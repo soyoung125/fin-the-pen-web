@@ -1,20 +1,10 @@
 import * as React from 'react';
 import Box from '@mui/material/Box';
 import CssBaseline from '@mui/material/CssBaseline';
-import BottomNavigation from '@mui/material/BottomNavigation';
-import BottomNavigationAction from '@mui/material/BottomNavigationAction';
-// import RestoreIcon from '@mui/icons-material/Restore';
-// import FavoriteIcon from '@mui/icons-material/Favorite';
-// import ArchiveIcon from '@mui/icons-material/Archive';
-import Paper from '@mui/material/Paper';
-import { Outlet, useNavigate } from 'react-router-dom';
-import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
-import DataSaverOffIcon from '@mui/icons-material/DataSaverOff';
-import AddCircleIcon from '@mui/icons-material/AddCircle';
-import NotificationsIcon from '@mui/icons-material/Notifications';
-import PersonIcon from '@mui/icons-material/Person';
-import PATH from '../../utils/constants/Path';
-import { NOTHING_IS_HERE_YET } from '../../utils/constants/Common';
+import { Outlet } from 'react-router-dom';
+
+import BottomBar from './BottomBar';
+import TopBar from './TopBar';
 // const messageExamples = [
 //   {
 //     primary: 'Brunch this week?',
@@ -82,33 +72,14 @@ export default function HomeLayout() {
   //   setMessages(refreshMessages());
   // }, [value, setMessages]);
 
-  const navigate = useNavigate();
-
   return (
     <Box sx={{ pb: 7 }} ref={ref}>
       <CssBaseline />
-      <Outlet />
-      <Paper
-        sx={{
-          position: 'fixed', bottom: 0, left: 0, right: 0,
-        }}
-        elevation={3}
-      >
-        <BottomNavigation
-          showLabels
-          value={value}
-          onChange={(event, newValue) => {
-            setValue(newValue);
-          }}
-        >
-          <BottomNavigationAction label="홈" icon={<CalendarMonthIcon />} onClick={() => navigate(PATH.home)} />
-          <BottomNavigationAction label="분석" icon={<DataSaverOffIcon />} onClick={() => navigate(PATH.analysis)} />
-          <BottomNavigationAction label="" icon={<AddCircleIcon />} onClick={() => alert(NOTHING_IS_HERE_YET)} />
-          <BottomNavigationAction label="알림" icon={<NotificationsIcon />} onClick={() => alert(NOTHING_IS_HERE_YET)} />
-          <BottomNavigationAction label="개인" icon={<PersonIcon />} onClick={() => navigate(PATH.signIn)} />
-          {/* <BottomNavigationAction label="Archive" icon={<ArchiveIcon />} /> */}
-        </BottomNavigation>
-      </Paper>
+      <TopBar value={value} setValue={setValue} />
+      <Box my={5}>
+        <Outlet />
+      </Box>
+      <BottomBar value={value} setValue={setValue} />
     </Box>
   );
 }
