@@ -10,7 +10,9 @@ import Paper from '@mui/material/Paper';
 import { Outlet, useNavigate } from 'react-router-dom';
 import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
 import DataSaverOffIcon from '@mui/icons-material/DataSaverOff';
-
+import AddCircleIcon from '@mui/icons-material/AddCircle';
+import NotificationsIcon from '@mui/icons-material/Notifications';
+import PersonIcon from '@mui/icons-material/Person';
 // const messageExamples = [
 //   {
 //     primary: 'Brunch this week?',
@@ -99,6 +101,9 @@ export default function HomeLayout() {
         >
           <BottomNavigationAction label="홈" icon={<CalendarMonthIcon />} onClick={() => navigate('')} />
           <BottomNavigationAction label="분석" icon={<DataSaverOffIcon />} onClick={() => navigate('/analysis')} />
+          <BottomNavigationAction label="" icon={<AddCircleIcon />} onClick={() => navigate('/analysis')} />
+          <BottomNavigationAction label="알림" icon={<NotificationsIcon />} onClick={() => navigate('/analysis')} />
+          <BottomNavigationAction label="개인" icon={<PersonIcon />} onClick={() => navigate('/analysis')} />
           {/* <BottomNavigationAction label="Archive" icon={<ArchiveIcon />} /> */}
         </BottomNavigation>
       </Paper>
