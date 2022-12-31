@@ -2,22 +2,23 @@ import AnalysisContainer from '../../containers/analysis/AnalysisContainer';
 import HomeContainer from '../../containers/home/HomeContainer';
 import SignInContainer from '../../containers/sign/SignInContainer';
 import TestContainer from '../../containers/test/TestContainer';
+import PATH from '../constants/Path';
 
 const homeRoutes = [
   {
-    path: '/',
+    path: PATH.home,
     element: <HomeContainer />,
   },
   {
-    path: '/analysis',
+    path: PATH.analysis,
     element: <AnalysisContainer />,
   },
   {
-    path: '/sign-in',
+    path: PATH.signIn,
     element: <SignInContainer />,
   },
   {
-    path: '/test',
+    path: PATH.test,
     element: <TestContainer />,
   },
 ];

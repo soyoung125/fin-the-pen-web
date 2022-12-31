@@ -13,6 +13,8 @@ import DataSaverOffIcon from '@mui/icons-material/DataSaverOff';
 import AddCircleIcon from '@mui/icons-material/AddCircle';
 import NotificationsIcon from '@mui/icons-material/Notifications';
 import PersonIcon from '@mui/icons-material/Person';
+import PATH from '../../utils/constants/Path';
+import { NOTHING_IS_HERE_YET } from '../../utils/constants/Common';
 // const messageExamples = [
 //   {
 //     primary: 'Brunch this week?',
@@ -99,11 +101,11 @@ export default function HomeLayout() {
             setValue(newValue);
           }}
         >
-          <BottomNavigationAction label="홈" icon={<CalendarMonthIcon />} onClick={() => navigate('')} />
-          <BottomNavigationAction label="분석" icon={<DataSaverOffIcon />} onClick={() => navigate('/analysis')} />
-          <BottomNavigationAction label="" icon={<AddCircleIcon />} onClick={() => navigate('/analysis')} />
-          <BottomNavigationAction label="알림" icon={<NotificationsIcon />} onClick={() => navigate('/analysis')} />
-          <BottomNavigationAction label="개인" icon={<PersonIcon />} onClick={() => navigate('/sign-in')} />
+          <BottomNavigationAction label="홈" icon={<CalendarMonthIcon />} onClick={() => navigate(PATH.home)} />
+          <BottomNavigationAction label="분석" icon={<DataSaverOffIcon />} onClick={() => navigate(PATH.analysis)} />
+          <BottomNavigationAction label="" icon={<AddCircleIcon />} onClick={() => alert(NOTHING_IS_HERE_YET)} />
+          <BottomNavigationAction label="알림" icon={<NotificationsIcon />} onClick={() => alert(NOTHING_IS_HERE_YET)} />
+          <BottomNavigationAction label="개인" icon={<PersonIcon />} onClick={() => navigate(PATH.signIn)} />
           {/* <BottomNavigationAction label="Archive" icon={<ArchiveIcon />} /> */}
         </BottomNavigation>
       </Paper>
