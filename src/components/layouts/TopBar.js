@@ -1,4 +1,6 @@
-import { Paper } from '@mui/material';
+import {
+  Box, Paper, Stack, Typography,
+} from '@mui/material';
 
 function TopBar() {
   return (
@@ -8,7 +10,37 @@ function TopBar() {
       }}
       elevation={3}
     >
-      상태바가 올 자리
+      <Stack
+        direction="row"
+        justifyContent="space-between"
+        alignItems="center"
+        spacing={2}
+      >
+        <Box>
+          <Typography>
+            2023
+          </Typography>
+          <Typography>
+            January
+          </Typography>
+        </Box>
+        <Box>
+          <Typography>
+            1월 소비 목표 금액
+          </Typography>
+          <Typography>
+            600,000원
+          </Typography>
+        </Box>
+        <Box>
+          <Typography>
+            1월 1일
+          </Typography>
+          <Typography>
+            일요일
+          </Typography>
+        </Box>
+      </Stack>
     </Paper>
   );
 }
