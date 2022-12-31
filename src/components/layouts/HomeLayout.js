@@ -103,7 +103,7 @@ export default function HomeLayout() {
           <BottomNavigationAction label="분석" icon={<DataSaverOffIcon />} onClick={() => navigate('/analysis')} />
           <BottomNavigationAction label="" icon={<AddCircleIcon />} onClick={() => navigate('/analysis')} />
           <BottomNavigationAction label="알림" icon={<NotificationsIcon />} onClick={() => navigate('/analysis')} />
-          <BottomNavigationAction label="개인" icon={<PersonIcon />} onClick={() => navigate('/analysis')} />
+          <BottomNavigationAction label="개인" icon={<PersonIcon />} onClick={() => navigate('/sign-in')} />
           {/* <BottomNavigationAction label="Archive" icon={<ArchiveIcon />} /> */}
         </BottomNavigation>
       </Paper>
