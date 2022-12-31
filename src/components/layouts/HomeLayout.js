@@ -3,11 +3,13 @@ import Box from '@mui/material/Box';
 import CssBaseline from '@mui/material/CssBaseline';
 import BottomNavigation from '@mui/material/BottomNavigation';
 import BottomNavigationAction from '@mui/material/BottomNavigationAction';
-import RestoreIcon from '@mui/icons-material/Restore';
-import FavoriteIcon from '@mui/icons-material/Favorite';
+// import RestoreIcon from '@mui/icons-material/Restore';
+// import FavoriteIcon from '@mui/icons-material/Favorite';
 // import ArchiveIcon from '@mui/icons-material/Archive';
 import Paper from '@mui/material/Paper';
 import { Outlet, useNavigate } from 'react-router-dom';
+import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
+import DataSaverOffIcon from '@mui/icons-material/DataSaverOff';
 
 // const messageExamples = [
 //   {
@@ -95,8 +97,8 @@ export default function HomeLayout() {
             setValue(newValue);
           }}
         >
-          <BottomNavigationAction label="번갈아 가면서" icon={<RestoreIcon />} onClick={() => navigate('')} />
-          <BottomNavigationAction label="눌러 보세요" icon={<FavoriteIcon />} onClick={() => navigate('/test')} />
+          <BottomNavigationAction label="홈" icon={<CalendarMonthIcon />} onClick={() => navigate('')} />
+          <BottomNavigationAction label="분석" icon={<DataSaverOffIcon />} onClick={() => navigate('/analysis')} />
           {/* <BottomNavigationAction label="Archive" icon={<ArchiveIcon />} /> */}
         </BottomNavigation>
       </Paper>
