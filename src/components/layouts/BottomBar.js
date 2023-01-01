@@ -10,6 +10,7 @@ import PersonIcon from '@mui/icons-material/Person';
 import { useState } from 'react';
 import PATH from '../../utils/constants/Path';
 import { NOTHING_IS_HERE_YET } from '../../utils/constants/Common';
+import AddEventModal from '../calender/AddEventModal';
 
 function BottomBar({ value, setValue }) {
   const navigate = useNavigate();
@@ -42,7 +43,7 @@ function BottomBar({ value, setValue }) {
         anchor="bottom"
         onClose={() => setState(false)}
       >
-        ㅇㅇ
+        <AddEventModal />
       </Drawer>
     </>
   );
