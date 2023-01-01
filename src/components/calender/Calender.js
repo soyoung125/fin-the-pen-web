@@ -1,8 +1,25 @@
+import TextField from '@mui/material/TextField';
+// import moment from 'moment';
+import { AdapterMoment } from '@mui/x-date-pickers/AdapterMoment';
+import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
+import { StaticDatePicker } from '@mui/x-date-pickers/StaticDatePicker';
+import React from 'react';
+
 function Calender() {
+  const [value, setValue] = React.useState(new Date());
+
   return (
-    <>
-      달력이 올 자리
-    </>
+    <LocalizationProvider dateAdapter={AdapterMoment}>
+      <StaticDatePicker
+        displayStaticWrapperAs="desktop"
+        value={value}
+        onChange={(newValue) => {
+          setValue(newValue);
+        }}
+        // eslint-disable-next-line react/jsx-props-no-spreading
+        renderInput={(params) => <TextField {...params} />}
+      />
+    </LocalizationProvider>
   );
 }
 

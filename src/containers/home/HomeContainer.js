@@ -1,8 +1,8 @@
+import Calender from '../../components/calender/Calender';
+
 function HomeConatiner() {
   return (
-    <>
-      홈이당
-    </>
+    <Calender />
   );
 }
 export default HomeConatiner;
