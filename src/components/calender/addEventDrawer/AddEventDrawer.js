@@ -2,6 +2,7 @@ import {
   Accordion,
   AccordionDetails,
   AccordionSummary,
+  Alert,
   Box,
   Button,
   Card,
@@ -39,6 +40,7 @@ function AddEventDrawer() {
       <Typography>Add New Event</Typography>
       <NameInput event={event} updateEvent={updateEvent} />
       <DateInput event={event} updateEvent={updateEvent} />
+      <Alert severity="error">여기를 기준으로 하단 기능은 아직 동작하지 않습니다.</Alert>
       <Stack
         direction="row"
         justifyContent="space-between"
