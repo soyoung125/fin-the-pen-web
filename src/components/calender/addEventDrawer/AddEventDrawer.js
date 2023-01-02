@@ -10,20 +10,17 @@ import {
   Stack, Switch, TextField, Typography,
 } from '@mui/material';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
-import { useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import NameInput from './NameInput';
 import DateInput from './DateInput';
 import ADD_EVENT from '../../../utils/constants/event';
 import { NOTHING_IS_AVAILABLE_BELOW_HERE } from '../../../utils/constants/common';
-import { addEvent } from '../../../utils/redux/event/eventSlice';
+import { addEvent, selectDate } from '../../../utils/redux/event/eventSlice';
 
 function AddEventDrawer() {
   const dispatch = useDispatch();
-
-  const handleDelete = () => {
-    console.info('You clicked the delete icon.');
-  };
+  const date = useSelector(selectDate);
 
   const [event, setEvent] = useState({
     event_name: '',
@@ -32,10 +29,20 @@ function AddEventDrawer() {
     end_time: '',
   });
 
+  useEffect(() => {
+    // eslint-disable-next-line no-underscore-dangle
+    setEvent({ ...event, date: date.format('YYYY-MM-DD') });
+  }, [date]);
+
   const updateEvent = (state) => {
     setEvent({ ...event, [state.target.id]: state.target.value });
     console.log(event);
   };
+
+  const handleDelete = () => {
+    console.info('You clicked the delete icon.');
+  };
+
   return (
     <Stack
       justifyContent="space-between"
@@ -59,7 +66,7 @@ function AddEventDrawer() {
         <Button>+ Add New</Button>
       </Stack>
       <Box>
-        {Array.from({ length: 10 }, (v, i) => i + 1).map((num) => <Chip label={num} variant="outlined" onDelete={handleDelete} sx={{ mr: 1, mb: 1 }} />)}
+        {Array.from({ length: 10 }, (v, i) => i + 1).map((num) => <Chip key={num} label={num} variant="outlined" onDelete={handleDelete} sx={{ mr: 1, mb: 1 }} />)}
       </Box>
       <Accordion sx={{ width: '100%' }}>
         <AccordionSummary

@@ -29,7 +29,7 @@ function DateInput({ event, updateEvent }) {
           id="start_time"
           label={ADD_EVENT.start_time}
           type="time"
-          defaultValue="07:30"
+          // defaultValue="07:30"
           InputLabelProps={{
             shrink: true,
           }}
@@ -44,7 +44,7 @@ function DateInput({ event, updateEvent }) {
           id="end_time"
           label={ADD_EVENT.end_time}
           type="time"
-          defaultValue="07:30"
+          // defaultValue="07:30"
           InputLabelProps={{
             shrink: true,
           }}
