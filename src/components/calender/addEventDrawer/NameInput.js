@@ -1,6 +1,6 @@
 import { FormControl, InputAdornment, OutlinedInput } from '@mui/material';
 
-function EventNameInput({ event, updateEvent }) {
+function NameInput({ event, updateEvent }) {
   return (
     <FormControl fullWidth>
       <OutlinedInput
@@ -12,4 +12,4 @@ function EventNameInput({ event, updateEvent }) {
     </FormControl>
   );
 }
-export default EventNameInput;
+export default NameInput;

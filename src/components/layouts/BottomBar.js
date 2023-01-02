@@ -10,7 +10,7 @@ import PersonIcon from '@mui/icons-material/Person';
 import { useState } from 'react';
 import PATH from '../../utils/constants/Path';
 import { NOTHING_IS_HERE_YET } from '../../utils/constants/Common';
-import AddEventDrawer from '../calender/bottomDrawer/AddEventDrawer';
+import AddEventDrawer from '../calender/addEventDrawer/AddEventDrawer';
 
 function BottomBar({ value, setValue }) {
   const navigate = useNavigate();

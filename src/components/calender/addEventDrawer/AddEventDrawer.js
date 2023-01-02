@@ -10,7 +10,7 @@ import {
 } from '@mui/material';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import { useState } from 'react';
-import EventNameInput from './EventNameInput';
+import NameInput from './NameInput';
 
 function AddEventDrawer() {
   const handleDelete = () => {
@@ -34,7 +34,7 @@ function AddEventDrawer() {
       sx={{ mx: 1 }}
     >
       <Typography>Add New Event</Typography>
-      <EventNameInput event={event} updateEvent={updateEvent} />
+      <NameInput event={event} updateEvent={updateEvent} />
       <TextField
         id="date"
         label="Date"
