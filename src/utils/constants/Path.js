@@ -4,4 +4,5 @@ const PATH = Object.freeze({
   signIn: '/sign-in',
   test: '/test',
 });
+
 export default PATH;
