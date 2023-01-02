@@ -20,12 +20,12 @@ function AddEventDrawer() {
   const handleDelete = () => {
     console.info('You clicked the delete icon.');
   };
-  // eslint-disable-next-line no-unused-vars
+
   const [event, setEvent] = useState({
-    name: '',
+    event_name: '',
     date: new Date(),
-    startTime: '',
-    endTime: '',
+    start_time: '',
+    end_time: '',
   });
 
   const updateEvent = (state) => {

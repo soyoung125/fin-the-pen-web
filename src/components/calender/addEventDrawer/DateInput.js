@@ -26,7 +26,7 @@ function DateInput({ event, updateEvent }) {
         sx={{ width: '100%' }}
       >
         <TextField
-          id="startTime"
+          id="start_time"
           label={ADD_EVENT.start_time}
           type="time"
           defaultValue="07:30"
@@ -37,11 +37,11 @@ function DateInput({ event, updateEvent }) {
             step: 300, // 5 min
           }}
           fullWidth
-          value={event.startTime}
+          value={event.start_time}
           onChange={updateEvent}
         />
         <TextField
-          id="endTime"
+          id="end_time"
           label={ADD_EVENT.end_time}
           type="time"
           defaultValue="07:30"
@@ -52,7 +52,7 @@ function DateInput({ event, updateEvent }) {
             step: 300, // 5 min
           }}
           fullWidth
-          value={event.endTime}
+          value={event.end_time}
           onChange={updateEvent}
         />
       </Stack>

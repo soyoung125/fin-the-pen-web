@@ -5,9 +5,9 @@ function NameInput({ event, updateEvent }) {
   return (
     <FormControl fullWidth>
       <OutlinedInput
-        id="name"
+        id="event_name"
         startAdornment={<InputAdornment position="start">{ADD_EVENT.name}</InputAdornment>}
-        value={event.name}
+        value={event.event_name}
         onChange={updateEvent}
       />
     </FormControl>
