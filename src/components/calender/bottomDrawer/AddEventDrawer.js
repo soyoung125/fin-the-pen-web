@@ -6,13 +6,25 @@ import {
   Button,
   Card,
   Chip,
-  FormControl, InputAdornment, OutlinedInput, Stack, Switch, TextField, Typography,
+  Stack, Switch, TextField, Typography,
 } from '@mui/material';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+import { useState } from 'react';
+import EventNameInput from './EventNameInput';
 
 function AddEventDrawer() {
   const handleDelete = () => {
     console.info('You clicked the delete icon.');
+  };
+  // eslint-disable-next-line no-unused-vars
+  const [event, setEvent] = useState({
+    name: '',
+
+  });
+
+  const updateEvent = (state) => {
+    setEvent({ ...event, [state.target.id]: state.target.value });
+    console.log(event);
   };
   return (
     <Stack
@@ -22,12 +34,7 @@ function AddEventDrawer() {
       sx={{ mx: 1 }}
     >
       <Typography>Add New Event</Typography>
-      <FormControl fullWidth>
-        <OutlinedInput
-          id="outlined-basic"
-          startAdornment={<InputAdornment position="start">Event Name</InputAdornment>}
-        />
-      </FormControl>
+      <EventNameInput event={event} updateEvent={updateEvent} />
       <TextField
         id="date"
         label="Date"
