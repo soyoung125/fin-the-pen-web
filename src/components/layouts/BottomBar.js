@@ -10,11 +10,11 @@ import PersonIcon from '@mui/icons-material/Person';
 import { useState } from 'react';
 import PATH from '../../utils/constants/Path';
 import { NOTHING_IS_HERE_YET } from '../../utils/constants/Common';
-import AddEventModal from '../calender/AddEventModal';
+import AddEventDrawer from '../calender/bottomDrawer/AddEventDrawer';
 
 function BottomBar({ value, setValue }) {
   const navigate = useNavigate();
-  const [state, setState] = useState(false);
+  const [bottomDrawerOpen, setBottomDrawerOpen] = useState(false);
   return (
     <>
       <Paper
@@ -32,18 +32,19 @@ function BottomBar({ value, setValue }) {
         >
           <BottomNavigationAction label="홈" icon={<CalendarMonthIcon />} onClick={() => navigate(PATH.home)} />
           <BottomNavigationAction label="분석" icon={<DataSaverOffIcon />} onClick={() => navigate(PATH.analysis)} />
-          <BottomNavigationAction label="" icon={<AddCircleIcon />} onClick={() => setState(true)} />
+          <BottomNavigationAction label="" icon={<AddCircleIcon />} onClick={() => setBottomDrawerOpen(true)} />
           <BottomNavigationAction label="알림" icon={<NotificationsIcon />} onClick={() => alert(NOTHING_IS_HERE_YET)} />
           <BottomNavigationAction label="개인" icon={<PersonIcon />} onClick={() => navigate(PATH.signIn)} />
           {/* <BottomNavigationAction label="Archive" icon={<ArchiveIcon />} /> */}
         </BottomNavigation>
       </Paper>
       <Drawer
-        open={state}
+        open={bottomDrawerOpen}
         anchor="bottom"
-        onClose={() => setState(false)}
+        onClose={() => setBottomDrawerOpen(false)}
       >
-        <AddEventModal />
+        {/* 이 부분을 범용적으로 사용할 수 있게 만드는 건 어떨까? */}
+        <AddEventDrawer />
       </Drawer>
     </>
   );

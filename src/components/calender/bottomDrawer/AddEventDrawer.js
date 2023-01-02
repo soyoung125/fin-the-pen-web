@@ -10,7 +10,7 @@ import {
 } from '@mui/material';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 
-function AddEventModal() {
+function AddEventDrawer() {
   const handleDelete = () => {
     console.info('You clicked the delete icon.');
   };
@@ -129,4 +129,4 @@ function AddEventModal() {
     </Stack>
   );
 }
-export default AddEventModal;
+export default AddEventDrawer;
