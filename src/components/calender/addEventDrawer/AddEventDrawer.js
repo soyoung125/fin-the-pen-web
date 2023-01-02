@@ -13,6 +13,8 @@ import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import { useState } from 'react';
 import NameInput from './NameInput';
 import DateInput from './DateInput';
+import ADD_EVENT from '../../../utils/constants/event';
+import { NOTHING_IS_AVAILABLE_BELOW_HERE } from '../../../utils/constants/common';
 
 function AddEventDrawer() {
   const handleDelete = () => {
@@ -37,10 +39,11 @@ function AddEventDrawer() {
       spacing={2}
       sx={{ mx: 1 }}
     >
-      <Typography variant="h5">Add New Event</Typography>
+      <Typography variant="h5">{ADD_EVENT.drawer_title}</Typography>
       <NameInput event={event} updateEvent={updateEvent} />
       <DateInput event={event} updateEvent={updateEvent} />
-      <Alert severity="error">여기를 기준으로 하단 기능은 아직 동작하지 않습니다.</Alert>
+      <Alert severity="error">{NOTHING_IS_AVAILABLE_BELOW_HERE}</Alert>
+
       <Stack
         direction="row"
         justifyContent="space-between"

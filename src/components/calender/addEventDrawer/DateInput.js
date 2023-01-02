@@ -1,13 +1,14 @@
 import {
   Stack, TextField,
 } from '@mui/material';
+import ADD_EVENT from '../../../utils/constants/event';
 
 function DateInput({ event, updateEvent }) {
   return (
     <>
       <TextField
         id="date"
-        label="Date"
+        label={ADD_EVENT.date}
         type="date"
         // defaultValue="2017-05-24"
         fullWidth
@@ -26,7 +27,7 @@ function DateInput({ event, updateEvent }) {
       >
         <TextField
           id="startTime"
-          label="Start Time"
+          label={ADD_EVENT.start_time}
           type="time"
           defaultValue="07:30"
           InputLabelProps={{
@@ -41,7 +42,7 @@ function DateInput({ event, updateEvent }) {
         />
         <TextField
           id="endTime"
-          label="End Time"
+          label={ADD_EVENT.end_time}
           type="time"
           defaultValue="07:30"
           InputLabelProps={{
