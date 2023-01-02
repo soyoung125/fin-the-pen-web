@@ -6,6 +6,8 @@ import { CalendarPicker } from '@mui/x-date-pickers/CalendarPicker';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { PickersDay } from '@mui/x-date-pickers/PickersDay/PickersDay';
 import React from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { selectDate } from '../../utils/redux/event/eventSlice';
 
 /**
  * --일정 스키마--
@@ -24,7 +26,8 @@ import React from 'react';
  */
 
 function Calender() {
-  const [value, setValue] = React.useState(new Date());
+  const dispatch = useDispatch();
+  const value = useSelector(selectDate);
   const DATE_SIZE = 32;
   // eslint-disable-next-line no-unused-vars
   const [fixedWithdrawal, setFixedWithdrawal] = React.useState(['2023/01/24']);
@@ -75,7 +78,7 @@ function Calender() {
           displayStaticWrapperAs="desktop"
           value={value}
           onChange={(newValue) => {
-            setValue(newValue);
+            dispatch(selectDate(newValue));
           }}
           // eslint-disable-next-line react/jsx-props-no-spreading
           renderDay={renderDayInPicker}
