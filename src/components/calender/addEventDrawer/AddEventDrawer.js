@@ -11,12 +11,16 @@ import {
 } from '@mui/material';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import { useState } from 'react';
+import { useDispatch } from 'react-redux';
 import NameInput from './NameInput';
 import DateInput from './DateInput';
 import ADD_EVENT from '../../../utils/constants/event';
 import { NOTHING_IS_AVAILABLE_BELOW_HERE } from '../../../utils/constants/common';
+import { addEvent } from '../../../utils/redux/event/eventSlice';
 
 function AddEventDrawer() {
+  const dispatch = useDispatch();
+
   const handleDelete = () => {
     console.info('You clicked the delete icon.');
   };
@@ -97,7 +101,13 @@ function AddEventDrawer() {
           </Stack>
         </AccordionDetails>
       </Accordion>
-      <Button variant="contained" fullWidth>Create Event & Wisw Spend</Button>
+      <Button
+        variant="contained"
+        fullWidth
+        onClick={() => dispatch(addEvent(event))}
+      >
+        Create Event & Wise Spend
+      </Button>
     </Stack>
   );
 }
