@@ -5,9 +5,10 @@ import { AdapterMoment } from '@mui/x-date-pickers/AdapterMoment';
 import { CalendarPicker } from '@mui/x-date-pickers/CalendarPicker';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { PickersDay } from '@mui/x-date-pickers/PickersDay/PickersDay';
+import moment from 'moment';
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { selectDate } from '../../utils/redux/event/eventSlice';
+import { selectDate, selectedDate } from '../../utils/redux/event/eventSlice';
 
 /**
  * --일정 스키마--
@@ -31,6 +32,10 @@ function Calender() {
   const DATE_SIZE = 32;
   // eslint-disable-next-line no-unused-vars
   const [fixedWithdrawal, setFixedWithdrawal] = React.useState(['2023/01/24']);
+
+  React.useEffect(() => {
+    dispatch(selectedDate(moment(new Date())));
+  }, []);
 
   const renderDayInPicker = (day, _value, DayComponentProps) => {
     if (fixedWithdrawal.includes(day.format('YYYY/MM/DD'))) {
@@ -80,11 +85,11 @@ function Calender() {
       >
         <CalendarPicker
           views={['day']}
-          disableHighlightToday="true"
+          disableHighlightToday
           displayStaticWrapperAs="desktop"
           value={value}
           onChange={(newValue) => {
-            dispatch(selectDate(newValue));
+            dispatch(selectedDate(newValue));
           }}
           // eslint-disable-next-line react/jsx-props-no-spreading
           renderDay={renderDayInPicker}
