@@ -1,10 +1,10 @@
 /* eslint-disable react/jsx-props-no-spreading */
-import { Box } from '@mui/material';
+import { Box, TextField } from '@mui/material';
 // import moment from 'moment';
 import { AdapterMoment } from '@mui/x-date-pickers/AdapterMoment';
+import { CalendarPicker } from '@mui/x-date-pickers/CalendarPicker';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { PickersDay } from '@mui/x-date-pickers/PickersDay/PickersDay';
-import { StaticDatePicker } from '@mui/x-date-pickers/StaticDatePicker';
 import React from 'react';
 
 /**
@@ -25,15 +25,14 @@ import React from 'react';
 
 function Calender() {
   const [value, setValue] = React.useState(new Date());
+  const DATE_SIZE = 32;
   // eslint-disable-next-line no-unused-vars
   const [fixedWithdrawal, setFixedWithdrawal] = React.useState(['2023/01/24']);
 
   const renderDayInPicker = (day, _value, DayComponentProps) => {
     if (fixedWithdrawal.includes(day.format('YYYY/MM/DD'))) {
       return (
-        <Box component="span" sx={{ border: 1, borderRadius: 2, borderColor: 'warning.main' }}>
-          <PickersDay {...DayComponentProps} />
-        </Box>
+        <PickersDay sx={{ border: 1, borderRadius: 2, borderColor: 'warning.main' }} {...DayComponentProps} />
       );
     }
 
@@ -42,15 +41,47 @@ function Calender() {
 
   return (
     <LocalizationProvider dateAdapter={AdapterMoment}>
-      <StaticDatePicker
-        displayStaticWrapperAs="desktop"
-        value={value}
-        onChange={(newValue) => {
-          setValue(newValue);
+      <Box
+        sx={{
+          '& > div': {
+            minWidth: '100%',
+          },
+          '& > div > div, & > div > div > div, & .MuiCalendarPicker-root': {
+            width: '100%',
+          },
+          '& .MuiTypography-caption': {
+            width: '100%',
+            margin: 0,
+          },
+          '& .PrivatePickersSlideTransition-root': {
+            minHeight: DATE_SIZE * 6,
+          },
+          '& .PrivatePickersSlideTransition-root [role="row"]': {
+            margin: 0,
+          },
+          '& .MuiPickersDay-dayWithMargin': {
+            margin: 0,
+          },
+          '& .MuiPickersDay-root': {
+            width: DATE_SIZE,
+            height: DATE_SIZE,
+            marginX: 'auto',
+          },
         }}
-        // eslint-disable-next-line react/jsx-props-no-spreading
-        renderDay={renderDayInPicker}
-      />
+      >
+        <CalendarPicker
+          views={['day']}
+          disableHighlightToday="true"
+          displayStaticWrapperAs="desktop"
+          value={value}
+          onChange={(newValue) => {
+            setValue(newValue);
+          }}
+          // eslint-disable-next-line react/jsx-props-no-spreading
+          renderDay={renderDayInPicker}
+          renderInput={(params) => <TextField {...params} fullWidth />}
+        />
+      </Box>
     </LocalizationProvider>
   );
 }
