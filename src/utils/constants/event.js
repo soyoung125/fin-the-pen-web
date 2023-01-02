@@ -10,6 +10,5 @@ const ADD_EVENT = Object.freeze({
   importance_high: '상',
   importance_middle: '중',
   importance_low: '하',
-
 });
 export default ADD_EVENT;

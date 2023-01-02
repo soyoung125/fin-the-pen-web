@@ -7,7 +7,7 @@ import {
   Button,
   Card,
   Chip,
-  Stack, Switch, Typography,
+  Stack, Typography,
 } from '@mui/material';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import { useEffect, useState } from 'react';
@@ -19,6 +19,7 @@ import { NOTHING_IS_AVAILABLE_BELOW_HERE } from '../../../utils/constants/common
 import { addEvent, selectDate } from '../../../utils/redux/event/eventSlice';
 import SpendingInput from './SpendingInput';
 import ImportanceInput from './ImportanceInput';
+import ExclusionInput from './ExclusionInput';
 
 function AddEventDrawer() {
   const dispatch = useDispatch();
@@ -32,6 +33,7 @@ function AddEventDrawer() {
     type: ADD_EVENT.type_minus,
     expected_spending: 0,
     importance: ADD_EVENT.importance_middle,
+    exclusion: false, // false면 포함
   });
 
   useEffect(() => {
@@ -42,6 +44,11 @@ function AddEventDrawer() {
   const updateEvent = (state) => {
     setEvent({ ...event, [state.target.id]: state.target.value });
     console.log(event);
+  };
+
+  const updateExclusion = (state) => {
+    setEvent({ ...event, exclusion: state.target.checked });
+    console.log(state.target.checked);
   };
 
   const handleDelete = () => {
@@ -89,20 +96,9 @@ function AddEventDrawer() {
             </Card>
             <Card>
               <ImportanceInput event={event} updateEvent={updateEvent} />
-              {/* <Stack direction="row" justifyContent="space-between" alignItems="center">
-                <Typography>일정 중요도</Typography>
-                <Stack direction="row" alignItems="center">
-                  <Button>상</Button>
-                  <Button>중</Button>
-                  <Button>하</Button>
-                </Stack>
-              </Stack> */}
             </Card>
             <Card>
-              <Stack direction="row" justifyContent="space-between" alignItems="center">
-                <Typography>예산에서 제외</Typography>
-                <Switch />
-              </Stack>
+              <ExclusionInput event={event} updateExclusion={updateExclusion} />
             </Card>
           </Stack>
         </AccordionDetails>
