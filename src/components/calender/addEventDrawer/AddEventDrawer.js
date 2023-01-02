@@ -15,7 +15,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import NameInput from './NameInput';
 import DateInput from './DateInput';
 import ADD_EVENT from '../../../utils/constants/event';
-import { NOTHING_IS_AVAILABLE_BELOW_HERE } from '../../../utils/constants/common';
+import { NOT_AVAILABLE } from '../../../utils/constants/common';
 import { addEvent, selectDate } from '../../../utils/redux/event/eventSlice';
 import SpendingInput from './SpendingInput';
 import ImportanceInput from './ImportanceInput';
@@ -65,7 +65,6 @@ function AddEventDrawer() {
       <Typography variant="h5">{ADD_EVENT.drawer_title}</Typography>
       <NameInput event={event} updateEvent={updateEvent} />
       <DateInput event={event} updateEvent={updateEvent} />
-      <Alert severity="error">{NOTHING_IS_AVAILABLE_BELOW_HERE}</Alert>
 
       <Stack
         direction="row"
@@ -77,6 +76,7 @@ function AddEventDrawer() {
         <Typography>Select Category</Typography>
         <Button>+ Add New</Button>
       </Stack>
+      <Alert severity="error">{NOT_AVAILABLE}</Alert>
       <Box>
         {Array.from({ length: 10 }, (v, i) => i + 1).map((num) => <Chip key={num} label={num} variant="outlined" onDelete={handleDelete} sx={{ mr: 1, mb: 1 }} />)}
       </Box>
