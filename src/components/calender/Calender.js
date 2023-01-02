@@ -1,5 +1,5 @@
 /* eslint-disable react/jsx-props-no-spreading */
-import { Box, TextField } from '@mui/material';
+import { Box } from '@mui/material';
 // import moment from 'moment';
 import { AdapterMoment } from '@mui/x-date-pickers/AdapterMoment';
 import { CalendarPicker } from '@mui/x-date-pickers/CalendarPicker';
@@ -35,7 +35,7 @@ function Calender() {
   const renderDayInPicker = (day, _value, DayComponentProps) => {
     if (fixedWithdrawal.includes(day.format('YYYY/MM/DD'))) {
       return (
-        <PickersDay sx={{ border: 1, borderRadius: 2, borderColor: 'warning.main' }} {...DayComponentProps} />
+        <PickersDay sx={{ border: 1, borderRadius: 2, borderColor: 'warning.light' }} {...DayComponentProps} />
       );
     }
 
@@ -70,6 +70,12 @@ function Calender() {
             height: DATE_SIZE,
             marginX: 'auto',
           },
+          '& .MuiPickersDay-root:focus': {
+            borderRadius: 2,
+            backgroundColor: 'secondary.light',
+            color: 'white',
+            fontWeight: 'bold',
+          },
         }}
       >
         <CalendarPicker
@@ -82,7 +88,6 @@ function Calender() {
           }}
           // eslint-disable-next-line react/jsx-props-no-spreading
           renderDay={renderDayInPicker}
-          renderInput={(params) => <TextField {...params} fullWidth />}
         />
       </Box>
     </LocalizationProvider>
