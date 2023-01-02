@@ -11,6 +11,7 @@ import {
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import { useState } from 'react';
 import NameInput from './NameInput';
+import DateInput from './DateInput';
 
 function AddEventDrawer() {
   const handleDelete = () => {
@@ -19,7 +20,9 @@ function AddEventDrawer() {
   // eslint-disable-next-line no-unused-vars
   const [event, setEvent] = useState({
     name: '',
-
+    date: new Date(),
+    startTime: '',
+    endTime: '',
   });
 
   const updateEvent = (state) => {
@@ -35,50 +38,7 @@ function AddEventDrawer() {
     >
       <Typography>Add New Event</Typography>
       <NameInput event={event} updateEvent={updateEvent} />
-      <TextField
-        id="date"
-        label="Date"
-        type="date"
-        defaultValue="2017-05-24"
-        fullWidth
-        InputLabelProps={{
-          shrink: true,
-        }}
-      />
-      <Stack
-        direction="row"
-        justifyContent="space-between"
-        alignItems="center"
-        spacing={2}
-        sx={{ width: '100%' }}
-      >
-        <TextField
-          id="time"
-          label="Start Time"
-          type="time"
-          defaultValue="07:30"
-          InputLabelProps={{
-            shrink: true,
-          }}
-          inputProps={{
-            step: 300, // 5 min
-          }}
-          fullWidth
-        />
-        <TextField
-          id="time"
-          label="End Time"
-          type="time"
-          defaultValue="07:30"
-          InputLabelProps={{
-            shrink: true,
-          }}
-          inputProps={{
-            step: 300, // 5 min
-          }}
-          fullWidth
-        />
-      </Stack>
+      <DateInput event={event} updateEvent={updateEvent} />
       <Stack
         direction="row"
         justifyContent="space-between"
