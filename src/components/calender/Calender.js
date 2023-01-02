@@ -1,5 +1,6 @@
 /* eslint-disable react/jsx-props-no-spreading */
 import { Box } from '@mui/material';
+import { grey } from '@mui/material/colors';
 // import moment from 'moment';
 import { AdapterMoment } from '@mui/x-date-pickers/AdapterMoment';
 import { CalendarPicker } from '@mui/x-date-pickers/CalendarPicker';
@@ -75,6 +76,11 @@ function Calender() {
             height: DATE_SIZE,
             marginX: 'auto',
           },
+          '& .MuiPickersDay-today': {
+            border: 0,
+            borderRadius: 2,
+            backgroundColor: grey[100],
+          },
           '& .MuiPickersDay-root:focus': {
             borderRadius: 2,
             backgroundColor: 'secondary.light',
@@ -85,7 +91,6 @@ function Calender() {
       >
         <CalendarPicker
           views={['day']}
-          disableHighlightToday
           displayStaticWrapperAs="desktop"
           value={value}
           onChange={(newValue) => {
