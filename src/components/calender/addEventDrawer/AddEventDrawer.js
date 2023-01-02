@@ -7,7 +7,7 @@ import {
   Button,
   Card,
   Chip,
-  Stack, Switch, TextField, Typography,
+  Stack, Switch, Typography,
 } from '@mui/material';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import { useEffect, useState } from 'react';
@@ -17,6 +17,7 @@ import DateInput from './DateInput';
 import ADD_EVENT from '../../../utils/constants/event';
 import { NOTHING_IS_AVAILABLE_BELOW_HERE } from '../../../utils/constants/common';
 import { addEvent, selectDate } from '../../../utils/redux/event/eventSlice';
+import SpendingInput from './SpendingInput';
 
 function AddEventDrawer() {
   const dispatch = useDispatch();
@@ -27,6 +28,8 @@ function AddEventDrawer() {
     date: new Date(),
     start_time: '',
     end_time: '',
+    type: ADD_EVENT.type_minus,
+    expected_spending: 0,
   });
 
   useEffect(() => {
@@ -68,6 +71,7 @@ function AddEventDrawer() {
       <Box>
         {Array.from({ length: 10 }, (v, i) => i + 1).map((num) => <Chip key={num} label={num} variant="outlined" onDelete={handleDelete} sx={{ mr: 1, mb: 1 }} />)}
       </Box>
+
       <Accordion sx={{ width: '100%' }}>
         <AccordionSummary
           expandIcon={<ExpandMoreIcon />}
@@ -79,15 +83,7 @@ function AddEventDrawer() {
         <AccordionDetails>
           <Stack spacing={1}>
             <Card>
-              <Stack direction="row" justifyContent="space-between" alignItems="center">
-                <Typography>금액 설정</Typography>
-                <Stack direction="row" alignItems="center">
-                  <Button>입금</Button>
-                  <Button>출금</Button>
-                  <TextField />
-                  <Typography>원</Typography>
-                </Stack>
-              </Stack>
+              <SpendingInput event={event} updateEvent={updateEvent} />
             </Card>
             <Card>
               <Stack direction="row" justifyContent="space-between" alignItems="center">
