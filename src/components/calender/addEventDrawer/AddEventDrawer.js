@@ -37,7 +37,7 @@ function AddEventDrawer() {
       spacing={2}
       sx={{ mx: 1 }}
     >
-      <Typography>Add New Event</Typography>
+      <Typography variant="h5">Add New Event</Typography>
       <NameInput event={event} updateEvent={updateEvent} />
       <DateInput event={event} updateEvent={updateEvent} />
       <Alert severity="error">여기를 기준으로 하단 기능은 아직 동작하지 않습니다.</Alert>

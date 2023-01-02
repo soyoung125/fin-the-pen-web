@@ -8,8 +8,8 @@ import AddCircleIcon from '@mui/icons-material/AddCircle';
 import NotificationsIcon from '@mui/icons-material/Notifications';
 import PersonIcon from '@mui/icons-material/Person';
 import { useState } from 'react';
-import PATH from '../../utils/constants/Path';
-import { NOTHING_IS_HERE_YET } from '../../utils/constants/Common';
+import PATH from '../../utils/constants/path';
+import { NOTHING_IS_HERE_YET } from '../../utils/constants/common';
 import AddEventDrawer from '../calender/addEventDrawer/AddEventDrawer';
 
 function BottomBar({ value, setValue }) {
