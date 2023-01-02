@@ -18,6 +18,7 @@ import ADD_EVENT from '../../../utils/constants/event';
 import { NOTHING_IS_AVAILABLE_BELOW_HERE } from '../../../utils/constants/common';
 import { addEvent, selectDate } from '../../../utils/redux/event/eventSlice';
 import SpendingInput from './SpendingInput';
+import ImportanceInput from './ImportanceInput';
 
 function AddEventDrawer() {
   const dispatch = useDispatch();
@@ -30,6 +31,7 @@ function AddEventDrawer() {
     end_time: '',
     type: ADD_EVENT.type_minus,
     expected_spending: 0,
+    importance: ADD_EVENT.importance_middle,
   });
 
   useEffect(() => {
@@ -86,14 +88,15 @@ function AddEventDrawer() {
               <SpendingInput event={event} updateEvent={updateEvent} />
             </Card>
             <Card>
-              <Stack direction="row" justifyContent="space-between" alignItems="center">
+              <ImportanceInput event={event} updateEvent={updateEvent} />
+              {/* <Stack direction="row" justifyContent="space-between" alignItems="center">
                 <Typography>일정 중요도</Typography>
                 <Stack direction="row" alignItems="center">
                   <Button>상</Button>
                   <Button>중</Button>
                   <Button>하</Button>
                 </Stack>
-              </Stack>
+              </Stack> */}
             </Card>
             <Card>
               <Stack direction="row" justifyContent="space-between" alignItems="center">
