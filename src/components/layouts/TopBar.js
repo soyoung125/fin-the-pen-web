@@ -15,6 +15,7 @@ function TopBar() {
         justifyContent="space-between"
         alignItems="center"
         spacing={2}
+        mx={1}
       >
         <Box>
           <Typography>

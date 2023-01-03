@@ -17,6 +17,7 @@ function HomeConatiner() {
   return (
     <>
       <Calender />
+      <Divider />
       {
         events.map((e) => (
           <List key={Math.random()}>
