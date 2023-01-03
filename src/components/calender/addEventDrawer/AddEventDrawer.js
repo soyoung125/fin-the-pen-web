@@ -21,7 +21,7 @@ import SpendingInput from './SpendingInput';
 import ImportanceInput from './ImportanceInput';
 import ExclusionInput from './ExclusionInput';
 
-function AddEventDrawer() {
+function AddEventDrawer({ setBottomDrawerOpen }) {
   const dispatch = useDispatch();
   const date = useSelector(selectDate);
 
@@ -62,7 +62,10 @@ function AddEventDrawer() {
       spacing={2}
       sx={{ mx: 1 }}
     >
-      <Typography variant="h5">{ADD_EVENT.drawer_title}</Typography>
+      <Stack direction="row" justifyContent="space-between">
+        <Typography variant="h5">{ADD_EVENT.drawer_title}</Typography>
+        <Button onClick={() => setBottomDrawerOpen(false)}>x</Button>
+      </Stack>
       <NameInput event={event} updateEvent={updateEvent} />
       <DateInput event={event} updateEvent={updateEvent} />
 
@@ -106,7 +109,10 @@ function AddEventDrawer() {
       <Button
         variant="contained"
         fullWidth
-        onClick={() => dispatch(addEvent(event))}
+        onClick={() => {
+          dispatch(addEvent(event));
+          setBottomDrawerOpen(false);
+        }}
       >
         Create Event & Wise Spend
       </Button>
