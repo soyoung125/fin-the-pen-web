@@ -87,6 +87,34 @@ function Calender() {
           '& > div > div, & > div > div > div, & .MuiCalendarPicker-root': {
             width: '100%',
           },
+          // 헤더 디자인을 위한 css
+          '.MuiPickersCalendarHeader-root': {
+            display: 'flex',
+            width: '100vw',
+            paddingX: 2,
+          },
+          '.MuiPickersCalendarHeader-root:first-child': {
+            order: 0,
+            marginX: 'auto',
+          },
+          '.MuiPickersArrowSwitcher-root': {
+            display: 'inline-flex',
+            // visibility: 'hidden'
+          },
+          '.MuiPickersCalendarHeader-label': {
+            textAlign: 'center',
+          },
+          '.MuiPickersArrowSwitcher-spacer': {
+            width: '100vw',
+          },
+          '.css-31ca4x-MuiPickersFadeTransitionGroup-root': {
+            // display: 'inline-flex',
+            position: 'absolute',
+            left: 0,
+            right: 0,
+            alignItems: 'center',
+          },
+          // 데이 디자인을 위한 css
           '& .MuiTypography-caption': {
             width: '100%',
             margin: 0,
