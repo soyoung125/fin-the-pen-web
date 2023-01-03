@@ -1,5 +1,5 @@
 /* eslint-disable react/jsx-props-no-spreading */
-import { Box } from '@mui/material';
+import { Box, Stack } from '@mui/material';
 import { grey } from '@mui/material/colors';
 // import moment from 'moment';
 import { AdapterMoment } from '@mui/x-date-pickers/AdapterMoment';
@@ -9,7 +9,7 @@ import { PickersDay } from '@mui/x-date-pickers/PickersDay/PickersDay';
 import moment from 'moment';
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { selectDate, selectedDate } from '../../utils/redux/event/eventSlice';
+import { selectDate, selectedDate, selectEvents } from '../../utils/redux/event/eventSlice';
 
 /**
  * --일정 스키마--
@@ -30,6 +30,7 @@ import { selectDate, selectedDate } from '../../utils/redux/event/eventSlice';
 function Calender() {
   const dispatch = useDispatch();
   const value = useSelector(selectDate);
+  const events = useSelector(selectEvents);
   const DATE_SIZE = 32;
   // eslint-disable-next-line no-unused-vars
   const [fixedWithdrawal, setFixedWithdrawal] = React.useState(['2023/01/24']);
@@ -41,11 +42,38 @@ function Calender() {
   const renderDayInPicker = (day, _value, DayComponentProps) => {
     if (fixedWithdrawal.includes(day.format('YYYY/MM/DD'))) {
       return (
-        <PickersDay sx={{ border: 1, borderRadius: 2, borderColor: 'warning.light' }} {...DayComponentProps} />
+        <PickersDay
+          sx={{
+            border: 1, borderRadius: 2, marginBottom: 2, borderColor: 'warning.light',
+          }}
+          {...DayComponentProps}
+        />
       );
     }
 
-    return <PickersDay {...DayComponentProps} />;
+    const dayEvents = events.filter((e) => e.date === day.format('YYYY-MM-DD'));
+
+    if (dayEvents.length > 0) {
+      return (
+        <Box sx={{ width: DATE_SIZE, marginX: 'auto' }}>
+          <Stack>
+            <PickersDay sx={{ marginBottom: 2 }} {...DayComponentProps} />
+            <Stack direction="row" justifyContent="center" spacing={0.5} mt={0.1}>
+              {dayEvents.map(() => ( // 추후 e의 카테고리 별로 색 바꿀 예정
+                <Box
+                  key={Math.random()}
+                  sx={{
+                    width: 0, height: 0, border: '2px solid', borderRadius: 3,
+                  }}
+                />
+              ))}
+            </Stack>
+          </Stack>
+        </Box>
+      );
+    }
+
+    return <PickersDay sx={{ marginBottom: 2 }} {...DayComponentProps} />;
   };
 
   return (
@@ -71,14 +99,18 @@ function Calender() {
           '& .MuiPickersDay-dayWithMargin': {
             margin: 0,
           },
+          '& .MuiDayPicker-weekContainer': {
+            height: 40,
+          },
           '& .MuiPickersDay-root': {
             width: DATE_SIZE,
             height: DATE_SIZE,
             marginX: 'auto',
           },
           '& .MuiPickersDay-today': {
-            border: 0,
+            border: 1,
             borderRadius: 2,
+            borderColor: grey[100],
             backgroundColor: grey[100],
           },
           '& .MuiPickersDay-root:focus': {
