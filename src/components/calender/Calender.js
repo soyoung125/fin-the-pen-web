@@ -1,7 +1,6 @@
 /* eslint-disable react/jsx-props-no-spreading */
 import { Box, Stack } from '@mui/material';
 import { grey } from '@mui/material/colors';
-// import moment from 'moment';
 import { AdapterMoment } from '@mui/x-date-pickers/AdapterMoment';
 import { CalendarPicker } from '@mui/x-date-pickers/CalendarPicker';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
@@ -59,12 +58,12 @@ function Calender() {
         <Box sx={{ width: DATE_SIZE, marginX: 'auto' }}>
           <Stack>
             <PickersDay sx={{ marginBottom: 2 }} {...DayComponentProps} />
-            <Stack direction="row" justifyContent="center" spacing={0.5} mt={0.1} sx={{ height: 5 }}>
+            <Stack direction="row" justifyContent="center" spacing={0.5} mt={0.1}>
               {dayEvents.map(() => ( // 추후 e의 카테고리 별로 색 바꿀 예정
                 <Box
                   key={Math.random()}
                   sx={{
-                    width: 0, height: 0, border: '1px solid', borderRadius: 3,
+                    width: '5px', height: '5px', border: '1px solid', borderRadius: 3,
                   }}
                 />
               ))}
@@ -136,7 +135,7 @@ function Calender() {
             height: DATE_SIZE,
             marginX: 'auto',
           },
-          '&& .MuiPickersDay-root:focus': {
+          '& .MuiPickersDay-root:focus': {
             borderRadius: 2,
             backgroundColor: 'secondary.light',
             color: 'white',
