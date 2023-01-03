@@ -15,13 +15,22 @@ function HomeConatiner() {
   const events = useSelector(selectEvents);
   console.log(events);
   return (
-    <>
+    <Box>
       <Calender />
       <Divider />
-      {
-        events.map((e) => (
-          <List key={Math.random()}>
-            <Box px={1}>
+      <List
+        key={Math.random()}
+        sx={{
+          bgcolor: 'background.paper',
+          position: 'relative',
+          overflow: 'auto',
+          flex: 1,
+          '& ul': { padding: 0 },
+        }}
+      >
+        {
+          events.map((e) => (
+            <Box px={1} mb={1}>
               <Card>
                 <Stack direction="row" justifyContent="space-between" p={1}>
                   <Stack>
@@ -34,10 +43,10 @@ function HomeConatiner() {
                 </Stack>
               </Card>
             </Box>
-          </List>
-        ))
-      }
-    </>
+          ))
+        }
+      </List>
+    </Box>
   );
 }
 export default HomeConatiner;
