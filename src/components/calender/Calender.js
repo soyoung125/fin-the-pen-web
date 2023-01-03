@@ -32,6 +32,7 @@ function Calender() {
   const value = useSelector(selectDate);
   const events = useSelector(selectEvents);
   const DATE_SIZE = 32;
+  const DATE_HEIGHT = 50;
   // eslint-disable-next-line no-unused-vars
   const [fixedWithdrawal, setFixedWithdrawal] = React.useState(['2023/01/24']);
 
@@ -91,7 +92,7 @@ function Calender() {
             margin: 0,
           },
           '& .PrivatePickersSlideTransition-root': {
-            minHeight: DATE_SIZE * 6,
+            minHeight: DATE_HEIGHT * 6,
           },
           '& .PrivatePickersSlideTransition-root [role="row"]': {
             margin: 0,
@@ -100,7 +101,7 @@ function Calender() {
             margin: 0,
           },
           '& .MuiDayPicker-weekContainer': {
-            height: 40,
+            height: DATE_HEIGHT,
           },
           '& .MuiPickersDay-root': {
             width: DATE_SIZE,
