@@ -136,23 +136,22 @@ function Calender() {
             height: DATE_SIZE,
             marginX: 'auto',
           },
-          '& .MuiPickersDay-today': {
-            border: 1,
-            borderRadius: 2,
-            borderColor: grey[100],
-            backgroundColor: grey[100],
-          },
-          '& .MuiPickersDay-root:focus': {
+          '&& .MuiPickersDay-root:focus': {
             borderRadius: 2,
             backgroundColor: 'secondary.light',
             color: 'white',
             fontWeight: 'bold',
+          },
+          '& [aria-current="date"]': {
+            borderRadius: 2,
+            backgroundColor: grey[100],
           },
         }}
       >
         <CalendarPicker
           views={['day']}
           displayStaticWrapperAs="desktop"
+          disableHighlightToday
           dayOfWeekFormatter={(day) => day.substring(0, 3)}
           value={value}
           onChange={(newValue) => {
