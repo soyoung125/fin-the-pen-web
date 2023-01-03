@@ -10,22 +10,6 @@ import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { selectDate, selectedDate, selectEvents } from '../../utils/redux/event/eventSlice';
 
-/**
- * --일정 스키마--
- * 고유 아이디 id
- * 유저 아이디 user_id
- * 날짜 date
- * 일정 시작 start_time
- * 일정 끝 end_time
- * 이벤트 이름 event_name
- * 타입(출금,입금) type
- * 금액 expected_spending
- * 예산 제외 exclusion
- * 카테고리 categories
- * 일정중요도 importance
- * + 정기 출금은??
- */
-
 function Calender() {
   const dispatch = useDispatch();
   const value = useSelector(selectDate);
@@ -98,7 +82,6 @@ function Calender() {
           },
           '.MuiPickersArrowSwitcher-root': {
             display: 'inline-flex',
-            // visibility: 'hidden'
           },
           '.MuiPickersCalendarHeader-label': {
             textAlign: 'center',
@@ -107,12 +90,12 @@ function Calender() {
             width: '100vw',
           },
           '.css-31ca4x-MuiPickersFadeTransitionGroup-root': {
-            // display: 'inline-flex',
             position: 'absolute',
             left: 0,
             right: 0,
             alignItems: 'center',
           },
+
           // 데이 디자인을 위한 css
           '& .MuiTypography-caption': {
             width: '100%',
