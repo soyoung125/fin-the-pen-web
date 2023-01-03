@@ -12,6 +12,7 @@ import {
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import ClearIcon from '@mui/icons-material/Clear';
 import NameInput from './NameInput';
 import DateInput from './DateInput';
 import ADD_EVENT from '../../../utils/constants/event';
@@ -58,13 +59,14 @@ function AddEventDrawer({ setBottomDrawerOpen }) {
   return (
     <Stack
       justifyContent="space-between"
-      alignItems="center"
+      // alignItems="center"
       spacing={2}
-      sx={{ mx: 1 }}
+      m={1}
     >
       <Stack direction="row" justifyContent="space-between">
+        <Button />
         <Typography variant="h5">{ADD_EVENT.drawer_title}</Typography>
-        <Button onClick={() => setBottomDrawerOpen(false)}>x</Button>
+        <Button onClick={() => setBottomDrawerOpen(false)}><ClearIcon /></Button>
       </Stack>
       <NameInput event={event} updateEvent={updateEvent} />
       <DateInput event={event} updateEvent={updateEvent} />
