@@ -44,7 +44,7 @@ function BottomBar({ value, setValue }) {
         onClose={() => setBottomDrawerOpen(false)}
       >
         {/* 이 부분을 범용적으로 사용할 수 있게 만드는 건 어떨까? */}
-        <AddEventDrawer />
+        <AddEventDrawer setBottomDrawerOpen={setBottomDrawerOpen} />
       </Drawer>
     </>
   );
