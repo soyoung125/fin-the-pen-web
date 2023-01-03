@@ -59,12 +59,12 @@ function Calender() {
         <Box sx={{ width: DATE_SIZE, marginX: 'auto' }}>
           <Stack>
             <PickersDay sx={{ marginBottom: 2 }} {...DayComponentProps} />
-            <Stack direction="row" justifyContent="center" spacing={0.5} mt={0.1}>
+            <Stack direction="row" justifyContent="center" spacing={0.5} mt={0.1} sx={{ height: 5 }}>
               {dayEvents.map(() => ( // 추후 e의 카테고리 별로 색 바꿀 예정
                 <Box
                   key={Math.random()}
                   sx={{
-                    width: 0, height: 0, border: '2px solid', borderRadius: 3,
+                    width: 0, height: 0, border: '1px solid', borderRadius: 3,
                   }}
                 />
               ))}
@@ -153,6 +153,7 @@ function Calender() {
         <CalendarPicker
           views={['day']}
           displayStaticWrapperAs="desktop"
+          dayOfWeekFormatter={(day) => day.substring(0, 3)}
           value={value}
           onChange={(newValue) => {
             dispatch(selectedDate(newValue));
