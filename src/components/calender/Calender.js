@@ -89,7 +89,7 @@ function Calender() {
           '.MuiPickersArrowSwitcher-spacer': {
             width: '100vw',
           },
-          '.css-31ca4x-MuiPickersFadeTransitionGroup-root': {
+          '.MuiPickersCalendarHeader-labelContainer > .MuiPickersFadeTransitionGroup-root': {
             position: 'absolute',
             left: 0,
             right: 0,
@@ -102,7 +102,7 @@ function Calender() {
             margin: 0,
           },
           '& .PrivatePickersSlideTransition-root': {
-            minHeight: DATE_HEIGHT * 6,
+            minHeight: DATE_HEIGHT * 5,
           },
           '& .PrivatePickersSlideTransition-root [role="row"]': {
             margin: 0,
