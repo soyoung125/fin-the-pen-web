@@ -11,6 +11,9 @@ import Box from '@mui/material/Box';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
+import { useEffect } from 'react';
+import { useDispatch } from 'react-redux';
+import { setHeaderOpenFalse, setHeaderOpenTrue } from '../../utils/redux/common/commonSlice';
 // import { createTheme, ThemeProvider } from '@mui/material/styles';
 
 function Copyright(props) {
@@ -39,6 +42,15 @@ export default function SignInContainer() {
       password: data.get('password'),
     });
   };
+
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(setHeaderOpenFalse()); // 페이지 진입 시 헤더 감추기
+    return () => {
+      dispatch(setHeaderOpenTrue()); // 페이지 탈출 시 헤더 복구
+    };
+  }, []);
 
   return (
   // <ThemeProvider theme={theme}>
