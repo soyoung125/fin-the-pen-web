@@ -76,7 +76,7 @@ export default function HomeLayout() {
     <Box sx={{ pb: 7 }} ref={ref}>
       <CssBaseline />
       <TopBar value={value} setValue={setValue} />
-      <Box my={5}>
+      <Box>
         <Outlet />
       </Box>
       <BottomBar value={value} setValue={setValue} />
