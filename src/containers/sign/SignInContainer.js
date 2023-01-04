@@ -10,8 +10,10 @@ import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 import { setHeaderOpenFalse, setHeaderOpenTrue } from '../../utils/redux/common/commonSlice';
 import { mockLogin, selectStatus, selectUser } from '../../utils/redux/user/userSlice';
+import PATH from '../../utils/constants/path';
 // import { createTheme, ThemeProvider } from '@mui/material/styles';
 
 function Copyright(props) {
@@ -33,7 +35,7 @@ function Copyright(props) {
 
 export default function SignInContainer() {
   const dispatch = useDispatch();
-
+  const navigate = useNavigate();
   const user = useSelector(selectUser);
   const status = useSelector(selectStatus);
 
@@ -57,6 +59,12 @@ export default function SignInContainer() {
     };
   }, []);
 
+  useEffect(() => {
+    if (user !== null) {
+      navigate(PATH.home);
+    }
+  }, [user]);
+
   return (
     <Container component="main" maxWidth="xs">
       <CssBaseline />
@@ -68,7 +76,6 @@ export default function SignInContainer() {
           alignItems: 'center',
         }}
       >
-        {JSON.stringify(user)}
         <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
           <LockOutlinedIcon />
         </Avatar>
