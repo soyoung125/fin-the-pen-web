@@ -10,6 +10,10 @@ function MyPageContainer() {
   const user = useSelector(selectUser);
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const userLogOut = () => {
+    dispatch(logOut());
+    // 로그아웃 하면서 추가로 해제해야 할 행동을 여기에서 해줘야 함
+  };
   useEffect(() => {
     // 로그인 안된 계정은 로그인 페이지로 강제연결
     if (user === null) {
@@ -19,11 +23,13 @@ function MyPageContainer() {
   return (
     <Box>
       <Typography>다음 계정으로 로그인 되어있습니다.</Typography>
-      {JSON.stringify(user)}
+      <Typography>
+        {JSON.stringify(user)}
+      </Typography>
       <Button
         variant="contained"
         color="error"
-        onClick={() => dispatch(logOut())}
+        onClick={() => userLogOut()}
       >
         로그아웃
       </Button>

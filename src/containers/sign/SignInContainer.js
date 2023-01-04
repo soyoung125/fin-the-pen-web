@@ -50,6 +50,7 @@ export default function SignInContainer() {
 
   const guestLogin = () => {
     dispatch(mockLogin());
+    // 추가로 이런 저런 설정을 여기에서 해줘야 함.
   };
 
   useEffect(() => {
