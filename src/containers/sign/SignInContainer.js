@@ -3,17 +3,15 @@ import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
 import TextField from '@mui/material/TextField';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import Checkbox from '@mui/material/Checkbox';
 import Link from '@mui/material/Link';
-import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { useEffect } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { setHeaderOpenFalse, setHeaderOpenTrue } from '../../utils/redux/common/commonSlice';
+import { mockLogin, selectStatus, selectUser } from '../../utils/redux/user/userSlice';
 // import { createTheme, ThemeProvider } from '@mui/material/styles';
 
 function Copyright(props) {
@@ -34,6 +32,11 @@ function Copyright(props) {
 // const theme = createTheme();
 
 export default function SignInContainer() {
+  const dispatch = useDispatch();
+
+  const user = useSelector(selectUser);
+  const status = useSelector(selectStatus);
+
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
@@ -43,7 +46,9 @@ export default function SignInContainer() {
     });
   };
 
-  const dispatch = useDispatch();
+  const guestLogin = () => {
+    dispatch(mockLogin());
+  };
 
   useEffect(() => {
     dispatch(setHeaderOpenFalse()); // 페이지 진입 시 헤더 감추기
@@ -53,7 +58,6 @@ export default function SignInContainer() {
   }, []);
 
   return (
-  // <ThemeProvider theme={theme}>
     <Container component="main" maxWidth="xs">
       <CssBaseline />
       <Box
@@ -64,6 +68,7 @@ export default function SignInContainer() {
           alignItems: 'center',
         }}
       >
+        {JSON.stringify(user)}
         <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
           <LockOutlinedIcon />
         </Avatar>
@@ -91,34 +96,33 @@ export default function SignInContainer() {
             id="password"
             autoComplete="current-password"
           />
-          <FormControlLabel
-            control={<Checkbox value="remember" color="primary" />}
-            label="Remember me"
-          />
           <Button
             type="submit"
             fullWidth
             variant="contained"
             sx={{ mt: 3, mb: 2 }}
           >
-            Sign In
+            로그인 (미구현)
           </Button>
-          <Grid container>
-            <Grid item xs>
-              <Link href="#" variant="body2">
-                Forgot password?
-              </Link>
-            </Grid>
-            <Grid item>
-              <Link href="#" variant="body2">
-                Don`t have an account? Sign Up
-              </Link>
-            </Grid>
-          </Grid>
+
+          <Link href="#" variant="body2">
+            계정이 없으신가요?
+          </Link>
         </Box>
+        {/* 서버 감지에 실패한 경우에만 아래 버튼이 뜨게 개선 예정 */}
+        <Button
+          type="submit"
+          fullWidth
+          variant="contained"
+          color="error"
+          sx={{ mt: 3, mb: 2 }}
+          onClick={() => guestLogin()}
+        >
+          {status === 'idle' ? 'Guest 계정으로 로그인 하기' : '로그인 중 ...'}
+        </Button>
       </Box>
       <Copyright sx={{ mt: 8, mb: 4 }} />
     </Container>
-  // </ThemeProvider>
+
   );
 }
