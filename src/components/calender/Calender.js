@@ -8,12 +8,12 @@ import { PickersDay } from '@mui/x-date-pickers/PickersDay/PickersDay';
 import moment from 'moment';
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { selectDate, selectedDate, selectEvents } from '../../utils/redux/event/eventSlice';
+import { selectDate, selectedDate, selectSchedules } from '../../utils/redux/schedule/scheduleSlice';
 
 function Calender() {
   const dispatch = useDispatch();
   const value = useSelector(selectDate);
-  const events = useSelector(selectEvents);
+  const schedules = useSelector(selectSchedules);
   const DATE_SIZE = 32;
   const DATE_HEIGHT = 50;
   // eslint-disable-next-line no-unused-vars
@@ -35,15 +35,15 @@ function Calender() {
       );
     }
 
-    const dayEvents = events.filter((e) => e.date === day.format('YYYY-MM-DD'));
+    const daySchedules = schedules.filter((e) => e.date === day.format('YYYY-MM-DD'));
 
-    if (dayEvents.length > 0) {
+    if (daySchedules.length > 0) {
       return (
         <Box sx={{ width: DATE_SIZE, marginX: 'auto' }}>
           <Stack>
             <PickersDay sx={{ marginBottom: 2 }} {...DayComponentProps} />
             <Stack direction="row" justifyContent="center" spacing={0.5} mt={0.1}>
-              {dayEvents.map(() => ( // 추후 e의 카테고리 별로 색 바꿀 예정
+              {daySchedules.map(() => ( // 추후 e의 카테고리 별로 색 바꿀 예정
                 <Box
                   key={Math.random()}
                   sx={{

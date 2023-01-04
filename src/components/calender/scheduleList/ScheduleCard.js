@@ -5,14 +5,14 @@ import {
 } from '@mui/material';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 
-function EventCard({ event }) {
+function ScheduleCard({ schedule }) {
   return (
     <Box px={1} mb={1}>
       <Card>
         <Stack direction="row" justifyContent="space-between" p={1}>
           <Stack>
-            <Typography>{`○ ${event.start_time} - ${event.end_time}`}</Typography>
-            <Typography>{`${event.event_name}`}</Typography>
+            <Typography>{`○ ${schedule.start_time} - ${schedule.end_time}`}</Typography>
+            <Typography>{`${schedule.event_name}`}</Typography>
           </Stack>
           <Button variant="text" size="small">
             <MoreVertIcon />
@@ -23,4 +23,4 @@ function EventCard({ event }) {
   );
 }
 
-export default EventCard;
+export default ScheduleCard;

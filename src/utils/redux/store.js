@@ -7,13 +7,13 @@ import { combineReducers } from 'redux';
 import { persistReducer } from 'redux-persist';
 import thunk from 'redux-thunk';
 import userReducer from './user/userSlice';
-import eventReducer from './event/eventSlice';
+import scheduleReducer from './schedule/scheduleSlice';
 import commonReducer from './common/commonSlice';
 
 const reducers = combineReducers({
   common: commonReducer,
   user: userReducer,
-  event: eventReducer,
+  schedule: scheduleReducer,
   // 리듀서 추가를 여기에 해주삼 ㅇㅇ
 });
 

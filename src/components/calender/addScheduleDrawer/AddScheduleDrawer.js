@@ -17,7 +17,7 @@ import NameInput from './NameInput';
 import DateInput from './DateInput';
 import ADD_SCHEDULE from '../../../utils/constants/schedule';
 import { NOT_AVAILABLE } from '../../../utils/constants/common';
-import { addEvent, selectDate } from '../../../utils/redux/event/eventSlice';
+import { addSchedule, selectDate } from '../../../utils/redux/schedule/scheduleSlice';
 import SpendingInput from './SpendingInput';
 import ImportanceInput from './ImportanceInput';
 import ExclusionInput from './ExclusionInput';
@@ -112,7 +112,7 @@ function AddScheduleDrawer({ setBottomDrawerOpen }) {
         variant="contained"
         fullWidth
         onClick={() => {
-          dispatch(addEvent(schedule));
+          dispatch(addSchedule(schedule));
           setBottomDrawerOpen(false);
         }}
       >
