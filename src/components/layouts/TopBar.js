@@ -1,5 +1,5 @@
 import {
-  Box, Paper, Stack, Typography,
+  Paper, Stack, Typography,
 } from '@mui/material';
 import { useSelector } from 'react-redux';
 import { selectHeaderOpen } from '../../utils/redux/common/commonSlice';
@@ -18,30 +18,40 @@ function TopBar() {
           spacing={2}
           mx={1}
         >
-          <Box>
+          <Stack
+            justifyContent="space-between"
+            alignItems="flex-start"
+          >
             <Typography>
-              2023
+              좌측
             </Typography>
             <Typography>
-              January
+              표시영역
             </Typography>
-          </Box>
-          <Box>
+          </Stack>
+          <Stack
+            justifyContent="center"
+            alignItems="center"
+          >
             <Typography>
-              1월 소비 목표 금액
-            </Typography>
-            <Typography>
-              600,000원
-            </Typography>
-          </Box>
-          <Box>
-            <Typography>
-              1월 1일
+              중앙
             </Typography>
             <Typography>
-              일요일
+              표시영역
             </Typography>
-          </Box>
+          </Stack>
+          <Stack
+            justifyContent="space-between"
+            alignItems="flex-end"
+          >
+            <Typography>
+              우측
+            </Typography>
+            <Typography>
+              표시영역
+            </Typography>
+          </Stack>
+
         </Stack>
         )
       }
