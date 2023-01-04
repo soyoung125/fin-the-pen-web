@@ -19,9 +19,9 @@ function ScheduleList() {
       }}
     >
       {
-        schedules.map((el) => (
-          el.date === date ? <ScheduleCard schedule={el} key={Math.random()} /> : null
-        ))
+        schedules
+          .filter((el) => el.date === date)
+          .map((el) => <ScheduleCard schedule={el} key={Math.random()} />)
       }
     </List>
   );
