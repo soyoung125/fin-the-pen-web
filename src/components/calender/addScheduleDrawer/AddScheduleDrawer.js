@@ -7,6 +7,8 @@ import {
   Button,
   Card,
   Chip,
+  Slide,
+  Snackbar,
   Stack, Typography,
 } from '@mui/material';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
@@ -21,6 +23,11 @@ import { addSchedule, selectDate } from '../../../utils/redux/schedule/scheduleS
 import SpendingInput from './SpendingInput';
 import ImportanceInput from './ImportanceInput';
 import ExclusionInput from './ExclusionInput';
+
+function TransitionUp(props) {
+  // eslint-disable-next-line react/jsx-props-no-spreading
+  return <Slide {...props} direction="right" />;
+}
 
 function AddScheduleDrawer({ setBottomDrawerOpen }) {
   const dispatch = useDispatch();
@@ -56,69 +63,83 @@ function AddScheduleDrawer({ setBottomDrawerOpen }) {
     console.info('You clicked the delete icon.');
   };
 
+  const [snackbarOpen, setSnackbarOpen] = useState(true);
+  const handleClose = () => {
+    setSnackbarOpen(false);
+  };
+
   return (
-    <Stack
-      justifyContent="space-between"
-      spacing={2}
-      m={1}
-    >
-      <Stack direction="row" justifyContent="space-between">
-        <Button />
-        <Typography variant="h5" sx={{ fontWeight: 'bold' }}>{ADD_SCHEDULE.drawer_title}</Typography>
-        <Button onClick={() => setBottomDrawerOpen(false)}><ClearIcon /></Button>
-      </Stack>
-      <NameInput schedule={schedule} updateSchedule={updateSchedule} />
-      <DateInput schedule={schedule} updateSchedule={updateSchedule} />
-
+    <>
+      <Snackbar
+        anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
+        open={snackbarOpen}
+        onClose={handleClose}
+        message="경고! 자산이 거의 남지 않았습니다."
+        TransitionComponent={TransitionUp}
+      />
       <Stack
-        direction="row"
         justifyContent="space-between"
-        alignItems="center"
         spacing={2}
-        sx={{ width: '100%' }}
+        m={1}
       >
-        <Typography sx={{ fontWeight: 'bold' }}>{ADD_SCHEDULE.category_title}</Typography>
-        <Button>{ADD_SCHEDULE.add_category}</Button>
-      </Stack>
+        <Stack direction="row" justifyContent="space-between">
+          <Button />
+          <Typography variant="h5" sx={{ fontWeight: 'bold' }}>{ADD_SCHEDULE.drawer_title}</Typography>
+          <Button onClick={() => setBottomDrawerOpen(false)}><ClearIcon /></Button>
+        </Stack>
+        <NameInput schedule={schedule} updateSchedule={updateSchedule} />
+        <DateInput schedule={schedule} updateSchedule={updateSchedule} />
 
-      <Alert severity="error">{NOT_AVAILABLE}</Alert>
-      <Box>
-        {Array.from({ length: 10 }, (v, i) => i + 1).map((num) => <Chip key={num} label={num} variant="outlined" onDelete={handleDelete} sx={{ mr: 1, mb: 1 }} />)}
-      </Box>
-
-      <Accordion sx={{ width: '100%' }}>
-        <AccordionSummary
-          expandIcon={<ExpandMoreIcon />}
-          aria-controls="panel1a-content"
-          id="panel1a-header"
+        <Stack
+          direction="row"
+          justifyContent="space-between"
+          alignItems="center"
+          spacing={2}
+          sx={{ width: '100%' }}
         >
-          <Typography sx={{ fontWeight: 'bold' }}>{ADD_SCHEDULE.set_finance_title}</Typography>
-        </AccordionSummary>
-        <AccordionDetails>
-          <Stack spacing={1}>
-            <Card>
-              <SpendingInput schedule={schedule} updateSchedule={updateSchedule} />
-            </Card>
-            <Card>
-              <ImportanceInput schedule={schedule} updateSchedule={updateSchedule} />
-            </Card>
-            <Card>
-              <ExclusionInput schedule={schedule} updateExclusion={updateExclusion} />
-            </Card>
-          </Stack>
-        </AccordionDetails>
-      </Accordion>
-      <Button
-        variant="contained"
-        fullWidth
-        onClick={() => {
-          dispatch(addSchedule(schedule));
-          setBottomDrawerOpen(false);
-        }}
-      >
-        Create Event & Wise Spend
-      </Button>
-    </Stack>
+          <Typography sx={{ fontWeight: 'bold' }}>{ADD_SCHEDULE.category_title}</Typography>
+          <Button>{ADD_SCHEDULE.add_category}</Button>
+        </Stack>
+
+        <Alert severity="error">{NOT_AVAILABLE}</Alert>
+        <Box>
+          {Array.from({ length: 10 }, (v, i) => i + 1).map((num) => <Chip key={num} label={num} variant="outlined" onDelete={handleDelete} sx={{ mr: 1, mb: 1 }} />)}
+        </Box>
+
+        <Accordion sx={{ width: '100%' }}>
+          <AccordionSummary
+            expandIcon={<ExpandMoreIcon />}
+            aria-controls="panel1a-content"
+            id="panel1a-header"
+          >
+            <Typography sx={{ fontWeight: 'bold' }}>{ADD_SCHEDULE.set_finance_title}</Typography>
+          </AccordionSummary>
+          <AccordionDetails>
+            <Stack spacing={1}>
+              <Card>
+                <SpendingInput schedule={schedule} updateSchedule={updateSchedule} />
+              </Card>
+              <Card>
+                <ImportanceInput schedule={schedule} updateSchedule={updateSchedule} />
+              </Card>
+              <Card>
+                <ExclusionInput schedule={schedule} updateExclusion={updateExclusion} />
+              </Card>
+            </Stack>
+          </AccordionDetails>
+        </Accordion>
+        <Button
+          variant="contained"
+          fullWidth
+          onClick={() => {
+            dispatch(addSchedule(schedule));
+            setBottomDrawerOpen(false);
+          }}
+        >
+          Create Event & Wise Spend
+        </Button>
+      </Stack>
+    </>
   );
 }
 export default AddScheduleDrawer;
