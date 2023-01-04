@@ -29,8 +29,8 @@ function AddScheduleDrawer({ setBottomDrawerOpen }) {
   const [schedule, setSchedule] = useState({
     event_name: '',
     date: new Date(),
-    start_time: '',
-    end_time: '',
+    start_time: '01:00',
+    end_time: '23:00',
     type: ADD_SCHEDULE.type_minus,
     expected_spending: 0,
     importance: ADD_SCHEDULE.importance_middle,
