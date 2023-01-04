@@ -1,11 +1,12 @@
 import {
   Stack, Switch, Typography,
 } from '@mui/material';
+import ADD_SCHEDULE from '../../../utils/constants/schedule';
 
 function ExclusionInput({ schedule, updateExclusion }) {
   return (
     <Stack direction="row" justifyContent="space-between" alignItems="center" p={1}>
-      <Typography>예산에서 제외</Typography>
+      <Typography>{ADD_SCHEDULE.exclusion_title}</Typography>
       <Stack direction="row" alignItems="center">
         <Switch
           id="exclusion"

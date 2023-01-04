@@ -6,13 +6,14 @@ import ADD_SCHEDULE from '../../../utils/constants/schedule';
 function SpendingInput({ schedule, updateSchedule }) {
   return (
     <Stack direction="row" justifyContent="space-between" alignItems="center" p={1}>
-      <Typography>금액 설정</Typography>
-      <Stack direction="row" alignItems="center">
+      <Typography>{ADD_SCHEDULE.set_spending_title}</Typography>
+      <Stack direction="row" justifyContent="flex-end" alignItems="center" spacing={1}>
         <Button
           variant={schedule.type === ADD_SCHEDULE.type_plus ? 'contained' : 'outlined'}
           id="type"
           value={ADD_SCHEDULE.type_plus}
           onClick={updateSchedule}
+          size="small"
         >
           {ADD_SCHEDULE.type_plus}
         </Button>
@@ -21,6 +22,7 @@ function SpendingInput({ schedule, updateSchedule }) {
           id="type"
           value={ADD_SCHEDULE.type_minus}
           onClick={updateSchedule}
+          size="small"
         >
           {ADD_SCHEDULE.type_minus}
         </Button>
@@ -33,8 +35,10 @@ function SpendingInput({ schedule, updateSchedule }) {
           InputLabelProps={{
             shrink: true,
           }}
+          sx={{ width: '30%' }}
+          size="small"
         />
-        <Typography>원</Typography>
+        <Typography>{ADD_SCHEDULE.won}</Typography>
       </Stack>
     </Stack>
   );

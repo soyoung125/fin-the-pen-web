@@ -9,6 +9,7 @@ function NameInput({ schedule, updateSchedule }) {
         startAdornment={<InputAdornment position="start">{ADD_SCHEDULE.name}</InputAdornment>}
         value={schedule.event_name}
         onChange={updateSchedule}
+        size="small"
       />
     </FormControl>
   );

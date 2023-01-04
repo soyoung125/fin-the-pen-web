@@ -6,13 +6,14 @@ import ADD_SCHEDULE from '../../../utils/constants/schedule';
 function ImportanceInput({ schedule, updateSchedule }) {
   return (
     <Stack direction="row" justifyContent="space-between" alignItems="center" p={1}>
-      <Typography>일정 중요도</Typography>
-      <Stack direction="row" alignItems="center">
+      <Typography>{ADD_SCHEDULE.set_importance_title}</Typography>
+      <Stack direction="row" alignItems="center" spacing={1}>
         <Button
           variant={schedule.importance === ADD_SCHEDULE.importance_high ? 'contained' : 'outlined'}
           id="importance"
           value={ADD_SCHEDULE.importance_high}
           onClick={updateSchedule}
+          size="small"
         >
           {ADD_SCHEDULE.importance_high}
         </Button>
@@ -21,6 +22,7 @@ function ImportanceInput({ schedule, updateSchedule }) {
           id="importance"
           value={ADD_SCHEDULE.importance_middle}
           onClick={updateSchedule}
+          size="small"
         >
           {ADD_SCHEDULE.importance_middle}
         </Button>
@@ -29,6 +31,7 @@ function ImportanceInput({ schedule, updateSchedule }) {
           id="importance"
           value={ADD_SCHEDULE.importance_low}
           onClick={updateSchedule}
+          size="small"
         >
           {ADD_SCHEDULE.importance_low}
         </Button>

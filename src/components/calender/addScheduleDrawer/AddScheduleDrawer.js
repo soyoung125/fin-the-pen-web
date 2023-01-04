@@ -59,13 +59,12 @@ function AddScheduleDrawer({ setBottomDrawerOpen }) {
   return (
     <Stack
       justifyContent="space-between"
-      // alignItems="center"
       spacing={2}
       m={1}
     >
       <Stack direction="row" justifyContent="space-between">
         <Button />
-        <Typography variant="h5">{ADD_SCHEDULE.drawer_title}</Typography>
+        <Typography variant="h5" sx={{ fontWeight: 'bold' }}>{ADD_SCHEDULE.drawer_title}</Typography>
         <Button onClick={() => setBottomDrawerOpen(false)}><ClearIcon /></Button>
       </Stack>
       <NameInput schedule={schedule} updateSchedule={updateSchedule} />
@@ -78,9 +77,10 @@ function AddScheduleDrawer({ setBottomDrawerOpen }) {
         spacing={2}
         sx={{ width: '100%' }}
       >
-        <Typography>Select Category</Typography>
-        <Button>+ Add New</Button>
+        <Typography sx={{ fontWeight: 'bold' }}>{ADD_SCHEDULE.category_title}</Typography>
+        <Button>{ADD_SCHEDULE.add_category}</Button>
       </Stack>
+
       <Alert severity="error">{NOT_AVAILABLE}</Alert>
       <Box>
         {Array.from({ length: 10 }, (v, i) => i + 1).map((num) => <Chip key={num} label={num} variant="outlined" onDelete={handleDelete} sx={{ mr: 1, mb: 1 }} />)}
@@ -92,7 +92,7 @@ function AddScheduleDrawer({ setBottomDrawerOpen }) {
           aria-controls="panel1a-content"
           id="panel1a-header"
         >
-          <Typography>자산 설정하기</Typography>
+          <Typography sx={{ fontWeight: 'bold' }}>{ADD_SCHEDULE.set_finance_title}</Typography>
         </AccordionSummary>
         <AccordionDetails>
           <Stack spacing={1}>

@@ -10,13 +10,13 @@ function DateInput({ schedule, updateSchedule }) {
         id="date"
         label={ADD_SCHEDULE.date}
         type="date"
-        // defaultValue="2017-05-24"
         fullWidth
         InputLabelProps={{
           shrink: true,
         }}
         value={schedule.date}
         onChange={updateSchedule}
+        size="small"
       />
       <Stack
         direction="row"
@@ -29,7 +29,6 @@ function DateInput({ schedule, updateSchedule }) {
           id="start_time"
           label={ADD_SCHEDULE.start_time}
           type="time"
-          // defaultValue="07:30"
           InputLabelProps={{
             shrink: true,
           }}
@@ -39,12 +38,12 @@ function DateInput({ schedule, updateSchedule }) {
           fullWidth
           value={schedule.start_time}
           onChange={updateSchedule}
+          size="small"
         />
         <TextField
           id="end_time"
           label={ADD_SCHEDULE.end_time}
           type="time"
-          // defaultValue="07:30"
           InputLabelProps={{
             shrink: true,
           }}
@@ -54,6 +53,7 @@ function DateInput({ schedule, updateSchedule }) {
           fullWidth
           value={schedule.end_time}
           onChange={updateSchedule}
+          size="small"
         />
       </Stack>
     </>
