@@ -4,7 +4,7 @@ import {
   Divider,
 } from '@mui/material';
 import Calender from '../../components/calender/Calender';
-import EventList from '../../components/calender/eventList/EventList';
+import ScheduleList from '../../components/calender/scheduleList/ScheduleList';
 
 function HomeConatiner() {
   // temp
@@ -12,7 +12,7 @@ function HomeConatiner() {
     <Box>
       <Calender />
       <Divider />
-      <EventList />
+      <ScheduleList />
     </Box>
   );
 }

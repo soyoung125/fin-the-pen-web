@@ -2,9 +2,9 @@ import { List } from '@mui/material';
 import moment from 'moment';
 import { useSelector } from 'react-redux';
 import { selectDate, selectEvents } from '../../../utils/redux/event/eventSlice';
-import EventCard from './EventCard';
+import ScheduleCard from './ScheduleCard';
 
-function EventList() {
+function ScheduleList() {
   const events = useSelector(selectEvents);
   const date = moment(useSelector(selectDate)).format('YYYY-MM-DD');
 
@@ -20,11 +20,11 @@ function EventList() {
     >
       {
         events.map((e) => (
-          e.date === date ? <EventCard event={e} key={Math.random()} /> : null
+          e.date === date ? <ScheduleCard event={e} key={Math.random()} /> : null
         ))
       }
     </List>
   );
 }
 
-export default EventList;
+export default ScheduleList;

@@ -10,7 +10,7 @@ import PersonIcon from '@mui/icons-material/Person';
 import { useState } from 'react';
 import PATH from '../../utils/constants/path';
 import { NOTHING_IS_HERE_YET } from '../../utils/constants/common';
-import AddEventDrawer from '../calender/addEventDrawer/AddEventDrawer';
+import AddScheduleDrawer from '../calender/addScheduleDrawer/AddScheduleDrawer';
 
 function BottomBar({ value, setValue }) {
   const navigate = useNavigate();
@@ -44,7 +44,7 @@ function BottomBar({ value, setValue }) {
         onClose={() => setBottomDrawerOpen(false)}
       >
         {/* 이 부분을 범용적으로 사용할 수 있게 만드는 건 어떨까? */}
-        <AddEventDrawer setBottomDrawerOpen={setBottomDrawerOpen} />
+        <AddScheduleDrawer setBottomDrawerOpen={setBottomDrawerOpen} />
       </Drawer>
     </>
   );
