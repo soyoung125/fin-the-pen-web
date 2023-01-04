@@ -39,3 +39,8 @@ React, Redux, Axios, React Router Dom, EsLint, chart.js
     └─마이페이지
        ├─로그인
        └─회원가입
+
+## 📜 Documentation
+
+[Figma](https://www.figma.com/file/jvJSoUfl0I4SKo59OB6Sua/%ED%95%80%EB%8D%94%ED%8E%9C?node-id=0%3A1&t=XbgFd2dax5HIYz3J-0
+)
