@@ -3,7 +3,7 @@ import {
 } from '@mui/material';
 import ADD_SCHEDULE from '../../../utils/constants/schedule';
 
-function DateInput({ event, updateEvent }) {
+function DateInput({ schedule, updateSchedule }) {
   return (
     <>
       <TextField
@@ -15,8 +15,8 @@ function DateInput({ event, updateEvent }) {
         InputLabelProps={{
           shrink: true,
         }}
-        value={event.date}
-        onChange={updateEvent}
+        value={schedule.date}
+        onChange={updateSchedule}
       />
       <Stack
         direction="row"
@@ -37,8 +37,8 @@ function DateInput({ event, updateEvent }) {
             step: 300, // 5 min
           }}
           fullWidth
-          value={event.start_time}
-          onChange={updateEvent}
+          value={schedule.start_time}
+          onChange={updateSchedule}
         />
         <TextField
           id="end_time"
@@ -52,8 +52,8 @@ function DateInput({ event, updateEvent }) {
             step: 300, // 5 min
           }}
           fullWidth
-          value={event.end_time}
-          onChange={updateEvent}
+          value={schedule.end_time}
+          onChange={updateSchedule}
         />
       </Stack>
     </>

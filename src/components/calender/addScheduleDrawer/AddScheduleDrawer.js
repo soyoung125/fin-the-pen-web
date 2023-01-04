@@ -22,11 +22,11 @@ import SpendingInput from './SpendingInput';
 import ImportanceInput from './ImportanceInput';
 import ExclusionInput from './ExclusionInput';
 
-function AddEventDrawer({ setBottomDrawerOpen }) {
+function AddScheduleDrawer({ setBottomDrawerOpen }) {
   const dispatch = useDispatch();
   const date = useSelector(selectDate);
 
-  const [event, setEvent] = useState({
+  const [schedule, setSchedule] = useState({
     event_name: '',
     date: new Date(),
     start_time: '',
@@ -39,16 +39,16 @@ function AddEventDrawer({ setBottomDrawerOpen }) {
 
   useEffect(() => {
     // eslint-disable-next-line no-underscore-dangle
-    setEvent({ ...event, date: date.format('YYYY-MM-DD') });
+    setSchedule({ ...schedule, date: date.format('YYYY-MM-DD') });
   }, [date]);
 
-  const updateEvent = (state) => {
-    setEvent({ ...event, [state.target.id]: state.target.value });
-    console.log(event);
+  const updateSchedule = (state) => {
+    setSchedule({ ...schedule, [state.target.id]: state.target.value });
+    console.log(schedule);
   };
 
   const updateExclusion = (state) => {
-    setEvent({ ...event, exclusion: state.target.checked });
+    setSchedule({ ...schedule, exclusion: state.target.checked });
     console.log(state.target.checked);
   };
 
@@ -68,8 +68,8 @@ function AddEventDrawer({ setBottomDrawerOpen }) {
         <Typography variant="h5">{ADD_SCHEDULE.drawer_title}</Typography>
         <Button onClick={() => setBottomDrawerOpen(false)}><ClearIcon /></Button>
       </Stack>
-      <NameInput event={event} updateEvent={updateEvent} />
-      <DateInput event={event} updateEvent={updateEvent} />
+      <NameInput schedule={schedule} updateSchedule={updateSchedule} />
+      <DateInput schedule={schedule} updateSchedule={updateSchedule} />
 
       <Stack
         direction="row"
@@ -97,13 +97,13 @@ function AddEventDrawer({ setBottomDrawerOpen }) {
         <AccordionDetails>
           <Stack spacing={1}>
             <Card>
-              <SpendingInput event={event} updateEvent={updateEvent} />
+              <SpendingInput schedule={schedule} updateSchedule={updateSchedule} />
             </Card>
             <Card>
-              <ImportanceInput event={event} updateEvent={updateEvent} />
+              <ImportanceInput schedule={schedule} updateSchedule={updateSchedule} />
             </Card>
             <Card>
-              <ExclusionInput event={event} updateExclusion={updateExclusion} />
+              <ExclusionInput schedule={schedule} updateExclusion={updateExclusion} />
             </Card>
           </Stack>
         </AccordionDetails>
@@ -112,7 +112,7 @@ function AddEventDrawer({ setBottomDrawerOpen }) {
         variant="contained"
         fullWidth
         onClick={() => {
-          dispatch(addEvent(event));
+          dispatch(addEvent(schedule));
           setBottomDrawerOpen(false);
         }}
       >
@@ -121,4 +121,4 @@ function AddEventDrawer({ setBottomDrawerOpen }) {
     </Stack>
   );
 }
-export default AddEventDrawer;
+export default AddScheduleDrawer;
