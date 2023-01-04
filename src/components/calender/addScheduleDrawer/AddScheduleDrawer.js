@@ -15,7 +15,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import ClearIcon from '@mui/icons-material/Clear';
 import NameInput from './NameInput';
 import DateInput from './DateInput';
-import ADD_EVENT from '../../../utils/constants/event';
+import ADD_SCHEDULE from '../../../utils/constants/schedule';
 import { NOT_AVAILABLE } from '../../../utils/constants/common';
 import { addEvent, selectDate } from '../../../utils/redux/event/eventSlice';
 import SpendingInput from './SpendingInput';
@@ -31,9 +31,9 @@ function AddEventDrawer({ setBottomDrawerOpen }) {
     date: new Date(),
     start_time: '',
     end_time: '',
-    type: ADD_EVENT.type_minus,
+    type: ADD_SCHEDULE.type_minus,
     expected_spending: 0,
-    importance: ADD_EVENT.importance_middle,
+    importance: ADD_SCHEDULE.importance_middle,
     exclusion: false, // false면 포함
   });
 
@@ -65,7 +65,7 @@ function AddEventDrawer({ setBottomDrawerOpen }) {
     >
       <Stack direction="row" justifyContent="space-between">
         <Button />
-        <Typography variant="h5">{ADD_EVENT.drawer_title}</Typography>
+        <Typography variant="h5">{ADD_SCHEDULE.drawer_title}</Typography>
         <Button onClick={() => setBottomDrawerOpen(false)}><ClearIcon /></Button>
       </Stack>
       <NameInput event={event} updateEvent={updateEvent} />

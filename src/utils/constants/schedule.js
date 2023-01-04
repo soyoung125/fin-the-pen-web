@@ -1,4 +1,4 @@
-const ADD_EVENT = Object.freeze({
+const ADD_SCHEDULE = Object.freeze({
   drawer_title: 'Add New Event',
   name: 'Event Name',
   date: 'Date',
@@ -11,4 +11,4 @@ const ADD_EVENT = Object.freeze({
   importance_middle: '중',
   importance_low: '하',
 });
-export default ADD_EVENT;
+export default ADD_SCHEDULE;

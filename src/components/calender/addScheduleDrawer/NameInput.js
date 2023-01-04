@@ -1,12 +1,12 @@
 import { FormControl, InputAdornment, OutlinedInput } from '@mui/material';
-import ADD_EVENT from '../../../utils/constants/event';
+import ADD_SCHEDULE from '../../../utils/constants/schedule';
 
 function NameInput({ event, updateEvent }) {
   return (
     <FormControl fullWidth>
       <OutlinedInput
         id="event_name"
-        startAdornment={<InputAdornment position="start">{ADD_EVENT.name}</InputAdornment>}
+        startAdornment={<InputAdornment position="start">{ADD_SCHEDULE.name}</InputAdornment>}
         value={event.event_name}
         onChange={updateEvent}
       />
