@@ -3,14 +3,13 @@ import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
 import TextField from '@mui/material/TextField';
-import Link from '@mui/material/Link';
 import Box from '@mui/material/Box';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { setHeaderOpenFalse, setHeaderOpenTrue } from '../../utils/redux/common/commonSlice';
 import { mockLogin, selectStatus, selectUser } from '../../utils/redux/user/userSlice';
 import PATH from '../../utils/constants/path';
@@ -113,7 +112,7 @@ export default function SignInContainer() {
             로그인 (미구현)
           </Button>
 
-          <Link href="#" variant="body2">
+          <Link to={PATH.signUp}>
             계정이 없으신가요?
           </Link>
         </Box>
