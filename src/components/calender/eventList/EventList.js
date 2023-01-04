@@ -1,15 +1,12 @@
-import {
-  Box,
-  Button,
-  Card,
-  List, Stack, Typography,
-} from '@mui/material';
-import MoreVertIcon from '@mui/icons-material/MoreVert';
+import { List } from '@mui/material';
+import moment from 'moment';
 import { useSelector } from 'react-redux';
-import { selectEvents } from '../../../utils/redux/event/eventSlice';
+import { selectDate, selectEvents } from '../../../utils/redux/event/eventSlice';
+import EventCard from './EventCard';
 
 function EventList() {
   const events = useSelector(selectEvents);
+  const date = moment(useSelector(selectDate)).format('YYYY-MM-DD');
 
   return (
     <List
@@ -23,19 +20,7 @@ function EventList() {
     >
       {
         events.map((e) => (
-          <Box px={1} mb={1} key={Math.random()}>
-            <Card>
-              <Stack direction="row" justifyContent="space-between" p={1}>
-                <Stack>
-                  <Typography>{`○ ${e.start_time} - ${e.end_time}`}</Typography>
-                  <Typography>{`${e.event_name}`}</Typography>
-                </Stack>
-                <Button variant="text" size="small">
-                  <MoreVertIcon />
-                </Button>
-              </Stack>
-            </Card>
-          </Box>
+          e.date === date ? <EventCard event={e} key={Math.random()} /> : null
         ))
       }
     </List>
