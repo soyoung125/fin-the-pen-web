@@ -1,25 +1,44 @@
+/* eslint-disable react/jsx-props-no-spreading */
+/* eslint-disable no-use-before-define */
 /* eslint-disable no-unused-vars */
+import * as React from 'react';
+// import { useAutocomplete } from '@mui/base/AutocompleteUnstyled';
+import CheckIcon from '@mui/icons-material/Check';
+import { styled } from '@mui/material/styles';
 import {
-  Alert,
-  Box,
-  Button,
-  Chip,
-  FormControl,
-  InputLabel,
-  Select,
-  Stack, Typography,
+  Button, Stack, Typography, useAutocomplete,
 } from '@mui/material';
-import { useState } from 'react';
 import ADD_SCHEDULE from '../../../utils/constants/schedule';
+import Root from './category/Root';
+import Label from './category/Label';
+import InputWrapper from './category/InputWrapper';
+import StyledTag from './category/StyledTag';
+import Listbox from './category/Listbox';
+import CATEGORIES from '../../../utils/constants/categories';
 
-function CategoryInput({ schedule, updateSchedule }) {
-  const handleDelete = () => {
-    console.info('You clicked the delete icon.');
-  };
-  const [multiSelectOpen, setMultiselectOpen] = useState(false);
-  const [categories, setCategories] = useState([]);
+export default function CategoryInput() {
+  const {
+    getRootProps,
+    getInputLabelProps,
+    getInputProps,
+    getTagProps,
+    getListboxProps,
+    getOptionProps,
+    groupedOptions,
+    value,
+    focused,
+    setAnchorEl,
+  } = useAutocomplete({
+    id: 'customized-hook-demo',
+    defaultValue: [CATEGORIES[1]],
+    multiple: true,
+    options: CATEGORIES,
+    getOptionLabel: (option) => option.title,
+  });
+
   return (
     <>
+
       <Stack
         direction="row"
         justifyContent="space-between"
@@ -28,37 +47,31 @@ function CategoryInput({ schedule, updateSchedule }) {
         sx={{ width: '100%' }}
       >
         <Typography sx={{ fontWeight: 'bold' }}>{ADD_SCHEDULE.category_title}</Typography>
-        <Button onClick={() => setMultiselectOpen(!multiSelectOpen)}>
-          {ADD_SCHEDULE.add_category}
-        </Button>
       </Stack>
-      {
-        multiSelectOpen
-        && (
-        <FormControl size="small">
-          <InputLabel htmlFor="grouped-native-select">Grouping</InputLabel>
-          <Select native defaultValue="" id="grouped-native-select" label="Grouping">
-            <option aria-label="None" value="" />
-            <optgroup label="Category 1">
-              <option value={1}>Option 1</option>
-              <option value={2}>Option 2</option>
-            </optgroup>
-            <optgroup label="Category 2">
-              <option value={3}>Option 3</option>
-              <option value={4}>Option 4</option>
-            </optgroup>
-          </Select>
-        </FormControl>
-        )
-      }
-      <Box>
-        {
-        categories.length === 0
-          ? <Typography>카테고리를 등록해주세요</Typography>
-          : categories.map((num) => <Chip key={num} label={num} variant="outlined" onDelete={handleDelete} sx={{ mr: 1, mb: 1 }} />)
-    }
-      </Box>
+
+      <Root>
+        <div {...getRootProps()}>
+          {/* <Label {...getInputLabelProps()}>Customized hook</Label> */}
+          <InputWrapper ref={setAnchorEl} className={focused ? 'focused' : ''}>
+            {value.map((option, index) => (
+              <StyledTag label={option.title} {...getTagProps({ index })} />
+            ))}
+
+            <input {...getInputProps()} />
+          </InputWrapper>
+        </div>
+        {groupedOptions.length > 0 ? (
+          <Listbox {...getListboxProps()}>
+            {groupedOptions.map((option, index) => (
+              <li {...getOptionProps({ option, index })}>
+                <span>{option.title}</span>
+                <CheckIcon fontSize="small" />
+              </li>
+            ))}
+          </Listbox>
+        ) : null}
+      </Root>
+
     </>
   );
 }
-export default CategoryInput;
