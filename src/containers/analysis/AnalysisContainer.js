@@ -1,7 +1,13 @@
+import AnalysisGraph from '../../components/analysis/AnalysisGraph';
+import AnalysisHeader from '../../components/analysis/AnalysisHeader';
+import AnalysisList from '../../components/analysis/AnalysisList';
+
 function AnalysisContainer() {
   return (
     <>
-      분석 페이지
+      <AnalysisHeader />
+      <AnalysisGraph />
+      <AnalysisList />
     </>
   );
 }
