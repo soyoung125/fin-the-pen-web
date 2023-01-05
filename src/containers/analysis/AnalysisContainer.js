@@ -48,7 +48,7 @@ function AnalysisContainer() {
           <AnalysisGraph data={data} total={total} />
           <AnalysisList />
         </>
-      ) : <Alert sx={{ margin: 2 }} severity="warning">지출 데이터가 없습니다.</Alert>}
+      ) : <Alert sx={{ margin: 2 }} severity="error">계산적 문제가 있어서 진행 멈춤.</Alert>}
     </Box>
   );
 }
