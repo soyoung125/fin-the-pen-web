@@ -21,6 +21,7 @@ import SpendingInput from './SpendingInput';
 import ImportanceInput from './ImportanceInput';
 import ExclusionInput from './ExclusionInput';
 import CategoryInput from './CategoryInput';
+import ALERTS from '../../../utils/constants/alerts';
 
 function TransitionUp(props) {
   // eslint-disable-next-line react/jsx-props-no-spreading
@@ -30,6 +31,9 @@ function TransitionUp(props) {
 function AddScheduleDrawer({ setBottomDrawerOpen }) {
   const dispatch = useDispatch();
   const date = useSelector(selectDate);
+
+  // 추후 삭제 예정
+  const random = Math.floor((Math.random() * 5));
 
   const [schedule, setSchedule] = useState({
     event_name: '',
@@ -77,8 +81,8 @@ function AddScheduleDrawer({ setBottomDrawerOpen }) {
         // message="경고! 자산이 거의 남지 않았습니다."
         TransitionComponent={TransitionUp}
       >
-        <Alert severity="error" sx={{ width: '100%' }}>
-          경고! 자산이 거의 남지 않았습니다.
+        <Alert color={ALERTS[random].color} sx={{ width: '100%' }}>
+          {ALERTS[random].message}
         </Alert>
       </Snackbar>
       <Stack
