@@ -76,10 +76,6 @@ function Calender() {
             width: '100vw',
             paddingX: 2,
           },
-          '.MuiPickersCalendarHeader-root:first-child': {
-            order: 0,
-            marginX: 'auto',
-          },
           '.MuiPickersArrowSwitcher-root': {
             display: 'inline-flex',
           },
