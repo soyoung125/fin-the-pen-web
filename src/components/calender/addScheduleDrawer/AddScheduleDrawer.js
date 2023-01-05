@@ -2,6 +2,7 @@ import {
   Accordion,
   AccordionDetails,
   AccordionSummary,
+  Alert,
   Button,
   Card,
   Slide,
@@ -73,9 +74,13 @@ function AddScheduleDrawer({ setBottomDrawerOpen }) {
         autoHideDuration={5000}
         open={snackbarOpen}
         onClose={handleClose}
-        message="경고! 자산이 거의 남지 않았습니다."
+        // message="경고! 자산이 거의 남지 않았습니다."
         TransitionComponent={TransitionUp}
-      />
+      >
+        <Alert severity="error" sx={{ width: '100%' }}>
+          경고! 자산이 거의 남지 않았습니다.
+        </Alert>
+      </Snackbar>
       <Stack
         justifyContent="space-between"
         spacing={2}
