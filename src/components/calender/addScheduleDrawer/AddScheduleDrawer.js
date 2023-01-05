@@ -65,6 +65,7 @@ function AddScheduleDrawer({ setBottomDrawerOpen }) {
     <>
       <Snackbar
         anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
+        autoHideDuration={5000}
         open={snackbarOpen}
         onClose={handleClose}
         message="경고! 자산이 거의 남지 않았습니다."
