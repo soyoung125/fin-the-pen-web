@@ -16,7 +16,7 @@ import StyledTag from './category/StyledTag';
 import Listbox from './category/Listbox';
 import CATEGORIES from '../../../utils/constants/categories';
 
-export default function CategoryInput() {
+export default function CategoryInput({ updateCategories }) {
   const {
     getRootProps,
     getInputLabelProps,
@@ -30,11 +30,15 @@ export default function CategoryInput() {
     setAnchorEl,
   } = useAutocomplete({
     id: 'customized-hook-demo',
-    defaultValue: [CATEGORIES[1]],
+    // defaultValue: [CATEGORIES[1]],
     multiple: true,
     options: CATEGORIES,
     getOptionLabel: (option) => option.title,
   });
+
+  React.useEffect(() => {
+    updateCategories(value);
+  }, [value]);
 
   return (
     <>
@@ -46,8 +50,11 @@ export default function CategoryInput() {
         spacing={2}
         sx={{ width: '100%' }}
       >
-        <Typography sx={{ fontWeight: 'bold' }}>{ADD_SCHEDULE.category_title}</Typography>
+        <Typography mx={1} sx={{ fontWeight: 'bold' }}>{ADD_SCHEDULE.category_title}</Typography>
       </Stack>
+      {
+        JSON.stringify(value)
+      }
 
       <Root>
         <div {...getRootProps()}>

@@ -35,6 +35,7 @@ function AddScheduleDrawer({ setBottomDrawerOpen }) {
     date: new Date(),
     start_time: '01:00',
     end_time: '23:00',
+    categories: [],
     type: ADD_SCHEDULE.type_minus,
     expected_spending: 0,
     importance: ADD_SCHEDULE.importance_middle,
@@ -49,6 +50,10 @@ function AddScheduleDrawer({ setBottomDrawerOpen }) {
   const updateSchedule = (state) => {
     setSchedule({ ...schedule, [state.target.id]: state.target.value });
     console.log(schedule);
+  };
+
+  const updateCategories = (categories) => {
+    setSchedule({ ...schedule, categories: categories.map((c) => c.title) });
   };
 
   const updateExclusion = (state) => {
@@ -84,7 +89,7 @@ function AddScheduleDrawer({ setBottomDrawerOpen }) {
         <NameInput schedule={schedule} updateSchedule={updateSchedule} />
         <DateInput schedule={schedule} updateSchedule={updateSchedule} />
 
-        <CategoryInput schedule={schedule} updateSchedule={updateSchedule} />
+        <CategoryInput updateCategories={updateCategories} />
 
         <Accordion sx={{ width: '100%' }}>
           <AccordionSummary
@@ -112,6 +117,7 @@ function AddScheduleDrawer({ setBottomDrawerOpen }) {
           variant="contained"
           fullWidth
           onClick={() => {
+            alert(JSON.stringify(schedule));
             dispatch(addSchedule(schedule));
             setBottomDrawerOpen(false);
           }}
