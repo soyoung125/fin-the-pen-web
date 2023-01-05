@@ -4,6 +4,9 @@ import {
   Box,
   Button,
   Chip,
+  FormControl,
+  InputLabel,
+  Select,
   Stack, Typography,
 } from '@mui/material';
 import { useState } from 'react';
@@ -13,6 +16,7 @@ function CategoryInput({ schedule, updateSchedule }) {
   const handleDelete = () => {
     console.info('You clicked the delete icon.');
   };
+  const [multiSelectOpen, setMultiselectOpen] = useState(false);
   const [categories, setCategories] = useState([]);
   return (
     <>
@@ -24,8 +28,29 @@ function CategoryInput({ schedule, updateSchedule }) {
         sx={{ width: '100%' }}
       >
         <Typography sx={{ fontWeight: 'bold' }}>{ADD_SCHEDULE.category_title}</Typography>
-        <Button>{ADD_SCHEDULE.add_category}</Button>
+        <Button onClick={() => setMultiselectOpen(!multiSelectOpen)}>
+          {ADD_SCHEDULE.add_category}
+        </Button>
       </Stack>
+      {
+        multiSelectOpen
+        && (
+        <FormControl size="small">
+          <InputLabel htmlFor="grouped-native-select">Grouping</InputLabel>
+          <Select native defaultValue="" id="grouped-native-select" label="Grouping">
+            <option aria-label="None" value="" />
+            <optgroup label="Category 1">
+              <option value={1}>Option 1</option>
+              <option value={2}>Option 2</option>
+            </optgroup>
+            <optgroup label="Category 2">
+              <option value={3}>Option 3</option>
+              <option value={4}>Option 4</option>
+            </optgroup>
+          </Select>
+        </FormControl>
+        )
+      }
       <Box>
         {
         categories.length === 0
