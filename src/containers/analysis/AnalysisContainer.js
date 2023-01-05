@@ -8,10 +8,10 @@ import CATEGORIES from '../../utils/constants/categories';
 import { selectSchedules } from '../../utils/redux/schedule/scheduleSlice';
 
 function AnalysisContainer() {
-  const [data, setData] = useState([]); // color 추가 계획
+  const [data, setData] = useState([]); // color 추가할 계획
   const schedules = useSelector(selectSchedules);
   // eslint-disable-next-line no-unused-vars
-  let total = 0;
+  let total = 0; // 총 지출액
 
   useEffect(() => {
     const newData = [];
@@ -20,22 +20,35 @@ function AnalysisContainer() {
       const schByCategory = schedules.filter((s) => (s.categories || []).includes(c.title));
       const cnt = schByCategory.length;
       if (cnt > 0) {
-        newData.push({ ...c, value: cnt });
-        total += cnt;
+        // eslint-disable-next-line function-paren-newline
+        const spending = schByCategory.reduce(
+          // eslint-disable-next-line prefer-arrow-callback
+          function (sum, schedule) {
+            return sum + parseInt(schedule.expected_spending, 10);
+          }, 0);
+        if (spending > 0) {
+          newData.push({
+            id: c.title,
+            label: c.title,
+            value: spending,
+          });
+          total += spending;
+        }
       }
     });
+    console.log(total);
     setData(newData);
   }, []);
 
   return (
     <Box>
       <AnalysisHeader />
-      {data.length > 0 ? (
+      {total > 0 ? (
         <>
           <AnalysisGraph data={data} total={total} />
           <AnalysisList />
         </>
-      ) : <Alert severity="warning">This is an info alert — check it out!</Alert>}
+      ) : <Alert sx={{ margin: 2 }} severity="warning">지출 데이터가 없습니다.</Alert>}
     </Box>
   );
 }

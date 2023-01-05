@@ -25,6 +25,7 @@ function AnalysisGraph({ data }) {
         arcLinkLabelsTextColor="#333333"
         arcLinkLabelsThickness={2}
         arcLinkLabelsColor={{ from: 'color' }}
+        arcLabel={(e) => `${e.id} (${e.value}%)`}
         arcLabelsSkipAngle={7}
         arcLabelsTextColor={{
           from: 'color',
