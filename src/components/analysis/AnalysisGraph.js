@@ -1,40 +1,7 @@
 import { Box } from '@mui/material';
 import { ResponsivePie } from '@nivo/pie';
 
-function AnalysisGraph() {
-  const data = [
-    {
-      id: 'rust',
-      label: 'rust',
-      value: 600,
-      color: 'hsl(275, 70%, 50%)',
-    },
-    {
-      id: 'haskell',
-      label: 'haskell',
-      value: 106,
-      color: 'hsl(358, 70%, 50%)',
-    },
-    {
-      id: 'c',
-      label: 'c',
-      value: 50,
-      color: 'hsl(52, 70%, 50%)',
-    },
-    {
-      id: 'go',
-      label: 'go',
-      value: 13,
-      color: 'hsl(19, 70%, 50%)',
-    },
-    {
-      id: 'hack',
-      label: 'hack',
-      value: 18,
-      color: 'hsl(300, 70%, 50%)',
-    },
-  ];
-
+function AnalysisGraph({ data }) {
   return (
     <Box sx={{ width: '100vw', height: '100vw' }}>
       <ResponsivePie
