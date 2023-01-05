@@ -2,11 +2,8 @@ import {
   Accordion,
   AccordionDetails,
   AccordionSummary,
-  Alert,
-  Box,
   Button,
   Card,
-  Chip,
   Slide,
   Snackbar,
   Stack, Typography,
@@ -18,11 +15,11 @@ import ClearIcon from '@mui/icons-material/Clear';
 import NameInput from './NameInput';
 import DateInput from './DateInput';
 import ADD_SCHEDULE from '../../../utils/constants/schedule';
-import { NOT_AVAILABLE } from '../../../utils/constants/common';
 import { addSchedule, selectDate } from '../../../utils/redux/schedule/scheduleSlice';
 import SpendingInput from './SpendingInput';
 import ImportanceInput from './ImportanceInput';
 import ExclusionInput from './ExclusionInput';
+import CategoryInput from './CategoryInput';
 
 function TransitionUp(props) {
   // eslint-disable-next-line react/jsx-props-no-spreading
@@ -59,10 +56,6 @@ function AddScheduleDrawer({ setBottomDrawerOpen }) {
     console.log(state.target.checked);
   };
 
-  const handleDelete = () => {
-    console.info('You clicked the delete icon.');
-  };
-
   const [snackbarOpen, setSnackbarOpen] = useState(true);
   const handleClose = () => {
     setSnackbarOpen(false);
@@ -90,21 +83,7 @@ function AddScheduleDrawer({ setBottomDrawerOpen }) {
         <NameInput schedule={schedule} updateSchedule={updateSchedule} />
         <DateInput schedule={schedule} updateSchedule={updateSchedule} />
 
-        <Stack
-          direction="row"
-          justifyContent="space-between"
-          alignItems="center"
-          spacing={2}
-          sx={{ width: '100%' }}
-        >
-          <Typography sx={{ fontWeight: 'bold' }}>{ADD_SCHEDULE.category_title}</Typography>
-          <Button>{ADD_SCHEDULE.add_category}</Button>
-        </Stack>
-
-        <Alert severity="error">{NOT_AVAILABLE}</Alert>
-        <Box>
-          {Array.from({ length: 10 }, (v, i) => i + 1).map((num) => <Chip key={num} label={num} variant="outlined" onDelete={handleDelete} sx={{ mr: 1, mb: 1 }} />)}
-        </Box>
+        <CategoryInput schedule={schedule} updateSchedule={updateSchedule} />
 
         <Accordion sx={{ width: '100%' }}>
           <AccordionSummary
