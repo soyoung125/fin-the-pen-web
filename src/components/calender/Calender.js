@@ -43,13 +43,16 @@ function Calender() {
           <Stack>
             <PickersDay sx={{ marginBottom: 2 }} {...DayComponentProps} />
             <Stack direction="row" justifyContent="center" spacing={0.5} mt={0.1}>
-              {daySchedules.map(() => ( // 추후 e의 카테고리 별로 색 바꿀 예정
-                <Box
-                  key={Math.random()}
-                  sx={{
-                    width: '5px', height: '5px', border: '1px solid', borderRadius: 3,
-                  }}
-                />
+              {daySchedules.map((s, index) => ( // 추후 e의 카테고리 별로 색 바꿀 예정
+                index < 3 ? (
+                  <Box
+                    key={Math.random()}
+                    sx={{
+                      width: '5px', height: '5px', border: '1px solid', borderRadius: 3,
+                    }}
+                  />
+                )
+                  : null
               ))}
             </Stack>
           </Stack>
