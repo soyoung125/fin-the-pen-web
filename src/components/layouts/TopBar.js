@@ -6,7 +6,7 @@ import {
   IconButton,
   Paper, Stack, ToggleButton, Typography,
 } from '@mui/material';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import NotificationsIcon from '@mui/icons-material/Notifications';
 import PersonIcon from '@mui/icons-material/Person';
@@ -23,6 +23,13 @@ function TopBar() {
   const [fullScreenModalOpen, setFullScreenModalOpen] = useState(false);
   const navigate = useNavigate();
   const user = useSelector(selectUser);
+
+  useEffect(() => {
+    if (user !== null) {
+      setFullScreenModalOpen(true);
+    }
+  }, [user]);
+
   return (
     <>
       <Box>
@@ -54,21 +61,21 @@ function TopBar() {
                     <NotificationsIcon />
                   </RoundedButton>
                 </Stack>
-                <Stack
+                {/* <Stack
                   justifyContent="flex-end"
                   alignItems="center"
                   mb={1}
-                >
-                  {/* <Typography sx={{ fontWeight: 'bolder' }}>
+                > */}
+                {/* <Typography sx={{ fontWeight: 'bolder' }}>
                   중앙
                 </Typography>
                 <Typography sx={{ fontWeight: 'bold', color: 'white' }}>
                   표시영역
                 </Typography> */}
-                  {/* <Button variant="contained" onClick={() => setFullScreenModalOpen(true)}>
+                {/* <Button variant="contained" onClick={() => setFullScreenModalOpen(true)}>
                   임시로 위치한 버튼 (빠른 시간 내에 복구 예정)
                 </Button> */}
-                </Stack>
+                {/* </Stack> */}
                 <Stack
                   justifyContent="flex-start"
                   alignItems="center"
