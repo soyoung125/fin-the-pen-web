@@ -1,6 +1,7 @@
 # 💸 핀더펜 (Financial The Penny)
 
 [웹에서 확인하기](https://soyoung125.github.io/fin-the-pen-web/)
+[서버](https://github.com/eomheeseung/fin-the-pen)
 
 ## 👤 Team Members
 - `기획(팀장)` [@5minha (오민하)](https://github.com/5minha)
