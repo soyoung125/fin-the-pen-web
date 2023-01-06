@@ -1,16 +1,25 @@
+/* eslint-disable no-unused-vars */
 import {
+  Avatar,
   Box,
   Button,
-  Paper, Stack, Typography,
+  IconButton,
+  Paper, Stack, ToggleButton, Typography,
 } from '@mui/material';
 import { useState } from 'react';
 import { useSelector } from 'react-redux';
+import NotificationsIcon from '@mui/icons-material/Notifications';
+import PersonIcon from '@mui/icons-material/Person';
+import { useNavigate } from 'react-router-dom';
 import { selectHeaderOpen } from '../../utils/redux/common/commonSlice';
 import FullScreenDialog from './FullScreenDialog';
+import RoundedButton from '../common/RoundedButton';
+import PATH from '../../utils/constants/path';
 
 function TopBar() {
   const headerOpen = useSelector(selectHeaderOpen);
   const [fullScreenModalOpen, setFullScreenModalOpen] = useState(false);
+  const navigate = useNavigate();
   return (
     <>
       <Box>
@@ -38,12 +47,9 @@ function TopBar() {
                 alignItems="center"
                 mt={1}
               >
-                <Typography sx={{ fontWeight: 'bold', color: 'white' }}>
-                  좌측
-                </Typography>
-                <Typography variant="caption" sx={{ fontWeight: 'bold', color: 'white' }}>
-                  표시영역
-                </Typography>
+                <RoundedButton onClick={() => navigate(PATH.notification)}>
+                  <NotificationsIcon />
+                </RoundedButton>
               </Stack>
               <Stack
                 justifyContent="flex-end"
@@ -56,23 +62,19 @@ function TopBar() {
                 <Typography sx={{ fontWeight: 'bold', color: 'white' }}>
                   표시영역
                 </Typography> */}
-                <Button variant="contained" onClick={() => setFullScreenModalOpen(true)}>
+                {/* <Button variant="contained" onClick={() => setFullScreenModalOpen(true)}>
                   임시로 위치한 버튼 (빠른 시간 내에 복구 예정)
-                </Button>
+                </Button> */}
               </Stack>
               <Stack
                 justifyContent="flex-start"
                 alignItems="center"
                 mt={1}
               >
-                <Typography sx={{ fontWeight: 'bold', color: 'white' }}>
-                  우측
-                </Typography>
-                <Typography variant="caption" sx={{ fontWeight: 'bold', color: 'white' }}>
-                  표시영역
-                </Typography>
+                <RoundedButton onClick={() => navigate(PATH.mypage)}>
+                  <PersonIcon />
+                </RoundedButton>
               </Stack>
-
             </Stack>
           </Paper>
         )

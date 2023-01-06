@@ -5,9 +5,9 @@ import { useNavigate } from 'react-router-dom';
 import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
 import DataSaverOffIcon from '@mui/icons-material/DataSaverOff';
 import AddCircleIcon from '@mui/icons-material/AddCircle';
-import NotificationsIcon from '@mui/icons-material/Notifications';
-import PersonIcon from '@mui/icons-material/Person';
 import { useState } from 'react';
+import SettingsIcon from '@mui/icons-material/Settings';
+import PaidIcon from '@mui/icons-material/Paid';
 import PATH from '../../utils/constants/path';
 import AddScheduleDrawer from '../calender/addScheduleDrawer/AddScheduleDrawer';
 
@@ -30,10 +30,10 @@ function BottomBar({ value, setValue }) {
           }}
         >
           <BottomNavigationAction label="홈" icon={<CalendarMonthIcon />} onClick={() => navigate(PATH.home)} />
-          <BottomNavigationAction label="분석" icon={<DataSaverOffIcon />} onClick={() => navigate(PATH.analysis)} />
+          <BottomNavigationAction label="리포트" icon={<DataSaverOffIcon />} onClick={() => navigate(PATH.analysis)} />
           <BottomNavigationAction label="" icon={<AddCircleIcon />} onClick={() => setBottomDrawerOpen(true)} />
-          <BottomNavigationAction label="알림" icon={<NotificationsIcon />} onClick={() => navigate(PATH.notification)} />
-          <BottomNavigationAction label="개인" icon={<PersonIcon />} onClick={() => navigate(PATH.mypage)} />
+          <BottomNavigationAction label="자산관리" icon={<PaidIcon />} onClick={() => navigate(PATH.notification)} />
+          <BottomNavigationAction label="설정" icon={<SettingsIcon />} onClick={() => navigate(PATH.mypage)} />
           {/* <BottomNavigationAction label="Archive" icon={<ArchiveIcon />} /> */}
         </BottomNavigation>
       </Paper>
