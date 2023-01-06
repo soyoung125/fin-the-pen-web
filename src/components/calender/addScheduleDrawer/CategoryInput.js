@@ -52,9 +52,6 @@ export default function CategoryInput({ updateCategories }) {
       >
         <Typography mx={1} sx={{ fontWeight: 'bold' }}>{ADD_SCHEDULE.category_title}</Typography>
       </Stack>
-      {
-        JSON.stringify(value)
-      }
 
       <Root>
         <div {...getRootProps()}>
