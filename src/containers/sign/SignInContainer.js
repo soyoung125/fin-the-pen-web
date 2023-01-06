@@ -10,6 +10,7 @@ import Container from '@mui/material/Container';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
+import { Stack } from '@mui/material';
 import { setHeaderOpenFalse, setHeaderOpenTrue } from '../../utils/redux/common/commonSlice';
 import { mockLogin, selectStatus, selectUser } from '../../utils/redux/user/userSlice';
 import PATH from '../../utils/constants/path';
@@ -21,7 +22,7 @@ function Copyright(props) {
     <Typography variant="body2" color="text.secondary" align="center" {...props}>
       {'Copyright © '}
       <Link color="inherit" href="https://mui.com/">
-        Your Website
+        핀더펜
       </Link>
       {' '}
       {new Date().getFullYear()}
@@ -41,10 +42,10 @@ export default function SignInContainer() {
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
-    console.log({
+    alert(JSON.stringify({
       email: data.get('email'),
       password: data.get('password'),
-    });
+    }));
   };
 
   const guestLogin = () => {
@@ -76,13 +77,20 @@ export default function SignInContainer() {
           alignItems: 'center',
         }}
       >
-        <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
+        <Avatar sx={{
+          m: 1, bgcolor: 'secondary.main', width: 100, height: 100,
+        }}
+        >
           <LockOutlinedIcon />
         </Avatar>
-        <Typography component="h1" variant="h5">
-          핀더펜과 함께 자산설계를 시작하세요!
-        </Typography>
-        <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
+
+        <Stack my={2}>
+          <Typography component="h1" variant="h5">
+            핀더펜과 함께 자산설계를 시작하세요!
+          </Typography>
+        </Stack>
+
+        <Box component="form" onSubmit={handleSubmit} noValidate>
           <TextField
             margin="normal"
             required
@@ -103,6 +111,11 @@ export default function SignInContainer() {
             id="password"
             autoComplete="current-password"
           />
+
+          <Link>
+            비밀번호를 잊으셨나요?
+          </Link>
+
           <Button
             type="submit"
             fullWidth
