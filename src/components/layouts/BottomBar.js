@@ -33,7 +33,7 @@ function BottomBar({ value, setValue }) {
           <BottomNavigationAction label="리포트" icon={<DataSaverOffIcon />} onClick={() => navigate(PATH.analysis)} />
           <BottomNavigationAction label="" icon={<AddCircleIcon />} onClick={() => setBottomDrawerOpen(true)} />
           <BottomNavigationAction label="자산관리" icon={<PaidIcon />} onClick={() => navigate(PATH.moneyManagement)} />
-          <BottomNavigationAction label="설정" icon={<SettingsIcon />} onClick={() => navigate(PATH.mypage)} />
+          <BottomNavigationAction label="설정" icon={<SettingsIcon />} onClick={() => navigate(PATH.settings)} />
         </BottomNavigation>
       </Paper>
       <Drawer

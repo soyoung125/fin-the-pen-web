@@ -6,6 +6,7 @@ const PATH = Object.freeze({
   mypage: '/mypage',
   notification: '/notification',
   moneyManagement: '/money-management',
+  settings: '/settings',
   test: '/test',
 });
 
