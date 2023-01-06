@@ -3,7 +3,7 @@
 [웹에서 확인하기](https://soyoung125.github.io/fin-the-pen/)
 
 ## 👤 Team Members
-- `기획(팀장)` [@@5minha (오민하)](https://github.com/5minha)
+- `기획(팀장)` [@5minha (오민하)](https://github.com/5minha)
 - `기획` [김상우]()
 - `프론트엔드` [@soyoung125 (박소영)](https://github.com/soyoung125)
 - `프론트엔드` [@gabrielyoon7 (윤주현, Gabriel Ju Hyun Yoon)](https://github.com/gabrielyoon7)
