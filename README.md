@@ -1,6 +1,6 @@
 # 💸 핀더펜 (Financial The Penny)
 
-[웹에서 확인하기](https://soyoung125.github.io/fin-the-pen/)
+[웹에서 확인하기](https://soyoung125.github.io/fin-the-pen-web/)
 
 ## 👤 Team Members
 - `기획(팀장)` [@5minha (오민하)](https://github.com/5minha)
@@ -46,13 +46,13 @@ React, Redux, Axios, React Router Dom, EsLint, chart.js
 Clone the project
 
 ```bash
-  git clone https://github.com/soyoung125/fin-the-pen.git
+  git clone https://github.com/soyoung125/fin-the-pen-web.git
 ```
 
 Go to the project directory
 
 ```bash
-  cd fin-the-pen
+  cd fin-the-pen-web
 ```
 
 Install dependencies

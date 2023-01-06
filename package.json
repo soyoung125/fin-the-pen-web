@@ -1,6 +1,6 @@
 {
-  "homepage": "http://soyoung125.github.io/fin-the-pen",
-  "name": "fin-the-pen",
+  "homepage": "http://soyoung125.github.io/fin-the-pen-web",
+  "name": "fin-the-pen-web",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
