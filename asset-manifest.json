@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.css": "/fin-the-pen/front-end/static/css/main.073c9b0a.css",
-    "main.js": "/fin-the-pen/front-end/static/js/main.6b402da1.js",
-    "static/js/787.4537dfc3.chunk.js": "/fin-the-pen/front-end/static/js/787.4537dfc3.chunk.js",
-    "index.html": "/fin-the-pen/front-end/index.html",
-    "main.073c9b0a.css.map": "/fin-the-pen/front-end/static/css/main.073c9b0a.css.map",
-    "main.6b402da1.js.map": "/fin-the-pen/front-end/static/js/main.6b402da1.js.map",
-    "787.4537dfc3.chunk.js.map": "/fin-the-pen/front-end/static/js/787.4537dfc3.chunk.js.map"
+    "main.css": "/front-end/fin-the-pen/static/css/main.073c9b0a.css",
+    "main.js": "/front-end/fin-the-pen/static/js/main.6d0c0af5.js",
+    "static/js/787.4537dfc3.chunk.js": "/front-end/fin-the-pen/static/js/787.4537dfc3.chunk.js",
+    "index.html": "/front-end/fin-the-pen/index.html",
+    "main.073c9b0a.css.map": "/front-end/fin-the-pen/static/css/main.073c9b0a.css.map",
+    "main.6d0c0af5.js.map": "/front-end/fin-the-pen/static/js/main.6d0c0af5.js.map",
+    "787.4537dfc3.chunk.js.map": "/front-end/fin-the-pen/static/js/787.4537dfc3.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.073c9b0a.css",
-    "static/js/main.6b402da1.js"
+    "static/js/main.6d0c0af5.js"
   ]
 }
