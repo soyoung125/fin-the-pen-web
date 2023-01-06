@@ -81,7 +81,7 @@ function AddScheduleDrawer({ setBottomDrawerOpen }) {
         // message="경고! 자산이 거의 남지 않았습니다."
         TransitionComponent={TransitionUp}
       >
-        <Alert color={ALERTS[random].color} sx={{ width: '100%' }}>
+        <Alert color={ALERTS[random].color} sx={{ width: '100%' }} icon={ALERTS[random].icon}>
           {ALERTS[random].message}
         </Alert>
       </Snackbar>
