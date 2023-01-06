@@ -1,13 +1,16 @@
 import {
-  Avatar, Box, Button, Container, CssBaseline, Stack, TextField, Typography,
+  Avatar, Box, Button, Container, CssBaseline, InputAdornment, TextField, Typography,
 } from '@mui/material';
 import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
+import { useNavigate } from 'react-router-dom';
 import { setHeaderOpenFalse, setHeaderOpenTrue } from '../../utils/redux/common/commonSlice';
+import PATH from '../../utils/constants/path';
 
 function SignUpContainer() {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   useEffect(() => {
     dispatch(setHeaderOpenFalse()); // 페이지 진입 시 헤더 감추기
     return () => {
@@ -18,13 +21,16 @@ function SignUpContainer() {
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
-    console.log({
+    alert(JSON.stringify({
       name: data.get('name'),
       email: data.get('email'),
       password: data.get('password'),
       phoneNumber: data.get('phoneNumber'),
-    });
+    }));
     // axios로 회원가입 요청 해야함
+
+    // axios로 회원가입 요청 후에
+    navigate(PATH.home);
   };
   return (
     <Container component="main" maxWidth="xs">
@@ -44,6 +50,7 @@ function SignUpContainer() {
           계정 가입
         </Typography>
         <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
+
           <TextField
             margin="normal"
             required
@@ -53,41 +60,44 @@ function SignUpContainer() {
             name="name"
             autoFocus
           />
+
           <TextField
             margin="normal"
             required
             fullWidth
             id="email"
-            label="Email Address"
+            label="이메일 주소"
             name="email"
             autoComplete="email"
             autoFocus
           />
-          <Stack direction="row">
-            <TextField
-              margin="normal"
-              required
-              fullWidth
-              name="password"
-              label="Password"
-              type="password"
-              id="password"
-              autoComplete="current-password"
-            />
-            <Button size="small">사용가능</Button>
-          </Stack>
-          <Stack direction="row">
-            <TextField
-              margin="normal"
-              required
-              fullWidth
-              id="phoneNumber"
-              label="전화번호"
-              name="phoneNumber"
-              autoFocus
-            />
-            <Button size="small">인증하기</Button>
-          </Stack>
+
+          <TextField
+            margin="normal"
+            required
+            fullWidth
+            name="password"
+            label="Password"
+            type="password"
+            id="password"
+            autoComplete="current-password"
+            InputProps={{
+              endAdornment: <InputAdornment position="end"><Button variant="contained" size="small">사용가능</Button></InputAdornment>,
+            }}
+          />
+
+          <TextField
+            margin="normal"
+            required
+            fullWidth
+            id="phoneNumber"
+            label="전화번호"
+            name="phoneNumber"
+            autoFocus
+            InputProps={{
+              endAdornment: <InputAdornment position="end"><Button variant="contained" size="small">인증완료</Button></InputAdornment>,
+            }}
+          />
 
           <Button
             type="submit"
@@ -97,6 +107,7 @@ function SignUpContainer() {
           >
             Continue
           </Button>
+
         </Box>
       </Box>
     </Container>
