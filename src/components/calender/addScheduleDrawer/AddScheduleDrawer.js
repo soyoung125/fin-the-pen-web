@@ -126,9 +126,12 @@ function AddScheduleDrawer({ setBottomDrawerOpen }) {
           variant="contained"
           fullWidth
           onClick={() => {
-            alert(JSON.stringify(schedule));
-            dispatch(addSchedule(schedule));
-            setBottomDrawerOpen(false);
+            if (schedule.event_name.length > 0) {
+              dispatch(addSchedule(schedule));
+              setBottomDrawerOpen(false);
+            } else {
+              alert('제목을 입력해야 합니다.');
+            }
           }}
         >
           Create Event & Wise Spend
