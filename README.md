@@ -40,6 +40,34 @@ React, Redux, Axios, React Router Dom, EsLint, chart.js
        ├─로그인
        └─회원가입
 
+
+## ⚙️ Run Locally
+
+Clone the project
+
+```bash
+  git clone https://github.com/soyoung125/fin-the-pen.git
+```
+
+Go to the project directory
+
+```bash
+  cd fin-the-pen
+```
+
+Install dependencies
+
+```bash
+  npm install
+```
+
+Start the server
+
+```bash
+  npm run start
+```
+
+
 ## 📜 Documentation
 
 [Figma](https://www.figma.com/file/jvJSoUfl0I4SKo59OB6Sua/%ED%95%80%EB%8D%94%ED%8E%9C?node-id=0%3A1&t=XbgFd2dax5HIYz3J-0
