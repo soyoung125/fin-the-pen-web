@@ -1,6 +1,7 @@
 import AnalysisContainer from '../../containers/analysis/AnalysisContainer';
 import HomeContainer from '../../containers/home/HomeContainer';
 import MyPageContainer from '../../containers/mypage/MyPageContainer';
+import NotificationContainer from '../../containers/notification/NotificationContainer';
 import SignInContainer from '../../containers/sign/SignInContainer';
 import SignUpContainer from '../../containers/sign/SignUpContainer';
 import TestContainer from '../../containers/test/TestContainer';
@@ -26,6 +27,10 @@ const homeRoutes = [
   {
     path: PATH.mypage,
     element: <MyPageContainer />,
+  },
+  {
+    path: PATH.notification,
+    element: <NotificationContainer />,
   },
   {
     path: PATH.test,

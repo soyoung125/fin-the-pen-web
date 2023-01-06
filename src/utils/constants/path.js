@@ -4,6 +4,7 @@ const PATH = Object.freeze({
   signIn: '/sign-in',
   signUp: '/sign-up',
   mypage: '/mypage',
+  notification: '/notification',
   test: '/test',
 });
 

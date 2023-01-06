@@ -9,7 +9,6 @@ import NotificationsIcon from '@mui/icons-material/Notifications';
 import PersonIcon from '@mui/icons-material/Person';
 import { useState } from 'react';
 import PATH from '../../utils/constants/path';
-import { NOTHING_IS_HERE_YET } from '../../utils/constants/common';
 import AddScheduleDrawer from '../calender/addScheduleDrawer/AddScheduleDrawer';
 
 function BottomBar({ value, setValue }) {
@@ -33,7 +32,7 @@ function BottomBar({ value, setValue }) {
           <BottomNavigationAction label="홈" icon={<CalendarMonthIcon />} onClick={() => navigate(PATH.home)} />
           <BottomNavigationAction label="분석" icon={<DataSaverOffIcon />} onClick={() => navigate(PATH.analysis)} />
           <BottomNavigationAction label="" icon={<AddCircleIcon />} onClick={() => setBottomDrawerOpen(true)} />
-          <BottomNavigationAction label="알림" icon={<NotificationsIcon />} onClick={() => alert(NOTHING_IS_HERE_YET)} />
+          <BottomNavigationAction label="알림" icon={<NotificationsIcon />} onClick={() => navigate(PATH.notification)} />
           <BottomNavigationAction label="개인" icon={<PersonIcon />} onClick={() => navigate(PATH.mypage)} />
           {/* <BottomNavigationAction label="Archive" icon={<ArchiveIcon />} /> */}
         </BottomNavigation>
