@@ -1,11 +1,26 @@
 import {
   Box,
   Button,
-  Card, Stack, Typography,
+  Card, Menu, MenuItem, MenuList, Stack, Typography,
 } from '@mui/material';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
+import { useState } from 'react';
 
-function ScheduleCard({ schedule }) {
+function ScheduleCard({ schedule, setScheduleModalOpen, setSelectedSchedule }) {
+  const [anchorEl, setAnchorEl] = useState(null);
+  const open = Boolean(anchorEl);
+  const handleClick = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
+  const handleModal = () => {
+    setSelectedSchedule(schedule);
+    setScheduleModalOpen(true);
+    setAnchorEl(null);
+  };
+
   return (
     <Box px={1} mb={1}>
       <Card>
@@ -14,9 +29,30 @@ function ScheduleCard({ schedule }) {
             <Typography>{`○ ${schedule.start_time} - ${schedule.end_time}`}</Typography>
             <Typography>{`${schedule.event_name}`}</Typography>
           </Stack>
-          <Button variant="text" size="small">
+          <Button
+            id="basic-button"
+            aria-controls={open ? 'basic-menu' : undefined}
+            aria-haspopup="true"
+            aria-expanded={open ? 'true' : undefined}
+            onClick={handleClick}
+            size="small"
+          >
             <MoreVertIcon />
           </Button>
+          <Menu
+            id="basic-menu"
+            anchorEl={anchorEl}
+            open={open}
+            onClose={handleClose}
+            MenuListProps={{
+              'aria-labelledby': 'basic-button',
+            }}
+          >
+            <MenuList dense>
+              <MenuItem onClick={handleModal}>자세히 보기</MenuItem>
+              <MenuItem onClick={handleClose}>삭제</MenuItem>
+            </MenuList>
+          </Menu>
         </Stack>
       </Card>
     </Box>
