@@ -1,15 +1,20 @@
 import {
   Box,
+  Button,
   Paper, Stack, Typography,
 } from '@mui/material';
+import { useState } from 'react';
 import { useSelector } from 'react-redux';
 import { selectHeaderOpen } from '../../utils/redux/common/commonSlice';
+import FullScreenDialog from './FullScreenDialog';
 
 function TopBar() {
   const headerOpen = useSelector(selectHeaderOpen);
+  const [fullScreenModalOpen, setFullScreenModalOpen] = useState(false);
   return (
-    <Box>
-      {
+    <>
+      <Box>
+        {
         headerOpen
         && (
           <Paper
@@ -45,12 +50,15 @@ function TopBar() {
                 alignItems="center"
                 mb={1}
               >
-                <Typography sx={{ fontWeight: 'bolder' }}>
+                {/* <Typography sx={{ fontWeight: 'bolder' }}>
                   중앙
                 </Typography>
                 <Typography sx={{ fontWeight: 'bold', color: 'white' }}>
                   표시영역
-                </Typography>
+                </Typography> */}
+                <Button variant="contained" onClick={() => setFullScreenModalOpen(true)}>
+                  임시로 위치한 버튼 (빠른 시간 내에 복구 예정)
+                </Button>
               </Stack>
               <Stack
                 justifyContent="flex-start"
@@ -69,7 +77,10 @@ function TopBar() {
           </Paper>
         )
       }
-    </Box>
+      </Box>
+      <FullScreenDialog open={fullScreenModalOpen} setOpen={setFullScreenModalOpen} />
+    </>
+
   );
 }
 export default TopBar;
