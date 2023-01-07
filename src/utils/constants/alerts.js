@@ -18,7 +18,7 @@ const ALERTS = Object.freeze([
   },
   {
     message: '보통! 아직까지는 괜찮습니다.',
-    color: 'warning', // 추후 색상 변경 예정
+    color: 'info', // 추후 색상 변경 예정
     icon: <SentimentSatisfiedIcon fontSize="inherit" />,
   },
   {
@@ -27,7 +27,7 @@ const ALERTS = Object.freeze([
     icon: <SentimentSatisfiedAltIcon fontSize="inherit" />,
   },
   {
-    message: '우수! 똑똑한 소비 생활을 실천중입니다..',
+    message: '우수! 똑똑한 소비 생활을 실천중입니다.',
     color: 'secondary',
     icon: <SentimentVerySatisfiedIcon fontSize="inherit" />,
   },
