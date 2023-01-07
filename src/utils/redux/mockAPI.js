@@ -10,6 +10,20 @@ export function fetchMockLogin() {
       password: '',
       bday: '2000-01-01',
       account_number: '123456789',
+      goals: [
+        {
+          id: 0,
+          question: '일년 동안의 저축 목표 금액은 얼마인가요?',
+          answer: null,
+          skip: false,
+        },
+        {
+          id: 1,
+          question: '월 기준 소비 목표 금액은 얼마인가요?',
+          answer: null,
+          skip: false,
+        },
+      ],
     },
   }), 2000));
 }

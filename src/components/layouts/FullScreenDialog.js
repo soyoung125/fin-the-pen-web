@@ -9,7 +9,7 @@ import CloseIcon from '@mui/icons-material/Close';
 import Slide from '@mui/material/Slide';
 import { forwardRef } from 'react';
 import {
-  Avatar, Box, Container, CssBaseline, TextField,
+  Avatar, Box, Container, CssBaseline, Stack, TextField,
 } from '@mui/material';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 
@@ -94,6 +94,15 @@ export default function FullScreenDialog({ open, setOpen }) {
               </Button>
             </Box>
           </Box>
+          <Stack
+            direction="row"
+            justifyContent="flex-end"
+            alignItems="center"
+            spacing={2}
+            mx={4}
+          >
+            <Button>질문 건너뛰기</Button>
+          </Stack>
         </Container>
       </Dialog>
     </div>
