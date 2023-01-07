@@ -1,7 +1,7 @@
 import { Box } from '@mui/material';
 import { ResponsivePie } from '@nivo/pie';
 
-function AnalysisGraph({ data }) {
+function AnalysisGraph({ data, total }) {
   return (
     <Box sx={{ width: '100vw', height: '100vw' }}>
       <ResponsivePie
@@ -25,7 +25,7 @@ function AnalysisGraph({ data }) {
         arcLinkLabelsTextColor="#333333"
         arcLinkLabelsThickness={2}
         arcLinkLabelsColor={{ from: 'color' }}
-        arcLabel={(e) => `${e.id} (${e.value}%)`}
+        arcLabel={(e) => { const percent = (parseInt(e.value, 10) / total) * 100; console.log(parseInt(e.value, 10) / total); return `${e.id} (${percent.toFixed(1)}%)`; }}
         arcLabelsSkipAngle={7}
         arcLabelsTextColor={{
           from: 'color',

@@ -9,15 +9,16 @@ import { selectSchedules } from '../../utils/redux/schedule/scheduleSlice';
 
 function AnalysisContainer() {
   const [data, setData] = useState([]); // color 추가할 계획
+  const [total, setTotal] = useState([]); // color 추가할 계획
   const schedules = useSelector(selectSchedules);
-  // eslint-disable-next-line no-unused-vars
-  let total = 0; // 총 지출액
 
   useEffect(() => {
     const newData = [];
+    // eslint-disable-next-line no-unused-vars
+    let newTotal = 0;
     // eslint-disable-next-line array-callback-return
     CATEGORIES.map((c) => {
-      const schByCategory = schedules.filter((s) => (s.categories || []).includes(c.title));
+      const schByCategory = schedules.filter((s) => (s.category.type !== '수입') && (s.category.title === c.title));
       const cnt = schByCategory.length;
       if (cnt > 0) {
         // eslint-disable-next-line function-paren-newline
@@ -32,11 +33,11 @@ function AnalysisContainer() {
             label: c.title,
             value: spending,
           });
-          total += spending;
+          newTotal += spending;
         }
       }
     });
-    console.log(total);
+    setTotal(newTotal);
     setData(newData);
   }, []);
 
