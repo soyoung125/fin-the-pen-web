@@ -40,7 +40,7 @@ function AddScheduleDrawer({ setBottomDrawerOpen }) {
     date: new Date(),
     start_time: '01:00',
     end_time: '23:00',
-    categories: [],
+    category: {},
     type: ADD_SCHEDULE.type_minus,
     expected_spending: 0,
     importance: ADD_SCHEDULE.importance_middle,
@@ -57,8 +57,8 @@ function AddScheduleDrawer({ setBottomDrawerOpen }) {
     console.log(schedule);
   };
 
-  const updateCategories = (categories) => {
-    setSchedule({ ...schedule, categories: categories.map((c) => c.title) });
+  const updateCategory = (categories) => {
+    setSchedule({ ...schedule, category: categories[0] });
   };
 
   const updateExclusion = (state) => {
@@ -98,7 +98,8 @@ function AddScheduleDrawer({ setBottomDrawerOpen }) {
         <NameInput schedule={schedule} updateSchedule={updateSchedule} />
         <DateInput schedule={schedule} updateSchedule={updateSchedule} />
 
-        <CategoryInput updateCategories={updateCategories} />
+        <Alert severity="warning">카테고리는 하나만 선택하기!!!!!!!(추후에 select로 변경 예정입니다.)</Alert>
+        <CategoryInput updateCategory={updateCategory} />
 
         <Accordion sx={{ width: '100%' }}>
           <AccordionSummary

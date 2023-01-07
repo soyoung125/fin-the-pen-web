@@ -2,7 +2,7 @@
 /* eslint-disable no-use-before-define */
 /* eslint-disable no-unused-vars */
 import * as React from 'react';
-// import { useAutocomplete } from '@mui/base/AutocompleteUnstyled';
+// import { useAutocomplete } from '@mui/base/AutocompleteUnstyled';oryory
 import CheckIcon from '@mui/icons-material/Check';
 import { styled } from '@mui/material/styles';
 import {
@@ -16,7 +16,7 @@ import StyledTag from './category/StyledTag';
 import Listbox from './category/Listbox';
 import CATEGORIES from '../../../utils/constants/categories';
 
-export default function CategoryInput({ updateCategories }) {
+export default function CategoryInput({ updateCategory }) {
   const {
     getRootProps,
     getInputLabelProps,
@@ -37,7 +37,7 @@ export default function CategoryInput({ updateCategories }) {
   });
 
   React.useEffect(() => {
-    updateCategories(value);
+    updateCategory(value);
   }, [value]);
 
   return (
