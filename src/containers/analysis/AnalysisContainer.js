@@ -47,7 +47,7 @@ function AnalysisContainer() {
       {total > 0 ? (
         <>
           <AnalysisGraph data={data} total={total} />
-          <AnalysisList />
+          <AnalysisList data={data} />
         </>
       ) : <Alert sx={{ margin: 2 }} severity="info">이체/지출 데이터가 존재하지 않습니다.</Alert>}
     </Box>
