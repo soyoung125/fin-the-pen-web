@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import AnalysisGraph from '../../components/analysis/AnalysisGraph';
 import AnalysisHeader from '../../components/analysis/AnalysisHeader';
-import AnalysisList from '../../components/analysis/AnalysisList';
+import AnalysisList from '../../components/analysis/analysisList/AnalysisList';
 import CATEGORIES from '../../utils/constants/categories';
 import { selectSchedules } from '../../utils/redux/schedule/scheduleSlice';
 
