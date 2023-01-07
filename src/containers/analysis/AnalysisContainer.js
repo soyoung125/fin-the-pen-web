@@ -38,7 +38,7 @@ function AnalysisContainer() {
       }
     });
     setTotal(newTotal);
-    setData(newData);
+    setData(newData.sort((a, b) => b.value - a.value));
   }, []);
 
   return (
@@ -49,7 +49,7 @@ function AnalysisContainer() {
           <AnalysisGraph data={data} total={total} />
           <AnalysisList />
         </>
-      ) : <Alert sx={{ margin: 2 }} severity="error">계산적 문제가 있어서 진행 멈춤.</Alert>}
+      ) : <Alert sx={{ margin: 2 }} severity="info">이체/지출 데이터가 존재하지 않습니다.</Alert>}
     </Box>
   );
 }
