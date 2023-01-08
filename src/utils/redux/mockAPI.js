@@ -14,12 +14,14 @@ export function fetchMockLogin() {
         {
           id: 0,
           question: '일년 동안의 저축 목표 금액은 얼마인가요?',
+          label: '저축 목표 금액',
           answer: null,
           skip: false,
         },
         {
           id: 1,
           question: '월 기준 소비 목표 금액은 얼마인가요?',
+          label: '소비 목표 금액',
           answer: null,
           skip: false,
         },

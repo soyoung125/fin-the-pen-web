@@ -15,7 +15,7 @@ import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 
 const Transition = forwardRef((props, ref) => <Slide direction="up" ref={ref} {...props} />);
 
-export default function FullScreenDialog({ open, setOpen }) {
+export default function FullScreenDialog({ open, setOpen, ask }) {
   const handleClose = () => {
     setOpen(false);
   };
@@ -71,7 +71,7 @@ export default function FullScreenDialog({ open, setOpen }) {
               자산 정보 입력
             </Typography>
             <Typography variant="caption">
-              일년 동안의 저축 목표 금액은 얼마인가요 ?
+              {ask.question}
             </Typography>
 
             <Box component="form" onSubmit={handleSubmit} noValidate>
@@ -80,7 +80,7 @@ export default function FullScreenDialog({ open, setOpen }) {
                 required
                 fullWidth
                 id="number"
-                label="저축 목표 금액"
+                label={ask.label}
                 name="number"
                 autoFocus
               />
