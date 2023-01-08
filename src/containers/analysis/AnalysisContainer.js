@@ -58,9 +58,11 @@ function AnalysisContainer() {
       <AnalysisHeader />
       {total > 0 ? (
         <>
-          {showDetailCard
-            ? <AnalysisDetailCard closeDetailCard={closeDetailCard} selectedItem={selectedItem} />
-            : <AnalysisGraph data={data} total={total} />}
+          <Box sx={{ width: '100vw', height: '100vw', padding: 5 }}>
+            {showDetailCard
+              ? <AnalysisDetailCard closeDetailCard={closeDetailCard} selectedItem={selectedItem} />
+              : <AnalysisGraph data={data} total={total} />}
+          </Box>
           <AnalysisList data={data} clickListItem={clickListItem} />
         </>
       ) : <Alert sx={{ margin: 2 }} severity="info">이체/지출 데이터가 존재하지 않습니다.</Alert>}

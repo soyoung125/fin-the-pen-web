@@ -5,7 +5,10 @@ import CloseIcon from '@mui/icons-material/Close';
 
 function AnalysisDetailCard({ closeDetailCard, selectedItem }) {
   return (
-    <Card sx={{ width: '80vw', height: '80vw', margin: '10vw' }}>
+    <Card sx={{
+      width: '100%', height: '100%',
+    }}
+    >
       <CardHeader
         title={selectedItem.label}
         action={(
@@ -17,7 +20,7 @@ function AnalysisDetailCard({ closeDetailCard, selectedItem }) {
       <CardContent>
         <Typography>
           {selectedItem.value}
-          원
+          원 사용
         </Typography>
       </CardContent>
     </Card>
