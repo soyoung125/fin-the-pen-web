@@ -21,12 +21,26 @@ import { selectUser } from '../../utils/redux/user/userSlice';
 function TopBar() {
   const headerOpen = useSelector(selectHeaderOpen);
   const [fullScreenModalOpen, setFullScreenModalOpen] = useState(false);
+  const [ask, setAsk] = useState({
+    id: 0,
+    question: '',
+    label: '',
+    answer: null,
+    skip: false,
+  });
   const navigate = useNavigate();
   const user = useSelector(selectUser);
 
   useEffect(() => {
     if (user !== null) {
-      setFullScreenModalOpen(true);
+      for (let index = 0; index < user.goals.length; index += 1) {
+        const goal = user.goals[index];
+        if (goal.skip === false && goal.answer === null) {
+          setAsk(goal);
+          setFullScreenModalOpen(true);
+          break;
+        }
+      }
     }
   }, [user]);
 
@@ -102,7 +116,7 @@ function TopBar() {
           )
         }
       </Box>
-      <FullScreenDialog open={fullScreenModalOpen} setOpen={setFullScreenModalOpen} />
+      <FullScreenDialog open={fullScreenModalOpen} setOpen={setFullScreenModalOpen} ask={ask} />
     </>
 
   );
