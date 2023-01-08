@@ -135,7 +135,7 @@ function AddScheduleDrawer({ setBottomDrawerOpen }) {
             }
           }}
         >
-          Create Event & Wise Spend
+          일정 추가하기
         </Button>
       </Stack>
     </>
