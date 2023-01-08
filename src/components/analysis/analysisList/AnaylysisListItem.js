@@ -2,9 +2,9 @@ import {
   Box, Grid, ListItem, Stack,
 } from '@mui/material';
 
-function AnalysisListItem({ category, rank }) {
+function AnalysisListItem({ category, rank, clickListItem }) {
   return (
-    <ListItem>
+    <ListItem onClick={() => clickListItem(category)}>
       <Grid container spacing={2}>
         <Grid xs={2} item>
           <Box display="flex" justifyContent="flex-end">

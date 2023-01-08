@@ -4,12 +4,15 @@ import { useSelector } from 'react-redux';
 import AnalysisGraph from '../../components/analysis/AnalysisGraph';
 import AnalysisHeader from '../../components/analysis/AnalysisHeader';
 import AnalysisList from '../../components/analysis/analysisList/AnalysisList';
+import AnalysisDetailCard from '../../components/analysis/detailCard/AnalysisDetailCard';
 import CATEGORIES from '../../utils/constants/categories';
 import { selectSchedules } from '../../utils/redux/schedule/scheduleSlice';
 
 function AnalysisContainer() {
   const [data, setData] = useState([]); // color 추가할 계획
   const [total, setTotal] = useState([]); // color 추가할 계획
+  const [showDetailCard, setShowDetailCard] = useState(false);
+  const [selectedItem, setSelectedItem] = useState({});
   const schedules = useSelector(selectSchedules);
 
   useEffect(() => {
@@ -41,13 +44,24 @@ function AnalysisContainer() {
     setData(newData.sort((a, b) => b.value - a.value));
   }, []);
 
+  const clickListItem = (category) => {
+    setShowDetailCard(true);
+    setSelectedItem(category);
+  };
+
+  const closeDetailCard = () => {
+    setShowDetailCard(false);
+  };
+
   return (
     <Box>
       <AnalysisHeader />
       {total > 0 ? (
         <>
-          <AnalysisGraph data={data} total={total} />
-          <AnalysisList data={data} />
+          {showDetailCard
+            ? <AnalysisDetailCard closeDetailCard={closeDetailCard} selectedItem={selectedItem} />
+            : <AnalysisGraph data={data} total={total} />}
+          <AnalysisList data={data} clickListItem={clickListItem} />
         </>
       ) : <Alert sx={{ margin: 2 }} severity="info">이체/지출 데이터가 존재하지 않습니다.</Alert>}
     </Box>

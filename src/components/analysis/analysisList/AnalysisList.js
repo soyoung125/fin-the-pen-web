@@ -4,7 +4,7 @@ import {
 } from '@mui/material';
 import AnalysisListItem from './AnaylysisListItem';
 
-function AnalysisList({ data }) {
+function AnalysisList({ data, clickListItem }) {
   return (
     <Box mx={3}>
       <Typography sx={{ mt: 4 }} variant="h6" component="div">
@@ -12,7 +12,7 @@ function AnalysisList({ data }) {
       </Typography>
       <List>
         {data.map((d, index) => (
-          <AnalysisListItem category={d} rank={(index + 1)} />
+          <AnalysisListItem category={d} rank={(index + 1)} clickListItem={clickListItem} />
         ))}
       </List>
     </Box>
