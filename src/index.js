@@ -12,6 +12,19 @@ import { Provider } from 'react-redux';
 import { PersistGate } from 'redux-persist/integration/react';
 import { persistStore } from 'redux-persist';
 import { store } from './utils/redux/store';
+import { createTheme, ThemeProvider } from '@mui/material';
+
+const theme = createTheme({
+  palette:{
+    type: 'light',
+    primary: {
+      main: '#7c4dff',
+    },
+    secondary: {
+      main: '#f50057',
+    },
+  }
+});
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 let persistor = persistStore(store);
@@ -20,7 +33,9 @@ root.render(
     <Provider store={store}>
       <PersistGate loading={null} persistor={persistor}>
         <BrowserRouter basename='fin-the-pen-web'>
+          <ThemeProvider theme={theme}>
           <App />
+          </ThemeProvider>
         </BrowserRouter>
       </PersistGate>
     </Provider>
