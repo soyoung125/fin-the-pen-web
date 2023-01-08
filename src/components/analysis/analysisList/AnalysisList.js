@@ -7,7 +7,7 @@ import AnalysisListItem from './AnaylysisListItem';
 function AnalysisList({ data }) {
   return (
     <Box mx={3}>
-      <Typography sx={{ mt: 4, mb: 2 }} variant="h6" component="div">
+      <Typography sx={{ mt: 4 }} variant="h6" component="div">
         Your Ranking
       </Typography>
       <List>
