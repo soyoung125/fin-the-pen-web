@@ -38,6 +38,7 @@ function AddScheduleDrawer({ setBottomDrawerOpen }) {
 
   const [schedule, setSchedule] = useState({
     event_name: '',
+    alarm: false,
     date: new Date(),
     start_time: '01:00',
     end_time: '23:00',
@@ -57,6 +58,11 @@ function AddScheduleDrawer({ setBottomDrawerOpen }) {
 
   const updateSchedule = (state) => {
     setSchedule({ ...schedule, [state.target.id]: state.target.value });
+    console.log(schedule);
+  };
+
+  const updateAlarm = () => {
+    setSchedule({ ...schedule, alarm: !schedule.alarm });
     console.log(schedule);
   };
 
@@ -106,7 +112,7 @@ function AddScheduleDrawer({ setBottomDrawerOpen }) {
           <Typography variant="h5" sx={{ fontWeight: 'bold' }}>{ADD_SCHEDULE.drawer_title}</Typography>
           <Button onClick={() => setBottomDrawerOpen(false)}><ClearIcon /></Button>
         </Stack>
-        <NameInput schedule={schedule} updateSchedule={updateSchedule} />
+        <NameInput schedule={schedule} updateSchedule={updateSchedule} updateAlarm={updateAlarm} />
         <DateInput schedule={schedule} updateSchedule={updateSchedule} />
 
         <RepeatInput schedule={schedule} updateRepeat={updateRepeat} />
