@@ -45,6 +45,11 @@ React, Redux, Axios, React Router Dom, EsLint, chart.js
 
 ## ⚙️ Run Locally
 
+  실행 전, Node.js 설치를 반드시 해주세요.
+  
+  vscode에서 실행하시면 편합니다.
+
+
 Clone the project
 
 ```bash
