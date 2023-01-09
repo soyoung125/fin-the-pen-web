@@ -3,7 +3,7 @@ import HomeContainer from '../../containers/home/HomeContainer';
 import MoneyManagementContainer from '../../containers/moneyManagement/MoneyManagementContainer';
 import MyPageContainer from '../../containers/mypage/MyPageContainer';
 import NotificationContainer from '../../containers/notification/NotificationContainer';
-import SettingsContainer from '../../containers/setting/SettingsContainer';
+import SettingsContainer from '../../containers/settings/SettingsContainer';
 import SignInContainer from '../../containers/sign/SignInContainer';
 import SignUpContainer from '../../containers/sign/SignUpContainer';
 import TestContainer from '../../containers/test/TestContainer';
