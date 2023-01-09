@@ -1,8 +1,8 @@
 /* eslint-disable react/jsx-props-no-spreading */
-import { Box, Stack } from '@mui/material';
+import { Box, Stack, TextField } from '@mui/material';
 import { grey } from '@mui/material/colors';
+import { StaticDatePicker } from '@mui/x-date-pickers';
 import { AdapterMoment } from '@mui/x-date-pickers/AdapterMoment';
-import { CalendarPicker } from '@mui/x-date-pickers/CalendarPicker';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { PickersDay } from '@mui/x-date-pickers/PickersDay/PickersDay';
 import moment from 'moment';
@@ -18,6 +18,8 @@ function Calender() {
   const DATE_HEIGHT = 50;
   // eslint-disable-next-line no-unused-vars
   const [fixedWithdrawal, setFixedWithdrawal] = React.useState(['2023/01/24']);
+
+  console.log(value);
 
   React.useEffect(() => {
     dispatch(selectedDate(moment(new Date())));
@@ -74,19 +76,25 @@ function Calender() {
             width: '100%',
           },
           // 헤더 디자인을 위한 css
+          '.MuiCalendarOrClockPicker-root > div': {
+            width: '100%',
+            margin: '0',
+          },
           '.MuiPickersCalendarHeader-root': {
             display: 'flex',
             width: '100vw',
             paddingX: 2,
           },
           '.MuiPickersArrowSwitcher-root': {
+            width: '100vw',
             display: 'inline-flex',
+            justifyContent: 'space-between',
           },
           '.MuiPickersCalendarHeader-label': {
             textAlign: 'center',
           },
           '.MuiPickersArrowSwitcher-spacer': {
-            width: '100vw',
+            width: '50vw',
           },
           '.MuiPickersCalendarHeader-labelContainer > .MuiPickersFadeTransitionGroup-root': {
             position: 'absolute',
@@ -129,17 +137,18 @@ function Calender() {
           },
         }}
       >
-        <CalendarPicker
+        <StaticDatePicker
           views={['day']}
           displayStaticWrapperAs="desktop"
           disableHighlightToday
           dayOfWeekFormatter={(day) => day.substring(0, 3)}
-          value={value}
+          value={moment(value)}
           onChange={(newValue) => {
             dispatch(selectedDate(newValue));
           }}
           // eslint-disable-next-line react/jsx-props-no-spreading
           renderDay={renderDayInPicker}
+          renderInput={(params) => <TextField {...params} />}
         />
       </Box>
     </LocalizationProvider>
