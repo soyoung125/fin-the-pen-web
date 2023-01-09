@@ -22,6 +22,7 @@ import ImportanceInput from './ImportanceInput';
 import ExclusionInput from './ExclusionInput';
 import CategoryInput from './CategoryInput';
 import ALERTS from '../../../utils/constants/alerts';
+import RepeatInput from './RepeatInput';
 
 function TransitionUp(props) {
   // eslint-disable-next-line react/jsx-props-no-spreading
@@ -40,6 +41,8 @@ function AddScheduleDrawer({ setBottomDrawerOpen }) {
     date: new Date(),
     start_time: '01:00',
     end_time: '23:00',
+    repeating_cycle: '없음',
+    repeat_deadline: '없음',
     category: {},
     type: ADD_SCHEDULE.type_minus,
     expected_spending: 0,
@@ -55,6 +58,14 @@ function AddScheduleDrawer({ setBottomDrawerOpen }) {
   const updateSchedule = (state) => {
     setSchedule({ ...schedule, [state.target.id]: state.target.value });
     console.log(schedule);
+  };
+
+  const updateRepeat = (state) => {
+    if ((state.target.name === 'repeating_cycle') && (state.target.value === '없음')) {
+      setSchedule({ ...schedule, [state.target.name]: state.target.value, repeat_deadline: '없음' });
+    } else {
+      setSchedule({ ...schedule, [state.target.name]: state.target.value });
+    }
   };
 
   const updateCategory = (categories) => {
@@ -97,6 +108,8 @@ function AddScheduleDrawer({ setBottomDrawerOpen }) {
         </Stack>
         <NameInput schedule={schedule} updateSchedule={updateSchedule} />
         <DateInput schedule={schedule} updateSchedule={updateSchedule} />
+
+        <RepeatInput schedule={schedule} updateRepeat={updateRepeat} />
 
         <Alert severity="warning">카테고리는 하나만 선택하기!!!!!!!(추후에 select로 변경 예정입니다.)</Alert>
         <CategoryInput updateCategory={updateCategory} />
