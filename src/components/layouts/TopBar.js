@@ -53,7 +53,7 @@ function TopBar() {
             <Paper
               elevation={10}
               sx={{
-                backgroundColor: '#7c4dff',
+                backgroundColor: 'primary.main',
                 height: 100,
                 borderBottomLeftRadius: '15px',
                 borderBottomRightRadius: '15px',
