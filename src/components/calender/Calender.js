@@ -16,8 +16,6 @@ function Calender() {
   const schedules = useSelector(selectSchedules);
   const DATE_SIZE = 32;
   const DATE_HEIGHT = 50;
-  // eslint-disable-next-line no-unused-vars
-  const [fixedWithdrawal, setFixedWithdrawal] = React.useState(['2023/01/24']);
 
   console.log(value);
 
@@ -26,7 +24,8 @@ function Calender() {
   }, []);
 
   const renderDayInPicker = (day, _value, DayComponentProps) => {
-    if (fixedWithdrawal.includes(day.format('YYYY/MM/DD'))) {
+    const fixedWithdrawal = schedules.map((s) => (s.repeating_cycle !== '없음' ? s.date : null));
+    if (fixedWithdrawal.includes(day.format('YYYY-MM-DD'))) {
       return (
         <PickersDay
           sx={{
