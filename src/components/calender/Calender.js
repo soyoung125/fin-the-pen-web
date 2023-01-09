@@ -119,7 +119,7 @@ function Calender() {
           },
           '& .MuiPickersDay-root:focus': {
             borderRadius: 2,
-            backgroundColor: 'secondary.light',
+            backgroundColor: 'primary.main',
             color: 'white',
             fontWeight: 'bold',
           },
