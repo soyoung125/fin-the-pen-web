@@ -54,6 +54,17 @@ function AnalysisContainer() {
     setShowDetailCard(false);
   };
 
+  const hexToRGB = (hex, alpha) => {
+    const r = parseInt(hex.slice(1, 3), 16);
+    const g = parseInt(hex.slice(3, 5), 16);
+    const b = parseInt(hex.slice(5, 7), 16);
+
+    if (alpha) {
+      return `rgba(${r}, ${g}, ${b}, ${alpha})`;
+    }
+    return `rgb(${r}, ${g}, ${b})`;
+  };
+
   return (
     <Box>
       <AnalysisHeader />
@@ -64,7 +75,7 @@ function AnalysisContainer() {
               ? <AnalysisDetailCard closeDetailCard={closeDetailCard} selectedItem={selectedItem} />
               : <AnalysisGraph data={data} total={total} />}
           </Box>
-          <AnalysisList data={data} clickListItem={clickListItem} />
+          <AnalysisList data={data} clickListItem={clickListItem} hexToRGB={hexToRGB} />
         </>
       ) : <Alert sx={{ margin: 2 }} severity="info">이체/지출 데이터가 존재하지 않습니다.</Alert>}
     </Box>
