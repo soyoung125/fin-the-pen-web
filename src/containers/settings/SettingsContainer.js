@@ -1,5 +1,3 @@
-/* eslint-disable import/extensions */
-/* eslint-disable import/no-unresolved */
 import { List } from '@mui/material';
 import ListSubheader from '@mui/material/ListSubheader';
 import AppLocker from './display/AppLocker';
