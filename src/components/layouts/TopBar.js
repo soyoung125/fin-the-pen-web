@@ -71,7 +71,7 @@ function TopBar() {
                   alignItems="center"
                   mt={1}
                 >
-                  <RoundedButton onClick={() => navigate(PATH.notification)}>
+                  <RoundedButton value="notification" onClick={() => navigate(PATH.notification)}>
                     <NotificationsIcon />
                   </RoundedButton>
                 </Stack>
@@ -98,13 +98,13 @@ function TopBar() {
                   {
                     user === null
                       ? (
-                        <RoundedButton onClick={() => navigate(PATH.signIn)}>
+                        <RoundedButton value="login" onClick={() => navigate(PATH.signIn)}>
                           <LoginIcon />
                         </RoundedButton>
                       )
 
                       : (
-                        <RoundedButton onClick={() => navigate(PATH.mypage)}>
+                        <RoundedButton value="user" onClick={() => navigate(PATH.mypage)}>
                           <PersonIcon />
                         </RoundedButton>
                       )
