@@ -58,14 +58,15 @@ const EXPENDITURE = {
 };
 
 const categoryFlatter = (obj) => {
-  const flatNestedCategories = (type, nestedType, categories) => categories.map((title) => ({
+  const flatNestedCategories = (type, nestedType, categories, color) => categories.map((title) => ({
     type,
     nestedType,
     title,
+    color,
   }));
-  const { type } = obj;
+  const { type, color } = obj;
   return obj.nested
-    .map((cat) => flatNestedCategories(type, cat.type, cat.categories))
+    .map((cat) => flatNestedCategories(type, cat.type, cat.categories, color))
     .flat(Infinity);
 };
 
