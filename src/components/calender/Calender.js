@@ -37,7 +37,6 @@ function Calender() {
     }
 
     const daySchedules = schedules.filter((e) => e.date === day.format('YYYY-MM-DD'));
-    console.log(daySchedules);
 
     if (daySchedules.length > 0) {
       return (
