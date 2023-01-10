@@ -21,7 +21,7 @@ function AnalysisContainer() {
     let newTotal = 0;
     // eslint-disable-next-line array-callback-return
     CATEGORIES.map((c) => {
-      const schByCategory = schedules.filter((s) => (s.category.type !== '수입') && (s.category.title === c.title));
+      const schByCategory = schedules.filter((s) => (s.category.type === '지출') && (s.category.title === c.title));
       const cnt = schByCategory.length;
       if (cnt > 0) {
         // eslint-disable-next-line function-paren-newline
@@ -35,6 +35,7 @@ function AnalysisContainer() {
             id: c.title,
             label: c.title,
             value: spending,
+            color: c.color,
           });
           newTotal += spending;
         }

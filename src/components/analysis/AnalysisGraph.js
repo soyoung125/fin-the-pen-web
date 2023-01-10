@@ -8,16 +8,7 @@ function AnalysisGraph({ data, total }) {
         top: 0, right: 0, bottom: 0, left: 0,
       }}
       sortByValue
-      colors={{ scheme: 'nivo' }}
-      borderColor={{
-        from: 'color',
-        modifiers: [
-          [
-            'darker',
-            '0',
-          ],
-        ],
-      }}
+      colors={data.map((d) => d.color)}
       enableArcLinkLabels={false}
       arcLinkLabelsSkipAngle={10}
       arcLinkLabelsTextColor="#333333"
