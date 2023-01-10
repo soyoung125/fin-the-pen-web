@@ -7,7 +7,7 @@ import { useNavigate } from 'react-router-dom';
 function Schedule() {
   const navigate = useNavigate();
   return (
-    <ListItemButton onClick={() => navigate('/')}>
+    <ListItemButton onClick={() => navigate('/test')}>
       <ListItem>
         <ListItemIcon>
           <EventAvailableIcon />
