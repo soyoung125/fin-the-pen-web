@@ -37,6 +37,7 @@ function Calender() {
     }
 
     const daySchedules = schedules.filter((e) => e.date === day.format('YYYY-MM-DD'));
+    console.log(daySchedules);
 
     if (daySchedules.length > 0) {
       return (
@@ -49,7 +50,7 @@ function Calender() {
                   <Box
                     key={Math.random()}
                     sx={{
-                      width: '5px', height: '5px', border: '1px solid', borderRadius: 3,
+                      width: '5px', height: '5px', border: '1px solid', borderRadius: 3, borderColor: s.category.color,
                     }}
                   />
                 )
