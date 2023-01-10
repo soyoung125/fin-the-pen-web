@@ -1,42 +1,12 @@
 /* eslint-disable react/jsx-props-no-spreading */
-/* eslint-disable no-use-before-define */
-/* eslint-disable no-unused-vars */
-// import { useAutocomplete } from '@mui/base/AutocompleteUnstyled';oryory
-import CheckIcon from '@mui/icons-material/Check';
-import { styled } from '@mui/material/styles';
 import {
-  Autocomplete,
-  Button, Stack, TextField, Typography, useAutocomplete,
+  Autocomplete, TextField,
 } from '@mui/material';
 import { useEffect, useState } from 'react';
 import ADD_SCHEDULE from '../../../utils/constants/schedule';
-import Root from './category/Root';
-import Label from './category/Label';
-import InputWrapper from './category/InputWrapper';
-import StyledTag from './category/StyledTag';
-import Listbox from './category/Listbox';
 import CATEGORIES from '../../../utils/constants/categories';
 
 export default function CategoryInput({ updateCategory }) {
-  // const {
-  //   getRootProps,
-  //   getInputLabelProps,
-  //   getInputProps,
-  //   getTagProps,
-  //   getListboxProps,
-  //   getOptionProps,
-  //   groupedOptions,
-  //   value,
-  //   focused,
-  //   setAnchorEl,
-  // } = useAutocomplete({
-  //   id: 'customized-hook-demo',
-  //   // defaultValue: [CATEGORIES[1]],
-  //   multiple: true,
-  //   options: CATEGORIES,
-  //   getOptionLabel: (option) => option.title,
-  // });
-
   const [value, setValue] = useState(null);
   const [inputValue, setInputValue] = useState('');
   useEffect(() => {
