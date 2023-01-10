@@ -117,7 +117,6 @@ function AddScheduleDrawer({ setBottomDrawerOpen }) {
 
         <RepeatInput schedule={schedule} updateRepeat={updateRepeat} />
 
-        <Alert severity="warning">카테고리는 하나만 선택하기!!!!!!!(추후에 select로 변경 예정입니다.)</Alert>
         <CategoryInput updateCategory={updateCategory} />
 
         <Accordion sx={{ width: '100%' }}>

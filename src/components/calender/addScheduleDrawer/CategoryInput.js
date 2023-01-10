@@ -19,9 +19,6 @@ export default function CategoryInput({ updateCategory }) {
   }, [value]);
   return (
     <div>
-      <div>{`value: ${value !== null ? `'${value}'` : 'null'}`}</div>
-      <div>{`inputValue: '${inputValue}'`}</div>
-      <br />
       <Autocomplete
         value={value}
         onChange={(event, newValue) => {
@@ -34,6 +31,7 @@ export default function CategoryInput({ updateCategory }) {
         id="category"
         options={CATEGORIES.map((cat) => cat.title)}
         renderInput={(params) => <TextField {...params} label={ADD_SCHEDULE.category_title} />}
+        size="small"
       />
     </div>
   );
