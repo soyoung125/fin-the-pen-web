@@ -1,7 +1,7 @@
-import List from '@mui/material/List';
+import { List } from '@mui/material';
 import ListSubheader from '@mui/material/ListSubheader';
-import AppLocker from './menu/AppLocker';
-import ThemeMode from './menu/ThemeMode';
+import AppLocker from './\bdisplay/AppLocker';
+import ThemeMode from './\bdisplay/ThemeMode';
 
 export default function SettingsContainer() {
   return (
