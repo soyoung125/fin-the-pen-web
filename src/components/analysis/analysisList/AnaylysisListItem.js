@@ -14,7 +14,7 @@ function AnalysisListItem({
             st
           </Box>
         </Grid>
-        <Grid xs={4} item>
+        <Grid xs={5} item>
           <Stack
             direction="row"
             alignItems="stretch"
@@ -32,7 +32,7 @@ function AnalysisListItem({
             {category.label}
           </Stack>
         </Grid>
-        <Grid xs={6} item>
+        <Grid xs={5} item>
           <Box>{category.value.toLocaleString('ko-KR')}</Box>
         </Grid>
       </Grid>
