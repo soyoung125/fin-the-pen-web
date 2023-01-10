@@ -1,9 +1,8 @@
 import { useState } from 'react';
 import HttpsIcon from '@mui/icons-material/Https';
-import {
-  ListItem, ListItemIcon, ListItemText, Typography,
-} from '@mui/material';
+
 import ToggleListItem from '../../../components/settings/ToggleListItem';
+import ClickableListItem from '../../../components/settings/ClickableListItem';
 
 function AppLocker() {
   const [checked, setChecked] = useState(false);
@@ -21,11 +20,7 @@ function AppLocker() {
       />
       {
       checked && (
-        <ListItem>
-          <ListItemIcon />
-          <ListItemText id="비밀번호 인증 단계" primary="비밀번호 인증 단계" />
-          <Typography sx={{ color: 'gray' }}>1단계</Typography>
-        </ListItem>
+        <ClickableListItem to="/test" title="비밀번호 인증 단계" subTitle="1단계" />
       )
     }
     </>
