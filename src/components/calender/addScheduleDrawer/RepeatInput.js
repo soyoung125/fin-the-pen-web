@@ -1,5 +1,5 @@
 import {
-  Box, FormControl, InputLabel, MenuItem, Select, Stack, Typography,
+  Box, FormControl, InputLabel, MenuItem, Select, Stack,
 } from '@mui/material';
 import { DEADLINE, REPEAT } from '../../../utils/constants/repeat';
 import ADD_SCHEDULE from '../../../utils/constants/schedule';
@@ -7,7 +7,7 @@ import ADD_SCHEDULE from '../../../utils/constants/schedule';
 function RepeatInput({ schedule, updateRepeat }) {
   return (
     <Box>
-      <Typography mx={1} sx={{ fontWeight: 'bold' }}>{ADD_SCHEDULE.repeat}</Typography>
+      {/* <Typography mx={1} sx={{ fontWeight: 'bold' }}>{ADD_SCHEDULE.repeat}</Typography> */}
       <Stack
         direction="row"
         justifyContent="space-between"
