@@ -4,7 +4,7 @@ import {
 } from '@mui/material';
 import AnalysisListItem from './AnaylysisListItem';
 
-function AnalysisList({ data, clickListItem }) {
+function AnalysisList({ data, clickListItem, hexToRGB }) {
   return (
     <Box mx={3}>
       <Typography sx={{ mt: 4 }} variant="h6" component="div">
@@ -17,6 +17,7 @@ function AnalysisList({ data, clickListItem }) {
             category={d}
             rank={(index + 1)}
             clickListItem={clickListItem}
+            bgColor={hexToRGB(d.color, 0.5)}
           />
         ))}
       </List>

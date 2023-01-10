@@ -2,7 +2,9 @@ import {
   Box, Grid, ListItem, Stack,
 } from '@mui/material';
 
-function AnalysisListItem({ category, rank, clickListItem }) {
+function AnalysisListItem({
+  category, rank, clickListItem, bgColor,
+}) {
   return (
     <ListItem onClick={() => clickListItem(category)}>
       <Grid container spacing={2}>
@@ -12,17 +14,25 @@ function AnalysisListItem({ category, rank, clickListItem }) {
             st
           </Box>
         </Grid>
-        <Grid xs={4} item>
-          <Stack direction="row" alignItems="stretch" sx={{ paddingX: 1, borderRadius: 2, backgroundColor: 'primary.light' }}>
+        <Grid xs={5} item>
+          <Stack
+            direction="row"
+            alignItems="stretch"
+            sx={{
+              paddingX: 1,
+              borderRadius: 2,
+              backgroundColor: bgColor,
+            }}
+          >
             <Box
               sx={{
-                width: '15px', height: '15px', border: '4px solid', borderRadius: 3, borderColor: 'primary.dark', marginY: 'auto', marginRight: 0.5,
+                width: '15px', height: '15px', border: '4px solid', borderRadius: 3, borderColor: category.color, marginY: 'auto', marginRight: 0.5,
               }}
             />
             {category.label}
           </Stack>
         </Grid>
-        <Grid xs={6} item>
+        <Grid xs={5} item>
           <Box>{category.value.toLocaleString('ko-KR')}</Box>
         </Grid>
       </Grid>
