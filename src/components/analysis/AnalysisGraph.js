@@ -23,7 +23,7 @@ function AnalysisGraph({ data, total }) {
       arcLinkLabelsTextColor="#333333"
       arcLinkLabelsThickness={2}
       arcLinkLabelsColor={{ from: 'color' }}
-      arcLabel={(e) => { const percent = (parseInt(e.value, 10) / total) * 100; console.log(parseInt(e.value, 10) / total); return `${e.id} (${percent.toFixed(1)}%)`; }}
+      arcLabel={(e) => { const percent = (parseInt(e.value, 10) / total) * 100; return `${e.id} (${percent.toFixed(1)}%)`; }}
       arcLabelsSkipAngle={7}
       arcLabelsTextColor={{
         from: 'color',

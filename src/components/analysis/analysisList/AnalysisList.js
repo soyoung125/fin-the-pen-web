@@ -12,7 +12,12 @@ function AnalysisList({ data, clickListItem }) {
       </Typography>
       <List>
         {data.map((d, index) => (
-          <AnalysisListItem category={d} rank={(index + 1)} clickListItem={clickListItem} />
+          <AnalysisListItem
+            key={d.label}
+            category={d}
+            rank={(index + 1)}
+            clickListItem={clickListItem}
+          />
         ))}
       </List>
     </Box>
