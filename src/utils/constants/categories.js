@@ -12,6 +12,7 @@ const FIXED = {
       categories: ['구독비', '교통비/자동차세', '(주거)관리비/월세', '핸드폰요금', '적금', '보험비', '카드이체료'],
     },
   ],
+  color: '#FFE400',
 };
 
 const INCOME = {
@@ -26,6 +27,7 @@ const INCOME = {
       categories: ['금융', '사업', '기타'],
     },
   ],
+  color: '#1DDB16',
 };
 
 const EXPENDITURE = {
@@ -52,6 +54,7 @@ const EXPENDITURE = {
       categories: ['저축', '투자'],
     },
   ],
+  color: '#FF0000',
 };
 
 const categoryFlatter = (obj) => {
