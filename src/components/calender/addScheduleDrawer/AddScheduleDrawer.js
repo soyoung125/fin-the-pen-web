@@ -74,8 +74,8 @@ function AddScheduleDrawer({ setBottomDrawerOpen }) {
     }
   };
 
-  const updateCategory = (categories) => {
-    setSchedule({ ...schedule, category: categories[0] });
+  const updateCategory = (category) => {
+    setSchedule({ ...schedule, category });
   };
 
   const updateExclusion = (state) => {
