@@ -6,7 +6,7 @@ import { AdapterMoment } from '@mui/x-date-pickers/AdapterMoment';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { PickersDay } from '@mui/x-date-pickers/PickersDay/PickersDay';
 import moment from 'moment';
-import React from 'react';
+import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { selectDate, selectedDate, selectSchedules } from '../../utils/redux/schedule/scheduleSlice';
 
@@ -14,37 +14,71 @@ function Calender() {
   const dispatch = useDispatch();
   const value = useSelector(selectDate);
   const schedules = useSelector(selectSchedules);
+
   const DATE_SIZE = 32;
   const DATE_HEIGHT = 50;
 
-  console.log(value);
-
-  React.useEffect(() => {
+  useEffect(() => {
     dispatch(selectedDate(moment(new Date())));
   }, []);
 
   const renderDayInPicker = (day, _value, DayComponentProps) => {
-    const fixedWithdrawal = schedules.map((s) => (s.repeating_cycle !== '없음' ? s.date : null));
-    if (fixedWithdrawal.includes(day.format('YYYY-MM-DD'))) {
+    const daySchedules = schedules.filter((e) => e.date === day.format('YYYY-MM-DD'));
+
+    const fixedWithdrawal = daySchedules.filter((s) => s.category.type === '고정 입출금');
+    const nonFixedWithdrwal = daySchedules.filter((s) => s.category.type !== '고정 입출금');
+
+    if (fixedWithdrawal.length > 0) {
+      if (nonFixedWithdrwal.length > 0) {
+        return (
+          <Box sx={{ width: DATE_SIZE, marginX: 'auto' }}>
+            <Stack>
+              <PickersDay
+                sx={{
+                  border: 1,
+                  borderRadius: 2,
+                  marginBottom: 2,
+                  borderColor: fixedWithdrawal[0].category.color,
+                }}
+                {...DayComponentProps}
+              />
+              <Stack direction="row" justifyContent="center" spacing={0.5} mt={0.2}>
+                {nonFixedWithdrwal.map((s, index) => ( // 추후 e의 카테고리 별로 색 바꿀 예정
+                  index < 3 ? (
+                    <Box
+                      key={Math.random()}
+                      sx={{
+                        width: '5px', height: '5px', border: '1px solid', borderRadius: 3, borderColor: s.category.color,
+                      }}
+                    />
+                  )
+                    : null
+                ))}
+              </Stack>
+            </Stack>
+          </Box>
+        );
+      }
       return (
         <PickersDay
           sx={{
-            border: 1, borderRadius: 2, marginBottom: 2, borderColor: 'warning.light',
+            border: 1,
+            borderRadius: 2,
+            marginBottom: 2,
+            borderColor: fixedWithdrawal[0].category.color,
           }}
           {...DayComponentProps}
         />
       );
     }
 
-    const daySchedules = schedules.filter((e) => e.date === day.format('YYYY-MM-DD'));
-
-    if (daySchedules.length > 0) {
+    if (nonFixedWithdrwal.length > 0) {
       return (
         <Box sx={{ width: DATE_SIZE, marginX: 'auto' }}>
           <Stack>
             <PickersDay sx={{ marginBottom: 2 }} {...DayComponentProps} />
             <Stack direction="row" justifyContent="center" spacing={0.5} mt={0.1}>
-              {daySchedules.map((s, index) => ( // 추후 e의 카테고리 별로 색 바꿀 예정
+              {nonFixedWithdrwal.map((s, index) => ( // 추후 e의 카테고리 별로 색 바꿀 예정
                 index < 3 ? (
                   <Box
                     key={Math.random()}
