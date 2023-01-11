@@ -1,5 +1,7 @@
-import { List } from '@mui/material';
-import ListSubheader from '@mui/material/ListSubheader';
+import {
+  Accordion, AccordionDetails, AccordionSummary, Typography,
+} from '@mui/material';
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import AppLocker from './display/AppLocker';
 import Budget from './display/Budget';
 import ThemeMode from './display/ThemeMode';
@@ -8,20 +10,32 @@ import Schedule from './schedule/Schedule';
 export default function SettingsContainer() {
   return (
     <>
-      <List
-        sx={{ width: '100%', bgcolor: 'background.paper' }}
-        subheader={<ListSubheader>화면 설정</ListSubheader>}
-      >
-        <AppLocker />
-        <ThemeMode />
-        <Budget />
-      </List>
-      <List
-        sx={{ width: '100%', bgcolor: 'background.paper' }}
-        subheader={<ListSubheader>일정</ListSubheader>}
-      >
-        <Schedule />
-      </List>
+      <Accordion>
+        <AccordionSummary
+          expandIcon={<ExpandMoreIcon />}
+          aria-controls="panel1a-content"
+          id="panel1a-header"
+        >
+          <Typography>화면 설정</Typography>
+        </AccordionSummary>
+        <AccordionDetails>
+          <AppLocker />
+          <ThemeMode />
+          <Budget />
+        </AccordionDetails>
+      </Accordion>
+      <Accordion>
+        <AccordionSummary
+          expandIcon={<ExpandMoreIcon />}
+          aria-controls="panel1a-content"
+          id="panel1a-header"
+        >
+          <Typography>일정</Typography>
+        </AccordionSummary>
+        <AccordionDetails>
+          <Schedule />
+        </AccordionDetails>
+      </Accordion>
     </>
   );
 }
