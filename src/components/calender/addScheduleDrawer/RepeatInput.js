@@ -1,10 +1,15 @@
 import {
-  Box, FormControl, InputLabel, MenuItem, Select, Stack,
+  // eslint-disable-next-line max-len
+  Box, Button, Dialog, DialogActions, DialogContent, DialogTitle, FormControl, FormHelperText, InputLabel, MenuItem, Select, Stack,
 } from '@mui/material';
+import { CalendarPicker, LocalizationProvider } from '@mui/x-date-pickers';
+import { AdapterMoment } from '@mui/x-date-pickers/AdapterMoment';
 import { DEADLINE, REPEAT } from '../../../utils/constants/repeat';
 import ADD_SCHEDULE from '../../../utils/constants/schedule';
 
-function RepeatInput({ schedule, updateRepeat }) {
+function RepeatInput({
+  schedule, updateRepeat, openDatePickerModal, handleModalClose, repeatEndDate, setRepeatEndDate,
+}) {
   return (
     <Box>
       {/* <Typography mx={1} sx={{ fontWeight: 'bold' }}>{ADD_SCHEDULE.repeat}</Typography> */}
@@ -37,8 +42,40 @@ function RepeatInput({ schedule, updateRepeat }) {
           >
             {DEADLINE.map((d) => (<MenuItem value={d}>{d}</MenuItem>))}
           </Select>
+          <FormHelperText>
+            {schedule.repeat_deadline === '캘린더에 표시' ? schedule.repeat_endDate : null}
+            까지 반복
+          </FormHelperText>
         </FormControl>
       </Stack>
+      <Dialog
+        open={openDatePickerModal}
+        onClose={handleModalClose}
+        aria-labelledby="alert-dialog-title"
+        aria-describedby="alert-dialog-description"
+        sx={{
+          '.MuiDialogContent-root': {
+            padding: 0,
+          },
+        }}
+      >
+        <DialogTitle id="alert-dialog-title">
+          날짜 선택
+        </DialogTitle>
+        <DialogContent>
+          <LocalizationProvider dateAdapter={AdapterMoment}>
+            <CalendarPicker
+              date={repeatEndDate}
+              onChange={(newDate) => setRepeatEndDate(newDate)}
+            />
+          </LocalizationProvider>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleModalClose} autoFocus>
+            설정
+          </Button>
+        </DialogActions>
+      </Dialog>
     </Box>
   );
 }

@@ -44,6 +44,7 @@ function AddScheduleDrawer({ setBottomDrawerOpen }) {
     end_time: '23:00',
     repeating_cycle: '없음',
     repeat_deadline: '없음',
+    repeat_endDate: new Date(),
     category: {},
     type: ADD_SCHEDULE.type_minus,
     expected_spending: 0,
@@ -51,9 +52,13 @@ function AddScheduleDrawer({ setBottomDrawerOpen }) {
     exclusion: false, // false면 포함
   });
 
+  const [openDatePickerModal, setOpenDatePickerModal] = useState(false);
+  const [repeatEndDate, setRepeatEndDate] = useState('');
+
   useEffect(() => {
     // eslint-disable-next-line no-underscore-dangle
-    setSchedule({ ...schedule, date: date.format('YYYY-MM-DD') });
+    setSchedule({ ...schedule, date: date.format('YYYY-MM-DD'), repeat_endDate: date.format('YYYY-MM-DD') });
+    setRepeatEndDate(date);
   }, [date]);
 
   const updateSchedule = (state) => {
@@ -72,6 +77,9 @@ function AddScheduleDrawer({ setBottomDrawerOpen }) {
     } else {
       setSchedule({ ...schedule, [state.target.name]: state.target.value });
     }
+    if ((state.target.name === 'repeat_deadline') && (state.target.value !== '없음')) {
+      setOpenDatePickerModal(true);
+    }
   };
 
   const updateCategory = (category) => {
@@ -86,6 +94,11 @@ function AddScheduleDrawer({ setBottomDrawerOpen }) {
   const [snackbarOpen, setSnackbarOpen] = useState(true);
   const handleClose = () => {
     setSnackbarOpen(false);
+  };
+
+  const handleModalClose = () => {
+    setOpenDatePickerModal(false);
+    setSchedule({ ...schedule, repeat_endDate: repeatEndDate.format('YYYY-MM-DD') });
   };
 
   return (
@@ -115,7 +128,14 @@ function AddScheduleDrawer({ setBottomDrawerOpen }) {
         <NameInput schedule={schedule} updateSchedule={updateSchedule} updateAlarm={updateAlarm} />
         <DateInput schedule={schedule} updateSchedule={updateSchedule} />
 
-        <RepeatInput schedule={schedule} updateRepeat={updateRepeat} />
+        <RepeatInput
+          schedule={schedule}
+          updateRepeat={updateRepeat}
+          openDatePickerModal={openDatePickerModal}
+          handleModalClose={handleModalClose}
+          repeatEndDate={repeatEndDate}
+          setRepeatEndDate={setRepeatEndDate}
+        />
 
         <CategoryInput updateCategory={updateCategory} />
 
