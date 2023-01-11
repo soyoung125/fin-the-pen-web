@@ -1,10 +1,15 @@
+/* eslint-disable no-unused-vars */
 import {
+  Avatar,
   Box,
   Button,
-  Card, Menu, MenuItem, MenuList, Stack, Typography,
+  Card, Divider, IconButton, ListItem, ListItemAvatar,
+  ListItemButton,
+  ListItemText, Menu, MenuItem, MenuList, Stack, Typography,
 } from '@mui/material';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 import { useState } from 'react';
+import FolderIcon from '@mui/icons-material/Folder';
 
 function ScheduleCard({ schedule, setScheduleModalOpen, setSelectedSchedule }) {
   const [anchorEl, setAnchorEl] = useState(null);
@@ -22,7 +27,8 @@ function ScheduleCard({ schedule, setScheduleModalOpen, setSelectedSchedule }) {
   };
 
   return (
-    <Box px={1} mb={1}>
+    <>
+      {/* <Box px={1} mb={1}>
       <Card>
         <Stack direction="row" justifyContent="space-between" p={1}>
           <Stack>
@@ -55,7 +61,37 @@ function ScheduleCard({ schedule, setScheduleModalOpen, setSelectedSchedule }) {
           </Menu>
         </Stack>
       </Card>
-    </Box>
+    </Box> */}
+      <ListItemButton onClick={() => handleModal()}>
+        <ListItem>
+          {/* <ListItemAvatar>
+            <Avatar>
+              <FolderIcon />
+            </Avatar>
+          </ListItemAvatar> */}
+          <ListItemText
+            primary={`○ ${schedule.start_time} - ${schedule.end_time}`}
+            secondary={schedule.event_name}
+          />
+          <Menu
+            id="basic-menu"
+            anchorEl={anchorEl}
+            open={open}
+            onClose={handleClose}
+            MenuListProps={{
+              'aria-labelledby': 'basic-button',
+            }}
+          >
+            <MenuList dense>
+              <MenuItem onClick={handleModal}>자세히 보기</MenuItem>
+              <MenuItem onClick={handleClose}>삭제</MenuItem>
+            </MenuList>
+          </Menu>
+        </ListItem>
+      </ListItemButton>
+      <Divider />
+    </>
+
   );
 }
 

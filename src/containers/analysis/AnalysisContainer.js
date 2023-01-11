@@ -21,7 +21,7 @@ function AnalysisContainer() {
     let newTotal = 0;
     // eslint-disable-next-line array-callback-return
     CATEGORIES.map((c) => {
-      const schByCategory = schedules.filter((s) => (s.category.type !== '수입') && (s.category.title === c.title));
+      const schByCategory = schedules.filter((s) => (s.category.type === '지출') && (s.category.title === c.title));
       const cnt = schByCategory.length;
       if (cnt > 0) {
         // eslint-disable-next-line function-paren-newline
@@ -35,6 +35,7 @@ function AnalysisContainer() {
             id: c.title,
             label: c.title,
             value: spending,
+            color: c.color,
           });
           newTotal += spending;
         }
@@ -53,6 +54,17 @@ function AnalysisContainer() {
     setShowDetailCard(false);
   };
 
+  const hexToRGB = (hex, alpha) => {
+    const r = parseInt(hex.slice(1, 3), 16);
+    const g = parseInt(hex.slice(3, 5), 16);
+    const b = parseInt(hex.slice(5, 7), 16);
+
+    if (alpha) {
+      return `rgba(${r}, ${g}, ${b}, ${alpha})`;
+    }
+    return `rgb(${r}, ${g}, ${b})`;
+  };
+
   return (
     <Box>
       <AnalysisHeader />
@@ -63,7 +75,7 @@ function AnalysisContainer() {
               ? <AnalysisDetailCard closeDetailCard={closeDetailCard} selectedItem={selectedItem} />
               : <AnalysisGraph data={data} total={total} />}
           </Box>
-          <AnalysisList data={data} clickListItem={clickListItem} />
+          <AnalysisList data={data} clickListItem={clickListItem} hexToRGB={hexToRGB} />
         </>
       ) : <Alert sx={{ margin: 2 }} severity="info">이체/지출 데이터가 존재하지 않습니다.</Alert>}
     </Box>

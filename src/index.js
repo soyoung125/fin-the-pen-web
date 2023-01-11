@@ -12,9 +12,9 @@ import { Provider } from 'react-redux';
 import { PersistGate } from 'redux-persist/integration/react';
 import { persistStore } from 'redux-persist';
 import { store } from './utils/redux/store';
-import { createTheme, ThemeProvider } from '@mui/material';
+import { createTheme, responsiveFontSizes, ThemeProvider } from '@mui/material';
 
-const theme = createTheme({
+const theme = responsiveFontSizes(createTheme({
   palette:{
     type: 'light',
     primary: {
@@ -24,7 +24,7 @@ const theme = createTheme({
       main: '#f50057',
     },
   }
-});
+}));
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 let persistor = persistStore(store);
