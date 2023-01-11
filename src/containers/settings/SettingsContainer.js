@@ -24,6 +24,7 @@ export default function SettingsContainer() {
           <Budget />
         </AccordionDetails>
       </Accordion>
+
       <Accordion>
         <AccordionSummary
           expandIcon={<ExpandMoreIcon />}
@@ -34,6 +35,84 @@ export default function SettingsContainer() {
         </AccordionSummary>
         <AccordionDetails>
           <Schedule />
+        </AccordionDetails>
+      </Accordion>
+
+      <Accordion>
+        <AccordionSummary
+          expandIcon={<ExpandMoreIcon />}
+          aria-controls="panel1a-content"
+          id="panel1a-header"
+        >
+          <Typography>보안 / 인증서</Typography>
+        </AccordionSummary>
+        <AccordionDetails>
+          <Typography>메뉴가 올 자리</Typography>
+        </AccordionDetails>
+      </Accordion>
+
+      <Accordion>
+        <AccordionSummary
+          expandIcon={<ExpandMoreIcon />}
+          aria-controls="panel1a-content"
+          id="panel1a-header"
+        >
+          <Typography>알림</Typography>
+        </AccordionSummary>
+        <AccordionDetails>
+          <Typography>메뉴가 올 자리</Typography>
+        </AccordionDetails>
+      </Accordion>
+
+      <Accordion>
+        <AccordionSummary
+          expandIcon={<ExpandMoreIcon />}
+          aria-controls="panel1a-content"
+          id="panel1a-header"
+        >
+          <Typography>연결 관리</Typography>
+        </AccordionSummary>
+        <AccordionDetails>
+          <Typography>메뉴가 올 자리</Typography>
+        </AccordionDetails>
+      </Accordion>
+
+      <Accordion>
+        <AccordionSummary
+          expandIcon={<ExpandMoreIcon />}
+          aria-controls="panel1a-content"
+          id="panel1a-header"
+        >
+          <Typography>약관 및 정책</Typography>
+        </AccordionSummary>
+        <AccordionDetails>
+          <Typography>메뉴가 올 자리</Typography>
+        </AccordionDetails>
+      </Accordion>
+
+      <Accordion>
+        <AccordionSummary
+          expandIcon={<ExpandMoreIcon />}
+          aria-controls="panel1a-content"
+          id="panel1a-header"
+        >
+          <Typography>앱 버전</Typography>
+        </AccordionSummary>
+        <AccordionDetails>
+          <Typography>메뉴가 올 자리</Typography>
+        </AccordionDetails>
+      </Accordion>
+
+      <Accordion>
+        <AccordionSummary
+          expandIcon={<ExpandMoreIcon />}
+          aria-controls="panel1a-content"
+          id="panel1a-header"
+        >
+          <Typography>서비스 초기화 및 탈퇴</Typography>
+        </AccordionSummary>
+        <AccordionDetails>
+          <Typography>메뉴가 올 자리</Typography>
         </AccordionDetails>
       </Accordion>
     </>
