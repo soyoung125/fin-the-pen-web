@@ -1,4 +1,7 @@
 import { Alert, Box } from '@mui/material';
+import {
+  blue, blueGrey, brown, green, indigo, pink, red,
+} from '@mui/material/colors';
 import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import AnalysisGraph from '../../components/analysis/AnalysisGraph';
@@ -14,14 +17,23 @@ function AnalysisContainer() {
   const [showDetailCard, setShowDetailCard] = useState(false);
   const [selectedItem, setSelectedItem] = useState({});
   const schedules = useSelector(selectSchedules);
+  const colorList = [
+    green[100], green[200], green[300],
+    blue[100], indigo[100], blue[200], indigo[200], blue[300], indigo[300], blue[400],
+    blueGrey[100], blueGrey[200],
+    pink[100], red[100], pink[200], red[200], pink[300],
+    brown[100], brown[200],
+  ];
 
   useEffect(() => {
     const newData = [];
     // eslint-disable-next-line no-unused-vars
     let newTotal = 0;
+    const expenditureCategories = CATEGORIES.filter((c) => c.type === '지출');
+    console.log(expenditureCategories);
     // eslint-disable-next-line array-callback-return
-    CATEGORIES.map((c) => {
-      const schByCategory = schedules.filter((s) => (s.category.type === '지출') && (s.category.title === c.title));
+    expenditureCategories.map((c, index) => {
+      const schByCategory = schedules.filter((s) => s.category.title === c.title);
       const cnt = schByCategory.length;
       if (cnt > 0) {
         // eslint-disable-next-line function-paren-newline
@@ -35,7 +47,7 @@ function AnalysisContainer() {
             id: c.title,
             label: c.title,
             value: spending,
-            color: c.color,
+            color: colorList[index],
           });
           newTotal += spending;
         }
