@@ -129,11 +129,12 @@ function Calender() {
           '.MuiPickersArrowSwitcher-spacer': {
             width: '50vw',
           },
-          '.MuiPickersCalendarHeader-labelContainer > .MuiPickersFadeTransitionGroup-root': {
+          '.MuiPickersCalendarHeader-labelContainer': {
             position: 'absolute',
             left: 0,
             right: 0,
             alignItems: 'center',
+            justifyContent: 'center',
           },
 
           // 데이 디자인을 위한 css
