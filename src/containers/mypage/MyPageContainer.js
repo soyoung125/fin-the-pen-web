@@ -1,13 +1,14 @@
 /* eslint-disable no-restricted-globals */
 /* eslint-disable no-alert */
 import {
-  Box, Button, Stack, Typography,
+  Box, Button, Typography,
 } from '@mui/material';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import PATH from '../../utils/constants/path';
 import { logOut, selectUser } from '../../utils/redux/user/userSlice';
+import GuestDataManager from '../test/GuestDataManager';
 // import SignInContainer from '../sign/SignInContainer';
 
 function MyPageContainer() {
@@ -32,25 +33,7 @@ function MyPageContainer() {
       <Typography>
         {JSON.stringify(user)}
       </Typography>
-      <Stack spacing={2} m={2} border={1} p={2}>
-        <Typography variant="h5">게스트 계정 전용 메뉴 (준비중)</Typography>
-        <Button
-          variant="contained"
-          color="success"
-          onClick={() => alert('준비 중인 메뉴')}
-        >
-          세이브 데이터 복구하기
-        </Button>
-
-        <Button
-          variant="contained"
-          color="info"
-          onClick={() => alert('준비 중인 메뉴')}
-        >
-          지금까지 작업한 데이터 백업
-        </Button>
-
-      </Stack>
+      <GuestDataManager />
       <Box m={2}>
         <Button
           variant="contained"
