@@ -8,7 +8,7 @@ function ClickableListItem({
 }) {
   const navigate = useNavigate();
   return (
-    <ListItemButton onClick={() => navigate(to)}>
+    <ListItemButton onClick={() => to && navigate(to)}>
       <ListItem>
         <ListItemIcon>
           {icon}
