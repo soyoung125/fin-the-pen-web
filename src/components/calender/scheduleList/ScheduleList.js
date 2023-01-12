@@ -1,5 +1,5 @@
 import {
-  Box, List, Stack, Typography,
+  Box, Stack, Typography,
 } from '@mui/material';
 import moment from 'moment';
 import { useSelector } from 'react-redux';
@@ -25,7 +25,7 @@ function ScheduleList() {
           </Box>
         </Stack>
       )}
-      <List
+      {/* <List
         sx={{
           bgcolor: 'background.paper',
           position: 'relative',
@@ -33,18 +33,18 @@ function ScheduleList() {
           flex: 1,
           '& ul': { padding: 0 },
         }}
-      >
-        {
-          schedules
-            .filter((el) => el.date === date)
-            .map((el) => (
-              <ScheduleCard
-                schedule={el}
-                key={Math.random()}
-              />
-            ))
-        }
-      </List>
+      > */}
+      {
+        schedules
+          .filter((el) => el.date === date)
+          .map((el) => (
+            <ScheduleCard
+              schedule={el}
+              key={Math.random()}
+            />
+          ))
+      }
+      {/* </List> */}
     </>
   );
 }
