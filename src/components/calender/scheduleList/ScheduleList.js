@@ -25,15 +25,6 @@ function ScheduleList() {
           </Box>
         </Stack>
       )}
-      {/* <List
-        sx={{
-          bgcolor: 'background.paper',
-          position: 'relative',
-          overflow: 'auto',
-          flex: 1,
-          '& ul': { padding: 0 },
-        }}
-      > */}
       {
         schedules
           .filter((el) => el.date === date)
@@ -44,7 +35,6 @@ function ScheduleList() {
             />
           ))
       }
-      {/* </List> */}
     </>
   );
 }
