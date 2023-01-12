@@ -20,5 +20,23 @@ const ADD_SCHEDULE = Object.freeze({
   importance_middle: '중', // 수정금지
   importance_low: '하', // 수정금지
   exclusion_title: '예산에서 제외',
+  add_schedule: '일정 추가하기',
 });
-export default ADD_SCHEDULE;
+const NEED_TITLE = '제목을 입력해야 합니다.';
+const INIT_SCHEDULE = {
+  event_name: '',
+  alarm: false,
+  date: new Date(),
+  start_time: '09:00',
+  end_time: '11:00',
+  repeating_cycle: '없음',
+  repeat_deadline: '없음',
+  repeat_endDate: new Date(),
+  category: {},
+  type: ADD_SCHEDULE.type_minus,
+  expected_spending: 0,
+  importance: ADD_SCHEDULE.importance_middle,
+  exclusion: false, // false면 포함
+};
+export default null;
+export { ADD_SCHEDULE, NEED_TITLE, INIT_SCHEDULE };

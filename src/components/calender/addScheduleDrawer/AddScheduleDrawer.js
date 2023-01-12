@@ -15,7 +15,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import ClearIcon from '@mui/icons-material/Clear';
 import NameInput from './NameInput';
 import DateInput from './DateInput';
-import ADD_SCHEDULE from '../../../utils/constants/schedule';
+import { ADD_SCHEDULE, INIT_SCHEDULE, NEED_TITLE } from '../../../utils/constants/schedule';
 import { addSchedule, selectDate } from '../../../utils/redux/schedule/scheduleSlice';
 import SpendingInput from './SpendingInput';
 import ImportanceInput from './ImportanceInput';
@@ -24,6 +24,7 @@ import CategoryInput from './CategoryInput';
 import ALERTS from '../../../utils/constants/alerts';
 import RepeatInput from './RepeatInput';
 import { selectUser } from '../../../utils/redux/user/userSlice';
+import { NEED_SIGN_IN } from '../../../utils/constants/common';
 
 function TransitionUp(props) {
   // eslint-disable-next-line react/jsx-props-no-spreading
@@ -38,21 +39,7 @@ function AddScheduleDrawer({ setBottomDrawerOpen }) {
   // 추후 삭제 예정
   const random = Math.floor((Math.random() * 5));
 
-  const [schedule, setSchedule] = useState({
-    event_name: '',
-    alarm: false,
-    date: new Date(),
-    start_time: '09:00',
-    end_time: '10:00',
-    repeating_cycle: '없음',
-    repeat_deadline: '없음',
-    repeat_endDate: new Date(),
-    category: {},
-    type: ADD_SCHEDULE.type_minus,
-    expected_spending: 0,
-    importance: ADD_SCHEDULE.importance_middle,
-    exclusion: false, // false면 포함
-  });
+  const [schedule, setSchedule] = useState(INIT_SCHEDULE);
 
   const [openDatePickerModal, setOpenDatePickerModal] = useState(false);
   const [repeatEndDate, setRepeatEndDate] = useState('');
@@ -172,12 +159,12 @@ function AddScheduleDrawer({ setBottomDrawerOpen }) {
               dispatch(addSchedule(schedule));
               setBottomDrawerOpen(false);
             } else {
-              alert('제목을 입력해야 합니다.');
+              alert(NEED_TITLE);
             }
           }}
         >
           {
-            user === null ? '로그인이 필요한 메뉴입니다.' : '일정 추가하기'
+            user === null ? NEED_SIGN_IN : ADD_SCHEDULE.add_schedule
           }
         </Button>
       </Stack>

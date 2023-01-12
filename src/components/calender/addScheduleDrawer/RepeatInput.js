@@ -5,7 +5,7 @@ import {
 import { CalendarPicker, LocalizationProvider } from '@mui/x-date-pickers';
 import { AdapterMoment } from '@mui/x-date-pickers/AdapterMoment';
 import { DEADLINE, REPEAT } from '../../../utils/constants/repeat';
-import ADD_SCHEDULE from '../../../utils/constants/schedule';
+import { ADD_SCHEDULE } from '../../../utils/constants/schedule';
 
 function RepeatInput({
   schedule, updateRepeat, openDatePickerModal, handleModalClose, repeatEndDate, setRepeatEndDate,

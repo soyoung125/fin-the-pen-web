@@ -2,7 +2,7 @@ import {
   FormControl, IconButton, InputAdornment, OutlinedInput,
 } from '@mui/material';
 import NotificationsNoneIcon from '@mui/icons-material/NotificationsNone';
-import ADD_SCHEDULE from '../../../utils/constants/schedule';
+import { ADD_SCHEDULE } from '../../../utils/constants/schedule';
 
 function NameInput({ schedule, updateSchedule, updateAlarm }) {
   return (

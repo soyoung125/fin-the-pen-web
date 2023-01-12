@@ -3,7 +3,7 @@ import {
   Autocomplete, TextField,
 } from '@mui/material';
 import { useEffect, useState } from 'react';
-import ADD_SCHEDULE from '../../../utils/constants/schedule';
+import { ADD_SCHEDULE } from '../../../utils/constants/schedule';
 import CATEGORIES from '../../../utils/constants/categories';
 
 export default function CategoryInput({ updateCategory }) {
