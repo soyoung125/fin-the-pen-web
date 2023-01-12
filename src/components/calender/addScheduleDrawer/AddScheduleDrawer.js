@@ -23,6 +23,7 @@ import ExclusionInput from './ExclusionInput';
 import CategoryInput from './CategoryInput';
 import ALERTS from '../../../utils/constants/alerts';
 import RepeatInput from './RepeatInput';
+import { selectUser } from '../../../utils/redux/user/userSlice';
 
 function TransitionUp(props) {
   // eslint-disable-next-line react/jsx-props-no-spreading
@@ -32,6 +33,7 @@ function TransitionUp(props) {
 function AddScheduleDrawer({ setBottomDrawerOpen }) {
   const dispatch = useDispatch();
   const date = useSelector(selectDate);
+  const user = useSelector(selectUser);
 
   // 추후 삭제 예정
   const random = Math.floor((Math.random() * 5));
@@ -40,8 +42,8 @@ function AddScheduleDrawer({ setBottomDrawerOpen }) {
     event_name: '',
     alarm: false,
     date: new Date(),
-    start_time: '01:00',
-    end_time: '23:00',
+    start_time: '09:00',
+    end_time: '10:00',
     repeating_cycle: '없음',
     repeat_deadline: '없음',
     repeat_endDate: new Date(),
@@ -164,6 +166,7 @@ function AddScheduleDrawer({ setBottomDrawerOpen }) {
         <Button
           variant="contained"
           fullWidth
+          disabled={user === null}
           onClick={() => {
             if (schedule.event_name.length > 0) {
               dispatch(addSchedule(schedule));
@@ -173,7 +176,9 @@ function AddScheduleDrawer({ setBottomDrawerOpen }) {
             }
           }}
         >
-          일정 추가하기
+          {
+            user === null ? '로그인이 필요한 메뉴입니다.' : '일정 추가하기'
+          }
         </Button>
       </Stack>
     </>
