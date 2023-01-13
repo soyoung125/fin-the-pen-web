@@ -50,12 +50,10 @@ function AddScheduleDrawer({ setBottomDrawerOpen, data, mode }) {
 
   const updateSchedule = (state) => {
     setSchedule({ ...schedule, [state.target.id]: state.target.value });
-    console.log(schedule);
   };
 
   const updateAlarm = () => {
     setSchedule({ ...schedule, alarm: !schedule.alarm });
-    console.log(schedule);
   };
 
   const updateRepeat = (state) => {
@@ -75,7 +73,6 @@ function AddScheduleDrawer({ setBottomDrawerOpen, data, mode }) {
 
   const updateExclusion = (state) => {
     setSchedule({ ...schedule, exclusion: state.target.checked });
-    console.log(state.target.checked);
   };
 
   const [snackbarOpen, setSnackbarOpen] = useState(true);
