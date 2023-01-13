@@ -1,6 +1,6 @@
 import {
   // eslint-disable-next-line max-len
-  Box, Button, Dialog, DialogActions, DialogContent, DialogTitle, FormControl, FormHelperText, InputLabel, MenuItem, Select, Stack,
+  Box, Button, Dialog, DialogActions, DialogContent, DialogTitle, FormControl, InputLabel, MenuItem, Select, Stack,
 } from '@mui/material';
 import { CalendarPicker, LocalizationProvider } from '@mui/x-date-pickers';
 import { AdapterMoment } from '@mui/x-date-pickers/AdapterMoment';
@@ -12,7 +12,6 @@ function RepeatInput({
 }) {
   return (
     <Box>
-      {/* <Typography mx={1} sx={{ fontWeight: 'bold' }}>{ADD_SCHEDULE.repeat}</Typography> */}
       <Stack
         direction="row"
         justifyContent="space-between"
@@ -32,20 +31,21 @@ function RepeatInput({
           </Select>
         </FormControl>
 
-        <FormControl fullWidth size="small" disabled={schedule.repeating_cycle === '없음'}>
+        <FormControl
+          fullWidth
+          size="small"
+          disabled={schedule.repeating_cycle === '없음'}
+        >
           <InputLabel>{ADD_SCHEDULE.repeat_deadline}</InputLabel>
           <Select
             name="repeat_deadline"
-            value={schedule.repeat_deadline}
+            value={schedule.repeat_deadline === '캘린더에 표시' ? schedule.repeat_endDate : schedule.repeat_deadline}
             label={ADD_SCHEDULE.repeat_deadline}
             onChange={updateRepeat}
           >
             {DEADLINE.map((d) => (<MenuItem value={d}>{d}</MenuItem>))}
+            <MenuItem disabled value={schedule.repeat_endDate}>{schedule.repeat_endDate}</MenuItem>
           </Select>
-          <FormHelperText>
-            {schedule.repeat_deadline === '캘린더에 표시' ? schedule.repeat_endDate : null}
-            까지 반복
-          </FormHelperText>
         </FormControl>
       </Stack>
       <Dialog
