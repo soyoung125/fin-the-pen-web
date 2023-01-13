@@ -13,9 +13,12 @@ import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import ClearIcon from '@mui/icons-material/Clear';
+import moment from 'moment';
 import NameInput from './NameInput';
 import DateInput from './DateInput';
-import { ADD_SCHEDULE, INIT_SCHEDULE, NEED_TITLE } from '../../../utils/constants/schedule';
+import {
+  ADD_SCHEDULE, INIT_SCHEDULE, NEED_TITLE, REPEAT_CYCLE,
+} from '../../../utils/constants/schedule';
 import { addSchedule, selectDate } from '../../../utils/redux/schedule/scheduleSlice';
 import SpendingInput from './SpendingInput';
 import ImportanceInput from './ImportanceInput';
@@ -90,6 +93,24 @@ function AddScheduleDrawer({ setBottomDrawerOpen }) {
     setSchedule({ ...schedule, repeat_endDate: repeatEndDate.format('YYYY-MM-DD') });
   };
 
+  const addNewSchedule = () => {
+    if (schedule.event_name.length > 0) {
+      // 반복 일정 추가
+      if ((schedule.repeating_cycle !== '없음') && (schedule.repeat_deadline !== '없음')) {
+        let repeatDate = moment(schedule.date).add(1, REPEAT_CYCLE[schedule.repeating_cycle]);
+        while (moment(schedule.repeat_endDate).isSameOrAfter(repeatDate)) {
+          dispatch(addSchedule({ ...schedule, date: repeatDate.format('YYYY-MM-DD') }));
+          repeatDate = moment(repeatDate).add(1, REPEAT_CYCLE[schedule.repeating_cycle]);
+        }
+      }
+      // 원래 일정 추가
+      dispatch(addSchedule(schedule));
+      setBottomDrawerOpen(false);
+    } else {
+      alert(NEED_TITLE);
+    }
+  };
+
   return (
     <>
       <Snackbar
@@ -154,14 +175,7 @@ function AddScheduleDrawer({ setBottomDrawerOpen }) {
           variant="contained"
           fullWidth
           disabled={user === null}
-          onClick={() => {
-            if (schedule.event_name.length > 0) {
-              dispatch(addSchedule(schedule));
-              setBottomDrawerOpen(false);
-            } else {
-              alert(NEED_TITLE);
-            }
-          }}
+          onClick={() => addNewSchedule()}
         >
           {
             user === null ? NEED_SIGN_IN : ADD_SCHEDULE.add_schedule

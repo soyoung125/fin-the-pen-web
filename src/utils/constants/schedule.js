@@ -38,5 +38,14 @@ const INIT_SCHEDULE = {
   importance: ADD_SCHEDULE.importance_middle,
   exclusion: false, // false면 포함
 };
+const REPEAT_CYCLE = {
+  일간: 'days',
+  주간: 'weeks',
+  월간: 'months',
+  연간: 'years',
+};
+
 export default null;
-export { ADD_SCHEDULE, NEED_TITLE, INIT_SCHEDULE };
+export {
+  ADD_SCHEDULE, NEED_TITLE, INIT_SCHEDULE, REPEAT_CYCLE,
+};
