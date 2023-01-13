@@ -11,7 +11,7 @@ import {
   Stack, Typography,
 } from '@mui/material';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import ClearIcon from '@mui/icons-material/Clear';
 import moment from 'moment';
@@ -20,7 +20,7 @@ import DateInput from './DateInput';
 import {
   ADD_SCHEDULE, NEED_TITLE, REPEAT_CYCLE,
 } from '../../../utils/constants/schedule';
-import { addSchedule, selectDate } from '../../../utils/redux/schedule/scheduleSlice';
+import { addSchedule } from '../../../utils/redux/schedule/scheduleSlice';
 import SpendingInput from './SpendingInput';
 import ImportanceInput from './ImportanceInput';
 import ExclusionInput from './ExclusionInput';
@@ -37,7 +37,6 @@ function TransitionUp(props) {
 
 function AddScheduleDrawer({ setBottomDrawerOpen, data, mode }) {
   const dispatch = useDispatch();
-  const date = useSelector(selectDate);
   const user = useSelector(selectUser);
 
   // 추후 삭제 예정
@@ -48,12 +47,6 @@ function AddScheduleDrawer({ setBottomDrawerOpen, data, mode }) {
   const [openDatePickerModal, setOpenDatePickerModal] = useState(false);
   const [repeatEndDate, setRepeatEndDate] = useState('');
   const [useMode, setUseMode] = useState(mode);
-
-  useEffect(() => {
-    // eslint-disable-next-line no-underscore-dangle
-    setSchedule({ ...schedule, date: date.format('YYYY-MM-DD'), repeat_endDate: date.format('YYYY-MM-DD') });
-    setRepeatEndDate(date);
-  }, [date]);
 
   const updateSchedule = (state) => {
     setSchedule({ ...schedule, [state.target.id]: state.target.value });

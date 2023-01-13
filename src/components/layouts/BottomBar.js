@@ -8,11 +8,14 @@ import AddCircleIcon from '@mui/icons-material/AddCircle';
 import { useState } from 'react';
 import SettingsIcon from '@mui/icons-material/Settings';
 import PaidIcon from '@mui/icons-material/Paid';
+import { useSelector } from 'react-redux';
 import PATH from '../../utils/constants/path';
 import AddScheduleDrawer from '../calender/addScheduleDrawer/AddScheduleDrawer';
 import { INIT_SCHEDULE } from '../../utils/constants/schedule';
+import { selectDate } from '../../utils/redux/schedule/scheduleSlice';
 
 function BottomBar({ value, setValue }) {
+  const date = useSelector(selectDate);
   const navigate = useNavigate();
   const [bottomDrawerOpen, setBottomDrawerOpen] = useState(false);
   return (
@@ -47,7 +50,7 @@ function BottomBar({ value, setValue }) {
         onClose={() => setBottomDrawerOpen(false)}
       >
         {/* 이 부분을 범용적으로 사용할 수 있게 만드는 건 어떨까? */}
-        <AddScheduleDrawer setBottomDrawerOpen={setBottomDrawerOpen} data={INIT_SCHEDULE} mode="create" />
+        <AddScheduleDrawer setBottomDrawerOpen={setBottomDrawerOpen} data={{ ...INIT_SCHEDULE, date: date.format('YYYY-MM-DD'), repeat_endDate: date.format('YYYY-MM-DD') }} mode="create" />
       </Drawer>
     </>
   );
