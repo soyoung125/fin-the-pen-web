@@ -6,6 +6,7 @@ import AppLocker from './display/AppLocker';
 import Budget from './display/Budget';
 import ThemeMode from './display/ThemeMode';
 import Schedule from './schedule/Schedule';
+import Version from './version/Version';
 
 export default function SettingsContainer() {
   return (
@@ -99,7 +100,7 @@ export default function SettingsContainer() {
           <Typography>앱 버전</Typography>
         </AccordionSummary>
         <AccordionDetails>
-          <Typography>메뉴가 올 자리</Typography>
+          <Version />
         </AccordionDetails>
       </Accordion>
 
