@@ -8,7 +8,8 @@ import { DEADLINE, REPEAT } from '../../../utils/constants/repeat';
 import { ADD_SCHEDULE } from '../../../utils/constants/schedule';
 
 function RepeatInput({
-  schedule, updateRepeat, openDatePickerModal, handleModalClose, repeatEndDate, setRepeatEndDate,
+  schedule, updateRepeat, openDatePickerModal,
+  handleModalClose, repeatEndDate, setRepeatEndDate, isDisable,
 }) {
   return (
     <Box>
@@ -19,7 +20,7 @@ function RepeatInput({
         spacing={2}
         sx={{ width: '100%', marginTop: 1 }}
       >
-        <FormControl fullWidth size="small">
+        <FormControl fullWidth size="small" disabled={isDisable}>
           <InputLabel>{ADD_SCHEDULE.repeating_cycle}</InputLabel>
           <Select
             name="repeating_cycle"
@@ -34,7 +35,7 @@ function RepeatInput({
         <FormControl
           fullWidth
           size="small"
-          disabled={schedule.repeating_cycle === '없음'}
+          disabled={isDisable || schedule.repeating_cycle === '없음'}
         >
           <InputLabel>{ADD_SCHEDULE.repeat_deadline}</InputLabel>
           <Select

@@ -142,8 +142,8 @@ function AddScheduleDrawer({ setBottomDrawerOpen, data, mode }) {
               ? <Button onClick={() => cancleModify()}>저장</Button>
               : <Button onClick={() => setBottomDrawerOpen(false)}><ClearIcon /></Button>}
         </Stack>
-        <NameInput schedule={schedule} updateSchedule={updateSchedule} updateAlarm={updateAlarm} />
-        <DateInput schedule={schedule} updateSchedule={updateSchedule} />
+        <NameInput schedule={schedule} updateSchedule={updateSchedule} updateAlarm={updateAlarm} isDisable={useMode === 'read'} />
+        <DateInput schedule={schedule} updateSchedule={updateSchedule} isDisable={useMode === 'read'} />
 
         <RepeatInput
           schedule={schedule}
@@ -152,6 +152,7 @@ function AddScheduleDrawer({ setBottomDrawerOpen, data, mode }) {
           handleModalClose={handleModalClose}
           repeatEndDate={repeatEndDate}
           setRepeatEndDate={setRepeatEndDate}
+          isDisable={useMode === 'read'}
         />
 
         <CategoryInput updateCategory={updateCategory} />
