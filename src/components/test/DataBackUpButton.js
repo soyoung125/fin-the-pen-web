@@ -12,6 +12,7 @@ function DataBackUpButton() {
   const [text, setText] = useState('');
   const schedules = useSelector(selectSchedules);
   const settings = useSelector(selectSettings);
+
   const saveData = () => {
     setOpen(true);
     setText(JSON.stringify({
@@ -43,7 +44,12 @@ function DataBackUpButton() {
 
             <textarea
               value={text}
-              style={{ height: '100%', width: '100%' }}
+              style={{
+                width: '100%',
+                height: '6.25em',
+                border: 'none',
+                resize: 'none',
+              }}
             />
 
             <Box my={3}>
