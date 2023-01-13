@@ -1,25 +1,9 @@
 import {
-  Box, Button, Divider, Stack, Typography,
+  Button, Stack, Typography,
 } from '@mui/material';
-import { useState } from 'react';
-import { useSelector } from 'react-redux';
-import ModalStaticBackdrop from '../../components/layouts/ModalStaticBackdrop';
-import { selectSchedules } from '../../utils/redux/schedule/scheduleSlice';
-import { selectSettings } from '../../utils/redux/setting/settingSlice';
+import DataBackUpButton from '../../components/test/DataBackUpButton';
 
 function GuestDataManager() {
-  const [open, setOpen] = useState(false);
-  const [text, setText] = useState('');
-  const schedules = useSelector(selectSchedules);
-  const settings = useSelector(selectSettings);
-  const saveData = () => {
-    setOpen(true);
-    setText(JSON.stringify({
-      schedules,
-      settings,
-    }));
-    alert('준비 중인 메뉴');
-  };
   return (
     <Stack spacing={2} m={2} border={1} p={2}>
       <Typography variant="h5">게스트 계정 전용 메뉴 (준비중)</Typography>
@@ -30,36 +14,8 @@ function GuestDataManager() {
       >
         세이브 데이터 복구하기
       </Button>
+      <DataBackUpButton />
 
-      <Button
-        variant="contained"
-        color="info"
-        onClick={() => saveData()}
-      >
-        지금까지 작업한 데이터 백업
-      </Button>
-      <ModalStaticBackdrop
-        keepMounted
-        width="xl"
-        open={open}
-        component={(
-          <Box p={3}>
-            <Typography variant="h5">아래 텍스트를 복사하여 다른 곳에 저장해주세요.</Typography>
-
-            <Box my={3}>
-              <Divider />
-            </Box>
-
-            <textarea value={text} style={{ width: '100%' }} />
-
-            <Box my={3}>
-              <Divider />
-            </Box>
-
-            <Button fullWidth variant="contained" onClick={() => setOpen(false)}>닫기</Button>
-          </Box>
-                )}
-      />
     </Stack>
   );
 }
