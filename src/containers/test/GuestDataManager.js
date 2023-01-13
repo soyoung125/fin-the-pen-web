@@ -2,14 +2,22 @@ import {
   Box, Button, Divider, Stack, Typography,
 } from '@mui/material';
 import { useState } from 'react';
+import { useSelector } from 'react-redux';
 import ModalStaticBackdrop from '../../components/layouts/ModalStaticBackdrop';
+import { selectSchedules } from '../../utils/redux/schedule/scheduleSlice';
+import { selectSettings } from '../../utils/redux/setting/settingSlice';
 
 function GuestDataManager() {
   const [open, setOpen] = useState(false);
   const [text, setText] = useState('');
+  const schedules = useSelector(selectSchedules);
+  const settings = useSelector(selectSettings);
   const saveData = () => {
     setOpen(true);
-    setText('dd');
+    setText(JSON.stringify({
+      schedules,
+      settings,
+    }));
     alert('준비 중인 메뉴');
   };
   return (
@@ -42,7 +50,7 @@ function GuestDataManager() {
               <Divider />
             </Box>
 
-            <Typography>{text}</Typography>
+            <textarea value={text} style={{ width: '100%' }} />
 
             <Box my={3}>
               <Divider />
