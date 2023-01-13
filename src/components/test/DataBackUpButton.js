@@ -28,7 +28,7 @@ function DataBackUpButton() {
         color="info"
         onClick={() => saveData()}
       >
-        지금까지 작업한 데이터 백업
+        지금까지 작업한 데이터 백업하기 (수동)
       </Button>
       <ModalStaticBackdrop
         keepMounted
@@ -58,7 +58,7 @@ function DataBackUpButton() {
 
             <Button fullWidth variant="contained" onClick={() => setOpen(false)}>닫기</Button>
           </Box>
-                )}
+        )}
       />
     </>
   );

@@ -1,3 +1,4 @@
+/* eslint-disable no-param-reassign */
 import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
@@ -12,13 +13,15 @@ export const scheduleSlice = createSlice({
     addSchedule: (state, action) => {
       state.schedules.push(action.payload);
     },
+    setSchedules: (state, action) => {
+      state.schedules = action.payload;
+    },
     selectedDate: (state, action) => {
-      // eslint-disable-next-line no-param-reassign
       state.date = action.payload;
     },
   },
 });
-export const { addSchedule, selectedDate } = scheduleSlice.actions;
+export const { addSchedule, setSchedules, selectedDate } = scheduleSlice.actions;
 
 export const selectSchedules = (state) => state.schedule.schedules;
 export const selectDate = (state) => state.schedule.date;
