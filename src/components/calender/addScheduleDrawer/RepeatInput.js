@@ -12,7 +12,6 @@ function RepeatInput({
 }) {
   return (
     <Box>
-      {/* <Typography mx={1} sx={{ fontWeight: 'bold' }}>{ADD_SCHEDULE.repeat}</Typography> */}
       <Stack
         direction="row"
         justifyContent="space-between"
@@ -47,10 +46,6 @@ function RepeatInput({
             {DEADLINE.map((d) => (<MenuItem value={d}>{d}</MenuItem>))}
             <MenuItem disabled value={schedule.repeat_endDate}>{schedule.repeat_endDate}</MenuItem>
           </Select>
-          {/* <FormHelperText>
-            {schedule.repeat_deadline === '캘린더에 표시' ? schedule.repeat_endDate : null}
-            까지 반복
-          </FormHelperText> */}
         </FormControl>
       </Stack>
       <Dialog
