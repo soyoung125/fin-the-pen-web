@@ -4,26 +4,12 @@ import {
 } from '@mui/material';
 import { useState } from 'react';
 
-function ScheduleCard({ schedule, setScheduleModalOpen, setSelectedSchedule }) {
-  const [anchorEl, setAnchorEl] = useState(null);
-  const open = Boolean(anchorEl);
-  const handleClick = (event) => {
-    setAnchorEl(event.currentTarget);
-  };
-  const handleClose = () => {
-    setAnchorEl(null);
-  };
-  const handleModal = () => {
-    setSelectedSchedule(schedule);
-    setScheduleModalOpen(true);
-    setAnchorEl(null);
-  };
-
+function ScheduleCard({ schedule, handleModal }) {
   return (
     <>
-      <CardActionArea>
+      <CardActionArea onClick={() => handleModal(schedule)}>
         <Box sx={{ width: '100vw', justifyContent: 'start' }}>
-          <Box px={3} py={2} onClick={() => handleModal()}>
+          <Box px={3} py={2}>
             <Stack direction="row">
               <Box
                 sx={{

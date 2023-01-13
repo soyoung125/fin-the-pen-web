@@ -10,6 +10,7 @@ import SettingsIcon from '@mui/icons-material/Settings';
 import PaidIcon from '@mui/icons-material/Paid';
 import PATH from '../../utils/constants/path';
 import AddScheduleDrawer from '../calender/addScheduleDrawer/AddScheduleDrawer';
+import { INIT_SCHEDULE } from '../../utils/constants/schedule';
 
 function BottomBar({ value, setValue }) {
   const navigate = useNavigate();
@@ -46,7 +47,7 @@ function BottomBar({ value, setValue }) {
         onClose={() => setBottomDrawerOpen(false)}
       >
         {/* 이 부분을 범용적으로 사용할 수 있게 만드는 건 어떨까? */}
-        <AddScheduleDrawer setBottomDrawerOpen={setBottomDrawerOpen} />
+        <AddScheduleDrawer setBottomDrawerOpen={setBottomDrawerOpen} data={INIT_SCHEDULE} />
       </Drawer>
     </>
   );

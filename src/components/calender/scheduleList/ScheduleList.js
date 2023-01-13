@@ -1,14 +1,23 @@
 import {
-  Box, Stack, Typography,
+  Box, Drawer, Stack, Typography,
 } from '@mui/material';
 import moment from 'moment';
+import { useState } from 'react';
 import { useSelector } from 'react-redux';
 import { selectDate, selectSchedules } from '../../../utils/redux/schedule/scheduleSlice';
+import AddScheduleDrawer from '../addScheduleDrawer/AddScheduleDrawer';
 import ScheduleCard from './ScheduleCard';
 
 function ScheduleList() {
+  const [bottomDrawerOpen, setBottomDrawerOpen] = useState(false);
+  const [selectedSchedule, setSelectedSchedule] = useState(null);
   const schedules = useSelector(selectSchedules);
   const date = moment(useSelector(selectDate)).format('YYYY-MM-DD');
+
+  const handleModal = (schedule) => {
+    setSelectedSchedule(schedule);
+    setBottomDrawerOpen(true);
+  };
 
   return (
     <>
@@ -32,9 +41,18 @@ function ScheduleList() {
             <ScheduleCard
               schedule={el}
               key={Math.random()}
+              handleModal={handleModal}
             />
           ))
       }
+      <Drawer
+        open={bottomDrawerOpen}
+        anchor="bottom"
+        onClose={() => setBottomDrawerOpen(false)}
+      >
+        {/* 이 부분을 범용적으로 사용할 수 있게 만드는 건 어떨까? */}
+        <AddScheduleDrawer setBottomDrawerOpen={setBottomDrawerOpen} data={selectedSchedule} />
+      </Drawer>
     </>
   );
 }

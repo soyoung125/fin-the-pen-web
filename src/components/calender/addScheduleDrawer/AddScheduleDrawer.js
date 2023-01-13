@@ -17,7 +17,7 @@ import moment from 'moment';
 import NameInput from './NameInput';
 import DateInput from './DateInput';
 import {
-  ADD_SCHEDULE, INIT_SCHEDULE, NEED_TITLE, REPEAT_CYCLE,
+  ADD_SCHEDULE, NEED_TITLE, REPEAT_CYCLE,
 } from '../../../utils/constants/schedule';
 import { addSchedule, selectDate } from '../../../utils/redux/schedule/scheduleSlice';
 import SpendingInput from './SpendingInput';
@@ -34,7 +34,7 @@ function TransitionUp(props) {
   return <Slide {...props} direction="right" />;
 }
 
-function AddScheduleDrawer({ setBottomDrawerOpen }) {
+function AddScheduleDrawer({ setBottomDrawerOpen, data }) {
   const dispatch = useDispatch();
   const date = useSelector(selectDate);
   const user = useSelector(selectUser);
@@ -42,7 +42,7 @@ function AddScheduleDrawer({ setBottomDrawerOpen }) {
   // 추후 삭제 예정
   const random = Math.floor((Math.random() * 5));
 
-  const [schedule, setSchedule] = useState(INIT_SCHEDULE);
+  const [schedule, setSchedule] = useState(data);
 
   const [openDatePickerModal, setOpenDatePickerModal] = useState(false);
   const [repeatEndDate, setRepeatEndDate] = useState('');
