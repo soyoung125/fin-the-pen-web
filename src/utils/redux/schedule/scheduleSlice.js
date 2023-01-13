@@ -1,8 +1,9 @@
 /* eslint-disable no-param-reassign */
 import { createSlice } from '@reduxjs/toolkit';
+import moment from 'moment';
 
 const initialState = {
-  date: '',
+  date: moment(new Date()),
   schedules: [],
 };
 
