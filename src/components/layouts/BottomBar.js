@@ -18,7 +18,11 @@ function BottomBar({ value, setValue }) {
     <>
       <Paper
         sx={{
-          position: 'fixed', bottom: 0, left: 0, right: 0,
+          position: 'fixed',
+          bottom: 0,
+          left: 0,
+          right: 0,
+          paddingBottom: 1,
         }}
         elevation={3}
       >
