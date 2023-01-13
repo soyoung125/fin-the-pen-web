@@ -1,3 +1,4 @@
+/* eslint-disable no-nested-ternary */
 import {
   Accordion,
   AccordionDetails,
@@ -34,7 +35,7 @@ function TransitionUp(props) {
   return <Slide {...props} direction="right" />;
 }
 
-function AddScheduleDrawer({ setBottomDrawerOpen, data }) {
+function AddScheduleDrawer({ setBottomDrawerOpen, data, mode }) {
   const dispatch = useDispatch();
   const date = useSelector(selectDate);
   const user = useSelector(selectUser);
@@ -46,6 +47,7 @@ function AddScheduleDrawer({ setBottomDrawerOpen, data }) {
 
   const [openDatePickerModal, setOpenDatePickerModal] = useState(false);
   const [repeatEndDate, setRepeatEndDate] = useState('');
+  const [useMode, setUseMode] = useState(mode);
 
   useEffect(() => {
     // eslint-disable-next-line no-underscore-dangle
@@ -111,6 +113,11 @@ function AddScheduleDrawer({ setBottomDrawerOpen, data }) {
     }
   };
 
+  const cancleModify = () => {
+    setSchedule(data);
+    setUseMode('read');
+  };
+
   return (
     <>
       <Snackbar
@@ -130,10 +137,17 @@ function AddScheduleDrawer({ setBottomDrawerOpen, data }) {
         spacing={2}
         m={1}
       >
-        <Stack direction="row" justifyContent="space-between">
-          <Button />
-          <Typography variant="h5" sx={{ fontWeight: 'bold' }}>{ADD_SCHEDULE.drawer_title}</Typography>
-          <Button onClick={() => setBottomDrawerOpen(false)}><ClearIcon /></Button>
+        <Stack direction="row" alignItems="center" justifyContent="space-between">
+          {useMode === 'modify'
+            ? <Button onClick={() => cancleModify()}>취소</Button>
+            : <Button />}
+          <Typography variant="h5" sx={{ fontWeight: 'bold' }}>{ADD_SCHEDULE.drawer_title[useMode]}</Typography>
+
+          {useMode === 'read'
+            ? <Button onClick={() => setUseMode('modify')}>수정</Button>
+            : useMode === 'modify'
+              ? <Button onClick={() => cancleModify()}>저장</Button>
+              : <Button onClick={() => setBottomDrawerOpen(false)}><ClearIcon /></Button>}
         </Stack>
         <NameInput schedule={schedule} updateSchedule={updateSchedule} updateAlarm={updateAlarm} />
         <DateInput schedule={schedule} updateSchedule={updateSchedule} />

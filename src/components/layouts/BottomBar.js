@@ -47,7 +47,7 @@ function BottomBar({ value, setValue }) {
         onClose={() => setBottomDrawerOpen(false)}
       >
         {/* 이 부분을 범용적으로 사용할 수 있게 만드는 건 어떨까? */}
-        <AddScheduleDrawer setBottomDrawerOpen={setBottomDrawerOpen} data={INIT_SCHEDULE} />
+        <AddScheduleDrawer setBottomDrawerOpen={setBottomDrawerOpen} data={INIT_SCHEDULE} mode="create" />
       </Drawer>
     </>
   );

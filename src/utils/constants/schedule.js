@@ -1,5 +1,9 @@
 const ADD_SCHEDULE = Object.freeze({
-  drawer_title: '새로운 이벤트',
+  drawer_title: {
+    create: '새로운 이벤트',
+    read: '일정',
+    modify: '일정 편집',
+  },
   name: '제목',
   date: '날짜',
   start_time: '시작',
