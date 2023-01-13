@@ -136,7 +136,7 @@ function AddScheduleDrawer({ setBottomDrawerOpen }) {
           >
             <Typography sx={{ fontWeight: 'bold' }}>{ADD_SCHEDULE.set_finance_title}</Typography>
           </AccordionSummary>
-          <AccordionDetails>
+          <AccordionDetails sx={{ backgroundColor: '#F6F6F6' }}>
             <Stack spacing={1}>
               <Card>
                 <SpendingInput schedule={schedule} updateSchedule={updateSchedule} />
