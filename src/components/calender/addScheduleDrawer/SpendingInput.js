@@ -14,8 +14,11 @@ function SpendingInput({ schedule, updateSchedule }) {
           value={ADD_SCHEDULE.type_plus}
           onClick={updateSchedule}
           size="small"
+          sx={{
+            borderRadius: 5, minWidth: 0, width: '30px', height: '30px',
+          }}
         >
-          {ADD_SCHEDULE.type_plus}
+          +
         </Button>
         <Button
           variant={schedule.type === ADD_SCHEDULE.type_minus ? 'contained' : 'outlined'}
@@ -23,8 +26,11 @@ function SpendingInput({ schedule, updateSchedule }) {
           value={ADD_SCHEDULE.type_minus}
           onClick={updateSchedule}
           size="small"
+          sx={{
+            borderRadius: 5, minWidth: 0, width: '30px', height: '30px',
+          }}
         >
-          {ADD_SCHEDULE.type_minus}
+          -
         </Button>
         <TextField
           id="expected_spending"
