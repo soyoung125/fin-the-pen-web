@@ -152,7 +152,11 @@ function AddScheduleDrawer({ setBottomDrawerOpen, data, mode }) {
           isDisable={useMode === 'read'}
         />
 
-        <CategoryInput updateCategory={updateCategory} />
+        <CategoryInput
+          updateCategory={updateCategory}
+          selected={useMode === 'create' ? null : schedule.category.title}
+          isDisable={useMode === 'read'}
+        />
 
         <Accordion sx={{ width: '100%' }}>
           <AccordionSummary

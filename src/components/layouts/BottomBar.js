@@ -9,6 +9,7 @@ import { useState } from 'react';
 import SettingsIcon from '@mui/icons-material/Settings';
 import PaidIcon from '@mui/icons-material/Paid';
 import { useSelector } from 'react-redux';
+import moment from 'moment';
 import PATH from '../../utils/constants/path';
 import AddScheduleDrawer from '../calender/addScheduleDrawer/AddScheduleDrawer';
 import { INIT_SCHEDULE } from '../../utils/constants/schedule';
@@ -18,6 +19,8 @@ function BottomBar({ value, setValue }) {
   const date = useSelector(selectDate);
   const navigate = useNavigate();
   const [bottomDrawerOpen, setBottomDrawerOpen] = useState(false);
+
+  console.log(date);
   return (
     <>
       <Paper
@@ -50,7 +53,7 @@ function BottomBar({ value, setValue }) {
         onClose={() => setBottomDrawerOpen(false)}
       >
         {/* 이 부분을 범용적으로 사용할 수 있게 만드는 건 어떨까? */}
-        <AddScheduleDrawer setBottomDrawerOpen={setBottomDrawerOpen} data={{ ...INIT_SCHEDULE, date: date.format('YYYY-MM-DD'), repeat_endDate: date.format('YYYY-MM-DD') }} mode="create" />
+        <AddScheduleDrawer setBottomDrawerOpen={setBottomDrawerOpen} data={{ ...INIT_SCHEDULE, date: moment(date).format('YYYY-MM-DD'), repeat_endDate: moment(date).format('YYYY-MM-DD') }} mode="create" />
       </Drawer>
     </>
   );
