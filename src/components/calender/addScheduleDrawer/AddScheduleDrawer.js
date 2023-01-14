@@ -160,7 +160,7 @@ function AddScheduleDrawer({ setBottomDrawerOpen, data, mode }) {
         <NameInput
           schedule={schedule}
           updateSchedule={updateSchedule}
-          updateAlarm={updateAlarm}
+          updateAlarm={!isDisable && updateAlarm}
           isDisable={isDisable}
         />
         <DateInput schedule={schedule} updateSchedule={updateSchedule} isDisable={isDisable} />
@@ -195,8 +195,8 @@ function AddScheduleDrawer({ setBottomDrawerOpen, data, mode }) {
               <Card>
                 <SpendingInput
                   schedule={schedule}
-                  updateSchedule={updateSchedule}
-                  updateSpandingType={updateSpandingType}
+                  updateSchedule={!isDisable && updateSchedule}
+                  updateSpandingType={!isDisable && updateSpandingType}
                   mode={useMode}
                   isDisable={isDisable}
                 />
