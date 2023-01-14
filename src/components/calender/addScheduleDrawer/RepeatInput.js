@@ -1,6 +1,7 @@
+/* eslint-disable react/jsx-props-no-spreading */
 import {
   // eslint-disable-next-line max-len
-  Box, Button, Dialog, DialogActions, DialogContent, DialogTitle, FormControl, InputLabel, MenuItem, Select, Stack,
+  Box, Button, Dialog, DialogActions, DialogContent, DialogTitle, FormControl, InputLabel, MenuItem, Select, Stack, TextField,
 } from '@mui/material';
 import { LocalizationProvider, StaticDatePicker } from '@mui/x-date-pickers';
 import { AdapterMoment } from '@mui/x-date-pickers/AdapterMoment';
@@ -29,7 +30,7 @@ function RepeatInput({
             label={ADD_SCHEDULE.repeating_cycle}
             onChange={updateRepeat}
           >
-            {REPEAT.map((r) => (<MenuItem id="repeating_cycle" value={r}>{r}</MenuItem>))}
+            {REPEAT.map((r) => (<MenuItem id="repeating_cycle" key={Math.random()} value={r}>{r}</MenuItem>))}
           </Select>
         </FormControl>
 
@@ -45,7 +46,7 @@ function RepeatInput({
             label={ADD_SCHEDULE.repeat_deadline}
             onChange={updateRepeat}
           >
-            {DEADLINE.map((d) => (<MenuItem value={d}>{d}</MenuItem>))}
+            {DEADLINE.map((d) => (<MenuItem key={Math.random()} value={d}>{d}</MenuItem>))}
             <MenuItem disabled value={schedule.repeat_endDate}>{schedule.repeat_endDate}</MenuItem>
           </Select>
         </FormControl>
@@ -72,6 +73,7 @@ function RepeatInput({
               onChange={(newValue) => {
                 setRepeatEndDate(newValue);
               }}
+              renderInput={(params) => <TextField {...params} />}
             />
           </LocalizationProvider>
         </DialogContent>
