@@ -12,7 +12,7 @@ function ImportanceInput({ schedule, updateSchedule, isDisable }) {
           variant={schedule.importance === ADD_SCHEDULE.importance_high ? 'contained' : 'outlined'}
           id="importance"
           value={ADD_SCHEDULE.importance_high}
-          onClick={!isDisable && updateSchedule}
+          onClick={isDisable ? undefined : updateSchedule}
           size="small"
         >
           {ADD_SCHEDULE.importance_high}
@@ -21,7 +21,7 @@ function ImportanceInput({ schedule, updateSchedule, isDisable }) {
           variant={schedule.importance === ADD_SCHEDULE.importance_middle ? 'contained' : 'outlined'}
           id="importance"
           value={ADD_SCHEDULE.importance_middle}
-          onClick={!isDisable && updateSchedule}
+          onClick={isDisable ? undefined : updateSchedule}
           size="small"
         >
           {ADD_SCHEDULE.importance_middle}
@@ -30,7 +30,7 @@ function ImportanceInput({ schedule, updateSchedule, isDisable }) {
           variant={schedule.importance === ADD_SCHEDULE.importance_low ? 'contained' : 'outlined'}
           id="importance"
           value={ADD_SCHEDULE.importance_low}
-          onClick={!isDisable && updateSchedule}
+          onClick={isDisable ? undefined : updateSchedule}
           size="small"
         >
           {ADD_SCHEDULE.importance_low}

@@ -160,7 +160,7 @@ function AddScheduleDrawer({ setBottomDrawerOpen, data, mode }) {
         <NameInput
           schedule={schedule}
           updateSchedule={updateSchedule}
-          updateAlarm={!isDisable && updateAlarm}
+          updateAlarm={isDisable ? undefined : updateAlarm}
           isDisable={isDisable}
         />
         <DateInput schedule={schedule} updateSchedule={updateSchedule} isDisable={isDisable} />

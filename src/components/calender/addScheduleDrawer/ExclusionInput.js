@@ -12,7 +12,7 @@ function ExclusionInput({ schedule, updateExclusion, isDisable }) {
           id="exclusion"
           checked={schedule.exclusion}
           value={schedule.exclusion}
-          onChange={!isDisable && updateExclusion}
+          onChange={isDisable ? undefined : updateExclusion}
         />
       </Stack>
     </Stack>
