@@ -11,7 +11,7 @@ import {
   Stack, Typography,
 } from '@mui/material';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import ClearIcon from '@mui/icons-material/Clear';
 import moment from 'moment';
@@ -48,6 +48,11 @@ function AddScheduleDrawer({ setBottomDrawerOpen, data, mode }) {
   const [repeatEndDate, setRepeatEndDate] = useState('');
   const [useMode, setUseMode] = useState(mode);
   const [expandAccordion, setExpandAccordion] = useState(mode !== 'create');
+  const [isDisable, setIsDisable] = useState(mode === 'read');
+
+  useEffect(() => {
+    setIsDisable(useMode === 'read');
+  }, [useMode]);
 
   const updateSchedule = (state) => {
     setSchedule({ ...schedule, [state.target.id]: state.target.value });
@@ -146,14 +151,19 @@ function AddScheduleDrawer({ setBottomDrawerOpen, data, mode }) {
             : <Button />}
           <Typography variant="h5" sx={{ fontWeight: 'bold' }}>{ADD_SCHEDULE.drawer_title[useMode]}</Typography>
 
-          {useMode === 'read'
+          {isDisable
             ? <Button onClick={() => setUseMode('modify')}>수정</Button>
             : useMode === 'modify'
               ? <Button onClick={() => cancleModify()}>저장</Button>
               : <Button onClick={() => setBottomDrawerOpen(false)}><ClearIcon /></Button>}
         </Stack>
-        <NameInput schedule={schedule} updateSchedule={updateSchedule} updateAlarm={updateAlarm} isDisable={useMode === 'read'} />
-        <DateInput schedule={schedule} updateSchedule={updateSchedule} isDisable={useMode === 'read'} />
+        <NameInput
+          schedule={schedule}
+          updateSchedule={updateSchedule}
+          updateAlarm={updateAlarm}
+          isDisable={isDisable}
+        />
+        <DateInput schedule={schedule} updateSchedule={updateSchedule} isDisable={isDisable} />
 
         <RepeatInput
           schedule={schedule}
@@ -162,13 +172,13 @@ function AddScheduleDrawer({ setBottomDrawerOpen, data, mode }) {
           handleModalClose={handleModalClose}
           repeatEndDate={repeatEndDate}
           setRepeatEndDate={setRepeatEndDate}
-          isDisable={useMode === 'read'}
+          isDisable={isDisable}
         />
 
         <CategoryInput
           updateCategory={updateCategory}
           selected={useMode === 'create' ? null : schedule.category.title}
-          isDisable={useMode === 'read'}
+          isDisable={isDisable}
         />
 
         <Accordion sx={{ width: '100%' }} expanded={expandAccordion}>
@@ -183,13 +193,27 @@ function AddScheduleDrawer({ setBottomDrawerOpen, data, mode }) {
           <AccordionDetails sx={{ backgroundColor: '#F6F6F6' }}>
             <Stack spacing={1}>
               <Card>
-                <SpendingInput schedule={schedule} updateSchedule={updateSchedule} mode={useMode} isDisable={useMode === 'read'} updateSpandingType={updateSpandingType} />
+                <SpendingInput
+                  schedule={schedule}
+                  updateSchedule={updateSchedule}
+                  updateSpandingType={updateSpandingType}
+                  mode={useMode}
+                  isDisable={isDisable}
+                />
               </Card>
               <Card>
-                <ImportanceInput schedule={schedule} updateSchedule={updateSchedule} isDisable={useMode === 'read'} />
+                <ImportanceInput
+                  schedule={schedule}
+                  updateSchedule={updateSchedule}
+                  isDisable={isDisable}
+                />
               </Card>
               <Card>
-                <ExclusionInput schedule={schedule} updateExclusion={updateExclusion} isDisable={useMode === 'read'} />
+                <ExclusionInput
+                  schedule={schedule}
+                  updateExclusion={updateExclusion}
+                  isDisable={isDisable}
+                />
               </Card>
             </Stack>
           </AccordionDetails>
