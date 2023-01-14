@@ -3,12 +3,13 @@ import {
   blue, blueGrey, brown, green, indigo, pink, red,
 } from '@mui/material/colors';
 import { useEffect, useState } from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import AnalysisGraph from '../../components/analysis/AnalysisGraph';
 import AnalysisHeader from '../../components/analysis/AnalysisHeader';
 import AnalysisList from '../../components/analysis/analysisList/AnalysisList';
 import AnalysisDetailCard from '../../components/analysis/detailCard/AnalysisDetailCard';
 import CATEGORIES from '../../utils/constants/categories';
+import { setHeaderOpenTrue } from '../../utils/redux/common/commonSlice';
 import { selectSchedules } from '../../utils/redux/schedule/scheduleSlice';
 
 function AnalysisContainer() {
@@ -24,6 +25,11 @@ function AnalysisContainer() {
     pink[100], red[100], pink[200], red[200], pink[300],
     brown[100], brown[200],
   ];
+
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(setHeaderOpenTrue('analysis'));
+  }, []);
 
   useEffect(() => {
     const newData = [];

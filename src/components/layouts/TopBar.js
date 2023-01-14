@@ -13,12 +13,29 @@ import PersonIcon from '@mui/icons-material/Person';
 import { useNavigate } from 'react-router-dom';
 import LoginIcon from '@mui/icons-material/Login';
 import SearchIcon from '@mui/icons-material/Search';
+import FilterAltIcon from '@mui/icons-material/FilterAlt';
 import { selectHeaderMode, selectHeaderOpen } from '../../utils/redux/common/commonSlice';
 import FullScreenDialog from './FullScreenDialog';
 import RoundedButton from '../common/RoundedButton';
 import PATH from '../../utils/constants/path';
 import { selectUser } from '../../utils/redux/user/userSlice';
 
+function PersonalButton({ user }) {
+  const navigate = useNavigate();
+  if (user === null) {
+    return (
+      <RoundedButton value="login" onClick={() => navigate(PATH.signIn)}>
+        <LoginIcon />
+      </RoundedButton>
+
+    );
+  }
+  return (
+    <RoundedButton value="user" onClick={() => navigate(PATH.mypage)}>
+      <PersonIcon />
+    </RoundedButton>
+  );
+}
 function TopBar() {
   const navigate = useNavigate();
   const user = useSelector(selectUser);
@@ -69,17 +86,19 @@ function TopBar() {
                 alignItems="flex-end"
                 sx={{ height: 100 }}
               >
-                {/* 좌측 */}
+                {/* 헤더 좌측 메뉴 */}
                 <Stack
                   direction="row"
                   justifyContent="space-between"
                   alignItems="flex-end"
                 >
-                  {
-
-                  }
+                  {headerMode === 'analysis' && (
+                    <RoundedButton value="user" onClick={() => alert('준비 중인 메뉴')}>
+                      <FilterAltIcon />
+                    </RoundedButton>
+                  )}
                 </Stack>
-                {/* 우측 */}
+                {/* 헤더 우측 메뉴 */}
                 <Stack
                   direction="row"
                   justifyContent="space-between"
@@ -87,26 +106,17 @@ function TopBar() {
                 >
                   {headerMode === 'home' && (
                     <>
-
                       <RoundedButton value="user" onClick={() => alert('준비 중인 메뉴')}>
                         <SearchIcon />
                       </RoundedButton>
                       <RoundedButton value="notification" onClick={() => navigate(PATH.notification)}>
                         <NotificationsIcon />
                       </RoundedButton>
-                      {
-                        user === null
-                          ? (
-                            <RoundedButton value="login" onClick={() => navigate(PATH.signIn)}>
-                              <LoginIcon />
-                            </RoundedButton>
-                          ) : (
-                            <RoundedButton value="user" onClick={() => navigate(PATH.mypage)}>
-                              <PersonIcon />
-                            </RoundedButton>
-                          )
-                      }
+                      <PersonalButton user={user} />
                     </>
+                  )}
+                  {headerMode === 'analysis' && (
+                    <PersonalButton user={user} />
                   )}
                 </Stack>
 
