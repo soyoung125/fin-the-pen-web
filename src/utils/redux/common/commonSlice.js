@@ -3,7 +3,7 @@ import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
   headerOpen: true,
-  mode: 'home',
+  headerMode: 'home',
 };
 
 export const commonSlice = createSlice({
@@ -12,9 +12,9 @@ export const commonSlice = createSlice({
   reducers: {
     setHeaderOpenTrue: (state, action) => {
       const mode = action.payload;
-      if (mode) {
+      if (mode !== undefined) {
         console.log(mode);
-        state.mode = mode;
+        state.headerMode = mode;
       }
       state.headerOpen = true;
     },
@@ -26,5 +26,6 @@ export const commonSlice = createSlice({
 export const { setHeaderOpenTrue, setHeaderOpenFalse } = commonSlice.actions;
 
 export const selectHeaderOpen = (state) => state.common.headerOpen;
+export const selectHeaderMode = (state) => state.common.headerMode;
 
 export default commonSlice.reducer;
