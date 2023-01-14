@@ -2,8 +2,9 @@ import {
   // eslint-disable-next-line max-len
   Box, Button, Dialog, DialogActions, DialogContent, DialogTitle, FormControl, InputLabel, MenuItem, Select, Stack,
 } from '@mui/material';
-import { CalendarPicker, LocalizationProvider } from '@mui/x-date-pickers';
+import { LocalizationProvider, StaticDatePicker } from '@mui/x-date-pickers';
 import { AdapterMoment } from '@mui/x-date-pickers/AdapterMoment';
+import moment from 'moment';
 import { DEADLINE, REPEAT } from '../../../utils/constants/repeat';
 import { ADD_SCHEDULE } from '../../../utils/constants/schedule';
 
@@ -65,9 +66,12 @@ function RepeatInput({
         </DialogTitle>
         <DialogContent>
           <LocalizationProvider dateAdapter={AdapterMoment}>
-            <CalendarPicker
-              date={repeatEndDate}
-              onChange={(newDate) => setRepeatEndDate(newDate)}
+            <StaticDatePicker
+              displayStaticWrapperAs="desktop"
+              value={moment(repeatEndDate)}
+              onChange={(newValue) => {
+                setRepeatEndDate(newValue);
+              }}
             />
           </LocalizationProvider>
         </DialogContent>
