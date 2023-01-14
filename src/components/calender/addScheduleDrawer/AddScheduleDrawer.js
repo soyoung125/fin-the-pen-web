@@ -195,8 +195,8 @@ function AddScheduleDrawer({ setBottomDrawerOpen, data, mode }) {
               <Card>
                 <SpendingInput
                   schedule={schedule}
-                  updateSchedule={!isDisable && updateSchedule}
-                  updateSpandingType={!isDisable && updateSpandingType}
+                  updateSchedule={updateSchedule}
+                  updateSpandingType={updateSpandingType}
                   mode={useMode}
                   isDisable={isDisable}
                 />

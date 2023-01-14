@@ -1,4 +1,3 @@
-/* eslint-disable no-nested-ternary */
 import {
   Button, Stack, TextField, Typography,
 } from '@mui/material';
@@ -17,12 +16,7 @@ function SpendingInput({
               variant={schedule.type === ADD_SCHEDULE.type_plus ? 'contained' : 'outlined'}
               id="type"
               value={ADD_SCHEDULE.type_plus}
-              onClick={
-                isDisable ? null
-                  : (
-                    mode === 'create' ? updateSchedule : updateSpandingType
-                  )
-              }
+              onClick={mode === 'create' ? updateSchedule : updateSpandingType}
               size="small"
               sx={{
                 borderRadius: 5, minWidth: 0, width: '30px', height: '30px',
@@ -38,12 +32,7 @@ function SpendingInput({
               variant={schedule.type === ADD_SCHEDULE.type_minus ? 'contained' : 'outlined'}
               id="type"
               value={ADD_SCHEDULE.type_minus}
-              onClick={
-                isDisable ? null
-                  : (
-                    mode === 'create' ? updateSchedule : updateSpandingType
-                  )
-              }
+              onClick={mode === 'create' ? updateSchedule : updateSpandingType}
               size="small"
               sx={{
                 borderRadius: 5, minWidth: 0, width: '30px', height: '30px',
