@@ -158,7 +158,7 @@ function AddScheduleDrawer({ setBottomDrawerOpen, data, mode }) {
           isDisable={useMode === 'read'}
         />
 
-        <Accordion sx={{ width: '100%' }}>
+        <Accordion sx={{ width: '100%' }} expanded={useMode !== 'create'}>
           <AccordionSummary
             expandIcon={<ExpandMoreIcon />}
             aria-controls="panel1a-content"
@@ -172,10 +172,10 @@ function AddScheduleDrawer({ setBottomDrawerOpen, data, mode }) {
                 <SpendingInput schedule={schedule} updateSchedule={updateSchedule} />
               </Card>
               <Card>
-                <ImportanceInput schedule={schedule} updateSchedule={updateSchedule} />
+                <ImportanceInput schedule={schedule} updateSchedule={updateSchedule} isDisable={useMode === 'read'} />
               </Card>
               <Card>
-                <ExclusionInput schedule={schedule} updateExclusion={updateExclusion} />
+                <ExclusionInput schedule={schedule} updateExclusion={updateExclusion} isDisable={useMode === 'read'} />
               </Card>
             </Stack>
           </AccordionDetails>

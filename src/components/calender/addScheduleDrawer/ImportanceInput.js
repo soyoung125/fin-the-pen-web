@@ -3,7 +3,7 @@ import {
 } from '@mui/material';
 import { ADD_SCHEDULE } from '../../../utils/constants/schedule';
 
-function ImportanceInput({ schedule, updateSchedule }) {
+function ImportanceInput({ schedule, updateSchedule, isDisable }) {
   return (
     <Stack direction="row" justifyContent="space-between" alignItems="center" p={1}>
       <Typography>{ADD_SCHEDULE.set_importance_title}</Typography>
@@ -12,7 +12,7 @@ function ImportanceInput({ schedule, updateSchedule }) {
           variant={schedule.importance === ADD_SCHEDULE.importance_high ? 'contained' : 'outlined'}
           id="importance"
           value={ADD_SCHEDULE.importance_high}
-          onClick={updateSchedule}
+          onClick={!isDisable && updateSchedule}
           size="small"
         >
           {ADD_SCHEDULE.importance_high}
@@ -21,7 +21,7 @@ function ImportanceInput({ schedule, updateSchedule }) {
           variant={schedule.importance === ADD_SCHEDULE.importance_middle ? 'contained' : 'outlined'}
           id="importance"
           value={ADD_SCHEDULE.importance_middle}
-          onClick={updateSchedule}
+          onClick={!isDisable && updateSchedule}
           size="small"
         >
           {ADD_SCHEDULE.importance_middle}
@@ -30,7 +30,7 @@ function ImportanceInput({ schedule, updateSchedule }) {
           variant={schedule.importance === ADD_SCHEDULE.importance_low ? 'contained' : 'outlined'}
           id="importance"
           value={ADD_SCHEDULE.importance_low}
-          onClick={updateSchedule}
+          onClick={!isDisable && updateSchedule}
           size="small"
         >
           {ADD_SCHEDULE.importance_low}
