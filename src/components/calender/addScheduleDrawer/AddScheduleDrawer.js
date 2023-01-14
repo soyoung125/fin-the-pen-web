@@ -47,6 +47,7 @@ function AddScheduleDrawer({ setBottomDrawerOpen, data, mode }) {
   const [openDatePickerModal, setOpenDatePickerModal] = useState(false);
   const [repeatEndDate, setRepeatEndDate] = useState('');
   const [useMode, setUseMode] = useState(mode);
+  const [expandAccordion, setExpandAccordion] = useState(mode !== 'create');
 
   const updateSchedule = (state) => {
     setSchedule({ ...schedule, [state.target.id]: state.target.value });
@@ -73,6 +74,14 @@ function AddScheduleDrawer({ setBottomDrawerOpen, data, mode }) {
 
   const updateExclusion = (state) => {
     setSchedule({ ...schedule, exclusion: state.target.checked });
+  };
+
+  const updateSpandingType = () => {
+    if (schedule.type === ADD_SCHEDULE.type_plus) {
+      setSchedule({ ...schedule, type: ADD_SCHEDULE.type_minus });
+    } else {
+      setSchedule({ ...schedule, type: ADD_SCHEDULE.type_plus });
+    }
   };
 
   const [snackbarOpen, setSnackbarOpen] = useState(true);
@@ -106,6 +115,10 @@ function AddScheduleDrawer({ setBottomDrawerOpen, data, mode }) {
   const cancleModify = () => {
     setSchedule(data);
     setUseMode('read');
+  };
+
+  const handleExpand = () => {
+    setExpandAccordion(!expandAccordion);
   };
 
   return (
@@ -158,9 +171,10 @@ function AddScheduleDrawer({ setBottomDrawerOpen, data, mode }) {
           isDisable={useMode === 'read'}
         />
 
-        <Accordion sx={{ width: '100%' }} expanded={useMode !== 'create'}>
+        <Accordion sx={{ width: '100%' }} expanded={expandAccordion}>
           <AccordionSummary
             expandIcon={<ExpandMoreIcon />}
+            onClick={() => handleExpand()}
             aria-controls="panel1a-content"
             id="panel1a-header"
           >
@@ -169,7 +183,7 @@ function AddScheduleDrawer({ setBottomDrawerOpen, data, mode }) {
           <AccordionDetails sx={{ backgroundColor: '#F6F6F6' }}>
             <Stack spacing={1}>
               <Card>
-                <SpendingInput schedule={schedule} updateSchedule={updateSchedule} />
+                <SpendingInput schedule={schedule} updateSchedule={updateSchedule} mode={useMode} isDisable={useMode === 'read'} updateSpandingType={updateSpandingType} />
               </Card>
               <Card>
                 <ImportanceInput schedule={schedule} updateSchedule={updateSchedule} isDisable={useMode === 'read'} />
