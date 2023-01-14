@@ -24,7 +24,11 @@ const ADD_SCHEDULE = Object.freeze({
   importance_middle: '중', // 저장 데이터와 연동되어 있음
   importance_low: '하', // 저장 데이터와 연동되어 있음
   exclusion_title: '예산에서 제외',
-  add_schedule: '일정 추가하기',
+  add_schedule: {
+    create: '일정 추가하기',
+    read: '문구를 뭐로할까요',
+    modify: '일정 삭제하기',
+  },
 });
 const NEED_TITLE = '제목을 입력해야 합니다.';
 const INIT_SCHEDULE = {

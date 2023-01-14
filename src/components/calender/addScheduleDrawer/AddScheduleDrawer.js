@@ -100,7 +100,7 @@ function AddScheduleDrawer({ setBottomDrawerOpen, data, mode }) {
   };
 
   const addNewSchedule = () => {
-    if (schedule.event_name.length > 0) {
+    if (schedule.event_name.length > 0 && mode === 'create') {
       // 반복 일정 추가
       if ((schedule.repeating_cycle !== '없음') && (schedule.repeat_deadline !== '없음')) {
         let repeatDate = moment(schedule.date).add(1, REPEAT_CYCLE[schedule.repeating_cycle]);
@@ -221,11 +221,11 @@ function AddScheduleDrawer({ setBottomDrawerOpen, data, mode }) {
         <Button
           variant="contained"
           fullWidth
-          disabled={user === null}
+          disabled={user === null || isDisable}
           onClick={() => addNewSchedule()}
         >
           {
-            user === null ? NEED_SIGN_IN : ADD_SCHEDULE.add_schedule
+            user === null ? NEED_SIGN_IN : ADD_SCHEDULE.add_schedule[useMode]
           }
         </Button>
       </Stack>
