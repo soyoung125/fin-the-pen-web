@@ -1,19 +1,24 @@
+/* eslint-disable no-param-reassign */
 import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
   headerOpen: true,
+  mode: 'home',
 };
 
 export const commonSlice = createSlice({
   name: 'common',
   initialState,
   reducers: {
-    setHeaderOpenTrue: (state) => {
-      // eslint-disable-next-line no-param-reassign
+    setHeaderOpenTrue: (state, action) => {
+      const mode = action.payload;
+      if (mode) {
+        console.log(mode);
+        state.mode = mode;
+      }
       state.headerOpen = true;
     },
     setHeaderOpenFalse: (state) => {
-      // eslint-disable-next-line no-param-reassign
       state.headerOpen = false;
     },
   },
