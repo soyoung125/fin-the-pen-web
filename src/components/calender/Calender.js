@@ -176,9 +176,9 @@ function Calender() {
           displayStaticWrapperAs="desktop"
           disableHighlightToday
           dayOfWeekFormatter={(day) => day.substring(0, 3)}
-          value={moment(value)}
+          value={value}
           onChange={(newValue) => {
-            dispatch(selectedDate(newValue));
+            dispatch(selectedDate(moment(newValue)));
           }}
           // eslint-disable-next-line react/jsx-props-no-spreading
           renderDay={renderDayInPicker}
