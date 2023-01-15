@@ -13,7 +13,6 @@ export const commonSlice = createSlice({
     setHeaderOpenTrue: (state, action) => {
       const mode = action.payload;
       if (mode !== undefined) {
-        console.log(mode);
         state.headerMode = mode;
       }
       state.headerOpen = true;
