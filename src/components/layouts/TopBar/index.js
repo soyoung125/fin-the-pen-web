@@ -1,41 +1,17 @@
-/* eslint-disable no-unused-vars */
-import {
-  Avatar,
-  Box,
-  Button,
-  IconButton,
-  Paper, Stack, ToggleButton, Typography,
-} from '@mui/material';
+import { Box, Paper, Stack } from '@mui/material';
 import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import NotificationsIcon from '@mui/icons-material/Notifications';
-import PersonIcon from '@mui/icons-material/Person';
 import { useNavigate } from 'react-router-dom';
-import LoginIcon from '@mui/icons-material/Login';
 import SearchIcon from '@mui/icons-material/Search';
-import FilterAltIcon from '@mui/icons-material/FilterAlt';
-import { selectHeaderMode, selectHeaderOpen } from '../../utils/redux/common/commonSlice';
-import FullScreenDialog from './FullScreenDialog';
-import RoundedButton from '../common/RoundedButton';
-import PATH from '../../utils/constants/path';
-import { selectUser } from '../../utils/redux/user/userSlice';
+import { selectHeaderMode, selectHeaderOpen } from '../../../utils/redux/common/commonSlice';
+import FullScreenDialog from '../FullScreenDialog';
+import RoundedButton from '../../common/RoundedButton';
+import PATH from '../../../utils/constants/path';
+import { selectUser } from '../../../utils/redux/user/userSlice';
+import FilterButton from './buttons/FilterButton';
+import PersonalButton from './buttons/PersonalButton';
 
-function PersonalButton({ user }) {
-  const navigate = useNavigate();
-  if (user === null) {
-    return (
-      <RoundedButton value="login" onClick={() => navigate(PATH.signIn)}>
-        <LoginIcon />
-      </RoundedButton>
-
-    );
-  }
-  return (
-    <RoundedButton value="user" onClick={() => navigate(PATH.mypage)}>
-      <PersonIcon />
-    </RoundedButton>
-  );
-}
 function TopBar() {
   const navigate = useNavigate();
   const user = useSelector(selectUser);
@@ -93,9 +69,7 @@ function TopBar() {
                   alignItems="flex-end"
                 >
                   {headerMode === 'analysis' && (
-                    <RoundedButton value="user" onClick={() => alert('준비 중인 메뉴')}>
-                      <FilterAltIcon />
-                    </RoundedButton>
+                    <FilterButton />
                   )}
                 </Stack>
                 {/* 헤더 우측 메뉴 */}
@@ -112,11 +86,11 @@ function TopBar() {
                       <RoundedButton value="notification" onClick={() => navigate(PATH.notification)}>
                         <NotificationsIcon />
                       </RoundedButton>
-                      <PersonalButton user={user} />
+                      <PersonalButton />
                     </>
                   )}
                   {headerMode === 'analysis' && (
-                    <PersonalButton user={user} />
+                    <PersonalButton />
                   )}
                 </Stack>
 
