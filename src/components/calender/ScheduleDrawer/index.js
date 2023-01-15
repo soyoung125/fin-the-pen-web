@@ -15,18 +15,18 @@ import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import ClearIcon from '@mui/icons-material/Clear';
 import moment from 'moment';
-import NameInput from './NameInput';
-import DateInput from './DateInput';
+import NameInput from './inputs/NameInput';
+import DateInput from './inputs/DateInput';
 import {
   ADD_SCHEDULE, NEED_TITLE, REPEAT_CYCLE,
 } from '../../../utils/constants/schedule';
 import { addSchedule } from '../../../utils/redux/schedule/scheduleSlice';
-import SpendingInput from './SpendingInput';
-import ImportanceInput from './ImportanceInput';
-import ExclusionInput from './ExclusionInput';
-import CategoryInput from './CategoryInput';
+import SpendingInput from './inputs/SpendingInput';
+import ImportanceInput from './inputs/ImportanceInput';
+import ExclusionInput from './inputs/ExclusionInput';
+import CategoryInput from './inputs/CategoryInput';
 import ALERTS from '../../../utils/constants/alerts';
-import RepeatInput from './RepeatInput';
+import RepeatInput from './inputs/RepeatInput';
 import { selectUser } from '../../../utils/redux/user/userSlice';
 import { NEED_SIGN_IN } from '../../../utils/constants/common';
 

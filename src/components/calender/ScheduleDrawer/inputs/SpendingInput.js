@@ -1,7 +1,7 @@
 import {
   Button, Stack, TextField, Typography,
 } from '@mui/material';
-import { ADD_SCHEDULE } from '../../../utils/constants/schedule';
+import { ADD_SCHEDULE } from '../../../../utils/constants/schedule';
 
 function SpendingInput({
   schedule, updateSchedule, mode, isDisable, updateSpendingType,

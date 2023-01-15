@@ -6,8 +6,8 @@ import {
 import { LocalizationProvider, StaticDatePicker } from '@mui/x-date-pickers';
 import { AdapterMoment } from '@mui/x-date-pickers/AdapterMoment';
 import moment from 'moment';
-import { DEADLINE, REPEAT } from '../../../utils/constants/repeat';
-import { ADD_SCHEDULE } from '../../../utils/constants/schedule';
+import { DEADLINE, REPEAT } from '../../../../utils/constants/repeat';
+import { ADD_SCHEDULE } from '../../../../utils/constants/schedule';
 
 function RepeatInput({
   schedule, updateRepeat, openDatePickerModal,

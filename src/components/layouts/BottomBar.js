@@ -11,7 +11,7 @@ import PaidIcon from '@mui/icons-material/Paid';
 import { useSelector } from 'react-redux';
 import moment from 'moment';
 import PATH from '../../utils/constants/path';
-import ScheduleDrawer from '../calender/scheduleDrawer/ScheduleDrawer';
+import ScheduleDrawer from '../calender/ScheduleDrawer';
 import { INIT_SCHEDULE } from '../../utils/constants/schedule';
 import { selectDate } from '../../utils/redux/schedule/scheduleSlice';
 

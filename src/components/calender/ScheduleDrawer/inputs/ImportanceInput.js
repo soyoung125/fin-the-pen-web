@@ -1,7 +1,7 @@
 import {
   Button, Stack, Typography,
 } from '@mui/material';
-import { ADD_SCHEDULE } from '../../../utils/constants/schedule';
+import { ADD_SCHEDULE } from '../../../../utils/constants/schedule';
 
 function ImportanceInput({ schedule, updateSchedule, isDisable }) {
   return (

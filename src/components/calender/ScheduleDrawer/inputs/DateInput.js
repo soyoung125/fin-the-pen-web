@@ -1,7 +1,7 @@
 import {
   Stack, TextField,
 } from '@mui/material';
-import { ADD_SCHEDULE } from '../../../utils/constants/schedule';
+import { ADD_SCHEDULE } from '../../../../utils/constants/schedule';
 
 function DateInput({ schedule, updateSchedule, isDisable }) {
   return (

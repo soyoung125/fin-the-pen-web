@@ -5,7 +5,7 @@ import moment from 'moment';
 import { useState } from 'react';
 import { useSelector } from 'react-redux';
 import { selectDate, selectSchedules } from '../../../utils/redux/schedule/scheduleSlice';
-import ScheduleDrawer from '../scheduleDrawer/ScheduleDrawer';
+import ScheduleDrawer from '../ScheduleDrawer';
 import ScheduleCard from './ScheduleCard';
 
 function ScheduleList() {

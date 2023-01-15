@@ -1,7 +1,7 @@
 import {
   Stack, Switch, Typography,
 } from '@mui/material';
-import { ADD_SCHEDULE } from '../../../utils/constants/schedule';
+import { ADD_SCHEDULE } from '../../../../utils/constants/schedule';
 
 function ExclusionInput({ schedule, updateExclusion, isDisable }) {
   return (
