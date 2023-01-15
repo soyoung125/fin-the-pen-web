@@ -9,7 +9,7 @@ function SpendingInput({
   return (
     <Stack direction="row" justifyContent="space-between" alignItems="center" p={1}>
       <Typography>{ADD_SCHEDULE.set_spending_title}</Typography>
-      <Stack direction="row" justifyContent="flex-end" alignItems="center" spacing={1}>
+      <Stack direction="row" alignItems="center" spacing={1}>
         {(mode === 'create') || (schedule.type === ADD_SCHEDULE.type_plus)
           ? (
             <Button
@@ -52,7 +52,7 @@ function SpendingInput({
           InputLabelProps={{
             shrink: true,
           }}
-          sx={{ width: '30%' }}
+          sx={{ width: '20vw' }}
           size="small"
         />
         <Typography>{ADD_SCHEDULE.won}</Typography>
