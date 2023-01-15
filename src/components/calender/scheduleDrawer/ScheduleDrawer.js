@@ -35,7 +35,7 @@ function TransitionUp(props) {
   return <Slide {...props} direction="right" />;
 }
 
-function AddScheduleDrawer({ setBottomDrawerOpen, data, mode }) {
+function ScheduleDrawer({ setBottomDrawerOpen, data, mode }) {
   const dispatch = useDispatch();
   const user = useSelector(selectUser);
 
@@ -232,4 +232,4 @@ function AddScheduleDrawer({ setBottomDrawerOpen, data, mode }) {
     </>
   );
 }
-export default AddScheduleDrawer;
+export default ScheduleDrawer;
