@@ -81,7 +81,7 @@ function ScheduleDrawer({ setBottomDrawerOpen, data, mode }) {
     setSchedule({ ...schedule, exclusion: state.target.checked });
   };
 
-  const updateSpandingType = () => {
+  const updateSpendingType = () => {
     if (schedule.type === ADD_SCHEDULE.type_plus) {
       setSchedule({ ...schedule, type: ADD_SCHEDULE.type_minus });
     } else {
@@ -196,7 +196,7 @@ function ScheduleDrawer({ setBottomDrawerOpen, data, mode }) {
                 <SpendingInput
                   schedule={schedule}
                   updateSchedule={updateSchedule}
-                  updateSpandingType={updateSpandingType}
+                  updateSpendingType={isDisable ? undefined : updateSpendingType}
                   mode={useMode}
                   isDisable={isDisable}
                 />

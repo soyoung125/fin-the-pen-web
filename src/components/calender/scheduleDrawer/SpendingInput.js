@@ -4,7 +4,7 @@ import {
 import { ADD_SCHEDULE } from '../../../utils/constants/schedule';
 
 function SpendingInput({
-  schedule, updateSchedule, mode, isDisable, updateSpandingType,
+  schedule, updateSchedule, mode, isDisable, updateSpendingType,
 }) {
   return (
     <Stack direction="row" justifyContent="space-between" alignItems="center" p={1}>
@@ -16,7 +16,7 @@ function SpendingInput({
               variant={schedule.type === ADD_SCHEDULE.type_plus ? 'contained' : 'outlined'}
               id="type"
               value={ADD_SCHEDULE.type_plus}
-              onClick={mode === 'create' ? updateSchedule : updateSpandingType}
+              onClick={mode === 'create' ? updateSchedule : updateSpendingType}
               size="small"
               sx={{
                 borderRadius: 5, minWidth: 0, width: '30px', height: '30px',
@@ -32,7 +32,7 @@ function SpendingInput({
               variant={schedule.type === ADD_SCHEDULE.type_minus ? 'contained' : 'outlined'}
               id="type"
               value={ADD_SCHEDULE.type_minus}
-              onClick={mode === 'create' ? updateSchedule : updateSpandingType}
+              onClick={mode === 'create' ? updateSchedule : updateSpendingType}
               size="small"
               sx={{
                 borderRadius: 5, minWidth: 0, width: '30px', height: '30px',
