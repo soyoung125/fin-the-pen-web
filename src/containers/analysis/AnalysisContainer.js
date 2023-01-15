@@ -36,7 +36,7 @@ function AnalysisContainer() {
     // eslint-disable-next-line no-unused-vars
     let newTotal = 0;
     const expenditureCategories = CATEGORIES.filter((c) => c.type === '지출');
-    console.log(expenditureCategories);
+
     // eslint-disable-next-line array-callback-return
     expenditureCategories.map((c, index) => {
       const schByCategory = schedules.filter((s) => s.category.title === c.title);
