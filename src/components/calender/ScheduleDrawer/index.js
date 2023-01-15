@@ -1,14 +1,7 @@
 /* eslint-disable no-nested-ternary */
 import {
-  Accordion,
-  AccordionDetails,
-  AccordionSummary,
-  Alert,
-  Button,
-  Card,
-  Slide,
-  Snackbar,
-  Stack, Typography,
+  Accordion, AccordionDetails, AccordionSummary, Alert,
+  Button, Card, Slide, Snackbar, Stack, Typography,
 } from '@mui/material';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import { useEffect, useState } from 'react';
