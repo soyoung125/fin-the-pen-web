@@ -31,7 +31,7 @@ function Calender() {
     if (fixedWithdrawal.length > 0) {
       if (nonFixedWithdrwal.length > 0) {
         return (
-          <Box sx={{ width: DATE_SIZE, marginX: 'auto' }}>
+          <Box sx={{ width: DATE_SIZE, marginX: 'auto' }} key={DayComponentProps.key}>
             <Stack>
               <PickersDay
                 sx={{
@@ -74,7 +74,7 @@ function Calender() {
 
     if (nonFixedWithdrwal.length > 0) {
       return (
-        <Box sx={{ width: DATE_SIZE, marginX: 'auto' }}>
+        <Box sx={{ width: DATE_SIZE, marginX: 'auto' }} key={DayComponentProps.key}>
           <Stack>
             <PickersDay sx={{ marginBottom: 2 }} {...DayComponentProps} />
             <Stack direction="row" justifyContent="center" spacing={0.5} mt={0.1}>

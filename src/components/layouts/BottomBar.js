@@ -20,7 +20,6 @@ function BottomBar({ value, setValue }) {
   const navigate = useNavigate();
   const [bottomDrawerOpen, setBottomDrawerOpen] = useState(false);
 
-  console.log(date);
   return (
     <>
       <Paper

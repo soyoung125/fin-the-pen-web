@@ -16,7 +16,7 @@ function ScheduleCard({ schedule, handleModal }) {
                   width: '15px', height: '15px', border: '4px solid', borderRadius: 3, borderColor: schedule.category.color, marginY: 'auto', marginRight: 2,
                 }}
               />
-              <Typography variant="caption" fullwidth>{`${schedule.start_time} - ${schedule.end_time}`}</Typography>
+              <Typography variant="caption">{`${schedule.start_time} - ${schedule.end_time}`}</Typography>
             </Stack>
             <Typography variant="h6" pl={1} pt={1}>{schedule.event_name}</Typography>
           </Box>
