@@ -93,10 +93,11 @@ function ScheduleDrawer({ setBottomDrawerOpen, data, mode }) {
     if ((schedule.repeating_cycle !== '없음') && (schedule.repeat_deadline !== '없음')) {
       let repeatDate = moment(schedule.date).add(1, REPEAT_CYCLE[schedule.repeating_cycle]);
       while (moment(schedule.repeat_endDate).isSameOrAfter(repeatDate)) {
-        dispatch(addSchedule({ ...schedule, date: repeatDate.format('YYYY-MM-DD') }));
+        dispatch(addSchedule({ ...schedule, id: schedule.event_name + Math.random(), date: repeatDate.format('YYYY-MM-DD') }));
         repeatDate = moment(repeatDate).add(1, REPEAT_CYCLE[schedule.repeating_cycle]);
       }
     }
+    setSchedule({ ...schedule, id: schedule.event_name + Math.random() });
     // 원래 일정 추가
     dispatch(addSchedule(schedule));
     setBottomDrawerOpen(false);
