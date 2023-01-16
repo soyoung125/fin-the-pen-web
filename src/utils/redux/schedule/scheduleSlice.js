@@ -14,6 +14,9 @@ export const scheduleSlice = createSlice({
     addSchedule: (state, action) => {
       state.schedules.push(action.payload);
     },
+    deleteSchedule: (state, action) => {
+      state.schedules = state.schedules.filter((s) => s.id !== action.payload);
+    },
     setSchedules: (state, action) => {
       state.schedules = action.payload;
     },
@@ -22,7 +25,9 @@ export const scheduleSlice = createSlice({
     },
   },
 });
-export const { addSchedule, setSchedules, selectedDate } = scheduleSlice.actions;
+export const {
+  addSchedule, deleteSchedule, setSchedules, selectedDate,
+} = scheduleSlice.actions;
 
 export const selectSchedules = (state) => state.schedule.schedules;
 export const selectDate = (state) => state.schedule.date;

@@ -14,7 +14,7 @@ import DateInput from './inputs/DateInput';
 import {
   ADD_SCHEDULE, NEED_TITLE, REPEAT_CYCLE,
 } from '../../../utils/constants/schedule';
-import { addSchedule } from '../../../utils/redux/schedule/scheduleSlice';
+import { addSchedule, deleteSchedule } from '../../../utils/redux/schedule/scheduleSlice';
 import SpendingInput from './inputs/SpendingInput';
 import ImportanceInput from './inputs/ImportanceInput';
 import ExclusionInput from './inputs/ExclusionInput';
@@ -103,8 +103,9 @@ function ScheduleDrawer({ setBottomDrawerOpen, data, mode }) {
     setBottomDrawerOpen(false);
   };
 
-  const deleteSchedul = () => {
+  const deleteSelectedSchedule = () => {
     // 수정 예정
+    dispatch(deleteSchedule(schedule.id));
     setBottomDrawerOpen(false);
   };
 
@@ -117,7 +118,7 @@ function ScheduleDrawer({ setBottomDrawerOpen, data, mode }) {
       if (mode === 'create') {
         addNewSchedule();
       } else {
-        deleteSchedul();
+        deleteSelectedSchedule();
       }
     } else {
       alert(NEED_TITLE);
