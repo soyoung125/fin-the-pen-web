@@ -2,7 +2,8 @@ import {
   Button, Drawer, Stack, Typography,
 } from '@mui/material';
 import { useState } from 'react';
-import FilterAltIcon from '@mui/icons-material/FilterAlt';
+// import FilterAltIcon from '@mui/icons-material/FilterAlt';
+import FilterAltOutlinedIcon from '@mui/icons-material/FilterAltOutlined';
 import RoundedButton from '../../../common/RoundedButton';
 
 function FilterButton() {
@@ -10,7 +11,8 @@ function FilterButton() {
   return (
     <>
       <RoundedButton value="user" onClick={() => setBottomDrawerOpen(true)}>
-        <FilterAltIcon />
+        {/* <FilterAltIcon /> */}
+        <FilterAltOutlinedIcon />
       </RoundedButton>
       <Drawer
         open={bottomDrawerOpen}

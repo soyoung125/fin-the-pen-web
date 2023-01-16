@@ -1,9 +1,10 @@
 import { Box, Paper, Stack } from '@mui/material';
 import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
-import NotificationsIcon from '@mui/icons-material/Notifications';
 import { useNavigate } from 'react-router-dom';
 import SearchIcon from '@mui/icons-material/Search';
+// import NotificationsIcon from '@mui/icons-material/Notifications';
+import NotificationsOutlinedIcon from '@mui/icons-material/NotificationsOutlined';
 import { selectHeaderMode, selectHeaderOpen } from '../../../utils/redux/common/commonSlice';
 import FullScreenDialog from '../FullScreenDialog';
 import RoundedButton from '../../common/RoundedButton';
@@ -84,7 +85,8 @@ function TopBar() {
                         <SearchIcon />
                       </RoundedButton>
                       <RoundedButton value="notification" onClick={() => navigate(PATH.notification)}>
-                        <NotificationsIcon />
+                        {/* <NotificationsIcon /> */}
+                        <NotificationsOutlinedIcon />
                       </RoundedButton>
                       <PersonalButton />
                     </>
