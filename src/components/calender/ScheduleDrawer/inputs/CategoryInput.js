@@ -3,8 +3,8 @@ import {
   Autocomplete, TextField,
 } from '@mui/material';
 import { useEffect, useState } from 'react';
+import { CATEGORIES } from '../../../../utils/constants/categories';
 import { ADD_SCHEDULE } from '../../../../utils/constants/schedule';
-import CATEGORIES from '../../../../utils/constants/categories';
 
 export default function CategoryInput({ updateCategory, selected }) {
   const [value, setValue] = useState(selected);
