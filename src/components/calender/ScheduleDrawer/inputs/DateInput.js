@@ -3,12 +3,11 @@ import {
 } from '@mui/material';
 import { ADD_SCHEDULE } from '../../../../utils/constants/schedule';
 
-function DateInput({ schedule, updateSchedule, isDisable }) {
+function DateInput({ schedule, updateSchedule }) {
   return (
     <>
       <TextField
         id="date"
-        disabled={isDisable}
         label={ADD_SCHEDULE.date}
         type="date"
         fullWidth
@@ -28,7 +27,6 @@ function DateInput({ schedule, updateSchedule, isDisable }) {
       >
         <TextField
           id="start_time"
-          disabled={isDisable}
           label={ADD_SCHEDULE.start_time}
           type="time"
           InputLabelProps={{
@@ -44,7 +42,6 @@ function DateInput({ schedule, updateSchedule, isDisable }) {
         />
         <TextField
           id="end_time"
-          disabled={isDisable}
           label={ADD_SCHEDULE.end_time}
           type="time"
           InputLabelProps={{

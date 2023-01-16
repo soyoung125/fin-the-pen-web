@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 /* eslint-disable no-nested-ternary */
 import {
   Accordion, AccordionDetails, AccordionSummary, Alert,
@@ -41,11 +42,6 @@ function ScheduleDrawer({ setBottomDrawerOpen, data, mode }) {
   const [repeatEndDate, setRepeatEndDate] = useState('');
   const [useMode, setUseMode] = useState(mode);
   const [expandAccordion, setExpandAccordion] = useState(mode !== 'create');
-  const [isDisable, setIsDisable] = useState(mode === 'read');
-
-  useEffect(() => {
-    setIsDisable(useMode === 'read');
-  }, [useMode]);
 
   const updateSchedule = (state) => {
     setSchedule({ ...schedule, [state.target.id]: state.target.value });
@@ -140,23 +136,20 @@ function ScheduleDrawer({ setBottomDrawerOpen, data, mode }) {
       >
         <Stack direction="row" alignItems="center" justifyContent="space-between">
           {useMode === 'modify'
-            ? <Button onClick={() => cancleModify()}>취소</Button>
+            ? <Button onClick={() => setBottomDrawerOpen(false)}>취소</Button>
             : <Button />}
           <Typography variant="h5" sx={{ fontWeight: 'bold' }}>{ADD_SCHEDULE.drawer_title[useMode]}</Typography>
 
-          {isDisable
-            ? <Button onClick={() => setUseMode('modify')}>수정</Button>
-            : useMode === 'modify'
-              ? <Button onClick={() => cancleModify()}>저장</Button>
-              : <Button onClick={() => setBottomDrawerOpen(false)}><ClearIcon /></Button>}
+          {useMode === 'modify'
+            ? <Button onClick={() => setBottomDrawerOpen(false)}>저장</Button>
+            : <Button onClick={() => setBottomDrawerOpen(false)}><ClearIcon /></Button>}
         </Stack>
         <NameInput
           schedule={schedule}
           updateSchedule={updateSchedule}
-          updateAlarm={isDisable ? undefined : updateAlarm}
-          isDisable={isDisable}
+          updateAlarm={updateAlarm}
         />
-        <DateInput schedule={schedule} updateSchedule={updateSchedule} isDisable={isDisable} />
+        <DateInput schedule={schedule} updateSchedule={updateSchedule} />
 
         <RepeatInput
           schedule={schedule}
@@ -165,13 +158,11 @@ function ScheduleDrawer({ setBottomDrawerOpen, data, mode }) {
           handleModalClose={handleModalClose}
           repeatEndDate={repeatEndDate}
           setRepeatEndDate={setRepeatEndDate}
-          isDisable={isDisable}
         />
 
         <CategoryInput
           updateCategory={updateCategory}
           selected={useMode === 'create' ? null : schedule.category.title}
-          isDisable={isDisable}
         />
 
         <Accordion sx={{ width: '100%' }} expanded={expandAccordion}>
@@ -189,23 +180,20 @@ function ScheduleDrawer({ setBottomDrawerOpen, data, mode }) {
                 <SpendingInput
                   schedule={schedule}
                   updateSchedule={updateSchedule}
-                  updateSpendingType={isDisable ? undefined : updateSpendingType}
+                  updateSpendingType={updateSpendingType}
                   mode={useMode}
-                  isDisable={isDisable}
                 />
               </Card>
               <Card>
                 <ImportanceInput
                   schedule={schedule}
                   updateSchedule={updateSchedule}
-                  isDisable={isDisable}
                 />
               </Card>
               <Card>
                 <ExclusionInput
                   schedule={schedule}
                   updateExclusion={updateExclusion}
-                  isDisable={isDisable}
                 />
               </Card>
             </Stack>
@@ -214,7 +202,7 @@ function ScheduleDrawer({ setBottomDrawerOpen, data, mode }) {
         <Button
           variant="contained"
           fullWidth
-          disabled={user === null || isDisable}
+          disabled={user === null}
           onClick={() => addNewSchedule()}
         >
           {

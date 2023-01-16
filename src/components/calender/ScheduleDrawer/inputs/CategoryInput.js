@@ -6,7 +6,7 @@ import { useEffect, useState } from 'react';
 import { ADD_SCHEDULE } from '../../../../utils/constants/schedule';
 import CATEGORIES from '../../../../utils/constants/categories';
 
-export default function CategoryInput({ updateCategory, selected, isDisable }) {
+export default function CategoryInput({ updateCategory, selected }) {
   const [value, setValue] = useState(selected);
   const [inputValue, setInputValue] = useState('');
   useEffect(() => {
@@ -20,7 +20,6 @@ export default function CategoryInput({ updateCategory, selected, isDisable }) {
   return (
     <div>
       <Autocomplete
-        disabled={isDisable}
         value={value}
         onChange={(event, newValue) => {
           setValue(newValue);

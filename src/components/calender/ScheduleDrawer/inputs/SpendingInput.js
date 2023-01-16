@@ -4,7 +4,7 @@ import {
 import { ADD_SCHEDULE } from '../../../../utils/constants/schedule';
 
 function SpendingInput({
-  schedule, updateSchedule, mode, isDisable, updateSpendingType,
+  schedule, updateSchedule, mode, updateSpendingType,
 }) {
   return (
     <Stack direction="row" justifyContent="space-between" alignItems="center" p={1}>
@@ -44,7 +44,6 @@ function SpendingInput({
           : null}
         <TextField
           id="expected_spending"
-          disabled={isDisable}
           value={schedule.expected_spending}
           onChange={updateSchedule}
           label={ADD_SCHEDULE.expected_spending}
