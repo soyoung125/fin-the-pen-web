@@ -179,7 +179,30 @@ function ScheduleDrawer({ setBottomDrawerOpen, data, mode }) {
           selected={useMode === 'create' ? null : schedule.category.title}
         />
 
-        <Accordion sx={{ width: '100%' }} expanded={expandAccordion}>
+        <Stack spacing={1}>
+          <Card>
+            <SpendingInput
+              schedule={schedule}
+              updateSchedule={updateSchedule}
+              updateSpendingType={updateSpendingType}
+              mode={useMode}
+            />
+          </Card>
+          <Card>
+            <ImportanceInput
+              schedule={schedule}
+              updateSchedule={updateSchedule}
+            />
+          </Card>
+          <Card>
+            <ExclusionInput
+              schedule={schedule}
+              updateExclusion={updateExclusion}
+            />
+          </Card>
+        </Stack>
+
+        {/* <Accordion sx={{ width: '100%' }} expanded={expandAccordion}>
           <AccordionSummary
             expandIcon={<ExpandMoreIcon />}
             onClick={() => handleExpand()}
@@ -212,7 +235,7 @@ function ScheduleDrawer({ setBottomDrawerOpen, data, mode }) {
               </Card>
             </Stack>
           </AccordionDetails>
-        </Accordion>
+        </Accordion> */}
         <Button
           variant="contained"
           fullWidth
