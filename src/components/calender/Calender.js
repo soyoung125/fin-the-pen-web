@@ -9,6 +9,8 @@ import moment from 'moment';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { selectDate, selectedDate, selectSchedules } from '../../utils/redux/schedule/scheduleSlice';
+import MarkedPickersDay from './scheduleMarker/MarkedPickersDay';
+import MarkerStack from './scheduleMarker/MarkerStack';
 
 function Calender() {
   const dispatch = useDispatch();
@@ -33,41 +35,19 @@ function Calender() {
         return (
           <Box sx={{ width: DATE_SIZE, marginX: 'auto' }} key={DayComponentProps.key}>
             <Stack>
-              <PickersDay
-                sx={{
-                  border: 1,
-                  borderRadius: 2,
-                  marginBottom: 2,
-                  borderColor: fixedWithdrawal[0].category.color,
-                }}
-                {...DayComponentProps}
+              <MarkedPickersDay
+                color={fixedWithdrawal[0].category.color}
+                DayComponentProps={DayComponentProps}
               />
-              <Stack direction="row" justifyContent="center" spacing={0.5} mt={0.2}>
-                {nonFixedWithdrwal.map((s, index) => ( // 추후 e의 카테고리 별로 색 바꿀 예정
-                  index < 3 ? (
-                    <Box
-                      key={Math.random()}
-                      sx={{
-                        width: '5px', height: '5px', border: '1px solid', borderRadius: 3, borderColor: s.category.color,
-                      }}
-                    />
-                  )
-                    : null
-                ))}
-              </Stack>
+              <MarkerStack nonFixedWithdrwal={nonFixedWithdrwal} />
             </Stack>
           </Box>
         );
       }
       return (
-        <PickersDay
-          sx={{
-            border: 1,
-            borderRadius: 2,
-            marginBottom: 2,
-            borderColor: fixedWithdrawal[0].category.color,
-          }}
-          {...DayComponentProps}
+        <MarkedPickersDay
+          color={fixedWithdrawal[0].category.color}
+          DayComponentProps={DayComponentProps}
         />
       );
     }
@@ -77,19 +57,7 @@ function Calender() {
         <Box sx={{ width: DATE_SIZE, marginX: 'auto' }} key={DayComponentProps.key}>
           <Stack>
             <PickersDay sx={{ marginBottom: 2 }} {...DayComponentProps} />
-            <Stack direction="row" justifyContent="center" spacing={0.5} mt={0.1}>
-              {nonFixedWithdrwal.map((s, index) => ( // 추후 e의 카테고리 별로 색 바꿀 예정
-                index < 3 ? (
-                  <Box
-                    key={Math.random()}
-                    sx={{
-                      width: '5px', height: '5px', border: '1px solid', borderRadius: 3, borderColor: s.category.color,
-                    }}
-                  />
-                )
-                  : null
-              ))}
-            </Stack>
+            <MarkerStack nonFixedWithdrwal={nonFixedWithdrwal} />
           </Stack>
         </Box>
       );
