@@ -89,30 +89,38 @@ function ScheduleDrawer({ setBottomDrawerOpen, data, mode }) {
   };
 
   const addNewSchedule = () => {
-    if (schedule.event_name.length > 0 && mode === 'create') {
-      // 반복 일정 추가
-      if ((schedule.repeating_cycle !== '없음') && (schedule.repeat_deadline !== '없음')) {
-        let repeatDate = moment(schedule.date).add(1, REPEAT_CYCLE[schedule.repeating_cycle]);
-        while (moment(schedule.repeat_endDate).isSameOrAfter(repeatDate)) {
-          dispatch(addSchedule({ ...schedule, date: repeatDate.format('YYYY-MM-DD') }));
-          repeatDate = moment(repeatDate).add(1, REPEAT_CYCLE[schedule.repeating_cycle]);
-        }
+    // 반복 일정 추가
+    if ((schedule.repeating_cycle !== '없음') && (schedule.repeat_deadline !== '없음')) {
+      let repeatDate = moment(schedule.date).add(1, REPEAT_CYCLE[schedule.repeating_cycle]);
+      while (moment(schedule.repeat_endDate).isSameOrAfter(repeatDate)) {
+        dispatch(addSchedule({ ...schedule, date: repeatDate.format('YYYY-MM-DD') }));
+        repeatDate = moment(repeatDate).add(1, REPEAT_CYCLE[schedule.repeating_cycle]);
       }
-      // 원래 일정 추가
-      dispatch(addSchedule(schedule));
-      setBottomDrawerOpen(false);
-    } else {
-      alert(NEED_TITLE);
     }
+    // 원래 일정 추가
+    dispatch(addSchedule(schedule));
+    setBottomDrawerOpen(false);
   };
 
-  const cancleModify = () => {
-    setSchedule(data);
-    setUseMode('read');
+  const deleteSchedul = () => {
+    // 수정 예정
+    setBottomDrawerOpen(false);
   };
 
   const handleExpand = () => {
     setExpandAccordion(!expandAccordion);
+  };
+
+  const handleSubmit = () => {
+    if (schedule.event_name.length > 0) {
+      if (mode === 'create') {
+        addNewSchedule();
+      } else {
+        deleteSchedul();
+      }
+    } else {
+      alert(NEED_TITLE);
+    }
   };
 
   return (
@@ -203,7 +211,7 @@ function ScheduleDrawer({ setBottomDrawerOpen, data, mode }) {
           variant="contained"
           fullWidth
           disabled={user === null}
-          onClick={() => addNewSchedule()}
+          onClick={() => handleSubmit()}
         >
           {
             user === null ? NEED_SIGN_IN : ADD_SCHEDULE.add_schedule[useMode]
