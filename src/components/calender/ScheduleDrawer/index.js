@@ -14,7 +14,7 @@ import DateInput from './inputs/DateInput';
 import {
   ADD_SCHEDULE, NEED_TITLE, REPEAT_CYCLE,
 } from '../../../utils/constants/schedule';
-import { addSchedule, deleteSchedule } from '../../../utils/redux/schedule/scheduleSlice';
+import { addSchedule, deleteSchedule, modifySchedule } from '../../../utils/redux/schedule/scheduleSlice';
 import SpendingInput from './inputs/SpendingInput';
 import ImportanceInput from './inputs/ImportanceInput';
 import ExclusionInput from './inputs/ExclusionInput';
@@ -104,8 +104,12 @@ function ScheduleDrawer({ setBottomDrawerOpen, data, mode }) {
   };
 
   const deleteSelectedSchedule = () => {
-    // 수정 예정
     dispatch(deleteSchedule(schedule.id));
+    setBottomDrawerOpen(false);
+  };
+
+  const modifySelectedSchedule = () => {
+    dispatch(modifySchedule(schedule));
     setBottomDrawerOpen(false);
   };
 
@@ -151,7 +155,7 @@ function ScheduleDrawer({ setBottomDrawerOpen, data, mode }) {
           <Typography variant="h5" sx={{ fontWeight: 'bold' }}>{ADD_SCHEDULE.drawer_title[useMode]}</Typography>
 
           {useMode === 'modify'
-            ? <Button onClick={() => setBottomDrawerOpen(false)}>저장</Button>
+            ? <Button onClick={() => modifySelectedSchedule()}>저장</Button>
             : <Button onClick={() => setBottomDrawerOpen(false)}><ClearIcon /></Button>}
         </Stack>
         <NameInput

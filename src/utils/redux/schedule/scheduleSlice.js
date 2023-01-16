@@ -1,3 +1,4 @@
+/* eslint-disable max-len */
 /* eslint-disable no-param-reassign */
 import { createSlice } from '@reduxjs/toolkit';
 import moment from 'moment';
@@ -17,6 +18,9 @@ export const scheduleSlice = createSlice({
     deleteSchedule: (state, action) => {
       state.schedules = state.schedules.filter((s) => s.id !== action.payload);
     },
+    modifySchedule: (state, action) => {
+      state.schedules = state.schedules.map((s) => (s.id === action.payload.id ? action.payload : s));
+    },
     setSchedules: (state, action) => {
       state.schedules = action.payload;
     },
@@ -26,7 +30,7 @@ export const scheduleSlice = createSlice({
   },
 });
 export const {
-  addSchedule, deleteSchedule, setSchedules, selectedDate,
+  addSchedule, deleteSchedule, setSchedules, selectedDate, modifySchedule,
 } = scheduleSlice.actions;
 
 export const selectSchedules = (state) => state.schedule.schedules;
