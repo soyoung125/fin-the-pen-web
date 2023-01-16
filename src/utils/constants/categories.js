@@ -80,4 +80,7 @@ const CATEGORIES = Object.freeze(
   [...categoryFlatter(FIXED), ...categoryFlatter(INCOME), ...categoryFlatter(EXPENDITURE)],
 );
 
-export default CATEGORIES;
+export default null;
+export {
+  CATEGORIES, FIXED, INCOME, EXPENDITURE,
+};

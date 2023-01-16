@@ -1,4 +1,4 @@
-import CATEGORIES from '../../utils/constants/categories';
+import { CATEGORIES } from '../../utils/constants/categories';
 
 function MoneyManagementContainer() {
   return (

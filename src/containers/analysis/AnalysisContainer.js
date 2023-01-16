@@ -8,7 +8,8 @@ import AnalysisGraph from '../../components/analysis/AnalysisGraph';
 import AnalysisHeader from '../../components/analysis/AnalysisHeader';
 import AnalysisList from '../../components/analysis/analysisList/AnalysisList';
 import AnalysisDetailCard from '../../components/analysis/detailCard/AnalysisDetailCard';
-import CATEGORIES from '../../utils/constants/categories';
+import { CATEGORIES } from '../../utils/constants/categories';
+// import CATEGORIES from '../../utils/constants/categories';
 import { setHeaderOpenTrue } from '../../utils/redux/common/commonSlice';
 import { selectSchedules } from '../../utils/redux/schedule/scheduleSlice';
 
