@@ -4,13 +4,14 @@ import {
 import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
-import { useNavigate } from 'react-router-dom';
+// import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
 import { setHeaderOpenFalse, setHeaderOpenTrue } from '../../utils/redux/common/commonSlice';
-import PATH from '../../utils/constants/path';
+// import PATH from '../../utils/constants/path';
 
 function SignUpContainer() {
   const dispatch = useDispatch();
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
   useEffect(() => {
     dispatch(setHeaderOpenFalse()); // 페이지 진입 시 헤더 감추기
     return () => {
@@ -21,16 +22,29 @@ function SignUpContainer() {
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
-    alert(JSON.stringify({
-      name: data.get('name'),
-      email: data.get('email'),
+    const user = {
+      user_id: data.get('email'),
       password: data.get('password'),
-      phoneNumber: data.get('phoneNumber'),
-    }));
-    // axios로 회원가입 요청 해야함
-
-    // axios로 회원가입 요청 후에
-    navigate(PATH.home);
+      name: data.get('name'),
+      phone_number: data.get('phoneNumber'),
+    };
+    alert(JSON.stringify(user));
+    /**
+     * @eomheeseung
+     *
+     * axios로 회원가입 요청하기
+     * POST 방식으로 위 user 객체를 서버에 전달하려고 합니다.
+     * 하단에 있는 요청 주소는 수정해주셔야 합니다.
+     *
+     */
+    axios.post('회원가입을_위한_API_주소', user)
+      .then((response) => {
+        // 처리 결과
+        alert(response);
+      }).catch((error) => {
+        // error 발생 시
+        alert(`err : ${error}`);
+      });
   };
   return (
     <Container component="main" maxWidth="xs">
