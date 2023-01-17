@@ -23,6 +23,7 @@ import ALERTS from '../../../utils/constants/alerts';
 import RepeatInput from './inputs/RepeatInput';
 import { selectUser } from '../../../utils/redux/user/userSlice';
 import { NEED_SIGN_IN } from '../../../utils/constants/common';
+import AssetSettings from './AssetSettings';
 
 function TransitionUp(props) {
   // eslint-disable-next-line react/jsx-props-no-spreading
@@ -179,63 +180,38 @@ function ScheduleDrawer({ setBottomDrawerOpen, data, mode }) {
           selected={useMode === 'create' ? null : schedule.category.title}
         />
 
-        <Stack spacing={1}>
-          <Card>
-            <SpendingInput
+        {mode === 'modify'
+          ? (
+            <AssetSettings
               schedule={schedule}
               updateSchedule={updateSchedule}
               updateSpendingType={updateSpendingType}
+              updateExclusion={updateExclusion}
               mode={useMode}
             />
-          </Card>
-          <Card>
-            <ImportanceInput
-              schedule={schedule}
-              updateSchedule={updateSchedule}
-            />
-          </Card>
-          <Card>
-            <ExclusionInput
-              schedule={schedule}
-              updateExclusion={updateExclusion}
-            />
-          </Card>
-        </Stack>
-
-        {/* <Accordion sx={{ width: '100%' }} expanded={expandAccordion}>
-          <AccordionSummary
-            expandIcon={<ExpandMoreIcon />}
-            onClick={() => handleExpand()}
-            aria-controls="panel1a-content"
-            id="panel1a-header"
-          >
-            <Typography sx={{ fontWeight: 'bold' }}>{ADD_SCHEDULE.set_finance_title}</Typography>
-          </AccordionSummary>
-          <AccordionDetails sx={{ backgroundColor: '#F6F6F6' }}>
-            <Stack spacing={1}>
-              <Card>
-                <SpendingInput
+          )
+          : (
+            <Accordion sx={{ width: '100%' }} expanded={expandAccordion}>
+              <AccordionSummary
+                expandIcon={<ExpandMoreIcon />}
+                onClick={() => handleExpand()}
+                aria-controls="panel1a-content"
+                id="panel1a-header"
+              >
+                <Typography sx={{ fontWeight: 'bold' }}>{ADD_SCHEDULE.set_finance_title}</Typography>
+              </AccordionSummary>
+              <AccordionDetails sx={{ backgroundColor: '#F6F6F6' }}>
+                <AssetSettings
                   schedule={schedule}
                   updateSchedule={updateSchedule}
                   updateSpendingType={updateSpendingType}
+                  updateExclusion={updateExclusion}
                   mode={useMode}
                 />
-              </Card>
-              <Card>
-                <ImportanceInput
-                  schedule={schedule}
-                  updateSchedule={updateSchedule}
-                />
-              </Card>
-              <Card>
-                <ExclusionInput
-                  schedule={schedule}
-                  updateExclusion={updateExclusion}
-                />
-              </Card>
-            </Stack>
-          </AccordionDetails>
-        </Accordion> */}
+              </AccordionDetails>
+            </Accordion>
+          )}
+
         <Button
           variant="contained"
           fullWidth
