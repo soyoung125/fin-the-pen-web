@@ -68,7 +68,9 @@ function RepeatInput({
         <DialogContent>
           <LocalizationProvider dateAdapter={AdapterMoment}>
             <StaticDatePicker
+              views={['day']}
               displayStaticWrapperAs="desktop"
+              disableHighlightToday
               value={moment(repeatEndDate)}
               onChange={(newValue) => {
                 setRepeatEndDate(newValue);

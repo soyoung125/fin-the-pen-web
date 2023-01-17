@@ -39,7 +39,7 @@ function ScheduleDrawer({ setBottomDrawerOpen, data, mode }) {
   const [schedule, setSchedule] = useState(data);
 
   const [openDatePickerModal, setOpenDatePickerModal] = useState(false);
-  const [repeatEndDate, setRepeatEndDate] = useState('');
+  const [repeatEndDate, setRepeatEndDate] = useState(moment(schedule.repeat_endDate));
   const [useMode, setUseMode] = useState(mode);
   const [expandAccordion, setExpandAccordion] = useState(mode !== 'create');
 
@@ -85,7 +85,7 @@ function ScheduleDrawer({ setBottomDrawerOpen, data, mode }) {
 
   const handleModalClose = () => {
     setOpenDatePickerModal(false);
-    setSchedule({ ...schedule, repeat_endDate: repeatEndDate.format('YYYY-MM-DD') });
+    setSchedule({ ...schedule, repeat_endDate: moment(repeatEndDate).format('YYYY-MM-DD') });
   };
 
   const addNewSchedule = () => {
