@@ -20,8 +20,9 @@ function AnalysisContainer() {
   const [selectedItem, setSelectedItem] = useState({});
   const schedules = useSelector(selectSchedules);
   const colorList = [
+    indigo[100], indigo[200], indigo[300], indigo[400], indigo[500], indigo[600], indigo[700],
     green[100], green[200], green[300],
-    blue[100], indigo[100], blue[200], indigo[200], blue[300], indigo[300], blue[400],
+    blue[100], blue[200], blue[300], blue[400], blue[500], blue[600], blue[700],
     blueGrey[100], blueGrey[200],
     pink[100], red[100], pink[200], red[200], pink[300],
     brown[100], brown[200],
@@ -36,7 +37,7 @@ function AnalysisContainer() {
     const newData = [];
     // eslint-disable-next-line no-unused-vars
     let newTotal = 0;
-    const expenditureCategories = CATEGORIES.filter((c) => c.type === '지출');
+    const expenditureCategories = CATEGORIES.filter((c) => c.type === '지출' || c.nestedType === '출금');
 
     // eslint-disable-next-line array-callback-return
     expenditureCategories.map((c, index) => {
