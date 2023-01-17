@@ -8,6 +8,7 @@ import { PickersDay } from '@mui/x-date-pickers/PickersDay/PickersDay';
 import moment from 'moment';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { EXPENDITURE, INCOME } from '../../utils/constants/categories';
 import { selectDate, selectedDate, selectSchedules } from '../../utils/redux/schedule/scheduleSlice';
 import MarkedPickersDay from './scheduleMarker/MarkedPickersDay';
 import MarkerStack from './scheduleMarker/MarkerStack';
@@ -32,6 +33,13 @@ function Calender() {
 
     if (fixedWithdrawal.length > 0) {
       if (nonFixedWithdrwal.length > 0) {
+        const categoryForMarker = INCOME.nested.concat(EXPENDITURE.nested)
+          .map((c) => (daySchedules.findIndex(
+            (s) => s.category.nestedType === c.type,
+          ) === -1
+            ? { ...c, marked: false }
+            : { ...c, marked: true }
+          ));
         return (
           <Box sx={{ width: DATE_SIZE, marginX: 'auto' }} key={DayComponentProps.key}>
             <Stack>
@@ -39,7 +47,10 @@ function Calender() {
                 color={fixedWithdrawal[0].category.color}
                 DayComponentProps={DayComponentProps}
               />
-              <MarkerStack nonFixedWithdrwal={nonFixedWithdrwal} />
+              <MarkerStack
+                nonFixedWithdrwal={nonFixedWithdrwal}
+                categoryForMarker={categoryForMarker}
+              />
             </Stack>
           </Box>
         );
@@ -53,11 +64,21 @@ function Calender() {
     }
 
     if (nonFixedWithdrwal.length > 0) {
+      const categoryForMarker = INCOME.nested.concat(EXPENDITURE.nested)
+        .map((c) => (daySchedules.findIndex(
+          (s) => s.category.nestedType === c.type,
+        ) === -1
+          ? { ...c, marked: false }
+          : { ...c, marked: true }
+        ));
       return (
         <Box sx={{ width: DATE_SIZE, marginX: 'auto' }} key={DayComponentProps.key}>
           <Stack>
             <PickersDay sx={{ marginBottom: 2 }} {...DayComponentProps} />
-            <MarkerStack nonFixedWithdrwal={nonFixedWithdrwal} />
+            <MarkerStack
+              nonFixedWithdrwal={nonFixedWithdrwal}
+              categoryForMarker={categoryForMarker}
+            />
           </Stack>
         </Box>
       );
