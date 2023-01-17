@@ -37,8 +37,8 @@ function Calender() {
           .map((c) => (daySchedules.findIndex(
             (s) => s.category.nestedType === c.type,
           ) === -1
-            ? { ...c, marked: false }
-            : { ...c, marked: true }
+            ? { ...c, color: '#FFFFFF' }
+            : c
           ));
         return (
           <Box sx={{ width: DATE_SIZE, marginX: 'auto' }} key={DayComponentProps.key}>
@@ -68,8 +68,8 @@ function Calender() {
         .map((c) => (daySchedules.findIndex(
           (s) => s.category.nestedType === c.type,
         ) === -1
-          ? { ...c, marked: false }
-          : { ...c, marked: true }
+          ? { ...c, color: '#FFFFFF' }
+          : c
         ));
       return (
         <Box sx={{ width: DATE_SIZE, marginX: 'auto' }} key={DayComponentProps.key}>

@@ -1,19 +1,28 @@
 import { Box, Stack } from '@mui/material';
 
-function MarkerStack({ nonFixedWithdrwal }) {
+function MarkerStack({ categoryForMarker }) {
   return (
-    <Stack direction="row" justifyContent="center" spacing={0.5} mt={0.2}>
-      {nonFixedWithdrwal.map((s, index) => ( // 추후 e의 카테고리 별로 색 바꿀 예정
-        index < 3 ? (
+    <Stack>
+      <Stack direction="row" justifyContent="center" spacing={0.5} mt={0.2}>
+        {categoryForMarker.slice(0, 3).map((s) => (
           <Box
             key={Math.random()}
             sx={{
-              width: '5px', height: '5px', border: '1px solid', borderRadius: 3, borderColor: s.category.color,
+              width: '5px', height: '5px', border: '1px solid', borderRadius: 3, borderColor: s.color,
             }}
           />
-        )
-          : null
-      ))}
+        ))}
+      </Stack>
+      <Stack direction="row" justifyContent="center" spacing={0.5} mt={0.2}>
+        {categoryForMarker.slice(3, 7).map((s) => (
+          <Box
+            key={Math.random()}
+            sx={{
+              width: '5px', height: '5px', border: '1px solid', borderRadius: 3, borderColor: s.color,
+            }}
+          />
+        ))}
+      </Stack>
     </Stack>
   );
 }
