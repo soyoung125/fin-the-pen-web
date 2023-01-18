@@ -24,7 +24,7 @@ function FilterButton() {
       </RoundedButton>
       <Drawer
         open={bottomDrawerOpen}
-        anchor="bottom"
+        anchor="top"
         onClose={() => setBottomDrawerOpen(false)}
       >
         <Stack
