@@ -14,12 +14,16 @@ function RepeatInput({
   handleModalClose, repeatEndDate, updateRepeatEndDate,
 }) {
   const renderDayInPicker = (day, _value, DayComponentProps) => {
+    if (moment(schedule.date).isSame(repeatEndDate)) {
+      return <PickersDay {...DayComponentProps} />;
+    }
     if (moment(schedule.date).isSame(day)) {
       return (
         <PickersDay
           sx={{
             borderTopRightRadius: 0, borderBottomRightRadius: 0, marginX: 0, width: '40px', outline: '0',
           }}
+          disableMargin
           className="Mui-selected"
           {...DayComponentProps}
         />
@@ -32,6 +36,7 @@ function RepeatInput({
             borderTopLeftRadius: 0, borderBottomLeftRadius: 0, marginX: 0, width: '40px', outline: '0',
           }}
           className="Mui-selected"
+          disableMargin
           {...DayComponentProps}
         />
       );
@@ -42,6 +47,7 @@ function RepeatInput({
           sx={{
             borderRadius: 0, marginX: 0, width: '40px', outline: '0',
           }}
+          disableMargin
           className="Mui-selected"
           {...DayComponentProps}
         />
