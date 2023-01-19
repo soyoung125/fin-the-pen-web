@@ -1,15 +1,16 @@
 {
   "files": {
     "main.css": "/fin-the-pen-web/static/css/main.073c9b0a.css",
-    "main.js": "/fin-the-pen-web/static/js/main.7c860739.js",
+    "main.js": "/fin-the-pen-web/static/js/main.28bb3238.js",
     "static/js/787.cb473310.chunk.js": "/fin-the-pen-web/static/js/787.cb473310.chunk.js",
+    "static/media/logo_square.jpg": "/fin-the-pen-web/static/media/logo_square.ed1726a43a911762452d.jpg",
     "index.html": "/fin-the-pen-web/index.html",
     "main.073c9b0a.css.map": "/fin-the-pen-web/static/css/main.073c9b0a.css.map",
-    "main.7c860739.js.map": "/fin-the-pen-web/static/js/main.7c860739.js.map",
+    "main.28bb3238.js.map": "/fin-the-pen-web/static/js/main.28bb3238.js.map",
     "787.cb473310.chunk.js.map": "/fin-the-pen-web/static/js/787.cb473310.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.073c9b0a.css",
-    "static/js/main.7c860739.js"
+    "static/js/main.28bb3238.js"
   ]
 }
