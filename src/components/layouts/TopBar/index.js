@@ -1,4 +1,6 @@
-import { Box, Paper, Stack } from '@mui/material';
+import {
+  Box, Paper, Stack,
+} from '@mui/material';
 import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
@@ -12,6 +14,15 @@ import PATH from '../../../utils/constants/path';
 import { selectUser } from '../../../utils/redux/user/userSlice';
 import FilterButton from './buttons/FilterButton';
 import PersonalButton from './buttons/PersonalButton';
+import logo from '../../../assets/logos/logo_square.jpg';
+
+function LogoButton({ navigate }) {
+  return (
+    <RoundedButton value="user" onClick={() => navigate(PATH.home)}>
+      <img src={logo} alt="" width="26px" height="26px" />
+    </RoundedButton>
+  );
+}
 
 function TopBar() {
   const navigate = useNavigate();
@@ -63,16 +74,32 @@ function TopBar() {
                 alignItems="flex-end"
                 sx={{ height: 100 }}
               >
+
                 {/* 헤더 좌측 메뉴 */}
                 <Stack
                   direction="row"
                   justifyContent="space-between"
                   alignItems="flex-end"
                 >
+                  {headerMode === 'home' && (
+                    <LogoButton navigate={navigate} />
+                  )}
                   {headerMode === 'analysis' && (
                     <FilterButton />
                   )}
                 </Stack>
+
+                {/* 헤더 중앙 메뉴 */}
+                <Stack
+                  direction="row"
+                  justifyContent="space-between"
+                  alignItems="flex-end"
+                >
+                  {headerMode === 'analysis' && (
+                    <LogoButton navigate={navigate} />
+                  )}
+                </Stack>
+
                 {/* 헤더 우측 메뉴 */}
                 <Stack
                   direction="row"
