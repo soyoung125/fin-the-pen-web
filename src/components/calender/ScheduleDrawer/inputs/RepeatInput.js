@@ -3,7 +3,7 @@ import {
   // eslint-disable-next-line max-len
   Box, Button, Dialog, DialogActions, DialogContent, DialogTitle, FormControl, InputLabel, MenuItem, Select, Stack, TextField,
 } from '@mui/material';
-import { LocalizationProvider, StaticDatePicker } from '@mui/x-date-pickers';
+import { LocalizationProvider, PickersDay, StaticDatePicker } from '@mui/x-date-pickers';
 import { AdapterMoment } from '@mui/x-date-pickers/AdapterMoment';
 import moment from 'moment';
 import { DEADLINE, REPEAT } from '../../../../utils/constants/repeat';
@@ -13,6 +13,43 @@ function RepeatInput({
   schedule, updateRepeat, openDatePickerModal,
   handleModalClose, repeatEndDate, setRepeatEndDate,
 }) {
+  const renderDayInPicker = (day, _value, DayComponentProps) => {
+    if (moment(schedule.date).isSame(day)) {
+      return (
+        <PickersDay
+          sx={{
+            borderTopRightRadius: 0, borderBottomRightRadius: 0, marginX: 0, width: '40px', outline: '0',
+          }}
+          className="Mui-selected"
+          {...DayComponentProps}
+        />
+      );
+    }
+    if (moment(repeatEndDate).isSame(day)) {
+      return (
+        <PickersDay
+          sx={{
+            borderTopLeftRadius: 0, borderBottomLeftRadius: 0, marginX: 0, width: '40px', outline: '0',
+          }}
+          className="Mui-selected"
+          {...DayComponentProps}
+        />
+      );
+    }
+    if (moment(schedule.date).isBefore(day) && moment(repeatEndDate).isAfter(day)) {
+      return (
+        <PickersDay
+          sx={{
+            borderRadius: 0, marginX: 0, width: '40px', outline: '0',
+          }}
+          className="Mui-selected"
+          {...DayComponentProps}
+        />
+      );
+    }
+    return <PickersDay {...DayComponentProps} />;
+  };
+
   return (
     <Box>
       <Stack
@@ -75,6 +112,7 @@ function RepeatInput({
               onChange={(newValue) => {
                 setRepeatEndDate(newValue);
               }}
+              renderDay={renderDayInPicker}
               renderInput={(params) => <TextField {...params} />}
             />
           </LocalizationProvider>
