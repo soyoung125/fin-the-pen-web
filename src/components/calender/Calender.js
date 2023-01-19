@@ -148,7 +148,7 @@ function Calender() {
             height: DATE_SIZE,
             marginX: 'auto',
           },
-          '& .MuiPickersDay-root:focus': {
+          '& .Mui-selected': {
             borderRadius: 2,
             backgroundColor: 'primary.main',
             color: 'white',
