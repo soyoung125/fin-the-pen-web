@@ -8,6 +8,7 @@ import Version from './version/Version';
 import Accordion from '../../components/common/accordions/Accordion';
 import AccordionSummary from '../../components/common/accordions/AccordionSummary';
 import AccordionDetails from '../../components/common/accordions/AccordionDetails';
+import Change from './version/Change';
 
 export default function SettingsContainer() {
   return (
@@ -102,6 +103,7 @@ export default function SettingsContainer() {
         </AccordionSummary>
         <AccordionDetails>
           <Version />
+          <Change />
         </AccordionDetails>
       </Accordion>
 
