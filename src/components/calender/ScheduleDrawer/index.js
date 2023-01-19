@@ -79,6 +79,14 @@ function ScheduleDrawer({ setBottomDrawerOpen, data, mode }) {
     }
   };
 
+  const updateRepeatEndDate = (endDate) => {
+    if (endDate.isBefore(schedule.date)) {
+      alert('반복 종료일을 다시 선택해주세요.');
+    } else {
+      setRepeatEndDate(endDate);
+    }
+  };
+
   const [snackbarOpen, setSnackbarOpen] = useState(true);
   const handleClose = () => {
     setSnackbarOpen(false);
@@ -172,7 +180,7 @@ function ScheduleDrawer({ setBottomDrawerOpen, data, mode }) {
           openDatePickerModal={openDatePickerModal}
           handleModalClose={handleModalClose}
           repeatEndDate={repeatEndDate}
-          setRepeatEndDate={setRepeatEndDate}
+          updateRepeatEndDate={updateRepeatEndDate}
         />
 
         <CategoryInput

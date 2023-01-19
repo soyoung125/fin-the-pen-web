@@ -11,7 +11,7 @@ import { ADD_SCHEDULE } from '../../../../utils/constants/schedule';
 
 function RepeatInput({
   schedule, updateRepeat, openDatePickerModal,
-  handleModalClose, repeatEndDate, setRepeatEndDate,
+  handleModalClose, repeatEndDate, updateRepeatEndDate,
 }) {
   const renderDayInPicker = (day, _value, DayComponentProps) => {
     if (moment(schedule.date).isSame(day)) {
@@ -110,7 +110,7 @@ function RepeatInput({
               disableHighlightToday
               value={moment(repeatEndDate)}
               onChange={(newValue) => {
-                setRepeatEndDate(newValue);
+                updateRepeatEndDate(newValue);
               }}
               renderDay={renderDayInPicker}
               renderInput={(params) => <TextField {...params} />}
