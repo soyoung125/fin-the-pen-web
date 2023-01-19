@@ -52,7 +52,7 @@ function FilterButton() {
                       <>
                         <Typography>{el.type}</Typography>
                         {el.categories.map((cat) => (
-                          <Chip label={cat} variant="outlined" onDelete={handleDelete} sx={{ mr: 1, mb: 1 }} />
+                          <Chip key={Math.random()} label={cat} variant="outlined" onDelete={handleDelete} sx={{ mr: 1, mb: 1 }} />
                         ))}
                       </>
                     ))}

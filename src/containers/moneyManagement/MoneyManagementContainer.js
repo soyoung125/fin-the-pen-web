@@ -5,7 +5,7 @@ function MoneyManagementContainer() {
     <>
       자산 관리
       {
-        CATEGORIES.map((cat) => <div>{JSON.stringify(cat)}</div>)
+        CATEGORIES.map((cat) => <div key={Math.random()}>{JSON.stringify(cat)}</div>)
       }
     </>
   );
