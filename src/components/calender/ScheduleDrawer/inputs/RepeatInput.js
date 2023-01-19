@@ -21,9 +21,8 @@ function RepeatInput({
       return (
         <PickersDay
           sx={{
-            borderTopRightRadius: 0, borderBottomRightRadius: 0, marginX: 0, width: '40px', outline: '0',
+            borderTopRightRadius: 0, borderBottomRightRadius: 0, marginX: 0, width: '40px',
           }}
-          disableMargin
           className="Mui-selected"
           {...DayComponentProps}
         />
@@ -33,10 +32,9 @@ function RepeatInput({
       return (
         <PickersDay
           sx={{
-            borderTopLeftRadius: 0, borderBottomLeftRadius: 0, marginX: 0, width: '40px', outline: '0',
+            borderTopLeftRadius: 0, borderBottomLeftRadius: 0, marginX: 0, width: '40px',
           }}
           className="Mui-selected"
-          disableMargin
           {...DayComponentProps}
         />
       );
@@ -45,9 +43,8 @@ function RepeatInput({
       return (
         <PickersDay
           sx={{
-            borderRadius: 0, marginX: 0, width: '40px', outline: '0',
+            borderRadius: 0, marginX: 0, width: '40px',
           }}
-          disableMargin
           className="Mui-selected"
           {...DayComponentProps}
         />
