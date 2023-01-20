@@ -5,17 +5,13 @@ import {
 } from '@mui/material';
 import { useState } from 'react';
 import FilterAltOutlinedIcon from '@mui/icons-material/FilterAltOutlined';
-import RoundedButton from '../../../common/RoundedButton';
-import Accordion from '../../../common/accordions/Accordion';
-import AccordionSummary from '../../../common/accordions/AccordionSummary';
-import AccordionDetails from '../../../common/accordions/AccordionDetails';
-import { EXPENDITURE, FIXED, INCOME } from '../../../../utils/constants/categories';
+import RoundedButton from '../../../../common/RoundedButton';
+import { EXPENDITURE, FIXED, INCOME } from '../../../../../utils/constants/categories';
+import FilterAccordion from './inputs/FilterAccordion';
 
 function FilterButton() {
   const [bottomDrawerOpen, setBottomDrawerOpen] = useState(false);
-  const handleDelete = () => {
-    console.info('You clicked the Chip.');
-  };
+
   return (
     <>
       <RoundedButton value="user" onClick={() => setBottomDrawerOpen(true)}>
@@ -39,26 +35,9 @@ function FilterButton() {
           </Stack>
           <Stack>
             {
-              [FIXED, INCOME, EXPENDITURE].map((obj) => (
-                <Accordion>
-                  <AccordionSummary
-                    aria-controls="panel1a-content"
-                    id="panel1a-header"
-                  >
-                    <Typography>{obj.type}</Typography>
-                  </AccordionSummary>
-                  <AccordionDetails>
-                    {obj.nested.map((el) => (
-                      <>
-                        <Typography>{el.type}</Typography>
-                        {el.categories.map((cat) => (
-                          <Chip key={Math.random()} label={cat} variant="outlined" onDelete={handleDelete} sx={{ mr: 1, mb: 1 }} />
-                        ))}
-                      </>
-                    ))}
-                  </AccordionDetails>
-                </Accordion>
-              ))
+                [FIXED, INCOME, EXPENDITURE].map((obj) => (
+                  <FilterAccordion tag={obj} />
+                ))
             }
           </Stack>
           <Stack
@@ -76,8 +55,6 @@ function FilterButton() {
               InputLabelProps={{
                 shrink: true,
               }}
-              // value={schedule.date}
-              // onChange={updateSchedule}
               size="small"
             />
             <Typography>~</Typography>
@@ -89,8 +66,6 @@ function FilterButton() {
               InputLabelProps={{
                 shrink: true,
               }}
-              // value={schedule.date}
-              // onChange={updateSchedule}
               size="small"
             />
           </Stack>
