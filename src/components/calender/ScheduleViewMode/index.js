@@ -8,8 +8,23 @@ function ScheduleViewMode() {
   const viewMode = useSelector(selectViewMode);
 
   return (
-    <Box display="flex" justifyContent="center" alignItems="center">
-      <Box sx={{ borderRadius: 4, backgroundColor: grey[200] }}>
+    <Box
+      sx={{
+        width: '100vw',
+        position: 'absolute',
+        bottom: '80px',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+      }}
+    >
+      <Box
+        sx={{
+          display: 'inline-flex',
+          borderRadius: 4,
+          backgroundColor: grey[200],
+        }}
+      >
         <Button
           sx={{ borderRadius: 4 }}
           variant={viewMode === 'asset' ? 'contained' : 'text'}
