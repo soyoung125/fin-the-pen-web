@@ -36,7 +36,7 @@ function FilterButton() {
           <Stack>
             {
                 [FIXED, INCOME, EXPENDITURE].map((obj) => (
-                  <FilterAccordion tag={obj} />
+                  <FilterAccordion tag={obj} key={obj.type} />
                 ))
             }
           </Stack>
