@@ -1,11 +1,15 @@
 import { Box, Chip, Typography } from '@mui/material';
+import { useDispatch } from 'react-redux';
 import Accordion from '../../../../../common/accordions/Accordion';
 import AccordionSummary from '../../../../../common/accordions/AccordionSummary';
 import AccordionDetails from '../../../../../common/accordions/AccordionDetails';
+import { updateFilter } from '../../../../../../utils/redux/schedule/scheduleSlice';
 
 function FilterAccordion({ tag }) {
+  const dispatch = useDispatch();
   const handleClick = (state) => {
     console.info(state.target.innerText);
+    dispatch(updateFilter(state.target.innerText));
   };
   return (
     <Accordion>

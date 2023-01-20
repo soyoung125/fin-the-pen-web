@@ -28,11 +28,14 @@ export const scheduleSlice = createSlice({
     selectedDate: (state, action) => {
       state.date = action.payload;
     },
-    addFilter: (state, action) => {
-      state.filtered.add(action.payload);
-    },
-    deleteFilter: (state, action) => {
-      state.filtered = new Set([...state.filtered].filter((cat) => cat !== action.payload));
+    updateFilter: (state, action) => {
+      /**
+       * 수정 예정
+       *
+       * 1. 배열 안에 이미 있는 단어라면 제거
+       * 2. 배열 안에 없는 단어라면 추가
+       */
+      state.filtered.push(action.payload);
     },
   },
 });
@@ -42,8 +45,7 @@ export const {
   setSchedules,
   selectedDate,
   modifySchedule,
-  addFilter,
-  deleteFilter,
+  updateFilter,
 } = scheduleSlice.actions;
 
 export const selectSchedules = (state) => state.schedule.schedules;
