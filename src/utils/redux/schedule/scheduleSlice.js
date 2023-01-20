@@ -37,6 +37,9 @@ export const scheduleSlice = createSlice({
        */
       state.filtered.push(action.payload);
     },
+    initFilter: (state) => {
+      state.filtered = [];
+    },
   },
 });
 export const {
@@ -46,6 +49,7 @@ export const {
   selectedDate,
   modifySchedule,
   updateFilter,
+  initFilter,
 } = scheduleSlice.actions;
 
 export const selectSchedules = (state) => state.schedule.schedules;

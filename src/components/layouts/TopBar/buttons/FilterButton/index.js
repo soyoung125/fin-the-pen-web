@@ -5,13 +5,14 @@ import {
 } from '@mui/material';
 import { useState } from 'react';
 import FilterAltOutlinedIcon from '@mui/icons-material/FilterAltOutlined';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import RoundedButton from '../../../../common/RoundedButton';
 import { EXPENDITURE, FIXED, INCOME } from '../../../../../utils/constants/categories';
 import FilterAccordion from './inputs/FilterAccordion';
-import { selectFiltered } from '../../../../../utils/redux/schedule/scheduleSlice';
+import { initFilter, selectFiltered } from '../../../../../utils/redux/schedule/scheduleSlice';
 
 function FilterButton() {
+  const dispatch = useDispatch();
   const [bottomDrawerOpen, setBottomDrawerOpen] = useState(false);
   const filtered = useSelector(selectFiltered);
   return (
@@ -77,6 +78,7 @@ function FilterButton() {
           <Stack>
             <Button
               variant="contained"
+              onClick={() => dispatch(initFilter())}
             >
               필터 초기화
             </Button>
