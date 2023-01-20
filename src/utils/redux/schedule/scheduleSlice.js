@@ -7,6 +7,7 @@ const initialState = {
   date: moment(new Date()),
   schedules: [],
   filtered: [],
+  viewMode: 'schedule',
 };
 
 export const scheduleSlice = createSlice({
@@ -40,6 +41,9 @@ export const scheduleSlice = createSlice({
     initFilter: (state) => {
       state.filtered = [];
     },
+    changeViewMode: (state, action) => {
+      state.viewMode = action.payload;
+    },
   },
 });
 export const {
@@ -50,10 +54,12 @@ export const {
   modifySchedule,
   updateFilter,
   initFilter,
+  changeViewMode,
 } = scheduleSlice.actions;
 
 export const selectSchedules = (state) => state.schedule.schedules;
 export const selectDate = (state) => state.schedule.date;
 export const selectFiltered = (state) => state.schedule.filtered;
+export const selectViewMode = (state) => state.schedule.viewMode;
 
 export default scheduleSlice.reducer;
