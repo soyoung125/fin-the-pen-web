@@ -6,6 +6,7 @@ import moment from 'moment';
 const initialState = {
   date: moment(new Date()),
   schedules: [],
+  filtered: [],
 };
 
 export const scheduleSlice = createSlice({
@@ -27,13 +28,26 @@ export const scheduleSlice = createSlice({
     selectedDate: (state, action) => {
       state.date = action.payload;
     },
+    addFilter: (state, action) => {
+      state.filtered.add(action.payload);
+    },
+    deleteFilter: (state, action) => {
+      state.filtered = new Set([...state.filtered].filter((cat) => cat !== action.payload));
+    },
   },
 });
 export const {
-  addSchedule, deleteSchedule, setSchedules, selectedDate, modifySchedule,
+  addSchedule,
+  deleteSchedule,
+  setSchedules,
+  selectedDate,
+  modifySchedule,
+  addFilter,
+  deleteFilter,
 } = scheduleSlice.actions;
 
 export const selectSchedules = (state) => state.schedule.schedules;
 export const selectDate = (state) => state.schedule.date;
+export const selectFiltered = (state) => state.schedule.filtered;
 
 export default scheduleSlice.reducer;
