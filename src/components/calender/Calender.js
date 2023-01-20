@@ -62,6 +62,7 @@ function Calender() {
         <MarkedPickersDay
           color={fixedWithdrawal[0].category.color}
           DayComponentProps={DayComponentProps}
+          key={DayComponentProps.key}
         />
       );
     }
