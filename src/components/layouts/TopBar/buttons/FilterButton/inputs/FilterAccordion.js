@@ -13,14 +13,20 @@ function FilterAccordion({ tag }) {
         aria-controls="panel1a-content"
         id="panel1a-header"
       >
-        <Typography color={tag.nested.color}>{tag.type}</Typography>
+        <Typography>{tag.type}</Typography>
       </AccordionSummary>
       <AccordionDetails>
         {tag.nested.map((el) => (
           <Box key={el.type}>
             <Typography>{el.type}</Typography>
             {el.categories.map((cat) => (
-              <Chip key={cat} label={cat} variant="outlined" onDelete={handleDelete} sx={{ mr: 1, mb: 1 }} />
+              <Chip
+                key={cat}
+                label={cat}
+                variant="outlined"
+                onDelete={handleDelete}
+                sx={{ mr: 1, mb: 1, color: el.color }}
+              />
             ))}
           </Box>
         ))}
