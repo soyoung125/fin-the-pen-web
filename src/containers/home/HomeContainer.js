@@ -4,14 +4,17 @@ import {
   Divider,
 } from '@mui/material';
 import { useEffect } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import Calender from '../../components/calender/Calender';
 import ScheduleList from '../../components/calender/scheduleList/ScheduleList';
 import ScheduleViewMode from '../../components/calender/ScheduleViewMode';
 import { setHeaderOpenTrue } from '../../utils/redux/common/commonSlice';
+import { selectViewMode } from '../../utils/redux/schedule/scheduleSlice';
 
 function HomeConatiner() {
   const dispatch = useDispatch();
+  const viewMode = useSelector(selectViewMode);
+
   useEffect(() => {
     dispatch(setHeaderOpenTrue('home'));
   }, []);
@@ -20,7 +23,7 @@ function HomeConatiner() {
     <Box>
       <Calender />
       <Divider />
-      <ScheduleList />
+      {viewMode === 'schedule' && <ScheduleList />}
       <ScheduleViewMode />
     </Box>
   );
