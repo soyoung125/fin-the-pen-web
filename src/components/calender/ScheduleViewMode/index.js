@@ -1,6 +1,5 @@
 import { Box, Button } from '@mui/material';
 import { grey } from '@mui/material/colors';
-// import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { changeViewMode, selectViewMode } from '../../../utils/redux/schedule/scheduleSlice';
 

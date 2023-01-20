@@ -9,7 +9,9 @@ import moment from 'moment';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { EXPENDITURE, INCOME } from '../../utils/constants/categories';
-import { selectDate, selectedDate, selectSchedules } from '../../utils/redux/schedule/scheduleSlice';
+import {
+  selectDate, selectedDate, selectSchedules, selectViewMode,
+} from '../../utils/redux/schedule/scheduleSlice';
 import MarkedPickersDay from './scheduleMarker/MarkedPickersDay';
 import MarkerStack from './scheduleMarker/MarkerStack';
 
@@ -17,6 +19,7 @@ function Calender() {
   const dispatch = useDispatch();
   const value = useSelector(selectDate);
   const schedules = useSelector(selectSchedules);
+  const viewMode = useSelector(selectViewMode);
 
   const DATE_SIZE = 32;
   const DATE_HEIGHT = 50;
@@ -84,6 +87,12 @@ function Calender() {
       );
     }
 
+    return <PickersDay sx={{ marginBottom: 2 }} {...DayComponentProps} />;
+  };
+
+  // eslint-disable-next-line arrow-body-style
+  const renderAssetDayPicker = (day, _value, DayComponentProps) => {
+    // 렌더링 방식은 추후 수정 얘정
     return <PickersDay sx={{ marginBottom: 2 }} {...DayComponentProps} />;
   };
 
@@ -170,7 +179,7 @@ function Calender() {
             dispatch(selectedDate(moment(newValue)));
           }}
           // eslint-disable-next-line react/jsx-props-no-spreading
-          renderDay={renderDayInPicker}
+          renderDay={viewMode === 'schedule' ? renderDayInPicker : renderAssetDayPicker}
           renderInput={(params) => <TextField {...params} />}
         />
       </Box>
