@@ -7,6 +7,7 @@ import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import Calender from '../../components/calender/Calender';
 import ScheduleList from '../../components/calender/scheduleList/ScheduleList';
+import ScheduleViewMode from '../../components/calender/ScheduleViewMode';
 import { setHeaderOpenTrue } from '../../utils/redux/common/commonSlice';
 
 function HomeConatiner() {
@@ -14,11 +15,13 @@ function HomeConatiner() {
   useEffect(() => {
     dispatch(setHeaderOpenTrue('home'));
   }, []);
+
   return (
     <Box>
       <Calender />
       <Divider />
       <ScheduleList />
+      <ScheduleViewMode />
     </Box>
   );
 }
