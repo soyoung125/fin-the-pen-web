@@ -11,7 +11,7 @@ function ScheduleViewMode() {
     <Box
       sx={{
         width: '100vw',
-        position: 'absolute',
+        position: 'fixed',
         bottom: '80px',
         display: 'flex',
         alignItems: 'center',
