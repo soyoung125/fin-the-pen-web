@@ -4,8 +4,8 @@ import AccordionSummary from '../../../../../common/accordions/AccordionSummary'
 import AccordionDetails from '../../../../../common/accordions/AccordionDetails';
 
 function FilterAccordion({ tag }) {
-  const handleDelete = () => {
-    console.info('You clicked the Chip.');
+  const handleClick = (state) => {
+    console.info(state.target.innerText);
   };
   return (
     <Accordion>
@@ -24,7 +24,7 @@ function FilterAccordion({ tag }) {
                 key={cat}
                 label={cat}
                 variant="outlined"
-                onDelete={handleDelete}
+                onClick={handleClick}
                 sx={{ mr: 1, mb: 1, color: el.color }}
               />
             ))}
