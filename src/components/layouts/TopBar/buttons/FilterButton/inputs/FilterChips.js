@@ -16,6 +16,23 @@ function FilterChips({ nested }) {
     setCategories(nested.categories);
   }, [nested]);
 
+  useEffect(() => {
+    /**
+     * 이 타입의 모든 태그가 해제된 경우, 체크를 자동으로 해제 처리
+     */
+    let matches = 0;
+    categories.forEach((cat) => {
+      if (filtered.includes(cat)) {
+        matches += 1;
+      }
+    });
+    if (matches === categories.length) {
+      setChecked(false);
+    } else {
+      setChecked(true);
+    }
+  }, [filtered]);
+
   const handleClick = (state) => {
     dispatch(updateFilter(state.target.innerText));
   };
@@ -33,12 +50,12 @@ function FilterChips({ nested }) {
   return (
     <Box key={nested.type}>
       <Stack direction="row" alignItems="center">
-        <Typography>{nested.type}</Typography>
         <Checkbox
           checked={checked}
           onChange={handleChange}
           inputProps={{ 'aria-label': 'controlled' }}
         />
+        <Typography>{nested.type}</Typography>
       </Stack>
       {nested.categories.map((cat) => (
         <Chip
