@@ -7,7 +7,6 @@ function MarkedPickersDay({ color, DayComponentProps }) {
       sx={{
         border: 1,
         borderRadius: 2,
-        marginBottom: 2,
         borderColor: color,
       }}
       {...DayComponentProps}
