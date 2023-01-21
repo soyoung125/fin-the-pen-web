@@ -31,12 +31,15 @@ export const scheduleSlice = createSlice({
     },
     updateFilter: (state, action) => {
       /**
-       * 수정 예정
-       *
        * 1. 배열 안에 이미 있는 단어라면 제거
        * 2. 배열 안에 없는 단어라면 추가
        */
-      state.filtered.push(action.payload);
+      if (state.filtered.includes(action.payload)) {
+        state.filtered = state.filtered.filter((f) => f !== action.payload);
+      } else {
+        const set = new Set([...state.filtered].concat(action.payload));
+        state.filtered = Array.from(set);
+      }
     },
     initFilter: (state) => {
       state.filtered = [];
