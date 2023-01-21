@@ -30,6 +30,10 @@ const ADD_SCHEDULE = Object.freeze({
     modify: '일정 삭제하기',
   },
 });
+const SCHEDULE_DRAWER_MODE = {
+  수정: 'modify',
+  생성: 'create',
+};
 const NEED_TITLE = '제목을 입력해야 합니다.';
 const INIT_SCHEDULE = {
   event_name: '',
@@ -59,5 +63,10 @@ const VIEW_MODE = {
 
 export default null;
 export {
-  ADD_SCHEDULE, NEED_TITLE, INIT_SCHEDULE, REPEAT_CYCLE, VIEW_MODE,
+  ADD_SCHEDULE,
+  SCHEDULE_DRAWER_MODE,
+  NEED_TITLE,
+  INIT_SCHEDULE,
+  REPEAT_CYCLE,
+  VIEW_MODE,
 };

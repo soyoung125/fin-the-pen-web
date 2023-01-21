@@ -12,7 +12,7 @@ import { useSelector } from 'react-redux';
 import moment from 'moment';
 import PATH from '../../utils/constants/path';
 import ScheduleDrawer from '../calender/ScheduleDrawer';
-import { INIT_SCHEDULE } from '../../utils/constants/schedule';
+import { INIT_SCHEDULE, SCHEDULE_DRAWER_MODE } from '../../utils/constants/schedule';
 import { selectDate } from '../../utils/redux/schedule/scheduleSlice';
 
 function BottomBar({ value, setValue }) {
@@ -52,7 +52,15 @@ function BottomBar({ value, setValue }) {
         onClose={() => setBottomDrawerOpen(false)}
       >
         {/* 이 부분을 범용적으로 사용할 수 있게 만드는 건 어떨까? */}
-        <ScheduleDrawer setBottomDrawerOpen={setBottomDrawerOpen} data={{ ...INIT_SCHEDULE, date: moment(date).format('YYYY-MM-DD'), repeat_endDate: moment(date).format('YYYY-MM-DD') }} mode="create" />
+        <ScheduleDrawer
+          setBottomDrawerOpen={setBottomDrawerOpen}
+          data={{
+            ...INIT_SCHEDULE,
+            date: moment(date).format('YYYY-MM-DD'),
+            repeat_endDate: moment(date).format('YYYY-MM-DD'),
+          }}
+          mode={SCHEDULE_DRAWER_MODE.생성}
+        />
       </Drawer>
     </>
   );
