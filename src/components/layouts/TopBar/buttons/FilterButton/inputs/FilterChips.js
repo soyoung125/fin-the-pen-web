@@ -3,21 +3,29 @@ import {
   Box, Chip, Stack, Typography,
 } from '@mui/material';
 import { useDispatch, useSelector } from 'react-redux';
-import { useState } from 'react';
-import { selectFiltered, updateFilter } from '../../../../../../utils/redux/schedule/scheduleSlice';
+import { useEffect, useState } from 'react';
+import { selectFiltered, updateFilter, updateFiltersForce } from '../../../../../../utils/redux/schedule/scheduleSlice';
 
 function FilterChips({ nested }) {
   const dispatch = useDispatch();
   const filtered = useSelector(selectFiltered);
   const [checked, setChecked] = useState(true);
+  const [categories, setCategories] = useState([]);
+
+  useEffect(() => {
+    setCategories(nested.categories);
+  }, [nested]);
 
   const handleClick = (state) => {
-    console.info(state.target.innerText);
     dispatch(updateFilter(state.target.innerText));
   };
 
   const handleChange = (event) => {
     setChecked(event.target.checked);
+    dispatch(updateFiltersForce({
+      mode: checked ? 'write' : 'remove',
+      categories,
+    }));
   };
 
   const isFiltered = (cat) => filtered.findIndex((word) => word === cat) === -1;

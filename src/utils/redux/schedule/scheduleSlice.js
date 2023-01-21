@@ -41,6 +41,25 @@ export const scheduleSlice = createSlice({
         state.filtered = Array.from(set);
       }
     },
+    updateFiltersForce: (state, action) => {
+      /**
+       * mode가 write라면 들어온 categories를 state.filtered에 강제로 추가
+       * mode가 remove라면 들어온 categories를 state.filtered에서 강제로 제거
+       */
+      const { mode, categories } = action.payload;
+      switch (mode) {
+        case 'write':
+          state.filtered = Array.from(new Set([...state.filtered].concat(categories)));
+          break;
+        case 'remove':
+          categories.forEach((cat) => {
+            state.filtered = state.filtered.filter((f) => f !== cat);
+          });
+          break;
+        default:
+          alert('잘못 된 요청입니다.');
+      }
+    },
     initFilter: (state) => {
       state.filtered = [];
     },
@@ -56,6 +75,7 @@ export const {
   selectedDate,
   modifySchedule,
   updateFilter,
+  updateFiltersForce,
   initFilter,
   changeViewMode,
 } = scheduleSlice.actions;
