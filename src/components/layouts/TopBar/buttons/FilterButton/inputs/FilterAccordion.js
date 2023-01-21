@@ -1,5 +1,9 @@
-import { Box, Chip, Typography } from '@mui/material';
+import {
+  Box, Chip, Stack, Typography,
+} from '@mui/material';
 import { useDispatch, useSelector } from 'react-redux';
+import Checkbox from '@mui/material/Checkbox';
+import { useState } from 'react';
 import Accordion from '../../../../../common/accordions/Accordion';
 import AccordionSummary from '../../../../../common/accordions/AccordionSummary';
 import AccordionDetails from '../../../../../common/accordions/AccordionDetails';
@@ -12,6 +16,11 @@ function FilterAccordion({ tag }) {
     console.info(state.target.innerText);
     dispatch(updateFilter(state.target.innerText));
   };
+  const [checked, setChecked] = useState(true);
+
+  const handleChange = (event) => {
+    setChecked(event.target.checked);
+  };
   return (
     <Accordion>
       <AccordionSummary
@@ -23,7 +32,14 @@ function FilterAccordion({ tag }) {
       <AccordionDetails>
         {tag.nested.map((el) => (
           <Box key={el.type}>
-            <Typography>{el.type}</Typography>
+            <Stack direction="row" alignItems="center">
+              <Typography>{el.type}</Typography>
+              <Checkbox
+                checked={checked}
+                onChange={handleChange}
+                inputProps={{ 'aria-label': 'controlled' }}
+              />
+            </Stack>
             {el.categories.map((cat) => (
               <Chip
                 key={cat}
