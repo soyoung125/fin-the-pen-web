@@ -16,14 +16,14 @@ import MarkedPickersDay from './scheduleMarker/MarkedPickersDay';
 import MarkerStack from './scheduleMarker/MarkerStack';
 import 'moment/locale/ko';
 
-function Calender() {
+function Calender({ dateHeight }) {
   const dispatch = useDispatch();
   const value = useSelector(selectDate);
   const schedules = useSelector(selectSchedules);
   const viewMode = useSelector(selectViewMode);
 
   const DATE_SIZE = 32;
-  const DATE_HEIGHT = 50;
+  const DATE_HEIGHT = dateHeight;
 
   useEffect(() => {
     dispatch(selectedDate(moment(new Date())));
@@ -108,11 +108,14 @@ function Calender() {
           },
           '& > div > div, & > div > div > div, & .MuiCalendarPicker-root': {
             width: '100%',
+            display: 'inline-flex',
+            minHeight: DATE_HEIGHT * 6,
           },
           // 헤더 디자인을 위한 css
           '.MuiCalendarOrClockPicker-root > div': {
             width: '100%',
             margin: '0',
+            minHeight: DATE_HEIGHT * 6,
           },
           '.MuiPickersCalendarHeader-root': {
             display: 'flex',

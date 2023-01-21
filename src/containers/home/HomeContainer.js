@@ -21,9 +21,13 @@ function HomeConatiner() {
 
   return (
     <Box>
-      <Calender />
-      <Divider />
-      {viewMode === 'schedule' && <ScheduleList />}
+      <Calender dateHeight={viewMode === 'schedule' ? 50 : 120} />
+      {viewMode === 'schedule' && (
+      <>
+        <Divider />
+        <ScheduleList />
+      </>
+      )}
       <ScheduleViewMode />
     </Box>
   );
