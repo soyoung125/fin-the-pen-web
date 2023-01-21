@@ -9,12 +9,16 @@ import { useDispatch, useSelector } from 'react-redux';
 import RoundedButton from '../../../../common/RoundedButton';
 import { EXPENDITURE, FIXED, INCOME } from '../../../../../utils/constants/categories';
 import FilterAccordion from './inputs/FilterAccordion';
-import { initFilter, selectFiltered } from '../../../../../utils/redux/schedule/scheduleSlice';
+import { initFilter, selectFiltered, updateFilter } from '../../../../../utils/redux/schedule/scheduleSlice';
 
 function FilterButton() {
   const dispatch = useDispatch();
   const [bottomDrawerOpen, setBottomDrawerOpen] = useState(false);
   const filtered = useSelector(selectFiltered);
+  const handleClick = (state) => {
+    dispatch(updateFilter(state.target.innerText));
+  };
+
   return (
     <>
       <RoundedButton value="user" onClick={() => setBottomDrawerOpen(true)}>
@@ -36,9 +40,22 @@ function FilterButton() {
             <Typography variant="h5" sx={{ fontWeight: 'bold' }}>필터 설정(제작중)</Typography>
             <Button onClick={() => alert('확인')}>확인</Button>
           </Stack>
-          <Typography>
-            {JSON.stringify(`filtered : ${filtered}`)}
-          </Typography>
+          {
+            filtered.length > 0 && (
+              <>
+                <Typography variant="caption">❌ 다음 태그들은 앱에서 표시되지 않습니다.</Typography>
+                <Box>
+                  {filtered.map((cat) => (
+                    <Chip
+                      label={cat}
+                      sx={{ mb: 1, mr: 1 }}
+                      onClick={handleClick}
+                    />
+                  ))}
+                </Box>
+              </>
+            )
+          }
           <Stack>
             {
                 [FIXED, INCOME, EXPENDITURE].map((obj) => (

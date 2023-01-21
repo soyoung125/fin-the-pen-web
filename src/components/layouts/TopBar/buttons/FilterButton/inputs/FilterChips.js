@@ -31,7 +31,7 @@ function FilterChips({ nested }) {
     } else {
       setChecked(true);
     }
-  }, [filtered]);
+  }, [categories, filtered]);
 
   const handleClick = (state) => {
     dispatch(updateFilter(state.target.innerText));
