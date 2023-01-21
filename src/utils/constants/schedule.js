@@ -52,8 +52,12 @@ const REPEAT_CYCLE = {
   월간: 'months',
   연간: 'years',
 };
+const VIEW_MODE = {
+  자산: 'asset',
+  일정: 'schedule',
+};
 
 export default null;
 export {
-  ADD_SCHEDULE, NEED_TITLE, INIT_SCHEDULE, REPEAT_CYCLE,
+  ADD_SCHEDULE, NEED_TITLE, INIT_SCHEDULE, REPEAT_CYCLE, VIEW_MODE,
 };

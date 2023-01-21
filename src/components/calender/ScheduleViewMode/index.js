@@ -1,6 +1,7 @@
 import { Box, Button } from '@mui/material';
 import { grey } from '@mui/material/colors';
 import { useDispatch, useSelector } from 'react-redux';
+import { VIEW_MODE } from '../../../utils/constants/schedule';
 import { changeViewMode, selectViewMode } from '../../../utils/redux/schedule/scheduleSlice';
 
 function ScheduleViewMode() {
@@ -27,15 +28,15 @@ function ScheduleViewMode() {
       >
         <Button
           sx={{ borderRadius: 4 }}
-          variant={viewMode === 'asset' ? 'contained' : 'text'}
-          onClick={() => dispatch(changeViewMode('asset'))}
+          variant={viewMode === VIEW_MODE.자산 ? 'contained' : 'text'}
+          onClick={() => dispatch(changeViewMode(VIEW_MODE.자산))}
         >
           자산
         </Button>
         <Button
           sx={{ borderRadius: 4 }}
-          variant={viewMode === 'schedule' ? 'contained' : 'text'}
-          onClick={() => dispatch(changeViewMode('schedule'))}
+          variant={viewMode === VIEW_MODE.일정 ? 'contained' : 'text'}
+          onClick={() => dispatch(changeViewMode(VIEW_MODE.일정))}
         >
           일정
         </Button>
