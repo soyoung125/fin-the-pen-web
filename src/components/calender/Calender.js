@@ -14,6 +14,7 @@ import {
 } from '../../utils/redux/schedule/scheduleSlice';
 import MarkedPickersDay from './scheduleMarker/MarkedPickersDay';
 import MarkerStack from './scheduleMarker/MarkerStack';
+import 'moment/locale/ko';
 
 function Calender() {
   const dispatch = useDispatch();
@@ -98,7 +99,8 @@ function Calender() {
   };
 
   return (
-    <LocalizationProvider dateAdapter={AdapterMoment}>
+    // eslint-disable-next-line max-len
+    <LocalizationProvider dateAdapter={AdapterMoment} dateFormats={{ monthAndYear: 'yyyy년 MM월' }}>
       <Box
         sx={{
           '& > div': {
