@@ -12,7 +12,7 @@ import moment from 'moment';
 import NameInput from './inputs/NameInput';
 import DateInput from './inputs/DateInput';
 import {
-  ADD_SCHEDULE, NEED_TITLE, REPEAT_CYCLE,
+  ADD_SCHEDULE, NEED_TITLE, REPEAT_CYCLE, SCHEDULE_DRAWER_MODE,
 } from '../../../utils/constants/schedule';
 import { addSchedule, deleteSchedule, modifySchedule } from '../../../utils/redux/schedule/scheduleSlice';
 import SpendingInput from './inputs/SpendingInput';
@@ -42,7 +42,7 @@ function ScheduleDrawer({ setBottomDrawerOpen, data, mode }) {
   const [openDatePickerModal, setOpenDatePickerModal] = useState(false);
   const [repeatEndDate, setRepeatEndDate] = useState(moment(schedule.repeat_endDate));
   const [useMode, setUseMode] = useState(mode);
-  const [expandAccordion, setExpandAccordion] = useState(mode !== 'create');
+  const [expandAccordion, setExpandAccordion] = useState(mode !== SCHEDULE_DRAWER_MODE.생성);
 
   const updateSchedule = (state) => {
     setSchedule({ ...schedule, [state.target.id]: state.target.value });
@@ -128,7 +128,7 @@ function ScheduleDrawer({ setBottomDrawerOpen, data, mode }) {
 
   const handleSubmit = () => {
     if (schedule.event_name.length > 0) {
-      if (mode === 'create') {
+      if (mode === SCHEDULE_DRAWER_MODE.생성) {
         addNewSchedule();
       } else {
         deleteSelectedSchedule();
@@ -158,12 +158,12 @@ function ScheduleDrawer({ setBottomDrawerOpen, data, mode }) {
         m={1}
       >
         <Stack direction="row" alignItems="center" justifyContent="space-between">
-          {useMode === 'modify'
+          {useMode === SCHEDULE_DRAWER_MODE.수정
             ? <Button onClick={() => setBottomDrawerOpen(false)}>취소</Button>
             : <Button />}
           <Typography variant="h5" sx={{ fontWeight: 'bold' }}>{ADD_SCHEDULE.drawer_title[useMode]}</Typography>
 
-          {useMode === 'modify'
+          {useMode === SCHEDULE_DRAWER_MODE.수정
             ? <Button onClick={() => modifySelectedSchedule()}>저장</Button>
             : <Button onClick={() => setBottomDrawerOpen(false)}><ClearIcon /></Button>}
         </Stack>
@@ -185,10 +185,10 @@ function ScheduleDrawer({ setBottomDrawerOpen, data, mode }) {
 
         <CategoryInput
           updateCategory={updateCategory}
-          selected={useMode === 'create' ? null : schedule.category.title}
+          selected={useMode === SCHEDULE_DRAWER_MODE.생성 ? null : schedule.category.title}
         />
 
-        {mode === 'modify'
+        {mode === SCHEDULE_DRAWER_MODE.수정
           ? (
             <AssetSettings
               schedule={schedule}

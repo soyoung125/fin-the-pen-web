@@ -4,6 +4,7 @@ import {
 import moment from 'moment';
 import { useState } from 'react';
 import { useSelector } from 'react-redux';
+import { SCHEDULE_DRAWER_MODE } from '../../../utils/constants/schedule';
 import { selectDate, selectSchedules } from '../../../utils/redux/schedule/scheduleSlice';
 import ScheduleDrawer from '../ScheduleDrawer';
 import ScheduleCard from './ScheduleCard';
@@ -51,7 +52,11 @@ function ScheduleList() {
         onClose={() => setBottomDrawerOpen(false)}
       >
         {/* 이 부분을 범용적으로 사용할 수 있게 만드는 건 어떨까? */}
-        <ScheduleDrawer setBottomDrawerOpen={setBottomDrawerOpen} data={selectedSchedule} mode="modify" />
+        <ScheduleDrawer
+          setBottomDrawerOpen={setBottomDrawerOpen}
+          data={selectedSchedule}
+          mode={SCHEDULE_DRAWER_MODE.수정}
+        />
       </Drawer>
     </>
   );
