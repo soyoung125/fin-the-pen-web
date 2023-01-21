@@ -1,7 +1,8 @@
 /* eslint-disable no-unused-vars */
 import {
+  Alert,
   Box,
-  Button, Chip, Drawer, ListItem, Stack, TextField, Typography,
+  Button, Chip, Drawer, ListItem, Paper, Stack, TextField, Typography,
 } from '@mui/material';
 import { useState } from 'react';
 import FilterAltOutlinedIcon from '@mui/icons-material/FilterAltOutlined';
@@ -15,8 +16,13 @@ function FilterButton() {
   const dispatch = useDispatch();
   const [bottomDrawerOpen, setBottomDrawerOpen] = useState(false);
   const filtered = useSelector(selectFiltered);
+
   const handleClick = (state) => {
     dispatch(updateFilter(state.target.innerText));
+  };
+
+  const handleDelete = (cat) => {
+    dispatch(updateFilter(cat));
   };
 
   return (
@@ -42,18 +48,26 @@ function FilterButton() {
           </Stack>
           {
             filtered.length > 0 && (
-              <>
-                <Typography variant="caption">❌ 다음 태그들은 앱에서 표시되지 않습니다.</Typography>
-                <Box>
-                  {filtered.map((cat) => (
-                    <Chip
-                      label={cat}
-                      sx={{ mb: 1, mr: 1 }}
-                      onClick={handleClick}
-                    />
-                  ))}
+              <Paper>
+                <Box p={2}>
+                  <Box mb={2}>
+                    <Alert severity="error">
+                      아래 태그들은 앱에서 표시되지 않습니다.
+                    </Alert>
+                  </Box>
+                  <Box>
+                    {filtered.map((cat) => (
+                      <Chip
+                        label={cat}
+                        key={cat}
+                        sx={{ mb: 1, mr: 1 }}
+                        onClick={handleClick}
+                        onDelete={() => handleDelete(cat)}
+                      />
+                    ))}
+                  </Box>
                 </Box>
-              </>
+              </Paper>
             )
           }
           <Stack>
