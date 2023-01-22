@@ -1,17 +1,14 @@
-import { Stack, Typography } from '@mui/material';
 import { useSelector } from 'react-redux';
+import TestBox from '../../components/test/TestBox';
 import { selectUser } from '../../utils/redux/user/userSlice';
 
 function UserData() {
   const user = useSelector(selectUser);
 
   return (
-    <Stack spacing={2} m={2} border={1} p={2}>
-      <Typography>Redux : selectUser</Typography>
-      <Typography sx={{ wordBreak: 'break-all' }}>
-        {JSON.stringify(user)}
-      </Typography>
-    </Stack>
+    <TestBox title="Redux : selectUser">
+      {JSON.stringify(user)}
+    </TestBox>
   );
 }
 export default UserData;
