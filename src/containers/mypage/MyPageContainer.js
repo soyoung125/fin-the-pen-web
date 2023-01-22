@@ -1,14 +1,13 @@
 /* eslint-disable no-restricted-globals */
 /* eslint-disable no-alert */
-import {
-  Box, Button, Typography,
-} from '@mui/material';
+import { Box, Button } from '@mui/material';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import PATH from '../../utils/constants/path';
 import { logOut, selectUser } from '../../utils/redux/user/userSlice';
 import GuestDataManager from '../test/GuestDataManager';
+import UserData from '../test/UserData';
 // import SignInContainer from '../sign/SignInContainer';
 
 function MyPageContainer() {
@@ -29,10 +28,7 @@ function MyPageContainer() {
   }, [user]);
   return (
     <Box>
-      <Typography>다음 계정으로 로그인 되어있습니다.</Typography>
-      <Typography>
-        {JSON.stringify(user)}
-      </Typography>
+      <UserData />
       <GuestDataManager />
       <Box m={2}>
         <Button
