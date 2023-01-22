@@ -56,7 +56,7 @@ function FilterButton() {
                       아래 태그들은 앱에서 표시되지 않습니다.
                     </Alert>
                   </Box>
-                  <Box>
+                  <Stack direction="row" sx={{ overflowX: 'scroll' }}>
                     {filtered.map((cat) => (
                       <Chip
                         label={cat}
@@ -66,7 +66,7 @@ function FilterButton() {
                         onDelete={() => handleDelete(cat)}
                       />
                     ))}
-                  </Box>
+                  </Stack>
                 </Box>
               </Paper>
             )
