@@ -40,6 +40,7 @@ function FilterButton() {
           justifyContent="space-between"
           spacing={2}
           m={1}
+          pt={5}
         >
           <Stack direction="row" alignItems="center" justifyContent="space-between">
             <Button onClick={() => setBottomDrawerOpen(false)}>닫기</Button>
