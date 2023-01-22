@@ -47,20 +47,25 @@ function AnalysisContainer() {
         // eslint-disable-next-line function-paren-newline
         const spending = schByCategory.reduce(
           // eslint-disable-next-line prefer-arrow-callback
-          function (sum, schedule) {
-            return sum + parseInt(schedule.expected_spending, 10);
-          }, 0);
-        if (spending > 0) {
+          function (result, schedule) {
+            return {
+              sum: result.sum + parseInt(schedule.expected_spending, 10),
+              history: result.history.concat(schedule),
+            };
+          }, { sum: 0, history: [] });
+        if (spending.sum > 0) {
           newData.push({
             id: c.title,
             label: c.title,
-            value: spending,
+            value: spending.sum,
             color: colorList[index],
+            history: spending.history,
           });
-          newTotal += spending;
+          newTotal += spending.sum;
         }
       }
     });
+    console.log(newData);
     setTotal(newTotal);
     setData(newData.sort((a, b) => b.value - a.value));
   }, []);
