@@ -1,5 +1,6 @@
+/* eslint-disable max-len */
 import {
-  Card, CardContent, CardHeader, IconButton, Typography,
+  Card, CardContent, CardHeader, IconButton, List, ListItem, ListItemText,
 } from '@mui/material';
 import CloseIcon from '@mui/icons-material/Close';
 
@@ -18,10 +19,16 @@ function AnalysisDetailCard({ closeDetailCard, selectedItem }) {
         )}
       />
       <CardContent>
-        <Typography>
-          {selectedItem.value}
-          원 사용
-        </Typography>
+        <List>
+          {selectedItem.history.map((s) => (
+            <ListItem>
+              <ListItemText
+                key={Math.random()}
+                primary={s.event_name}
+              />
+            </ListItem>
+          ))}
+        </List>
       </CardContent>
     </Card>
   );
