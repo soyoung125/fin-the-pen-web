@@ -3,6 +3,7 @@ import {
   Card, CardContent, CardHeader, IconButton, List, ListItem, ListItemText, Stack, Typography,
 } from '@mui/material';
 import CloseIcon from '@mui/icons-material/Close';
+import AssetManagement from './AssetManagement';
 
 function AnalysisDetailCard({ closeDetailCard, selectedItem }) {
   return (
@@ -33,6 +34,7 @@ function AnalysisDetailCard({ closeDetailCard, selectedItem }) {
           ))}
         </List>
       </CardContent>
+      <AssetManagement />
     </Card>
   );
 }
