@@ -6,14 +6,14 @@ import moment from 'moment';
 
 function SpendingDetailCard({ schedule }) {
   return (
-    <Paper sx={{ marginY: 1, padding: 1 }}>
+    <Paper sx={{ marginY: 1, paddingY: 2, paddingX: 3 }}>
       <Stack direction="row" justifyContent="space-between">
         <Typography>{moment(schedule.date).format('MM월 DD일')}</Typography>
         <Typography>{schedule.event_name}</Typography>
       </Stack>
       <Stack direction="row" justifyContent="space-between">
-        <Typography>
-          <AccessTimeIcon fontSize="small" />
+        <Typography variant="caption">
+          <AccessTimeIcon sx={{ width: '10px', height: '10px', marginRight: 0.5 }} />
           {schedule.start_time}
         </Typography>
         <Typography>
@@ -21,7 +21,7 @@ function SpendingDetailCard({ schedule }) {
             variant="contained"
             size="small"
             sx={{
-              borderRadius: 5, minWidth: 0, width: '20px', height: '20px',
+              borderRadius: 5, minWidth: 0, width: '20px', height: '20px', marginRight: 0.5,
             }}
           >
             {schedule.type}
