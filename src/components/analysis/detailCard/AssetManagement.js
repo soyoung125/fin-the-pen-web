@@ -5,7 +5,7 @@ function AssetManagement() {
     <Stack
       justifyContent="center"
       sx={{
-        borderRadius: 3, backgroundColor: 'primary.main', padding: 2, margin: 2,
+        borderRadius: 3, backgroundColor: 'primary.main', padding: 2, marginBottom: 2,
       }}
     >
       <Typography variant="buttontext">1월 22일 기준 카페 지출 내역 총 4견 (25,000원)</Typography>

@@ -1,11 +1,15 @@
 /* eslint-disable max-len */
 import {
+  Alert,
   Card, CardContent, CardHeader, IconButton, List, ListItem, ListItemText, Stack, Typography,
 } from '@mui/material';
 import CloseIcon from '@mui/icons-material/Close';
 import AssetManagement from './AssetManagement';
+import ALERTS from '../../../utils/constants/alerts';
 
 function AnalysisDetailCard({ closeDetailCard, selectedItem }) {
+  const random = Math.floor((Math.random() * 5));
+
   return (
     <Card sx={{
       height: '100%',
@@ -33,8 +37,11 @@ function AnalysisDetailCard({ closeDetailCard, selectedItem }) {
             </ListItem>
           ))}
         </List>
+        <AssetManagement />
+        <Alert color={ALERTS[random].color} sx={{ width: '100%' }} icon={ALERTS[random].icon}>
+          {ALERTS[random].message}
+        </Alert>
       </CardContent>
-      <AssetManagement />
     </Card>
   );
 }
