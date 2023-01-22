@@ -1,3 +1,4 @@
+/* eslint-disable no-nested-ternary */
 import { Alert, Box } from '@mui/material';
 import {
   blue, blueGrey, brown, green, indigo, pink, red,
@@ -94,14 +95,16 @@ function AnalysisContainer() {
     <Box>
       <AnalysisHeader />
       {total > 0 ? (
-        <>
-          <Box sx={{ width: '100vw', height: '100vw', padding: 5 }}>
-            {showDetailCard
-              ? <AnalysisDetailCard closeDetailCard={closeDetailCard} selectedItem={selectedItem} />
-              : <AnalysisGraph data={data} total={total} />}
-          </Box>
-          <AnalysisList data={data} clickListItem={clickListItem} hexToRGB={hexToRGB} />
-        </>
+        showDetailCard
+          ? <AnalysisDetailCard closeDetailCard={closeDetailCard} selectedItem={selectedItem} />
+          : (
+            <>
+              <Box sx={{ width: '100vw', height: '100vw', padding: 5 }}>
+                <AnalysisGraph data={data} total={total} />
+              </Box>
+              <AnalysisList data={data} clickListItem={clickListItem} hexToRGB={hexToRGB} />
+            </>
+          )
       ) : <Alert sx={{ margin: 2 }} severity="info">이체/지출 데이터가 존재하지 않습니다.</Alert>}
     </Box>
   );
