@@ -1,6 +1,8 @@
+/* eslint-disable react/no-unescaped-entities */
 import { Stack, Typography } from '@mui/material';
+import moment from 'moment';
 
-function AssetManagement() {
+function AssetManagement({ selectedItem }) {
   return (
     <Stack
       justifyContent="center"
@@ -8,9 +10,24 @@ function AssetManagement() {
         borderRadius: 3, backgroundColor: 'primary.main', padding: 2, marginBottom: 2,
       }}
     >
-      <Typography variant="buttontext">1월 22일 기준 카페 지출 내역 총 4견 (25,000원)</Typography>
       <Typography variant="buttontext">
-        {'\'카페\''}
+        {moment(new Date()).format('M월 D일')}
+        {' '}
+        기준
+        {' '}
+        {selectedItem.label}
+        {' '}
+        지출 내역 총
+        {' '}
+        {selectedItem.history.length}
+        건 (
+        {selectedItem.value.toLocaleString('ko-KR')}
+        원)
+      </Typography>
+      <Typography variant="buttontext">
+        '
+        {selectedItem.label}
+        '
         {' '}
         카테고리 소비 목표액인 100,000의 25%
       </Typography>

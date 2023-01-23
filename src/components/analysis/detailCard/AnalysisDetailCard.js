@@ -33,7 +33,7 @@ function AnalysisDetailCard({ closeDetailCard, selectedItem }) {
             <SpendingDetailCard schedule={s} key={Math.random()} />
           ))}
         </Stack>
-        <AssetManagement />
+        <AssetManagement selectedItem={selectedItem} />
         <Alert color={ALERTS[random].color} sx={{ width: '100%' }} icon={ALERTS[random].icon}>
           {ALERTS[random].message}
         </Alert>
