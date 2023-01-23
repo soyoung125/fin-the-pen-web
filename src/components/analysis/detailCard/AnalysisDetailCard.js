@@ -12,10 +12,7 @@ function AnalysisDetailCard({ closeDetailCard, selectedItem }) {
   const random = Math.floor((Math.random() * 5));
 
   return (
-    <Card sx={{
-      height: '100%',
-    }}
-    >
+    <Card sx={{ height: '100%', border: '0px' }} variant="outlined">
       <CardHeader
         action={(
           <IconButton onClick={() => closeDetailCard()}>
