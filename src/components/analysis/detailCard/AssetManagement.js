@@ -7,7 +7,7 @@ function AssetManagement({ selectedItem }) {
     <Stack
       justifyContent="center"
       sx={{
-        borderRadius: 3, backgroundColor: 'primary.main', padding: 2, marginBottom: 2,
+        borderRadius: 3, backgroundColor: 'primary.main', padding: 3, marginBottom: 2, color: 'white', textAlign: 'center',
       }}
     >
       <Typography variant="buttontext">
