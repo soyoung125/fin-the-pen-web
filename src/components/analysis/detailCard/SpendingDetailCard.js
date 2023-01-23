@@ -1,3 +1,4 @@
+/* eslint-disable max-len */
 import {
   Button, Paper, Stack, Typography,
 } from '@mui/material';
@@ -6,7 +7,10 @@ import moment from 'moment';
 
 function SpendingDetailCard({ schedule }) {
   return (
-    <Paper sx={{ marginY: 1, paddingY: 2, paddingX: 3 }}>
+    <Paper sx={{
+      marginY: 1, paddingY: 2, paddingX: 3, borderRadius: 3, borderLeft: 12, borderLeftColor: schedule.category.color,
+    }}
+    >
       <Stack direction="row" justifyContent="space-between">
         <Typography>{moment(schedule.date).format('MM월 DD일')}</Typography>
         <Typography>{schedule.event_name}</Typography>
