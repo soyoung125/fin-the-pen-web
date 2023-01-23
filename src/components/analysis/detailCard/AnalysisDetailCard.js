@@ -30,7 +30,7 @@ function AnalysisDetailCard({ closeDetailCard, selectedItem }) {
         </Stack>
         <Stack sx={{ borderRadius: 3, marginBottom: 2 }}>
           {selectedItem.history.map((s) => (
-            <SpendingDetailCard schedule={s} key={Math.random()} />
+            <SpendingDetailCard schedule={s} key={Math.random()} bgColor={selectedItem.color} />
           ))}
         </Stack>
         <AssetManagement selectedItem={selectedItem} />
