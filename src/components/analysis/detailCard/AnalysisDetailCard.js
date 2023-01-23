@@ -25,8 +25,8 @@ function AnalysisDetailCard({ closeDetailCard, selectedItem }) {
       />
       <CardContent>
         <Stack direction="row" justifyContent="space-between" alignItems="flex-end">
-          <Typography variant="h4">{`${selectedItem.label} 지출 내역`}</Typography>
-          <Typography>{`총 ${selectedItem.history.length}건`}</Typography>
+          <Typography variant="h4" sx={{ fontWeight: 'bold' }}>{`${selectedItem.label} 지출 내역`}</Typography>
+          <Typography sx={{ color: 'primary.main', fontWeight: 'bold' }}>{`총 ${selectedItem.history.length}건`}</Typography>
         </Stack>
         <Stack sx={{ borderRadius: 3, marginBottom: 2 }}>
           {selectedItem.history.map((s) => (
