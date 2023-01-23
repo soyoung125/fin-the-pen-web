@@ -56,7 +56,7 @@ export default function SignInContainer() {
      * 하단에 있는 요청 주소는 수정해주셔야 합니다.
      *
      */
-    axios.post('로그인을_위한_API_주소', sign)
+    axios.post('/fin-the-pen-web/sign-in', sign)
       .then((response) => {
         // 처리 결과
         alert(response);
