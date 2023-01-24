@@ -7,7 +7,7 @@ const initialState = {
   date: moment(new Date()),
   schedules: [],
   filtered: [],
-  viewMode: 'schedule',
+  viewMode: 'asset',
 };
 
 export const scheduleSlice = createSlice({
