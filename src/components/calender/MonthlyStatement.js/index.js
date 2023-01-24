@@ -1,39 +1,24 @@
+/* eslint-disable max-len */
 import {
-  Box,
-  Grid, Paper, Stack, Typography,
+  Box, Grid,
 } from '@mui/material';
 import { lightBlue, pink } from '@mui/material/colors';
+import StatementCard from './StatementCard';
 
 function MonthlyStatement() {
   return (
     <Box mx={2}>
       <Grid container spacing={2}>
-        <Grid item xs={6}>
-          <Paper
-            elevation={3}
-            sx={{
-              height: 90, borderRadius: 5, padding: 2, backgroundColor: pink[100], color: 'white',
-            }}
-          >
-            <Stack>
-              <Typography variant="h6" sx={{ fontWeight: 'bold' }}>수입</Typography>
-              <Box sx={{ textAlign: 'end', fontWeight: 'bold' }}>1000000원</Box>
-            </Stack>
-          </Paper>
-        </Grid>
-        <Grid item xs={6}>
-          <Paper
-            elevation={3}
-            sx={{
-              height: 90, borderRadius: 5, padding: 2, backgroundColor: lightBlue[200], color: 'white',
-            }}
-          >
-            <Stack>
-              <Typography variant="h6" sx={{ fontWeight: 'bold' }}>지출</Typography>
-              <Box sx={{ textAlign: 'end', fontWeight: 'bold' }}>1000000원</Box>
-            </Stack>
-          </Paper>
-        </Grid>
+        <StatementCard
+          title="수입"
+          value="100000원"
+          color={pink[100]}
+        />
+        <StatementCard
+          title="지출"
+          value="100000원"
+          color={lightBlue[200]}
+        />
       </Grid>
     </Box>
   );
