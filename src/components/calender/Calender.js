@@ -1,7 +1,6 @@
 /* eslint-disable max-len */
 /* eslint-disable react/jsx-props-no-spreading */
 import { Box, Stack, TextField } from '@mui/material';
-import { grey } from '@mui/material/colors';
 import { StaticDatePicker } from '@mui/x-date-pickers';
 import { AdapterMoment } from '@mui/x-date-pickers/AdapterMoment';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
@@ -182,10 +181,6 @@ function Calender({ dateHeight }) {
             backgroundColor: 'primary.main',
             color: 'white',
             fontWeight: 'bold',
-          },
-          '& [aria-current="date"]': {
-            borderRadius: 2,
-            backgroundColor: grey[100],
           },
         }}
       >
