@@ -8,6 +8,7 @@ import {
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import Calender from '../../components/calender/Calender';
+import MonthlyStatement from '../../components/calender/MonthlyStatement.js';
 import ScheduleList from '../../components/calender/scheduleList/ScheduleList';
 import ScheduleViewMode from '../../components/calender/ScheduleViewMode';
 import ALERTS from '../../utils/constants/alerts';
@@ -43,13 +44,20 @@ function HomeConatiner() {
           {ALERTS[random].message}
         </Alert>
       </Snackbar>
-      <Calender dateHeight={viewMode === 'schedule' ? 50 : 120} />
-      {viewMode === 'schedule' && (
-      <>
-        <Divider />
-        <ScheduleList />
-      </>
-      )}
+      {viewMode === 'schedule'
+        ? (
+          <>
+            <Calender dateHeight={50} />
+            <Divider />
+            <ScheduleList />
+          </>
+        )
+        : (
+          <>
+            <Calender dateHeight={100} />
+            <MonthlyStatement />
+          </>
+        )}
       <ScheduleViewMode />
     </Box>
   );

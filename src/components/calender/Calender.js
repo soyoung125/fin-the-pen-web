@@ -123,13 +123,13 @@ function Calender({ dateHeight }) {
           '& > div > div, & > div > div > div, & .MuiCalendarPicker-root': {
             width: '100%',
             display: 'inline-flex',
-            minHeight: DATE_HEIGHT * 6,
+            minHeight: DATE_HEIGHT * 5 + 100,
           },
           // 헤더 디자인을 위한 css
           '.MuiCalendarOrClockPicker-root > div': {
             width: '100%',
             margin: '0',
-            minHeight: DATE_HEIGHT * 6,
+            minHeight: DATE_HEIGHT * 5 + 100,
           },
           '.MuiPickersCalendarHeader-root': {
             display: 'flex',
