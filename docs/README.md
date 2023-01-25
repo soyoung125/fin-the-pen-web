@@ -125,6 +125,9 @@
 # 버그 목록
 - [ ] 
 
+# 개선 필요 목록
+- [ ] 회원가입과 로그인에서 axios로 직접 요청하지 않고, redux에서 createAsyncThunk()로 처리하기
+
 # 기타
 - [x] mui 설치
 - [x] react-router-dom 설치
