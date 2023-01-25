@@ -13,7 +13,9 @@ import { Link, useNavigate } from 'react-router-dom';
 import { Stack } from '@mui/material';
 import axios from 'axios';
 import { setHeaderOpenFalse, setHeaderOpenTrue } from '../../utils/redux/common/commonSlice';
-import { mockLogin, selectStatus, selectUser } from '../../utils/redux/user/userSlice';
+import {
+  mockLogin, selectStatus, selectUser, setUser,
+} from '../../utils/redux/user/userSlice';
 import PATH from '../../utils/constants/path';
 // import { createTheme, ThemeProvider } from '@mui/material/styles';
 
@@ -59,9 +61,13 @@ export default function SignInContainer() {
     axios.post('/fin-the-pen-web/sign-in', sign)
       .then((response) => {
         // 처리 결과
-        const temp = JSON.stringify(response);
-        alert(temp);
-        console.log(temp);
+        console.log(response.data);
+        if (response.data === '') {
+          alert('잘못된 아이디 혹은 비번');
+        } else {
+          alert(JSON.stringify(response.data));
+          dispatch(setUser(response.data));
+        }
       }).catch((error) => {
         // error 발생 시
         alert(`err : ${error}`);
@@ -142,7 +148,7 @@ export default function SignInContainer() {
             variant="contained"
             sx={{ mt: 3, mb: 2 }}
           >
-            로그인 (미구현)
+            로그인
           </Button>
 
           <Link to={PATH.signUp}>

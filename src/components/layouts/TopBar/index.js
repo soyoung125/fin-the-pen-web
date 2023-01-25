@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import {
   Box, Paper, Stack,
 } from '@mui/material';
@@ -38,18 +39,18 @@ function TopBar() {
     skip: false,
   });
 
-  useEffect(() => {
-    if (user !== null) {
-      for (let index = 0; index < user.goals.length; index += 1) {
-        const goal = user.goals[index];
-        if (goal.skip === false && goal.answer === null) {
-          setAsk(goal);
-          setFullScreenModalOpen(true);
-          break;
-        }
-      }
-    }
-  }, [user]);
+  // useEffect(() => {
+  //   if (user !== null) {
+  //     for (let index = 0; index < user.goals.length; index += 1) {
+  //       const goal = user.goals[index];
+  //       if (goal.skip === false && goal.answer === null) {
+  //         setAsk(goal);
+  //         setFullScreenModalOpen(true);
+  //         break;
+  //       }
+  //     }
+  //   }
+  // }, [user]);
 
   return (
     <>

@@ -26,6 +26,10 @@ export const userSlice = createSlice({
     initStatus: (state) => {
       state.status = 'idle';
     },
+    setUser: (state, action) => {
+      // 삭제 될 예정인 메소드 (createAsyncThunk로 이전 예정)
+      state.user = action.payload;
+    },
     logOut: (state) => {
       state.user = null;
     },
@@ -44,7 +48,7 @@ export const userSlice = createSlice({
   },
 });
 
-export const { initStatus, logOut } = userSlice.actions;
+export const { initStatus, setUser, logOut } = userSlice.actions;
 
 export const selectUser = (state) => state.user.user;
 export const selectStatus = (state) => state.user.status;
