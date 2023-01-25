@@ -18,7 +18,23 @@ function ScheduleCard({ schedule, handleModal }) {
               />
               <Typography variant="caption">{`${schedule.start_time} - ${schedule.end_time}`}</Typography>
             </Stack>
-            <Typography variant="h6" pl={1} pt={1}>{schedule.event_name}</Typography>
+            <Stack
+              direction="row"
+              pl={1}
+              pt={1}
+              alignItems="center"
+              justifyContent="space-between"
+            >
+              <Typography
+                variant="h6"
+                noWrap
+              >
+                {schedule.event_name}
+              </Typography>
+              <Typography>
+                {`${schedule.type}${schedule.expected_spending.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')}`}
+              </Typography>
+            </Stack>
           </Box>
         </Box>
       </CardActionArea>
