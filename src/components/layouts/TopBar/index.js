@@ -62,10 +62,7 @@ function TopBar() {
               sx={{
                 backgroundColor: 'primary.main',
                 height: 100,
-                borderTopLeftRadius: '0px',
-                borderTopRightRadius: '0px',
-                borderBottomLeftRadius: '15px',
-                borderBottomRightRadius: '15px',
+                borderRadius: 0,
               }}
             >
               <Stack

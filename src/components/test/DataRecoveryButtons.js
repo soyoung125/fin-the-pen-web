@@ -78,6 +78,7 @@ function DataRecoveryButtons() {
                       expected_spending: '600000',
                       importance: '상',
                       exclusion: false,
+                      id: '15d754bd-b169-46f9-82c8-be25c09b9c04',
                     }, {
                       event_name: '길동이랑 저녁식사 ',
                       alarm: false,
@@ -94,6 +95,7 @@ function DataRecoveryButtons() {
                       expected_spending: '15000',
                       importance: '중',
                       exclusion: false,
+                      id: '0063d15c-9dca-4357-8bf3-db3d0f1c65f4',
                     }, {
                       event_name: '파마 예약 ',
                       alarm: false,
@@ -110,6 +112,7 @@ function DataRecoveryButtons() {
                       expected_spending: '100000',
                       importance: '중',
                       exclusion: false,
+                      id: '73129bbf-387d-495e-a4b0-d583a33b4c20',
                     }, {
                       event_name: '올리브영에서 틴트사기 ',
                       alarm: false,
@@ -126,6 +129,7 @@ function DataRecoveryButtons() {
                       expected_spending: '15000',
                       importance: '중',
                       exclusion: false,
+                      id: '5b63fe2c-981b-452e-9b76-a4ae637d486d',
                     }, {
                       event_name: '호걸이랑 영화보기 ',
                       alarm: false,
@@ -142,6 +146,7 @@ function DataRecoveryButtons() {
                       expected_spending: '15000',
                       importance: '중',
                       exclusion: false,
+                      id: 'c4e39156-a59c-45e4-91d2-d5a96e109ffd',
                     }, {
                       event_name: '미미랑 도너츠 먹으러가기 ',
                       alarm: false,
@@ -158,6 +163,7 @@ function DataRecoveryButtons() {
                       expected_spending: '10000',
                       importance: '중',
                       exclusion: false,
+                      id: '0278d711-7fed-46ae-9421-839b80da9b5d',
                     }],
                     settings: {
                       앱비밀번호: false, 인증단계: 1, 화면테마: 'default', 예산숨김: false, 반복일정목록: [], 숨김일정: false, 숨김일정목록: false, 비밀번호인증단계: 1, 기본알림: false, 진동: false, 소리: false, 알림음: '', 잠금화면알람: false, 일정알림시간: '5분전', 소비주의알림: false, 정기입출금목록: [], 마이데이터: [], 캘린더목록: [],
