@@ -59,7 +59,9 @@ export default function SignInContainer() {
     axios.post('/fin-the-pen-web/sign-in', sign)
       .then((response) => {
         // 처리 결과
-        alert(response);
+        const temp = JSON.stringify(response);
+        alert(temp);
+        console.log(temp);
       }).catch((error) => {
         // error 발생 시
         alert(`err : ${error}`);

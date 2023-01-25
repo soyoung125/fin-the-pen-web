@@ -6,11 +6,13 @@ import { useDispatch } from 'react-redux';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 // import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 import { setHeaderOpenFalse, setHeaderOpenTrue } from '../../utils/redux/common/commonSlice';
 // import PATH from '../../utils/constants/path';
 
 function SignUpContainer() {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   // const navigate = useNavigate();
   useEffect(() => {
     dispatch(setHeaderOpenFalse()); // 페이지 진입 시 헤더 감추기
@@ -40,7 +42,11 @@ function SignUpContainer() {
     axios.post('/fin-the-pen-web/sign-up', user)
       .then((response) => {
         // 처리 결과
-        alert(response);
+        if (response.data === true) {
+          navigate('/sign-in');
+        } else {
+          alert('중복된 아이디 입니다.');
+        }
       }).catch((error) => {
         // error 발생 시
         alert(`err : ${error}`);
