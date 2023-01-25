@@ -106,9 +106,8 @@ function ScheduleDrawer({ setBottomDrawerOpen, data, mode }) {
         repeatDate = moment(repeatDate).add(1, REPEAT_CYCLE[schedule.repeating_cycle]);
       }
     }
-    setSchedule({ ...schedule, id: schedule.event_name + Math.random() });
     // 원래 일정 추가
-    dispatch(addSchedule(schedule));
+    dispatch(addSchedule({ ...schedule, id: schedule.event_name + Math.random() }));
     setBottomDrawerOpen(false);
   };
 
