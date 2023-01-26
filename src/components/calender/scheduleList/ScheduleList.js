@@ -38,11 +38,11 @@ function ScheduleList() {
       )}
       {
         schedules
-          .filter((el) => el.date === date)
-          .map((el) => (
+          .filter((schedule) => schedule.date === date)
+          .map((schedule) => (
             <ScheduleCard
-              schedule={el}
-              category={CATEGORIES.find((c) => c.title === el.category)}
+              schedule={schedule}
+              category={CATEGORIES.find((c) => c.title === schedule.category)}
               key={Math.random()}
               handleModal={handleModal}
             />
