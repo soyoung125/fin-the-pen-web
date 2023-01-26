@@ -8,6 +8,7 @@ import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { setHeaderOpenFalse, setHeaderOpenTrue } from '../../utils/redux/common/commonSlice';
+import { generateUser } from '../../utils/redux/API';
 
 function SignUpContainer() {
   const dispatch = useDispatch();
@@ -20,6 +21,21 @@ function SignUpContainer() {
     };
   }, []);
 
+  const signUp = async (user) => {
+    const result = await generateUser(user);
+    // 에러 핸들링
+    if (result === undefined) {
+      alert('서버에서 응답이 없습니다. GUEST 계정으로 로그인 하세요.');
+      return;
+    }
+    if (result) {
+      alert('회원 가입이 완료됐습니다.');
+      navigate('/sign-in');
+    } else {
+      alert('중복된 아이디 입니다.');
+    }
+  };
+
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
@@ -31,21 +47,7 @@ function SignUpContainer() {
     };
     const invalidIndex = Object.values(user).findIndex((v) => v === '');
     if (invalidIndex === -1) {
-      axios.post('/fin-the-pen-web/sign-up', user)
-        .then((response) => {
-        // 처리 결과
-          if (response.data === true) {
-            alert('회원 가입이 완료됐습니다.');
-            navigate('/sign-in');
-          } else {
-            alert('중복된 아이디 입니다.');
-          }
-        }).catch((error) => {
-        // error 발생 시
-          alert(`err : ${error}`);
-          alert('서버에서 응답이 없습니다. GUEST 계정으로 로그인 하세요.');
-          navigate('/sign-in');
-        });
+      signUp(user);
     } else {
       alert('모든 칸을 입력해주세요');
     }
