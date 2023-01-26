@@ -8,7 +8,7 @@ import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { setHeaderOpenFalse, setHeaderOpenTrue } from '../../utils/redux/common/commonSlice';
-import { generateUser } from '../../utils/redux/API';
+import { fetchSignUp } from '../../utils/redux/API';
 
 function SignUpContainer() {
   const dispatch = useDispatch();
@@ -22,7 +22,7 @@ function SignUpContainer() {
   }, []);
 
   const signUp = async (user) => {
-    const result = await generateUser(user);
+    const result = await fetchSignUp(user);
     // 에러 핸들링
     if (result === undefined) {
       alert('서버에서 응답이 없습니다. GUEST 계정으로 로그인 하세요.');
