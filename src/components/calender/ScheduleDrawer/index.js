@@ -185,7 +185,7 @@ function ScheduleDrawer({ setBottomDrawerOpen, data, mode }) {
 
         <CategoryInput
           updateCategory={updateCategory}
-          selected={useMode === SCHEDULE_DRAWER_MODE.생성 ? null : schedule.category.title}
+          selected={useMode === SCHEDULE_DRAWER_MODE.생성 ? null : schedule.category}
         />
 
         {mode === SCHEDULE_DRAWER_MODE.수정
