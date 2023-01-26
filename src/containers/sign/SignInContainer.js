@@ -42,6 +42,11 @@ export default function SignInContainer() {
   const user = useSelector(selectUser);
   const status = useSelector(selectStatus);
 
+  const guestLogin = () => {
+    dispatch(mockLogin());
+    // 추가로 이런 저런 설정을 여기에서 해줘야 함.
+  };
+
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
@@ -49,7 +54,7 @@ export default function SignInContainer() {
       user_id: data.get('email'),
       password: data.get('password'),
     };
-    alert(JSON.stringify(sign));
+    // alert(JSON.stringify(sign));
     /**
      * @eomheeseung
      *
@@ -61,9 +66,9 @@ export default function SignInContainer() {
     axios.post('/fin-the-pen-web/sign-in', sign)
       .then((response) => {
         // 처리 결과
-        console.log(response.data);
+        // console.log(response.data);
         if (response.data === '') {
-          alert('잘못된 아이디 혹은 비번');
+          alert('잘못된 아이디 혹은 비번입니다.');
         } else {
           alert(JSON.stringify(response.data));
           dispatch(setUser(response.data));
@@ -71,12 +76,9 @@ export default function SignInContainer() {
       }).catch((error) => {
         // error 발생 시
         alert(`err : ${error}`);
+        alert('서버에서 응답이 없습니다. 자동으로 GUEST 계정 로그인을 시도합니다.');
+        guestLogin();
       });
-  };
-
-  const guestLogin = () => {
-    dispatch(mockLogin());
-    // 추가로 이런 저런 설정을 여기에서 해줘야 함.
   };
 
   useEffect(() => {
@@ -87,6 +89,7 @@ export default function SignInContainer() {
   }, []);
 
   useEffect(() => {
+    // 로그인에 성공하는 경우를 감지하여 home으로 보내버림
     if (user !== null) {
       navigate(PATH.home);
     }
