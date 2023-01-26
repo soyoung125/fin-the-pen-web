@@ -2,6 +2,7 @@
 import {
   Box, CardActionArea, Divider, Stack, Typography,
 } from '@mui/material';
+import { grey } from '@mui/material/colors';
 import { useState } from 'react';
 
 function ScheduleCard({ schedule, handleModal, category }) {
@@ -31,8 +32,9 @@ function ScheduleCard({ schedule, handleModal, category }) {
               >
                 {schedule.event_name}
               </Typography>
-              <Typography>
-                {`${schedule.type}${schedule.expected_spending.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')}`}
+              {/* 색상은 실제 소비 내역 데이터 연동 후 바꿀 예정 */}
+              <Typography sx={{ color: grey[500] }}>
+                {`${schedule.type}${parseInt(schedule.expected_spending, 10).toLocaleString('ko-KR')}`}
               </Typography>
             </Stack>
           </Box>
