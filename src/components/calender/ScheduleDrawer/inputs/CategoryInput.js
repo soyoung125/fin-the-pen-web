@@ -13,7 +13,7 @@ export default function CategoryInput({ updateCategory, selected }) {
     if (value) {
       const category = CATEGORIES.filter((cat) => cat.title === value);
       if (category.length > 0) {
-        updateCategory(category[0]);
+        updateCategory(category[0].title);
       }
     }
   }, [value]);
