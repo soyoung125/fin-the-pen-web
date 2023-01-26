@@ -34,8 +34,7 @@ function SpendingDetailCard({ schedule, bgColor }) {
           >
             {schedule.type}
           </Button>
-          {schedule.expected_spending}
-          원
+          {`${parseInt(schedule.expected_spending, 10).toLocaleString('ko-KR')}원`}
         </Box>
       </Stack>
     </Paper>
