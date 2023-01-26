@@ -10,3 +10,12 @@ export const fetchSignUp = async (user) => {
     alert(err);
   }
 };
+
+export const fetchLogin = async (sign) => {
+  try {
+    const response = await axios.post('/fin-the-pen-web/sign-in', sign);
+    return response.data;
+  } catch (err) {
+    alert(err);
+  }
+};

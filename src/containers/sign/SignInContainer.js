@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
@@ -14,6 +15,7 @@ import { Stack } from '@mui/material';
 import axios from 'axios';
 import { setHeaderOpenFalse, setHeaderOpenTrue } from '../../utils/redux/common/commonSlice';
 import {
+  login,
   mockLogin, selectStatus, selectUser, setUser,
 } from '../../utils/redux/user/userSlice';
 import PATH from '../../utils/constants/path';
@@ -54,31 +56,7 @@ export default function SignInContainer() {
       user_id: data.get('email'),
       password: data.get('password'),
     };
-    // alert(JSON.stringify(sign));
-    /**
-     * @eomheeseung
-     *
-     * axios로 로그인 요청하기
-     * POST 방식으로 위 sign 객체를 서버에 전달하려고 합니다.
-     * 하단에 있는 요청 주소는 수정해주셔야 합니다.
-     *
-     */
-    axios.post('/fin-the-pen-web/sign-in', sign)
-      .then((response) => {
-        // 처리 결과
-        // console.log(response.data);
-        if (response.data === '') {
-          alert('잘못된 아이디 혹은 비번입니다.');
-        } else {
-          alert(JSON.stringify(response.data));
-          dispatch(setUser(response.data));
-        }
-      }).catch((error) => {
-        // error 발생 시
-        alert(`err : ${error}`);
-        alert('서버에서 응답이 없습니다. 자동으로 GUEST 계정 로그인을 시도합니다.');
-        guestLogin();
-      });
+    dispatch(login(sign));
   };
 
   useEffect(() => {
