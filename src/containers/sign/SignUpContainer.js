@@ -30,7 +30,7 @@ function SignUpContainer() {
       name: data.get('name'),
       phone_number: data.get('phoneNumber'),
     };
-    alert(JSON.stringify(user));
+    // alert(JSON.stringify(user));
     /**
      * @eomheeseung
      *
@@ -43,6 +43,7 @@ function SignUpContainer() {
       .then((response) => {
         // 처리 결과
         if (response.data === true) {
+          alert('회원 가입이 완료됐습니다.');
           navigate('/sign-in');
         } else {
           alert('중복된 아이디 입니다.');
@@ -50,6 +51,8 @@ function SignUpContainer() {
       }).catch((error) => {
         // error 발생 시
         alert(`err : ${error}`);
+        alert('서버에서 응답이 없습니다. GUEST 계정으로 로그인 하세요.');
+        navigate('/sign-in');
       });
   };
   return (
