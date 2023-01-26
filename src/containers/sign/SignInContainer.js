@@ -141,7 +141,7 @@ export default function SignInContainer() {
             autoComplete="current-password"
           />
 
-          <Link>
+          <Link onClick={() => alert('You forget a thousand things every day. Make sure this is one of them :)')}>
             비밀번호를 잊으셨나요?
           </Link>
 
