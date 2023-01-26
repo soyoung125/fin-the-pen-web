@@ -8,7 +8,7 @@ import { PickersDay } from '@mui/x-date-pickers/PickersDay/PickersDay';
 import moment from 'moment';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { EXPENDITURE, INCOME } from '../../utils/constants/categories';
+import { CATEGORIES, EXPENDITURE, INCOME } from '../../utils/constants/categories';
 import {
   selectDate, selectedDate, selectSchedules, selectViewMode,
 } from '../../utils/redux/schedule/scheduleSlice';
@@ -55,7 +55,7 @@ function Calender({ dateHeight }) {
   };
 
   const renderDayInPicker = (day, _value, DayComponentProps) => {
-    const daySchedules = schedules.filter((e) => e.date === day.format('YYYY-MM-DD'));
+    const daySchedules = schedules.filter((e) => e.date === day.format('YYYY-MM-DD')).map((s) => ({ ...s, category: CATEGORIES.find((c) => c.title === s.category) }));
 
     const fixedWithdrawal = daySchedules.filter((s) => s.category.type === '고정 입출금');
     const nonFixedWithdrwal = daySchedules.filter((s) => s.category.type !== '고정 입출금');
