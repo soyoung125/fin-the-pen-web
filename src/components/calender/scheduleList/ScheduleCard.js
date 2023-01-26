@@ -4,7 +4,7 @@ import {
 } from '@mui/material';
 import { useState } from 'react';
 
-function ScheduleCard({ schedule, handleModal }) {
+function ScheduleCard({ schedule, handleModal, category }) {
   return (
     <>
       <CardActionArea onClick={() => handleModal(schedule)}>
@@ -13,7 +13,7 @@ function ScheduleCard({ schedule, handleModal }) {
             <Stack direction="row">
               <Box
                 sx={{
-                  width: '15px', height: '15px', border: '4px solid', borderRadius: 3, borderColor: schedule.category.color, marginY: 'auto', marginRight: 2,
+                  width: '15px', height: '15px', border: '4px solid', borderRadius: 3, borderColor: category.color, marginY: 'auto', marginRight: 2,
                 }}
               />
               <Typography variant="caption">{`${schedule.start_time} - ${schedule.end_time}`}</Typography>
