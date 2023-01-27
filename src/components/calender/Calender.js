@@ -10,6 +10,7 @@ import { PickersDay } from '@mui/x-date-pickers/PickersDay/PickersDay';
 import moment from 'moment';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { grey } from '@mui/material/colors';
 import { CATEGORIES, EXPENDITURE, INCOME } from '../../utils/constants/categories';
 import {
   selectDate, selectedDate, selectSchedules, selectViewMode,
@@ -111,9 +112,9 @@ function Calender({ dateHeight }) {
   // eslint-disable-next-line arrow-body-style
   const renderAssetDayPicker = (day, _value, DayComponentProps) => {
     const renderDay = DayComponentProps.day;
-    console.log(DayComponentProps);
     if (renderDay.isSameOrBefore(today)) {
-      if (renderDay.format('dd') === '토' || renderDay.isSame(today)) {
+      console.log(renderDay.isSame(today, 'week'));
+      if (renderDay.format('dd') === '일' && !renderDay.isSame(today, 'week')) {
         return (
           <Box sx={{ width: 'calc(100vw / 7)' }} key={DayComponentProps.key}>
             <Box sx={{ display: 'flex', justifyContent: 'center' }}>
@@ -123,6 +124,13 @@ function Calender({ dateHeight }) {
               <Box sx={{ fontSize: 'x-small', paddingRight: 2 }} display="flex" justifyContent="flex-end">-10000</Box>
               <Box sx={{ fontSize: 'x-small', paddingRight: 2 }} display="flex" justifyContent="flex-end">+10000</Box>
             </Stack>
+            <Box sx={{
+              width: '100vw', background: grey[200], overflow: 'visible', borderRadius: 3, display: 'flex', justifyContent: 'flex-end', paddingX: 2,
+            }}
+            >
+              <Box sx={{ fontSize: 'small', paddingRight: 1 }}>-10000</Box>
+              <Box sx={{ fontSize: 'small' }}>+10000</Box>
+            </Box>
           </Box>
         );
       }
