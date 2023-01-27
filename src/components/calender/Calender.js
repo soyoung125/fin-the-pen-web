@@ -147,9 +147,30 @@ function Calender({ dateHeight }) {
           </Box>
         );
       }
+      return (
+        <Box sx={{ width: 'calc(100vw / 7)' }} key={DayComponentProps.key}>
+          <Box sx={{ display: 'flex', justifyContent: 'center' }}>
+            <PickersDay {...DayComponentProps} />
+          </Box>
+          <Stack>
+            <Box sx={{ fontSize: 'x-small', paddingRight: 2 }} display="flex" justifyContent="flex-end">-10000</Box>
+            <Box sx={{ fontSize: 'x-small', paddingRight: 2 }} display="flex" justifyContent="flex-end">+10000</Box>
+          </Stack>
+        </Box>
+      );
     }
     // 렌더링 방식은 추후 수정 얘정
-    return <PickersDay {...DayComponentProps} />;
+    return (
+      <Box sx={{ width: 'calc(100vw / 7)' }} key={DayComponentProps.key}>
+        <Box sx={{ display: 'flex', justifyContent: 'center' }}>
+          <PickersDay {...DayComponentProps} />
+        </Box>
+        <Stack>
+          <Box sx={{ fontSize: 'x-small', paddingRight: 2 }} display="flex" justifyContent="flex-end">-10000</Box>
+          <Box sx={{ fontSize: 'x-small', paddingRight: 2 }} display="flex" justifyContent="flex-end">+10000</Box>
+        </Stack>
+      </Box>
+    );
   };
 
   return (
