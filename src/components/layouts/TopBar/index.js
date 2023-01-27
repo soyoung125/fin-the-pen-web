@@ -1,6 +1,6 @@
 /* eslint-disable no-unused-vars */
 import {
-  Box, Paper, Stack,
+  Box, Button, Paper, Stack, Typography,
 } from '@mui/material';
 import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
@@ -8,7 +8,7 @@ import { useNavigate } from 'react-router-dom';
 import SearchIcon from '@mui/icons-material/Search';
 // import NotificationsIcon from '@mui/icons-material/Notifications';
 import NotificationsOutlinedIcon from '@mui/icons-material/NotificationsOutlined';
-import { selectHeaderMode, selectHeaderOpen } from '../../../utils/redux/common/commonSlice';
+import { selectGuestMode, selectHeaderMode, selectHeaderOpen } from '../../../utils/redux/common/commonSlice';
 import FullScreenDialog from '../FullScreenDialog';
 import RoundedButton from '../../common/RoundedButton';
 import PATH from '../../../utils/constants/path';
@@ -18,9 +18,15 @@ import PersonalButton from './buttons/PersonalButton';
 import logo from '../../../assets/logos/logo_square.jpg';
 
 function LogoButton({ navigate }) {
+  const guestMode = useSelector(selectGuestMode);
   return (
     <RoundedButton value="user" onClick={() => navigate(PATH.home)}>
       <img src={logo} alt="" width="26px" height="26px" />
+      {
+        guestMode && (
+          <Typography>GUEST MODE</Typography>
+        )
+      }
     </RoundedButton>
   );
 }
@@ -77,7 +83,7 @@ function TopBar() {
                 <Stack
                   direction="row"
                   justifyContent="space-between"
-                  alignItems="flex-end"
+                  alignItems="center"
                 >
                   {headerMode === 'home' && (
                     <LogoButton navigate={navigate} />
@@ -91,7 +97,7 @@ function TopBar() {
                 <Stack
                   direction="row"
                   justifyContent="space-between"
-                  alignItems="flex-end"
+                  alignItems="center"
                 >
                   {headerMode === 'analysis' && (
                     <LogoButton navigate={navigate} />
@@ -102,7 +108,7 @@ function TopBar() {
                 <Stack
                   direction="row"
                   justifyContent="space-between"
-                  alignItems="flex-end"
+                  alignItems="center"
                 >
                   {headerMode === 'home' && (
                     <>
