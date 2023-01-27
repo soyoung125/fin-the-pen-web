@@ -112,9 +112,10 @@ function Calender({ dateHeight }) {
   // eslint-disable-next-line arrow-body-style
   const renderAssetDayPicker = (day, _value, DayComponentProps) => {
     const renderDay = DayComponentProps.day;
+    const weekday = renderDay.format('dd');
+    // console.log(DayComponentProps);
     if (renderDay.isSameOrBefore(today)) {
-      console.log(renderDay.isSame(today, 'week'));
-      if (renderDay.format('dd') === '일' && !renderDay.isSame(today, 'week')) {
+      if (weekday === '일') {
         return (
           <Box sx={{ width: 'calc(100vw / 7)' }} key={DayComponentProps.key}>
             <Box sx={{ display: 'flex', justifyContent: 'center' }}>
@@ -124,13 +125,25 @@ function Calender({ dateHeight }) {
               <Box sx={{ fontSize: 'x-small', paddingRight: 2 }} display="flex" justifyContent="flex-end">-10000</Box>
               <Box sx={{ fontSize: 'x-small', paddingRight: 2 }} display="flex" justifyContent="flex-end">+10000</Box>
             </Stack>
-            <Box sx={{
-              width: '100vw', background: grey[200], overflow: 'visible', borderRadius: 3, display: 'flex', justifyContent: 'flex-end', paddingX: 2,
-            }}
-            >
-              <Box sx={{ fontSize: 'small', paddingRight: 1 }}>-10000</Box>
-              <Box sx={{ fontSize: 'small' }}>+10000</Box>
-            </Box>
+            {renderDay.isSame(today, 'week')
+              ? (
+                <Box sx={{
+                  width: `calc(100vw / 7 * (${today.diff(renderDay, 'days')} + 1))`, background: grey[200], overflow: 'visible', borderRadius: 3, display: 'flex', justifyContent: 'flex-end', paddingX: 2,
+                }}
+                >
+                  <Box sx={{ fontSize: 'small', paddingRight: 1 }}>-10000</Box>
+                  <Box sx={{ fontSize: 'small' }}>+10000</Box>
+                </Box>
+              )
+              : (
+                <Box sx={{
+                  width: '100vw', background: grey[200], overflow: 'visible', borderRadius: 3, display: 'flex', justifyContent: 'flex-end', paddingX: 2,
+                }}
+                >
+                  <Box sx={{ fontSize: 'small', paddingRight: 1 }}>-10000</Box>
+                  <Box sx={{ fontSize: 'small' }}>+10000</Box>
+                </Box>
+              )}
           </Box>
         );
       }
