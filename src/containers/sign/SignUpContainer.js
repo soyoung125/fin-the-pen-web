@@ -9,6 +9,7 @@ import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { setHeaderOpenFalse, setHeaderOpenTrue } from '../../utils/redux/common/commonSlice';
 import { fetchSignUp } from '../../utils/redux/API';
+import { isObjectValuesEmpty } from '../../utils/tools';
 
 function SignUpContainer() {
   const dispatch = useDispatch();
@@ -45,7 +46,7 @@ function SignUpContainer() {
       name: data.get('name'),
       phone_number: data.get('phoneNumber'),
     };
-    const invalidIndex = Object.values(user).findIndex((v) => v === '');
+    const invalidIndex = isObjectValuesEmpty(user);
     if (invalidIndex === -1) {
       signUp(user);
     } else {
