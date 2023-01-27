@@ -1,6 +1,8 @@
 /* eslint-disable max-len */
 /* eslint-disable react/jsx-props-no-spreading */
-import { Box, Stack, TextField } from '@mui/material';
+import {
+  Box, Stack, TextField,
+} from '@mui/material';
 import { StaticDatePicker } from '@mui/x-date-pickers';
 import { AdapterMoment } from '@mui/x-date-pickers/AdapterMoment';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
@@ -21,6 +23,7 @@ function Calender({ dateHeight }) {
   const value = useSelector(selectDate);
   const schedules = useSelector(selectSchedules);
   const viewMode = useSelector(selectViewMode);
+  const today = moment(new Date());
 
   const DATE_SIZE = 32;
   const DATE_HEIGHT = dateHeight;
@@ -107,6 +110,23 @@ function Calender({ dateHeight }) {
 
   // eslint-disable-next-line arrow-body-style
   const renderAssetDayPicker = (day, _value, DayComponentProps) => {
+    const renderDay = DayComponentProps.day;
+    console.log(DayComponentProps);
+    if (renderDay.isSameOrBefore(today)) {
+      if (renderDay.format('dd') === '토' || renderDay.isSame(today)) {
+        return (
+          <Box sx={{ width: 'calc(100vw / 7)' }} key={DayComponentProps.key}>
+            <Box sx={{ display: 'flex', justifyContent: 'center' }}>
+              <PickersDay sx={{ marginBottom: 2 }} {...DayComponentProps} />
+            </Box>
+            <Stack>
+              <Box sx={{ fontSize: 'x-small', paddingRight: 2 }} display="flex" justifyContent="flex-end">-10000</Box>
+              <Box sx={{ fontSize: 'x-small', paddingRight: 2 }} display="flex" justifyContent="flex-end">+10000</Box>
+            </Stack>
+          </Box>
+        );
+      }
+    }
     // 렌더링 방식은 추후 수정 얘정
     return <PickersDay sx={{ marginBottom: 2 }} {...DayComponentProps} />;
   };
