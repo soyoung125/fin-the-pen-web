@@ -55,7 +55,7 @@ function Calender({ dateHeight }) {
   };
 
   const renderDayInPicker = (day, _value, DayComponentProps) => {
-    const daySchedules = schedules.filter((e) => e.date === day.format('YYYY-MM-DD')).map((s) => ({ ...s, category: CATEGORIES.find((c) => c.title === s.category) }));
+    const daySchedules = schedules.filter((e) => e.date === day.format('YYYY-MM-DD')).map((s) => ({ ...s, category: CATEGORIES.find((c) => c.title === s.category) || { type: '미분류', color: '#C8A2C8' } }));
 
     const fixedWithdrawal = daySchedules.filter((s) => s.category.type === '고정 입출금');
     const nonFixedWithdrwal = daySchedules.filter((s) => s.category.type !== '고정 입출금');

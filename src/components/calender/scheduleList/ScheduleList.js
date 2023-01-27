@@ -42,7 +42,7 @@ function ScheduleList() {
           .map((schedule) => (
             <ScheduleCard
               schedule={schedule}
-              category={CATEGORIES.find((c) => c.title === schedule.category)}
+              category={(CATEGORIES.find((c) => c.title === schedule.category) || { color: '#C8A2C8' })}
               key={Math.random()}
               handleModal={handleModal}
             />
