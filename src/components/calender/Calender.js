@@ -10,7 +10,7 @@ import { PickersDay } from '@mui/x-date-pickers/PickersDay/PickersDay';
 import moment from 'moment';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { grey } from '@mui/material/colors';
+import { grey, lightBlue, pink } from '@mui/material/colors';
 import { CATEGORIES, EXPENDITURE, INCOME } from '../../utils/constants/categories';
 import {
   selectDate, selectedDate, selectSchedules, selectViewMode,
@@ -125,8 +125,8 @@ function Calender({ dateHeight }) {
               <PickersDay {...DayComponentProps} />
             </Box>
             <Stack>
-              <Box sx={{ fontSize: 'x-small', paddingRight: 2 }} display="flex" justifyContent="flex-end">-10000</Box>
-              <Box sx={{ fontSize: 'x-small', paddingRight: 2 }} display="flex" justifyContent="flex-end">+10000</Box>
+              <Box sx={{ fontSize: 'x-small', paddingRight: 2, color: lightBlue[200] }} display="flex" justifyContent="flex-end">-10000</Box>
+              <Box sx={{ fontSize: 'x-small', paddingRight: 2, color: pink[100] }} display="flex" justifyContent="flex-end">+10000</Box>
             </Stack>
             {renderDay.isSame(today, 'week')
               ? (
@@ -156,8 +156,8 @@ function Calender({ dateHeight }) {
             <PickersDay {...DayComponentProps} />
           </Box>
           <Stack>
-            <Box sx={{ fontSize: 'x-small', paddingRight: 2 }} display="flex" justifyContent="flex-end">-10000</Box>
-            <Box sx={{ fontSize: 'x-small', paddingRight: 2 }} display="flex" justifyContent="flex-end">+10000</Box>
+            <Box sx={{ fontSize: 'x-small', paddingRight: 2, color: lightBlue[300] }} display="flex" justifyContent="flex-end">-10000</Box>
+            <Box sx={{ fontSize: 'x-small', paddingRight: 2, color: pink[200] }} display="flex" justifyContent="flex-end">+10000</Box>
           </Stack>
         </Box>
       );
@@ -169,8 +169,8 @@ function Calender({ dateHeight }) {
           <PickersDay {...DayComponentProps} />
         </Box>
         <Stack>
-          <Box sx={{ fontSize: 'x-small', paddingRight: 2 }} display="flex" justifyContent="flex-end">-10000</Box>
-          <Box sx={{ fontSize: 'x-small', paddingRight: 2 }} display="flex" justifyContent="flex-end">+10000</Box>
+          <Box sx={{ fontSize: 'x-small', paddingRight: 2, color: grey[500] }} display="flex" justifyContent="flex-end">-10000</Box>
+          <Box sx={{ fontSize: 'x-small', paddingRight: 2, color: grey[500] }} display="flex" justifyContent="flex-end">+10000</Box>
         </Stack>
       </Box>
     );
