@@ -131,7 +131,7 @@ function Calender({ dateHeight }) {
             <Box sx={{ display: 'flex', justifyContent: 'center' }}>
               <PickersDay {...DayComponentProps} />
             </Box>
-            <Stack>
+            <Stack mb={1}>
               <Box sx={{ fontSize: 'x-small', paddingRight: 2, color: lightBlue[200] }} display="flex" justifyContent="flex-end">-10000</Box>
               <Box sx={{ fontSize: 'x-small', paddingRight: 2, color: pink[100] }} display="flex" justifyContent="flex-end">+10000</Box>
             </Stack>
