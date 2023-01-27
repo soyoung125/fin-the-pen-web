@@ -33,6 +33,11 @@ function Calender({ dateHeight }) {
     dispatch(selectedDate(moment(new Date())));
   }, []);
 
+  /**
+   * 해당 일의 일정을 받아 카테고리 수별로 마커위치를 고정하기 위해 새로운 배열을 생성해 반환하는 함수
+   * @param {Array} daySchedules 해당 일의 일정 배열
+   * @returns {Array} 카테고리별 일정 마커를 표시하기 휘한 길이 7의 배열 (색상 표시를 위해 color 요소 필수)
+   */
   const makeMarkerData = (daySchedules) => {
     const emptyData = Array(6).fill().map(() => ({ color: '#FFFFFF' }));
     const categoryForMarker = INCOME.nested.concat(EXPENDITURE.nested)
@@ -109,14 +114,16 @@ function Calender({ dateHeight }) {
     return <PickersDay {...DayComponentProps} />;
   };
 
-  // eslint-disable-next-line arrow-body-style
   const renderAssetDayPicker = (day, _value, DayComponentProps) => {
     const renderDay = DayComponentProps.day;
     const weekday = renderDay.format('dd');
-    // console.log(DayComponentProps);
+
+    // 이달에 해당하지 않은 날은 아무것도 표시하지 않기 위한 조건문
     if (!renderDay.isSame(today, 'month')) {
       return <PickersDay {...DayComponentProps} />;
     }
+
+    // 오늘 이전의 일별 수입/지출, 주별 수입/지출을 표시하기 위한 조건문
     if (renderDay.isSameOrBefore(today)) {
       if (weekday === '일') {
         return (
@@ -130,6 +137,7 @@ function Calender({ dateHeight }) {
             </Stack>
             {renderDay.isSame(today, 'week')
               ? (
+                // 이번주의 주별 수입/지출 표시
                 <Box sx={{
                   width: `calc(100vw / 7 * (${today.diff(renderDay, 'days')} + 1))`, background: grey[200], overflow: 'visible', borderRadius: 3, display: 'flex', justifyContent: 'flex-end', paddingX: 2,
                 }}
@@ -139,6 +147,7 @@ function Calender({ dateHeight }) {
                 </Box>
               )
               : (
+                // 지난주들의 주별 수입/지출 표시
                 <Box sx={{
                   width: '100vw', background: grey[200], overflow: 'visible', borderRadius: 3, display: 'flex', justifyContent: 'flex-end', paddingX: 2,
                 }}
@@ -150,6 +159,8 @@ function Calender({ dateHeight }) {
           </Box>
         );
       }
+
+      // 지난 일들의 일별 수입/지출액 표시
       return (
         <Box sx={{ width: 'calc(100vw / 7)' }} key={DayComponentProps.key}>
           <Box sx={{ display: 'flex', justifyContent: 'center' }}>
@@ -162,7 +173,8 @@ function Calender({ dateHeight }) {
         </Box>
       );
     }
-    // 렌더링 방식은 추후 수정 얘정
+
+    // 뒷날의 일별 수입/지출액 표시
     return (
       <Box sx={{ width: 'calc(100vw / 7)' }} key={DayComponentProps.key}>
         <Box sx={{ display: 'flex', justifyContent: 'center' }}>
@@ -177,7 +189,6 @@ function Calender({ dateHeight }) {
   };
 
   return (
-    // eslint-disable-next-line max-len
     <LocalizationProvider dateAdapter={AdapterMoment} dateFormats={{ monthAndYear: 'yyyy년 MM월' }}>
       <Box
         sx={{
