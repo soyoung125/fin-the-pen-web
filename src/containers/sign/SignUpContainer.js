@@ -1,6 +1,6 @@
 /* eslint-disable no-unused-vars */
 import {
-  Avatar, Box, Button, Container, CssBaseline, InputAdornment, TextField, Typography,
+  Avatar, Box, Button, Container, CssBaseline, InputAdornment, Stack, TextField, Typography,
 } from '@mui/material';
 import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
@@ -58,7 +58,7 @@ function SignUpContainer() {
       <CssBaseline />
       <Box
         sx={{
-          marginTop: 8,
+          marginTop: 25,
           display: 'flex',
           flexDirection: 'column',
           alignItems: 'center',
@@ -127,16 +127,23 @@ function SignUpContainer() {
               ),
             }}
           />
-
-          <Button
-            type="submit"
-            fullWidth
-            variant="contained"
-            sx={{ mt: 3, mb: 2 }}
-          >
-            회원가입
-          </Button>
-
+          <Stack direction="row" spacing={1} my={2}>
+            <Button
+              fullWidth
+              variant="contained"
+              color="error"
+              onClick={() => navigate('/sign-in')}
+            >
+              뒤로가기
+            </Button>
+            <Button
+              type="submit"
+              fullWidth
+              variant="contained"
+            >
+              회원가입
+            </Button>
+          </Stack>
         </Box>
       </Box>
     </Container>
