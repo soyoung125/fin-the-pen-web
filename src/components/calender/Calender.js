@@ -142,8 +142,8 @@ function Calender({ dateHeight }) {
                   width: `calc(100vw / 7 * (${today.diff(renderDay, 'days')} + 1))`, background: grey[200], overflow: 'visible', borderRadius: 3, display: 'flex', justifyContent: 'flex-end', paddingX: 2,
                 }}
                 >
-                  <Box sx={{ fontSize: 'small', paddingRight: 1 }}>-10000</Box>
-                  <Box sx={{ fontSize: 'small' }}>+10000</Box>
+                  <Box sx={{ fontSize: 'small', paddingRight: 1, color: 'primary.main' }}>-10000</Box>
+                  <Box sx={{ fontSize: 'small', color: grey[500] }}>+10000</Box>
                 </Box>
               )
               : (
