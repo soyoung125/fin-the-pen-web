@@ -1,9 +1,6 @@
 /* eslint-disable no-unused-vars */
 import {
-  Alert,
-  Box,
-  Divider,
-  Snackbar,
+  Alert, Box, Divider, Snackbar,
 } from '@mui/material';
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';

@@ -1,5 +1,6 @@
 /* eslint-disable no-param-reassign */
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import { NO_SIGNAL_FROM_SERVER } from '../../constants/common';
 import { fetchLogin } from '../API';
 import { fetchMockLogin } from '../mockAPI';
 
@@ -23,7 +24,7 @@ export const login = createAsyncThunk(
   async (sign) => {
     const response = await fetchLogin(sign);
     if (response === undefined) {
-      alert('서버에서 응답이 없습니다. GUEST 계정으로 로그인을 시도합니다.');
+      alert(`${NO_SIGNAL_FROM_SERVER} GUEST 계정으로 로그인을 시도합니다.`);
       const mock = await fetchMockLogin();
       return mock.data;
     }

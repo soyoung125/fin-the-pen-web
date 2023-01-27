@@ -10,6 +10,7 @@ import { useNavigate } from 'react-router-dom';
 import { setHeaderOpenFalse, setHeaderOpenTrue } from '../../utils/redux/common/commonSlice';
 import { fetchSignUp } from '../../utils/redux/API';
 import { isObjectValuesEmpty } from '../../utils/tools';
+import { NO_BLANKS, NO_DUPLICATION_ID, NO_SIGNAL_FROM_SERVER } from '../../utils/constants/common';
 
 function SignUpContainer() {
   const dispatch = useDispatch();
@@ -26,14 +27,14 @@ function SignUpContainer() {
     const result = await fetchSignUp(user);
     // 에러 핸들링
     if (result === undefined) {
-      alert('서버에서 응답이 없습니다. GUEST 계정으로 로그인 하세요.');
+      alert(`${NO_SIGNAL_FROM_SERVER} GUEST 계정으로 로그인 하세요.`);
       return;
     }
     if (result) {
       alert('회원 가입이 완료됐습니다.');
       navigate('/sign-in');
     } else {
-      alert('중복된 아이디 입니다.');
+      alert(NO_DUPLICATION_ID);
     }
   };
 
@@ -50,7 +51,7 @@ function SignUpContainer() {
     if (invalidIndex === -1) {
       signUp(user);
     } else {
-      alert('모든 칸을 입력해주세요');
+      alert(NO_BLANKS);
     }
   };
   return (

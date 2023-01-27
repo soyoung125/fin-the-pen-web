@@ -1,8 +1,6 @@
 /* eslint-disable max-len */
 /* eslint-disable react/jsx-props-no-spreading */
-import {
-  Box, Stack, TextField,
-} from '@mui/material';
+import { Box, Stack, TextField } from '@mui/material';
 import { StaticDatePicker } from '@mui/x-date-pickers';
 import { AdapterMoment } from '@mui/x-date-pickers/AdapterMoment';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';

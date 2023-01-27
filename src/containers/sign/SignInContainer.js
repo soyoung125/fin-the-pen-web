@@ -20,6 +20,7 @@ import {
 } from '../../utils/redux/user/userSlice';
 import PATH from '../../utils/constants/path';
 import { isObjectValuesEmpty } from '../../utils/tools';
+import { NO_BLANKS } from '../../utils/constants/common';
 // import { createTheme, ThemeProvider } from '@mui/material/styles';
 
 function Copyright(props) {
@@ -61,7 +62,7 @@ export default function SignInContainer() {
     if (invalidIndex === -1) {
       dispatch(login(sign));
     } else {
-      alert('모든 칸을 입력해주세요');
+      alert(NO_BLANKS);
     }
   };
 
