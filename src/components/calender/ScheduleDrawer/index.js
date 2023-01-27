@@ -127,14 +127,14 @@ function ScheduleDrawer({ setBottomDrawerOpen, data, mode }) {
   };
 
   const handleSubmit = () => {
-    if (schedule.event_name.length > 0) {
-      if (mode === SCHEDULE_DRAWER_MODE.생성) {
-        addNewSchedule();
-      } else {
-        deleteSelectedSchedule();
-      }
-    } else {
+    if (schedule.event_name.length === 0) {
       alert(NEED_TITLE);
+      return;
+    }
+    if (mode === SCHEDULE_DRAWER_MODE.생성) {
+      addNewSchedule();
+    } else {
+      deleteSelectedSchedule();
     }
   };
 
@@ -227,7 +227,9 @@ function ScheduleDrawer({ setBottomDrawerOpen, data, mode }) {
           onClick={() => handleSubmit()}
         >
           {
-            user === null ? NEED_SIGN_IN : ADD_SCHEDULE.add_schedule[useMode]
+            user === null
+              ? NEED_SIGN_IN
+              : ADD_SCHEDULE.add_schedule[useMode]
           }
         </Button>
       </Stack>
