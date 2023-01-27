@@ -19,6 +19,7 @@ import {
   mockLogin, selectStatus, selectUser, setUser,
 } from '../../utils/redux/user/userSlice';
 import PATH from '../../utils/constants/path';
+import { isObjectValuesEmpty } from '../../utils/tools';
 // import { createTheme, ThemeProvider } from '@mui/material/styles';
 
 function Copyright(props) {
@@ -56,7 +57,12 @@ export default function SignInContainer() {
       user_id: data.get('email'),
       password: data.get('password'),
     };
-    dispatch(login(sign));
+    const invalidIndex = isObjectValuesEmpty(sign);
+    if (invalidIndex === -1) {
+      dispatch(login(sign));
+    } else {
+      alert('모든 칸을 입력해주세요');
+    }
   };
 
   useEffect(() => {
