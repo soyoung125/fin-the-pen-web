@@ -114,6 +114,9 @@ function Calender({ dateHeight }) {
     const renderDay = DayComponentProps.day;
     const weekday = renderDay.format('dd');
     // console.log(DayComponentProps);
+    if (!renderDay.isSame(today, 'month')) {
+      return <PickersDay {...DayComponentProps} />;
+    }
     if (renderDay.isSameOrBefore(today)) {
       if (weekday === '일') {
         return (
