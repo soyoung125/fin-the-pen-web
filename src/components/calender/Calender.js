@@ -95,7 +95,7 @@ function Calender({ dateHeight }) {
       return (
         <Box sx={{ width: DATE_SIZE, marginX: 'auto' }} key={DayComponentProps.key}>
           <Stack>
-            <PickersDay sx={{ marginBottom: 2 }} {...DayComponentProps} />
+            <PickersDay {...DayComponentProps} />
             <MarkerStack
               nonFixedWithdrwal={nonFixedWithdrwal}
               categoryForMarker={categoryForMarker}
@@ -105,7 +105,7 @@ function Calender({ dateHeight }) {
       );
     }
 
-    return <PickersDay sx={{ marginBottom: 2 }} {...DayComponentProps} />;
+    return <PickersDay {...DayComponentProps} />;
   };
 
   // eslint-disable-next-line arrow-body-style
@@ -117,7 +117,7 @@ function Calender({ dateHeight }) {
         return (
           <Box sx={{ width: 'calc(100vw / 7)' }} key={DayComponentProps.key}>
             <Box sx={{ display: 'flex', justifyContent: 'center' }}>
-              <PickersDay sx={{ marginBottom: 2 }} {...DayComponentProps} />
+              <PickersDay {...DayComponentProps} />
             </Box>
             <Stack>
               <Box sx={{ fontSize: 'x-small', paddingRight: 2 }} display="flex" justifyContent="flex-end">-10000</Box>
@@ -128,7 +128,7 @@ function Calender({ dateHeight }) {
       }
     }
     // 렌더링 방식은 추후 수정 얘정
-    return <PickersDay sx={{ marginBottom: 2 }} {...DayComponentProps} />;
+    return <PickersDay {...DayComponentProps} />;
   };
 
   return (
