@@ -9,13 +9,14 @@ import moment from 'moment';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { grey, lightBlue, pink } from '@mui/material/colors';
-import { CATEGORIES, EXPENDITURE, INCOME } from '../../utils/constants/categories';
+import { CATEGORIES, EXPENDITURE, INCOME } from '../../../utils/constants/categories';
 import {
   selectDate, selectedDate, selectSchedules, selectViewMode,
-} from '../../utils/redux/schedule/scheduleSlice';
-import MarkedPickersDay from './scheduleMarker/MarkedPickersDay';
-import MarkerStack from './scheduleMarker/MarkerStack';
+} from '../../../utils/redux/schedule/scheduleSlice';
+import MarkedPickersDay from '../scheduleMarker/MarkedPickersDay';
+import MarkerStack from '../scheduleMarker/MarkerStack';
 import 'moment/locale/ko';
+import CalenderBox from './boxes/CalenderBox';
 
 function Calender({ dateHeight }) {
   const dispatch = useDispatch();
@@ -188,76 +189,7 @@ function Calender({ dateHeight }) {
 
   return (
     <LocalizationProvider dateAdapter={AdapterMoment} dateFormats={{ monthAndYear: 'yyyy년 MM월' }}>
-      <Box
-        sx={{
-          '& > div': {
-            minWidth: '100%',
-          },
-          '& > div > div, & > div > div > div, & .MuiCalendarPicker-root': {
-            width: '100%',
-            display: 'inline-flex',
-            minHeight: DATE_HEIGHT * 5 + 100,
-          },
-          // 헤더 디자인을 위한 css
-          '.MuiCalendarOrClockPicker-root > div': {
-            width: '100%',
-            margin: '0',
-            minHeight: DATE_HEIGHT * 5 + 100,
-          },
-          '.MuiPickersCalendarHeader-root': {
-            display: 'flex',
-            width: '100vw',
-            paddingX: 2,
-          },
-          '.MuiPickersArrowSwitcher-root': {
-            width: '100vw',
-            display: 'inline-flex',
-            justifyContent: 'space-between',
-          },
-          '.MuiPickersCalendarHeader-label': {
-            textAlign: 'center',
-          },
-          '.MuiPickersArrowSwitcher-spacer': {
-            width: '50vw',
-          },
-          '.MuiPickersCalendarHeader-labelContainer': {
-            position: 'absolute',
-            left: 0,
-            right: 0,
-            alignItems: 'center',
-            justifyContent: 'center',
-          },
-
-          // 데이 디자인을 위한 css
-          '& .MuiTypography-caption': {
-            width: '100%',
-            margin: 0,
-          },
-          '& .PrivatePickersSlideTransition-root': {
-            minHeight: DATE_HEIGHT * 5,
-          },
-          '& .PrivatePickersSlideTransition-root [role="row"]': {
-            margin: 0,
-          },
-          '& .MuiPickersDay-dayWithMargin': {
-            margin: 0,
-          },
-          '& .MuiDayPicker-weekContainer': {
-            height: DATE_HEIGHT,
-          },
-          '& .MuiPickersDay-root': {
-            width: DATE_SIZE,
-            height: DATE_SIZE,
-            marginX: 'auto',
-          },
-          '& .Mui-selected': {
-            borderRadius: 2,
-            backgroundColor: 'primary.main',
-            color: 'white',
-            fontWeight: 'bold',
-          },
-        }}
-      >
+      <CalenderBox dateHeight={DATE_HEIGHT} dateSize={DATE_SIZE}>
         <StaticDatePicker
           views={['day']}
           displayStaticWrapperAs="desktop"
@@ -271,7 +203,7 @@ function Calender({ dateHeight }) {
           renderDay={viewMode === 'schedule' ? renderDayInPicker : renderAssetDayPicker}
           renderInput={(params) => <TextField {...params} />}
         />
-      </Box>
+      </CalenderBox>
     </LocalizationProvider>
   );
 }
