@@ -7,6 +7,7 @@ const NEED_SIGN_IN = '로그인이 필요한 메뉴입니다.';
 const NO_SIGNAL_FROM_SERVER = '서버에서 응답이 없습니다.';
 const NO_BLANKS = '모든 칸을 입력해주세요';
 const NO_DUPLICATION_ID = '중복된 아이디 입니다.';
+const SIGN_UP_SUCCESS = '회원 가입이 완료됐습니다.';
 export {
   NOTHING_IS_HERE_YET,
   NOTHING_IS_AVAILABLE_BELOW_HERE,
@@ -15,4 +16,5 @@ export {
   NO_SIGNAL_FROM_SERVER,
   NO_BLANKS,
   NO_DUPLICATION_ID,
+  SIGN_UP_SUCCESS,
 };

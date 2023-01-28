@@ -10,7 +10,10 @@ import { useNavigate } from 'react-router-dom';
 import { setHeaderOpenFalse, setHeaderOpenTrue } from '../../utils/redux/common/commonSlice';
 import { fetchSignUp } from '../../utils/redux/API';
 import { isObjectValuesEmpty } from '../../utils/tools';
-import { NO_BLANKS, NO_DUPLICATION_ID, NO_SIGNAL_FROM_SERVER } from '../../utils/constants/common';
+import {
+  NO_BLANKS, NO_DUPLICATION_ID, NO_SIGNAL_FROM_SERVER, SIGN_UP_SUCCESS,
+} from '../../utils/constants/common';
+import PATH from '../../utils/constants/path';
 
 function SignUpContainer() {
   const dispatch = useDispatch();
@@ -31,8 +34,8 @@ function SignUpContainer() {
       return;
     }
     if (result) {
-      alert('회원 가입이 완료됐습니다.');
-      navigate('/sign-in');
+      alert(SIGN_UP_SUCCESS);
+      navigate(PATH.signIn);
     } else {
       alert(NO_DUPLICATION_ID);
     }
