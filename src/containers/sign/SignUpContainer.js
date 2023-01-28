@@ -136,7 +136,7 @@ function SignUpContainer() {
               fullWidth
               variant="contained"
               color="error"
-              onClick={() => navigate('/sign-in')}
+              onClick={() => navigate(PATH.signIn)}
             >
               뒤로가기
             </Button>

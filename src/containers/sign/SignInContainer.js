@@ -74,7 +74,7 @@ export default function SignInContainer() {
   }, []);
 
   useEffect(() => {
-    // 로그인에 성공하는 경우를 감지하여 home으로 보내버림
+    // 로그인에 성공하는 경우를 감지하여 home으로 보내버림. 혹은, 이미 로그인 된 상태라면 홈으로 강제 이동
     if (user !== null) {
       navigate(PATH.home);
     }
