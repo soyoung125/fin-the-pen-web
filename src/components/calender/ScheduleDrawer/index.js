@@ -13,7 +13,7 @@ import { v4 as uuidv4 } from 'uuid';
 import NameInput from './inputs/NameInput';
 import DateInput from './inputs/DateInput';
 import {
-  ADD_SCHEDULE, NEED_TITLE, REPEAT_CYCLE, SCHEDULE_DRAWER_MODE,
+  SCHEDULE_DRAWER, NEED_TITLE, REPEAT_CYCLE, SCHEDULE_DRAWER_MODE,
 } from '../../../utils/constants/schedule';
 import { addSchedule, deleteSchedule, modifySchedule } from '../../../utils/redux/schedule/scheduleSlice';
 import SpendingInput from './inputs/SpendingInput';
@@ -73,10 +73,10 @@ function ScheduleDrawer({ setBottomDrawerOpen, data, mode }) {
   };
 
   const updateSpendingType = () => {
-    if (schedule.type === ADD_SCHEDULE.type_plus) {
-      setSchedule({ ...schedule, type: ADD_SCHEDULE.type_minus });
+    if (schedule.type === SCHEDULE_DRAWER.type_plus) {
+      setSchedule({ ...schedule, type: SCHEDULE_DRAWER.type_minus });
     } else {
-      setSchedule({ ...schedule, type: ADD_SCHEDULE.type_plus });
+      setSchedule({ ...schedule, type: SCHEDULE_DRAWER.type_plus });
     }
   };
 
@@ -161,7 +161,7 @@ function ScheduleDrawer({ setBottomDrawerOpen, data, mode }) {
           {useMode === SCHEDULE_DRAWER_MODE.수정
             ? <Button onClick={() => setBottomDrawerOpen(false)}>취소</Button>
             : <Button />}
-          <Typography variant="h5" sx={{ fontWeight: 'bold' }}>{ADD_SCHEDULE.drawer_title[useMode]}</Typography>
+          <Typography variant="h5" sx={{ fontWeight: 'bold' }}>{SCHEDULE_DRAWER.drawer_title[useMode]}</Typography>
 
           {useMode === SCHEDULE_DRAWER_MODE.수정
             ? <Button onClick={() => modifySelectedSchedule()}>저장</Button>
@@ -206,7 +206,7 @@ function ScheduleDrawer({ setBottomDrawerOpen, data, mode }) {
                 aria-controls="panel1a-content"
                 id="panel1a-header"
               >
-                <Typography sx={{ fontWeight: 'bold' }}>{ADD_SCHEDULE.set_finance_title}</Typography>
+                <Typography sx={{ fontWeight: 'bold' }}>{SCHEDULE_DRAWER.set_finance_title}</Typography>
               </AccordionSummary>
               <AccordionDetails sx={{ backgroundColor: '#F6F6F6' }}>
                 <AssetSettings
@@ -229,7 +229,7 @@ function ScheduleDrawer({ setBottomDrawerOpen, data, mode }) {
           {
             user === null
               ? NEED_SIGN_IN
-              : ADD_SCHEDULE.add_schedule[useMode]
+              : SCHEDULE_DRAWER.add_schedule[useMode]
           }
         </Button>
       </Stack>

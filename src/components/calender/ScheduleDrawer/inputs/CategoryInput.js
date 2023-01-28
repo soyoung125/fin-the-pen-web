@@ -4,7 +4,7 @@ import {
 } from '@mui/material';
 import { useEffect, useState } from 'react';
 import { CATEGORIES } from '../../../../utils/constants/categories';
-import { ADD_SCHEDULE } from '../../../../utils/constants/schedule';
+import { SCHEDULE_DRAWER } from '../../../../utils/constants/schedule';
 
 export default function CategoryInput({ updateCategory, selected }) {
   const [value, setValue] = useState(selected);
@@ -30,7 +30,7 @@ export default function CategoryInput({ updateCategory, selected }) {
         }}
         id="category"
         options={CATEGORIES.map((cat) => cat.title)}
-        renderInput={(params) => <TextField {...params} label={ADD_SCHEDULE.category_title} />}
+        renderInput={(params) => <TextField {...params} label={SCHEDULE_DRAWER.category_title} />}
         size="small"
       />
     </div>
