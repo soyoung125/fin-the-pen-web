@@ -7,7 +7,7 @@ import { updateSchedule } from '../utils/schedule';
 function DateInput({
   schedule, setSchedule,
 }) {
-  const updateState = (state) => {
+  const changeSchedule = (state) => {
     updateSchedule(schedule, setSchedule, state);
   };
   return (
@@ -21,7 +21,7 @@ function DateInput({
           shrink: true,
         }}
         value={schedule.date}
-        onChange={updateState}
+        onChange={changeSchedule}
         size="small"
       />
       <Stack
@@ -43,7 +43,7 @@ function DateInput({
           }}
           fullWidth
           value={schedule.start_time}
-          onChange={updateState}
+          onChange={changeSchedule}
           size="small"
         />
         <TextField
@@ -58,7 +58,7 @@ function DateInput({
           }}
           fullWidth
           value={schedule.end_time}
-          onChange={updateState}
+          onChange={changeSchedule}
           size="small"
         />
       </Stack>
