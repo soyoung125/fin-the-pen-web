@@ -25,7 +25,7 @@ import ALERTS from '../../../utils/constants/alerts';
 import RepeatInput from './inputs/RepeatInput';
 import { selectUser } from '../../../utils/redux/user/userSlice';
 import { NEED_SIGN_IN, NOT_AVAILABLE } from '../../../utils/constants/common';
-import AssetSettings from './AssetSettings';
+import AssetSettings from './inputs/AssetSettings';
 
 function TransitionUp(props) {
   // eslint-disable-next-line react/jsx-props-no-spreading
@@ -41,7 +41,6 @@ function ScheduleDrawer({ setBottomDrawerOpen, data, mode }) {
 
   const schedule = useSelector(selectSchedule);
 
-  const [useMode, setUseMode] = useState(mode); // 이거를 useState로 관리해야 하는 이유가 있는지?
   const [expandAccordion, setExpandAccordion] = useState(mode !== SCHEDULE_DRAWER_MODE.생성);
 
   const [snackbarOpen, setSnackbarOpen] = useState(true);
@@ -122,12 +121,12 @@ function ScheduleDrawer({ setBottomDrawerOpen, data, mode }) {
               m={1}
             >
               <Stack direction="row" alignItems="center" justifyContent="space-between">
-                {useMode === SCHEDULE_DRAWER_MODE.수정
+                {mode === SCHEDULE_DRAWER_MODE.수정
                   ? <Button onClick={() => setBottomDrawerOpen(false)}>취소</Button>
-                  : <Button />}
-                <Typography variant="h5" sx={{ fontWeight: 'bold' }}>{SCHEDULE_DRAWER.drawer_title[useMode]}</Typography>
+                  : <Button disabled />}
+                <Typography variant="h5" sx={{ fontWeight: 'bold' }}>{SCHEDULE_DRAWER.drawer_title[mode]}</Typography>
 
-                {useMode === SCHEDULE_DRAWER_MODE.수정
+                {mode === SCHEDULE_DRAWER_MODE.수정
                   ? <Button onClick={() => modifySelectedSchedule()}>저장</Button>
                   : <Button onClick={() => setBottomDrawerOpen(false)}><ClearIcon /></Button>}
               </Stack>
@@ -144,14 +143,14 @@ function ScheduleDrawer({ setBottomDrawerOpen, data, mode }) {
               {/* 이벤트 카테고리 */}
               <CategoryInput
                 selected={
-                  useMode === SCHEDULE_DRAWER_MODE.생성 ? '' : schedule.category
+                  mode === SCHEDULE_DRAWER_MODE.생성 ? '' : schedule.category
                 }
               />
 
               {/* 자산 설정하기 */}
               {mode === SCHEDULE_DRAWER_MODE.수정
                 ? (
-                  <AssetSettings mode={useMode} />
+                  <AssetSettings mode={mode} />
                 )
                 : (
                   <Accordion sx={{ width: '100%' }} expanded={expandAccordion}>
@@ -164,7 +163,7 @@ function ScheduleDrawer({ setBottomDrawerOpen, data, mode }) {
                       <Typography sx={{ fontWeight: 'bold' }}>{SCHEDULE_DRAWER.set_finance_title}</Typography>
                     </AccordionSummary>
                     <AccordionDetails sx={{ backgroundColor: '#F6F6F6' }}>
-                      <AssetSettings mode={useMode} />
+                      <AssetSettings mode={mode} />
                     </AccordionDetails>
                   </Accordion>
                 )}
@@ -183,7 +182,7 @@ function ScheduleDrawer({ setBottomDrawerOpen, data, mode }) {
                   {
                     user === null
                       ? NEED_SIGN_IN
-                      : SCHEDULE_DRAWER.add_schedule[useMode]
+                      : SCHEDULE_DRAWER.add_schedule[mode]
                   }
                 </Button>
                 <Button
