@@ -1,19 +1,27 @@
 import { SCHEDULE_DRAWER } from '../../../../utils/constants/schedule';
+import { setDrawerSchedule } from '../../../../utils/redux/schedule/scheduleSlice';
 
 /* eslint-disable import/prefer-default-export */
-export const updateSchedule = (schedule, setSchedule, state) => {
-  setSchedule({ ...schedule, [state.target.id]: state.target.value });
+export const updateSchedule = (dispatch, schedule, state) => {
+  dispatch(setDrawerSchedule({ ...schedule, [state.target.id]: state.target.value }));
 };
 
-export const updateAlarm = (schedule, setSchedule) => {
-  setSchedule({ ...schedule, alarm: !schedule.alarm });
+export const updateAlarm = (dispatch, schedule) => {
+  dispatch(setDrawerSchedule({ ...schedule, alarm: !schedule.alarm }));
 };
 
-export const updateRepeat = (schedule, setSchedule, setOpenDatePickerModal, state) => {
+export const updateRepeat = (dispatch, schedule, setOpenDatePickerModal, state) => {
   if ((state.target.name === 'repeating_cycle') && (state.target.value === '없음')) {
-    setSchedule({ ...schedule, [state.target.name]: state.target.value, repeat_deadline: '없음' });
+    dispatch(setDrawerSchedule({
+      ...schedule,
+      [state.target.name]: state.target.value,
+      repeat_deadline: '없음',
+    }));
   } else {
-    setSchedule({ ...schedule, [state.target.name]: state.target.value });
+    dispatch(setDrawerSchedule({
+      ...schedule,
+      [state.target.name]: state.target.value,
+    }));
   }
   if ((state.target.name === 'repeat_deadline') && (state.target.value !== '없음')) {
     setOpenDatePickerModal(true);
@@ -28,18 +36,18 @@ export const updateRepeatEndDate = (schedule, setRepeatEndDate, endDate) => {
   }
 };
 
-export const updateCategory = (schedule, setSchedule, category) => {
-  setSchedule({ ...schedule, category });
+export const updateCategory = (dispatch, schedule, category) => {
+  dispatch(setDrawerSchedule({ ...schedule, category }));
 };
 
-export const updateSpendingType = (schedule, setSchedule) => {
+export const updateSpendingType = (dispatch, schedule) => {
   if (schedule.type === SCHEDULE_DRAWER.type_plus) {
-    setSchedule({ ...schedule, type: SCHEDULE_DRAWER.type_minus });
+    dispatch(setDrawerSchedule({ ...schedule, type: SCHEDULE_DRAWER.type_minus }));
   } else {
-    setSchedule({ ...schedule, type: SCHEDULE_DRAWER.type_plus });
+    dispatch(setDrawerSchedule({ ...schedule, type: SCHEDULE_DRAWER.type_plus }));
   }
 };
 
-export const updateExclusion = (schedule, setSchedule, state) => {
-  setSchedule({ ...schedule, exclusion: state.target.checked });
+export const updateExclusion = (dispatch, schedule, state) => {
+  dispatch(setDrawerSchedule({ ...schedule, exclusion: state.target.checked }));
 };

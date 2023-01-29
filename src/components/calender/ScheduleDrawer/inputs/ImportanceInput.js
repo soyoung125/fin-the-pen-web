@@ -1,13 +1,19 @@
 import {
   Button, Stack, Typography,
 } from '@mui/material';
+import { useDispatch, useSelector } from 'react-redux';
 import { SCHEDULE_DRAWER } from '../../../../utils/constants/schedule';
+import { selectSchedule } from '../../../../utils/redux/schedule/scheduleSlice';
 import { updateSchedule } from '../utils/schedule';
 
-function ImportanceInput({ schedule, setSchedule }) {
+function ImportanceInput() {
+  const dispatch = useDispatch();
+  const schedule = useSelector(selectSchedule);
+
   const changeSchedule = (state) => {
-    updateSchedule(schedule, setSchedule, state);
+    updateSchedule(dispatch, schedule, state);
   };
+
   return (
     <Stack direction="row" justifyContent="space-between" alignItems="center" p={1}>
       <Typography>{SCHEDULE_DRAWER.set_importance_title}</Typography>

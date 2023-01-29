@@ -7,26 +7,29 @@ import { LocalizationProvider, PickersDay, StaticDatePicker } from '@mui/x-date-
 import { AdapterMoment } from '@mui/x-date-pickers/AdapterMoment';
 import moment from 'moment';
 import { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { DEADLINE, REPEAT } from '../../../../utils/constants/repeat';
 import { SCHEDULE_DRAWER } from '../../../../utils/constants/schedule';
+import { selectSchedule, setDrawerSchedule } from '../../../../utils/redux/schedule/scheduleSlice';
 import { updateRepeat, updateRepeatEndDate } from '../utils/schedule';
 
-function RepeatInput({
-  schedule, setSchedule,
-}) {
+function RepeatInput() {
+  const dispatch = useDispatch();
+  const schedule = useSelector(selectSchedule);
+
   const [openDatePickerModal, setOpenDatePickerModal] = useState(false);
   const [repeatEndDate, setRepeatEndDate] = useState(moment(schedule.repeat_endDate));
 
   const changeRepeat = (state) => {
-    updateRepeat(schedule, setSchedule, setOpenDatePickerModal, state);
+    updateRepeat(dispatch, schedule, setOpenDatePickerModal, state);
   };
 
   const handleModalClose = () => {
     setOpenDatePickerModal(false);
-    setSchedule({
+    dispatch(setDrawerSchedule({
       ...schedule,
       repeat_endDate: moment(repeatEndDate).format('YYYY-MM-DD'),
-    });
+    }));
   };
 
   const renderDayInPicker = (day, _value, DayComponentProps) => {

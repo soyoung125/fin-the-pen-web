@@ -3,18 +3,21 @@ import {
   FormControl, IconButton, InputAdornment, OutlinedInput,
 } from '@mui/material';
 import NotificationsNoneIcon from '@mui/icons-material/NotificationsNone';
+import { useDispatch, useSelector } from 'react-redux';
 import { SCHEDULE_DRAWER } from '../../../../utils/constants/schedule';
 import { updateAlarm, updateSchedule } from '../utils/schedule';
+import { selectSchedule } from '../../../../utils/redux/schedule/scheduleSlice';
 
-function NameInput({
-  schedule, setSchedule,
-  //  updateAlarm,
-}) {
+function NameInput({ setSchedule }) {
+  const dispatch = useDispatch();
+  const schedule = useSelector(selectSchedule);
+
   const changeSchedule = (state) => {
-    updateSchedule(schedule, setSchedule, state);
+    updateSchedule(dispatch, schedule, state);
   };
+
   const changeAlarm = () => {
-    updateAlarm(schedule, setSchedule);
+    updateAlarm(dispatch, schedule);
   };
   return (
     <FormControl fullWidth>

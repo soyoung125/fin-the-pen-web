@@ -3,30 +3,17 @@ import ExclusionInput from '../inputs/ExclusionInput';
 import ImportanceInput from '../inputs/ImportanceInput';
 import SpendingInput from '../inputs/SpendingInput';
 
-function AssetSettings({
-  schedule, setSchedule,
-  mode,
-}) {
+function AssetSettings({ mode }) {
   return (
     <Stack spacing={1}>
       <Card>
-        <SpendingInput
-          schedule={schedule}
-          setSchedule={setSchedule}
-          mode={mode}
-        />
+        <SpendingInput mode={mode} />
       </Card>
       <Card>
-        <ImportanceInput
-          schedule={schedule}
-          setSchedule={setSchedule}
-        />
+        <ImportanceInput />
       </Card>
       <Card>
-        <ExclusionInput
-          schedule={schedule}
-          setSchedule={setSchedule}
-        />
+        <ExclusionInput />
       </Card>
     </Stack>
   );

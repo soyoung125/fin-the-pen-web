@@ -3,23 +3,28 @@ import {
   Autocomplete, TextField,
 } from '@mui/material';
 import { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { CATEGORIES } from '../../../../utils/constants/categories';
 import { SCHEDULE_DRAWER } from '../../../../utils/constants/schedule';
+import { selectSchedule } from '../../../../utils/redux/schedule/scheduleSlice';
 import { updateCategory } from '../utils/schedule';
 
-export default function CategoryInput({
-  schedule, setSchedule, selected,
-}) {
+export default function CategoryInput({ selected }) {
+  const dispatch = useDispatch();
+  const schedule = useSelector(selectSchedule);
+
   const [value, setValue] = useState(selected);
   const [inputValue, setInputValue] = useState('');
+
   useEffect(() => {
     if (value) {
       const category = CATEGORIES.filter((cat) => cat.title === value);
       if (category.length > 0) {
-        updateCategory(schedule, setSchedule, category[0].title);
+        updateCategory(dispatch, schedule, category[0].title);
       }
     }
   }, [value]);
+
   return (
     <div>
       <Autocomplete
