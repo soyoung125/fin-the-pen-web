@@ -3,8 +3,7 @@
 /* eslint-disable no-nested-ternary */
 import {
   Accordion, AccordionDetails, AccordionSummary, Alert,
-  Box,
-  Button, Slide, Snackbar, Stack, Typography,
+  Box, Button, Slide, Snackbar, Stack, Typography,
 } from '@mui/material';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import { useEffect, useState } from 'react';
@@ -26,6 +25,7 @@ import RepeatInput from './inputs/RepeatInput';
 import { selectUser } from '../../../utils/redux/user/userSlice';
 import { NEED_SIGN_IN, NOT_AVAILABLE } from '../../../utils/constants/common';
 import AssetSettings from './inputs/AssetSettings';
+import ScheduleDrawerHeader from './layouts/ScheduleDrawerHeader';
 
 function TransitionUp(props) {
   // eslint-disable-next-line react/jsx-props-no-spreading
@@ -85,7 +85,7 @@ function ScheduleDrawer({ setBottomDrawerOpen, data, mode }) {
     if (mode === SCHEDULE_DRAWER_MODE.생성) {
       addNewSchedule();
     } else {
-      deleteSelectedSchedule();
+      modifySelectedSchedule();
     }
   };
 
@@ -120,16 +120,11 @@ function ScheduleDrawer({ setBottomDrawerOpen, data, mode }) {
               spacing={2}
               m={1}
             >
-              <Stack direction="row" alignItems="center" justifyContent="space-between">
-                {mode === SCHEDULE_DRAWER_MODE.수정
-                  ? <Button onClick={() => setBottomDrawerOpen(false)}>취소</Button>
-                  : <Button disabled />}
-                <Typography variant="h5" sx={{ fontWeight: 'bold' }}>{SCHEDULE_DRAWER.drawer_title[mode]}</Typography>
-
-                {mode === SCHEDULE_DRAWER_MODE.수정
-                  ? <Button onClick={() => modifySelectedSchedule()}>저장</Button>
-                  : <Button onClick={() => setBottomDrawerOpen(false)}><ClearIcon /></Button>}
-              </Stack>
+              <ScheduleDrawerHeader
+                mode={mode}
+                setBottomDrawerOpen={setBottomDrawerOpen}
+                deleteSelectedSchedule={deleteSelectedSchedule}
+              />
 
               {/* 이벤트 제목 */}
               <NameInput />

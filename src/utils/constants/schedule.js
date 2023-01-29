@@ -27,7 +27,7 @@ const SCHEDULE_DRAWER = Object.freeze({
   add_schedule: {
     create: '일정 추가하기',
     read: '문구를 뭐로할까요',
-    modify: '일정 삭제하기',
+    modify: '수정 완료',
   },
 });
 const SCHEDULE_DRAWER_MODE = {
