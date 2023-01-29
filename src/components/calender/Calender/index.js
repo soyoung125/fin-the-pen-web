@@ -122,7 +122,7 @@ function Calender({ dateHeight }) {
     const isSameOrBefore = day.isSameOrBefore(today);
 
     // 이달에 해당하지 않은 날은 아무것도 표시하지 않기 위한 조건문
-    if (!day.isSame(today, 'month')) {
+    if (!day.isSame(value, 'month')) {
       return <PickersDay {...DayComponentProps} />;
     }
 
