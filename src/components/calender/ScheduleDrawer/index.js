@@ -45,10 +45,6 @@ function ScheduleDrawer({ setBottomDrawerOpen, data, mode }) {
 
   const [snackbarOpen, setSnackbarOpen] = useState(true);
 
-  const handleClose = () => {
-    setSnackbarOpen(false);
-  };
-
   const addNewSchedule = () => {
     // 반복 일정 추가
     if ((schedule.repeating_cycle !== '없음') && (schedule.repeat_deadline !== '없음')) {
@@ -60,11 +56,6 @@ function ScheduleDrawer({ setBottomDrawerOpen, data, mode }) {
     }
     // 원래 일정 추가
     dispatch(addSchedule({ ...schedule, id: uuidv4() }));
-    setBottomDrawerOpen(false);
-  };
-
-  const deleteSelectedSchedule = () => {
-    dispatch(deleteSchedule(schedule.id));
     setBottomDrawerOpen(false);
   };
 
@@ -108,7 +99,9 @@ function ScheduleDrawer({ setBottomDrawerOpen, data, mode }) {
               anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
               autoHideDuration={5000}
               open={snackbarOpen}
-              onClose={handleClose}
+              onClose={() => {
+                setSnackbarOpen(false);
+              }}
               TransitionComponent={TransitionUp}
             >
               <Alert color={ALERTS[random].color} sx={{ width: '100%' }} icon={ALERTS[random].icon}>
@@ -123,7 +116,6 @@ function ScheduleDrawer({ setBottomDrawerOpen, data, mode }) {
               <ScheduleDrawerHeader
                 mode={mode}
                 setBottomDrawerOpen={setBottomDrawerOpen}
-                deleteSelectedSchedule={deleteSelectedSchedule}
               />
 
               {/* 이벤트 제목 */}
