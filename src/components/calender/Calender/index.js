@@ -1,3 +1,4 @@
+/* eslint-disable no-underscore-dangle */
 /* eslint-disable max-len */
 /* eslint-disable react/jsx-props-no-spreading */
 import { Box, Stack, TextField } from '@mui/material';
@@ -194,7 +195,9 @@ function Calender({ dateHeight }) {
           onChange={(newValue) => {
             dispatch(selectedDate(moment(newValue)));
           }}
-          // eslint-disable-next-line react/jsx-props-no-spreading
+          onMonthChange={(month) => {
+            dispatch(selectedDate(moment(month._d)));
+          }}
           renderDay={viewMode === 'schedule' ? renderDayInPicker : renderAssetDayPicker}
           renderInput={(params) => <TextField {...params} />}
         />
