@@ -113,6 +113,21 @@ function Calender({ dateHeight }) {
     return <PickersDay {...DayComponentProps} />;
   };
 
+  /**
+   * 수입, 지출액을 계산하기 위한 함수
+   * @param {Moment} renderDay 수입, 지출액을 계산할 날
+   * @param {String} unit 'day', 'week' 같은 날/주를 확인하기 위한 단위
+   * @param {Sting} type '-', '+' 수입/지출을 확인하기 위한 매개변수
+   * @returns 일/주별 수입/지출 액
+   */
+  const calculateIncomeExpenditure = (renderDay, unit, type) => {
+    if (type === '-') {
+      return schedules.filter((s) => renderDay.isSame(s.date, unit)).reduce((sum, current) => (current.type === type ? sum - parseInt(current.expected_spending, 10) : sum), 0);
+    }
+    return schedules.filter((s) => renderDay.isSame(s.date, unit)).reduce((sum, current) => (current.type === type ? sum + parseInt(current.expected_spending, 10) : sum), 0);
+  };
+
+  // 실제 지출 데이터를 불러오기 전이기 때문에 일정 데이터의 지출 데이터 사용중
   const renderAssetDayPicker = (day, _value, DayComponentProps) => {
     const renderDay = DayComponentProps.day;
     const weekday = renderDay.format('dd');
@@ -125,14 +140,19 @@ function Calender({ dateHeight }) {
     // 오늘 이전의 일별 수입/지출, 주별 수입/지출을 표시하기 위한 조건문
     if (renderDay.isSameOrBefore(today)) {
       if (weekday === '일') {
+        // console.log(calculateIncomeExpenditure(renderDay, 'day', '-'));
         return (
           <Box sx={{ width: 'calc(100vw / 7)' }} key={DayComponentProps.key}>
             <Box sx={{ display: 'flex', justifyContent: 'center' }}>
               <PickersDay {...DayComponentProps} />
             </Box>
             <Stack mb={1}>
-              <Box sx={{ fontSize: 'x-small', paddingRight: 2, color: lightBlue[200] }} display="flex" justifyContent="flex-end">-10000</Box>
-              <Box sx={{ fontSize: 'x-small', paddingRight: 2, color: pink[100] }} display="flex" justifyContent="flex-end">+10000</Box>
+              <Box sx={{ fontSize: 'x-small', paddingRight: 1, color: lightBlue[200] }} display="flex" justifyContent="flex-end">
+                {calculateIncomeExpenditure(renderDay, 'day', '-')}
+              </Box>
+              <Box sx={{ fontSize: 'x-small', paddingRight: 1, color: pink[100] }} display="flex" justifyContent="flex-end">
+                {calculateIncomeExpenditure(renderDay, 'day', '+')}
+              </Box>
             </Stack>
             {renderDay.isSame(today, 'week')
               ? (
@@ -141,8 +161,12 @@ function Calender({ dateHeight }) {
                   width: `calc(100vw / 7 * (${today.diff(renderDay, 'days')} + 1))`, background: grey[200], overflow: 'visible', borderRadius: 3, display: 'flex', justifyContent: 'flex-end', paddingX: 2,
                 }}
                 >
-                  <Box sx={{ fontSize: 'small', paddingRight: 1, color: 'primary.main' }}>-10000</Box>
-                  <Box sx={{ fontSize: 'small', color: grey[500] }}>+10000</Box>
+                  <Box sx={{ fontSize: 'small', paddingRight: 1, color: 'primary.main' }}>
+                    {schedules.filter((s) => renderDay.isSameOrBefore(s.date) && renderDay.isSame(s.date, 'week')).reduce((sum, current) => (current.type === '-' ? sum - parseInt(current.expected_spending, 10) : sum), 0)}
+                  </Box>
+                  <Box sx={{ fontSize: 'small', color: grey[500] }}>
+                    {schedules.filter((s) => renderDay.isSameOrBefore(s.date) && renderDay.isSame(s.date, 'week')).reduce((sum, current) => (current.type === '+' ? sum + parseInt(current.expected_spending, 10) : sum), 0)}
+                  </Box>
                 </Box>
               )
               : (
@@ -151,8 +175,12 @@ function Calender({ dateHeight }) {
                   width: '100vw', background: grey[200], overflow: 'visible', borderRadius: 3, display: 'flex', justifyContent: 'flex-end', paddingX: 2,
                 }}
                 >
-                  <Box sx={{ fontSize: 'small', paddingRight: 1, color: 'primary.main' }}>+10000</Box>
-                  <Box sx={{ fontSize: 'small', color: grey[500] }}>-10000</Box>
+                  <Box sx={{ fontSize: 'small', paddingRight: 1, color: 'primary.main' }}>
+                    {calculateIncomeExpenditure(renderDay, 'week', '-')}
+                  </Box>
+                  <Box sx={{ fontSize: 'small', color: grey[500] }}>
+                    {calculateIncomeExpenditure(renderDay, 'week', '+')}
+                  </Box>
                 </Box>
               )}
           </Box>
@@ -166,8 +194,12 @@ function Calender({ dateHeight }) {
             <PickersDay {...DayComponentProps} />
           </Box>
           <Stack>
-            <Box sx={{ fontSize: 'x-small', paddingRight: 2, color: lightBlue[300] }} display="flex" justifyContent="flex-end">-10000</Box>
-            <Box sx={{ fontSize: 'x-small', paddingRight: 2, color: pink[200] }} display="flex" justifyContent="flex-end">+10000</Box>
+            <Box sx={{ fontSize: 'x-small', paddingRight: 2, color: lightBlue[300] }} display="flex" justifyContent="flex-end">
+              {calculateIncomeExpenditure(renderDay, 'day', '-')}
+            </Box>
+            <Box sx={{ fontSize: 'x-small', paddingRight: 2, color: pink[200] }} display="flex" justifyContent="flex-end">
+              {calculateIncomeExpenditure(renderDay, 'day', '+')}
+            </Box>
           </Stack>
         </Box>
       );
