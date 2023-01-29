@@ -18,6 +18,7 @@ import MarkerStack from '../scheduleMarker/MarkerStack';
 import 'moment/locale/ko';
 import CalenderBox from './boxes/CalenderBox';
 import IncomeExpenditureBox from './boxes/IncomeExpenditureBox';
+import { calculateIncomeExpenditure } from '../../../utils/tools';
 
 function Calender({ dateHeight }) {
   const dispatch = useDispatch();
@@ -114,23 +115,6 @@ function Calender({ dateHeight }) {
     return <PickersDay {...DayComponentProps} />;
   };
 
-  /**
-   * 수입, 지출액을 계산하기 위한 함수
-   * @param {Moment} renderDay 수입, 지출액을 계산할 날
-   * @param {String} unit 'day', 'week' 같은 날/주를 확인하기 위한 단위
-   * @param {Sting} type '-', '+' 수입/지출을 확인하기 위한 매개변수
-   * @returns 일/주별 수입/지출 액
-   */
-  const calculateIncomeExpenditure = (renderDay, unit, type) => {
-    let result = 0;
-    if (type === '-') {
-      result = schedules.filter((s) => renderDay.isSame(s.date, unit)).reduce((sum, current) => (current.type === type ? sum - parseInt(current.expected_spending, 10) : sum), result);
-    } else {
-      result = schedules.filter((s) => renderDay.isSame(s.date, unit)).reduce((sum, current) => (current.type === type ? sum + parseInt(current.expected_spending, 10) : sum), result);
-    }
-    return result !== 0 ? result : null;
-  };
-
   // 실제 지출 데이터를 불러오기 전이기 때문에 일정 데이터의 지출 데이터 사용중
   const renderAssetDayPicker = (day, _value, DayComponentProps) => {
     const renderDay = DayComponentProps.day;
@@ -147,8 +131,8 @@ function Calender({ dateHeight }) {
       return (
         <IncomeExpenditureBox
           key={DayComponentProps.key}
-          income={calculateIncomeExpenditure(renderDay, 'day', '+')}
-          expenditure={calculateIncomeExpenditure(renderDay, 'day', '-')}
+          income={calculateIncomeExpenditure(schedules, renderDay, 'day', '+')}
+          expenditure={calculateIncomeExpenditure(schedules, renderDay, 'day', '-')}
           incomeColor={pink[100]}
           expenditureColor={lightBlue[200]}
           pickersDay={<PickersDay {...DayComponentProps} />}
@@ -175,10 +159,10 @@ function Calender({ dateHeight }) {
               }}
               >
                 <Box sx={{ fontSize: 'small', paddingRight: 1, color: 'primary.main' }}>
-                  {calculateIncomeExpenditure(renderDay, 'week', '-')}
+                  {calculateIncomeExpenditure(schedules, renderDay, 'week', '-')}
                 </Box>
                 <Box sx={{ fontSize: 'small', color: grey[500] }}>
-                  {calculateIncomeExpenditure(renderDay, 'week', '+')}
+                  {calculateIncomeExpenditure(schedules, renderDay, 'week', '+')}
                 </Box>
               </Box>
             )}
@@ -190,8 +174,8 @@ function Calender({ dateHeight }) {
     return (
       <IncomeExpenditureBox
         key={DayComponentProps.key}
-        income={calculateIncomeExpenditure(renderDay, 'day', '+')}
-        expenditure={calculateIncomeExpenditure(renderDay, 'day', '-')}
+        income={calculateIncomeExpenditure(schedules, renderDay, 'day', '+')}
+        expenditure={calculateIncomeExpenditure(schedules, renderDay, 'day', '-')}
         incomeColor={isSameOrBefore ? pink[100] : grey[500]}
         expenditureColor={isSameOrBefore ? lightBlue[200] : grey[500]}
         pickersDay={<PickersDay {...DayComponentProps} />}
