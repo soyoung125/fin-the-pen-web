@@ -9,20 +9,13 @@ import moment from 'moment';
 import { useState } from 'react';
 import { DEADLINE, REPEAT } from '../../../../utils/constants/repeat';
 import { SCHEDULE_DRAWER } from '../../../../utils/constants/schedule';
-import { updateRepeat } from '../utils/schedule';
+import { updateRepeat, updateRepeatEndDate } from '../utils/schedule';
 
 function RepeatInput({
   schedule, setSchedule,
 }) {
   const [openDatePickerModal, setOpenDatePickerModal] = useState(false);
   const [repeatEndDate, setRepeatEndDate] = useState(moment(schedule.repeat_endDate));
-  const updateRepeatEndDate = (endDate) => {
-    if (endDate.isBefore(schedule.date)) {
-      alert('반복 종료일을 다시 선택해주세요.');
-    } else {
-      setRepeatEndDate(endDate);
-    }
-  };
 
   const changeRepeat = (state) => {
     updateRepeat(schedule, setSchedule, setOpenDatePickerModal, state);
@@ -30,7 +23,10 @@ function RepeatInput({
 
   const handleModalClose = () => {
     setOpenDatePickerModal(false);
-    setSchedule({ ...schedule, repeat_endDate: moment(repeatEndDate).format('YYYY-MM-DD') });
+    setSchedule({
+      ...schedule,
+      repeat_endDate: moment(repeatEndDate).format('YYYY-MM-DD'),
+    });
   };
 
   const renderDayInPicker = (day, _value, DayComponentProps) => {
@@ -111,6 +107,7 @@ function RepeatInput({
           </Select>
         </FormControl>
       </Stack>
+
       <Dialog
         open={openDatePickerModal}
         onClose={handleModalClose}
@@ -133,7 +130,7 @@ function RepeatInput({
               disableHighlightToday
               value={moment(repeatEndDate)}
               onChange={(newValue) => {
-                updateRepeatEndDate(newValue);
+                updateRepeatEndDate(schedule, setRepeatEndDate, newValue);
               }}
               renderDay={renderDayInPicker}
               renderInput={(params) => <TextField {...params} />}

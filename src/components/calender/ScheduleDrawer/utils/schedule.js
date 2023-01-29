@@ -2,6 +2,7 @@
 export const updateSchedule = (schedule, setSchedule, state) => {
   setSchedule({ ...schedule, [state.target.id]: state.target.value });
 };
+
 export const updateAlarm = (schedule, setSchedule) => {
   setSchedule({ ...schedule, alarm: !schedule.alarm });
 };
@@ -14,5 +15,13 @@ export const updateRepeat = (schedule, setSchedule, setOpenDatePickerModal, stat
   }
   if ((state.target.name === 'repeat_deadline') && (state.target.value !== '없음')) {
     setOpenDatePickerModal(true);
+  }
+};
+
+export const updateRepeatEndDate = (schedule, setRepeatEndDate, endDate) => {
+  if (endDate.isBefore(schedule.date)) {
+    alert('반복 종료일을 다시 선택해주세요.');
+  } else {
+    setRepeatEndDate(endDate);
   }
 };
