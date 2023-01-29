@@ -117,12 +117,11 @@ function Calender({ dateHeight }) {
 
   // 실제 지출 데이터를 불러오기 전이기 때문에 일정 데이터의 지출 데이터 사용중
   const renderAssetDayPicker = (day, _value, DayComponentProps) => {
-    const renderDay = DayComponentProps.day;
-    const weekday = renderDay.format('dd');
-    const isSameOrBefore = renderDay.isSameOrBefore(today);
+    const weekday = day.format('dd');
+    const isSameOrBefore = day.isSameOrBefore(today);
 
     // 이달에 해당하지 않은 날은 아무것도 표시하지 않기 위한 조건문
-    if (!renderDay.isSame(today, 'month')) {
+    if (!day.isSame(today, 'month')) {
       return <PickersDay {...DayComponentProps} />;
     }
 
@@ -131,24 +130,24 @@ function Calender({ dateHeight }) {
       return (
         <IncomeExpenditureBox
           key={DayComponentProps.key}
-          income={calculateIncomeExpenditure(schedules, renderDay, 'day', '+')}
-          expenditure={calculateIncomeExpenditure(schedules, renderDay, 'day', '-')}
+          income={calculateIncomeExpenditure(schedules, day, 'day', '+')}
+          expenditure={calculateIncomeExpenditure(schedules, day, 'day', '-')}
           incomeColor={pink[100]}
           expenditureColor={lightBlue[200]}
           pickersDay={<PickersDay {...DayComponentProps} />}
         >
-          {renderDay.isSame(today, 'week')
+          {day.isSame(today, 'week')
             ? (
           // 이번주의 주별 수입/지출 표시
               <Box sx={{
-                width: `calc(100vw / 7 * (${today.diff(renderDay, 'days')} + 1))`, background: grey[200], overflow: 'visible', borderRadius: 3, display: 'flex', justifyContent: 'flex-end', paddingX: 2, height: '20px',
+                width: `calc(100vw / 7 * (${today.diff(day, 'days')} + 1))`, background: grey[200], overflow: 'visible', borderRadius: 3, display: 'flex', justifyContent: 'flex-end', paddingX: 2, height: '20px',
               }}
               >
                 <Box sx={{ fontSize: 'small', paddingRight: 1, color: 'primary.main' }}>
-                  {schedules.filter((s) => renderDay.isSameOrBefore(s.date) && renderDay.isSame(s.date, 'week')).reduce((sum, current) => (current.type === '-' ? sum - parseInt(current.expected_spending, 10) : sum), 0)}
+                  {schedules.filter((s) => day.isSameOrBefore(s.date) && day.isSame(s.date, 'week')).reduce((sum, current) => (current.type === '-' ? sum - parseInt(current.expected_spending, 10) : sum), 0)}
                 </Box>
                 <Box sx={{ fontSize: 'small', color: grey[500] }}>
-                  {schedules.filter((s) => renderDay.isSameOrBefore(s.date) && renderDay.isSame(s.date, 'week')).reduce((sum, current) => (current.type === '+' ? sum + parseInt(current.expected_spending, 10) : sum), 0)}
+                  {schedules.filter((s) => day.isSameOrBefore(s.date) && day.isSame(s.date, 'week')).reduce((sum, current) => (current.type === '+' ? sum + parseInt(current.expected_spending, 10) : sum), 0)}
                 </Box>
               </Box>
             )
@@ -159,10 +158,10 @@ function Calender({ dateHeight }) {
               }}
               >
                 <Box sx={{ fontSize: 'small', paddingRight: 1, color: 'primary.main' }}>
-                  {calculateIncomeExpenditure(schedules, renderDay, 'week', '-')}
+                  {calculateIncomeExpenditure(schedules, day, 'week', '-')}
                 </Box>
                 <Box sx={{ fontSize: 'small', color: grey[500] }}>
-                  {calculateIncomeExpenditure(schedules, renderDay, 'week', '+')}
+                  {calculateIncomeExpenditure(schedules, day, 'week', '+')}
                 </Box>
               </Box>
             )}
@@ -174,8 +173,8 @@ function Calender({ dateHeight }) {
     return (
       <IncomeExpenditureBox
         key={DayComponentProps.key}
-        income={calculateIncomeExpenditure(schedules, renderDay, 'day', '+')}
-        expenditure={calculateIncomeExpenditure(schedules, renderDay, 'day', '-')}
+        income={calculateIncomeExpenditure(schedules, day, 'day', '+')}
+        expenditure={calculateIncomeExpenditure(schedules, day, 'day', '-')}
         incomeColor={isSameOrBefore ? pink[100] : grey[500]}
         expenditureColor={isSameOrBefore ? lightBlue[200] : grey[500]}
         pickersDay={<PickersDay {...DayComponentProps} />}
