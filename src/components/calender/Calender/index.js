@@ -146,6 +146,7 @@ function Calender({ dateHeight }) {
     if (isSameOrBefore && weekday === '일') {
       return (
         <IncomeExpenditureBox
+          key={DayComponentProps.key}
           income={calculateIncomeExpenditure(renderDay, 'day', '+')}
           expenditure={calculateIncomeExpenditure(renderDay, 'day', '-')}
           incomeColor={pink[100]}
