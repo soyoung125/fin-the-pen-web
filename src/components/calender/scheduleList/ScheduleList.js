@@ -2,11 +2,14 @@ import {
   Box, Drawer, Stack, Typography,
 } from '@mui/material';
 import moment from 'moment';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { CATEGORIES } from '../../../utils/constants/categories';
 import { SCHEDULE_DRAWER_MODE } from '../../../utils/constants/schedule';
+import { fetchSchedules } from '../../../utils/redux/API';
+import { selectGuestMode } from '../../../utils/redux/common/commonSlice';
 import { selectDate, selectSchedules } from '../../../utils/redux/schedule/scheduleSlice';
+import { selectUser } from '../../../utils/redux/user/userSlice';
 import ScheduleDrawer from '../ScheduleDrawer';
 import ScheduleCard from './ScheduleCard';
 
@@ -15,11 +18,26 @@ function ScheduleList() {
   const [selectedSchedule, setSelectedSchedule] = useState(null);
   const schedules = useSelector(selectSchedules);
   const date = moment(useSelector(selectDate)).format('YYYY-MM-DD');
+  const user = useSelector(selectUser);
+  const guestMode = useSelector(selectGuestMode);
 
   const handleModal = (schedule) => {
     setSelectedSchedule(schedule);
     setBottomDrawerOpen(true);
   };
+
+  const getSchedules = async () => {
+    console.log('전체 데이터를 수신할 위치');
+    const result = await fetchSchedules(user.user_id);
+    console.log(result);
+  };
+
+  useEffect(() => {
+    // 게스트 모드가 아닌 경우에만 서버에 데이터를 요청
+    if (user && !guestMode) {
+      getSchedules();
+    }
+  }, [date]);
 
   return (
     <>
