@@ -17,9 +17,9 @@ export const isObjectValuesEmpty = (obj) => (
 /**
   * 수입, 지출액을 계산하기 위한 함수
   * @param {Moment} renderDay 수입, 지출액을 계산할 기준일
-  * @param {String} unit 'day', 'week' 같은 날/주를 확인하기 위한 단위
+  * @param {String} unit 'day', 'week', 'month' 같은 날/주/월을 확인하기 위한 단위
   * @param {Sting} type '-', '+' 수입/지출을 확인하기 위한 매개변수
-  * @returns 일/주별 수입/지출 액
+  * @returns 일/주/월별 수입/지출 액
   */
 export const calculateIncomeExpenditure = (schedules, renderDay, unit, type) => {
   let result = 0;
@@ -38,5 +38,5 @@ export const calculateIncomeExpenditure = (schedules, renderDay, unit, type) => 
           : sum
       ), result);
   }
-  return result !== 0 ? result : null;
+  return result.toLocaleString('ko-KR');
 };
