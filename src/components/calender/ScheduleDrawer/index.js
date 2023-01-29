@@ -45,11 +45,6 @@ function ScheduleDrawer({ setBottomDrawerOpen, data, mode }) {
   const [useMode, setUseMode] = useState(mode);
   const [expandAccordion, setExpandAccordion] = useState(mode !== SCHEDULE_DRAWER_MODE.생성);
 
-  // eslint-disable-next-line no-shadow
-  const updateSchedule = (schedule, setSchedule, state) => {
-    setSchedule({ ...schedule, [state.target.id]: state.target.value });
-  };
-
   const updateAlarm = () => {
     setSchedule({ ...schedule, alarm: !schedule.alarm });
   };
@@ -183,7 +178,6 @@ function ScheduleDrawer({ setBottomDrawerOpen, data, mode }) {
         <DateInput
           schedule={schedule}
           setSchedule={setSchedule}
-          updateSchedule={updateSchedule}
         />
 
         {/* 이벤트 반복 설정 */}
@@ -211,7 +205,6 @@ function ScheduleDrawer({ setBottomDrawerOpen, data, mode }) {
             <AssetSettings
               schedule={schedule}
               setSchedule={setSchedule}
-              updateSchedule={updateSchedule}
               updateSpendingType={updateSpendingType}
               updateExclusion={updateExclusion}
               mode={useMode}
@@ -231,7 +224,6 @@ function ScheduleDrawer({ setBottomDrawerOpen, data, mode }) {
                 <AssetSettings
                   schedule={schedule}
                   setSchedule={setSchedule}
-                  updateSchedule={updateSchedule}
                   updateSpendingType={updateSpendingType}
                   updateExclusion={updateExclusion}
                   mode={useMode}

@@ -2,16 +2,20 @@ import { Card, Stack } from '@mui/material';
 import ExclusionInput from '../inputs/ExclusionInput';
 import ImportanceInput from '../inputs/ImportanceInput';
 import SpendingInput from '../inputs/SpendingInput';
+import { updateSchedule } from '../utils/schedule';
 
 function AssetSettings({
-  schedule, updateSchedule, updateSpendingType, updateExclusion, mode,
+  schedule, setSchedule, updateSpendingType, updateExclusion, mode,
 }) {
+  const updateState = (state) => {
+    updateSchedule(schedule, setSchedule, state);
+  };
   return (
     <Stack spacing={1}>
       <Card>
         <SpendingInput
           schedule={schedule}
-          updateSchedule={updateSchedule}
+          updateSchedule={updateState}
           updateSpendingType={updateSpendingType}
           mode={mode}
         />
@@ -19,7 +23,7 @@ function AssetSettings({
       <Card>
         <ImportanceInput
           schedule={schedule}
-          updateSchedule={updateSchedule}
+          updateSchedule={updateState}
         />
       </Card>
       <Card>

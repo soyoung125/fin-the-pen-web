@@ -2,8 +2,14 @@ import {
   Stack, TextField,
 } from '@mui/material';
 import { SCHEDULE_DRAWER } from '../../../../utils/constants/schedule';
+import { updateSchedule } from '../utils/schedule';
 
-function DateInput({ schedule, updateSchedule }) {
+function DateInput({
+  schedule, setSchedule,
+}) {
+  const updateState = (state) => {
+    updateSchedule(schedule, setSchedule, state);
+  };
   return (
     <>
       <TextField
@@ -15,7 +21,7 @@ function DateInput({ schedule, updateSchedule }) {
           shrink: true,
         }}
         value={schedule.date}
-        onChange={updateSchedule}
+        onChange={updateState}
         size="small"
       />
       <Stack
@@ -37,7 +43,7 @@ function DateInput({ schedule, updateSchedule }) {
           }}
           fullWidth
           value={schedule.start_time}
-          onChange={updateSchedule}
+          onChange={updateState}
           size="small"
         />
         <TextField
@@ -52,7 +58,7 @@ function DateInput({ schedule, updateSchedule }) {
           }}
           fullWidth
           value={schedule.end_time}
-          onChange={updateSchedule}
+          onChange={updateState}
           size="small"
         />
       </Stack>
