@@ -1,8 +1,10 @@
 /* eslint-disable no-unused-vars */
 import { Button, Stack } from '@mui/material';
 import { useSelector } from 'react-redux';
+import { v4 as uuidv4 } from 'uuid';
 import { NEED_SIGN_IN, NOT_AVAILABLE } from '../../../../utils/constants/common';
 import { NEED_TITLE, SCHEDULE_DRAWER } from '../../../../utils/constants/schedule';
+import { fetchCreateSchedule } from '../../../../utils/redux/API';
 import { selectGuestMode } from '../../../../utils/redux/common/commonSlice';
 import { selectSchedule } from '../../../../utils/redux/schedule/scheduleSlice';
 import { selectUser } from '../../../../utils/redux/user/userSlice';
@@ -19,10 +21,21 @@ function ScheduleDrawerFooter({ mode, setBottomDrawerOpen }) {
   // guest mode end
 
   // fetch mode start
+  const createSchedule = async () => {
+    const scheduleWithUuid = {
+      ...schedule,
+      id: uuidv4(),
+      user_id: user.user_id,
+    };
+    alert(`일정을 저장합니다. 저장하려는 일정 데이터는 다음과 같습니다. ${JSON.stringify(scheduleWithUuid)}`);
+    const result = await fetchCreateSchedule(scheduleWithUuid);
+    console.log(result);
+  };
   const fetchHandler = () => {
     alert(`일반 모드! ${mode}`);
     switch (mode) {
       case 'create':
+        createSchedule();
         break;
       case 'modify':
         alert(NOT_AVAILABLE);
