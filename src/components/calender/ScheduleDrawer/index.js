@@ -23,7 +23,7 @@ import CategoryInput from './inputs/CategoryInput';
 import ALERTS from '../../../utils/constants/alerts';
 import RepeatInput from './inputs/RepeatInput';
 import { selectUser } from '../../../utils/redux/user/userSlice';
-import { NEED_SIGN_IN } from '../../../utils/constants/common';
+import { NEED_SIGN_IN, NOT_AVAILABLE } from '../../../utils/constants/common';
 import AssetSettings from './AssetSettings';
 
 function TransitionUp(props) {
@@ -138,6 +138,10 @@ function ScheduleDrawer({ setBottomDrawerOpen, data, mode }) {
     }
   };
 
+  const handleSubmitByRedux = () => {
+    alert(NOT_AVAILABLE);
+  };
+
   return (
     <>
       <Snackbar
@@ -167,11 +171,13 @@ function ScheduleDrawer({ setBottomDrawerOpen, data, mode }) {
             ? <Button onClick={() => modifySelectedSchedule()}>저장</Button>
             : <Button onClick={() => setBottomDrawerOpen(false)}><ClearIcon /></Button>}
         </Stack>
+
         <NameInput
           schedule={schedule}
           updateSchedule={updateSchedule}
           updateAlarm={updateAlarm}
         />
+
         <DateInput schedule={schedule} updateSchedule={updateSchedule} />
 
         <RepeatInput
@@ -219,19 +225,32 @@ function ScheduleDrawer({ setBottomDrawerOpen, data, mode }) {
               </AccordionDetails>
             </Accordion>
           )}
-
-        <Button
-          variant="contained"
-          fullWidth
-          disabled={user === null}
-          onClick={() => handleSubmit()}
+        <Stack
+          direction="row"
+          spacing={1}
         >
-          {
+          <Button
+            variant="contained"
+            fullWidth
+            disabled={user === null}
+            onClick={() => handleSubmit()}
+          >
+            {
             user === null
               ? NEED_SIGN_IN
               : SCHEDULE_DRAWER.add_schedule[useMode]
           }
-        </Button>
+          </Button>
+          <Button
+            variant="contained"
+            color="warning"
+            fullWidth
+            disabled={user === null}
+            onClick={() => handleSubmitByRedux()}
+          >
+            redux test
+          </Button>
+        </Stack>
       </Stack>
     </>
   );

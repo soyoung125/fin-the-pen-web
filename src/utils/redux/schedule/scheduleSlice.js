@@ -4,14 +4,17 @@ import { createSlice } from '@reduxjs/toolkit';
 import moment from 'moment';
 
 const initialState = {
+  // 메인
   date: moment(new Date()),
+  viewMode: 'asset',
+  // 전체 일정 데이터
   schedules: [],
+  // 필터
   filtered: [],
   filtered_date: {
     start: moment(new Date()),
     end: moment(new Date()),
   },
-  viewMode: 'asset',
 };
 
 export const scheduleSlice = createSlice({
