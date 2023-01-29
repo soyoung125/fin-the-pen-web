@@ -8,9 +8,7 @@ import { SCHEDULE_DRAWER } from '../../../../utils/constants/schedule';
 import { updateCategory } from '../utils/schedule';
 
 export default function CategoryInput({
-  schedule, setSchedule,
-  // updateCategory,
-  selected,
+  schedule, setSchedule, selected,
 }) {
   const [value, setValue] = useState(selected);
   const [inputValue, setInputValue] = useState('');

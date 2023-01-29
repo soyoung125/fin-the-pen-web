@@ -156,8 +156,7 @@ function ScheduleDrawer({ setBottomDrawerOpen, data, mode }) {
         <CategoryInput
           schedule={schedule}
           setSchedule={setSchedule}
-          // updateCategory={updateCategory}
-          selected={useMode === SCHEDULE_DRAWER_MODE.생성 ? null : schedule.category}
+          selected={useMode === SCHEDULE_DRAWER_MODE.생성 ? '' : schedule.category}
         />
 
         {/* 자산 설정하기 */}

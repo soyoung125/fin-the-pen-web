@@ -44,7 +44,7 @@ const INIT_SCHEDULE = (date) => ({
   repeating_cycle: '없음',
   repeat_deadline: '없음',
   repeat_endDate: date,
-  category: {},
+  category: '',
   type: SCHEDULE_DRAWER.type_minus,
   expected_spending: 0,
   importance: SCHEDULE_DRAWER.importance_middle,
