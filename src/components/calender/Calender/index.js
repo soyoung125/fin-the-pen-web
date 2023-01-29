@@ -17,6 +17,7 @@ import MarkedPickersDay from '../scheduleMarker/MarkedPickersDay';
 import MarkerStack from '../scheduleMarker/MarkerStack';
 import 'moment/locale/ko';
 import CalenderBox from './boxes/CalenderBox';
+import IncomeExpenditureBox from './boxes/IncomeExpenditureBox';
 
 function Calender({ dateHeight }) {
   const dispatch = useDispatch();
@@ -149,26 +150,14 @@ function Calender({ dateHeight }) {
             <Box sx={{ display: 'flex', justifyContent: 'center' }}>
               <PickersDay {...DayComponentProps} />
             </Box>
-            <Stack mb={1}>
-              <Box
-                sx={{
-                  fontSize: 'x-small', paddingRight: 1, color: lightBlue[200], height: '15px',
-                }}
-                display="flex"
-                justifyContent="flex-end"
-              >
-                {calculateIncomeExpenditure(renderDay, 'day', '-')}
-              </Box>
-              <Box
-                sx={{
-                  fontSize: 'x-small', paddingRight: 1, color: pink[100], height: '15px',
-                }}
-                display="flex"
-                justifyContent="flex-end"
-              >
-                {calculateIncomeExpenditure(renderDay, 'day', '+')}
-              </Box>
-            </Stack>
+
+            <IncomeExpenditureBox
+              income={calculateIncomeExpenditure(renderDay, 'day', '+')}
+              expenditure={calculateIncomeExpenditure(renderDay, 'day', '-')}
+              incomeColor={pink[100]}
+              expenditureColor={lightBlue[200]}
+            />
+
             {renderDay.isSame(today, 'week')
               ? (
                 // 이번주의 주별 수입/지출 표시
@@ -208,14 +197,13 @@ function Calender({ dateHeight }) {
           <Box sx={{ display: 'flex', justifyContent: 'center' }}>
             <PickersDay {...DayComponentProps} />
           </Box>
-          <Stack>
-            <Box sx={{ fontSize: 'x-small', paddingRight: 2, color: lightBlue[300] }} display="flex" justifyContent="flex-end">
-              {calculateIncomeExpenditure(renderDay, 'day', '-')}
-            </Box>
-            <Box sx={{ fontSize: 'x-small', paddingRight: 2, color: pink[200] }} display="flex" justifyContent="flex-end">
-              {calculateIncomeExpenditure(renderDay, 'day', '+')}
-            </Box>
-          </Stack>
+
+          <IncomeExpenditureBox
+            income={calculateIncomeExpenditure(renderDay, 'day', '+')}
+            expenditure={calculateIncomeExpenditure(renderDay, 'day', '-')}
+            incomeColor={pink[100]}
+            expenditureColor={lightBlue[200]}
+          />
         </Box>
       );
     }
@@ -226,14 +214,13 @@ function Calender({ dateHeight }) {
         <Box sx={{ display: 'flex', justifyContent: 'center' }}>
           <PickersDay {...DayComponentProps} />
         </Box>
-        <Stack>
-          <Box sx={{ fontSize: 'x-small', paddingRight: 2, color: grey[500] }} display="flex" justifyContent="flex-end">
-            {calculateIncomeExpenditure(renderDay, 'day', '-')}
-          </Box>
-          <Box sx={{ fontSize: 'x-small', paddingRight: 2, color: grey[500] }} display="flex" justifyContent="flex-end">
-            {calculateIncomeExpenditure(renderDay, 'day', '+')}
-          </Box>
-        </Stack>
+
+        <IncomeExpenditureBox
+          income={calculateIncomeExpenditure(renderDay, 'day', '+')}
+          expenditure={calculateIncomeExpenditure(renderDay, 'day', '-')}
+          incomeColor={grey[500]}
+          expenditureColor={grey[500]}
+        />
       </Box>
     );
   };
