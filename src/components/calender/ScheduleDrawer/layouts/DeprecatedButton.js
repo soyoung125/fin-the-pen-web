@@ -54,7 +54,7 @@ function DeprecatedButton({ mode, setBottomDrawerOpen }) {
       {
     user === null
       ? NEED_SIGN_IN
-      : SCHEDULE_DRAWER.add_schedule[mode]
+      : `${SCHEDULE_DRAWER.add_schedule[mode]} (guest)`
   }
     </Button>
   );
