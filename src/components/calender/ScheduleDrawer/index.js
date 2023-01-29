@@ -1,12 +1,12 @@
-/* eslint-disable no-shadow */
 /* eslint-disable no-unused-vars */
+/* eslint-disable no-shadow */
 /* eslint-disable no-nested-ternary */
 import {
   Accordion, AccordionDetails, AccordionSummary, Alert,
-  Button, Card, Slide, Snackbar, Stack, Typography,
+  Button, Slide, Snackbar, Stack, Typography,
 } from '@mui/material';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import ClearIcon from '@mui/icons-material/Clear';
 import moment from 'moment';
@@ -17,9 +17,6 @@ import {
   SCHEDULE_DRAWER, NEED_TITLE, REPEAT_CYCLE, SCHEDULE_DRAWER_MODE,
 } from '../../../utils/constants/schedule';
 import { addSchedule, deleteSchedule, modifySchedule } from '../../../utils/redux/schedule/scheduleSlice';
-import SpendingInput from './inputs/SpendingInput';
-import ImportanceInput from './inputs/ImportanceInput';
-import ExclusionInput from './inputs/ExclusionInput';
 import CategoryInput from './inputs/CategoryInput';
 import ALERTS from '../../../utils/constants/alerts';
 import RepeatInput from './inputs/RepeatInput';
@@ -41,22 +38,11 @@ function ScheduleDrawer({ setBottomDrawerOpen, data, mode }) {
 
   const [schedule, setSchedule] = useState(data);
 
-  const [useMode, setUseMode] = useState(mode);
+  const [useMode, setUseMode] = useState(mode); // 이거를 useState로 관리해야 하는 이유가 있는지?
   const [expandAccordion, setExpandAccordion] = useState(mode !== SCHEDULE_DRAWER_MODE.생성);
 
-  const updateExclusion = (state) => {
-    setSchedule({ ...schedule, exclusion: state.target.checked });
-  };
-
-  const updateSpendingType = () => {
-    if (schedule.type === SCHEDULE_DRAWER.type_plus) {
-      setSchedule({ ...schedule, type: SCHEDULE_DRAWER.type_minus });
-    } else {
-      setSchedule({ ...schedule, type: SCHEDULE_DRAWER.type_plus });
-    }
-  };
-
   const [snackbarOpen, setSnackbarOpen] = useState(true);
+
   const handleClose = () => {
     setSnackbarOpen(false);
   };
@@ -165,8 +151,6 @@ function ScheduleDrawer({ setBottomDrawerOpen, data, mode }) {
             <AssetSettings
               schedule={schedule}
               setSchedule={setSchedule}
-              updateSpendingType={updateSpendingType}
-              updateExclusion={updateExclusion}
               mode={useMode}
             />
           )
@@ -184,8 +168,6 @@ function ScheduleDrawer({ setBottomDrawerOpen, data, mode }) {
                 <AssetSettings
                   schedule={schedule}
                   setSchedule={setSchedule}
-                  updateSpendingType={updateSpendingType}
-                  updateExclusion={updateExclusion}
                   mode={useMode}
                 />
               </AccordionDetails>

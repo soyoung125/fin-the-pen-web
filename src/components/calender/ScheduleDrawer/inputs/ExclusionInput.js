@@ -2,8 +2,14 @@ import {
   Stack, Switch, Typography,
 } from '@mui/material';
 import { SCHEDULE_DRAWER } from '../../../../utils/constants/schedule';
+import { updateExclusion } from '../utils/schedule';
 
-function ExclusionInput({ schedule, updateExclusion }) {
+function ExclusionInput({
+  schedule, setSchedule,
+}) {
+  const changeExclustion = (state) => {
+    updateExclusion(schedule, setSchedule, state);
+  };
   return (
     <Stack direction="row" justifyContent="space-between" alignItems="center" p={1}>
       <Typography>{SCHEDULE_DRAWER.exclusion_title}</Typography>
@@ -12,7 +18,7 @@ function ExclusionInput({ schedule, updateExclusion }) {
           id="exclusion"
           checked={schedule.exclusion}
           value={schedule.exclusion}
-          onChange={updateExclusion}
+          onChange={changeExclustion}
         />
       </Stack>
     </Stack>

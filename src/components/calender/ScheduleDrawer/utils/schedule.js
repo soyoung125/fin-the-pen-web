@@ -1,3 +1,5 @@
+import { SCHEDULE_DRAWER } from '../../../../utils/constants/schedule';
+
 /* eslint-disable import/prefer-default-export */
 export const updateSchedule = (schedule, setSchedule, state) => {
   setSchedule({ ...schedule, [state.target.id]: state.target.value });
@@ -28,4 +30,16 @@ export const updateRepeatEndDate = (schedule, setRepeatEndDate, endDate) => {
 
 export const updateCategory = (schedule, setSchedule, category) => {
   setSchedule({ ...schedule, category });
+};
+
+export const updateSpendingType = (schedule, setSchedule) => {
+  if (schedule.type === SCHEDULE_DRAWER.type_plus) {
+    setSchedule({ ...schedule, type: SCHEDULE_DRAWER.type_minus });
+  } else {
+    setSchedule({ ...schedule, type: SCHEDULE_DRAWER.type_plus });
+  }
+};
+
+export const updateExclusion = (schedule, setSchedule, state) => {
+  setSchedule({ ...schedule, exclusion: state.target.checked });
 };
