@@ -1,29 +1,21 @@
-/* eslint-disable no-unused-vars */
-/* eslint-disable no-shadow */
-/* eslint-disable no-nested-ternary */
 import {
   Accordion, AccordionDetails, AccordionSummary, Alert,
-  Box, Button, Slide, Snackbar, Stack, Typography,
+  Box, Slide, Snackbar, Stack, Typography,
 } from '@mui/material';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import ClearIcon from '@mui/icons-material/Clear';
-import moment from 'moment';
-import { v4 as uuidv4 } from 'uuid';
 import NameInput from './inputs/NameInput';
 import DateInput from './inputs/DateInput';
 import {
-  SCHEDULE_DRAWER, NEED_TITLE, REPEAT_CYCLE, SCHEDULE_DRAWER_MODE,
+  SCHEDULE_DRAWER, SCHEDULE_DRAWER_MODE,
 } from '../../../utils/constants/schedule';
 import {
-  addSchedule, deleteSchedule, modifySchedule, selectSchedule, setDrawerSchedule,
+  selectSchedule, setDrawerSchedule,
 } from '../../../utils/redux/schedule/scheduleSlice';
 import CategoryInput from './inputs/CategoryInput';
 import ALERTS from '../../../utils/constants/alerts';
 import RepeatInput from './inputs/RepeatInput';
-import { selectUser } from '../../../utils/redux/user/userSlice';
-import { NEED_SIGN_IN, NOT_AVAILABLE } from '../../../utils/constants/common';
 import AssetSettings from './inputs/AssetSettings';
 import ScheduleDrawerHeader from './layouts/ScheduleDrawerHeader';
 import ScheduleDrawerFooter from './layouts/ScheduleDrawerFooter';
@@ -35,7 +27,6 @@ function TransitionUp(props) {
 
 function ScheduleDrawer({ setBottomDrawerOpen, data, mode }) {
   const dispatch = useDispatch();
-  const user = useSelector(selectUser);
 
   // 추후 삭제 예정
   const random = Math.floor((Math.random() * 5));
@@ -43,7 +34,6 @@ function ScheduleDrawer({ setBottomDrawerOpen, data, mode }) {
   const schedule = useSelector(selectSchedule);
 
   const [expandAccordion, setExpandAccordion] = useState(mode !== SCHEDULE_DRAWER_MODE.생성);
-
   const [snackbarOpen, setSnackbarOpen] = useState(true);
 
   const handleExpand = () => {
