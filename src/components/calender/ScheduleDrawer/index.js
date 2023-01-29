@@ -3,10 +3,11 @@
 /* eslint-disable no-nested-ternary */
 import {
   Accordion, AccordionDetails, AccordionSummary, Alert,
+  Box,
   Button, Slide, Snackbar, Stack, Typography,
 } from '@mui/material';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import ClearIcon from '@mui/icons-material/Clear';
 import moment from 'moment';
@@ -16,7 +17,9 @@ import DateInput from './inputs/DateInput';
 import {
   SCHEDULE_DRAWER, NEED_TITLE, REPEAT_CYCLE, SCHEDULE_DRAWER_MODE,
 } from '../../../utils/constants/schedule';
-import { addSchedule, deleteSchedule, modifySchedule } from '../../../utils/redux/schedule/scheduleSlice';
+import {
+  addSchedule, deleteSchedule, modifySchedule, selectSchedule, setDrawerSchedule,
+} from '../../../utils/redux/schedule/scheduleSlice';
 import CategoryInput from './inputs/CategoryInput';
 import ALERTS from '../../../utils/constants/alerts';
 import RepeatInput from './inputs/RepeatInput';
@@ -37,11 +40,21 @@ function ScheduleDrawer({ setBottomDrawerOpen, data, mode }) {
   const random = Math.floor((Math.random() * 5));
 
   const [schedule, setSchedule] = useState(data);
+  // const schedule = useSelector(selectSchedule);
+  // const setSchedule = () => {
+  //   console.log('ㅇㅇ');
+  // };
 
   const [useMode, setUseMode] = useState(mode); // 이거를 useState로 관리해야 하는 이유가 있는지?
   const [expandAccordion, setExpandAccordion] = useState(mode !== SCHEDULE_DRAWER_MODE.생성);
 
   const [snackbarOpen, setSnackbarOpen] = useState(true);
+
+  useEffect(() => {
+    if (data) {
+      dispatch(setDrawerSchedule(data));
+    }
+  }, []);
 
   const handleClose = () => {
     setSnackbarOpen(false);
@@ -92,117 +105,123 @@ function ScheduleDrawer({ setBottomDrawerOpen, data, mode }) {
   };
 
   return (
-    <>
-      <Snackbar
-        anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
-        autoHideDuration={5000}
-        open={snackbarOpen}
-        onClose={handleClose}
-        TransitionComponent={TransitionUp}
-      >
-        <Alert color={ALERTS[random].color} sx={{ width: '100%' }} icon={ALERTS[random].icon}>
-          {ALERTS[random].message}
-        </Alert>
-      </Snackbar>
-      <Stack
-        justifyContent="space-between"
-        spacing={2}
-        m={1}
-      >
-        <Stack direction="row" alignItems="center" justifyContent="space-between">
-          {useMode === SCHEDULE_DRAWER_MODE.수정
-            ? <Button onClick={() => setBottomDrawerOpen(false)}>취소</Button>
-            : <Button />}
-          <Typography variant="h5" sx={{ fontWeight: 'bold' }}>{SCHEDULE_DRAWER.drawer_title[useMode]}</Typography>
+    <Box>
+      {
+      schedule && (
+        <Box>
+          <Snackbar
+            anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
+            autoHideDuration={5000}
+            open={snackbarOpen}
+            onClose={handleClose}
+            TransitionComponent={TransitionUp}
+          >
+            <Alert color={ALERTS[random].color} sx={{ width: '100%' }} icon={ALERTS[random].icon}>
+              {ALERTS[random].message}
+            </Alert>
+          </Snackbar>
+          <Stack
+            justifyContent="space-between"
+            spacing={2}
+            m={1}
+          >
+            <Stack direction="row" alignItems="center" justifyContent="space-between">
+              {useMode === SCHEDULE_DRAWER_MODE.수정
+                ? <Button onClick={() => setBottomDrawerOpen(false)}>취소</Button>
+                : <Button />}
+              <Typography variant="h5" sx={{ fontWeight: 'bold' }}>{SCHEDULE_DRAWER.drawer_title[useMode]}</Typography>
 
-          {useMode === SCHEDULE_DRAWER_MODE.수정
-            ? <Button onClick={() => modifySelectedSchedule()}>저장</Button>
-            : <Button onClick={() => setBottomDrawerOpen(false)}><ClearIcon /></Button>}
-        </Stack>
+              {useMode === SCHEDULE_DRAWER_MODE.수정
+                ? <Button onClick={() => modifySelectedSchedule()}>저장</Button>
+                : <Button onClick={() => setBottomDrawerOpen(false)}><ClearIcon /></Button>}
+            </Stack>
 
-        {/* 이벤트 제목 */}
-        <NameInput
-          schedule={schedule}
-          setSchedule={setSchedule}
-        />
-
-        {/* 이벤트 일정 */}
-        <DateInput
-          schedule={schedule}
-          setSchedule={setSchedule}
-        />
-
-        {/* 이벤트 반복 설정 */}
-        <RepeatInput
-          schedule={schedule}
-          setSchedule={setSchedule}
-        />
-
-        {/* 이벤트 카테고리 */}
-        <CategoryInput
-          schedule={schedule}
-          setSchedule={setSchedule}
-          selected={useMode === SCHEDULE_DRAWER_MODE.생성 ? '' : schedule.category}
-        />
-
-        {/* 자산 설정하기 */}
-        {mode === SCHEDULE_DRAWER_MODE.수정
-          ? (
-            <AssetSettings
+            {/* 이벤트 제목 */}
+            <NameInput
               schedule={schedule}
               setSchedule={setSchedule}
-              mode={useMode}
             />
-          )
-          : (
-            <Accordion sx={{ width: '100%' }} expanded={expandAccordion}>
-              <AccordionSummary
-                expandIcon={<ExpandMoreIcon />}
-                onClick={() => handleExpand()}
-                aria-controls="panel1a-content"
-                id="panel1a-header"
-              >
-                <Typography sx={{ fontWeight: 'bold' }}>{SCHEDULE_DRAWER.set_finance_title}</Typography>
-              </AccordionSummary>
-              <AccordionDetails sx={{ backgroundColor: '#F6F6F6' }}>
+
+            {/* 이벤트 일정 */}
+            <DateInput
+              schedule={schedule}
+              setSchedule={setSchedule}
+            />
+
+            {/* 이벤트 반복 설정 */}
+            <RepeatInput
+              schedule={schedule}
+              setSchedule={setSchedule}
+            />
+
+            {/* 이벤트 카테고리 */}
+            <CategoryInput
+              schedule={schedule}
+              setSchedule={setSchedule}
+              selected={useMode === SCHEDULE_DRAWER_MODE.생성 ? '' : schedule.category}
+            />
+
+            {/* 자산 설정하기 */}
+            {mode === SCHEDULE_DRAWER_MODE.수정
+              ? (
                 <AssetSettings
                   schedule={schedule}
                   setSchedule={setSchedule}
                   mode={useMode}
                 />
-              </AccordionDetails>
-            </Accordion>
-          )}
+              )
+              : (
+                <Accordion sx={{ width: '100%' }} expanded={expandAccordion}>
+                  <AccordionSummary
+                    expandIcon={<ExpandMoreIcon />}
+                    onClick={() => handleExpand()}
+                    aria-controls="panel1a-content"
+                    id="panel1a-header"
+                  >
+                    <Typography sx={{ fontWeight: 'bold' }}>{SCHEDULE_DRAWER.set_finance_title}</Typography>
+                  </AccordionSummary>
+                  <AccordionDetails sx={{ backgroundColor: '#F6F6F6' }}>
+                    <AssetSettings
+                      schedule={schedule}
+                      setSchedule={setSchedule}
+                      mode={useMode}
+                    />
+                  </AccordionDetails>
+                </Accordion>
+              )}
 
-        {/* 제출 버튼 */}
-        <Stack
-          direction="row"
-          spacing={1}
-        >
-          <Button
-            variant="contained"
-            fullWidth
-            disabled={user === null}
-            onClick={() => handleSubmit()}
-          >
-            {
+            {/* 제출 버튼 */}
+            <Stack
+              direction="row"
+              spacing={1}
+            >
+              <Button
+                variant="contained"
+                fullWidth
+                disabled={user === null}
+                onClick={() => handleSubmit()}
+              >
+                {
             user === null
               ? NEED_SIGN_IN
               : SCHEDULE_DRAWER.add_schedule[useMode]
           }
-          </Button>
-          <Button
-            variant="contained"
-            color="warning"
-            fullWidth
-            disabled={user === null}
-            onClick={() => handleSubmitByRedux()}
-          >
-            redux test
-          </Button>
-        </Stack>
-      </Stack>
-    </>
+              </Button>
+              <Button
+                variant="contained"
+                color="warning"
+                fullWidth
+                disabled={user === null}
+                onClick={() => handleSubmitByRedux()}
+              >
+                redux test
+              </Button>
+            </Stack>
+          </Stack>
+        </Box>
+      )
+    }
+    </Box>
   );
 }
 export default ScheduleDrawer;
