@@ -4,13 +4,17 @@ import {
 } from '@mui/material';
 import NotificationsNoneIcon from '@mui/icons-material/NotificationsNone';
 import { SCHEDULE_DRAWER } from '../../../../utils/constants/schedule';
-import { updateSchedule } from '../utils/schedule';
+import { updateAlarm, updateSchedule } from '../utils/schedule';
 
 function NameInput({
-  schedule, setSchedule, updateAlarm,
+  schedule, setSchedule,
+  //  updateAlarm,
 }) {
-  const updateState = (state) => {
+  const changeSchedule = (state) => {
     updateSchedule(schedule, setSchedule, state);
+  };
+  const changeAlarm = () => {
+    updateAlarm(schedule, setSchedule);
   };
   return (
     <FormControl fullWidth>
@@ -21,7 +25,7 @@ function NameInput({
           <InputAdornment position="end">
             <IconButton
               aria-label="toggle password visibility"
-              onClick={updateAlarm}
+              onClick={changeAlarm}
               edge="end"
             >
               {schedule.alarm ? <NotificationsNoneIcon color="primary" /> : <NotificationsNoneIcon />}
@@ -29,7 +33,7 @@ function NameInput({
           </InputAdornment>
         )}
         value={schedule.event_name}
-        onChange={updateState}
+        onChange={changeSchedule}
         size="small"
       />
     </FormControl>

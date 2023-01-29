@@ -45,10 +45,6 @@ function ScheduleDrawer({ setBottomDrawerOpen, data, mode }) {
   const [useMode, setUseMode] = useState(mode);
   const [expandAccordion, setExpandAccordion] = useState(mode !== SCHEDULE_DRAWER_MODE.생성);
 
-  const updateAlarm = () => {
-    setSchedule({ ...schedule, alarm: !schedule.alarm });
-  };
-
   const updateRepeat = (state) => {
     if ((state.target.name === 'repeating_cycle') && (state.target.value === '없음')) {
       setSchedule({ ...schedule, [state.target.name]: state.target.value, repeat_deadline: '없음' });
@@ -171,7 +167,6 @@ function ScheduleDrawer({ setBottomDrawerOpen, data, mode }) {
         <NameInput
           schedule={schedule}
           setSchedule={setSchedule}
-          updateAlarm={updateAlarm}
         />
 
         {/* 이벤트 일정 */}
