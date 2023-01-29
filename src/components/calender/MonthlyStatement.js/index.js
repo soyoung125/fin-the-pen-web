@@ -7,7 +7,7 @@ import StatementCard from './StatementCard';
 
 function MonthlyStatement() {
   return (
-    <Box mx={2}>
+    <Box mx={2} mb="80px">
       <Grid container spacing={2}>
         <StatementCard
           title="수입"
