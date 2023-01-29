@@ -35,21 +35,21 @@ const SCHEDULE_DRAWER_MODE = {
   생성: 'create',
 };
 const NEED_TITLE = '제목을 입력해야 합니다.';
-const INIT_SCHEDULE = {
+const INIT_SCHEDULE = (date) => ({
   event_name: '',
   alarm: false,
-  date: new Date(),
+  date,
   start_time: '09:00',
   end_time: '11:00',
   repeating_cycle: '없음',
   repeat_deadline: '없음',
-  repeat_endDate: new Date(),
+  repeat_endDate: date,
   category: {},
   type: SCHEDULE_DRAWER.type_minus,
   expected_spending: 0,
   importance: SCHEDULE_DRAWER.importance_middle,
   exclusion: false, // false면 포함
-};
+});
 const REPEAT_CYCLE = {
   일간: 'days',
   주간: 'weeks',
