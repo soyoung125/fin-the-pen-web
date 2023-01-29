@@ -5,15 +5,20 @@ import {
 import { useEffect, useState } from 'react';
 import { CATEGORIES } from '../../../../utils/constants/categories';
 import { SCHEDULE_DRAWER } from '../../../../utils/constants/schedule';
+import { updateCategory } from '../utils/schedule';
 
-export default function CategoryInput({ updateCategory, selected }) {
+export default function CategoryInput({
+  schedule, setSchedule,
+  // updateCategory,
+  selected,
+}) {
   const [value, setValue] = useState(selected);
   const [inputValue, setInputValue] = useState('');
   useEffect(() => {
     if (value) {
       const category = CATEGORIES.filter((cat) => cat.title === value);
       if (category.length > 0) {
-        updateCategory(category[0].title);
+        updateCategory(schedule, setSchedule, category[0].title);
       }
     }
   }, [value]);
@@ -30,7 +35,12 @@ export default function CategoryInput({ updateCategory, selected }) {
         }}
         id="category"
         options={CATEGORIES.map((cat) => cat.title)}
-        renderInput={(params) => <TextField {...params} label={SCHEDULE_DRAWER.category_title} />}
+        renderInput={(params) => (
+          <TextField
+            {...params}
+            label={SCHEDULE_DRAWER.category_title}
+          />
+        )}
         size="small"
       />
     </div>

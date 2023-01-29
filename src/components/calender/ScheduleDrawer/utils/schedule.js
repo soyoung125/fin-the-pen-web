@@ -25,3 +25,7 @@ export const updateRepeatEndDate = (schedule, setRepeatEndDate, endDate) => {
     setRepeatEndDate(endDate);
   }
 };
+
+export const updateCategory = (schedule, setSchedule, category) => {
+  setSchedule({ ...schedule, category });
+};

@@ -44,10 +44,6 @@ function ScheduleDrawer({ setBottomDrawerOpen, data, mode }) {
   const [useMode, setUseMode] = useState(mode);
   const [expandAccordion, setExpandAccordion] = useState(mode !== SCHEDULE_DRAWER_MODE.생성);
 
-  const updateCategory = (category) => {
-    setSchedule({ ...schedule, category });
-  };
-
   const updateExclusion = (state) => {
     setSchedule({ ...schedule, exclusion: state.target.checked });
   };
@@ -160,7 +156,7 @@ function ScheduleDrawer({ setBottomDrawerOpen, data, mode }) {
         <CategoryInput
           schedule={schedule}
           setSchedule={setSchedule}
-          updateCategory={updateCategory}
+          // updateCategory={updateCategory}
           selected={useMode === SCHEDULE_DRAWER_MODE.생성 ? null : schedule.category}
         />
 
