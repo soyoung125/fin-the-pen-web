@@ -45,7 +45,8 @@ function ScheduleDrawer({ setBottomDrawerOpen, data, mode }) {
   const [useMode, setUseMode] = useState(mode);
   const [expandAccordion, setExpandAccordion] = useState(mode !== SCHEDULE_DRAWER_MODE.생성);
 
-  const updateSchedule = (state) => {
+  // eslint-disable-next-line no-shadow
+  const updateSchedule = (schedule, setSchedule, state) => {
     setSchedule({ ...schedule, [state.target.id]: state.target.value });
   };
 
@@ -149,7 +150,6 @@ function ScheduleDrawer({ setBottomDrawerOpen, data, mode }) {
         autoHideDuration={5000}
         open={snackbarOpen}
         onClose={handleClose}
-        // message="경고! 자산이 거의 남지 않았습니다."
         TransitionComponent={TransitionUp}
       >
         <Alert color={ALERTS[random].color} sx={{ width: '100%' }} icon={ALERTS[random].icon}>
@@ -172,16 +172,24 @@ function ScheduleDrawer({ setBottomDrawerOpen, data, mode }) {
             : <Button onClick={() => setBottomDrawerOpen(false)}><ClearIcon /></Button>}
         </Stack>
 
+        {/* 이벤트 제목 */}
         <NameInput
           schedule={schedule}
-          updateSchedule={updateSchedule}
+          setSchedule={setSchedule}
           updateAlarm={updateAlarm}
         />
 
-        <DateInput schedule={schedule} updateSchedule={updateSchedule} />
+        {/* 이벤트 일정 */}
+        <DateInput
+          schedule={schedule}
+          setSchedule={setSchedule}
+          updateSchedule={updateSchedule}
+        />
 
+        {/* 이벤트 반복 설정 */}
         <RepeatInput
           schedule={schedule}
+          setSchedule={setSchedule}
           updateRepeat={updateRepeat}
           openDatePickerModal={openDatePickerModal}
           handleModalClose={handleModalClose}
@@ -189,15 +197,20 @@ function ScheduleDrawer({ setBottomDrawerOpen, data, mode }) {
           updateRepeatEndDate={updateRepeatEndDate}
         />
 
+        {/* 이벤트 카테고리 */}
         <CategoryInput
+          schedule={schedule}
+          setSchedule={setSchedule}
           updateCategory={updateCategory}
           selected={useMode === SCHEDULE_DRAWER_MODE.생성 ? null : schedule.category}
         />
 
+        {/* 자산 설정하기 */}
         {mode === SCHEDULE_DRAWER_MODE.수정
           ? (
             <AssetSettings
               schedule={schedule}
+              setSchedule={setSchedule}
               updateSchedule={updateSchedule}
               updateSpendingType={updateSpendingType}
               updateExclusion={updateExclusion}
@@ -217,6 +230,7 @@ function ScheduleDrawer({ setBottomDrawerOpen, data, mode }) {
               <AccordionDetails sx={{ backgroundColor: '#F6F6F6' }}>
                 <AssetSettings
                   schedule={schedule}
+                  setSchedule={setSchedule}
                   updateSchedule={updateSchedule}
                   updateSpendingType={updateSpendingType}
                   updateExclusion={updateExclusion}
@@ -225,6 +239,8 @@ function ScheduleDrawer({ setBottomDrawerOpen, data, mode }) {
               </AccordionDetails>
             </Accordion>
           )}
+
+        {/* 제출 버튼 */}
         <Stack
           direction="row"
           spacing={1}

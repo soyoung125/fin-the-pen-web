@@ -1,12 +1,17 @@
+/* eslint-disable no-unused-vars */
 import {
   FormControl, IconButton, InputAdornment, OutlinedInput,
 } from '@mui/material';
 import NotificationsNoneIcon from '@mui/icons-material/NotificationsNone';
 import { SCHEDULE_DRAWER } from '../../../../utils/constants/schedule';
+import { updateSchedule } from '../utils/schedule';
 
 function NameInput({
-  schedule, updateSchedule, updateAlarm,
+  schedule, setSchedule, updateAlarm,
 }) {
+  const updateState = (state) => {
+    updateSchedule(schedule, setSchedule, state);
+  };
   return (
     <FormControl fullWidth>
       <OutlinedInput
@@ -24,7 +29,7 @@ function NameInput({
           </InputAdornment>
         )}
         value={schedule.event_name}
-        onChange={updateSchedule}
+        onChange={updateState}
         size="small"
       />
     </FormControl>
