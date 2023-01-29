@@ -121,10 +121,13 @@ function Calender({ dateHeight }) {
    * @returns 일/주별 수입/지출 액
    */
   const calculateIncomeExpenditure = (renderDay, unit, type) => {
+    let result = 0;
     if (type === '-') {
-      return schedules.filter((s) => renderDay.isSame(s.date, unit)).reduce((sum, current) => (current.type === type ? sum - parseInt(current.expected_spending, 10) : sum), 0);
+      result = schedules.filter((s) => renderDay.isSame(s.date, unit)).reduce((sum, current) => (current.type === type ? sum - parseInt(current.expected_spending, 10) : sum), result);
+    } else {
+      result = schedules.filter((s) => renderDay.isSame(s.date, unit)).reduce((sum, current) => (current.type === type ? sum + parseInt(current.expected_spending, 10) : sum), result);
     }
-    return schedules.filter((s) => renderDay.isSame(s.date, unit)).reduce((sum, current) => (current.type === type ? sum + parseInt(current.expected_spending, 10) : sum), 0);
+    return result !== 0 ? result : null;
   };
 
   // 실제 지출 데이터를 불러오기 전이기 때문에 일정 데이터의 지출 데이터 사용중
@@ -147,10 +150,22 @@ function Calender({ dateHeight }) {
               <PickersDay {...DayComponentProps} />
             </Box>
             <Stack mb={1}>
-              <Box sx={{ fontSize: 'x-small', paddingRight: 1, color: lightBlue[200] }} display="flex" justifyContent="flex-end">
+              <Box
+                sx={{
+                  fontSize: 'x-small', paddingRight: 1, color: lightBlue[200], height: '15px',
+                }}
+                display="flex"
+                justifyContent="flex-end"
+              >
                 {calculateIncomeExpenditure(renderDay, 'day', '-')}
               </Box>
-              <Box sx={{ fontSize: 'x-small', paddingRight: 1, color: pink[100] }} display="flex" justifyContent="flex-end">
+              <Box
+                sx={{
+                  fontSize: 'x-small', paddingRight: 1, color: pink[100], height: '15px',
+                }}
+                display="flex"
+                justifyContent="flex-end"
+              >
                 {calculateIncomeExpenditure(renderDay, 'day', '+')}
               </Box>
             </Stack>
