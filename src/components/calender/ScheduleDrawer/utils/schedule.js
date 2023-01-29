@@ -5,3 +5,14 @@ export const updateSchedule = (schedule, setSchedule, state) => {
 export const updateAlarm = (schedule, setSchedule) => {
   setSchedule({ ...schedule, alarm: !schedule.alarm });
 };
+
+export const updateRepeat = (schedule, setSchedule, setOpenDatePickerModal, state) => {
+  if ((state.target.name === 'repeating_cycle') && (state.target.value === '없음')) {
+    setSchedule({ ...schedule, [state.target.name]: state.target.value, repeat_deadline: '없음' });
+  } else {
+    setSchedule({ ...schedule, [state.target.name]: state.target.value });
+  }
+  if ((state.target.name === 'repeat_deadline') && (state.target.value !== '없음')) {
+    setOpenDatePickerModal(true);
+  }
+};

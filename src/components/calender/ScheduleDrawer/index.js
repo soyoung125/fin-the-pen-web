@@ -1,3 +1,4 @@
+/* eslint-disable no-shadow */
 /* eslint-disable no-unused-vars */
 /* eslint-disable no-nested-ternary */
 import {
@@ -40,21 +41,8 @@ function ScheduleDrawer({ setBottomDrawerOpen, data, mode }) {
 
   const [schedule, setSchedule] = useState(data);
 
-  const [openDatePickerModal, setOpenDatePickerModal] = useState(false);
-  const [repeatEndDate, setRepeatEndDate] = useState(moment(schedule.repeat_endDate));
   const [useMode, setUseMode] = useState(mode);
   const [expandAccordion, setExpandAccordion] = useState(mode !== SCHEDULE_DRAWER_MODE.생성);
-
-  const updateRepeat = (state) => {
-    if ((state.target.name === 'repeating_cycle') && (state.target.value === '없음')) {
-      setSchedule({ ...schedule, [state.target.name]: state.target.value, repeat_deadline: '없음' });
-    } else {
-      setSchedule({ ...schedule, [state.target.name]: state.target.value });
-    }
-    if ((state.target.name === 'repeat_deadline') && (state.target.value !== '없음')) {
-      setOpenDatePickerModal(true);
-    }
-  };
 
   const updateCategory = (category) => {
     setSchedule({ ...schedule, category });
@@ -72,22 +60,9 @@ function ScheduleDrawer({ setBottomDrawerOpen, data, mode }) {
     }
   };
 
-  const updateRepeatEndDate = (endDate) => {
-    if (endDate.isBefore(schedule.date)) {
-      alert('반복 종료일을 다시 선택해주세요.');
-    } else {
-      setRepeatEndDate(endDate);
-    }
-  };
-
   const [snackbarOpen, setSnackbarOpen] = useState(true);
   const handleClose = () => {
     setSnackbarOpen(false);
-  };
-
-  const handleModalClose = () => {
-    setOpenDatePickerModal(false);
-    setSchedule({ ...schedule, repeat_endDate: moment(repeatEndDate).format('YYYY-MM-DD') });
   };
 
   const addNewSchedule = () => {
@@ -179,11 +154,6 @@ function ScheduleDrawer({ setBottomDrawerOpen, data, mode }) {
         <RepeatInput
           schedule={schedule}
           setSchedule={setSchedule}
-          updateRepeat={updateRepeat}
-          openDatePickerModal={openDatePickerModal}
-          handleModalClose={handleModalClose}
-          repeatEndDate={repeatEndDate}
-          updateRepeatEndDate={updateRepeatEndDate}
         />
 
         {/* 이벤트 카테고리 */}
