@@ -227,8 +227,12 @@ function Calender({ dateHeight }) {
           <PickersDay {...DayComponentProps} />
         </Box>
         <Stack>
-          <Box sx={{ fontSize: 'x-small', paddingRight: 2, color: grey[500] }} display="flex" justifyContent="flex-end">-10000</Box>
-          <Box sx={{ fontSize: 'x-small', paddingRight: 2, color: grey[500] }} display="flex" justifyContent="flex-end">+10000</Box>
+          <Box sx={{ fontSize: 'x-small', paddingRight: 2, color: grey[500] }} display="flex" justifyContent="flex-end">
+            {calculateIncomeExpenditure(renderDay, 'day', '-')}
+          </Box>
+          <Box sx={{ fontSize: 'x-small', paddingRight: 2, color: grey[500] }} display="flex" justifyContent="flex-end">
+            {calculateIncomeExpenditure(renderDay, 'day', '+')}
+          </Box>
         </Stack>
       </Box>
     );
