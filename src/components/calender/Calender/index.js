@@ -156,7 +156,7 @@ function Calender({ dateHeight }) {
             ? (
           // 이번주의 주별 수입/지출 표시
               <Box sx={{
-                width: `calc(100vw / 7 * (${today.diff(renderDay, 'days')} + 1))`, background: grey[200], overflow: 'visible', borderRadius: 3, display: 'flex', justifyContent: 'flex-end', paddingX: 2,
+                width: `calc(100vw / 7 * (${today.diff(renderDay, 'days')} + 1))`, background: grey[200], overflow: 'visible', borderRadius: 3, display: 'flex', justifyContent: 'flex-end', paddingX: 2, height: '20px',
               }}
               >
                 <Box sx={{ fontSize: 'small', paddingRight: 1, color: 'primary.main' }}>
@@ -170,7 +170,7 @@ function Calender({ dateHeight }) {
             : (
           // 지난주들의 주별 수입/지출 표시
               <Box sx={{
-                width: '100vw', background: grey[200], overflow: 'visible', borderRadius: 3, display: 'flex', justifyContent: 'flex-end', paddingX: 2,
+                width: '100vw', background: grey[200], overflow: 'visible', borderRadius: 3, display: 'flex', justifyContent: 'flex-end', paddingX: 2, height: '20px',
               }}
               >
                 <Box sx={{ fontSize: 'small', paddingRight: 1, color: 'primary.main' }}>
