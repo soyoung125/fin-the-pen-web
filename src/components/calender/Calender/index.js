@@ -135,6 +135,7 @@ function Calender({ dateHeight }) {
   const renderAssetDayPicker = (day, _value, DayComponentProps) => {
     const renderDay = DayComponentProps.day;
     const weekday = renderDay.format('dd');
+    const isSameOrBefore = renderDay.isSameOrBefore(today);
 
     // 이달에 해당하지 않은 날은 아무것도 표시하지 않기 위한 조건문
     if (!renderDay.isSame(today, 'month')) {
@@ -142,86 +143,58 @@ function Calender({ dateHeight }) {
     }
 
     // 오늘 이전의 일별 수입/지출, 주별 수입/지출을 표시하기 위한 조건문
-    if (renderDay.isSameOrBefore(today)) {
-      if (weekday === '일') {
-        // console.log(calculateIncomeExpenditure(renderDay, 'day', '-'));
-        return (
-          <Box sx={{ width: 'calc(100vw / 7)' }} key={DayComponentProps.key}>
-            <Box sx={{ display: 'flex', justifyContent: 'center' }}>
-              <PickersDay {...DayComponentProps} />
-            </Box>
-
-            <IncomeExpenditureBox
-              income={calculateIncomeExpenditure(renderDay, 'day', '+')}
-              expenditure={calculateIncomeExpenditure(renderDay, 'day', '-')}
-              incomeColor={pink[100]}
-              expenditureColor={lightBlue[200]}
-            />
-
-            {renderDay.isSame(today, 'week')
-              ? (
-                // 이번주의 주별 수입/지출 표시
-                <Box sx={{
-                  width: `calc(100vw / 7 * (${today.diff(renderDay, 'days')} + 1))`, background: grey[200], overflow: 'visible', borderRadius: 3, display: 'flex', justifyContent: 'flex-end', paddingX: 2,
-                }}
-                >
-                  <Box sx={{ fontSize: 'small', paddingRight: 1, color: 'primary.main' }}>
-                    {schedules.filter((s) => renderDay.isSameOrBefore(s.date) && renderDay.isSame(s.date, 'week')).reduce((sum, current) => (current.type === '-' ? sum - parseInt(current.expected_spending, 10) : sum), 0)}
-                  </Box>
-                  <Box sx={{ fontSize: 'small', color: grey[500] }}>
-                    {schedules.filter((s) => renderDay.isSameOrBefore(s.date) && renderDay.isSame(s.date, 'week')).reduce((sum, current) => (current.type === '+' ? sum + parseInt(current.expected_spending, 10) : sum), 0)}
-                  </Box>
-                </Box>
-              )
-              : (
-                // 지난주들의 주별 수입/지출 표시
-                <Box sx={{
-                  width: '100vw', background: grey[200], overflow: 'visible', borderRadius: 3, display: 'flex', justifyContent: 'flex-end', paddingX: 2,
-                }}
-                >
-                  <Box sx={{ fontSize: 'small', paddingRight: 1, color: 'primary.main' }}>
-                    {calculateIncomeExpenditure(renderDay, 'week', '-')}
-                  </Box>
-                  <Box sx={{ fontSize: 'small', color: grey[500] }}>
-                    {calculateIncomeExpenditure(renderDay, 'week', '+')}
-                  </Box>
-                </Box>
-              )}
-          </Box>
-        );
-      }
-
-      // 지난 일들의 일별 수입/지출액 표시
+    if (isSameOrBefore && weekday === '일') {
       return (
-        <Box sx={{ width: 'calc(100vw / 7)' }} key={DayComponentProps.key}>
-          <Box sx={{ display: 'flex', justifyContent: 'center' }}>
-            <PickersDay {...DayComponentProps} />
-          </Box>
-
-          <IncomeExpenditureBox
-            income={calculateIncomeExpenditure(renderDay, 'day', '+')}
-            expenditure={calculateIncomeExpenditure(renderDay, 'day', '-')}
-            incomeColor={pink[100]}
-            expenditureColor={lightBlue[200]}
-          />
-        </Box>
+        <IncomeExpenditureBox
+          income={calculateIncomeExpenditure(renderDay, 'day', '+')}
+          expenditure={calculateIncomeExpenditure(renderDay, 'day', '-')}
+          incomeColor={pink[100]}
+          expenditureColor={lightBlue[200]}
+          pickersDay={<PickersDay {...DayComponentProps} />}
+        >
+          {renderDay.isSame(today, 'week')
+            ? (
+          // 이번주의 주별 수입/지출 표시
+              <Box sx={{
+                width: `calc(100vw / 7 * (${today.diff(renderDay, 'days')} + 1))`, background: grey[200], overflow: 'visible', borderRadius: 3, display: 'flex', justifyContent: 'flex-end', paddingX: 2,
+              }}
+              >
+                <Box sx={{ fontSize: 'small', paddingRight: 1, color: 'primary.main' }}>
+                  {schedules.filter((s) => renderDay.isSameOrBefore(s.date) && renderDay.isSame(s.date, 'week')).reduce((sum, current) => (current.type === '-' ? sum - parseInt(current.expected_spending, 10) : sum), 0)}
+                </Box>
+                <Box sx={{ fontSize: 'small', color: grey[500] }}>
+                  {schedules.filter((s) => renderDay.isSameOrBefore(s.date) && renderDay.isSame(s.date, 'week')).reduce((sum, current) => (current.type === '+' ? sum + parseInt(current.expected_spending, 10) : sum), 0)}
+                </Box>
+              </Box>
+            )
+            : (
+          // 지난주들의 주별 수입/지출 표시
+              <Box sx={{
+                width: '100vw', background: grey[200], overflow: 'visible', borderRadius: 3, display: 'flex', justifyContent: 'flex-end', paddingX: 2,
+              }}
+              >
+                <Box sx={{ fontSize: 'small', paddingRight: 1, color: 'primary.main' }}>
+                  {calculateIncomeExpenditure(renderDay, 'week', '-')}
+                </Box>
+                <Box sx={{ fontSize: 'small', color: grey[500] }}>
+                  {calculateIncomeExpenditure(renderDay, 'week', '+')}
+                </Box>
+              </Box>
+            )}
+        </IncomeExpenditureBox>
       );
     }
 
     // 뒷날의 일별 수입/지출액 표시
     return (
-      <Box sx={{ width: 'calc(100vw / 7)' }} key={DayComponentProps.key}>
-        <Box sx={{ display: 'flex', justifyContent: 'center' }}>
-          <PickersDay {...DayComponentProps} />
-        </Box>
-
-        <IncomeExpenditureBox
-          income={calculateIncomeExpenditure(renderDay, 'day', '+')}
-          expenditure={calculateIncomeExpenditure(renderDay, 'day', '-')}
-          incomeColor={grey[500]}
-          expenditureColor={grey[500]}
-        />
-      </Box>
+      <IncomeExpenditureBox
+        key={DayComponentProps.key}
+        income={calculateIncomeExpenditure(renderDay, 'day', '+')}
+        expenditure={calculateIncomeExpenditure(renderDay, 'day', '-')}
+        incomeColor={isSameOrBefore ? pink[100] : grey[500]}
+        expenditureColor={isSameOrBefore ? lightBlue[200] : grey[500]}
+        pickersDay={<PickersDay {...DayComponentProps} />}
+      />
     );
   };
 
