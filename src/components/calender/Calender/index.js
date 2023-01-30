@@ -121,18 +121,21 @@ function Calender({ dateHeight }) {
     const weekday = day.format('dd');
     const isSameOrBefore = day.isSameOrBefore(today);
 
-    // 이달에 해당하지 않은 날은 아무것도 표시하지 않기 위한 조건문
-    if (!day.isSame(value, 'month')) {
+    // 오늘이 이달의 마지막 주에 해당하고 후달이 일요일로 시작하지 않은 경우 회색바가 그려지는 문제를 해결하기 위한 코드
+    if (!day.isSame(value, 'month') && today.isBefore(value)) {
       return <PickersDay {...DayComponentProps} />;
     }
 
     // 오늘 이전의 일별 수입/지출, 주별 수입/지출을 표시하기 위한 조건문
     if (isSameOrBefore && weekday === '일') {
+      const income = !day.isSame(value, 'month') ? '0' : calculateIncomeExpenditure(schedules, day, 'day', '+');
+      const expenditure = !day.isSame(value, 'month') ? '0' : calculateIncomeExpenditure(schedules, day, 'day', '-');
+
       return (
         <IncomeExpenditureBox
           key={DayComponentProps.key}
-          income={calculateIncomeExpenditure(schedules, day, 'day', '+')}
-          expenditure={calculateIncomeExpenditure(schedules, day, 'day', '-')}
+          income={income}
+          expenditure={expenditure}
           incomeColor={pink[100]}
           expenditureColor={lightBlue[200]}
           pickersDay={<PickersDay {...DayComponentProps} />}
