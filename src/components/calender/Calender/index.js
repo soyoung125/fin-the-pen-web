@@ -188,7 +188,12 @@ function Calender({ dateHeight }) {
 
   return (
     <LocalizationProvider dateAdapter={AdapterMoment} dateFormats={{ monthAndYear: 'yyyy년 MM월' }}>
-      <CalenderBox dateHeight={DATE_HEIGHT} dateSize={DATE_SIZE}>
+      <CalenderBox
+        dateHeight={DATE_HEIGHT}
+        dateSize={DATE_SIZE}
+        // 달력 높이 계산을 위한 해당 월의 주수 계산
+        week={moment(value).endOf('month').week() - moment(value).startOf('month').week() + 1}
+      >
         <StaticDatePicker
           views={['day']}
           displayStaticWrapperAs="desktop"
