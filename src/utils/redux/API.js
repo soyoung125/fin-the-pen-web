@@ -33,7 +33,7 @@ export const fetchCreateSchedule = async (schedule) => {
 
 export const fetchSchedules = async (user_id) => {
   try {
-    const response = await axios.post('/getAllSchedules', user_id);
+    const response = await axios.post('/getAllSchedules', { user_id });
     // alert(JSON.stringify(response));
     return response.data;
   } catch (err) {
