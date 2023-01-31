@@ -8,7 +8,7 @@
 /**
  * isObjectValuesEmpty(obj)
  * 어떤 객체의 value 를 전수조사하여, 빈칸 '' 이 검출되지 않으면 -1을 반환하는 함수.
- * 즉, -1이 반환되면 이 객체에 빈칸이 없다는 의미이다.
+ * 즉, -1이 반환되면 이 객체의 value에 빈칸이 없다는 의미이다.
  */
 export const isObjectValuesEmpty = (obj) => (
   Object.values(obj).findIndex((v) => v === '')
@@ -39,4 +39,20 @@ export const calculateIncomeExpenditure = (schedules, baseDate, unit, type) => {
       ), result);
   }
   return result.toLocaleString('ko-KR');
+};
+
+/**
+ * geustMode 여부에 따라 실행할 함수를 결정하는 스위치
+ *
+ * @param {boolean} guestMode 게스트 모드 여부
+ * @param {function} func1 게스트 모드인 경우 실행할 함수
+ * @param {function} func2 게스트 모드가 아닌 경우 실행할 함수
+ */
+
+export const executeFunctionByGuestMode = (guestMode, func1, func2) => {
+  if (guestMode) {
+    func1();
+  } else {
+    func2();
+  }
 };

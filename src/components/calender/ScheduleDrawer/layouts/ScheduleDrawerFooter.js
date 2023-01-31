@@ -8,6 +8,7 @@ import { fetchCreateSchedule } from '../../../../utils/redux/API';
 import { selectGuestMode } from '../../../../utils/redux/common/commonSlice';
 import { selectSchedule } from '../../../../utils/redux/schedule/scheduleSlice';
 import { selectUser } from '../../../../utils/redux/user/userSlice';
+import { executeFunctionByGuestMode } from '../../../../utils/tools';
 import DeprecatedButton from './DeprecatedButton';
 
 function ScheduleDrawerFooter({ mode, setBottomDrawerOpen }) {
@@ -51,11 +52,7 @@ function ScheduleDrawerFooter({ mode, setBottomDrawerOpen }) {
       alert(NEED_TITLE);
       return;
     }
-    if (guestMode) {
-      guestHandler();
-    } else {
-      fetchHandler();
-    }
+    executeFunctionByGuestMode(guestMode, guestHandler, fetchHandler);
   };
 
   return (
@@ -75,7 +72,7 @@ function ScheduleDrawerFooter({ mode, setBottomDrawerOpen }) {
         disabled={user === null}
         onClick={() => handleSubmit()}
       >
-        { user === null
+        {user === null
           ? NEED_SIGN_IN
           : `${SCHEDULE_DRAWER.add_schedule[mode]} (fetch)`}
       </Button>
