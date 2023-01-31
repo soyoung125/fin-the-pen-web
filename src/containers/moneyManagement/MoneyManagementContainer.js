@@ -8,6 +8,7 @@ import {
 } from '@mui/material/colors';
 import moment from 'moment/moment';
 import { useSelector } from 'react-redux';
+import SettingsPaper from '../../components/momeyManagement/SettingsPaper';
 import { CATEGORIES } from '../../utils/constants/categories';
 import { selectSchedules } from '../../utils/redux/schedule/scheduleSlice';
 
@@ -29,44 +30,9 @@ function MoneyManagementContainer() {
         자산과 일정을 관리하세요
       </Box>
 
-      <Paper sx={{ marginY: 2, padding: 2 }}>
-        <Grid container spacing={2}>
-          <Grid item xs={6}>
-            <Box sx={{
-              backgroundColor: pink[200], paddingY: 5, borderRadius: 4, display: 'flex', justifyContent: 'center',
-            }}
-            >
-              저축 목표 금액 설정
-            </Box>
-          </Grid>
-          <Grid item xs={6}>
-            <Box sx={{
-              backgroundColor: yellow[200], paddingY: 5, borderRadius: 4, display: 'flex', justifyContent: 'center',
-            }}
-            >
-              정기 입출금액 설정
-            </Box>
-          </Grid>
-          <Grid item xs={6}>
-            <Box sx={{
-              backgroundColor: lightBlue[200], paddingY: 5, borderRadius: 4, display: 'flex', justifyContent: 'center',
-            }}
-            >
-              카테고리별 자산 설정
-            </Box>
-          </Grid>
-          <Grid item xs={6}>
-            <Box sx={{
-              backgroundColor: teal[200], paddingY: 5, borderRadius: 4, display: 'flex', justifyContent: 'center',
-            }}
-            >
-              일정 관리
-            </Box>
-          </Grid>
-        </Grid>
-      </Paper>
+      <SettingsPaper />
 
-      <Box sx={{ typography: 'h4', fontWeight: 'bold', marginTop: 5 }}>
+      <Box sx={{ typography: 'h4', fontWeight: 'bold' }}>
         My 스케줄 현황
       </Box>
 
