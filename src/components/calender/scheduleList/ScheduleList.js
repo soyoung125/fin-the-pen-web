@@ -3,17 +3,18 @@ import {
 } from '@mui/material';
 import moment from 'moment';
 import { useEffect, useState } from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { CATEGORIES } from '../../../utils/constants/categories';
 import { SCHEDULE_DRAWER_MODE } from '../../../utils/constants/schedule';
 import { fetchSchedules } from '../../../utils/redux/API';
 import { selectGuestMode } from '../../../utils/redux/common/commonSlice';
-import { selectDate, selectSchedules } from '../../../utils/redux/schedule/scheduleSlice';
+import { selectDate, selectSchedules, setSchedules } from '../../../utils/redux/schedule/scheduleSlice';
 import { selectUser } from '../../../utils/redux/user/userSlice';
 import ScheduleDrawer from '../ScheduleDrawer';
 import ScheduleCard from './ScheduleCard';
 
 function ScheduleList() {
+  const dispatch = useDispatch();
   const [bottomDrawerOpen, setBottomDrawerOpen] = useState(false);
   const [selectedSchedule, setSelectedSchedule] = useState(null);
   const schedules = useSelector(selectSchedules);
@@ -30,6 +31,7 @@ function ScheduleList() {
     console.log('전체 데이터를 수신할 위치');
     const result = await fetchSchedules(user.user_id);
     console.log(result);
+    dispatch(setSchedules(result));
   };
 
   useEffect(() => {
