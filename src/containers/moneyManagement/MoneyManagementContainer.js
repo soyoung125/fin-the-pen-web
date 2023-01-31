@@ -16,14 +16,8 @@ function MoneyManagementContainer() {
   const schedules = useSelector(selectSchedules);
   const today = moment();
 
-  console.log(schedules.filter((s) => today.isSame(s.date, 'month')));
-
   return (
     <Box sx={{ m: 3 }}>
-      {/* 자산 관리
-      {
-        CATEGORIES.map((cat) => <div key={Math.random()}>{JSON.stringify(cat)}</div>)
-      } */}
       <Box sx={{ typography: 'h4', fontWeight: 'bold' }}>
         핀더팬과 함께 &quot;OOO&quot; 님의
         <br />
