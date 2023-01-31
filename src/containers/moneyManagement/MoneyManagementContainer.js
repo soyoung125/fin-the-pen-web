@@ -8,6 +8,7 @@ import {
 } from '@mui/material/colors';
 import moment from 'moment/moment';
 import { useSelector } from 'react-redux';
+import ScheduleStatusCard from '../../components/momeyManagement/ScheduleStatusCard.js';
 import SettingsPaper from '../../components/momeyManagement/SettingsPaper';
 import { CATEGORIES } from '../../utils/constants/categories';
 import { selectSchedules } from '../../utils/redux/schedule/scheduleSlice';
@@ -30,32 +31,10 @@ function MoneyManagementContainer() {
         My 스케줄 현황
       </Box>
 
-      <Box sx={{
-        marginTop: 3, border: '2px solid', borderRadius: 2, borderColor: 'primary.main',
-      }}
-      >
-        <Stack direction="row">
-          <Stack width="50%" sx={{ textAlign: 'center', paddingY: 2 }}>
-            <Box>{`${today.format('M월')} 남은 일정`}</Box>
-            <Box sx={{
-              typography: 'h4', fontWeight: 'bold', color: 'primary.main', marginTop: 2,
-            }}
-            >
-              {`${schedules.filter((s) => today.isSame(s.date, 'month') && today.isSameOrBefore(s.date, 'day')).length}개`}
-            </Box>
-          </Stack>
-
-          <Stack width="50%" sx={{ textAlign: 'center', paddingY: 2 }}>
-            <Box>추천 소비 금액</Box>
-            <Box sx={{
-              typography: 'h4', fontWeight: 'bold', color: 'primary.main', marginTop: 2,
-            }}
-            >
-              xxxxx원
-            </Box>
-          </Stack>
-        </Stack>
-      </Box>
+      <ScheduleStatusCard
+        month={today.format('M월')}
+        numberOfSchedule={schedules.filter((s) => today.isSame(s.date, 'month') && today.isSameOrBefore(s.date, 'day')).length}
+      />
     </Box>
   );
 }
