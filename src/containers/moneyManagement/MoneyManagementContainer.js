@@ -21,13 +21,12 @@ function MoneyManagementContainer() {
   const today = moment();
 
   return (
-    <Box sx={{ m: 3 }}>
+    <Box sx={{ m: 3, wordBreak: 'keep-all' }}>
       {user
         ? (
           <>
             <Box sx={{ typography: 'h4', fontWeight: 'bold' }}>
-              <Box>{`핀더팬과 함께 "${user.name}" 님의`}</Box>
-              <Box>자산과 일정을 관리하세요</Box>
+              {`핀더팬과 함께 "${user.name}" 님의 자산과 일정을 관리하세요`}
             </Box>
             <SettingsPaper />
             <Box sx={{ typography: 'h4', fontWeight: 'bold' }}>
