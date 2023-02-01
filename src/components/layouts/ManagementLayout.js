@@ -29,13 +29,25 @@ function ManagementLayout() {
   return (
     <Box>
       <Stack direction="row" alignItems="center" justifyContent="space-between" px={2} my={2} sx={{ height: '30px' }}>
-        <IconButton aria-label="delete" sx={{ padding: '5px', marginRight: '-3px' }} onClick={() => handleMovement('-')}>
+        <IconButton
+          aria-label="delete"
+          sx={{
+            padding: '5px', marginRight: '-3px', border: '1px solid', borderRadius: 2,
+          }}
+          onClick={() => handleMovement('-')}
+        >
           <KeyboardArrowLeftIcon />
         </IconButton>
         <Stack alignItems="center">
           <Typography variant="h6" sx={{ fontWeight: 'bold' }}>{momeyManagementSettings[management].title}</Typography>
         </Stack>
-        <IconButton aria-label="delete" sx={{ padding: '5px', marginLeft: '-3px' }} onClick={() => handleMovement('+')}>
+        <IconButton
+          aria-label="delete"
+          sx={{
+            padding: '5px', marginLeft: '-3px', border: '1px solid', borderRadius: 2,
+          }}
+          onClick={() => handleMovement('+')}
+        >
           <KeyboardArrowRightIcon />
         </IconButton>
       </Stack>
