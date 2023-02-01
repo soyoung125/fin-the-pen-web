@@ -63,6 +63,7 @@ function SpendingInput({ mode }) {
           }}
           sx={{ width: '20vw' }}
           size="small"
+          dir="rtl"
         />
         <Typography>{SCHEDULE_DRAWER.won}</Typography>
       </Stack>
