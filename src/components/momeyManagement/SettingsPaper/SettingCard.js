@@ -1,9 +1,12 @@
 import { Box, CardActionArea, Grid } from '@mui/material';
+import { useNavigate } from 'react-router-dom';
 
 function SettingCard({ setting }) {
+  const navigatie = useNavigate();
+
   return (
     <Grid item xs={6}>
-      <CardActionArea>
+      <CardActionArea onClick={() => navigatie(setting.path)}>
         <Box sx={{
           height: '120px',
           backgroundColor: setting.color,
