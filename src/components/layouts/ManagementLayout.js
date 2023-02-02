@@ -28,7 +28,7 @@ function ManagementLayout() {
 
   return (
     <Box>
-      <Stack direction="row" alignItems="center" justifyContent="space-between" px={2} my={2} sx={{ height: '30px' }}>
+      <Stack direction="row" alignItems="center" justifyContent="space-between" px={2} my={5} sx={{ height: '30px' }}>
         <IconButton
           aria-label="delete"
           sx={{
@@ -52,7 +52,7 @@ function ManagementLayout() {
         </IconButton>
       </Stack>
 
-      <Box>
+      <Box sx={{ m: 3, wordBreak: 'keep-all' }}>
         <Outlet />
       </Box>
     </Box>
