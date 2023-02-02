@@ -14,8 +14,8 @@ const initialState = {
   // 필터
   filtered: [],
   filtered_date: {
-    start: null,
-    end: null,
+    start: '',
+    end: '',
   },
 };
 
@@ -77,6 +77,10 @@ export const scheduleSlice = createSlice({
     },
     initFilter: (state) => {
       state.filtered = [];
+      state.filtered_date = {
+        start: '',
+        end: '',
+      };
     },
     changeViewMode: (state, action) => {
       state.viewMode = action.payload;
