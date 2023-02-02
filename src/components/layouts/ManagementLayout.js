@@ -52,7 +52,7 @@ function ManagementLayout() {
         </IconButton>
       </Stack>
 
-      <Box sx={{ m: 3, wordBreak: 'keep-all' }}>
+      <Box sx={{ m: 3, wordBreak: 'keep-all', fontWeight: 'bold' }}>
         <Outlet />
       </Box>
     </Box>
