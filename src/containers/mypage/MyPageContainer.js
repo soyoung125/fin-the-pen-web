@@ -7,6 +7,7 @@ import { useNavigate } from 'react-router-dom';
 import PATH from '../../utils/constants/path';
 import { logOut, selectUser } from '../../utils/redux/user/userSlice';
 import GuestDataManager from '../test/GuestDataManager';
+import GuestMode from '../test/GuestMode';
 import ScheduleData from '../test/ScheduleData';
 import UserData from '../test/UserData';
 // import SignInContainer from '../sign/SignInContainer';
@@ -40,6 +41,7 @@ function MyPageContainer() {
         </Button>
       </Box>
 
+      <GuestMode />
       <UserData />
       <ScheduleData />
     </Box>
