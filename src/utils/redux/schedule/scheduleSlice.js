@@ -14,8 +14,8 @@ const initialState = {
   // 필터
   filtered: [],
   filtered_date: {
-    start: moment(new Date()),
-    end: moment(new Date()),
+    start: null,
+    end: null,
   },
 };
 
@@ -72,6 +72,9 @@ export const scheduleSlice = createSlice({
           alert('잘못 된 요청입니다.');
       }
     },
+    setFilteredDate: (state, action) => {
+      state.filtered_date[action.payload.type] = action.payload.date;
+    },
     initFilter: (state) => {
       state.filtered = [];
     },
@@ -89,6 +92,7 @@ export const {
   modifySchedule,
   updateFilter,
   updateFiltersForce,
+  setFilteredDate,
   initFilter,
   changeViewMode,
 } = scheduleSlice.actions;

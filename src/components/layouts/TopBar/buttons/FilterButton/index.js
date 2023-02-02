@@ -10,12 +10,16 @@ import { useDispatch, useSelector } from 'react-redux';
 import RoundedButton from '../../../../common/RoundedButton';
 import { EXPENDITURE, FIXED, INCOME } from '../../../../../utils/constants/categories';
 import FilterAccordion from './inputs/FilterAccordion';
-import { initFilter, selectFiltered, updateFilter } from '../../../../../utils/redux/schedule/scheduleSlice';
+import {
+  initFilter, selectFiltered, selectFilteredDate, setFilteredDate, updateFilter,
+} from '../../../../../utils/redux/schedule/scheduleSlice';
+import { SOMETHING_IS_WRONG } from '../../../../../utils/constants/common';
 
 function FilterButton() {
   const dispatch = useDispatch();
   const [bottomDrawerOpen, setBottomDrawerOpen] = useState(false);
   const filtered = useSelector(selectFiltered);
+  const filteredDate = useSelector(selectFilteredDate);
 
   const handleClick = (state) => {
     dispatch(updateFilter(state.target.innerText));
@@ -23,6 +27,13 @@ function FilterButton() {
 
   const handleDelete = (cat) => {
     dispatch(updateFilter(cat));
+  };
+
+  const changeSchedule = (state) => {
+    dispatch(setFilteredDate({
+      type: state.target.id,
+      date: state.target.value,
+    }));
   };
 
   return (
@@ -73,9 +84,9 @@ function FilterButton() {
           }
           <Stack>
             {
-                [FIXED, INCOME, EXPENDITURE].map((obj) => (
-                  <FilterAccordion tag={obj} key={obj.type} />
-                ))
+              [FIXED, INCOME, EXPENDITURE].map((obj) => (
+                <FilterAccordion tag={obj} key={obj.type} />
+              ))
             }
           </Stack>
           <Stack
@@ -86,24 +97,28 @@ function FilterButton() {
             sx={{ width: '100%' }}
           >
             <TextField
-              id="start_date"
+              id="start"
               label="시작일"
               type="date"
               fullWidth
               InputLabelProps={{
                 shrink: true,
               }}
+              value={filteredDate.start}
+              onChange={changeSchedule}
               size="small"
             />
             <Typography>~</Typography>
             <TextField
-              id="date"
+              id="end"
               label="종료일"
               type="date"
               fullWidth
               InputLabelProps={{
                 shrink: true,
               }}
+              value={filteredDate.end}
+              onChange={changeSchedule}
               size="small"
             />
           </Stack>
