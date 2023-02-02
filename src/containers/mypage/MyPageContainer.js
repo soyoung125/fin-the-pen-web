@@ -9,6 +9,7 @@ import { logOut, selectUser } from '../../utils/redux/user/userSlice';
 import GuestDataManager from '../test/GuestDataManager';
 import GuestMode from '../test/GuestMode';
 import ScheduleData from '../test/ScheduleData';
+import ScheduleFilterData from '../test/ScheduleFilterData';
 import UserData from '../test/UserData';
 // import SignInContainer from '../sign/SignInContainer';
 
@@ -44,6 +45,7 @@ function MyPageContainer() {
       <GuestMode />
       <UserData />
       <ScheduleData />
+      <ScheduleFilterData />
     </Box>
   );
 }
