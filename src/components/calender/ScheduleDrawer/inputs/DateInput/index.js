@@ -33,7 +33,7 @@ function DateInput() {
         onChange={changeSchedule}
         size="small"
       />
-      <Stack
+      {/* <Stack
         direction="row"
         justifyContent="space-between"
         alignItems="center"
@@ -70,7 +70,7 @@ function DateInput() {
           onChange={changeSchedule}
           size="small"
         />
-      </Stack>
+      </Stack> */}
       <Stack
         direction="row"
         justifyContent="space-between"
@@ -80,7 +80,7 @@ function DateInput() {
       >
         <TextField
           id="start_time"
-          label={`${SCHEDULE_DRAWER.start_time} (동작x 구현중)`}
+          label={`${SCHEDULE_DRAWER.start_time} (beta)`}
           fullWidth
           value={schedule.start_time}
           onClick={() => openModal('start_time')}
@@ -88,7 +88,7 @@ function DateInput() {
         />
         <TextField
           id="end_time"
-          label={`${SCHEDULE_DRAWER.end_time} (동작x 구현중)`}
+          label={`${SCHEDULE_DRAWER.end_time} (beta)`}
           fullWidth
           value={schedule.end_time}
           onClick={() => openModal('end_time')}
@@ -100,7 +100,11 @@ function DateInput() {
         width="xl"
         open={modalOpen}
         component={(
-          <TimeSelector timeId={timeId} setModalOpen={setModalOpen} />
+          <TimeSelector
+            timeId={timeId}
+            setModalOpen={setModalOpen}
+            changeSchedule={changeSchedule}
+          />
         )}
       />
     </>
