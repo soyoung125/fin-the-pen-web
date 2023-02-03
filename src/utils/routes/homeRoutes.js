@@ -1,4 +1,5 @@
 import AnalysisContainer from '../../containers/analysis/AnalysisContainer';
+import AssetManagementContainer from '../../containers/assetManagement/AssetManagementContainer';
 import HomeContainer from '../../containers/home/HomeContainer';
 import MyPageContainer from '../../containers/mypage/MyPageContainer';
 import NotificationContainer from '../../containers/notification/NotificationContainer';
@@ -35,7 +36,7 @@ const homeRoutes = [
   },
   {
     path: PATH.assetManagement,
-    element: <assetManagementContainer />,
+    element: <AssetManagementContainer />,
   },
   {
     path: PATH.settings,
