@@ -1,7 +1,7 @@
-import AssetsByCategory from '../../containers/moneyManagement/settings/AssetsByCategory';
-import RegularDepositWithdrawal from '../../containers/moneyManagement/settings/RegularDepositWithdrawal';
-import SavingsGoal from '../../containers/moneyManagement/settings/SavingsGoalContainer';
-import ScheduleManagement from '../../containers/moneyManagement/settings/ScheduleManagement';
+import AssetsByCategory from '../../containers/moneyManagement/pages/AssetsByCategory';
+import RegularDepositWithdrawal from '../../containers/moneyManagement/pages/RegularDepositWithdrawal';
+import SavingsGoal from '../../containers/moneyManagement/pages/SavingsGoalContainer';
+import ScheduleManagement from '../../containers/moneyManagement/pages/ScheduleManagement';
 import PATH from '../constants/path';
 
 const managementRoutes = [
