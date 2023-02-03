@@ -1,8 +1,5 @@
 import {
-  Box,
-  Button,
-  Divider,
-  Stack, TextField,
+  Box, Button, Stack, TextField,
 } from '@mui/material';
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
@@ -101,24 +98,22 @@ function DateInput() {
         component={(
           <Box>
             <Stack p={2}>
-              <Stack direction="row" justifyContent="center">
-                <Button>오전</Button>
-                <Button>오후</Button>
-              </Stack>
-              <Box my={3}>
-                <Divider />
-              </Box>
-              <Box>
-                {
-                  Array.from({ length: 12 }, (_, i) => i + 1).map((n) => <Button>{n}</Button>)
-                }
-              </Box>
-              <Box my={3}>
-                <Divider />
-              </Box>
-              <Stack direction="row" justifyContent="center">
-                <Button>00</Button>
-                <Button>30</Button>
+              <Stack direction="row" justifyContent="space-around" alignItems="center">
+                <Stack>
+                  <Button>오전</Button>
+                  <Button>오후</Button>
+                </Stack>
+                <Stack>
+                  {
+                    Array.from({ length: 12 }, (_, i) => i + 1).map((n) => <Button>{n}</Button>)
+                  }
+
+                </Stack>
+                <Stack>
+                  <Button>00</Button>
+                  <Button>30</Button>
+
+                </Stack>
               </Stack>
             </Stack>
 
