@@ -15,7 +15,7 @@ import { CATEGORIES } from '../../utils/constants/categories';
 import { selectSchedules } from '../../utils/redux/schedule/scheduleSlice';
 import { selectUser } from '../../utils/redux/user/userSlice';
 
-function assetManagementContainer() {
+function AssetManagementContainer() {
   const schedules = useSelector(selectSchedules);
   const user = useSelector(selectUser);
   const today = moment();
@@ -42,4 +42,4 @@ function assetManagementContainer() {
     </Box>
   );
 }
-export default assetManagementContainer;
+export default AssetManagementContainer;
