@@ -9,6 +9,7 @@ const NO_BLANKS = '모든 칸을 입력해주세요';
 const NO_DUPLICATION_ID = '중복된 아이디 입니다.';
 const SIGN_UP_SUCCESS = '회원 가입이 완료됐습니다.';
 const SOMETHING_IS_WRONG = '무언가 잘못됐습니다.';
+export default null;
 export {
   NOTHING_IS_HERE_YET,
   NOTHING_IS_AVAILABLE_BELOW_HERE,

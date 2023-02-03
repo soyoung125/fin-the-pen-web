@@ -1,3 +1,14 @@
+const TIME_SELECTOR = Object.freeze({
+  meridiem: {
+    am: '오전',
+    pm: '오후',
+  },
+  minutes: {
+    zero: '00',
+    thirty: '30',
+  },
+});
+
 const SCHEDULE_DRAWER = Object.freeze({
   drawer_title: {
     create: '새로운 이벤트',
@@ -63,6 +74,7 @@ const VIEW_MODE = {
 
 export default null;
 export {
+  TIME_SELECTOR,
   SCHEDULE_DRAWER,
   SCHEDULE_DRAWER_MODE,
   NEED_TITLE,
