@@ -2,9 +2,9 @@ import {
   Button, Stack, TextField, Typography,
 } from '@mui/material';
 import { useDispatch, useSelector } from 'react-redux';
-import { SCHEDULE_DRAWER } from '../../../../utils/constants/schedule';
-import { selectSchedule } from '../../../../utils/redux/schedule/scheduleSlice';
-import { updateSchedule, updateSpendingType } from '../utils/schedule';
+import { SCHEDULE_DRAWER } from '../../../../../utils/constants/schedule';
+import { selectSchedule } from '../../../../../utils/redux/schedule/scheduleSlice';
+import { updateSchedule, updateSpendingType } from '../../utils/schedule';
 
 function SpendingInput({ mode }) {
   const dispatch = useDispatch();
