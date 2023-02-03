@@ -2,6 +2,7 @@
 import {
   Alert, Box, Divider, Snackbar,
 } from '@mui/material';
+import moment from 'moment';
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import Calender from '../../components/calender/Calender';
@@ -10,11 +11,12 @@ import ScheduleList from '../../components/calender/scheduleList/ScheduleList';
 import ScheduleViewMode from '../../components/calender/ScheduleViewMode';
 import ALERTS from '../../utils/constants/alerts';
 import { setHeaderOpenTrue } from '../../utils/redux/common/commonSlice';
-import { changeViewMode, selectViewMode } from '../../utils/redux/schedule/scheduleSlice';
+import { changeViewMode, selectDate, selectViewMode } from '../../utils/redux/schedule/scheduleSlice';
 
 function HomeConatiner() {
   const dispatch = useDispatch();
   const viewMode = useSelector(selectViewMode);
+  const date = useSelector(selectDate);
 
   // 추후 삭제 예정
   const random = Math.floor((Math.random() * 5));
@@ -24,6 +26,10 @@ function HomeConatiner() {
     dispatch(setHeaderOpenTrue('home'));
     dispatch(changeViewMode('asset'));
   }, []);
+
+  useEffect(() => {
+    console.log(moment(date).format('YYYY-MM'));
+  }, [date]);
 
   const handleClose = () => {
     setSnackbarOpen(false);
