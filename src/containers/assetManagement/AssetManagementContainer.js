@@ -9,13 +9,13 @@ import {
 } from '@mui/material/colors';
 import moment from 'moment/moment';
 import { useSelector } from 'react-redux';
-import ScheduleStatusCard from '../../components/momeyManagement/ScheduleStatusCard.js';
-import SettingsPaper from '../../components/momeyManagement/SettingsPaper';
+import ScheduleStatusCard from '../../components/assetManagement/ScheduleStatusCard';
+import SettingsPaper from '../../components/assetManagement/SettingsPaper';
 import { CATEGORIES } from '../../utils/constants/categories';
 import { selectSchedules } from '../../utils/redux/schedule/scheduleSlice';
 import { selectUser } from '../../utils/redux/user/userSlice';
 
-function MoneyManagementContainer() {
+function assetManagementContainer() {
   const schedules = useSelector(selectSchedules);
   const user = useSelector(selectUser);
   const today = moment();
@@ -42,4 +42,4 @@ function MoneyManagementContainer() {
     </Box>
   );
 }
-export default MoneyManagementContainer;
+export default assetManagementContainer;

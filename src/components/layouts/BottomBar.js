@@ -41,7 +41,7 @@ function BottomBar({ value, setValue }) {
           <BottomNavigationAction label="홈" icon={<CalendarMonthIcon />} onClick={() => navigate(PATH.home)} />
           <BottomNavigationAction label="리포트" icon={<DataSaverOffIcon />} onClick={() => navigate(PATH.analysis)} />
           <BottomNavigationAction label="" icon={<AddCircleIcon />} onClick={() => setBottomDrawerOpen(true)} />
-          <BottomNavigationAction label="자산관리" icon={<PaidIcon />} onClick={() => navigate(PATH.moneyManagement)} />
+          <BottomNavigationAction label="자산관리" icon={<PaidIcon />} onClick={() => navigate(PATH.assetManagement)} />
           <BottomNavigationAction label="설정" icon={<SettingsIcon />} onClick={() => navigate(PATH.settings)} />
         </BottomNavigation>
       </Paper>
