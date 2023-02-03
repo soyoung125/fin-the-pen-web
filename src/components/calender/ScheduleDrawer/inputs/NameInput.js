@@ -31,7 +31,7 @@ function NameInput({ setSchedule }) {
               onClick={changeAlarm}
               edge="end"
             >
-              {schedule.alarm ? <NotificationsNoneIcon color="primary" /> : <NotificationsNoneIcon />}
+              <NotificationsNoneIcon color={schedule.alarm ? 'primary' : ''} />
             </IconButton>
           </InputAdornment>
         )}
