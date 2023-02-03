@@ -1,8 +1,8 @@
 import {
   Box, Button, Stack, Typography,
 } from '@mui/material';
-import { useState } from 'react';
-import { NOT_AVAILABLE } from '../../../../../utils/constants/common';
+import { useEffect, useState } from 'react';
+import { NOT_AVAILABLE, SOMETHING_IS_WRONG } from '../../../../../utils/constants/common';
 import { TIME_SELECTOR } from '../../../../../utils/constants/schedule';
 
 function StateButton({ state, setState, value }) {
@@ -16,14 +16,31 @@ function StateButton({ state, setState, value }) {
   );
 }
 
-function TimeSelector({ setModalOpen }) {
+function TimeSelector({ timeId, setModalOpen }) {
   const [meridiem, setMeridiem] = useState(TIME_SELECTOR.meridiem.am);
   const [hours, setHours] = useState(9);
   const [minutes, setMinutes] = useState('00');
+  useEffect(() => {
+    switch (timeId) {
+      case 'start_time': // 이 부분 상수화 필요 (바깥도)
+        setMeridiem(TIME_SELECTOR.meridiem.am);
+        setHours(9);
+        setMinutes('00');
+        break;
+      case 'end_time': // 이 부분 상수화 필요 (바깥도)
+        setMeridiem(TIME_SELECTOR.meridiem.pm);
+        setHours(11);
+        setMinutes('00');
+        break;
+      default:
+        alert(SOMETHING_IS_WRONG);
+    }
+  }, [timeId]);
   return (
     <Box>
       <Stack p={2}>
         <Typography>{NOT_AVAILABLE}</Typography>
+        <Typography>{timeId}</Typography>
         <Stack direction="row" justifyContent="space-around" alignItems="center">
           <Stack>
             <StateButton
