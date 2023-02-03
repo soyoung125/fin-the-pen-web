@@ -57,7 +57,7 @@ function ScheduleList() {
         </Stack>
       )}
       {
-        schedules
+        [...schedules]
           .filter((schedule) => schedule.date === date)
           .map((schedule) => (
             <ScheduleCard

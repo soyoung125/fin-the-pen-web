@@ -101,7 +101,7 @@ export const {
   changeViewMode,
 } = scheduleSlice.actions;
 
-export const selectSchedules = (state) => state.schedule.schedules;
+export const selectSchedules = (state) => [...state.schedule.schedules].sort((a, b) => a.start_time.localeCompare(b.start_time));
 export const selectDate = (state) => state.schedule.date;
 export const selectFiltered = (state) => state.schedule.filtered;
 export const selectFilteredDate = (state) => state.schedule.filtered_date;
