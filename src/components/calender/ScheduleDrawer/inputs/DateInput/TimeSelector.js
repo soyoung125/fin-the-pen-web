@@ -34,17 +34,17 @@ function TimeSelector({
     setModalOpen(false);
   };
 
+  const initTime = (currentMeridiem, currentHours, currentMinutes) => {
+    setMeridiem(currentMeridiem);
+    setHours(currentHours);
+    setMinutes(currentMinutes);
+  };
+
   useEffect(() => {
     const time12type = convert24to12(currentTime);
-    const currentMeridiem = time12type[0];
     const time = time12type[1].split(':');
-    const currentHours = Number(time[0]);
-    const currentMinutes = time[1];
-    console.log(time12type);
     if (timeId) {
-      setMeridiem(currentMeridiem);
-      setHours(currentHours);
-      setMinutes(currentMinutes);
+      initTime(time12type[0], Number(time[0]), time[1]);
     }
   }, [timeId, currentTime]);
 
