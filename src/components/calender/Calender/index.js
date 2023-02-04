@@ -1,5 +1,4 @@
 /* eslint-disable no-underscore-dangle */
-/* eslint-disable max-len */
 /* eslint-disable react/jsx-props-no-spreading */
 import { Box, Stack, TextField } from '@mui/material';
 import { StaticDatePicker } from '@mui/x-date-pickers';
@@ -10,7 +9,7 @@ import moment from 'moment';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { grey, lightBlue, pink } from '@mui/material/colors';
-import { CATEGORIES, EXPENDITURE, INCOME } from '../../../utils/constants/categories';
+import { CATEGORIES } from '../../../utils/constants/categories';
 import {
   selectDate, selectedDate, selectSchedules, selectViewMode,
 } from '../../../utils/redux/schedule/scheduleSlice';
@@ -20,6 +19,7 @@ import 'moment/locale/ko';
 import CalenderBox from './boxes/CalenderBox';
 import IncomeExpenditureBox from './boxes/IncomeExpenditureBox';
 import { calculateIncomeExpenditure } from '../../../utils/tools';
+import { makeMarkerData } from './utils/calender';
 
 function Calender({ dateHeight }) {
   const dispatch = useDispatch();
@@ -34,36 +34,6 @@ function Calender({ dateHeight }) {
   useEffect(() => {
     dispatch(selectedDate(moment(new Date())));
   }, []);
-
-  /**
-   * 해당 일의 일정을 받아 카테고리 수별로 마커위치를 고정하기 위해 새로운 배열을 생성해 반환하는 함수
-   * @param {Array} daySchedules 해당 일의 일정 배열
-   * @returns {Array} 카테고리별 일정 마커를 표시하기 휘한 길이 7의 배열 (색상 표시를 위해 color 요소 필수)
-   */
-  const makeMarkerData = (daySchedules) => {
-    const emptyData = Array(6).fill().map(() => ({ color: '#FFFFFF' }));
-    const categoryForMarker = INCOME.nested.concat(EXPENDITURE.nested)
-      .filter((c) => (daySchedules.findIndex(
-        (s) => s.category.nestedType === c.type,
-      ) !== -1));
-
-    switch (categoryForMarker.length) {
-      case 1:
-        return [emptyData[0], ...categoryForMarker, ...emptyData.slice(-5)];
-      case 2:
-        return [...emptyData.slice(-4), ...categoryForMarker, emptyData[0]];
-      case 3:
-        return [...categoryForMarker, ...emptyData.slice(-4)];
-      case 4:
-        return [...emptyData.slice(-3), ...categoryForMarker];
-      case 5:
-        return [...categoryForMarker.slice(0, 3), emptyData[0], ...categoryForMarker.slice(-2), emptyData[0]];
-      case 6:
-        return [categoryForMarker[0], emptyData[0], ...categoryForMarker.slice(1)];
-      default:
-        return categoryForMarker;
-    }
-  };
 
   const renderDayInPicker = (day, _value, DayComponentProps) => {
     const daySchedules = schedules.filter((e) => e.date === day.format('YYYY-MM-DD')).map((s) => ({ ...s, category: CATEGORIES.find((c) => c.title === s.category) || { type: '미분류', color: '#C8A2C8' } }));
@@ -215,8 +185,3 @@ function Calender({ dateHeight }) {
 }
 
 export default Calender;
-
-/**
- * 어떤 방식으로 작업할 지는 모르겠지만
- * 파일 명 등은 알아서 수정해주세요
- */
