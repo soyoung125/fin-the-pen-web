@@ -51,7 +51,7 @@ const INIT_SCHEDULE = (date) => ({
   alarm: false,
   date,
   start_time: '09:00',
-  end_time: '11:00',
+  end_time: '20:00',
   repeating_cycle: '없음',
   repeat_deadline: '없음',
   repeat_endDate: date,

@@ -60,11 +60,12 @@ export const executeFunctionByGuestMode = (guestMode, func1, func2) => {
 };
 
 /**
- * 12시 형식을 24시 형식으로 변환해주는 함수 (ex. 오전 9:00 => 09:00, 오후 5:00 => 17:00)
+ * 12시 형식을 24시 형식으로 변환해주는 함수
+ * (ex. 오전 9:00 => 09:00, 오후 5:00 => 17:00)
  * @param {string} meridiem 오전/오후 ('오전' or '오후' only)
  * @param {number} hours 시각
  * @param {*} minutes 분
- * @returns
+ * @returns {string} 'HH:MM' 형식
  */
 export const convert12to24 = (meridiem, hours, minutes) => {
   let h = hours;
@@ -75,4 +76,23 @@ export const convert12to24 = (meridiem, hours, minutes) => {
     h = 0;
   }
   return `${h < 10 ? '0' : ''}${h}:${minutes}`;
+};
+
+/**
+ * 24시 형식을 12시 형식으로 변환해주는 함수
+ * (ex. 24:00 => ['오후', '00:00'], 17:00 => ['오후', '05:00'])
+ * @param {string} time 'HH:MM' 형식
+ * @returns {[string, string]} ['오전||오후', 'HH:MM']
+ */
+export const convert24to12 = (time) => {
+  const t = time.split(':');
+  const hours = Number(t[0]);
+  const minutes = t[1];
+  if (hours === 0) {
+    return [TIME_SELECTOR.meridiem.pm, `${hours + 12}:${minutes}`];
+  }
+  if (hours > 12) {
+    return [TIME_SELECTOR.meridiem.pm, `${hours - 12}:${minutes}`];
+  }
+  return [TIME_SELECTOR.meridiem.am, `${hours}:${minutes}`];
 };
