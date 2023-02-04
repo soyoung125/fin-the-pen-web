@@ -11,12 +11,14 @@ function DateInput() {
   const dispatch = useDispatch();
   const schedule = useSelector(selectSchedule);
   const [timeId, setTimeId] = useState(null);
+  const [currentTime, setCurrentTime] = useState('09:00');
   const [modalOpen, setModalOpen] = useState(false);
   const changeSchedule = (state) => {
     updateSchedule(dispatch, schedule, state);
   };
-  const openModal = (id) => {
+  const openModal = (id, time) => {
     setTimeId(id);
+    setCurrentTime(time);
     setModalOpen(!modalOpen);
   };
   return (
@@ -83,7 +85,7 @@ function DateInput() {
           label={`${SCHEDULE_DRAWER.start_time} (beta)`}
           fullWidth
           value={schedule.start_time}
-          onClick={() => openModal('start_time')}
+          onClick={() => openModal('start_time', schedule.start_time)}
           size="small"
         />
         <TextField
@@ -91,7 +93,7 @@ function DateInput() {
           label={`${SCHEDULE_DRAWER.end_time} (beta)`}
           fullWidth
           value={schedule.end_time}
-          onClick={() => openModal('end_time')}
+          onClick={() => openModal('end_time', schedule.end_time)}
           size="small"
         />
       </Stack>
@@ -102,6 +104,7 @@ function DateInput() {
         component={(
           <TimeSelector
             timeId={timeId}
+            currentTime={currentTime}
             setModalOpen={setModalOpen}
             changeSchedule={changeSchedule}
           />

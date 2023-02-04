@@ -16,7 +16,9 @@ function StateButton({ state, setState, value }) {
   );
 }
 
-function TimeSelector({ timeId, setModalOpen, changeSchedule }) {
+function TimeSelector({
+  timeId, currentTime, setModalOpen, changeSchedule,
+}) {
   const [meridiem, setMeridiem] = useState(TIME_SELECTOR.meridiem.am);
   const [hours, setHours] = useState(9);
   const [minutes, setMinutes] = useState('00');
@@ -45,7 +47,7 @@ function TimeSelector({ timeId, setModalOpen, changeSchedule }) {
 
   useEffect(() => {
     // 초기에 기존 시간을 체크 해줄 수 있는 useEffect 제작이 필요함
-
+    console.log(currentTime);
     if (timeId) {
       switch (timeId) {
         case 'start_time': // 이 부분 상수화 필요 (바깥도)
@@ -62,7 +64,7 @@ function TimeSelector({ timeId, setModalOpen, changeSchedule }) {
           alert(SOMETHING_IS_WRONG);
       }
     }
-  }, [timeId]);
+  }, [timeId, currentTime]);
 
   return (
     <Stack p={2}>
