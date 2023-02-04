@@ -8,6 +8,7 @@ import {
 import moment from 'moment';
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import ScheduleStatusCard from '../../components/assetManagement/ScheduleStatusCard';
 import Calender from '../../components/calender/Calender';
 import MonthlyStatement from '../../components/calender/MonthlyStatement.js';
 import ScheduleList from '../../components/calender/scheduleList/ScheduleList';
@@ -16,7 +17,7 @@ import ALERTS from '../../utils/constants/alerts';
 import { fetchSchedules } from '../../utils/redux/API';
 import { selectGuestMode, setHeaderOpenTrue } from '../../utils/redux/common/commonSlice';
 import {
-  changeViewMode, selectDate, selectViewMode, setSchedules,
+  changeViewMode, selectDate, selectSchedules, selectViewMode, setSchedules,
 } from '../../utils/redux/schedule/scheduleSlice';
 import { selectUser } from '../../utils/redux/user/userSlice';
 
@@ -26,6 +27,8 @@ function HomeConatiner() {
   const date = useSelector(selectDate);
   const user = useSelector(selectUser);
   const guestMode = useSelector(selectGuestMode);
+  const schedules = useSelector(selectSchedules);
+  const today = moment();
 
   // 추후 삭제 예정
   const random = Math.floor((Math.random() * 5));
@@ -92,10 +95,16 @@ function HomeConatiner() {
                   <Button onClick={handleExpand}>{expandAccordion ? '달력 닫기' : '달력 보기'}</Button>
                 </Stack>
               </AccordionSummary>
-              <AccordionDetails sx={{ p: 0, pb: 5 }}>
+              <AccordionDetails sx={{ p: 0 }}>
                 <Calender dateHeight={85} />
               </AccordionDetails>
             </Accordion>
+            <Box sx={{ margin: 2, pb: 6 }}>
+              <ScheduleStatusCard
+                month={today.format('M월')}
+                numberOfSchedule={schedules.filter((s) => today.isSame(s.date, 'month') && today.isSameOrBefore(s.date, 'day')).length}
+              />
+            </Box>
           </>
         )}
       <ScheduleViewMode />

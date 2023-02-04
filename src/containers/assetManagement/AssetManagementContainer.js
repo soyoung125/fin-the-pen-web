@@ -29,9 +29,7 @@ function AssetManagementContainer() {
               {`핀더팬과 함께 "${user.name}" 님의 자산과 일정을 관리하세요`}
             </Box>
             <SettingsPaper />
-            <Box sx={{ typography: 'h4', fontWeight: 'bold' }}>
-              My 스케줄 현황
-            </Box>
+
             <ScheduleStatusCard
               month={today.format('M월')}
               numberOfSchedule={schedules.filter((s) => today.isSame(s.date, 'month') && today.isSameOrBefore(s.date, 'day')).length}

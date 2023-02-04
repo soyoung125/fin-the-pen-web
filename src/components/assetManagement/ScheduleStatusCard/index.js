@@ -3,22 +3,28 @@ import StatusStack from './StatusStack';
 
 function ScheduleStatusCard({ month, numberOfSchedule }) {
   return (
-    <Box sx={{
-      marginTop: 3, border: '2px solid', borderRadius: 2, borderColor: 'primary.main',
-    }}
-    >
-      <Stack direction="row">
-        <StatusStack
-          title={`${month} 남은 일정`}
-          content={`${numberOfSchedule}개`}
-        />
+    <>
+      <Box sx={{ typography: 'h4', fontWeight: 'bold' }}>
+        My 스케줄 현황
+      </Box>
+      <Box sx={{
+        marginTop: 3, border: '2px solid', borderRadius: 2, borderColor: 'primary.main',
+      }}
+      >
+        <Stack direction="row">
+          <StatusStack
+            title={`${month} 남은 일정`}
+            content={`${numberOfSchedule}개`}
+          />
 
-        <StatusStack
-          title="추천 소비 금액"
-          content="xxxxx원"
-        />
-      </Stack>
-    </Box>
+          <StatusStack
+            title="추천 소비 금액"
+            content="xxxxx원"
+          />
+        </Stack>
+      </Box>
+
+    </>
   );
 }
 
