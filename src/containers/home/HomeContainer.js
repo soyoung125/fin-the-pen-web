@@ -1,6 +1,9 @@
 /* eslint-disable no-unused-vars */
 import {
-  Alert, Box, Divider, Snackbar,
+  Accordion,
+  AccordionDetails,
+  AccordionSummary,
+  Alert, Box, Button, Divider, Snackbar, Stack, Typography,
 } from '@mui/material';
 import moment from 'moment';
 import { useEffect, useState } from 'react';
@@ -27,6 +30,12 @@ function HomeConatiner() {
   // 추후 삭제 예정
   const random = Math.floor((Math.random() * 5));
   const [snackbarOpen, setSnackbarOpen] = useState(true);
+
+  const [expandAccordion, setExpandAccordion] = useState(false);
+
+  const handleExpand = () => {
+    setExpandAccordion(!expandAccordion);
+  };
 
   useEffect(() => {
     dispatch(setHeaderOpenTrue('home'));
@@ -76,7 +85,17 @@ function HomeConatiner() {
         : (
           <>
             <MonthlyStatement />
-            <Calender dateHeight={85} />
+            <Accordion expanded={expandAccordion} disableGutters elevation={0}>
+              <AccordionSummary>
+                <Stack direction="row" justifyContent="space-between" width="100%">
+                  <Typography sx={{ display: 'flex', alignItems: 'center', fontWeight: 'bold' }}>전체 내역</Typography>
+                  <Button onClick={handleExpand}>{expandAccordion ? '달력 닫기' : '달력 보기'}</Button>
+                </Stack>
+              </AccordionSummary>
+              <AccordionDetails sx={{ p: 0, pb: 5 }}>
+                <Calender dateHeight={85} />
+              </AccordionDetails>
+            </Accordion>
           </>
         )}
       <ScheduleViewMode />
