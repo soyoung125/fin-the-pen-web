@@ -5,17 +5,7 @@ import { useEffect, useState } from 'react';
 import { NOT_STABLE } from '../../../../../utils/constants/common';
 import { TIME_SELECTOR } from '../../../../../utils/constants/schedule';
 import { convert12to24, convert24to12 } from '../../../../../utils/tools';
-
-function StateButton({ state, setState, value }) {
-  return (
-    <Button
-      variant={state === value ? 'contained' : 'text'}
-      onClick={() => setState(value)}
-    >
-      {value}
-    </Button>
-  );
-}
+import StateButton from './StateButton';
 
 function TimeSelector({
   timeId, currentTime, setModalOpen, changeSchedule,
