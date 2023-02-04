@@ -12,7 +12,7 @@ function SettingsPaper() {
     >
       <Grid container spacing={2} alignItems="stretch">
         {momeyManagementSettings.map((s) => (
-          <SettingCard setting={s} />
+          <SettingCard setting={s} key={Math.random()} />
         ))}
       </Grid>
     </Paper>
