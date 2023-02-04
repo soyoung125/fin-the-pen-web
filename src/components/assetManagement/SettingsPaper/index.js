@@ -1,5 +1,5 @@
 import { Grid, Paper } from '@mui/material';
-import momeyManagementSettings from '../../../utils/constants/settings';
+import assetManagements from '../../../utils/constants/managements';
 import SettingCard from './SettingCard';
 
 function SettingsPaper() {
@@ -11,7 +11,7 @@ function SettingsPaper() {
       }}
     >
       <Grid container spacing={2} alignItems="stretch">
-        {momeyManagementSettings.map((s) => (
+        {assetManagements.map((s) => (
           <SettingCard setting={s} key={Math.random()} />
         ))}
       </Grid>

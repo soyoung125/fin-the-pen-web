@@ -5,7 +5,7 @@ import KeyboardArrowLeftIcon from '@mui/icons-material/KeyboardArrowLeft';
 import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight';
 import { Outlet, useLocation, useNavigate } from 'react-router-dom';
 import { useEffect, useState } from 'react';
-import momeyManagementSettings from '../../utils/constants/settings';
+import assetManagements from '../../utils/constants/managements';
 
 function ManagementLayout() {
   const location = useLocation();
@@ -13,16 +13,16 @@ function ManagementLayout() {
   const [management, setManagement] = useState(0);
 
   useEffect(() => {
-    setManagement(momeyManagementSettings.findIndex((s) => s.path === location.pathname));
+    setManagement(assetManagements.findIndex((s) => s.path === location.pathname));
   }, []);
 
   const handleMovement = (type) => {
     if (type === '-' && management !== 0) {
       setManagement(management - 1);
-      navigate(momeyManagementSettings[management - 1].path, { replace: true });
+      navigate(assetManagements[management - 1].path, { replace: true });
     } else if (type === '+' && management !== 3) {
       setManagement(management + 1);
-      navigate(momeyManagementSettings[management + 1].path, { replace: true });
+      navigate(assetManagements[management + 1].path, { replace: true });
     }
   };
 
@@ -39,7 +39,7 @@ function ManagementLayout() {
           <KeyboardArrowLeftIcon />
         </IconButton>
         <Stack alignItems="center">
-          <Typography variant="h6" sx={{ fontWeight: 'bold' }}>{momeyManagementSettings[management].title}</Typography>
+          <Typography variant="h6" sx={{ fontWeight: 'bold' }}>{assetManagements[management].title}</Typography>
         </Stack>
         <IconButton
           aria-label="delete"
