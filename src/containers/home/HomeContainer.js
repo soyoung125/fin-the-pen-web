@@ -75,7 +75,7 @@ function HomeConatiner() {
         )
         : (
           <>
-            <Calender dateHeight={100} />
+            <Calender dateHeight={85} />
             <MonthlyStatement />
           </>
         )}

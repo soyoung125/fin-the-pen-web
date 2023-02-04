@@ -28,7 +28,7 @@ function Calender({ dateHeight }) {
   const viewMode = useSelector(selectViewMode);
   const today = moment(new Date());
 
-  const DATE_SIZE = 32;
+  const DATE_SIZE = 25;
   const DATE_HEIGHT = dateHeight;
 
   useEffect(() => {
