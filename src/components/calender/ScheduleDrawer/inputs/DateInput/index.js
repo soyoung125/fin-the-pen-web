@@ -5,6 +5,7 @@ import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { SCHEDULE_DRAWER } from '../../../../../utils/constants/schedule';
 import { selectSchedule } from '../../../../../utils/redux/schedule/scheduleSlice';
+import { isTimeOrderCorrect } from '../../../../../utils/tools';
 import ModalStaticBackdrop from '../../../../layouts/ModalStaticBackdrop';
 import { updateSchedule } from '../../utils/schedule';
 import TimeSelector from './TimeSelector';
@@ -16,13 +17,6 @@ function DateInput() {
   const [currentTime, setCurrentTime] = useState('09:00');
   const [modalOpen, setModalOpen] = useState(false);
   const [error, setError] = useState(null);
-  const isTimeOrderCorrect = (startTime, endTime) => {
-    console.log(startTime, endTime);
-    if (startTime > endTime) {
-      return false;
-    }
-    return true;
-  };
 
   const changeSchedule = (state) => {
     updateSchedule(dispatch, schedule, state);

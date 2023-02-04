@@ -96,3 +96,16 @@ export const convert24to12 = (time) => {
   }
   return [TIME_SELECTOR.meridiem.am, `${hours}:${minutes}`];
 };
+
+/**
+ * 시작 시각이 종료 시각보다 빠른지 검사하는 함수
+ * @param {*} startTime
+ * @param {*} endTime
+ * @returns
+ */
+export const isTimeOrderCorrect = (startTime, endTime) => {
+  if (startTime > endTime) {
+    return false;
+  }
+  return true;
+};
