@@ -1,5 +1,7 @@
-import { Stack, TextField } from '@mui/material';
-import { useState } from 'react';
+import {
+  Alert, Stack, TextField,
+} from '@mui/material';
+import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { SCHEDULE_DRAWER } from '../../../../../utils/constants/schedule';
 import { selectSchedule } from '../../../../../utils/redux/schedule/scheduleSlice';
@@ -13,14 +15,33 @@ function DateInput() {
   const [timeId, setTimeId] = useState(null);
   const [currentTime, setCurrentTime] = useState('09:00');
   const [modalOpen, setModalOpen] = useState(false);
+  const [error, setError] = useState(null);
+  const isTimeOrderCorrect = (startTime, endTime) => {
+    console.log(startTime, endTime);
+    if (startTime > endTime) {
+      return false;
+    }
+    return true;
+  };
+
   const changeSchedule = (state) => {
     updateSchedule(dispatch, schedule, state);
   };
+
   const openModal = (id, time) => {
     setTimeId(id);
     setCurrentTime(time);
     setModalOpen(!modalOpen);
   };
+
+  useEffect(() => {
+    if (isTimeOrderCorrect(schedule.start_time, schedule.end_time)) {
+      setError(false);
+    } else {
+      setError(true);
+    }
+  }, [schedule]);
+
   return (
     <>
       <TextField
@@ -97,6 +118,15 @@ function DateInput() {
           size="small"
         />
       </Stack>
+      {
+        error && (
+          <Stack justifyContent="center">
+            <Alert color="error">
+              종료 시각이 시작 시각보다 빠르지 않았으면 좋겠어요.
+            </Alert>
+          </Stack>
+        )
+      }
       <ModalStaticBackdrop
         keepMounted
         width="xl"
