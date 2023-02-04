@@ -1,5 +1,7 @@
 /* eslint-disable import/prefer-default-export */
 
+import { TIME_SELECTOR } from './constants/schedule';
+
 /**
  * 유용한 함수들을 모아두는 곳.
  * 주석으로 부가 설명이 있으면 더 좋을 것 같아요.
@@ -55,4 +57,22 @@ export const executeFunctionByGuestMode = (guestMode, func1, func2) => {
   } else {
     func2();
   }
+};
+
+/**
+ * 12시 형식을 24시 형식으로 변환해주는 함수 (ex. 오전 9:00 => 09:00, 오후 5:00 => 17:00)
+ * @param {string} meridiem 오전/오후 ('오전' or '오후' only)
+ * @param {number} hours 시각
+ * @param {*} minutes 분
+ * @returns
+ */
+export const convert12to24 = (meridiem, hours, minutes) => {
+  let h = hours;
+  if (meridiem === TIME_SELECTOR.meridiem.pm) {
+    h += 12;
+  }
+  if (h === 24) {
+    h = 0;
+  }
+  return `${h < 10 ? '0' : ''}${h}:${minutes}`;
 };

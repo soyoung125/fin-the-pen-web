@@ -4,6 +4,7 @@ import {
 import { useEffect, useState } from 'react';
 import { NOT_STABLE, SOMETHING_IS_WRONG } from '../../../../../utils/constants/common';
 import { TIME_SELECTOR } from '../../../../../utils/constants/schedule';
+import { convert12to24 } from '../../../../../utils/tools';
 
 function StateButton({ state, setState, value }) {
   return (
@@ -23,23 +24,11 @@ function TimeSelector({
   const [hours, setHours] = useState(9);
   const [minutes, setMinutes] = useState('00');
 
-  const time = () => {
-    let h = hours;
-    if (meridiem === TIME_SELECTOR.meridiem.pm) {
-      h += 12;
-    }
-    if (h === 24) {
-      h = 0;
-    }
-    const text = `${h < 10 ? '0' : ''}${h}:${minutes}`;
-    return text;
-  };
-
   const setTime = () => {
     changeSchedule({
       target: {
         id: timeId,
-        value: time(),
+        value: convert12to24(meridiem, hours, minutes),
       },
     });
     setModalOpen(false);
