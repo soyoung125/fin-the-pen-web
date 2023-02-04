@@ -51,3 +51,14 @@ export const updateSpendingType = (dispatch, schedule) => {
 export const updateExclusion = (dispatch, schedule, state) => {
   dispatch(setDrawerSchedule({ ...schedule, exclusion: state.target.checked }));
 };
+
+export const switchTitle = (id) => {
+  switch (id) {
+    case 'start_time':
+      return '일정 시작 시각';
+    case 'end_time':
+      return '일정 종료 시각';
+    default:
+      return 'error';
+  }
+};

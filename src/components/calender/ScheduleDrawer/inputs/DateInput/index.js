@@ -123,7 +123,7 @@ function DateInput() {
       }
       <ModalStaticBackdrop
         keepMounted
-        width="xl"
+        width="xs"
         open={modalOpen}
         component={(
           <TimeSelector

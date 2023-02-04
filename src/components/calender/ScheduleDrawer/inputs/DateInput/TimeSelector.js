@@ -1,11 +1,21 @@
 import {
-  Button, Stack, Typography,
+  Box,
+  Button, Divider, Stack, Typography,
 } from '@mui/material';
 import { useEffect, useState } from 'react';
 import { NOT_STABLE } from '../../../../../utils/constants/common';
 import { TIME_SELECTOR } from '../../../../../utils/constants/schedule';
 import { convert12to24, convert24to12 } from '../../../../../utils/tools';
+import { switchTitle } from '../../utils/schedule';
 import StateButton from './StateButton';
+
+function CenterBox({ children }) {
+  return (
+    <Box sx={{ justifyContent: 'center', display: 'flex' }}>
+      {children}
+    </Box>
+  );
+}
 
 function TimeSelector({
   timeId, currentTime, setModalOpen, changeSchedule,
@@ -40,33 +50,45 @@ function TimeSelector({
 
   return (
     <Stack p={2}>
-      <Typography>{NOT_STABLE}</Typography>
-      <Typography>{timeId}</Typography>
-      <Stack direction="row" justifyContent="space-around" alignItems="center">
-        <Stack>
+      <Typography color="error" variant="caption">{NOT_STABLE}</Typography>
+      <Typography variant="h4">{`${switchTitle(timeId)} 설정`}</Typography>
+      <CenterBox>
+        <StateButton
+          value={TIME_SELECTOR.meridiem.am}
+          state={meridiem}
+          setState={setMeridiem}
+        />
+        <StateButton
+          value={TIME_SELECTOR.meridiem.pm}
+          state={meridiem}
+          setState={setMeridiem}
+        />
+      </CenterBox>
+      <Box my={1}>
+        <Divider />
+      </Box>
+      <CenterBox>
+        <Typography>시</Typography>
+      </CenterBox>
+      <Box>
+        { Array.from({ length: 12 }, (_, i) => i + 1).map((n) => (
           <StateButton
-            value={TIME_SELECTOR.meridiem.am}
-            state={meridiem}
-            setState={setMeridiem}
-          />
-          <StateButton
-            value={TIME_SELECTOR.meridiem.pm}
-            state={meridiem}
-            setState={setMeridiem}
-          />
-        </Stack>
-        <Stack>
-          { Array.from({ length: 12 }, (_, i) => i + 1).map((n) => (
-            <StateButton
-              value={n}
-              state={hours}
-              setState={setHours}
-            >
-              {n}
-            </StateButton>
-          ))}
-        </Stack>
-        <Stack>
+            value={n}
+            state={hours}
+            setState={setHours}
+          >
+            {n}
+          </StateButton>
+        ))}
+      </Box>
+      <Box my={1}>
+        <Divider />
+      </Box>
+      <CenterBox>
+        <Typography>분</Typography>
+      </CenterBox>
+      <CenterBox>
+        <Box>
           <StateButton
             value={TIME_SELECTOR.minutes.zero}
             state={minutes}
@@ -81,8 +103,9 @@ function TimeSelector({
           >
             {TIME_SELECTOR.minutes.thirty}
           </StateButton>
-        </Stack>
-      </Stack>
+        </Box>
+      </CenterBox>
+      <Box my={1} />
       <Stack direction="row" spacing={1}>
         <Button fullWidth variant="contained" color="error" onClick={() => setModalOpen(false)}>닫기</Button>
         <Button fullWidth variant="contained" color="success" onClick={() => setTime()}>설정하기</Button>
