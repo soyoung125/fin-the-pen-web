@@ -7,6 +7,7 @@ import {
 import { useState } from 'react';
 import FilterAltOutlinedIcon from '@mui/icons-material/FilterAltOutlined';
 import { useDispatch, useSelector } from 'react-redux';
+import ClearIcon from '@mui/icons-material/Clear';
 import RoundedButton from '../../../../common/RoundedButton';
 import { EXPENDITURE, FIXED, INCOME } from '../../../../../utils/constants/categories';
 import FilterAccordion from './inputs/FilterAccordion';
@@ -52,11 +53,18 @@ function FilterButton() {
           spacing={2}
           m={1}
           pt={5}
+          pb={2}
         >
           <Stack direction="row" alignItems="center" justifyContent="space-between">
-            <Button onClick={() => setBottomDrawerOpen(false)}>닫기</Button>
-            <Typography variant="h5" sx={{ fontWeight: 'bold' }}>필터 설정(제작중)</Typography>
-            <Button onClick={() => alert('확인')}>확인</Button>
+            <Button onClick={() => setBottomDrawerOpen(false)}><ClearIcon /></Button>
+            <Typography variant="h5" sx={{ fontWeight: 'bold' }}>필터 설정</Typography>
+            <Button
+              variant="outlined"
+              color="error"
+              onClick={() => dispatch(initFilter())}
+            >
+              초기화
+            </Button>
           </Stack>
           {
             filtered.length > 0 && (
@@ -121,14 +129,6 @@ function FilterButton() {
               onChange={changeSchedule}
               size="small"
             />
-          </Stack>
-          <Stack>
-            <Button
-              variant="contained"
-              onClick={() => dispatch(initFilter())}
-            >
-              필터 초기화
-            </Button>
           </Stack>
         </Stack>
       </Drawer>
