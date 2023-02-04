@@ -4,11 +4,11 @@ import StatusStack from './StatusStack';
 function ScheduleStatusCard({ month, numberOfSchedule }) {
   return (
     <>
-      <Box sx={{ typography: 'h4', fontWeight: 'bold' }}>
+      <Box sx={{ typography: 'h6', fontWeight: 'bold' }}>
         My 스케줄 현황
       </Box>
       <Box sx={{
-        marginTop: 3, border: '2px solid', borderRadius: 2, borderColor: 'primary.main',
+        marginTop: 1, border: '2px solid', borderRadius: 2, borderColor: 'primary.main',
       }}
       >
         <Stack direction="row">
