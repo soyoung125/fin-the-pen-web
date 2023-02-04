@@ -3,7 +3,7 @@ import {
 } from '@mui/material';
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { SCHEDULE_DRAWER } from '../../../../../utils/constants/schedule';
+import { SCHEDULE_DRAWER, WRONG_TIME_ORDER } from '../../../../../utils/constants/schedule';
 import { selectSchedule } from '../../../../../utils/redux/schedule/scheduleSlice';
 import { isTimeOrderCorrect } from '../../../../../utils/tools';
 import ModalStaticBackdrop from '../../../../layouts/ModalStaticBackdrop';
@@ -116,7 +116,7 @@ function DateInput() {
         error && (
           <Stack justifyContent="center">
             <Alert color="error">
-              종료 시각이 시작 시각보다 빠르지 않았으면 좋겠어요.
+              {WRONG_TIME_ORDER}
             </Alert>
           </Stack>
         )

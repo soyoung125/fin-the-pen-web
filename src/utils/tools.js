@@ -98,7 +98,8 @@ export const convert24to12 = (time) => {
 };
 
 /**
- * 시작 시각이 종료 시각보다 빠른지 검사하는 함수
+ * 시작 시각이 종료 시각보다 빠른지 검사하는 함수.
+ * 알파벳 순으로 검사하므로 시각('HH:MM'), 날짜('YYYY.MM.DD')를 범용 지원한다.
  * @param {*} startTime
  * @param {*} endTime
  * @returns

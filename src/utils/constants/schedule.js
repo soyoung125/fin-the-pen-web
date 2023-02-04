@@ -46,6 +46,7 @@ const SCHEDULE_DRAWER_MODE = {
   생성: 'create',
 };
 const NEED_TITLE = '제목을 입력해야 합니다.';
+const WRONG_TIME_ORDER = '종료 시각이 시작 시각보다 빠르지 않았으면 좋겠어요.';
 const INIT_SCHEDULE = (date) => ({
   event_name: '',
   alarm: false,
@@ -78,6 +79,7 @@ export {
   SCHEDULE_DRAWER,
   SCHEDULE_DRAWER_MODE,
   NEED_TITLE,
+  WRONG_TIME_ORDER,
   INIT_SCHEDULE,
   REPEAT_CYCLE,
   VIEW_MODE,

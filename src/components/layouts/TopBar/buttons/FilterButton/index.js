@@ -4,7 +4,7 @@ import {
   Box,
   Button, Chip, Drawer, ListItem, Paper, Stack, TextField, Typography,
 } from '@mui/material';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import FilterAltOutlinedIcon from '@mui/icons-material/FilterAltOutlined';
 import { useDispatch, useSelector } from 'react-redux';
 import ClearIcon from '@mui/icons-material/Clear';
@@ -15,12 +15,15 @@ import {
   initFilter, selectFiltered, selectFilteredDate, setFilteredDate, updateFilter,
 } from '../../../../../utils/redux/schedule/scheduleSlice';
 import { SOMETHING_IS_WRONG } from '../../../../../utils/constants/common';
+import { isTimeOrderCorrect } from '../../../../../utils/tools';
+import { WRONG_TIME_ORDER } from '../../../../../utils/constants/schedule';
 
 function FilterButton() {
   const dispatch = useDispatch();
   const [bottomDrawerOpen, setBottomDrawerOpen] = useState(false);
   const filtered = useSelector(selectFiltered);
   const filteredDate = useSelector(selectFilteredDate);
+  const [error, setError] = useState(null);
 
   const handleClick = (state) => {
     dispatch(updateFilter(state.target.innerText));
@@ -36,6 +39,14 @@ function FilterButton() {
       date: state.target.value,
     }));
   };
+
+  useEffect(() => {
+    if (isTimeOrderCorrect(filteredDate.start, filteredDate.end)) {
+      setError(false);
+    } else {
+      setError(true);
+    }
+  }, [filteredDate]);
 
   return (
     <>
@@ -130,6 +141,15 @@ function FilterButton() {
               size="small"
             />
           </Stack>
+          {
+            error && (
+              <Stack justifyContent="center">
+                <Alert color="error">
+                  {WRONG_TIME_ORDER}
+                </Alert>
+              </Stack>
+            )
+          }
         </Stack>
       </Drawer>
     </>
