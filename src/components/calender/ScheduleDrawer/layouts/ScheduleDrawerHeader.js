@@ -10,8 +10,10 @@ function ScheduleDrawerHeader({ mode, setBottomDrawerOpen }) {
   const schedule = useSelector(selectSchedule);
 
   const deleteSelectedSchedule = () => {
-    dispatch(deleteSchedule(schedule.id));
-    setBottomDrawerOpen(false);
+    if (window.confirm('정말로 삭제 하시겠습니까?')) {
+      dispatch(deleteSchedule(schedule.id));
+      setBottomDrawerOpen(false);
+    }
   };
 
   return (
