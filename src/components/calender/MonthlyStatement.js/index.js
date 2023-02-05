@@ -19,7 +19,7 @@ function MonthlyStatement() {
   const date = useSelector(selectDate);
 
   return (
-    <Paper elevation={6} sx={{ margin: 2, padding: 2, paddingTop: 3 }}>
+    <Paper elevation={6} sx={{ margin: 2, padding: 2, paddingTop: 2 }}>
       <SwitchingHeader>
         <Typography variant="h6" sx={{ fontWeight: 'bold' }}>{`${moment(date).format('M')}월`}</Typography>
         <Typography variant="caption">자산내역</Typography>

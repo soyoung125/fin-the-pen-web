@@ -28,7 +28,7 @@ function ManagementLayout() {
   };
 
   return (
-    <Box sx={{ pt: 3 }}>
+    <Box sx={{ pt: 3, px: 2 }}>
       <SwitchingHeader
         handleClickLeftArrow={() => handleMovement('-')}
         handleClickRightArrow={() => handleMovement('+')}
@@ -36,7 +36,7 @@ function ManagementLayout() {
         <Typography variant="h6" sx={{ fontWeight: 'bold' }}>{assetManagements[management].title}</Typography>
       </SwitchingHeader>
 
-      <Box sx={{ m: 3, wordBreak: 'keep-all', fontWeight: 'bold' }}>
+      <Box sx={{ my: 3, wordBreak: 'keep-all', fontWeight: 'bold' }}>
         <Outlet />
       </Box>
     </Box>
