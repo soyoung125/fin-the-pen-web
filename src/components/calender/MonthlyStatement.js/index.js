@@ -1,16 +1,10 @@
-/* eslint-disable no-unused-vars */
-/* eslint-disable max-len */
 import {
-  Box, Grid, IconButton, Paper, Stack, Typography,
+  Box, Stack, Typography,
 } from '@mui/material';
-import { lightBlue, pink } from '@mui/material/colors';
 import moment from 'moment';
 import { useSelector } from 'react-redux';
-import KeyboardArrowLeftIcon from '@mui/icons-material/KeyboardArrowLeft';
-import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight';
 import { selectDate, selectSchedules } from '../../../utils/redux/schedule/scheduleSlice';
 import { calculateIncomeExpenditure } from '../../../utils/tools';
-import StatementCard from './StatementCard';
 import StatusStack from '../../assetManagement/ScheduleStatusCard/StatusStack';
 import SwitchingHeader from '../../common/SwitchingHeader';
 import RoundedPaper from '../../common/RoundedPaper';
