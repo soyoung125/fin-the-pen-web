@@ -1,5 +1,5 @@
 import {
-  Box, Button, Grid, Paper, Stack,
+  Box, Grid, IconButton, Paper, Stack,
 } from '@mui/material';
 import { useSelector } from 'react-redux';
 import BorderColorIcon from '@mui/icons-material/BorderColor';
@@ -11,26 +11,26 @@ function SavingsGoal() {
 
   return (
     <>
-      <Box sx={{ typography: 'h6', fontWeight: 'bold' }}>
+      <Box sx={{ fontWeight: 'bold' }}>
         {`"${user.name}"님의 한해 저축 목표입니다.`}
       </Box>
 
       <Paper sx={{ p: 2, mt: 1, mb: 3 }}>
         <Stack direction="row" justifyContent="space-between" alignItems="center">
-          <Box sx={{ typography: 'h5', fontWeight: 'bold' }}>1 Year Goal</Box>
-          <Button onClick={() => alert(NOTHING_IS_HERE_YET)}>
-            <BorderColorIcon />
-          </Button>
+          <Box sx={{ typography: 'h6', fontWeight: 'bold' }}>1 Year Goal</Box>
+          <IconButton color="primary" onClick={() => alert(NOTHING_IS_HERE_YET)}>
+            <BorderColorIcon fontSize="small" />
+          </IconButton>
         </Stack>
         <Box sx={{
-          typography: 'h5', fontWeight: 'bold', my: 2, p: 3, border: '2px solid', borderRadius: 2, borderColor: 'primary.main', color: 'primary.main', textAlign: 'end',
+          typography: 'h6', fontWeight: 'bold', my: 1, p: 2, border: '2px solid', borderRadius: 2, borderColor: 'primary.main', color: 'primary.main', textAlign: 'end',
         }}
         >
           xxxxxxx원
         </Box>
-        <Box sx={{ typography: 'h5', fontWeight: 'bold' }}>1 Month Goal</Box>
+        <Box sx={{ typography: 'h6', fontWeight: 'bold' }}>1 Month Goal</Box>
         <Box sx={{
-          typography: 'h5', fontWeight: 'bold', my: 2, p: 3, border: '2px solid', borderRadius: 2, borderColor: 'primary.main', color: 'primary.main', textAlign: 'end',
+          typography: 'h6', fontWeight: 'bold', my: 1, p: 2, border: '2px solid', borderRadius: 2, borderColor: 'primary.main', color: 'primary.main', textAlign: 'end',
         }}
         >
           xxxxxxx원
@@ -38,12 +38,12 @@ function SavingsGoal() {
       </Paper>
 
       <Stack direction="row" justifyContent="space-between" alignItems="center">
-        <Box sx={{ typography: 'h6', fontWeight: 'bold' }}>
+        <Box sx={{ fontWeight: 'bold' }}>
           당신의 또 다른 목표는 무엇인가요?
         </Box>
-        <Button onClick={() => alert(NOTHING_IS_HERE_YET)}>
-          <BorderColorIcon />
-        </Button>
+        <IconButton color="primary" onClick={() => alert(NOTHING_IS_HERE_YET)}>
+          <BorderColorIcon fontSize="small" />
+        </IconButton>
       </Stack>
 
       <Grid container spacing={1} textAlign="center" mt={0}>
