@@ -13,13 +13,14 @@ import { calculateIncomeExpenditure } from '../../../utils/tools';
 import StatementCard from './StatementCard';
 import StatusStack from '../../assetManagement/ScheduleStatusCard/StatusStack';
 import SwitchingHeader from '../../common/SwitchingHeader';
+import RoundedPaper from '../../common/RoundedPaper';
 
 function MonthlyStatement() {
   const schedules = useSelector(selectSchedules);
   const date = useSelector(selectDate);
 
   return (
-    <Paper elevation={6} sx={{ margin: 2, padding: 2, paddingTop: 2 }}>
+    <RoundedPaper>
       <SwitchingHeader>
         <Typography variant="h6" sx={{ fontWeight: 'bold' }}>{`${moment(date).format('M')}월`}</Typography>
         <Typography variant="caption">자산내역</Typography>
@@ -41,7 +42,7 @@ function MonthlyStatement() {
           />
         </Stack>
       </Box>
-    </Paper>
+    </RoundedPaper>
   );
 }
 
