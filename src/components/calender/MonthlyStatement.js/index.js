@@ -12,25 +12,18 @@ import { selectDate, selectSchedules } from '../../../utils/redux/schedule/sched
 import { calculateIncomeExpenditure } from '../../../utils/tools';
 import StatementCard from './StatementCard';
 import StatusStack from '../../assetManagement/ScheduleStatusCard/StatusStack';
+import SwitchingHeader from '../../common/SwitchingHeader';
 
 function MonthlyStatement() {
   const schedules = useSelector(selectSchedules);
   const date = useSelector(selectDate);
 
   return (
-    <Paper elevation={6} sx={{ margin: 2, padding: 2, paddingTop: 0.5 }}>
-      <Stack direction="row" alignItems="center" justifyContent="space-between" my={2} sx={{ height: '30px' }}>
-        <IconButton aria-label="delete" sx={{ padding: '5px', marginRight: '-3px' }}>
-          <KeyboardArrowLeftIcon />
-        </IconButton>
-        <Stack alignItems="center">
-          <Typography variant="h6" sx={{ fontWeight: 'bold' }}>{`${moment(date).format('M')}월`}</Typography>
-          <Typography variant="caption">자산내역</Typography>
-        </Stack>
-        <IconButton aria-label="delete" sx={{ padding: '5px', marginLeft: '-3px' }}>
-          <KeyboardArrowRightIcon />
-        </IconButton>
-      </Stack>
+    <Paper elevation={6} sx={{ margin: 2, padding: 2, paddingTop: 3 }}>
+      <SwitchingHeader>
+        <Typography variant="h6" sx={{ fontWeight: 'bold' }}>{`${moment(date).format('M')}월`}</Typography>
+        <Typography variant="caption">자산내역</Typography>
+      </SwitchingHeader>
 
       <Box sx={{
         marginTop: 3, border: '2px solid', borderRadius: 2, borderColor: 'primary.main',
