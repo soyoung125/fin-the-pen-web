@@ -4,7 +4,7 @@ import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight';
 
 function SwitchingHeader({ children, handleClickLeftArrow, handleClickRightArrow }) {
   return (
-    <Stack direction="row" alignItems="center" justifyContent="space-between" px={2} sx={{ height: '30px' }}>
+    <Stack direction="row" alignItems="center" justifyContent="space-between" sx={{ height: '100%' }}>
       <IconButton
         aria-label="delete"
         sx={{
