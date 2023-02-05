@@ -1,11 +1,12 @@
 import {
-  Box, Grid, IconButton, Paper, Stack, Typography,
+  Box, Grid, IconButton, Stack, Typography,
 } from '@mui/material';
 import { useSelector } from 'react-redux';
 import BorderColorIcon from '@mui/icons-material/BorderColor';
 import { useState } from 'react';
 import { selectUser } from '../../../utils/redux/user/userSlice';
 import ModalStaticBackdrop from '../../../components/layouts/ModalStaticBackdrop';
+import RoundedPaper from '../../../components/common/RoundedPaper';
 
 function SavingsGoal() {
   const user = useSelector(selectUser);
@@ -19,7 +20,7 @@ function SavingsGoal() {
         {`"${user.name}"님의 한해 저축 목표입니다.`}
       </Box>
 
-      <Paper sx={{ p: 2, mt: 1, mb: 3 }}>
+      <RoundedPaper sx={{ p: 2, mt: 1, mb: 3 }}>
         <Stack direction="row" justifyContent="space-between" alignItems="center">
           <Box sx={{ typography: 'h6', fontWeight: 'bold' }}>1 Year Goal</Box>
           <IconButton color="primary" onClick={() => setSavingGoalModalOpen(true)}>
@@ -39,7 +40,7 @@ function SavingsGoal() {
         >
           xxxxxxx원
         </Box>
-      </Paper>
+      </RoundedPaper>
 
       <Stack direction="row" justifyContent="space-between" alignItems="center">
         <Box sx={{ fontWeight: 'bold' }}>
