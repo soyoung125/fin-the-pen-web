@@ -1,47 +1,15 @@
 import {
   Box, Grid, IconButton, Stack, Typography,
 } from '@mui/material';
-import { useSelector } from 'react-redux';
 import BorderColorIcon from '@mui/icons-material/BorderColor';
 import { useState } from 'react';
-import { selectUser } from '../../../utils/redux/user/userSlice';
-import ModalStaticBackdrop from '../../../components/layouts/ModalStaticBackdrop';
-import RoundedPaper from '../../../components/common/RoundedPaper';
+import ModalStaticBackdrop from '../../../../../components/layouts/ModalStaticBackdrop';
 
-function SavingsGoal() {
-  const user = useSelector(selectUser);
-
-  const [savingGoalModalOpen, setSavingGoalModalOpen] = useState(false);
+function Personal() {
   const [personalGoalModalOpen, setPersonalGoalModalOpen] = useState(false);
 
   return (
     <>
-      <Box sx={{ fontWeight: 'bold' }}>
-        {`"${user.name}"님의 한해 저축 목표입니다.`}
-      </Box>
-
-      <RoundedPaper sx={{ p: 2, mt: 1, mb: 3 }}>
-        <Stack direction="row" justifyContent="space-between" alignItems="center">
-          <Box sx={{ typography: 'h6', fontWeight: 'bold' }}>1 Year Goal</Box>
-          <IconButton color="primary" onClick={() => setSavingGoalModalOpen(true)}>
-            <BorderColorIcon fontSize="small" />
-          </IconButton>
-        </Stack>
-        <Box sx={{
-          typography: 'h6', fontWeight: 'bold', my: 1, p: 2, border: '2px solid', borderRadius: 2, borderColor: 'primary.main', color: 'primary.main', textAlign: 'end',
-        }}
-        >
-          xxxxxxx원
-        </Box>
-        <Box sx={{ typography: 'h6', fontWeight: 'bold' }}>1 Month Goal</Box>
-        <Box sx={{
-          typography: 'h6', fontWeight: 'bold', my: 1, p: 2, border: '2px solid', borderRadius: 2, borderColor: 'primary.main', color: 'primary.main', textAlign: 'end',
-        }}
-        >
-          xxxxxxx원
-        </Box>
-      </RoundedPaper>
-
       <Stack direction="row" justifyContent="space-between" alignItems="center">
         <Box sx={{ fontWeight: 'bold' }}>
           당신의 또 다른 목표는 무엇인가요?
@@ -85,16 +53,7 @@ function SavingsGoal() {
           </Box>
         </Grid>
       </Grid>
-      <ModalStaticBackdrop
-        keepMounted
-        width="xl"
-        open={savingGoalModalOpen}
-        component={(
-          <Typography>
-            저축 목표
-          </Typography>
-        )}
-      />
+
       <ModalStaticBackdrop
         keepMounted
         width="xl"
@@ -109,4 +68,4 @@ function SavingsGoal() {
   );
 }
 
-export default SavingsGoal;
+export default Personal;
