@@ -1,11 +1,11 @@
+/* eslint-disable max-len */
 import {
-  Box, IconButton, Stack, Typography,
+  Box, Typography,
 } from '@mui/material';
-import KeyboardArrowLeftIcon from '@mui/icons-material/KeyboardArrowLeft';
-import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight';
 import { Outlet, useLocation, useNavigate } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import assetManagements from '../../utils/constants/managements';
+import SwitchingHeader from '../common/SwitchingHeader';
 
 function ManagementLayout() {
   const location = useLocation();
@@ -17,6 +17,7 @@ function ManagementLayout() {
   }, []);
 
   const handleMovement = (type) => {
+    console.log(assetManagements[management].title);
     if (type === '-' && management !== 0) {
       setManagement(management - 1);
       navigate(assetManagements[management - 1].path, { replace: true });
@@ -27,30 +28,13 @@ function ManagementLayout() {
   };
 
   return (
-    <Box>
-      <Stack direction="row" alignItems="center" justifyContent="space-between" px={2} my={5} sx={{ height: '30px' }}>
-        <IconButton
-          aria-label="delete"
-          sx={{
-            padding: '5px', marginRight: '-3px', border: '1px solid', borderRadius: 2,
-          }}
-          onClick={() => handleMovement('-')}
-        >
-          <KeyboardArrowLeftIcon />
-        </IconButton>
-        <Stack alignItems="center">
-          <Typography variant="h6" sx={{ fontWeight: 'bold' }}>{assetManagements[management].title}</Typography>
-        </Stack>
-        <IconButton
-          aria-label="delete"
-          sx={{
-            padding: '5px', marginLeft: '-3px', border: '1px solid', borderRadius: 2,
-          }}
-          onClick={() => handleMovement('+')}
-        >
-          <KeyboardArrowRightIcon />
-        </IconButton>
-      </Stack>
+    <Box sx={{ pt: 3 }}>
+      <SwitchingHeader
+        handleClickLeftArrow={() => handleMovement('-')}
+        handleClickRightArrow={() => handleMovement('+')}
+      >
+        <Typography variant="h6" sx={{ fontWeight: 'bold' }}>{assetManagements[management].title}</Typography>
+      </SwitchingHeader>
 
       <Box sx={{ m: 3, wordBreak: 'keep-all', fontWeight: 'bold' }}>
         <Outlet />
