@@ -73,6 +73,7 @@ function TimeSelector({
       <Box>
         { Array.from({ length: 12 }, (_, i) => i + 1).map((n) => (
           <StateButton
+            key={n}
             value={n}
             state={hours}
             setState={setHours}
