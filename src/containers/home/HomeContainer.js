@@ -86,7 +86,7 @@ function HomeConatiner() {
           </>
         )
         : (
-          <>
+          <Box sx={{ mx: 2, mb: 8 }}>
             <MonthlyStatement />
             <Accordion expanded={expandAccordion} disableGutters elevation={0}>
               <AccordionSummary>
@@ -99,13 +99,13 @@ function HomeConatiner() {
                 <Calender dateHeight={85} />
               </AccordionDetails>
             </Accordion>
-            <Box sx={{ margin: 2, pb: 6 }}>
+            <Box>
               <ScheduleStatusCard
                 month={today.format('M월')}
                 numberOfSchedule={schedules.filter((s) => today.isSame(s.date, 'month') && today.isSameOrBefore(s.date, 'day')).length}
               />
             </Box>
-          </>
+          </Box>
         )}
       <ScheduleViewMode />
     </Box>

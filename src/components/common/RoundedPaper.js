@@ -5,7 +5,7 @@ function RoundedPaper({ children }) {
     <Paper
       elevation={8}
       sx={{
-        marginTop: 2, marginBottom: 5, padding: 2, textAlign: 'center', borderRadius: 3,
+        marginY: 2, padding: 2, textAlign: 'center', borderRadius: 3,
       }}
     >
       {children}
