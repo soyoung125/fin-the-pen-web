@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 /* eslint-disable no-restricted-globals */
 /* eslint-disable no-alert */
 import { Box, Button } from '@mui/material';
@@ -19,8 +20,12 @@ function MyPageContainer() {
   const dispatch = useDispatch();
   const userLogOut = () => {
     if (confirm('게스트 계정은 로그아웃 하는 경우 지금까지 작업한 내용이 저장되지 않습니다. 중요한 자료는 미리 백업해주세요. (확인 시 모든 정보 날라감)')) {
-      dispatch(logOut());
-      // 로그아웃 하면서 추가로 해제해야 할 행동을 여기에서 해줘야 함
+      sessionStorage.clear();
+      window.location.href = '';
+      /**
+       * logOut을 dispatch하지 않고, redux 스토어를 강제로 비워서 초기화 처리해버리는 중
+       */
+      // dispatch(logOut());
     }
   };
   useEffect(() => {
