@@ -1,8 +1,10 @@
 import {
-  Box, Grid, Paper, Stack,
+  Box, Button, Grid, Paper, Stack,
 } from '@mui/material';
 import { useSelector } from 'react-redux';
+import BorderColorIcon from '@mui/icons-material/BorderColor';
 import { selectUser } from '../../../utils/redux/user/userSlice';
+import { NOTHING_IS_HERE_YET } from '../../../utils/constants/common';
 
 function SavingsGoal() {
   const user = useSelector(selectUser);
@@ -14,7 +16,12 @@ function SavingsGoal() {
       </Box>
 
       <Paper sx={{ p: 2, mt: 1, mb: 3 }}>
-        <Box sx={{ typography: 'h5', fontWeight: 'bold' }}>1 Year Goal</Box>
+        <Stack direction="row" justifyContent="space-between" alignItems="center">
+          <Box sx={{ typography: 'h5', fontWeight: 'bold' }}>1 Year Goal</Box>
+          <Button onClick={() => alert(NOTHING_IS_HERE_YET)}>
+            <BorderColorIcon />
+          </Button>
+        </Stack>
         <Box sx={{
           typography: 'h5', fontWeight: 'bold', my: 2, p: 3, border: '2px solid', borderRadius: 2, borderColor: 'primary.main', color: 'primary.main', textAlign: 'end',
         }}
@@ -30,9 +37,14 @@ function SavingsGoal() {
         </Box>
       </Paper>
 
-      <Box sx={{ typography: 'h6', fontWeight: 'bold' }}>
-        당신의 또 다른 목표는 무엇인가요?
-      </Box>
+      <Stack direction="row" justifyContent="space-between" alignItems="center">
+        <Box sx={{ typography: 'h6', fontWeight: 'bold' }}>
+          당신의 또 다른 목표는 무엇인가요?
+        </Box>
+        <Button onClick={() => alert(NOTHING_IS_HERE_YET)}>
+          <BorderColorIcon />
+        </Button>
+      </Stack>
 
       <Grid container spacing={1} textAlign="center" mt={0}>
         <Grid item xs={6}>
