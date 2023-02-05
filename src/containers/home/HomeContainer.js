@@ -1,4 +1,3 @@
-/* eslint-disable no-unused-vars */
 import {
   Accordion,
   AccordionDetails,
@@ -86,8 +85,11 @@ function HomeConatiner() {
           </>
         )
         : (
-          <Box sx={{ mx: 2, mb: 8 }}>
-            <MonthlyStatement />
+          <Box sx={{ mb: 8 }}>
+            <Box sx={{ mx: 2 }}>
+              <MonthlyStatement />
+            </Box>
+
             <Accordion expanded={expandAccordion} disableGutters elevation={0}>
               <AccordionSummary>
                 <Stack direction="row" justifyContent="space-between" width="100%">
@@ -99,7 +101,8 @@ function HomeConatiner() {
                 <Calender dateHeight={85} />
               </AccordionDetails>
             </Accordion>
-            <Box>
+
+            <Box sx={{ mx: 2 }}>
               <ScheduleStatusCard
                 month={today.format('M월')}
                 numberOfSchedule={schedules.filter((s) => today.isSame(s.date, 'month') && today.isSameOrBefore(s.date, 'day')).length}
