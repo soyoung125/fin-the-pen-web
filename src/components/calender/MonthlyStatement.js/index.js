@@ -1,5 +1,5 @@
 import {
-  Box, Stack, Typography,
+  Stack, Typography,
 } from '@mui/material';
 import moment from 'moment';
 import { useSelector } from 'react-redux';
@@ -8,6 +8,7 @@ import { calculateIncomeExpenditure } from '../../../utils/tools';
 import StatusStack from '../../assetManagement/ScheduleStatusCard/StatusStack';
 import SwitchingHeader from '../../common/SwitchingHeader';
 import RoundedPaper from '../../common/RoundedPaper';
+import RoundedBorderBox from '../../common/RoundedBorderBox';
 
 function MonthlyStatement() {
   const schedules = useSelector(selectSchedules);
@@ -20,10 +21,7 @@ function MonthlyStatement() {
         <Typography variant="caption">자산내역</Typography>
       </SwitchingHeader>
 
-      <Box sx={{
-        marginTop: 3, border: '2px solid', borderRadius: 2, borderColor: 'primary.main',
-      }}
-      >
+      <RoundedBorderBox>
         <Stack direction="row">
           <StatusStack
             title="수입"
@@ -35,7 +33,7 @@ function MonthlyStatement() {
             content={calculateIncomeExpenditure(schedules, moment(date), 'month', '-')}
           />
         </Stack>
-      </Box>
+      </RoundedBorderBox>
     </RoundedPaper>
   );
 }
