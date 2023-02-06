@@ -1,16 +1,14 @@
 import { Box, Stack } from '@mui/material';
+import RoundedBorderBox from '../../common/RoundedBorderBox';
 import StatusStack from './StatusStack';
 
 function ScheduleStatusCard({ month, numberOfSchedule }) {
   return (
     <>
-      <Box sx={{ typography: 'h6', fontWeight: 'bold' }}>
+      <Box sx={{ typography: 'h6', fontWeight: 'bold', mb: 1 }}>
         My 스케줄 현황
       </Box>
-      <Box sx={{
-        marginTop: 1, border: '2px solid', borderRadius: 2, borderColor: 'primary.main',
-      }}
-      >
+      <RoundedBorderBox>
         <Stack direction="row">
           <StatusStack
             title={`${month} 남은 일정`}
@@ -22,7 +20,7 @@ function ScheduleStatusCard({ month, numberOfSchedule }) {
             content="xxxxx원"
           />
         </Stack>
-      </Box>
+      </RoundedBorderBox>
 
     </>
   );
