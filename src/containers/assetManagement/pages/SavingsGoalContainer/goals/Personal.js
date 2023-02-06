@@ -4,6 +4,7 @@ import {
 import BorderColorIcon from '@mui/icons-material/BorderColor';
 import { useState } from 'react';
 import ModalStaticBackdrop from '../../../../../components/layouts/ModalStaticBackdrop';
+import RoundedBorderBox from '../../../../../components/common/RoundedBorderBox';
 
 function Personal() {
   const [personalGoalModalOpen, setPersonalGoalModalOpen] = useState(false);
@@ -34,23 +35,22 @@ function Personal() {
         </Grid>
 
         <Grid item xs={6}>
-          <Stack
-            direction="row"
-            justifyContent="space-between"
-            sx={{
-              borderRadius: 2, border: '2px solid', borderColor: 'primary.main', p: 2, mb: 1,
-            }}
-          >
-            <Box>기간</Box>
-            <Box sx={{ color: 'primary.main' }}>YY/MM/DD</Box>
-          </Stack>
-          <Box sx={{
-            borderRadius: 2, border: '2px solid', borderColor: 'primary.main', p: 2,
-          }}
-          >
+          <RoundedBorderBox>
+            <Stack
+              direction="row"
+              justifyContent="space-between"
+            >
+              <Box>기간</Box>
+              <Box sx={{ color: 'primary.main' }}>YY/MM/DD</Box>
+            </Stack>
+          </RoundedBorderBox>
+
+          <Box my={1} />
+
+          <RoundedBorderBox>
             <Box mb={1}>핀더펜 MONEY</Box>
             <Box sx={{ color: 'primary.main' }}>xxxxxxx원</Box>
-          </Box>
+          </RoundedBorderBox>
         </Grid>
       </Grid>
 
