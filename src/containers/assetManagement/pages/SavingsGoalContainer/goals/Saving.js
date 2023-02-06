@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import {
   Box, Button, Divider, IconButton, Stack, TextField, Typography,
 } from '@mui/material';
@@ -11,6 +12,10 @@ import RoundedBorderBox from '../../../../../components/common/RoundedBorderBox'
 
 function Saving() {
   const [savingGoalModalOpen, setSavingGoalModalOpen] = useState(false);
+  const [saving, setSaving] = useState(0);
+  const handleChange = (event) => {
+    setSaving(event.target.value);
+  };
   return (
     <>
       <RoundedPaper sx={{ p: 2, mt: 1, mb: 3 }}>
@@ -39,6 +44,7 @@ function Saving() {
           </Box>
         </RoundedBorderBox>
       </RoundedPaper>
+
       <ModalStaticBackdrop
         keepMounted
         width="xl"
@@ -50,7 +56,7 @@ function Saving() {
                 <ClearIcon />
               </IconButton>
               <Typography variant="h5" sx={{ fontWeight: 'bold' }}>저축 목표 설정</Typography>
-              <IconButton onClick={() => setSavingGoalModalOpen(false)} color="error">
+              <IconButton onClick={() => setSaving(0)} color="error">
                 <DeleteForeverIcon />
               </IconButton>
             </Stack>
@@ -58,12 +64,20 @@ function Saving() {
               <Divider />
             </Box>
             <Stack spacing={1}>
-              <Typography variant="h5" sx={{ fontWeight: 'bold' }}>1 year Goal</Typography>
-              <TextField fullWidth placeholder="한해동안의 저축 목표액을 입력하세요" />
+              <Typography variant="h5" sx={{ fontWeight: 'bold' }}>1 Year Goal</Typography>
+              <TextField
+                fullWidth
+                placeholder="한해동안의 저축 목표액을 입력하세요"
+                type="number"
+                value={saving}
+                onChange={handleChange}
+                id="saving"
+              />
               <Typography variant="h5" sx={{ fontWeight: 'bold' }}>1 Month Goal</Typography>
               <TextField
                 fullWidth
                 placeholder="한해 저축 목표액을 입력하면 한달 저축 목표금액이 표시됩니다. "
+                value={saving / 12}
               />
             </Stack>
             <Button fullWidth variant="contained">
