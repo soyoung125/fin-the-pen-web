@@ -89,7 +89,7 @@ function Personal() {
 
       <ModalStaticBackdrop
         keepMounted
-        width="xl"
+        width="xs"
         open={personalGoalModalOpen}
         component={(
           <Stack p={2} spacing={1}>

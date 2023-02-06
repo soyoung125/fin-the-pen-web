@@ -47,7 +47,7 @@ function Saving() {
 
       <ModalStaticBackdrop
         keepMounted
-        width="xl"
+        width="xs"
         open={savingGoalModalOpen}
         component={(
           <Stack p={2} spacing={1}>
