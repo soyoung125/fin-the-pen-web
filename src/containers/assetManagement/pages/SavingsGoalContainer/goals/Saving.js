@@ -8,6 +8,7 @@ import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 import ClearIcon from '@mui/icons-material/Clear';
 import RoundedPaper from '../../../../../components/common/RoundedPaper';
 import ModalStaticBackdrop from '../../../../../components/layouts/ModalStaticBackdrop';
+import RoundedBorderBox from '../../../../../components/common/RoundedBorderBox';
 
 function Saving() {
   const [savingGoalModalOpen, setSavingGoalModalOpen] = useState(false);
@@ -24,19 +25,24 @@ function Saving() {
             <BorderColorIcon fontSize="small" />
           </IconButton>
         </Stack>
-        <Box sx={{
-          typography: 'h6', fontWeight: 'bold', my: 1, p: 2, border: '2px solid', borderRadius: 2, borderColor: 'primary.main', color: 'primary.main', textAlign: 'end',
-        }}
-        >
-          xxxxxxx원
-        </Box>
+        <RoundedBorderBox>
+          <Box sx={{
+            typography: 'h6', fontWeight: 'bold', color: 'primary.main', textAlign: 'end',
+          }}
+          >
+            xxxxxxx원
+          </Box>
+        </RoundedBorderBox>
+
         <Box sx={{ typography: 'h6', fontWeight: 'bold' }}>1 Month Goal</Box>
-        <Box sx={{
-          typography: 'h6', fontWeight: 'bold', my: 1, p: 2, border: '2px solid', borderRadius: 2, borderColor: 'primary.main', color: 'primary.main', textAlign: 'end',
-        }}
-        >
-          xxxxxxx원
-        </Box>
+        <RoundedBorderBox>
+          <Box sx={{
+            typography: 'h6', fontWeight: 'bold', color: 'primary.main', textAlign: 'end',
+          }}
+          >
+            xxxxxxx원
+          </Box>
+        </RoundedBorderBox>
       </RoundedPaper>
 
       <ModalStaticBackdrop
