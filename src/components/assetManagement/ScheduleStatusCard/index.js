@@ -9,7 +9,7 @@ function ScheduleStatusCard({ month, numberOfSchedule }) {
         My 스케줄 현황
       </Box>
       <RoundedBorderBox>
-        <Stack direction="row">
+        <Stack direction="row" spacing={2}>
           <StatusStack
             title={`${month} 남은 일정`}
             content={`${numberOfSchedule}개`}
