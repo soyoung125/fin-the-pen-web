@@ -22,7 +22,7 @@ function MonthlyStatement() {
       </SwitchingHeader>
 
       <RoundedBorderBox>
-        <Stack direction="row">
+        <Stack direction="row" spacing={2}>
           <StatusStack
             title="수입"
             content={calculateIncomeExpenditure(schedules, moment(date), 'month', '+')}
