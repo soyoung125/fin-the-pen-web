@@ -18,7 +18,7 @@ function MonthlyStatement() {
     <RoundedPaper>
       <SwitchingHeader>
         <Typography variant="h6" sx={{ fontWeight: 'bold' }}>{`${moment(date).format('M')}월`}</Typography>
-        <Typography variant="caption">자산내역</Typography>
+        <Typography variant="caption">{moment(date).format('YYYY')}</Typography>
       </SwitchingHeader>
 
       <RoundedBorderBox>
