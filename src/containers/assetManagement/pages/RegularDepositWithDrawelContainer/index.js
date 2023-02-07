@@ -2,7 +2,7 @@ import {
   Box, Button, IconButton, Stack,
 } from '@mui/material';
 import BorderColorIcon from '@mui/icons-material/BorderColor';
-import RoundedBorderBox from '../../../components/common/RoundedBorderBox';
+import RoundedBorderBox from '../../../../components/common/RoundedBorderBox';
 
 function RegularDepositWithdrawal() {
   return (

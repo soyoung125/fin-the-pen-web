@@ -1,5 +1,5 @@
 import AssetsByCategory from '../../containers/assetManagement/pages/AssetsByCategory';
-import RegularDepositWithdrawal from '../../containers/assetManagement/pages/RegularDepositWithdrawal';
+import RegularDepositWithdrawal from '../../containers/assetManagement/pages/RegularDepositWithDrawelContainer';
 import SavingsGoal from '../../containers/assetManagement/pages/SavingsGoalContainer';
 import ScheduleManagement from '../../containers/assetManagement/pages/ScheduleManagement';
 import PATH from '../constants/path';
