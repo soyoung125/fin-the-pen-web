@@ -45,15 +45,14 @@ function HomeConatiner() {
   }, []);
 
   const getSchedules = async () => {
-    console.log('전체 데이터를 수신할 위치');
+    console.log('월별 데이터를 수신할 위치');
     const result = await fetchMonthSchedules(user.user_id, moment(date).format('YYYY-MM'));
+    console.log(moment(date).format('YYYY-MM'));
     console.log(result);
     dispatch(setSchedules(result));
   };
 
   useEffect(() => {
-    console.log(moment(date).format('YYYY-MM'));
-
     // 게스트 모드가 아닌 경우에만 서버에 데이터를 요청
     if (user && !guestMode) {
       getSchedules();
