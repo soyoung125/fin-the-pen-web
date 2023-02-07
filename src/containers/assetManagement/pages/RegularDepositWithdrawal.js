@@ -2,6 +2,7 @@ import {
   Box, Button, IconButton, Stack,
 } from '@mui/material';
 import BorderColorIcon from '@mui/icons-material/BorderColor';
+import RoundedBorderBox from '../../../components/common/RoundedBorderBox';
 
 function RegularDepositWithdrawal() {
   return (
@@ -27,7 +28,20 @@ function RegularDepositWithdrawal() {
         </Stack>
       </Stack>
 
-      <Stack direction="row" justifyContent="space-between" alignItems="center">
+      <RoundedBorderBox>
+        <Stack direction="row" justifyContent="space-between">
+          <Box>
+            <Box sx={{ mb: 1 }}>매달 1일</Box>
+            <Box>OO은행 월급</Box>
+          </Box>
+          <Box sx={{ textAlign: 'end' }}>
+            <Box sx={{ mb: 1 }}>월급날</Box>
+            <Box sx={{ color: 'primary.main' }}>xxxxxxx원</Box>
+          </Box>
+        </Stack>
+      </RoundedBorderBox>
+
+      <Stack direction="row" justifyContent="space-between" alignItems="center" mt={2}>
         <Stack direction="row">
           <Button
             variant="contained"
@@ -47,6 +61,19 @@ function RegularDepositWithdrawal() {
           </IconButton>
         </Stack>
       </Stack>
+
+      <RoundedBorderBox>
+        <Stack direction="row" justifyContent="space-between">
+          <Box>
+            <Box sx={{ mb: 1 }}>매달 1일</Box>
+            <Box>넷플릭스</Box>
+          </Box>
+          <Box sx={{ textAlign: 'end' }}>
+            <Box sx={{ mb: 1 }}>넷플릭스 결제</Box>
+            <Box sx={{ color: 'primary.main' }}>xxxxxxx원</Box>
+          </Box>
+        </Stack>
+      </RoundedBorderBox>
     </>
   );
 }
