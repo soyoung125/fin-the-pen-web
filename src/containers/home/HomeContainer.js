@@ -41,7 +41,7 @@ function HomeConatiner() {
 
   useEffect(() => {
     dispatch(setHeaderOpenTrue('home'));
-    dispatch(changeViewMode('asset'));
+    dispatch(changeViewMode('schedule'));
   }, []);
 
   const getSchedules = async () => {
