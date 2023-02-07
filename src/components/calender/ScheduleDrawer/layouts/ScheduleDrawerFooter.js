@@ -51,10 +51,15 @@ function ScheduleDrawerFooter({ mode, setBottomDrawerOpen }) {
       alert(NEED_TITLE);
       return;
     }
-    if (mode === SCHEDULE_DRAWER_MODE.생성) {
-      addNewSchedule();
-    } else {
-      modifySelectedSchedule();
+    switch (mode) {
+      case 'create':
+        addNewSchedule();
+        break;
+      case 'modify':
+        modifySelectedSchedule();
+        break;
+      default:
+        alert('잘못 된 요청입니다.');
     }
   };
   // guest mode end
