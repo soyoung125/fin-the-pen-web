@@ -38,6 +38,9 @@ function NameInput({ setSchedule }) {
         value={schedule.event_name}
         onChange={changeSchedule}
         size="small"
+        inputProps={{
+          style: { textAlign: 'right' },
+        }}
       />
     </FormControl>
   );
