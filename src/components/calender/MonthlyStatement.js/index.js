@@ -25,14 +25,12 @@ function MonthlyStatement() {
         <Stack direction="row" spacing={2}>
           <StatusStack
             title="수입"
-            content={calculateIncomeExpenditure(schedules, moment(date), 'month', '+')}
-            type="+"
+            content={`+${calculateIncomeExpenditure(schedules, moment(date), 'month', '+')}`}
           />
 
           <StatusStack
             title="지출"
-            content={calculateIncomeExpenditure(schedules, moment(date), 'month', '-')}
-            type="-"
+            content={`-${calculateIncomeExpenditure(schedules, moment(date), 'month', '-')}`}
           />
         </Stack>
       </RoundedBorderBox>

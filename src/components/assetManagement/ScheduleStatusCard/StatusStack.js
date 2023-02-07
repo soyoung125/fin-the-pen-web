@@ -1,6 +1,6 @@
 import { Box, Stack } from '@mui/material';
 
-function StatusStack({ title, content, type }) {
+function StatusStack({ title, content }) {
   return (
     <Stack width="50%" sx={{ textAlign: 'center' }}>
       <Box>{title}</Box>
@@ -8,7 +8,7 @@ function StatusStack({ title, content, type }) {
         typography: 'h4', fontWeight: 'bold', color: 'primary.main', marginTop: 1,
       }}
       >
-        {type + content}
+        {content}
       </Box>
     </Stack>
   );
