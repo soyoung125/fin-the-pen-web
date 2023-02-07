@@ -118,6 +118,9 @@ function Personal() {
                   value={personalGoal.name}
                   onChange={changePersonalGoal}
                   size="small"
+                  inputProps={{
+                    style: { textAlign: 'right' },
+                  }}
                 />
               </FormControl>
 
@@ -129,6 +132,9 @@ function Personal() {
                   value={personalGoal.money}
                   onChange={changePersonalGoal}
                   size="small"
+                  inputProps={{
+                    style: { textAlign: 'right' },
+                  }}
                 />
               </FormControl>
 
@@ -137,8 +143,17 @@ function Personal() {
                 id="deadline"
                 type="date"
                 fullWidth
+                /**
+                 * 다음 링크를 참고하면 InputProps / inputProps 두 가지의 속성을 지원하고 있는데
+                 * 대소문자를 고려했을 때 중복된 속성명임에도 불구하고 다른 기능을 지원하는 듯 함.
+                 * https://mui.com/material-ui/api/text-field/
+                 */
                 InputProps={{
                   startAdornment: <InputAdornment position="start">기한</InputAdornment>,
+                }}
+                // eslint-disable-next-line react/jsx-no-duplicate-props
+                inputProps={{
+                  style: { textAlign: 'right' },
                 }}
                 value={personalGoal.deadline}
                 onChange={changePersonalGoal}
@@ -181,6 +196,9 @@ function Personal() {
                   startAdornment={<InputAdornment position="start">필요 적금액</InputAdornment>}
                   value={divisionByType(personalGoal.type, personalGoal.money)}
                   size="small"
+                  inputProps={{
+                    style: { textAlign: 'right' },
+                  }}
                 />
               </FormControl>
 
