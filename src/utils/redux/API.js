@@ -3,6 +3,10 @@
 /* eslint-disable import/prefer-default-export */
 import axios from 'axios';
 
+/**
+ * 반드시 서버로 요청할 때 JSON 형식이어야 함!
+ */
+
 export const fetchSignUp = async (user) => {
   try {
     const response = await axios.post('/fin-the-pen-web/sign-up', user);
@@ -31,9 +35,9 @@ export const fetchCreateSchedule = async (schedule) => {
   }
 };
 
-export const fetchSchedules = async (user_id) => {
+export const fetchMonthSchedules = async (user_id, date) => {
   try {
-    const response = await axios.post('/getAllSchedules', { user_id });
+    const response = await axios.post('/getMonthSchedules', { user_id, date });
     // alert(JSON.stringify(response));
     return response.data;
   } catch (err) {

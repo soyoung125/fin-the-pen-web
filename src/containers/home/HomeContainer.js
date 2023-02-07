@@ -13,7 +13,7 @@ import MonthlyStatement from '../../components/calender/MonthlyStatement.js';
 import ScheduleList from '../../components/calender/scheduleList/ScheduleList';
 import ScheduleViewMode from '../../components/calender/ScheduleViewMode';
 import ALERTS from '../../utils/constants/alerts';
-import { fetchSchedules } from '../../utils/redux/API';
+import { fetchMonthSchedules } from '../../utils/redux/API';
 import { selectGuestMode, setHeaderOpenTrue } from '../../utils/redux/common/commonSlice';
 import {
   changeViewMode, selectDate, selectSchedules, selectViewMode, setSchedules,
@@ -46,7 +46,7 @@ function HomeConatiner() {
 
   const getSchedules = async () => {
     console.log('전체 데이터를 수신할 위치');
-    const result = await fetchSchedules(user.user_id);
+    const result = await fetchMonthSchedules(user.user_id, moment(date).format('YYYY-MM'));
     console.log(result);
     dispatch(setSchedules(result));
   };
