@@ -1,6 +1,6 @@
 /* eslint-disable no-underscore-dangle */
 /* eslint-disable react/jsx-props-no-spreading */
-import { Box, Stack, TextField } from '@mui/material';
+import { Box, TextField } from '@mui/material';
 import { StaticDatePicker } from '@mui/x-date-pickers';
 import { AdapterMoment } from '@mui/x-date-pickers/AdapterMoment';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
@@ -45,17 +45,17 @@ function Calender({ dateHeight }) {
       if (nonFixedWithdrwal.length > 0) {
         const categoryForMarker = makeMarkerData(daySchedules);
         return (
-          <Box sx={{ width: DATE_SIZE, marginX: 'auto' }} key={DayComponentProps.key}>
-            <Stack>
+          <Box sx={{ width: 'calc(100vw / 7)' }} key={DayComponentProps.key}>
+            <Box sx={{ display: 'flex', justifyContent: 'center' }}>
               <MarkedPickersDay
                 color={fixedWithdrawal[0].category.color}
                 DayComponentProps={DayComponentProps}
               />
-              <MarkerStack
-                nonFixedWithdrwal={nonFixedWithdrwal}
-                categoryForMarker={categoryForMarker}
-              />
-            </Stack>
+            </Box>
+            <MarkerStack
+              nonFixedWithdrwal={nonFixedWithdrwal}
+              categoryForMarker={categoryForMarker}
+            />
           </Box>
         );
       }
@@ -71,14 +71,14 @@ function Calender({ dateHeight }) {
     if (nonFixedWithdrwal.length > 0) {
       const categoryForMarker = makeMarkerData(daySchedules);
       return (
-        <Box sx={{ width: DATE_SIZE, marginX: 'auto' }} key={DayComponentProps.key}>
-          <Stack>
+        <Box sx={{ width: 'calc(100vw / 7)' }} key={DayComponentProps.key}>
+          <Box sx={{ display: 'flex', justifyContent: 'center' }}>
             <PickersDay {...DayComponentProps} />
-            <MarkerStack
-              nonFixedWithdrwal={nonFixedWithdrwal}
-              categoryForMarker={categoryForMarker}
-            />
-          </Stack>
+          </Box>
+          <MarkerStack
+            nonFixedWithdrwal={nonFixedWithdrwal}
+            categoryForMarker={categoryForMarker}
+          />
         </Box>
       );
     }
