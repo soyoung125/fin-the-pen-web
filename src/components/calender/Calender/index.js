@@ -20,6 +20,7 @@ import CalenderBox from './boxes/CalenderBox';
 import IncomeExpenditureBox from './boxes/IncomeExpenditureBox';
 import { calculateIncomeExpenditure } from '../../../utils/tools';
 import { makeMarkerData } from './utils/calender';
+import WeeklyStatment from '../WeeklyStatment';
 
 function Calender({ dateHeight }) {
   const dispatch = useDispatch();
@@ -114,29 +115,31 @@ function Calender({ dateHeight }) {
             ? (
           // 이번주의 주별 수입/지출 표시
               <Box sx={{
-                width: `calc(100vw / 7 * (${today.diff(day, 'days')} + 1))`, background: grey[200], overflow: 'visible', borderRadius: 3, display: 'flex', justifyContent: 'flex-end', paddingX: 2, height: '20px',
+                width: `calc(100vw / 7 * (${today.diff(day, 'days')} + 1))`,
               }}
               >
-                <Box sx={{ fontSize: 'small', paddingRight: 1, color: 'primary.main' }}>
-                  {schedules.filter((s) => day.isSameOrBefore(s.date) && day.isSame(s.date, 'week')).reduce((sum, current) => (current.type === '-' ? sum - parseInt(current.expected_spending, 10) : sum), 0)}
-                </Box>
-                <Box sx={{ fontSize: 'small', color: grey[500] }}>
-                  {schedules.filter((s) => day.isSameOrBefore(s.date) && day.isSame(s.date, 'week')).reduce((sum, current) => (current.type === '+' ? sum + parseInt(current.expected_spending, 10) : sum), 0)}
-                </Box>
+                <WeeklyStatment
+                  expenditure={schedules.filter((s) => day.isSameOrBefore(s.date) && day.isSame(s.date, 'week')).reduce((sum, current) => (current.type === '-' ? sum - parseInt(current.expected_spending, 10) : sum), 0)}
+                  income={schedules.filter((s) => day.isSameOrBefore(s.date) && day.isSame(s.date, 'week')).reduce((sum, current) => (current.type === '+' ? sum + parseInt(current.expected_spending, 10) : sum), 0)}
+                />
               </Box>
             )
             : (
           // 지난주들의 주별 수입/지출 표시
               <Box sx={{
-                width: '100vw', background: grey[200], overflow: 'visible', borderRadius: 3, display: 'flex', justifyContent: 'flex-end', paddingX: 2, height: '20px',
+                width: '100vw',
               }}
               >
-                <Box sx={{ fontSize: 'small', paddingRight: 1, color: 'primary.main' }}>
+                {/* <Box sx={{ fontSize: 'small', paddingRight: 1, color: 'primary.main' }}>
                   {calculateIncomeExpenditure(schedules, day, 'week', '-')}
                 </Box>
                 <Box sx={{ fontSize: 'small', color: grey[500] }}>
                   {calculateIncomeExpenditure(schedules, day, 'week', '+')}
-                </Box>
+                </Box> */}
+                <WeeklyStatment
+                  expenditure={calculateIncomeExpenditure(schedules, day, 'week', '-')}
+                  income={calculateIncomeExpenditure(schedules, day, 'week', '+')}
+                />
               </Box>
             )}
         </IncomeExpenditureBox>
