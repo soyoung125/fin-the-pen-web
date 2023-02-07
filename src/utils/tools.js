@@ -40,7 +40,7 @@ export const calculateIncomeExpenditure = (schedules, baseDate, unit, type) => {
           : sum
       ), result);
   }
-  return result.toLocaleString('ko-KR');
+  return Math.abs(result).toLocaleString('ko-KR');
 };
 
 /**

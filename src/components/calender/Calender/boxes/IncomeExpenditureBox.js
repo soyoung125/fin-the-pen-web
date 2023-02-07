@@ -16,7 +16,7 @@ function IncomeExpenditureBox({
           display="flex"
           justifyContent="flex-end"
         >
-          {expenditure !== '0' && expenditure}
+          {expenditure !== '0' && `-${expenditure}`}
         </Box>
         <Box
           sx={{
@@ -25,7 +25,7 @@ function IncomeExpenditureBox({
           display="flex"
           justifyContent="flex-end"
         >
-          {income !== '0' && income}
+          {income !== '0' && `+${income}`}
         </Box>
       </Stack>
       {children}
