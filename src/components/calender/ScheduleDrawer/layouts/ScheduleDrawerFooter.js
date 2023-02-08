@@ -68,16 +68,6 @@ function ScheduleDrawerFooter({ mode, setBottomDrawerOpen }) {
   // guest mode end
 
   // fetch mode start
-  // const createSchedule = async () => {
-  //   const scheduleWithUuid = {
-  //     ...schedule,
-  //     id: uuidv4(),
-  //     user_id: user.user_id,
-  //   };
-  //   alert(`일정을 저장합니다. 저장하려는 일정 데이터는 다음과 같습니다. ${JSON.stringify(scheduleWithUuid)}`);
-  //   const result = await fetchCreateSchedule(scheduleWithUuid);
-  //   console.log(result);
-  // };
 
   const createSchedule = async () => {
     const scheduleWithUuid = {
