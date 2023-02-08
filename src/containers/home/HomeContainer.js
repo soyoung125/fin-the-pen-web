@@ -86,40 +86,38 @@ function HomeConatiner() {
           {ALERTS[random].message}
         </Alert>
       </Snackbar>
-      {viewMode === 'schedule'
-        ? (
-          <>
-            <Calender dateHeight={50} />
-            <Divider />
-            <ScheduleList />
-          </>
-        )
-        : (
-          <Box sx={{ mb: 8 }}>
-            <Box sx={{ mx: 2 }}>
-              <MonthlyStatement />
-            </Box>
-
-            <Accordion expanded={expandAccordion} disableGutters elevation={0}>
-              <AccordionSummary>
-                <Stack direction="row" justifyContent="space-between" width="100%">
-                  <Typography sx={{ display: 'flex', alignItems: 'center', fontWeight: 'bold' }}>전체 내역</Typography>
-                  <Button onClick={handleExpand}>{expandAccordion ? '달력 닫기' : '달력 보기'}</Button>
-                </Stack>
-              </AccordionSummary>
-              <AccordionDetails sx={{ p: 0 }}>
-                <Calender dateHeight={85} />
-              </AccordionDetails>
-            </Accordion>
-
-            <Box sx={{ mx: 2 }}>
-              <ScheduleStatusCard
-                month={today.format('M월')}
-                numberOfSchedule={schedules.filter((s) => today.isSame(s.date, 'month') && today.isSameOrBefore(s.date, 'day')).length}
-              />
-            </Box>
+      {viewMode === 'schedule' ? (
+        <>
+          <Calender dateHeight={50} />
+          <Divider />
+          <ScheduleList />
+        </>
+      ) : (
+        <Box sx={{ mb: 8 }}>
+          <Box sx={{ mx: 2 }}>
+            <MonthlyStatement />
           </Box>
-        )}
+
+          <Accordion expanded={expandAccordion} disableGutters elevation={0}>
+            <AccordionSummary>
+              <Stack direction="row" justifyContent="space-between" width="100%">
+                <Typography sx={{ display: 'flex', alignItems: 'center', fontWeight: 'bold' }}>전체 내역</Typography>
+                <Button onClick={handleExpand}>{expandAccordion ? '달력 닫기' : '달력 보기'}</Button>
+              </Stack>
+            </AccordionSummary>
+            <AccordionDetails sx={{ p: 0 }}>
+              <Calender dateHeight={85} />
+            </AccordionDetails>
+          </Accordion>
+
+          <Box sx={{ mx: 2 }}>
+            <ScheduleStatusCard
+              month={today.format('M월')}
+              numberOfSchedule={schedules.filter((s) => today.isSame(s.date, 'month') && today.isSameOrBefore(s.date, 'day')).length}
+            />
+          </Box>
+        </Box>
+      )}
       <ScheduleViewMode />
     </Box>
   );
