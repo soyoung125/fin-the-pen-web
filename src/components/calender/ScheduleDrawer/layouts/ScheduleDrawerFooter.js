@@ -1,3 +1,4 @@
+/* eslint-disable import/named */
 /* eslint-disable no-unused-vars */
 import { Button, Stack } from '@mui/material';
 import moment from 'moment';
@@ -7,9 +8,10 @@ import { NEED_SIGN_IN, NOT_AVAILABLE } from '../../../../utils/constants/common'
 import {
   NEED_TITLE, REPEAT_CYCLE, SCHEDULE_DRAWER, SCHEDULE_DRAWER_MODE,
 } from '../../../../utils/constants/schedule';
-import { fetchCreateSchedule } from '../../../../utils/redux/API';
 import { selectGuestMode } from '../../../../utils/redux/common/commonSlice';
-import { addSchedule, modifySchedule, selectSchedule } from '../../../../utils/redux/schedule/scheduleSlice';
+import {
+  addSchedule, createNewSchedule, getMonthSchedules, modifySchedule, selectDate, selectSchedule,
+} from '../../../../utils/redux/schedule/scheduleSlice';
 import { selectUser } from '../../../../utils/redux/user/userSlice';
 import { executeFunctionByGuestMode } from '../../../../utils/tools';
 import DeprecatedButton from './DeprecatedButton';
@@ -19,6 +21,7 @@ import DeprecatedButton from './DeprecatedButton';
  */
 
 function ScheduleDrawerFooter({ mode, setBottomDrawerOpen }) {
+  const date = useSelector(selectDate);
   const user = useSelector(selectUser);
   const guestMode = useSelector(selectGuestMode);
   const schedule = useSelector(selectSchedule);
@@ -65,16 +68,32 @@ function ScheduleDrawerFooter({ mode, setBottomDrawerOpen }) {
   // guest mode end
 
   // fetch mode start
+  // const createSchedule = async () => {
+  //   const scheduleWithUuid = {
+  //     ...schedule,
+  //     id: uuidv4(),
+  //     user_id: user.user_id,
+  //   };
+  //   alert(`일정을 저장합니다. 저장하려는 일정 데이터는 다음과 같습니다. ${JSON.stringify(scheduleWithUuid)}`);
+  //   const result = await fetchCreateSchedule(scheduleWithUuid);
+  //   console.log(result);
+  // };
+
   const createSchedule = async () => {
+    // 반복 일정 추가 아직 구현 안함.
     const scheduleWithUuid = {
       ...schedule,
       id: uuidv4(),
       user_id: user.user_id,
     };
-    alert(`일정을 저장합니다. 저장하려는 일정 데이터는 다음과 같습니다. ${JSON.stringify(scheduleWithUuid)}`);
-    const result = await fetchCreateSchedule(scheduleWithUuid);
-    console.log(result);
+    await dispatch(createNewSchedule(scheduleWithUuid));
+    dispatch(getMonthSchedules({ // 이 부분이 createNewSchedule 내부에 통합될 수 있을까?
+      user_id: user.user_id,
+      date: moment(date).format('YYYY-MM'),
+    }));
+    setBottomDrawerOpen(false);
   };
+
   const fetchHandler = () => {
     alert(`일반 모드! ${mode}`);
     switch (mode) {

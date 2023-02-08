@@ -2,7 +2,7 @@
 /* eslint-disable no-param-reassign */
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import moment from 'moment';
-import { fetchMonthSchedules } from '../API';
+import { fetchCreateSchedule, fetchMonthSchedules } from '../API';
 
 const initialState = {
   // 메인
@@ -25,6 +25,14 @@ export const getMonthSchedules = createAsyncThunk(
   'schedule/getMonthSchedules',
   async (schedule) => {
     const response = await fetchMonthSchedules(schedule);
+    return response;
+  },
+);
+
+export const createNewSchedule = createAsyncThunk(
+  'schedule/createNewSchedule',
+  async (scheduleWithUuid) => {
+    const response = await fetchCreateSchedule(scheduleWithUuid);
     return response;
   },
 );
