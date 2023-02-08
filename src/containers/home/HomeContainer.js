@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import {
   Accordion,
   AccordionDetails,
@@ -16,7 +17,7 @@ import ALERTS from '../../utils/constants/alerts';
 import { fetchMonthSchedules } from '../../utils/redux/API';
 import { selectGuestMode, setHeaderOpenTrue } from '../../utils/redux/common/commonSlice';
 import {
-  changeViewMode, selectDate, selectSchedules, selectViewMode, setSchedules,
+  changeViewMode, getMonthSchedules, selectDate, selectSchedules, selectViewMode, setSchedules,
 } from '../../utils/redux/schedule/scheduleSlice';
 import { selectUser } from '../../utils/redux/user/userSlice';
 
@@ -44,12 +45,22 @@ function HomeConatiner() {
     dispatch(changeViewMode('schedule'));
   }, []);
 
-  const getSchedules = async () => {
-    console.log('월별 데이터를 수신할 위치');
-    const result = await fetchMonthSchedules(user.user_id, moment(date).format('YYYY-MM'));
-    console.log(moment(date).format('YYYY-MM'));
-    console.log(result);
-    dispatch(setSchedules(result));
+  // const getSchedules = async () => {
+  //   console.log('월별 데이터를 수신할 위치');
+  //   const result = await fetchMonthSchedules({
+  //     user_id: user.user_id,
+  //     date: moment(date).format('YYYY-MM'),
+  //   });
+  //   console.log(moment(date).format('YYYY-MM'));
+  //   console.log(result);
+  //   dispatch(setSchedules(result));
+  // };
+
+  const getSchedules = () => {
+    dispatch(getMonthSchedules({
+      user_id: user.user_id,
+      date: moment(date).format('YYYY-MM'),
+    }));
   };
 
   useEffect(() => {

@@ -1,11 +1,13 @@
 /* eslint-disable max-len */
 /* eslint-disable no-param-reassign */
-import { createSlice } from '@reduxjs/toolkit';
+import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import moment from 'moment';
+import { fetchMonthSchedules } from '../API';
 
 const initialState = {
   // 메인
   date: moment(new Date()),
+  status: 'idle',
   viewMode: 'asset',
   // 전체 일정 데이터
   schedules: [],
@@ -18,6 +20,14 @@ const initialState = {
     end: '',
   },
 };
+
+export const getMonthSchedules = createAsyncThunk(
+  'schedule/getMonthSchedules',
+  async (schedule) => {
+    const response = await fetchMonthSchedules(schedule);
+    return response;
+  },
+);
 
 export const scheduleSlice = createSlice({
   name: 'schedule',
@@ -85,6 +95,18 @@ export const scheduleSlice = createSlice({
     changeViewMode: (state, action) => {
       state.viewMode = action.payload;
     },
+  },
+  extraReducers: (builder) => {
+    builder
+      .addCase(getMonthSchedules.pending, (state) => {
+      // mockLogin가 진행중일 때
+        state.status = 'loading';
+      })
+      .addCase(getMonthSchedules.fulfilled, (state, action) => {
+      // mockLogin가 끝나면
+        state.status = 'idle';
+        state.schedules = action.payload;
+      });
   },
 });
 export const {
