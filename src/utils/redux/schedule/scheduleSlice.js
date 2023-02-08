@@ -129,5 +129,6 @@ export const selectFiltered = (state) => state.schedule.filtered;
 export const selectFilteredDate = (state) => state.schedule.filtered_date;
 export const selectViewMode = (state) => state.schedule.viewMode;
 export const selectSchedule = (state) => state.schedule.schedule;
+export const selectStatus = (state) => state.schedule.status;
 
 export default scheduleSlice.reducer;
