@@ -35,9 +35,9 @@ export const fetchCreateSchedule = async (schedule) => {
   }
 };
 
-export const fetchMonthSchedules = async (user_id, date) => {
+export const fetchMonthSchedules = async (schedule) => {
   try {
-    const response = await axios.post('/getMonthSchedules', { user_id, date });
+    const response = await axios.post('/getMonthSchedules', schedule);
     // alert(JSON.stringify(response));
     return response.data;
   } catch (err) {
