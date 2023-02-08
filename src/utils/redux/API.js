@@ -28,7 +28,7 @@ export const fetchLogin = async (sign) => {
 export const fetchCreateSchedule = async (schedule) => {
   try {
     const response = await axios.post('/createSchedule', schedule);
-    alert(JSON.stringify(response));
+    // alert(JSON.stringify(response));
     return response.data;
   } catch (err) {
     alert(err);

@@ -80,12 +80,25 @@ function ScheduleDrawerFooter({ mode, setBottomDrawerOpen }) {
   // };
 
   const createSchedule = async () => {
-    // 반복 일정 추가 아직 구현 안함.
     const scheduleWithUuid = {
       ...schedule,
       id: uuidv4(),
       user_id: user.user_id,
     };
+    // 반복 일정 추가
+    if ((schedule.repeating_cycle !== '없음') && (schedule.repeat_deadline !== '없음')) {
+      let repeatDate = moment(schedule.date).add(1, REPEAT_CYCLE[schedule.repeating_cycle]);
+      while (moment(schedule.repeat_endDate).isSameOrAfter(repeatDate)) {
+        // eslint-disable-next-line no-await-in-loop
+        await dispatch(createNewSchedule({
+          ...scheduleWithUuid,
+          id: uuidv4(),
+          date: repeatDate.format('YYYY-MM-DD'),
+        }));
+        repeatDate = moment(repeatDate).add(1, REPEAT_CYCLE[schedule.repeating_cycle]);
+      }
+    }
+    // 원래 일정 추가
     await dispatch(createNewSchedule(scheduleWithUuid));
     dispatch(getMonthSchedules({ // 이 부분이 createNewSchedule 내부에 통합될 수 있을까?
       user_id: user.user_id,
