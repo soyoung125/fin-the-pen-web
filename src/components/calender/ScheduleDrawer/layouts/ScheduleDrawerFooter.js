@@ -10,7 +10,8 @@ import {
 } from '../../../../utils/constants/schedule';
 import { selectGuestMode } from '../../../../utils/redux/common/commonSlice';
 import {
-  addSchedule, createNewSchedule, getMonthSchedules, modifySchedule, selectDate, selectSchedule,
+  createNewSchedule, getMonthSchedules, mockCreateNewSchedule,
+  modifySchedule, selectDate, selectSchedule,
 } from '../../../../utils/redux/schedule/scheduleSlice';
 import { selectUser } from '../../../../utils/redux/user/userSlice';
 import { executeFunctionByGuestMode } from '../../../../utils/tools';
@@ -34,12 +35,12 @@ function ScheduleDrawerFooter({ mode, setBottomDrawerOpen }) {
     if ((schedule.repeating_cycle !== '없음') && (schedule.repeat_deadline !== '없음')) {
       let repeatDate = moment(schedule.date).add(1, REPEAT_CYCLE[schedule.repeating_cycle]);
       while (moment(schedule.repeat_endDate).isSameOrAfter(repeatDate)) {
-        dispatch(addSchedule({ ...schedule, id: uuidv4(), date: repeatDate.format('YYYY-MM-DD') })); // mock 함수로 이전 예정
+        dispatch(mockCreateNewSchedule({ ...schedule, id: uuidv4(), date: repeatDate.format('YYYY-MM-DD') })); // mock 함수로 이전 예정
         repeatDate = moment(repeatDate).add(1, REPEAT_CYCLE[schedule.repeating_cycle]);
       }
     }
     // 원래 일정 추가
-    dispatch(addSchedule({ ...schedule, id: uuidv4() })); // mock 함수로 이전 예정
+    dispatch(mockCreateNewSchedule({ ...schedule, id: uuidv4() })); // mock 함수로 이전 예정
     setBottomDrawerOpen(false);
   };
 

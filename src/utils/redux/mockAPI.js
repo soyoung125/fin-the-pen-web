@@ -30,3 +30,9 @@ export function fetchMockLogin() {
     },
   }), 1000));
 }
+
+export function fetchMockCreateSchedule(scheduleWithUuid) {
+  return new Promise((resolve) => setTimeout(() => resolve({
+    data: scheduleWithUuid,
+  }), 1000));
+}

@@ -3,6 +3,7 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import moment from 'moment';
 import { fetchCreateSchedule, fetchMonthSchedules } from '../API';
+import { fetchMockCreateSchedule } from '../mockAPI';
 
 const initialState = {
   // 메인
@@ -37,11 +38,19 @@ export const createNewSchedule = createAsyncThunk(
   },
 );
 
+export const mockCreateNewSchedule = createAsyncThunk(
+  'schedule/mockCreateNewSchedule',
+  async (scheduleWithUuid) => {
+    const response = await fetchMockCreateSchedule(scheduleWithUuid);
+    return response.data;
+  },
+);
+
 export const scheduleSlice = createSlice({
   name: 'schedule',
   initialState,
   reducers: {
-    addSchedule: (state, action) => {
+    addSchedule: (state, action) => { // deprecated
       state.schedules.push(action.payload);
     },
     deleteSchedule: (state, action) => {
@@ -107,13 +116,17 @@ export const scheduleSlice = createSlice({
   extraReducers: (builder) => {
     builder
       .addCase(getMonthSchedules.pending, (state) => {
-      // mockLogin가 진행중일 때
+      // getMonthSchedules가 진행중일 때
         state.status = 'loading';
       })
       .addCase(getMonthSchedules.fulfilled, (state, action) => {
-      // mockLogin가 끝나면
+      // getMonthSchedules가 끝나면
         state.status = 'idle';
         state.schedules = action.payload;
+      })
+      .addCase(mockCreateNewSchedule.fulfilled, (state, action) => {
+        // mockCreateNewSchedule가 끝나면
+        state.schedules.push(action.payload);
       });
   },
 });
