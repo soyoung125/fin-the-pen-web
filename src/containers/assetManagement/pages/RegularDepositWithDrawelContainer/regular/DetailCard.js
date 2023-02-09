@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import { Box, Stack } from '@mui/material';
 import { useState } from 'react';
 import RoundedBorderBox from '../../../../../components/common/RoundedBorderBox';
@@ -6,9 +7,8 @@ function DetailCard() {
   const [positionX, setPositionX] = useState(0);
   return (
     <Box
-      onMouseDown={(e) => setPositionX(e.clientX)}
-      onMouseMoveCapture={(e) => console.log(positionX - e.clientX)}
-      onMouseOver={(e) => console.log(positionX - e.clientX)}
+      onTouchStart={(e) => setPositionX(e.changedTouches[0].clientX)}
+      onTouchMove={(e) => console.log(e.changedTouches[0].clientX - positionX)}
     >
       <RoundedBorderBox>
         <Stack direction="row" justifyContent="space-between">
