@@ -1,5 +1,6 @@
+/* eslint-disable no-unused-vars */
 import {
-  BottomNavigation, BottomNavigationAction, Drawer, Paper,
+  BottomNavigation, BottomNavigationAction, Drawer, Paper, Stack, Typography,
 } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
@@ -14,6 +15,7 @@ import PATH from '../../utils/constants/path';
 import ScheduleDrawer from '../calender/ScheduleDrawer';
 import { INIT_SCHEDULE, SCHEDULE_DRAWER_MODE } from '../../utils/constants/schedule';
 import { selectDate } from '../../utils/redux/schedule/scheduleSlice';
+import CenterBox from './CenterBox';
 
 function BottomBar({ value, setValue }) {
   const date = useSelector(selectDate);
@@ -45,20 +47,38 @@ function BottomBar({ value, setValue }) {
           <BottomNavigationAction label="설정" icon={<SettingsIcon />} onClick={() => navigate(PATH.settings)} />
         </BottomNavigation>
       </Paper>
-      <Drawer
-        open={bottomDrawerOpen}
-        anchor="bottom"
-        onClose={() => setBottomDrawerOpen(false)}
-      >
-        {/* 이 부분을 범용적으로 사용할 수 있게 만드는 건 어떨까? */}
-        <ScheduleDrawer
-          setBottomDrawerOpen={setBottomDrawerOpen}
-          data={{
-            ...INIT_SCHEDULE(moment(date).format('YYYY-MM-DD')),
+      <CenterBox>
+        <Drawer
+          open={bottomDrawerOpen}
+          anchor="bottom"
+          onClose={() => setBottomDrawerOpen(false)}
+          PaperProps={{
+            sx: {
+              maxWidth: '400px',
+              // alignItems: 'center',
+              // justifyContent: 'center',
+            },
           }}
-          mode={SCHEDULE_DRAWER_MODE.생성}
-        />
-      </Drawer>
+          sx={{
+            // flexShrink: 0,
+            '& .MuiDrawer-paper': {
+              // alignItems: 'center',
+              // justifyContent: 'center',
+            },
+          }}
+        >
+          {/* 이 부분을 범용적으로 사용할 수 있게 만드는 건 어떨까? */}
+          <ScheduleDrawer
+            setBottomDrawerOpen={setBottomDrawerOpen}
+            data={{
+              ...INIT_SCHEDULE(moment(date).format('YYYY-MM-DD')),
+            }}
+            mode={SCHEDULE_DRAWER_MODE.생성}
+          />
+        </Drawer>
+
+      </CenterBox>
+
     </>
   );
 }
