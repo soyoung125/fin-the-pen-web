@@ -1,19 +1,15 @@
-import { Grid } from '@mui/material';
+import { Box } from '@mui/material';
 
 function CenterBox({ children }) {
   return (
-    <Grid
-      container
-      spacing={0}
-      direction="column"
-      alignItems="center"
+    <Box
+      display="flex"
       justifyContent="center"
-      style={{ minHeight: '100vh' }}
+      alignItems="center"
+      minHeight="100vh"
     >
-      <Grid item>
-        {children}
-      </Grid>
-    </Grid>
+      {children}
+    </Box>
   );
 }
 export default CenterBox;
