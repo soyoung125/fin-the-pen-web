@@ -15,6 +15,7 @@ import {
 } from '../../utils/constants/common';
 import PATH from '../../utils/constants/path';
 import CenterBox from '../../components/layouts/CenterBox';
+import LogoCircle from '../../components/common/LogoCircle';
 
 function SignUpContainer() {
   const dispatch = useDispatch();
@@ -60,9 +61,7 @@ function SignUpContainer() {
   };
   return (
     <CenterBox>
-      <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
-        <LockOutlinedIcon />
-      </Avatar>
+      <LogoCircle />
       <Typography component="h1" variant="h5">
         계정 가입
       </Typography>

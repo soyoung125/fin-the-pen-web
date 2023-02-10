@@ -1,4 +1,3 @@
-import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
 import Box from '@mui/material/Box';
@@ -14,8 +13,8 @@ import {
 import PATH from '../../utils/constants/path';
 import { isObjectValuesEmpty } from '../../utils/tools';
 import { NO_BLANKS } from '../../utils/constants/common';
-import logo from '../../assets/logos/logo_removebg.png';
 import CenterBox from '../../components/layouts/CenterBox';
+import LogoCircle from '../../components/common/LogoCircle';
 
 export default function SignInContainer() {
   const dispatch = useDispatch();
@@ -59,10 +58,7 @@ export default function SignInContainer() {
 
   return (
     <CenterBox>
-      <Avatar sx={{ bgcolor: 'primary.main', width: 100, height: 100 }}>
-        <img src={logo} alt="" width="50px" height="50px" />
-      </Avatar>
-
+      <LogoCircle />
       <Stack my={2}>
         <Typography component="h1" variant="h5">
           핀더펜과 함께 자산설계를 시작하세요!
