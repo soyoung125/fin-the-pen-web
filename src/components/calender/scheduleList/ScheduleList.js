@@ -28,6 +28,8 @@ function ScheduleList() {
     setTodaySchedules(schedules.filter((schedule) => schedule.date === date));
   }, [schedules]);
 
+  const [drawerWidth, setDrawerWidth] = useState(0);
+
   return (
     <>
       { // 로딩 시 Spinner
@@ -73,9 +75,17 @@ function ScheduleList() {
         open={bottomDrawerOpen}
         anchor="bottom"
         onClose={() => setBottomDrawerOpen(false)}
+        // Drawer를 가운데로 위치할 수 있도록 도와줌. resize는 이후 업데이트 예정
+        PaperProps={{
+          sx: {
+            maxWidth: '400px',
+            marginX: drawerWidth === 400 ? `calc((100% - ${drawerWidth}px)/2)` : null,
+          },
+        }}
       >
         {/* 이 부분을 범용적으로 사용할 수 있게 만드는 건 어떨까? */}
         <ScheduleDrawer
+          setDrawerWidth={setDrawerWidth}
           setBottomDrawerOpen={setBottomDrawerOpen}
           data={selectedSchedule}
           mode={SCHEDULE_DRAWER_MODE.수정}

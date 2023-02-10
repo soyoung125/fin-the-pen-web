@@ -22,6 +22,8 @@ function BottomBar({ value, setValue }) {
   const navigate = useNavigate();
   const [bottomDrawerOpen, setBottomDrawerOpen] = useState(false);
 
+  const [drawerWidth, setDrawerWidth] = useState(0);
+
   return (
     <>
       <Paper
@@ -51,23 +53,17 @@ function BottomBar({ value, setValue }) {
         open={bottomDrawerOpen}
         anchor="bottom"
         onClose={() => setBottomDrawerOpen(false)}
+        // Drawer를 가운데로 위치할 수 있도록 도와줌. resize는 이후 업데이트 예정
         PaperProps={{
           sx: {
             maxWidth: '400px',
-            // alignItems: 'center',
-            // justifyContent: 'center',
-          },
-        }}
-        sx={{
-          // flexShrink: 0,
-          '& .MuiDrawer-paper': {
-            // alignItems: 'center',
-            // justifyContent: 'center',
+            marginX: drawerWidth === 400 ? `calc((100% - ${drawerWidth}px)/2)` : null,
           },
         }}
       >
         {/* 이 부분을 범용적으로 사용할 수 있게 만드는 건 어떨까? */}
         <ScheduleDrawer
+          setDrawerWidth={setDrawerWidth}
           setBottomDrawerOpen={setBottomDrawerOpen}
           data={{
             ...INIT_SCHEDULE(moment(date).format('YYYY-MM-DD')),
