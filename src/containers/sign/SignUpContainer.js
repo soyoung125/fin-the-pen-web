@@ -14,6 +14,7 @@ import {
   NO_BLANKS, NO_DUPLICATION_ID, NO_SIGNAL_FROM_SERVER, SIGN_UP_SUCCESS,
 } from '../../utils/constants/common';
 import PATH from '../../utils/constants/path';
+import CenterBox from '../../components/layouts/CenterBox';
 
 function SignUpContainer() {
   const dispatch = useDispatch();
@@ -58,99 +59,89 @@ function SignUpContainer() {
     }
   };
   return (
-    <Container component="main" maxWidth="xs">
-      <CssBaseline />
-      <Box
-        sx={{
-          marginTop: 25,
-          display: 'flex',
-          flexDirection: 'column',
-          alignItems: 'center',
-        }}
-      >
-        <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
-          <LockOutlinedIcon />
-        </Avatar>
-        <Typography component="h1" variant="h5">
-          계정 가입
-        </Typography>
-        <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
+    <CenterBox>
+      <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
+        <LockOutlinedIcon />
+      </Avatar>
+      <Typography component="h1" variant="h5">
+        계정 가입
+      </Typography>
+      <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
 
-          <TextField
-            margin="normal"
-            required
-            fullWidth
-            id="name"
-            label="성명"
-            name="name"
-            autoFocus
-          />
+        <TextField
+          margin="normal"
+          required
+          fullWidth
+          id="name"
+          label="성명"
+          name="name"
+          autoFocus
+        />
 
-          <TextField
-            margin="normal"
-            required
-            fullWidth
-            id="email"
-            label="이메일 주소"
-            name="email"
-            autoComplete="email"
-            autoFocus
-          />
+        <TextField
+          margin="normal"
+          required
+          fullWidth
+          id="email"
+          label="이메일 주소"
+          name="email"
+          autoComplete="email"
+          autoFocus
+        />
 
-          <TextField
-            margin="normal"
-            required
-            fullWidth
-            name="password"
-            label="비밀번호"
-            type="password"
-            id="password"
-            autoComplete="current-password"
-            InputProps={{
-              endAdornment: (
-                <InputAdornment position="end">
-                  <Button variant="contained" size="small">사용가능</Button>
-                </InputAdornment>
-              ),
-            }}
-          />
+        <TextField
+          margin="normal"
+          required
+          fullWidth
+          name="password"
+          label="비밀번호"
+          type="password"
+          id="password"
+          autoComplete="current-password"
+          InputProps={{
+            endAdornment: (
+              <InputAdornment position="end">
+                <Button variant="contained" size="small">사용가능</Button>
+              </InputAdornment>
+            ),
+          }}
+        />
 
-          <TextField
-            margin="normal"
-            required
+        <TextField
+          margin="normal"
+          required
+          fullWidth
+          id="phoneNumber"
+          label="전화번호"
+          name="phoneNumber"
+          autoFocus
+          InputProps={{
+            endAdornment: (
+              <InputAdornment position="end">
+                <Button variant="contained" size="small">인증완료</Button>
+              </InputAdornment>
+            ),
+          }}
+        />
+        <Stack direction="row" spacing={1} my={2}>
+          <Button
             fullWidth
-            id="phoneNumber"
-            label="전화번호"
-            name="phoneNumber"
-            autoFocus
-            InputProps={{
-              endAdornment: (
-                <InputAdornment position="end">
-                  <Button variant="contained" size="small">인증완료</Button>
-                </InputAdornment>
-              ),
-            }}
-          />
-          <Stack direction="row" spacing={1} my={2}>
-            <Button
-              fullWidth
-              variant="contained"
-              color="error"
-              onClick={() => navigate(PATH.signIn)}
-            >
-              뒤로가기
-            </Button>
-            <Button
-              type="submit"
-              fullWidth
-              variant="contained"
-            >
-              회원가입
-            </Button>
-          </Stack>
-        </Box>
+            variant="contained"
+            color="error"
+            onClick={() => navigate(PATH.signIn)}
+          >
+            뒤로가기
+          </Button>
+          <Button
+            type="submit"
+            fullWidth
+            variant="contained"
+          >
+            회원가입
+          </Button>
+        </Stack>
       </Box>
-    </Container>
+    </CenterBox>
   );
 }
 export default SignUpContainer;
