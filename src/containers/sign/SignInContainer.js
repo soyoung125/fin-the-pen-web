@@ -58,71 +58,85 @@ export default function SignInContainer() {
 
   return (
     <CenterBox>
-      <LogoCircle />
-      <Stack my={2}>
-        <Typography component="h1" variant="h5">
-          핀더펜과 함께 자산설계를 시작하세요!
-        </Typography>
-      </Stack>
+      <Stack
+        justifyContent="center"
+        alignItems="center"
+        px={1}
+      >
+        <LogoCircle />
+        <Stack my={2}>
+          <Typography component="h1" variant="h5">
+            핀더펜과 함께 자산설계를 시작하세요!
+          </Typography>
+        </Stack>
 
-      <Box component="form" onSubmit={handleSubmit} noValidate>
-        <TextField
-          margin="normal"
-          required
-          fullWidth
-          id="email"
-          label="Email Address"
-          name="email"
-          autoComplete="email"
-          autoFocus
-        />
-        <TextField
-          margin="normal"
-          required
-          fullWidth
-          name="password"
-          label="Password"
-          type="password"
-          id="password"
-          autoComplete="current-password"
-        />
+        <Box
+          component="form"
+          onSubmit={handleSubmit}
+          noValidate
+          sx={{ maxWidth: '400px' }}
+        >
+          <TextField
+            margin="normal"
+            required
+            fullWidth
+            id="email"
+            label="Email Address"
+            name="email"
+            autoComplete="email"
+            autoFocus
+          />
+          <TextField
+            margin="normal"
+            required
+            fullWidth
+            name="password"
+            label="Password"
+            type="password"
+            id="password"
+            autoComplete="current-password"
+          />
 
-        <Button onClick={() => alert('You forget a thousand things every day. Make sure this is one of them :)')}>
-          비밀번호를 잊으셨나요?
-        </Button>
+          <Button onClick={() => alert('You forget a thousand things every day. Make sure this is one of them :)')}>
+            비밀번호를 잊으셨나요?
+          </Button>
+
+          <Button
+            type="submit"
+            fullWidth
+            variant="contained"
+            sx={{ mt: 3, mb: 2 }}
+          >
+            로그인
+          </Button>
+
+          <Button onClick={() => navigate(PATH.signUp)}>
+            계정이 없으신가요?
+          </Button>
+        </Box>
 
         <Button
           type="submit"
           fullWidth
           variant="contained"
+          color="error"
           sx={{ mt: 3, mb: 2 }}
+          onClick={() => guestLogin()}
         >
-          로그인
+          {status === 'idle' ? 'Guest 계정으로 로그인 하기' : '로그인 중 ...'}
         </Button>
+        <Typography color="text.secondary">
+          {'Copyright © '}
+          <Link color="inherit" href="https://mui.com/">
+            핀더펜
+          </Link>
+          {' '}
+          {new Date().getFullYear()}
+          .
+        </Typography>
 
-        <Link to={PATH.signUp}>
-          계정이 없으신가요?
-        </Link>
-      </Box>
-      <Button
-        type="submit"
-        fullWidth
-        variant="contained"
-        color="error"
-        sx={{ mt: 3, mb: 2 }}
-        onClick={() => guestLogin()}
-      >
-        {status === 'idle' ? 'Guest 계정으로 로그인 하기' : '로그인 중 ...'}
-      </Button>
-      <Typography color="text.secondary">
-        {'Copyright © '}
-        <Link color="inherit" href="https://mui.com/">
-          핀더펜
-        </Link>
-        {' '}
-        {new Date().getFullYear()}
-        .
-      </Typography>
+      </Stack>
+
     </CenterBox>
   );
 }
