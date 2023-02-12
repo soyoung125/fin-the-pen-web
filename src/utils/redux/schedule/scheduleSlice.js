@@ -3,7 +3,7 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import moment from 'moment';
 import { fetchCreateSchedule, fetchMonthSchedules } from '../API';
-import { fetchMockCreateSchedule } from '../mockAPI';
+import { fetchMockCreateSchedule, fetchMockDeleteSchedule } from '../mockAPI';
 
 const initialState = {
   // 메인
@@ -53,6 +53,21 @@ export const createSchedule = createAsyncThunk(
   },
 );
 
+export const deleteSchedule = createAsyncThunk(
+  'schedule/deleteSchedule',
+  async (id, { getState }) => {
+    const { guestMode } = getState().common;
+    if (guestMode) {
+      console.log('게스트 모드에서 제거');
+      const response = await fetchMockDeleteSchedule(id);
+      return response.data;
+    }
+    console.log('일반 모드에서 제거');
+    // await fetchCreateSchedule(id);
+    return null;
+  },
+);
+
 // export const mockCreateNewSchedule = createAsyncThunk(
 //   'schedule/mockCreateNewSchedule',
 //   async (scheduleWithUuid) => {
@@ -65,12 +80,12 @@ export const scheduleSlice = createSlice({
   name: 'schedule',
   initialState,
   reducers: {
-    addSchedule: (state, action) => { // deprecated
-      state.schedules.push(action.payload);
-    },
-    deleteSchedule: (state, action) => {
-      state.schedules = state.schedules.filter((s) => s.id !== action.payload);
-    },
+    // addSchedule: (state, action) => { // deprecated
+    //   state.schedules.push(action.payload);
+    // },
+    // deleteSchedule: (state, action) => { // deprecated
+    //   state.schedules = state.schedules.filter((s) => s.id !== action.payload);
+    // },
     modifySchedule: (state, action) => {
       state.schedules = state.schedules.map((s) => (s.id === action.payload.id ? action.payload : s));
     },
@@ -131,18 +146,24 @@ export const scheduleSlice = createSlice({
   extraReducers: (builder) => {
     builder
       .addCase(getMonthSchedules.pending, (state) => {
-      // getMonthSchedules가 진행중일 때
+      // getMonthSchedules 가 진행중일 때
         state.status = 'loading';
       })
       .addCase(getMonthSchedules.fulfilled, (state, action) => {
-      // getMonthSchedules가 끝나면
+      // getMonthSchedules 가 끝나면
         state.status = 'idle';
         state.schedules = action.payload;
       })
       .addCase(createSchedule.fulfilled, (state, action) => {
-        // createSchedul가 끝나면
+        // createSchedul 가 끝나면
         if (action.payload !== null) {
           state.schedules.push(action.payload);
+        }
+      })
+      .addCase(deleteSchedule.fulfilled, (state, action) => {
+        // deleteSchedule 가 끝나면
+        if (action.payload !== null) {
+          state.schedules = state.schedules.filter((s) => s.id !== action.payload);
         }
       });
 
@@ -153,8 +174,8 @@ export const scheduleSlice = createSlice({
   },
 });
 export const {
-  addSchedule,
-  deleteSchedule,
+  // addSchedule,
+  // deleteSchedule,
   setSchedules,
   setDrawerSchedule,
   selectedDate,

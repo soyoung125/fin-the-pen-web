@@ -36,3 +36,9 @@ export function fetchMockCreateSchedule(scheduleWithUuid) {
     data: scheduleWithUuid,
   }), 500));
 }
+
+export function fetchMockDeleteSchedule(id) {
+  return new Promise((resolve) => setTimeout(() => resolve({
+    data: id,
+  }), 500));
+}
