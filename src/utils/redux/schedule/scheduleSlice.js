@@ -38,8 +38,8 @@ export const getMonthSchedules = createAsyncThunk(
 //   },
 // );
 
-export const createNewSchedule = createAsyncThunk(
-  'schedule/createNewSchedule',
+export const createSchedule = createAsyncThunk(
+  'schedule/createSchedule',
   async (scheduleWithUuid, { getState }) => {
     const { guestMode } = getState().common;
     if (guestMode) {
@@ -139,9 +139,8 @@ export const scheduleSlice = createSlice({
         state.status = 'idle';
         state.schedules = action.payload;
       })
-
-      .addCase(createNewSchedule.fulfilled, (state, action) => {
-        // createNewSchedule가 끝나면
+      .addCase(createSchedule.fulfilled, (state, action) => {
+        // createSchedul가 끝나면
         if (action.payload !== null) {
           state.schedules.push(action.payload);
         }

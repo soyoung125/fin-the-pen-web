@@ -10,7 +10,8 @@ import {
 } from '../../../../utils/constants/schedule';
 import { selectGuestMode } from '../../../../utils/redux/common/commonSlice';
 import {
-  createNewSchedule, getMonthSchedules,
+  // createNewSchedule,
+  createSchedule, getMonthSchedules,
   // mockCreateNewSchedule,
   modifySchedule, selectDate, selectSchedule,
 } from '../../../../utils/redux/schedule/scheduleSlice';
@@ -54,23 +55,23 @@ function ScheduleDrawerFooter({ mode, setBottomDrawerOpen }) {
     setBottomDrawerOpen(false);
   };
 
-  const guestHandler = () => {
-    alert(`[${mode}] 게스트 모드에서 동작!`);
-    if (schedule.event_name.length === 0) {
-      alert(NEED_TITLE);
-      return;
-    }
-    switch (mode) {
-      case 'create':
-        // addNewSchedule();
-        break;
-      case 'modify':
-        modifySelectedSchedule();
-        break;
-      default:
-        alert('잘못 된 요청입니다.');
-    }
-  };
+  // const guestHandler = () => {
+  //   alert(`[${mode}] 게스트 모드에서 동작!`);
+  //   if (schedule.event_name.length === 0) {
+  //     alert(NEED_TITLE);
+  //     return;
+  //   }
+  //   switch (mode) {
+  //     case 'create':
+  //       // addNewSchedule();
+  //       break;
+  //     case 'modify':
+  //       modifySelectedSchedule();
+  //       break;
+  //     default:
+  //       alert('잘못 된 요청입니다.');
+  //   }
+  // };
   // guest mode end
 
   // fetch mode start
@@ -103,7 +104,7 @@ function ScheduleDrawerFooter({ mode, setBottomDrawerOpen }) {
   //   setBottomDrawerOpen(false);
   // };
 
-  const createSchedule = async () => {
+  const createHandler = async () => {
     const scheduleWithUuid = {
       ...schedule,
       id: uuidv4(),
@@ -114,7 +115,7 @@ function ScheduleDrawerFooter({ mode, setBottomDrawerOpen }) {
       let repeatDate = moment(schedule.date).add(1, REPEAT_CYCLE[schedule.repeating_cycle]);
       while (moment(schedule.repeat_endDate).isSameOrAfter(repeatDate)) {
         // eslint-disable-next-line no-await-in-loop
-        await dispatch(createNewSchedule({
+        await dispatch(createSchedule({
           ...scheduleWithUuid,
           id: uuidv4(),
           date: repeatDate.format('YYYY-MM-DD'),
@@ -123,9 +124,9 @@ function ScheduleDrawerFooter({ mode, setBottomDrawerOpen }) {
       }
     }
     // 원래 일정 추가
-    await dispatch(createNewSchedule(scheduleWithUuid));
-    if (!guestMode) {
-      dispatch(getMonthSchedules({ // 이 부분이 createNewSchedule 내부에 통합될 수 있을까?
+    await dispatch(createSchedule(scheduleWithUuid));
+    if (!guestMode) { // 게스트 모드가 아니라면, 현재 서버 상태를 새롭게 요청하기
+      dispatch(getMonthSchedules({
         user_id: user.user_id,
         date: moment(date).format('YYYY-MM'),
       }));
@@ -133,13 +134,14 @@ function ScheduleDrawerFooter({ mode, setBottomDrawerOpen }) {
     setBottomDrawerOpen(false);
   };
 
-  const fetchHandler = () => {
+  const modeHandler = () => {
     alert(`일반 모드! ${mode}`);
     switch (mode) {
       case 'create':
-        createSchedule();
+        createHandler();
         break;
       case 'modify':
+        // 다음 패치에 복구 시키겠습니다.
         alert(NOT_AVAILABLE);
         break;
       default:
@@ -153,7 +155,7 @@ function ScheduleDrawerFooter({ mode, setBottomDrawerOpen }) {
       alert(NEED_TITLE);
       return;
     }
-    fetchHandler();
+    modeHandler();
     // executeFunctionByGuestMode(guestMode, guestHandler, fetchHandler);
   };
 
