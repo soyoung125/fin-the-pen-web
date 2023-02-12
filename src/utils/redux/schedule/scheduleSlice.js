@@ -30,14 +30,6 @@ export const getMonthSchedules = createAsyncThunk(
   },
 );
 
-// export const createNewSchedule = createAsyncThunk(
-//   'schedule/createNewSchedule',
-//   async (scheduleWithUuid) => {
-//     const response = await fetchCreateSchedule(scheduleWithUuid);
-//     return response;
-//   },
-// );
-
 export const createSchedule = createAsyncThunk(
   'schedule/createSchedule',
   async (scheduleWithUuid, { getState }) => {
@@ -68,24 +60,10 @@ export const deleteSchedule = createAsyncThunk(
   },
 );
 
-// export const mockCreateNewSchedule = createAsyncThunk(
-//   'schedule/mockCreateNewSchedule',
-//   async (scheduleWithUuid) => {
-//     const response = await fetchMockCreateSchedule(scheduleWithUuid);
-//     return response.data;
-//   },
-// );
-
 export const scheduleSlice = createSlice({
   name: 'schedule',
   initialState,
   reducers: {
-    // addSchedule: (state, action) => { // deprecated
-    //   state.schedules.push(action.payload);
-    // },
-    // deleteSchedule: (state, action) => { // deprecated
-    //   state.schedules = state.schedules.filter((s) => s.id !== action.payload);
-    // },
     modifySchedule: (state, action) => {
       state.schedules = state.schedules.map((s) => (s.id === action.payload.id ? action.payload : s));
     },
@@ -166,16 +144,9 @@ export const scheduleSlice = createSlice({
           state.schedules = state.schedules.filter((s) => s.id !== action.payload);
         }
       });
-
-    // .addCase(mockCreateNewSchedule.fulfilled, (state, action) => {
-    //   // mockCreateNewSchedule가 끝나면
-    //   state.schedules.push(action.payload);
-    // });
   },
 });
 export const {
-  // addSchedule,
-  // deleteSchedule,
   setSchedules,
   setDrawerSchedule,
   selectedDate,
