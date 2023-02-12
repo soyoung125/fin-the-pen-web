@@ -16,7 +16,7 @@ import {
 } from '../../utils/redux/user/userSlice';
 import GuestDataManager from '../test/GuestDataManager';
 import GuestMode from '../test/GuestMode';
-import ScheduleData from '../test/ScheduleData';
+import ScheduleData from '../test/SchedulesData';
 import ScheduleFilterData from '../test/ScheduleFilterData';
 import UserData from '../test/UserData';
 // import SignInContainer from '../sign/SignInContainer';
