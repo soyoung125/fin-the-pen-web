@@ -2,7 +2,7 @@
 /* eslint-disable no-param-reassign */
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import moment from 'moment';
-import { fetchCreateSchedule, fetchMonthSchedules } from '../API';
+import { fetchCreateSchedule, fetchDeleteSchedule, fetchMonthSchedules } from '../API';
 import { fetchMockCreateSchedule, fetchMockDeleteSchedule } from '../mockAPI';
 
 const initialState = {
@@ -48,6 +48,7 @@ export const createSchedule = createAsyncThunk(
 export const deleteSchedule = createAsyncThunk(
   'schedule/deleteSchedule',
   async (id, { getState }) => {
+    console.log(id);
     const { guestMode } = getState().common;
     if (guestMode) {
       console.log('게스트 모드에서 제거');
@@ -55,7 +56,7 @@ export const deleteSchedule = createAsyncThunk(
       return response.data;
     }
     console.log('일반 모드에서 제거');
-    // await fetchCreateSchedule(id);
+    await fetchDeleteSchedule(id);
     return null;
   },
 );

@@ -35,6 +35,17 @@ export const fetchCreateSchedule = async (schedule) => {
   }
 };
 
+export const fetchDeleteSchedule = async (id) => {
+  try {
+    console.log({ id });
+    const response = await axios.post('/deleteSchedule', { id });
+    // alert(JSON.stringify(response));
+    return response.data;
+  } catch (err) {
+    alert(err);
+  }
+};
+
 export const fetchMonthSchedules = async (schedule) => {
   try {
     const response = await axios.post('/getMonthSchedules', schedule);
