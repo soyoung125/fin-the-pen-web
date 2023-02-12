@@ -28,7 +28,10 @@ function ScheduleDrawerFooter({ mode, setBottomDrawerOpen }) {
   const schedule = useSelector(selectSchedule);
   const dispatch = useDispatch();
 
-  const modifyHandler = async () => {
+  const handleModify = async () => {
+    /**
+     * 함수 완성되면 그 때 외부 모듈로 분리하겠습니다.
+     */
     if (guestMode) {
       dispatch(modifySchedule(schedule));
       setBottomDrawerOpen(false);
@@ -43,7 +46,7 @@ function ScheduleDrawerFooter({ mode, setBottomDrawerOpen }) {
         handleCreate(dispatch, schedule, user, guestMode, date, setBottomDrawerOpen);
         break;
       case 'modify':
-        modifyHandler();
+        handleModify();
         break;
       default:
         alert('잘못 된 요청입니다.');
