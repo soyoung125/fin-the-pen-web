@@ -30,21 +30,36 @@ export const getMonthSchedules = createAsyncThunk(
   },
 );
 
+// export const createNewSchedule = createAsyncThunk(
+//   'schedule/createNewSchedule',
+//   async (scheduleWithUuid) => {
+//     const response = await fetchCreateSchedule(scheduleWithUuid);
+//     return response;
+//   },
+// );
+
 export const createNewSchedule = createAsyncThunk(
   'schedule/createNewSchedule',
-  async (scheduleWithUuid) => {
-    const response = await fetchCreateSchedule(scheduleWithUuid);
-    return response;
+  async (scheduleWithUuid, { getState }) => {
+    const { guestMode } = getState().common;
+    if (guestMode) {
+      console.log('게스트 모드에서 추가');
+      const response = await fetchMockCreateSchedule(scheduleWithUuid);
+      return response.data;
+    }
+    console.log('일반 모드에서 추가');
+    await fetchCreateSchedule(scheduleWithUuid);
+    return null;
   },
 );
 
-export const mockCreateNewSchedule = createAsyncThunk(
-  'schedule/mockCreateNewSchedule',
-  async (scheduleWithUuid) => {
-    const response = await fetchMockCreateSchedule(scheduleWithUuid);
-    return response.data;
-  },
-);
+// export const mockCreateNewSchedule = createAsyncThunk(
+//   'schedule/mockCreateNewSchedule',
+//   async (scheduleWithUuid) => {
+//     const response = await fetchMockCreateSchedule(scheduleWithUuid);
+//     return response.data;
+//   },
+// );
 
 export const scheduleSlice = createSlice({
   name: 'schedule',
@@ -124,10 +139,18 @@ export const scheduleSlice = createSlice({
         state.status = 'idle';
         state.schedules = action.payload;
       })
-      .addCase(mockCreateNewSchedule.fulfilled, (state, action) => {
-        // mockCreateNewSchedule가 끝나면
-        state.schedules.push(action.payload);
+
+      .addCase(createNewSchedule.fulfilled, (state, action) => {
+        // createNewSchedule가 끝나면
+        if (action.payload !== null) {
+          state.schedules.push(action.payload);
+        }
       });
+
+    // .addCase(mockCreateNewSchedule.fulfilled, (state, action) => {
+    //   // mockCreateNewSchedule가 끝나면
+    //   state.schedules.push(action.payload);
+    // });
   },
 });
 export const {

@@ -10,7 +10,8 @@ import {
 } from '../../../../utils/constants/schedule';
 import { selectGuestMode } from '../../../../utils/redux/common/commonSlice';
 import {
-  createNewSchedule, getMonthSchedules, mockCreateNewSchedule,
+  createNewSchedule, getMonthSchedules,
+  // mockCreateNewSchedule,
   modifySchedule, selectDate, selectSchedule,
 } from '../../../../utils/redux/schedule/scheduleSlice';
 import { selectUser } from '../../../../utils/redux/user/userSlice';
@@ -30,19 +31,23 @@ function ScheduleDrawerFooter({ mode, setBottomDrawerOpen }) {
 
   // guest mode start
 
-  const addNewSchedule = () => {
-    // 반복 일정 추가
-    if ((schedule.repeating_cycle !== '없음') && (schedule.repeat_deadline !== '없음')) {
-      let repeatDate = moment(schedule.date).add(1, REPEAT_CYCLE[schedule.repeating_cycle]);
-      while (moment(schedule.repeat_endDate).isSameOrAfter(repeatDate)) {
-        dispatch(mockCreateNewSchedule({ ...schedule, id: uuidv4(), date: repeatDate.format('YYYY-MM-DD') })); // mock 함수로 이전 예정
-        repeatDate = moment(repeatDate).add(1, REPEAT_CYCLE[schedule.repeating_cycle]);
-      }
-    }
-    // 원래 일정 추가
-    dispatch(mockCreateNewSchedule({ ...schedule, id: uuidv4() })); // mock 함수로 이전 예정
-    setBottomDrawerOpen(false);
-  };
+  // const addNewSchedule = () => {
+  //   // 반복 일정 추가
+  //   if ((schedule.repeating_cycle !== '없음') && (schedule.repeat_deadline !== '없음')) {
+  //     let repeatDate = moment(schedule.date).add(1, REPEAT_CYCLE[schedule.repeating_cycle]);
+  //     while (moment(schedule.repeat_endDate).isSameOrAfter(repeatDate)) {
+  //       dispatch(mockCreateNewSchedule({
+  //         ...schedule,
+  //         id: uuidv4(),
+  //         date: repeatDate.format('YYYY-MM-DD'),
+  //       })); // mock 함수로 이전 예정
+  //       repeatDate = moment(repeatDate).add(1, REPEAT_CYCLE[schedule.repeating_cycle]);
+  //     }
+  //   }
+  //   // 원래 일정 추가
+  //   dispatch(mockCreateNewSchedule({ ...schedule, id: uuidv4() })); // mock 함수로 이전 예정
+  //   setBottomDrawerOpen(false);
+  // };
 
   const modifySelectedSchedule = () => {
     dispatch(modifySchedule(schedule));
@@ -57,7 +62,7 @@ function ScheduleDrawerFooter({ mode, setBottomDrawerOpen }) {
     }
     switch (mode) {
       case 'create':
-        addNewSchedule();
+        // addNewSchedule();
         break;
       case 'modify':
         modifySelectedSchedule();
@@ -69,6 +74,34 @@ function ScheduleDrawerFooter({ mode, setBottomDrawerOpen }) {
   // guest mode end
 
   // fetch mode start
+
+  // const createSchedule = async () => {
+  //   const scheduleWithUuid = {
+  //     ...schedule,
+  //     id: uuidv4(),
+  //     user_id: user.user_id,
+  //   };
+  //   // 반복 일정 추가
+  //   if ((schedule.repeating_cycle !== '없음') && (schedule.repeat_deadline !== '없음')) {
+  //     let repeatDate = moment(schedule.date).add(1, REPEAT_CYCLE[schedule.repeating_cycle]);
+  //     while (moment(schedule.repeat_endDate).isSameOrAfter(repeatDate)) {
+  //       // eslint-disable-next-line no-await-in-loop
+  //       await dispatch(createNewSchedule({
+  //         ...scheduleWithUuid,
+  //         id: uuidv4(),
+  //         date: repeatDate.format('YYYY-MM-DD'),
+  //       }));
+  //       repeatDate = moment(repeatDate).add(1, REPEAT_CYCLE[schedule.repeating_cycle]);
+  //     }
+  //   }
+  //   // 원래 일정 추가
+  //   await dispatch(createNewSchedule(scheduleWithUuid));
+  //   dispatch(getMonthSchedules({ // 이 부분이 createNewSchedule 내부에 통합될 수 있을까?
+  //     user_id: user.user_id,
+  //     date: moment(date).format('YYYY-MM'),
+  //   }));
+  //   setBottomDrawerOpen(false);
+  // };
 
   const createSchedule = async () => {
     const scheduleWithUuid = {
@@ -91,10 +124,12 @@ function ScheduleDrawerFooter({ mode, setBottomDrawerOpen }) {
     }
     // 원래 일정 추가
     await dispatch(createNewSchedule(scheduleWithUuid));
-    dispatch(getMonthSchedules({ // 이 부분이 createNewSchedule 내부에 통합될 수 있을까?
-      user_id: user.user_id,
-      date: moment(date).format('YYYY-MM'),
-    }));
+    if (!guestMode) {
+      dispatch(getMonthSchedules({ // 이 부분이 createNewSchedule 내부에 통합될 수 있을까?
+        user_id: user.user_id,
+        date: moment(date).format('YYYY-MM'),
+      }));
+    }
     setBottomDrawerOpen(false);
   };
 
@@ -118,7 +153,8 @@ function ScheduleDrawerFooter({ mode, setBottomDrawerOpen }) {
       alert(NEED_TITLE);
       return;
     }
-    executeFunctionByGuestMode(guestMode, guestHandler, fetchHandler);
+    fetchHandler();
+    // executeFunctionByGuestMode(guestMode, guestHandler, fetchHandler);
   };
 
   return (
