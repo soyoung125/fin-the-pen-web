@@ -6,6 +6,7 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 import SettingsIcon from '@mui/icons-material/Settings';
 import ClearIcon from '@mui/icons-material/Clear';
+import RestartAltIcon from '@mui/icons-material/RestartAlt';
 import 'swiper/css';
 import { useState } from 'react';
 import RoundedBorderBox from '../../../../../components/common/RoundedBorderBox';
@@ -61,13 +62,13 @@ function DetailCard() {
           <Stack p={2} spacing={1}>
             <Stack direction="row" alignItems="center" justifyContent="space-between">
               <IconButton onClick={() => setSettingModalOpen(false)}>
-                <ClearIcon />
+                <RestartAltIcon />
               </IconButton>
               <Typography variant="h5" sx={{ fontWeight: 'bold' }}>
                 정기 출금 내역
               </Typography>
-              <IconButton onClick={() => setSettingModalOpen(false)} color="error">
-                <DeleteForeverIcon />
+              <IconButton onClick={() => setSettingModalOpen(false)}>
+                <ClearIcon />
               </IconButton>
             </Stack>
             <Box my={1}>
