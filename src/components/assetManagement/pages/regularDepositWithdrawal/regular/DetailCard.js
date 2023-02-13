@@ -2,14 +2,10 @@ import {
   Box, Stack,
 } from '@mui/material';
 import 'swiper/css';
-import { useState } from 'react';
 import moment from 'moment';
 import RoundedBorderBox from '../../../../common/RoundedBorderBox';
-import ModifyModal from './ModifyModal';
 
 function DetailCard({ data }) {
-  const [settingModalOpen, setSettingModalOpen] = useState(false);
-
   return (
     <Box>
       <RoundedBorderBox>
@@ -30,8 +26,6 @@ function DetailCard({ data }) {
           </Box>
         </Stack>
       </RoundedBorderBox>
-
-      <ModifyModal settingModalOpen={settingModalOpen} setSettingModalOpen={setSettingModalOpen} />
     </Box>
   );
 }
