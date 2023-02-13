@@ -70,6 +70,7 @@ function RegularDepositWithdrawal() {
         open={openAlertModal}
         handleClose={() => setOpenAlertModal(false)}
         handleClickYes={() => handleMoveToDetailPage()}
+        mode="modify"
       />
     </>
   );

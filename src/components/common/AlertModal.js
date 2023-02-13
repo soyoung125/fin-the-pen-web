@@ -4,11 +4,13 @@ import {
   Dialog, Divider, Grid, Stack, Typography,
 } from '@mui/material';
 import ClearIcon from '@mui/icons-material/Clear';
+import { CONTROLLING_ALERT } from '../../utils/constants/alerts';
 
 function AlertModal(props) {
   const {
-    open, handleClose, handleClickYes,
+    open, handleClose, handleClickYes, mode,
   } = props;
+
   return (
     <Dialog
       sx={{ '& .MuiDialog-paper': { borderRadius: '1rem', width: '100%' } }}
@@ -29,7 +31,7 @@ function AlertModal(props) {
       </Box>
 
       <Box mx={3} my={2}>
-        <Typography>정보를 수정하시겠습니까?(추후 종류에 따라 다른 문구 뜨도록 수정 예쩡)</Typography>
+        <Typography>{CONTROLLING_ALERT[mode]}</Typography>
         <Grid container spacing={1}>
           <Grid item xs={6}>
             <Button fullWidth variant="contained" sx={{ backgroundColor: '#D8D8D8' }} onClick={handleClose}>아니오</Button>
