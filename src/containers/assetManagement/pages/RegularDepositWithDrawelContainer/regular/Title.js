@@ -2,8 +2,12 @@ import {
   Box, Button, IconButton, Stack,
 } from '@mui/material';
 import BorderColorIcon from '@mui/icons-material/BorderColor';
+import { useNavigate } from 'react-router-dom';
+import PATH from '../../../../../utils/constants/path';
 
 function Title({ type, title }) {
+  const navigate = useNavigate();
+
   return (
     <Stack direction="row" justifyContent="space-between" alignItems="center">
       <Stack direction="row">
@@ -20,7 +24,7 @@ function Title({ type, title }) {
       </Stack>
       <Stack direction="row" alignItems="center" sx={{ color: 'primary.main' }}>
         <Box>총 n건</Box>
-        <IconButton color="primary" onClick={() => console.log('정기 입금')}>
+        <IconButton color="primary" onClick={() => navigate(PATH.regularDepositWithdrawalDetail, { state: { type } })}>
           <BorderColorIcon fontSize="small" />
         </IconButton>
       </Stack>
