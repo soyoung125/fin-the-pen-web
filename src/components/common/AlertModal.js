@@ -17,9 +17,9 @@ function AlertModal(props) {
       open={open}
       scroll="body"
     >
-      <Stack direction="row" alignItems="center" justifyContent="space-between">
+      <Stack direction="row" alignItems="center" justifyContent="space-between" mt={1}>
         <Button disabled />
-        <Typography variant="h5" sx={{ fontWeight: 'bold' }}>
+        <Typography variant="h6" sx={{ fontWeight: 'bold' }}>
           알림
         </Typography>
         <Button onClick={handleClose}>
@@ -31,7 +31,7 @@ function AlertModal(props) {
       </Box>
 
       <Box mx={3} my={2}>
-        <Typography>{CONTROLLING_ALERT[mode]}</Typography>
+        <Box sx={{ textAlign: 'center', fontWeight: 'bold', my: 2 }}>{CONTROLLING_ALERT[mode]}</Box>
         <Grid container spacing={1}>
           <Grid item xs={6}>
             <Button fullWidth variant="contained" sx={{ backgroundColor: '#D8D8D8' }} onClick={handleClose}>아니오</Button>
