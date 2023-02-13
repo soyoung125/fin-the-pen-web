@@ -3,10 +3,11 @@ import {
 } from '@mui/material';
 import 'swiper/css';
 import { useState } from 'react';
+import moment from 'moment';
 import RoundedBorderBox from '../../../../common/RoundedBorderBox';
 import ModifyModal from './ModifyModal';
 
-function DetailCard() {
+function DetailCard({ data }) {
   const [settingModalOpen, setSettingModalOpen] = useState(false);
 
   return (
@@ -20,12 +21,12 @@ function DetailCard() {
           }}
         >
           <Box>
-            <Box sx={{ mb: 1 }}>매달 1일</Box>
-            <Box>OO은행 월급</Box>
+            <Box sx={{ mb: 1 }}>{`매${data.repeating_cycle.charAt(0)} ${moment(data.date).format('D일')}`}</Box>
+            <Box>{data.event_name}</Box>
           </Box>
           <Box sx={{ textAlign: 'end' }}>
-            <Box sx={{ mb: 1 }}>월급날</Box>
-            <Box sx={{ color: 'primary.main' }}>xxxxxxx원</Box>
+            <Box sx={{ mb: 1 }}>{data.event_name}</Box>
+            <Box sx={{ color: 'primary.main' }}>{`${parseInt(data.expected_spending, 10).toLocaleString('ko-kr')}원`}</Box>
           </Box>
         </Stack>
       </RoundedBorderBox>
