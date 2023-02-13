@@ -13,7 +13,7 @@ import Calender from '../../components/calender/Calender';
 import MonthlyStatement from '../../components/calender/MonthlyStatement.js';
 import ScheduleList from '../../components/calender/scheduleList/ScheduleList';
 import ScheduleViewMode from '../../components/calender/ScheduleViewMode';
-import ALERTS from '../../utils/constants/alerts';
+import { CONSUMPTION_ALERTS } from '../../utils/constants/alerts';
 import { fetchMonthSchedules } from '../../utils/redux/API';
 import { selectGuestMode, setHeaderOpenTrue } from '../../utils/redux/common/commonSlice';
 import {
@@ -82,8 +82,8 @@ function HomeConatiner() {
         open={snackbarOpen}
         onClose={handleClose}
       >
-        <Alert color={ALERTS[random].color} sx={{ width: '100%' }} icon={ALERTS[random].icon}>
-          {ALERTS[random].message}
+        <Alert color={CONSUMPTION_ALERTS[random].color} sx={{ width: '100%' }} icon={CONSUMPTION_ALERTS[random].icon}>
+          {CONSUMPTION_ALERTS[random].message}
         </Alert>
       </Snackbar>
       {viewMode === 'schedule' ? (

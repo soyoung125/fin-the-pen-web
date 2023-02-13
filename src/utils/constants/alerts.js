@@ -4,8 +4,8 @@ import SentimentSatisfiedIcon from '@mui/icons-material/SentimentSatisfied';
 import SentimentVerySatisfiedIcon from '@mui/icons-material/SentimentVerySatisfied';
 import SentimentSatisfiedAltIcon from '@mui/icons-material/SentimentSatisfiedAlt';
 
-// 아이콘 변경 예정
-const ALERTS = Object.freeze([
+// 소비 주의 5단계 알림
+const CONSUMPTION_ALERTS = Object.freeze([
   {
     message: '경고! 자산이 거의 남지 않았습니다.',
     color: 'error',
@@ -33,4 +33,12 @@ const ALERTS = Object.freeze([
   },
 ]);
 
-export default ALERTS;
+// 설정/수정/초기화/삭제 알림
+const CONTROLLING_ALERT = {
+  setting: '현재 정보로 설정하시겠습니까?',
+  modify: '정보를 수정하시겠습니까?',
+  reset: '모든 정보를 초기화하시겠습니까?',
+  delete: '정보를 삭제하시겠습니까?',
+};
+
+export { CONSUMPTION_ALERTS, CONTROLLING_ALERT };

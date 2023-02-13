@@ -5,8 +5,8 @@ import {
 } from '@mui/material';
 import CloseIcon from '@mui/icons-material/Close';
 import AssetManagement from './AssetManagement';
-import ALERTS from '../../../utils/constants/alerts';
 import SpendingDetailCard from './SpendingDetailCard';
+import { CONSUMPTION_ALERTS } from '../../../utils/constants/alerts';
 
 function AnalysisDetailCard({ closeDetailCard, selectedItem }) {
   const random = Math.floor((Math.random() * 5));
@@ -31,8 +31,8 @@ function AnalysisDetailCard({ closeDetailCard, selectedItem }) {
           ))}
         </Stack>
         <AssetManagement selectedItem={selectedItem} />
-        <Alert color={ALERTS[random].color} sx={{ width: '100%' }} icon={ALERTS[random].icon}>
-          {ALERTS[random].message}
+        <Alert color={CONSUMPTION_ALERTS[random].color} sx={{ width: '100%' }} icon={CONSUMPTION_ALERTS[random].icon}>
+          {CONSUMPTION_ALERTS[random].message}
         </Alert>
       </CardContent>
     </Card>

@@ -14,11 +14,11 @@ import {
   selectSchedule, setDrawerSchedule,
 } from '../../../utils/redux/schedule/scheduleSlice';
 import CategoryInput from './inputs/CategoryInput';
-import ALERTS from '../../../utils/constants/alerts';
 import RepeatInput from './inputs/RepeatInput';
 import AssetSettings from './inputs/AssetSettings';
 import ScheduleDrawerHeader from './layouts/ScheduleDrawerHeader';
 import ScheduleDrawerFooter from './layouts/ScheduleDrawerFooter';
+import { CONSUMPTION_ALERTS } from '../../../utils/constants/alerts';
 
 function TransitionUp(props) {
   // eslint-disable-next-line react/jsx-props-no-spreading
@@ -69,8 +69,8 @@ function ScheduleDrawer({
               }}
               TransitionComponent={TransitionUp}
             >
-              <Alert color={ALERTS[random].color} sx={{ width: '100%' }} icon={ALERTS[random].icon}>
-                {ALERTS[random].message}
+              <Alert color={CONSUMPTION_ALERTS[random].color} sx={{ width: '100%' }} icon={CONSUMPTION_ALERTS[random].icon}>
+                {CONSUMPTION_ALERTS[random].message}
               </Alert>
             </Snackbar>
             <Stack
