@@ -27,7 +27,7 @@ function Saving() {
         </Stack>
         <RoundedBorderBox>
           <Box sx={{
-            typography: 'h6', fontWeight: 'bold', color: 'primary.main', textAlign: 'end',
+            typography: 'h6', fontWeight: 'bold', color: 'primary.main', textAlign: 'end', p: 2,
           }}
           >
             xxxxxxx원
@@ -37,7 +37,7 @@ function Saving() {
         <Box sx={{ typography: 'h6', fontWeight: 'bold' }}>1 Month Goal</Box>
         <RoundedBorderBox>
           <Box sx={{
-            typography: 'h6', fontWeight: 'bold', color: 'primary.main', textAlign: 'end',
+            typography: 'h6', fontWeight: 'bold', color: 'primary.main', textAlign: 'end', p: 2,
           }}
           >
             xxxxxxx원

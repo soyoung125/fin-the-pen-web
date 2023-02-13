@@ -72,6 +72,7 @@ function Personal() {
             <Stack
               direction="row"
               justifyContent="space-between"
+              p={2}
             >
               <Box>기간</Box>
               <Box sx={{ color: 'primary.main' }}>YY/MM/DD</Box>
@@ -81,8 +82,10 @@ function Personal() {
           <Box my={1} />
 
           <RoundedBorderBox>
-            <Box mb={1}>핀더펜 MONEY</Box>
-            <Box sx={{ color: 'primary.main' }}>xxxxxxx원</Box>
+            <Box p={2}>
+              <Box mb={1}>핀더펜 MONEY</Box>
+              <Box sx={{ color: 'primary.main' }}>xxxxxxx원</Box>
+            </Box>
           </RoundedBorderBox>
         </Grid>
       </Grid>
