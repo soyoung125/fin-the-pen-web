@@ -1,4 +1,6 @@
-import { Box, IconButton, Stack } from '@mui/material';
+import {
+  Box, Button, IconButton, Stack, Tooltip,
+} from '@mui/material';
 import BorderColorIcon from '@mui/icons-material/BorderColor';
 import { useNavigate } from 'react-router-dom';
 import { useEffect, useState } from 'react';
@@ -72,6 +74,41 @@ function RegularDepositWithdrawal() {
         handleClickYes={() => handleMoveToDetailPage()}
         mode="modify"
       />
+
+      <Box
+        sx={{
+          width: '100vw',
+          pr: 4,
+          position: 'fixed',
+          bottom: '50px',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+        }}
+      >
+        <Tooltip
+          open
+          arrow
+          placement="top"
+          title="정기 입출금 일정 추가하기"
+          componentsProps={{
+            tooltip: {
+              sx: {
+                bgcolor: 'primary.main',
+              },
+            },
+            arrow: {
+              sx: {
+                '&::before': {
+                  backgroundColor: 'primary.main',
+                },
+              },
+            },
+          }}
+        >
+          <Button />
+        </Tooltip>
+      </Box>
     </>
   );
 }
