@@ -1,6 +1,7 @@
-import { Box, Stack } from '@mui/material';
+import { Box, Button, Stack } from '@mui/material';
 import { Swiper, SwiperSlide } from 'swiper/react';
-
+import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
+import SettingsIcon from '@mui/icons-material/Settings';
 import 'swiper/css';
 import RoundedBorderBox from '../../../../../components/common/RoundedBorderBox';
 
@@ -14,7 +15,9 @@ function DetailCard() {
           initialSlide={1}
         >
           <SwiperSlide style={{ display: 'flex', width: 'auto', height: 'auto' }}>
-            <Box>delete</Box>
+            <Button variant="contained">
+              <DeleteForeverIcon color="error" fontSize="large" />
+            </Button>
           </SwiperSlide>
           <SwiperSlide>
             <Stack direction="row" justifyContent="space-between" p={2}>
@@ -29,7 +32,9 @@ function DetailCard() {
             </Stack>
           </SwiperSlide>
           <SwiperSlide style={{ display: 'flex', width: 'auto', height: 'auto' }}>
-            <Box sx={{ width: 0 }}>modify</Box>
+            <Button variant="contained">
+              <SettingsIcon color="warning" fontSize="large" />
+            </Button>
           </SwiperSlide>
         </Swiper>
       </RoundedBorderBox>
