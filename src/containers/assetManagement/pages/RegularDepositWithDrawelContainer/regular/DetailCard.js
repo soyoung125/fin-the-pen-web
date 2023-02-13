@@ -16,11 +16,17 @@ function DetailCard() {
         >
           <SwiperSlide style={{ display: 'flex', width: 'auto', height: 'auto' }}>
             <Button variant="contained">
-              <DeleteForeverIcon color="error" fontSize="large" />
+              <DeleteForeverIcon fontSize="large" />
             </Button>
           </SwiperSlide>
           <SwiperSlide>
-            <Stack direction="row" justifyContent="space-between" p={2}>
+            <Stack
+              direction="row"
+              justifyContent="space-between"
+              sx={{
+                p: 2,
+              }}
+            >
               <Box>
                 <Box sx={{ mb: 1 }}>매달 1일</Box>
                 <Box>OO은행 월급</Box>
@@ -33,7 +39,7 @@ function DetailCard() {
           </SwiperSlide>
           <SwiperSlide style={{ display: 'flex', width: 'auto', height: 'auto' }}>
             <Button variant="contained">
-              <SettingsIcon color="warning" fontSize="large" />
+              <SettingsIcon fontSize="large" />
             </Button>
           </SwiperSlide>
         </Swiper>
