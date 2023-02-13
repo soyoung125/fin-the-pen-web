@@ -3,7 +3,7 @@ import {
 } from '@mui/material';
 import 'swiper/css';
 import { useState } from 'react';
-import RoundedBorderBox from '../../../../../components/common/RoundedBorderBox';
+import RoundedBorderBox from '../../../../common/RoundedBorderBox';
 import ModifyModal from './ModifyModal';
 
 function DetailCard() {

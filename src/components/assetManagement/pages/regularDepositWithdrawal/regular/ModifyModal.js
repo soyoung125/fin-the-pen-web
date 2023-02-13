@@ -5,7 +5,7 @@ import {
 import ClearIcon from '@mui/icons-material/Clear';
 import RestartAltIcon from '@mui/icons-material/RestartAlt';
 import 'swiper/css';
-import ModalStaticBackdrop from '../../../../../components/layouts/ModalStaticBackdrop';
+import ModalStaticBackdrop from '../../../../layouts/ModalStaticBackdrop';
 
 function ModifyModal({ settingModalOpen, setSettingModalOpen }) {
   return (

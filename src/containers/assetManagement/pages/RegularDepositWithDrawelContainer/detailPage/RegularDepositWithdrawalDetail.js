@@ -1,8 +1,8 @@
 import { Box } from '@mui/material';
 import { useLocation } from 'react-router-dom';
 import { REGULAR_DEPOSIT_WITHDRAWAL_TYPE } from '../../../../../utils/constants/schedule';
-import DetailCard from '../regular/DetailCard';
-import Title from '../regular/Title';
+import DetailCard from '../../../../../components/assetManagement/pages/regularDepositWithdrawal/regular/DetailCard';
+import Title from '../../../../../components/assetManagement/pages/regularDepositWithdrawal/regular/Title';
 
 function RegularDepositWithdrawalDetail() {
   const { state } = useLocation();
