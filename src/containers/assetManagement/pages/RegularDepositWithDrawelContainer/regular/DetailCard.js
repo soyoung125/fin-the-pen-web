@@ -13,11 +13,11 @@ function DetailCard() {
           className="mySwiper"
           initialSlide={1}
         >
-          <SwiperSlide style={{ display: 'flex', width: 'auto' }}>
+          <SwiperSlide style={{ display: 'flex', width: 'auto', height: 'auto' }}>
             <Box>delete</Box>
           </SwiperSlide>
           <SwiperSlide>
-            <Stack direction="row" justifyContent="space-between">
+            <Stack direction="row" justifyContent="space-between" p={2}>
               <Box>
                 <Box sx={{ mb: 1 }}>매달 1일</Box>
                 <Box>OO은행 월급</Box>
@@ -28,7 +28,7 @@ function DetailCard() {
               </Box>
             </Stack>
           </SwiperSlide>
-          <SwiperSlide style={{ display: 'flex', width: 'auto' }}>
+          <SwiperSlide style={{ display: 'flex', width: 'auto', height: 'auto' }}>
             <Box sx={{ width: 0 }}>modify</Box>
           </SwiperSlide>
         </Swiper>
