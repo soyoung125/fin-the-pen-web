@@ -130,12 +130,6 @@ function Calender({ dateHeight }) {
                 width: '100vw',
               }}
               >
-                {/* <Box sx={{ fontSize: 'small', paddingRight: 1, color: 'primary.main' }}>
-                  {calculateIncomeExpenditure(schedules, day, 'week', '-')}
-                </Box>
-                <Box sx={{ fontSize: 'small', color: grey[500] }}>
-                  {calculateIncomeExpenditure(schedules, day, 'week', '+')}
-                </Box> */}
                 <WeeklyStatment
                   expenditure={calculateIncomeExpenditure(schedules, day, 'week', '-')}
                   income={calculateIncomeExpenditure(schedules, day, 'week', '+')}
