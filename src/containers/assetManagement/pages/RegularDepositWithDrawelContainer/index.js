@@ -34,7 +34,7 @@ function RegularDepositWithdrawal() {
         </Stack>
       </Title>
 
-      {deposits.map((d) => <DetailCard data={d} />)}
+      {deposits.map((d) => <DetailCard data={d} key={d.id} />)}
 
       <Title
         type="-"
@@ -48,7 +48,7 @@ function RegularDepositWithdrawal() {
         </Stack>
       </Title>
 
-      {withdrawal.map((w) => <DetailCard data={w} />)}
+      {withdrawal.map((w) => <DetailCard data={w} key={w.id} />)}
     </>
   );
 }
