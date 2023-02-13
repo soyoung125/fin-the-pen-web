@@ -72,6 +72,10 @@ const VIEW_MODE = {
   자산: 'asset',
   일정: 'schedule',
 };
+const REGULAR_DEPOSIT_WITHDRAWAL_TYPE = {
+  '+': '입금',
+  '-': '출금',
+};
 
 export default null;
 export {
@@ -83,4 +87,5 @@ export {
   INIT_SCHEDULE,
   REPEAT_CYCLE,
   VIEW_MODE,
+  REGULAR_DEPOSIT_WITHDRAWAL_TYPE,
 };
