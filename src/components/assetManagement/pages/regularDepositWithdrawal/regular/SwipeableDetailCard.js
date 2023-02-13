@@ -27,16 +27,17 @@ function SwipeableDetailCard({ data }) {
             <Stack
               direction="row"
               justifyContent="space-between"
+              spacing={5}
               sx={{
-                p: 2,
+                px: 2, py: 3,
               }}
             >
               <Box>
-                <Box sx={{ mb: 1 }}>{`매${data.repeating_cycle.charAt(0)} ${moment(data.date).format('D일')}`}</Box>
+                <Box sx={{ mb: 3 }}>{`매${data.repeating_cycle.charAt(0)} ${moment(data.date).format('D일')}`}</Box>
                 <Box>{data.event_name}</Box>
               </Box>
               <Box sx={{ textAlign: 'end' }}>
-                <Box sx={{ mb: 1 }}>{data.event_name}</Box>
+                <Box sx={{ mb: 3 }}>{data.event_name}</Box>
                 <Box sx={{ color: 'primary.main' }}>{`${parseInt(data.expected_spending, 10).toLocaleString('ko-kr')}원`}</Box>
               </Box>
             </Stack>
