@@ -39,7 +39,7 @@ function ModifyModal({ settingModalOpen, setSettingModalOpen, data }) {
               <OutlinedInput
                 id="name"
                 startAdornment={<InputAdornment position="start">{`${type}명`}</InputAdornment>}
-                  // value={personalGoal.name}
+                value={data.event_name}
                   // onChange={changePersonalGoal}
                 size="small"
                 inputProps={{
@@ -53,7 +53,7 @@ function ModifyModal({ settingModalOpen, setSettingModalOpen, data }) {
               <OutlinedInput
                 id="nickName"
                 startAdornment={<InputAdornment position="start">별명</InputAdornment>}
-                  // value={personalGoal.money}
+                value={data.event_name}
                   // onChange={changePersonalGoal}
                 size="small"
                 inputProps={{
@@ -74,7 +74,7 @@ function ModifyModal({ settingModalOpen, setSettingModalOpen, data }) {
               inputProps={{
                 style: { textAlign: 'right' },
               }}
-                // value={personalGoal.deadline}
+              value={data.date}
                 // onChange={changePersonalGoal}
               size="small"
             />
@@ -91,7 +91,7 @@ function ModifyModal({ settingModalOpen, setSettingModalOpen, data }) {
               inputProps={{
                 style: { textAlign: 'right' },
               }}
-                // value={personalGoal.deadline}
+              value={data.repeat_endDate}
                 // onChange={changePersonalGoal}
               size="small"
             />
@@ -122,7 +122,7 @@ function ModifyModal({ settingModalOpen, setSettingModalOpen, data }) {
               <OutlinedInput
                 id="amount"
                 startAdornment={<InputAdornment position="start">{`${type}액`}</InputAdornment>}
-                  // value={personalGoal.money}
+                value={data.expected_spending}
                   // onChange={changePersonalGoal}
                 size="small"
                 inputProps={{
