@@ -4,7 +4,7 @@ import {
 
 function Title({ type, title, children }) {
   return (
-    <Stack direction="row" justifyContent="space-between" alignItems="center">
+    <Stack direction="row" justifyContent="space-between" alignItems="center" mt={3} mb={1}>
       <Stack direction="row">
         <Button
           variant="contained"
