@@ -3,6 +3,7 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 import SettingsIcon from '@mui/icons-material/Settings';
 import { useState } from 'react';
+import moment from 'moment';
 import RoundedBorderBox from '../../../../common/RoundedBorderBox';
 import ModifyModal from './ModifyModal';
 
@@ -31,12 +32,12 @@ function SwipeableDetailCard({ data }) {
               }}
             >
               <Box>
-                <Box sx={{ mb: 1 }}>매달 1일</Box>
-                <Box>OO은행 월급</Box>
+                <Box sx={{ mb: 1 }}>{`매${data.repeating_cycle.charAt(0)} ${moment(data.date).format('D일')}`}</Box>
+                <Box>{data.event_name}</Box>
               </Box>
               <Box sx={{ textAlign: 'end' }}>
-                <Box sx={{ mb: 1 }}>월급날</Box>
-                <Box sx={{ color: 'primary.main' }}>xxxxxxx원</Box>
+                <Box sx={{ mb: 1 }}>{data.event_name}</Box>
+                <Box sx={{ color: 'primary.main' }}>{`${parseInt(data.expected_spending, 10).toLocaleString('ko-kr')}원`}</Box>
               </Box>
             </Stack>
           </SwiperSlide>
