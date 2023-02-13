@@ -6,17 +6,18 @@ import Title from '../../../../../components/assetManagement/pages/regularDeposi
 
 function RegularDepositWithdrawalDetail() {
   const { state } = useLocation();
+  const { type, data } = state;
 
   return (
     <>
       <Title
         type={state.type}
-        title={`정기 ${REGULAR_DEPOSIT_WITHDRAWAL_TYPE[state.type]} 내역`}
+        title={`정기 ${REGULAR_DEPOSIT_WITHDRAWAL_TYPE[type]} 내역`}
       >
-        <Box sx={{ color: 'primary.main' }}>총 n건</Box>
+        <Box sx={{ color: 'primary.main' }}>{`총 ${data.length}건`}</Box>
       </Title>
 
-      <DetailCard />
+      {data.map((d) => <DetailCard data={d} key={d.id} />)}
     </>
   );
 }

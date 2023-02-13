@@ -13,11 +13,11 @@ function RegularDepositWithdrawal() {
   const navigate = useNavigate();
   const schedules = useSelector(selectSchedules);
   const [deposits, setDeposits] = useState([]);
-  const [withdrawal, setWithdrawal] = useState([]);
+  const [withdrawals, setWithdrawals] = useState([]);
 
   useEffect(() => {
     setDeposits(schedules.filter((s) => s.repeating_cycle !== '없음' && s.type === '+'));
-    setWithdrawal(schedules.filter((s) => s.repeating_cycle !== '없음' && s.type === '-'));
+    setWithdrawals(schedules.filter((s) => s.repeating_cycle !== '없음' && s.type === '-'));
   }, []);
 
   return (
@@ -28,7 +28,7 @@ function RegularDepositWithdrawal() {
       >
         <Stack direction="row" alignItems="center" sx={{ color: 'primary.main' }}>
           <Box>{`총 ${deposits.length}건`}</Box>
-          <IconButton color="primary" onClick={() => navigate(PATH.regularDepositWithdrawalDetail, { state: { type: '+' } })}>
+          <IconButton color="primary" onClick={() => navigate(PATH.regularDepositWithdrawalDetail, { state: { type: '+', data: deposits } })}>
             <BorderColorIcon fontSize="small" />
           </IconButton>
         </Stack>
@@ -41,14 +41,14 @@ function RegularDepositWithdrawal() {
         title={`정기 ${REGULAR_DEPOSIT_WITHDRAWAL_TYPE['-']} 내역`}
       >
         <Stack direction="row" alignItems="center" sx={{ color: 'primary.main' }}>
-          <Box>{`총 ${withdrawal.length}건`}</Box>
-          <IconButton color="primary" onClick={() => navigate(PATH.regularDepositWithdrawalDetail, { state: { type: '-' } })}>
+          <Box>{`총 ${withdrawals.length}건`}</Box>
+          <IconButton color="primary" onClick={() => navigate(PATH.regularDepositWithdrawalDetail, { state: { type: '-', data: withdrawals } })}>
             <BorderColorIcon fontSize="small" />
           </IconButton>
         </Stack>
       </Title>
 
-      {withdrawal.map((w) => <DetailCard data={w} key={w.id} />)}
+      {withdrawals.map((w) => <DetailCard data={w} key={w.id} />)}
     </>
   );
 }
