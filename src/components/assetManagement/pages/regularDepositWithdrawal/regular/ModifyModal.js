@@ -6,8 +6,10 @@ import ClearIcon from '@mui/icons-material/Clear';
 import RestartAltIcon from '@mui/icons-material/RestartAlt';
 import 'swiper/css';
 import ModalStaticBackdrop from '../../../../layouts/ModalStaticBackdrop';
+import { REGULAR_DEPOSIT_WITHDRAWAL_TYPE } from '../../../../../utils/constants/schedule';
 
-function ModifyModal({ settingModalOpen, setSettingModalOpen }) {
+function ModifyModal({ settingModalOpen, setSettingModalOpen, data }) {
+  const type = REGULAR_DEPOSIT_WITHDRAWAL_TYPE[data.type];
   return (
     <ModalStaticBackdrop
       keepMounted
@@ -20,7 +22,7 @@ function ModifyModal({ settingModalOpen, setSettingModalOpen }) {
               <RestartAltIcon />
             </IconButton>
             <Typography variant="h5" sx={{ fontWeight: 'bold' }}>
-              정기 출금 내역
+              {`정기 ${type} 내역`}
             </Typography>
             <IconButton onClick={() => setSettingModalOpen(false)}>
               <ClearIcon />
@@ -36,7 +38,7 @@ function ModifyModal({ settingModalOpen, setSettingModalOpen }) {
             <FormControl fullWidth>
               <OutlinedInput
                 id="name"
-                startAdornment={<InputAdornment position="start">출금명</InputAdornment>}
+                startAdornment={<InputAdornment position="start">{`${type}명`}</InputAdornment>}
                   // value={personalGoal.name}
                   // onChange={changePersonalGoal}
                 size="small"
@@ -66,7 +68,7 @@ function ModifyModal({ settingModalOpen, setSettingModalOpen }) {
               type="date"
               fullWidth
               InputProps={{
-                startAdornment: <InputAdornment position="start">출금일</InputAdornment>,
+                startAdornment: <InputAdornment position="start">{`${type}일`}</InputAdornment>,
               }}
                 // eslint-disable-next-line react/jsx-no-duplicate-props
               inputProps={{
@@ -83,7 +85,7 @@ function ModifyModal({ settingModalOpen, setSettingModalOpen }) {
               type="date"
               fullWidth
               InputProps={{
-                startAdornment: <InputAdornment position="start">출금기간</InputAdornment>,
+                startAdornment: <InputAdornment position="start">{`${type}기간`}</InputAdornment>,
               }}
                 // eslint-disable-next-line react/jsx-no-duplicate-props
               inputProps={{
@@ -97,7 +99,7 @@ function ModifyModal({ settingModalOpen, setSettingModalOpen }) {
             {/* 입출금액 고정 */}
             <FormControl fullWidth>
               <OutlinedInput
-                startAdornment={<InputAdornment position="start">출금액 고정</InputAdornment>}
+                startAdornment={<InputAdornment position="start">{`${type}액 고정`}</InputAdornment>}
                 endAdornment={(
                   <Switch
                       // checked={personalGoal.autoSaving}
@@ -119,7 +121,7 @@ function ModifyModal({ settingModalOpen, setSettingModalOpen }) {
             <FormControl fullWidth>
               <OutlinedInput
                 id="amount"
-                startAdornment={<InputAdornment position="start">출금액</InputAdornment>}
+                startAdornment={<InputAdornment position="start">{`${type}액`}</InputAdornment>}
                   // value={personalGoal.money}
                   // onChange={changePersonalGoal}
                 size="small"
