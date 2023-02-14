@@ -6,9 +6,15 @@ import { useState } from 'react';
 import moment from 'moment';
 import RoundedBorderBox from '../../../../common/RoundedBorderBox';
 import ModifyModal from './ModifyModal';
+import AlertModal from '../../../../common/AlertModal';
 
 function SwipeableDetailCard({ data }) {
   const [settingModalOpen, setSettingModalOpen] = useState(false);
+  const [openAlertModal, setOpenAlertModal] = useState(false);
+
+  const handleDeleteSchedule = () => {
+    setOpenAlertModal(false);
+  };
 
   return (
     <Box>
@@ -19,7 +25,7 @@ function SwipeableDetailCard({ data }) {
           initialSlide={1}
         >
           <SwiperSlide style={{ display: 'flex', width: 'auto', height: 'auto' }}>
-            <Button variant="contained">
+            <Button variant="contained" onClick={() => setOpenAlertModal(true)}>
               <DeleteForeverIcon fontSize="large" />
             </Button>
           </SwiperSlide>
@@ -54,6 +60,13 @@ function SwipeableDetailCard({ data }) {
         settingModalOpen={settingModalOpen}
         setSettingModalOpen={setSettingModalOpen}
         data={data}
+      />
+
+      <AlertModal
+        open={openAlertModal}
+        handleClose={() => setOpenAlertModal(false)}
+        handleClickYes={() => handleDeleteSchedule()}
+        mode="delete"
       />
     </Box>
   );
