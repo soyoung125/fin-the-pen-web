@@ -34,7 +34,7 @@ function RegularDepositWithdrawal() {
     if (type === '+') {
       navigate(PATH.regularDepositWithdrawalDetail, { state: { type: '+', data: deposits } });
     } else if (type === '-') {
-      navigate(PATH.regularDepositWithdrawalDetail, { state: { type: '=', data: withdrawals } });
+      navigate(PATH.regularDepositWithdrawalDetail, { state: { type: '-', data: withdrawals } });
     }
   };
 
