@@ -6,6 +6,7 @@ import moment from 'moment';
 import RoundedBorderBox from '../../../../common/RoundedBorderBox';
 
 function DetailCard({ data }) {
+  console.log(data);
   return (
     <Box mb={1}>
       <RoundedBorderBox>

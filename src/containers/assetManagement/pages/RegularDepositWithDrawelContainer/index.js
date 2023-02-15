@@ -1,3 +1,6 @@
+/* eslint-disable max-len */
+/* eslint-disable no-unused-vars */
+/* eslint-disable camelcase */
 import {
   Box, Button, IconButton, Stack, Tooltip,
 } from '@mui/material';
@@ -21,9 +24,23 @@ function RegularDepositWithdrawal() {
   const [type, setType] = useState('+');
 
   useEffect(() => {
-    setDeposits(schedules.filter((s) => s.repeating_cycle !== '없음' && s.type === '+'));
-    setWithdrawals(schedules.filter((s) => s.repeating_cycle !== '없음' && s.type === '-'));
+    setDeposits(schedules.filter((s) => s.repeating_cycle !== '없음' && s.type === '+').reduce((acc, curr) => {
+      const { event_name } = curr;
+      if (acc[event_name]) acc[event_name].push(curr);
+      else acc[event_name] = [curr];
+      return acc;
+    }, {}));
+    setWithdrawals(schedules.filter((s) => s.repeating_cycle !== '없음' && s.type === '-').reduce((acc, curr) => {
+      const { event_name } = curr;
+      if (acc[event_name]) acc[event_name].push(curr);
+      else acc[event_name] = [curr];
+      return acc;
+    }, {}));
   }, []);
+
+  useEffect(() => {
+    console.log(Object.keys(deposits));
+  }, [withdrawals]);
 
   const hadleOpenAlertModal = (newType) => {
     setType(newType);
@@ -45,28 +62,28 @@ function RegularDepositWithdrawal() {
         title={`정기 ${REGULAR_DEPOSIT_WITHDRAWAL_TYPE['+']} 내역`}
       >
         <Stack direction="row" alignItems="center" sx={{ color: 'primary.main' }}>
-          <Box>{`총 ${deposits.length}건`}</Box>
+          <Box>{`총 ${Object.keys(deposits).length}건`}</Box>
           <IconButton color="primary" onClick={() => hadleOpenAlertModal('+')}>
             <BorderColorIcon fontSize="small" />
           </IconButton>
         </Stack>
       </Title>
 
-      {deposits.map((d) => <DetailCard data={d} key={d.id} />)}
+      {Object.keys(deposits).map((d) => <DetailCard data={deposits[d]} key={deposits[d].id} />)}
 
       <Title
         type="-"
         title={`정기 ${REGULAR_DEPOSIT_WITHDRAWAL_TYPE['-']} 내역`}
       >
         <Stack direction="row" alignItems="center" sx={{ color: 'primary.main' }}>
-          <Box>{`총 ${withdrawals.length}건`}</Box>
+          <Box>{`총 ${Object.keys(withdrawals).length}건`}</Box>
           <IconButton color="primary" onClick={() => hadleOpenAlertModal('-')}>
             <BorderColorIcon fontSize="small" />
           </IconButton>
         </Stack>
       </Title>
 
-      {withdrawals.map((w) => <DetailCard data={w} key={w.id} />)}
+      {Object.keys(withdrawals).map((w) => <DetailCard data={withdrawals[w][0]} key={withdrawals[w][0].id} />)}
 
       <AlertModal
         open={openAlertModal}
