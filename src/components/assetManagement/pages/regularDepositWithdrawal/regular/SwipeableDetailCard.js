@@ -17,7 +17,7 @@ function SwipeableDetailCard({ data }) {
   };
 
   return (
-    <Box>
+    <Box mb={1}>
       <RoundedBorderBox>
         <Swiper
           slidesPerView="auto"

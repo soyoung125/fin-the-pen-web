@@ -7,7 +7,7 @@ import RoundedBorderBox from '../../../../common/RoundedBorderBox';
 
 function DetailCard({ data }) {
   return (
-    <Box>
+    <Box mb={1}>
       <RoundedBorderBox>
         <Stack
           direction="row"
