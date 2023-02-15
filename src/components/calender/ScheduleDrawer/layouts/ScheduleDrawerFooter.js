@@ -12,10 +12,10 @@ import {
   // createNewSchedule,
   createSchedule, getMonthSchedules,
   // mockCreateNewSchedule,
-  modifySchedule, selectDate, selectSchedule,
+  modifySchedule, selectDate, selectSchedule, setDrawerSchedule,
 } from '../../../../utils/redux/schedule/scheduleSlice';
 import { selectUser } from '../../../../utils/redux/user/userSlice';
-import { handleCreate } from '../utils/schedule';
+import { generateRandomSchedule, handleCreate } from '../utils/schedule';
 
 /**
  * 각종 로직들 모듈로 이전 예정
@@ -66,6 +66,19 @@ function ScheduleDrawerFooter({ mode, setBottomDrawerOpen }) {
       direction="row"
       spacing={1}
     >
+      {
+        mode === 'create' && (
+          <Button
+            fullWidth
+            variant="contained"
+            color="warning"
+            onClick={() => dispatch(setDrawerSchedule(generateRandomSchedule(date)))}
+          >
+            랜덤 데이터 채우기
+          </Button>
+
+        )
+      }
       <Tooltip
         title={!guestMode && '아직 일반 모드에서는 동작하지 않습니다.'}
         placement="top"

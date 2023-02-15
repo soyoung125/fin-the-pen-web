@@ -1,5 +1,6 @@
 import moment from 'moment';
 import { v4 as uuidv4 } from 'uuid';
+import { CATEGORIES } from '../../../../utils/constants/categories';
 import { REPEAT_CYCLE, SCHEDULE_DRAWER } from '../../../../utils/constants/schedule';
 import { createSchedule, getMonthSchedules, setDrawerSchedule } from '../../../../utils/redux/schedule/scheduleSlice';
 
@@ -100,4 +101,37 @@ export const handleCreate = async (
     }));
   }
   setBottomDrawerOpen(false);
+};
+
+/**
+ * date를 주면, 해당 날짜에 랜덤한 일정을 만들어준다.
+ * @param {*} date
+ * @returns schedule
+ */
+export const generateRandomSchedule = (date) => {
+  const generateRandomString = (num) => {
+    const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890';
+    let result = '';
+    const charactersLength = characters.length;
+    for (let i = 0; i < num; i += 1) {
+      result += characters.charAt(Math.floor(Math.random() * charactersLength));
+    }
+    return result;
+  };
+  const importances = ['상', '중', '하'];
+  return {
+    event_name: generateRandomString(5),
+    alarm: Math.floor(Math.random() * 2) === 0,
+    date: date.format('YYYY-MM-DD'),
+    start_time: `0${Math.floor(Math.random() * 9 + 1)}:00`,
+    end_time: `2${Math.floor(Math.random() * 4)}:00`,
+    repeating_cycle: '없음',
+    repeat_deadline: '없음',
+    repeat_endDate: date,
+    category: CATEGORIES[Math.floor(Math.random() * CATEGORIES.length)].title,
+    type: (Math.floor(Math.random() * 2)) % 2 === 0 ? '-' : '+',
+    expected_spending: Math.floor(Math.random() * 1000) * 100,
+    importance: importances[Math.floor(Math.random() * 3)],
+    exclusion: Math.floor(Math.random() * 2) === 0,
+  };
 };

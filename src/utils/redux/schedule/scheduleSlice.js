@@ -126,11 +126,11 @@ export const scheduleSlice = createSlice({
   extraReducers: (builder) => {
     builder
       .addCase(getMonthSchedules.pending, (state) => {
-      // getMonthSchedules 가 진행중일 때
+        // getMonthSchedules 가 진행중일 때
         state.status = 'loading';
       })
       .addCase(getMonthSchedules.fulfilled, (state, action) => {
-      // getMonthSchedules 가 끝나면
+        // getMonthSchedules 가 끝나면
         state.status = 'idle';
         state.schedules = action.payload;
       })
