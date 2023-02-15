@@ -12,10 +12,6 @@ export const updateSchedule = (dispatch, schedule, state) => {
   dispatch(setDrawerSchedule({ ...schedule, [state.target.id]: state.target.value }));
 };
 
-export const updateAlarm = (dispatch, schedule) => {
-  dispatch(setDrawerSchedule({ ...schedule, alarm: !schedule.alarm }));
-};
-
 export const updateRepeat = (dispatch, schedule, setOpenDatePickerModal, state) => {
   if ((state.target.name === 'repeating_cycle') && (state.target.value === '없음')) {
     dispatch(setDrawerSchedule({

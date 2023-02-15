@@ -1,14 +1,13 @@
-/* eslint-disable no-unused-vars */
 import {
   FormControl, IconButton, InputAdornment, OutlinedInput,
 } from '@mui/material';
 import NotificationsNoneIcon from '@mui/icons-material/NotificationsNone';
 import { useDispatch, useSelector } from 'react-redux';
 import { SCHEDULE_DRAWER } from '../../../../utils/constants/schedule';
-import { updateAlarm, updateSchedule } from '../utils/schedule';
+import { updateSchedule } from '../utils/schedule';
 import { selectSchedule } from '../../../../utils/redux/schedule/scheduleSlice';
 
-function NameInput({ setSchedule }) {
+function NameInput() {
   const dispatch = useDispatch();
   const schedule = useSelector(selectSchedule);
 
@@ -17,7 +16,12 @@ function NameInput({ setSchedule }) {
   };
 
   const changeAlarm = () => {
-    updateAlarm(dispatch, schedule);
+    updateSchedule(dispatch, schedule, {
+      target: {
+        id: 'alarm',
+        value: !schedule.alarm,
+      },
+    });
   };
   return (
     <FormControl fullWidth>
