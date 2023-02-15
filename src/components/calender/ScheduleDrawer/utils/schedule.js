@@ -38,10 +38,6 @@ export const updateRepeatEndDate = (schedule, setRepeatEndDate, endDate) => {
   }
 };
 
-export const updateCategory = (dispatch, schedule, category) => {
-  dispatch(setDrawerSchedule({ ...schedule, category }));
-};
-
 export const updateSpendingType = (dispatch, schedule) => {
   if (schedule.type === SCHEDULE_DRAWER.type_plus) {
     dispatch(setDrawerSchedule({ ...schedule, type: SCHEDULE_DRAWER.type_minus }));

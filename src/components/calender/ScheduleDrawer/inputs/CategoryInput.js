@@ -7,7 +7,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { CATEGORIES } from '../../../../utils/constants/categories';
 import { SCHEDULE_DRAWER } from '../../../../utils/constants/schedule';
 import { selectSchedule } from '../../../../utils/redux/schedule/scheduleSlice';
-import { updateCategory } from '../utils/schedule';
+import { updateSchedule } from '../utils/schedule';
 
 export default function CategoryInput({ selected }) {
   const dispatch = useDispatch();
@@ -20,7 +20,12 @@ export default function CategoryInput({ selected }) {
     if (value) {
       const category = CATEGORIES.filter((cat) => cat.title === value);
       if (category.length > 0) {
-        updateCategory(dispatch, schedule, category[0].title);
+        updateSchedule(dispatch, schedule, {
+          target: {
+            id: 'category',
+            value: category[0].title,
+          },
+        });
       }
     }
   }, [value]);
