@@ -35,12 +35,12 @@ export const createSchedule = createAsyncThunk(
   async (scheduleWithUuid, { getState }) => {
     const { guestMode } = getState().common;
     if (guestMode) {
-      console.log('게스트 모드에서 추가');
+      // console.log('게스트 모드에서 추가');/
       const response = await fetchMockCreateSchedule(scheduleWithUuid);
       return response.data;
     }
-    console.log('일반 모드에서 추가');
-    console.log(scheduleWithUuid);
+    // console.log('일반 모드에서 추가');
+    // console.log(scheduleWithUuid);
     await fetchCreateSchedule(scheduleWithUuid);
     return null;
   },
@@ -49,14 +49,14 @@ export const createSchedule = createAsyncThunk(
 export const deleteSchedule = createAsyncThunk(
   'schedule/deleteSchedule',
   async (id, { getState }) => {
-    console.log(id);
+    // console.log(id);
     const { guestMode } = getState().common;
     if (guestMode) {
-      console.log('게스트 모드에서 제거');
+      // console.log('게스트 모드에서 제거');
       const response = await fetchMockDeleteSchedule(id);
       return response.data;
     }
-    console.log('일반 모드에서 제거');
+    // console.log('일반 모드에서 제거');
     await fetchDeleteSchedule(id);
     return null;
   },
