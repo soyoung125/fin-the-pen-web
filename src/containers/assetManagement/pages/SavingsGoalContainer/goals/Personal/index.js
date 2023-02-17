@@ -7,9 +7,9 @@ import BorderColorIcon from '@mui/icons-material/BorderColor';
 import { useEffect, useState } from 'react';
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 import ClearIcon from '@mui/icons-material/Clear';
-import ModalStaticBackdrop from '../../../../../components/layouts/ModalStaticBackdrop';
-import RoundedBorderBox from '../../../../../components/common/RoundedBorderBox';
-import { SOMETHING_IS_WRONG } from '../../../../../utils/constants/common';
+import ModalStaticBackdrop from '../../../../../../components/layouts/ModalStaticBackdrop';
+import RoundedBorderBox from '../../../../../../components/common/RoundedBorderBox';
+import { SOMETHING_IS_WRONG } from '../../../../../../utils/constants/common';
 
 function Personal() {
   const [personalGoalModalOpen, setPersonalGoalModalOpen] = useState(false);
@@ -220,7 +220,7 @@ function Personal() {
                       })}
                       inputProps={{ 'aria-label': 'controlled' }}
                     />
-)}
+                  )}
                   size="small"
                   readOnly
                 />
