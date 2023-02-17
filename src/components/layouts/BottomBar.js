@@ -1,6 +1,5 @@
-/* eslint-disable no-unused-vars */
 import {
-  BottomNavigation, BottomNavigationAction, Drawer, Paper, Stack, Typography,
+  BottomNavigation, BottomNavigationAction, Drawer, Paper,
 } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
@@ -15,7 +14,6 @@ import PATH from '../../utils/constants/path';
 import ScheduleDrawer from '../calender/ScheduleDrawer';
 import { INIT_SCHEDULE, SCHEDULE_DRAWER_MODE } from '../../utils/constants/schedule';
 import { selectDate } from '../../utils/redux/schedule/scheduleSlice';
-import CenterBox from './CenterBox';
 import { selectBottomDrawerOpen, setBottomDrawerOpenFalse, setBottomDrawerOpenTrue } from '../../utils/redux/common/commonSlice';
 
 function BottomBar({ value, setValue }) {
@@ -23,7 +21,6 @@ function BottomBar({ value, setValue }) {
   const bottomDrawerOpen = useSelector(selectBottomDrawerOpen);
   const date = useSelector(selectDate);
   const navigate = useNavigate();
-  // const [bottomDrawerOpen, setBottomDrawerOpen] = useState(false);
 
   const [drawerWidth, setDrawerWidth] = useState(0);
 
@@ -55,7 +52,6 @@ function BottomBar({ value, setValue }) {
       <Drawer
         open={bottomDrawerOpen}
         anchor="bottom"
-        // onClose={() => setBottomDrawerOpen(false)}
         onClose={() => dispatch(setBottomDrawerOpenFalse())}
         // Drawer를 가운데로 위치할 수 있도록 도와줌. resize는 이후 업데이트 예정
         PaperProps={{
@@ -68,7 +64,6 @@ function BottomBar({ value, setValue }) {
         {/* 이 부분을 범용적으로 사용할 수 있게 만드는 건 어떨까? */}
         <ScheduleDrawer
           setDrawerWidth={setDrawerWidth}
-          // setBottomDrawerOpen={setBottomDrawerOpen}
           data={{
             ...INIT_SCHEDULE(moment(date).format('YYYY-MM-DD')),
           }}

@@ -1,4 +1,3 @@
-/* eslint-disable no-unused-vars */
 import {
   Box, CircularProgress, Drawer, Stack, Typography,
 } from '@mui/material';
@@ -15,7 +14,6 @@ import ScheduleCard from './ScheduleCard';
 function ScheduleList() {
   const dispatch = useDispatch();
   const bottomDrawerOpen = useSelector(selectBottomDrawerOpen);
-  // const [bottomDrawerOpen, setBottomDrawerOpen] = useState(false);
   const [selectedSchedule, setSelectedSchedule] = useState(null);
   const status = useSelector(selectStatus);
   const schedules = useSelector(selectSchedules);
@@ -24,7 +22,6 @@ function ScheduleList() {
 
   const handleModal = (schedule) => {
     setSelectedSchedule(schedule);
-    // setBottomDrawerOpen(true);
     dispatch(setBottomDrawerOpenTrue());
   };
 
@@ -78,7 +75,6 @@ function ScheduleList() {
       <Drawer
         open={bottomDrawerOpen}
         anchor="bottom"
-        // onClose={() => setBottomDrawerOpen(false)}
         onClose={() => dispatch(setBottomDrawerOpenFalse())}
         // Drawer를 가운데로 위치할 수 있도록 도와줌. resize는 이후 업데이트 예정
         PaperProps={{
@@ -91,7 +87,6 @@ function ScheduleList() {
         {/* 이 부분을 범용적으로 사용할 수 있게 만드는 건 어떨까? */}
         <ScheduleDrawer
           setDrawerWidth={setDrawerWidth}
-          // setBottomDrawerOpen={setBottomDrawerOpen}
           data={selectedSchedule}
           mode={SCHEDULE_DRAWER_MODE.수정}
         />
