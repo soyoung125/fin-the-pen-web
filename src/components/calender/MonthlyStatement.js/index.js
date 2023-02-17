@@ -2,8 +2,8 @@ import {
   Stack, Typography,
 } from '@mui/material';
 import moment from 'moment';
-import { useSelector } from 'react-redux';
-import { selectDate, selectSchedules } from '../../../utils/redux/schedule/scheduleSlice';
+import { useDispatch, useSelector } from 'react-redux';
+import { selectDate, selectSchedules, selectedDate } from '../../../utils/redux/schedule/scheduleSlice';
 import { calculateIncomeExpenditure } from '../../../utils/tools';
 import StatusStack from '../../assetManagement/ScheduleStatusCard/StatusStack';
 import SwitchingHeader from '../../common/SwitchingHeader';
@@ -11,12 +11,16 @@ import RoundedPaper from '../../common/RoundedPaper';
 import RoundedBorderBox from '../../common/RoundedBorderBox';
 
 function MonthlyStatement() {
+  const dispatch = useDispatch();
   const schedules = useSelector(selectSchedules);
   const date = useSelector(selectDate);
 
   return (
     <RoundedPaper>
-      <SwitchingHeader>
+      <SwitchingHeader
+        handleClickLeftArrow={() => dispatch(selectedDate(moment(date).subtract(1, 'months')))}
+        handleClickRightArrow={() => dispatch(selectedDate(moment(date).add(1, 'months')))}
+      >
         <Typography variant="h6" sx={{ fontWeight: 'bold' }}>{`${moment(date).format('M')}월`}</Typography>
         <Typography variant="caption">{moment(date).format('YYYY')}</Typography>
       </SwitchingHeader>
