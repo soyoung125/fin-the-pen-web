@@ -10,12 +10,14 @@ import userReducer from './user/userSlice';
 import scheduleReducer from './schedule/scheduleSlice';
 import commonReducer from './common/commonSlice';
 import settingReducer from './setting/settingSlice';
+import assetReducer from './asset/assetSlice';
 
 const reducers = combineReducers({
   common: commonReducer,
   user: userReducer,
   schedule: scheduleReducer,
   setting: settingReducer,
+  asset: assetReducer,
   // 리듀서 추가를 여기에 해주삼 ㅇㅇ
 });
 
