@@ -5,6 +5,7 @@ const initialState = {
   headerOpen: true,
   headerMode: 'home',
   guestMode: false,
+  bottomDrawerOpen: false,
 };
 
 export const commonSlice = createSlice({
@@ -27,6 +28,12 @@ export const commonSlice = createSlice({
     setGuestModeFalse: (state) => {
       state.guestMode = false;
     },
+    setBottomDrawerOpenTrue: (state) => {
+      state.bottomDrawerOpen = true;
+    },
+    setBottomDrawerOpenFalse: (state) => {
+      state.bottomDrawerOpen = false;
+    },
   },
 });
 export const {
@@ -34,10 +41,13 @@ export const {
   setHeaderOpenFalse,
   setGuestModeTrue,
   setGuestModeFalse,
+  setBottomDrawerOpenTrue,
+  setBottomDrawerOpenFalse,
 } = commonSlice.actions;
 
 export const selectHeaderOpen = (state) => state.common.headerOpen;
 export const selectHeaderMode = (state) => state.common.headerMode;
 export const selectGuestMode = (state) => state.common.guestMode;
+export const selectBottomDrawerOpen = (state) => state.common.bottomDrawerOpen;
 
 export default commonSlice.reducer;

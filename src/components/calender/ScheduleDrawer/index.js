@@ -26,7 +26,7 @@ function TransitionUp(props) {
 }
 
 function ScheduleDrawer({
-  setDrawerWidth, setBottomDrawerOpen, data, mode,
+  setDrawerWidth, data, mode,
 }) {
   // 추후 삭제 예정
   const random = Math.floor((Math.random() * 5));
@@ -80,7 +80,6 @@ function ScheduleDrawer({
             >
               <ScheduleDrawerHeader
                 mode={mode}
-                setBottomDrawerOpen={setBottomDrawerOpen}
               />
 
               {/* 이벤트 제목 */}
@@ -123,7 +122,6 @@ function ScheduleDrawer({
               {/* 제출 버튼 */}
               <ScheduleDrawerFooter
                 mode={mode}
-                setBottomDrawerOpen={setBottomDrawerOpen}
               />
             </Stack>
           </Box>

@@ -9,18 +9,21 @@ import AddCircleIcon from '@mui/icons-material/AddCircle';
 import { useState } from 'react';
 import SettingsIcon from '@mui/icons-material/Settings';
 import PaidIcon from '@mui/icons-material/Paid';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import moment from 'moment';
 import PATH from '../../utils/constants/path';
 import ScheduleDrawer from '../calender/ScheduleDrawer';
 import { INIT_SCHEDULE, SCHEDULE_DRAWER_MODE } from '../../utils/constants/schedule';
 import { selectDate } from '../../utils/redux/schedule/scheduleSlice';
 import CenterBox from './CenterBox';
+import { selectBottomDrawerOpen, setBottomDrawerOpenFalse, setBottomDrawerOpenTrue } from '../../utils/redux/common/commonSlice';
 
 function BottomBar({ value, setValue }) {
+  const dispatch = useDispatch();
+  const bottomDrawerOpen = useSelector(selectBottomDrawerOpen);
   const date = useSelector(selectDate);
   const navigate = useNavigate();
-  const [bottomDrawerOpen, setBottomDrawerOpen] = useState(false);
+  // const [bottomDrawerOpen, setBottomDrawerOpen] = useState(false);
 
   const [drawerWidth, setDrawerWidth] = useState(0);
 
@@ -44,7 +47,7 @@ function BottomBar({ value, setValue }) {
         >
           <BottomNavigationAction label="홈" icon={<CalendarMonthIcon />} onClick={() => navigate(PATH.home)} />
           <BottomNavigationAction label="리포트" icon={<DataSaverOffIcon />} onClick={() => navigate(PATH.analysis)} />
-          <BottomNavigationAction label="" icon={<AddCircleIcon />} onClick={() => setBottomDrawerOpen(true)} />
+          <BottomNavigationAction label="" icon={<AddCircleIcon />} onClick={() => dispatch(setBottomDrawerOpenTrue())} />
           <BottomNavigationAction label="자산관리" icon={<PaidIcon />} onClick={() => navigate(PATH.assetManagement)} />
           <BottomNavigationAction label="설정" icon={<SettingsIcon />} onClick={() => navigate(PATH.settings)} />
         </BottomNavigation>
@@ -52,7 +55,8 @@ function BottomBar({ value, setValue }) {
       <Drawer
         open={bottomDrawerOpen}
         anchor="bottom"
-        onClose={() => setBottomDrawerOpen(false)}
+        // onClose={() => setBottomDrawerOpen(false)}
+        onClose={() => dispatch(setBottomDrawerOpenFalse())}
         // Drawer를 가운데로 위치할 수 있도록 도와줌. resize는 이후 업데이트 예정
         PaperProps={{
           sx: {
@@ -64,7 +68,7 @@ function BottomBar({ value, setValue }) {
         {/* 이 부분을 범용적으로 사용할 수 있게 만드는 건 어떨까? */}
         <ScheduleDrawer
           setDrawerWidth={setDrawerWidth}
-          setBottomDrawerOpen={setBottomDrawerOpen}
+          // setBottomDrawerOpen={setBottomDrawerOpen}
           data={{
             ...INIT_SCHEDULE(moment(date).format('YYYY-MM-DD')),
           }}

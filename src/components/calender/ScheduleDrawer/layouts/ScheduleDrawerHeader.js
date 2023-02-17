@@ -6,9 +6,9 @@ import { useDispatch, useSelector } from 'react-redux';
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 import { SCHEDULE_DRAWER, SCHEDULE_DRAWER_MODE } from '../../../../utils/constants/schedule';
 import { deleteSchedule, selectSchedule } from '../../../../utils/redux/schedule/scheduleSlice';
-import { selectGuestMode } from '../../../../utils/redux/common/commonSlice';
+import { selectGuestMode, setBottomDrawerOpenFalse } from '../../../../utils/redux/common/commonSlice';
 
-function ScheduleDrawerHeader({ mode, setBottomDrawerOpen }) {
+function ScheduleDrawerHeader({ mode }) {
   const dispatch = useDispatch();
   const schedule = useSelector(selectSchedule);
   const guestMode = useSelector(selectGuestMode);
@@ -17,13 +17,13 @@ function ScheduleDrawerHeader({ mode, setBottomDrawerOpen }) {
     if (window.confirm('정말로 삭제 하시겠습니까?')) {
       console.log(schedule.id);
       dispatch(deleteSchedule(schedule.id));
-      setBottomDrawerOpen(false);
+      dispatch(setBottomDrawerOpenFalse());
     }
   };
 
   return (
     <Stack direction="row" alignItems="center" justifyContent="space-between">
-      <Button onClick={() => setBottomDrawerOpen(false)}><ClearIcon /></Button>
+      <Button onClick={() => dispatch(setBottomDrawerOpenFalse())}><ClearIcon /></Button>
       <Typography variant="h5" sx={{ fontWeight: 'bold' }}>{SCHEDULE_DRAWER.drawer_title[mode]}</Typography>
 
       {
