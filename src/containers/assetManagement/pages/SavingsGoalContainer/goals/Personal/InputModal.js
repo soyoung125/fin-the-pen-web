@@ -5,23 +5,22 @@ import {
 import ClearIcon from '@mui/icons-material/Clear';
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 import { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { SOMETHING_IS_WRONG } from '../../../../../../utils/constants/common';
+import { selectPersonalGoal, setPersonalGoal } from '../../../../../../utils/redux/asset/assetSlice';
 
 function InputModal({
   setPersonalGoalModalOpen,
 }) {
-  const init = {
-    name: 'i-Mac',
-    money: 2027100,
+  const [form, setForm] = useState({
+    name: '',
+    money: 0,
     deadline: '2024-01-01',
-    type: 'month', // day||month
+    type: 'day', // day||month
     autoSaving: true,
-  };
-
-  const [personalGoal, setPersonalGoal] = useState(init);
-
+  });
   const changePersonalGoal = (state) => {
-    setPersonalGoal({ ...personalGoal, [state.target.id]: state.target.value });
+    setForm({ ...form, [state.target.id]: state.target.value });
   };
 
   const divisionByType = (type, money) => {
@@ -35,9 +34,11 @@ function InputModal({
     }
   };
 
+  const dispatch = useDispatch();
+  const personal = useSelector(selectPersonalGoal);
   useEffect(() => {
-    console.log(personalGoal);
-  }, [personalGoal]);
+    setForm(personal);
+  }, [personal]);
 
   return (
     <Stack p={2} spacing={1}>
@@ -48,7 +49,16 @@ function InputModal({
         <Typography variant="h5" sx={{ fontWeight: 'bold' }}>
           Personal Goal
         </Typography>
-        <IconButton onClick={() => setPersonalGoal(init)} color="error">
+        <IconButton
+          onClick={() => setForm({
+            name: '',
+            money: 0,
+            deadline: '2024-01-01',
+            type: '', // day||month
+            autoSaving: true,
+          })}
+          color="error"
+        >
           <DeleteForeverIcon />
         </IconButton>
       </Stack>
@@ -63,7 +73,7 @@ function InputModal({
           <OutlinedInput
             id="name"
             startAdornment={<InputAdornment position="start">목표</InputAdornment>}
-            value={personalGoal.name}
+            value={form.name}
             onChange={changePersonalGoal}
             size="small"
             inputProps={{
@@ -77,7 +87,7 @@ function InputModal({
           <OutlinedInput
             id="money"
             startAdornment={<InputAdornment position="start">금액</InputAdornment>}
-            value={personalGoal.money}
+            value={form.money}
             onChange={changePersonalGoal}
             size="small"
             inputProps={{
@@ -103,7 +113,7 @@ function InputModal({
           inputProps={{
             style: { textAlign: 'right' },
           }}
-          value={personalGoal.deadline}
+          value={form.deadline}
           onChange={changePersonalGoal}
           size="small"
         />
@@ -113,7 +123,7 @@ function InputModal({
           <Button
             fullWidth
             id="type"
-            variant={personalGoal.type === 'day' ? 'contained' : 'outlined'}
+            variant={form.type === 'day' ? 'contained' : 'outlined'}
             onClick={() => changePersonalGoal({
               target: {
                 id: 'type',
@@ -126,7 +136,7 @@ function InputModal({
           <Button
             fullWidth
             id="type"
-            variant={personalGoal.type === 'month' ? 'contained' : 'outlined'}
+            variant={form.type === 'month' ? 'contained' : 'outlined'}
             onClick={() => changePersonalGoal({
               target: {
                 id: 'type',
@@ -142,7 +152,7 @@ function InputModal({
         <FormControl fullWidth>
           <OutlinedInput
             startAdornment={<InputAdornment position="start">필요 적금액</InputAdornment>}
-            value={divisionByType(personalGoal.type, personalGoal.money)}
+            value={divisionByType(form.type, form.money)}
             size="small"
             inputProps={{
               style: { textAlign: 'right' },
@@ -156,11 +166,11 @@ function InputModal({
             startAdornment={<InputAdornment position="start">자동 적금</InputAdornment>}
             endAdornment={(
               <Switch
-                checked={personalGoal.autoSaving}
+                checked={form.autoSaving}
                 onChange={() => changePersonalGoal({
                   target: {
                     id: 'autoSaving',
-                    value: !personalGoal.autoSaving,
+                    value: !form.autoSaving,
                   },
                 })}
                 inputProps={{ 'aria-label': 'controlled' }}
@@ -172,7 +182,14 @@ function InputModal({
         </FormControl>
 
       </Stack>
-      <Button fullWidth variant="contained">
+      <Button
+        fullWidth
+        variant="contained"
+        onClick={() => {
+          dispatch(setPersonalGoal(form));
+          setPersonalGoalModalOpen(false);
+        }}
+      >
         나만의 목표 설정하기
       </Button>
     </Stack>

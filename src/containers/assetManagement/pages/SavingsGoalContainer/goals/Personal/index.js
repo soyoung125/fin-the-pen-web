@@ -7,14 +7,16 @@ import BorderColorIcon from '@mui/icons-material/BorderColor';
 import { useEffect, useState } from 'react';
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 import ClearIcon from '@mui/icons-material/Clear';
+import { useSelector } from 'react-redux';
 import ModalStaticBackdrop from '../../../../../../components/layouts/ModalStaticBackdrop';
 import RoundedBorderBox from '../../../../../../components/common/RoundedBorderBox';
 import { SOMETHING_IS_WRONG } from '../../../../../../utils/constants/common';
 import InputModal from './InputModal';
+import { selectPersonalGoal } from '../../../../../../utils/redux/asset/assetSlice';
 
 function Personal() {
   const [personalGoalModalOpen, setPersonalGoalModalOpen] = useState(false);
-
+  const personal = useSelector(selectPersonalGoal);
   return (
     <>
       <Stack direction="row" justifyContent="space-between" alignItems="center">
@@ -35,8 +37,11 @@ function Personal() {
             }}
           >
             <Box mb={2}>나의 목표</Box>
-            <Box>i-Mac</Box>
-            <Box>xxxxxxx원</Box>
+            <Box>{personal.name}</Box>
+            <Box>
+              {personal.money}
+              원
+            </Box>
           </Stack>
         </Grid>
 
@@ -48,7 +53,7 @@ function Personal() {
               p={2}
             >
               <Box>기간</Box>
-              <Box sx={{ color: 'primary.main' }}>YY/MM/DD</Box>
+              <Box sx={{ color: 'primary.main' }}>{personal.deadline}</Box>
             </Stack>
           </RoundedBorderBox>
 

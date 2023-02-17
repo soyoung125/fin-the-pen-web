@@ -8,10 +8,10 @@ const initialState = {
       month: 0,
     },
     personal: {
-      name: '',
+      name: 'dd',
       money: 0,
       deadline: '2024-01-01',
-      type: 'day', // month,
+      type: 'day', // day||month,
       autoSaving: true,
     },
   },
@@ -24,10 +24,14 @@ export const assetSlice = createSlice({
     setSavingGoal: (state, action) => {
       state.goal.saving = action.payload;
     },
+    setPersonalGoal: (state, action) => {
+      state.goal.personal = action.payload;
+    },
   },
 });
 export const {
   setSavingGoal,
+  setPersonalGoal,
 } = assetSlice.actions;
 
 export const selectSavingGoal = (state) => state.asset.goal.saving;
