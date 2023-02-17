@@ -14,9 +14,11 @@ import Title from '../../../../components/assetManagement/pages/regularDepositWi
 import PATH from '../../../../utils/constants/path';
 import { selectSchedules } from '../../../../utils/redux/schedule/scheduleSlice';
 import AlertModal from '../../../../components/common/AlertModal';
+import { selectBottomDrawerOpen } from '../../../../utils/redux/common/commonSlice';
 
 function RegularDepositWithdrawal() {
   const navigate = useNavigate();
+  const bottomDrawerOpen = useSelector(selectBottomDrawerOpen);
   const schedules = useSelector(selectSchedules);
   const [deposits, setDeposits] = useState([]);
   const [withdrawals, setWithdrawals] = useState([]);
@@ -104,7 +106,7 @@ function RegularDepositWithdrawal() {
         }}
       >
         <Tooltip
-          open
+          open={!bottomDrawerOpen}
           arrow
           placement="top"
           title="정기 입출금 일정 추가하기"
