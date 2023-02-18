@@ -72,7 +72,7 @@ export const handleCreate = async (
   user,
   guestMode,
   date,
-  setBottomDrawerOpenFalse,
+  handleClose,
 ) => {
   const scheduleWithUuid = {
     ...schedule,
@@ -100,7 +100,7 @@ export const handleCreate = async (
       date: moment(date).format('YYYY-MM'),
     }));
   }
-  dispatch(setBottomDrawerOpenFalse());
+  handleClose();
 };
 
 /**

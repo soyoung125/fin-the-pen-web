@@ -7,7 +7,7 @@ import { NEED_SIGN_IN, NOT_AVAILABLE } from '../../../../utils/constants/common'
 import {
   NEED_TITLE, REPEAT_CYCLE, SCHEDULE_DRAWER,
 } from '../../../../utils/constants/schedule';
-import { selectGuestMode, setBottomDrawerOpenFalse } from '../../../../utils/redux/common/commonSlice';
+import { selectGuestMode } from '../../../../utils/redux/common/commonSlice';
 import {
   // createNewSchedule,
   createSchedule, getMonthSchedules,
@@ -21,7 +21,7 @@ import { generateRandomSchedule, handleCreate } from '../utils/schedule';
  * 각종 로직들 모듈로 이전 예정
  */
 
-function ScheduleDrawerFooter({ mode }) {
+function ScheduleDrawerFooter({ mode, handleClose }) {
   const date = useSelector(selectDate);
   const user = useSelector(selectUser);
   const guestMode = useSelector(selectGuestMode);
@@ -34,7 +34,7 @@ function ScheduleDrawerFooter({ mode }) {
      */
     if (guestMode) {
       dispatch(modifySchedule(schedule));
-      dispatch(setBottomDrawerOpenFalse());
+      handleClose();
     } else {
       alert(NOT_AVAILABLE);
     }
@@ -43,7 +43,7 @@ function ScheduleDrawerFooter({ mode }) {
   const handleMode = () => {
     switch (mode) {
       case 'create':
-        handleCreate(dispatch, schedule, user, guestMode, date, setBottomDrawerOpenFalse);
+        handleCreate(dispatch, schedule, user, guestMode, date, handleClose);
         break;
       case 'modify':
         handleModify();
