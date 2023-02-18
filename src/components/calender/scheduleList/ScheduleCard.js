@@ -7,8 +7,17 @@ import SettingsIcon from '@mui/icons-material/Settings';
 import { grey } from '@mui/material/colors';
 import { useState } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
+import { useDispatch } from 'react-redux';
+import { deleteSelectedSchedule } from '../../../utils/tools';
+import { setBottomDrawerOpenFalse } from '../../../utils/redux/common/commonSlice';
 
 function ScheduleCard({ schedule, handleModal, category }) {
+  const dispatch = useDispatch();
+
+  const handleClose = () => {
+    dispatch(setBottomDrawerOpenFalse());
+  };
+
   return (
     <>
       <Swiper
@@ -17,7 +26,7 @@ function ScheduleCard({ schedule, handleModal, category }) {
         initialSlide={1}
       >
         <SwiperSlide style={{ display: 'flex', width: 'auto', height: 'auto' }}>
-          <Button variant="contained" onClick={() => console.log(1)}>
+          <Button variant="contained" onClick={() => deleteSelectedSchedule(dispatch, schedule, handleClose)}>
             <DeleteForeverIcon fontSize="large" />
           </Button>
         </SwiperSlide>
