@@ -1,6 +1,7 @@
 /* eslint-disable import/prefer-default-export */
 
 import { TIME_SELECTOR } from './constants/schedule';
+import { deleteSchedule } from './redux/schedule/scheduleSlice';
 
 /**
  * 유용한 함수들을 모아두는 곳.
@@ -109,4 +110,12 @@ export const isTimeOrderCorrect = (startTime, endTime) => {
     return false;
   }
   return true;
+};
+
+export const deleteSelectedSchedule = (dispatch, schedule, handleClose) => {
+  if (window.confirm('정말로 삭제 하시겠습니까?')) {
+    console.log(schedule.id);
+    dispatch(deleteSchedule(schedule.id));
+    handleClose();
+  }
 };

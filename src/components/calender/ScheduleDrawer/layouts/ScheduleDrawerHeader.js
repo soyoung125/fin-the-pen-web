@@ -5,22 +5,14 @@ import ClearIcon from '@mui/icons-material/Clear';
 import { useDispatch, useSelector } from 'react-redux';
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 import { SCHEDULE_DRAWER, SCHEDULE_DRAWER_MODE } from '../../../../utils/constants/schedule';
-import { deleteSchedule, selectSchedule } from '../../../../utils/redux/schedule/scheduleSlice';
+import { selectSchedule } from '../../../../utils/redux/schedule/scheduleSlice';
 import { selectGuestMode } from '../../../../utils/redux/common/commonSlice';
+import { deleteSelectedSchedule } from '../../../../utils/tools';
 
 function ScheduleDrawerHeader({ mode, handleClose }) {
   const dispatch = useDispatch();
   const schedule = useSelector(selectSchedule);
   const guestMode = useSelector(selectGuestMode);
-
-  const deleteSelectedSchedule = () => {
-    if (window.confirm('정말로 삭제 하시겠습니까?')) {
-      console.log(schedule.id);
-      dispatch(deleteSchedule(schedule.id));
-      // dispatch(setBottomDrawerOpenFalse());
-      handleClose();
-    }
-  };
 
   return (
     <Stack direction="row" alignItems="center" justifyContent="space-between">
@@ -35,7 +27,7 @@ function ScheduleDrawerHeader({ mode, handleClose }) {
               placement="top"
             >
               <Button
-                onClick={() => deleteSelectedSchedule()}
+                onClick={() => deleteSelectedSchedule(dispatch, schedule, handleClose)}
                 color="error"
               >
                 <DeleteForeverIcon />
