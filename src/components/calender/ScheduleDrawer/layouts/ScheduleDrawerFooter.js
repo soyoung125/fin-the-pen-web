@@ -1,16 +1,11 @@
-/* eslint-disable no-unused-vars */
 import { Button, Stack, Tooltip } from '@mui/material';
-import moment from 'moment';
 import { useDispatch, useSelector } from 'react-redux';
-import { v4 as uuidv4 } from 'uuid';
 import { NEED_SIGN_IN, NOT_AVAILABLE } from '../../../../utils/constants/common';
 import {
-  NEED_TITLE, REPEAT_CYCLE, SCHEDULE_DRAWER,
+  NEED_TITLE, SCHEDULE_DRAWER,
 } from '../../../../utils/constants/schedule';
 import { selectGuestMode } from '../../../../utils/redux/common/commonSlice';
 import {
-  // createNewSchedule,
-  createSchedule, getMonthSchedules,
   // mockCreateNewSchedule,
   modifySchedule, selectDate, selectSchedule, setDrawerSchedule,
 } from '../../../../utils/redux/schedule/scheduleSlice';
