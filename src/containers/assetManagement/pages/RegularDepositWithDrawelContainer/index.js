@@ -1,3 +1,4 @@
+/* eslint-disable no-use-before-define */
 /* eslint-disable max-len */
 /* eslint-disable no-unused-vars */
 /* eslint-disable camelcase */
@@ -21,28 +22,28 @@ function RegularDepositWithdrawal() {
   const bottomDrawerOpen = useSelector(selectBottomDrawerOpen);
   const schedules = useSelector(selectSchedules);
   const [deposits, setDeposits] = useState([]);
+  const [depositsGroup, setDepositsGroup] = useState([]);
   const [withdrawals, setWithdrawals] = useState([]);
+  const [withdrawalsGroup, setWithdrawalsGroup] = useState([]);
   const [openAlertModal, setOpenAlertModal] = useState(false);
   const [type, setType] = useState('+');
 
   useEffect(() => {
-    setDeposits(schedules.filter((s) => s.repeating_cycle !== '없음' && s.type === '+').reduce((acc, curr) => {
-      const { event_name } = curr;
-      if (acc[event_name]) acc[event_name].push(curr);
-      else acc[event_name] = [curr];
-      return acc;
-    }, {}));
-    setWithdrawals(schedules.filter((s) => s.repeating_cycle !== '없음' && s.type === '-').reduce((acc, curr) => {
-      const { event_name } = curr;
-      if (acc[event_name]) acc[event_name].push(curr);
-      else acc[event_name] = [curr];
-      return acc;
-    }, {}));
+    setDeposits(schedules.filter((s) => s.repeating_cycle !== '없음' && s.type === '+'));
+    setWithdrawals(schedules.filter((s) => s.repeating_cycle !== '없음' && s.type === '-'));
   }, []);
 
   useEffect(() => {
-    console.log(Object.keys(deposits));
-  }, [withdrawals]);
+    setDepositsGroup(makeGroup(deposits));
+    setWithdrawalsGroup(makeGroup(withdrawals));
+  }, [deposits, withdrawals]);
+
+  const makeGroup = (data) => data.reduce((acc, curr) => {
+    const { event_name } = curr;
+    if (acc[event_name]) acc[event_name].push(curr);
+    else acc[event_name] = [curr];
+    return acc;
+  }, {});
 
   const hadleOpenAlertModal = (newType) => {
     setType(newType);
@@ -64,28 +65,28 @@ function RegularDepositWithdrawal() {
         title={`정기 ${REGULAR_DEPOSIT_WITHDRAWAL_TYPE['+']} 내역`}
       >
         <Stack direction="row" alignItems="center" sx={{ color: 'primary.main' }}>
-          <Box>{`총 ${Object.keys(deposits).length}건`}</Box>
+          <Box>{`총 ${Object.keys(depositsGroup).length}건`}</Box>
           <IconButton color="primary" onClick={() => hadleOpenAlertModal('+')}>
             <BorderColorIcon fontSize="small" />
           </IconButton>
         </Stack>
       </Title>
 
-      {Object.keys(deposits).map((d) => <DetailCard data={deposits[d]} key={deposits[d].id} />)}
+      {Object.keys(depositsGroup).map((d) => <DetailCard data={depositsGroup[d]} key={depositsGroup[d].id} />)}
 
       <Title
         type="-"
         title={`정기 ${REGULAR_DEPOSIT_WITHDRAWAL_TYPE['-']} 내역`}
       >
         <Stack direction="row" alignItems="center" sx={{ color: 'primary.main' }}>
-          <Box>{`총 ${Object.keys(withdrawals).length}건`}</Box>
+          <Box>{`총 ${Object.keys(withdrawalsGroup).length}건`}</Box>
           <IconButton color="primary" onClick={() => hadleOpenAlertModal('-')}>
             <BorderColorIcon fontSize="small" />
           </IconButton>
         </Stack>
       </Title>
 
-      {Object.keys(withdrawals).map((w) => <DetailCard data={withdrawals[w][0]} key={withdrawals[w][0].id} />)}
+      {Object.keys(withdrawalsGroup).map((w) => <DetailCard data={withdrawalsGroup[w][0]} key={withdrawalsGroup[w][0].id} />)}
 
       <AlertModal
         open={openAlertModal}
