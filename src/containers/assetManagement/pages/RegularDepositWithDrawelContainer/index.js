@@ -31,7 +31,7 @@ function RegularDepositWithdrawal() {
   useEffect(() => {
     setDeposits(schedules.filter((s) => s.repeating_cycle !== '없음' && s.type === '+'));
     setWithdrawals(schedules.filter((s) => s.repeating_cycle !== '없음' && s.type === '-'));
-  }, []);
+  }, [schedules]);
 
   useEffect(() => {
     setDepositsGroup(makeGroup(deposits));

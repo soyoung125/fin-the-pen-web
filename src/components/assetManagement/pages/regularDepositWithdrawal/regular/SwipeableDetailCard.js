@@ -4,15 +4,19 @@ import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 import SettingsIcon from '@mui/icons-material/Settings';
 import { useState } from 'react';
 import moment from 'moment';
+import { useDispatch } from 'react-redux';
 import RoundedBorderBox from '../../../../common/RoundedBorderBox';
 import ModifyModal from './ModifyModal';
 import AlertModal from '../../../../common/AlertModal';
+import { deleteSelectedSchedule } from '../../../../../utils/tools';
 
 function SwipeableDetailCard({ data }) {
+  const dispatch = useDispatch();
   const [settingModalOpen, setSettingModalOpen] = useState(false);
   const [openAlertModal, setOpenAlertModal] = useState(false);
 
-  const handleDeleteSchedule = () => {
+  console.log(data);
+  const handleCloseAlert = () => {
     setOpenAlertModal(false);
   };
 
@@ -65,7 +69,7 @@ function SwipeableDetailCard({ data }) {
       <AlertModal
         open={openAlertModal}
         handleClose={() => setOpenAlertModal(false)}
-        handleClickYes={() => handleDeleteSchedule()}
+        handleClickYes={() => deleteSelectedSchedule(dispatch, data, handleCloseAlert)}
         mode="delete"
       />
     </Box>
