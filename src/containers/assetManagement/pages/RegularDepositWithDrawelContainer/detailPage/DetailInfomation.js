@@ -1,12 +1,72 @@
+import {
+  Box, Button, Grid, Stack, Typography,
+} from '@mui/material';
+import AccessTimeIcon from '@mui/icons-material/AccessTime';
 import { useLocation } from 'react-router-dom';
+import moment from 'moment';
+import Title from '../../../../../components/assetManagement/pages/regularDepositWithdrawal/regular/Title';
+import RoundedBorderBox from '../../../../../components/common/RoundedBorderBox';
 
 function DetailInfomation() {
   const { state } = useLocation();
   const { data } = state;
+  const listDividerStyle = { borderTop: '2px solid', borderColor: 'primary.main' };
   console.log(data);
   return (
     <>
-      상세 페이지임
+      <Title
+        type={null}
+        title={(
+          <Stack direction="row">
+            <Box mr={1}>{data[0].event_name}</Box>
+            <Box
+              sx={{
+                typography: 'subtitle2', color: 'primary.main', display: 'flex', mt: 'auto',
+              }}
+            >
+              {`총${data.length}건`}
+            </Box>
+          </Stack>
+        )}
+      >
+        <Box sx={{ color: 'primary.main' }}>최신순</Box>
+      </Title>
+
+      <RoundedBorderBox>
+        {data.map((schedule, index) => (
+          <Box p={1} sx={index !== 0 ? listDividerStyle : null} key={schedule.id}>
+            <Stack direction="row" justifyContent="space-between">
+              <Typography sx={{ fontWeight: 'bold' }}>{moment(schedule.date).format('MM월 DD일')}</Typography>
+              <Typography sx={{ fontWeight: 'bold' }}>{schedule.event_name}</Typography>
+            </Stack>
+            <Grid container>
+              <Grid item xs>
+                <Stack direction="row" sx={{ fontSize: 'small', display: 'flex', alignItems: 'center' }}>
+                  <AccessTimeIcon sx={{
+                    width: '10px', height: '10px', marginRight: 0.5,
+                  }}
+                  />
+                  <Box>{schedule.start_time}</Box>
+                </Stack>
+              </Grid>
+              <Grid item xs={4.5} sm={3} md={2} lg={1}>
+                <Stack direction="row" justifyContent="space-between">
+                  <Button
+                    variant="contained"
+                    size="small"
+                    sx={{
+                      borderRadius: 5, minWidth: 0, width: '20px', height: '20px',
+                    }}
+                  >
+                    {schedule.type}
+                  </Button>
+                  <Box sx={{ color: 'primary.main' }}>{`${parseInt(schedule.expected_spending, 10).toLocaleString('ko-KR')}원`}</Box>
+                </Stack>
+              </Grid>
+            </Grid>
+          </Box>
+        ))}
+      </RoundedBorderBox>
     </>
   );
 }

@@ -6,6 +6,7 @@ function Title({ type, title, children }) {
   return (
     <Stack direction="row" justifyContent="space-between" alignItems="center" mt={3} mb={1}>
       <Stack direction="row">
+        {type && (
         <Button
           variant="contained"
           size="small"
@@ -15,6 +16,7 @@ function Title({ type, title, children }) {
         >
           {type}
         </Button>
+        )}
         <Box sx={{ typography: 'h6', fontWeight: 'bold' }}>{title}</Box>
       </Stack>
       {children}
