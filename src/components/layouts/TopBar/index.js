@@ -53,7 +53,7 @@ function TopBar() {
   useEffect(() => {
     console.log(user, savingGoal);
     if (user && savingGoal.year === 0 && savingGoal.skipRequest === false) {
-      alert('목표가 없는 사람임?');
+      console.log('목표가 없는 사람임?');
     }
   }, [user]);
 
