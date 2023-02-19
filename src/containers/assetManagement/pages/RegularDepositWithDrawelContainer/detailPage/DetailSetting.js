@@ -1,3 +1,4 @@
+/* eslint-disable camelcase */
 import { Box } from '@mui/material';
 import { useLocation } from 'react-router-dom';
 import { useEffect, useState } from 'react';
@@ -14,7 +15,12 @@ function DetailSetting() {
   const [detailData, setDetailData] = useState(data);
 
   useEffect(() => {
-    setDetailData(schedules.filter((s) => s.repeating_cycle !== '없음' && s.type === type));
+    setDetailData(schedules.filter((s) => s.repeating_cycle !== '없음' && s.type === type).reduce((acc, curr) => {
+      const { event_name } = curr;
+      if (acc[event_name]) acc[event_name].push(curr);
+      else acc[event_name] = [curr];
+      return acc;
+    }, {}));
   }, [schedules]);
 
   return (
@@ -23,10 +29,15 @@ function DetailSetting() {
         type={state.type}
         title={`정기 ${REGULAR_DEPOSIT_WITHDRAWAL_TYPE[type]} 내역`}
       >
-        <Box sx={{ color: 'primary.main' }}>{`총 ${detailData.length}건`}</Box>
+        <Box sx={{ color: 'primary.main' }}>{`총 ${Object.keys(detailData).length}건`}</Box>
       </Title>
 
-      {detailData.map((d) => <SwipeableDetailCard data={d} key={d.id} />)}
+      {Object.keys(detailData).map((d) => (
+        <SwipeableDetailCard
+          data={detailData[d]}
+          key={detailData[d][0].id}
+        />
+      ))}
     </>
   );
 }

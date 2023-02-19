@@ -29,14 +29,14 @@ function RegularDepositWithdrawal() {
   const [type, setType] = useState('+');
 
   useEffect(() => {
-    setDeposits(schedules.filter((s) => s.repeating_cycle !== '없음' && s.type === '+'));
-    setWithdrawals(schedules.filter((s) => s.repeating_cycle !== '없음' && s.type === '-'));
+    setDeposits(makeGroup(schedules.filter((s) => s.repeating_cycle !== '없음' && s.type === '+')));
+    setWithdrawals(makeGroup(schedules.filter((s) => s.repeating_cycle !== '없음' && s.type === '-')));
   }, [schedules]);
 
-  useEffect(() => {
-    setDepositsGroup(makeGroup(deposits));
-    setWithdrawalsGroup(makeGroup(withdrawals));
-  }, [deposits, withdrawals]);
+  // useEffect(() => {
+  //   setDepositsGroup(makeGroup(deposits));
+  //   setWithdrawalsGroup(makeGroup(withdrawals));
+  // }, [deposits, withdrawals]);
 
   const makeGroup = (data) => data.reduce((acc, curr) => {
     const { event_name } = curr;
@@ -65,28 +65,28 @@ function RegularDepositWithdrawal() {
         title={`정기 ${REGULAR_DEPOSIT_WITHDRAWAL_TYPE['+']} 내역`}
       >
         <Stack direction="row" alignItems="center" sx={{ color: 'primary.main' }}>
-          <Box>{`총 ${Object.keys(depositsGroup).length}건`}</Box>
+          <Box>{`총 ${Object.keys(deposits).length}건`}</Box>
           <IconButton color="primary" onClick={() => hadleOpenAlertModal('+')}>
             <BorderColorIcon fontSize="small" />
           </IconButton>
         </Stack>
       </Title>
 
-      {Object.keys(depositsGroup).map((d) => <DetailCard data={depositsGroup[d]} key={depositsGroup[d][0].id} />)}
+      {Object.keys(deposits).map((d) => <DetailCard data={deposits[d]} key={deposits[d][0].id} />)}
 
       <Title
         type="-"
         title={`정기 ${REGULAR_DEPOSIT_WITHDRAWAL_TYPE['-']} 내역`}
       >
         <Stack direction="row" alignItems="center" sx={{ color: 'primary.main' }}>
-          <Box>{`총 ${Object.keys(withdrawalsGroup).length}건`}</Box>
+          <Box>{`총 ${Object.keys(withdrawals).length}건`}</Box>
           <IconButton color="primary" onClick={() => hadleOpenAlertModal('-')}>
             <BorderColorIcon fontSize="small" />
           </IconButton>
         </Stack>
       </Title>
 
-      {Object.keys(withdrawalsGroup).map((w) => <DetailCard data={withdrawalsGroup[w]} key={withdrawalsGroup[w][0].id} />)}
+      {Object.keys(withdrawals).map((w) => <DetailCard data={withdrawals[w]} key={withdrawals[w][0].id} />)}
 
       <AlertModal
         open={openAlertModal}

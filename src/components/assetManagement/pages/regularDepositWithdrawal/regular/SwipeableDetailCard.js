@@ -14,8 +14,8 @@ function SwipeableDetailCard({ data }) {
   const dispatch = useDispatch();
   const [settingModalOpen, setSettingModalOpen] = useState(false);
   const [openAlertModal, setOpenAlertModal] = useState(false);
+  const schedule = data[0];
 
-  console.log(data);
   const handleCloseAlert = () => {
     setOpenAlertModal(false);
   };
@@ -43,12 +43,12 @@ function SwipeableDetailCard({ data }) {
               }}
             >
               <Box>
-                <Box sx={{ mb: 3 }}>{`매${data.repeating_cycle.charAt(0)} ${moment(data.date).format('D일')}`}</Box>
-                <Box>{data.event_name}</Box>
+                <Box sx={{ mb: 3 }}>{`매${schedule.repeating_cycle.charAt(0)} ${moment(schedule.date).format('D일')}`}</Box>
+                <Box>{schedule.event_name}</Box>
               </Box>
               <Box sx={{ textAlign: 'end' }}>
-                <Box sx={{ mb: 3 }}>{data.event_name}</Box>
-                <Box sx={{ color: 'primary.main' }}>{`${parseInt(data.expected_spending, 10).toLocaleString('ko-kr')}원`}</Box>
+                <Box sx={{ mb: 3 }}>{schedule.event_name}</Box>
+                <Box sx={{ color: 'primary.main' }}>{`${parseInt(schedule.expected_spending, 10).toLocaleString('ko-kr')}원`}</Box>
               </Box>
             </Stack>
           </SwiperSlide>
@@ -63,13 +63,13 @@ function SwipeableDetailCard({ data }) {
       <ModifyModal
         settingModalOpen={settingModalOpen}
         setSettingModalOpen={setSettingModalOpen}
-        data={data}
+        data={schedule}
       />
 
       <AlertModal
         open={openAlertModal}
         handleClose={() => setOpenAlertModal(false)}
-        handleClickYes={() => deleteSelectedSchedule(dispatch, data, handleCloseAlert)}
+        handleClickYes={() => deleteSelectedSchedule(dispatch, schedule, handleCloseAlert)}
         mode="delete"
       />
     </Box>
