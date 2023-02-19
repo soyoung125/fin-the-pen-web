@@ -13,6 +13,7 @@ const PATH = Object.freeze({
   savingsGoal: '/management/savings-goal',
   regularDepositWithdrawal: '/management/regular-deposit-withdrawal',
   DetailSetting: '/management/regular-deposit-withdrawal-detail-setting',
+  DetailInfomation: '/management/regular-deposit-withdrawal-detail-info',
   assetsByCategory: '/management/assets-by-category',
   scheduleManagement: '/management/schedule-management',
 });

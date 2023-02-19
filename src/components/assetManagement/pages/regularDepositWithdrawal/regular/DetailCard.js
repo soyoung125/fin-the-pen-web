@@ -3,10 +3,13 @@ import {
 } from '@mui/material';
 import 'swiper/css';
 import moment from 'moment';
+import { useNavigate } from 'react-router-dom';
 import RoundedBorderBox from '../../../../common/RoundedBorderBox';
+import PATH from '../../../../../utils/constants/path';
 
 function DetailCard({ data }) {
-  console.log(data);
+  const navigate = useNavigate();
+  // console.log(data);
   return (
     <Box mb={1}>
       <RoundedBorderBox>
@@ -22,7 +25,12 @@ function DetailCard({ data }) {
             <Box>{data.event_name}</Box>
           </Box>
           <Box sx={{ textAlign: 'end' }}>
-            <Box sx={{ mb: 1 }}>{data.event_name}</Box>
+            <Box
+              sx={{ mb: 1 }}
+              onClick={() => navigate(PATH.DetailInfomation)}
+            >
+              {data.event_name}
+            </Box>
             <Box sx={{ color: 'primary.main' }}>{`${parseInt(data.expected_spending, 10).toLocaleString('ko-kr')}원`}</Box>
           </Box>
         </Stack>
