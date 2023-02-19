@@ -18,6 +18,7 @@ import { selectUser } from '../../../utils/redux/user/userSlice';
 import FilterButton from './buttons/FilterButton';
 import PersonalButton from './buttons/PersonalButton';
 import logo from '../../../assets/logos/logo_removebg.png';
+import { selectSavingGoal } from '../../../utils/redux/asset/assetSlice';
 
 function LogoButton({ navigate }) {
   const guestMode = useSelector(selectGuestMode);
@@ -37,6 +38,7 @@ function TopBar() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const user = useSelector(selectUser);
+  const savingGoal = useSelector(selectSavingGoal);
   const headerOpen = useSelector(selectHeaderOpen);
   const headerMode = useSelector(selectHeaderMode);
   const [fullScreenModalOpen, setFullScreenModalOpen] = useState(false);
@@ -48,18 +50,12 @@ function TopBar() {
   //   skip: false,
   // });
 
-  // useEffect(() => {
-  //   if (user !== null) {
-  //     for (let index = 0; index < user.goals.length; index += 1) {
-  //       const goal = user.goals[index];
-  //       if (goal.skip === false && goal.answer === null) {
-  //         setAsk(goal);
-  //         setFullScreenModalOpen(true);
-  //         break;
-  //       }
-  //     }
-  //   }
-  // }, [user]);
+  useEffect(() => {
+    console.log(user, savingGoal);
+    if (user && savingGoal.year === 0 && savingGoal.skipRequest === false) {
+      console.log('목표가 없는 사람임?');
+    }
+  }, [user]);
 
   useEffect(() => {
     // 옵셔널 체이닝 사용하면 eslint에서 오류 발생

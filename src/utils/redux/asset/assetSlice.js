@@ -6,6 +6,7 @@ const initialState = {
     saving: {
       year: 0,
       month: 0,
+      skipRequest: false,
     },
     personal: {
       name: 'dd',
@@ -24,6 +25,9 @@ export const assetSlice = createSlice({
     setSavingGoal: (state, action) => {
       state.goal.saving = action.payload;
     },
+    setSavingGoalSkipRequestTrue: (state) => {
+      state.goal.saving = true;
+    },
     setPersonalGoal: (state, action) => {
       state.goal.personal = action.payload;
     },
@@ -31,6 +35,7 @@ export const assetSlice = createSlice({
 });
 export const {
   setSavingGoal,
+  setSkipRequestTrue,
   setPersonalGoal,
 } = assetSlice.actions;
 
