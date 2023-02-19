@@ -7,7 +7,7 @@ import Title from '../../../../../components/assetManagement/pages/regularDeposi
 import SwipeableDetailCard from '../../../../../components/assetManagement/pages/regularDepositWithdrawal/regular/SwipeableDetailCard';
 import { selectSchedules } from '../../../../../utils/redux/schedule/scheduleSlice';
 
-function RegularDepositWithdrawalDetail() {
+function DetailSetting() {
   const schedules = useSelector(selectSchedules);
   const { state } = useLocation();
   const { type, data } = state;
@@ -31,4 +31,4 @@ function RegularDepositWithdrawalDetail() {
   );
 }
 
-export default RegularDepositWithdrawalDetail;
+export default DetailSetting;

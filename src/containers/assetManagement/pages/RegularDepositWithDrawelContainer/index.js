@@ -52,9 +52,9 @@ function RegularDepositWithdrawal() {
 
   const handleMoveToDetailPage = () => {
     if (type === '+') {
-      navigate(PATH.regularDepositWithdrawalDetail, { state: { type: '+', data: deposits } });
+      navigate(PATH.DetailSetting, { state: { type: '+', data: deposits } });
     } else if (type === '-') {
-      navigate(PATH.regularDepositWithdrawalDetail, { state: { type: '-', data: withdrawals } });
+      navigate(PATH.DetailSetting, { state: { type: '-', data: withdrawals } });
     }
   };
 

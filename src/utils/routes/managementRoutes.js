@@ -1,6 +1,6 @@
 import AssetsByCategory from '../../containers/assetManagement/pages/AssetsByCategory';
 import RegularDepositWithdrawal from '../../containers/assetManagement/pages/RegularDepositWithDrawelContainer';
-import RegularDepositWithdrawalDetail from '../../containers/assetManagement/pages/RegularDepositWithDrawelContainer/detailPage/RegularDepositWithdrawalDetail';
+import DetailSetting from '../../containers/assetManagement/pages/RegularDepositWithDrawelContainer/detailPage/DetailSetting';
 import SavingsGoal from '../../containers/assetManagement/pages/SavingsGoalContainer';
 import ScheduleManagement from '../../containers/assetManagement/pages/ScheduleManagement';
 import PATH from '../constants/path';
@@ -15,8 +15,8 @@ const managementRoutes = [
     element: <RegularDepositWithdrawal />,
   },
   {
-    path: PATH.regularDepositWithdrawalDetail,
-    element: <RegularDepositWithdrawalDetail />,
+    path: PATH.DetailSetting,
+    element: <DetailSetting />,
   },
   {
     path: PATH.assetsByCategory,
