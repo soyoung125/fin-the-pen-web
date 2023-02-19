@@ -10,7 +10,7 @@ import {
   modifySchedule, selectDate, selectSchedule, setDrawerSchedule,
 } from '../../../../utils/redux/schedule/scheduleSlice';
 import { selectUser } from '../../../../utils/redux/user/userSlice';
-import { generateRandomSchedule, handleCreate } from '../utils/schedule';
+import { generateRandomSchedule, handleCreate } from '../domain/schedule';
 
 /**
  * 각종 로직들 모듈로 이전 예정

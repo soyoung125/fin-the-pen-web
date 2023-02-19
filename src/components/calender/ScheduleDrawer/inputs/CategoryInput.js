@@ -7,7 +7,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { CATEGORIES } from '../../../../utils/constants/categories';
 import { SCHEDULE_DRAWER } from '../../../../utils/constants/schedule';
 import { selectSchedule } from '../../../../utils/redux/schedule/scheduleSlice';
-import { updateSchedule } from '../utils/schedule';
+import { updateSchedule } from '../domain/schedule';
 
 export default function CategoryInput({ selected }) {
   const dispatch = useDispatch();

@@ -4,7 +4,7 @@ import {
 import { useDispatch, useSelector } from 'react-redux';
 import { SCHEDULE_DRAWER } from '../../../../../utils/constants/schedule';
 import { selectSchedule } from '../../../../../utils/redux/schedule/scheduleSlice';
-import { updateSchedule, updateSpendingType } from '../../utils/schedule';
+import { updateSchedule, updateSpendingType } from '../../domain/schedule';
 
 function SpendingInput({ mode }) {
   const dispatch = useDispatch();

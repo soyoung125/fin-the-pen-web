@@ -4,7 +4,7 @@ import {
 import { useDispatch, useSelector } from 'react-redux';
 import { SCHEDULE_DRAWER } from '../../../../../utils/constants/schedule';
 import { selectSchedule } from '../../../../../utils/redux/schedule/scheduleSlice';
-import { updateExclusion } from '../../utils/schedule';
+import { updateExclusion } from '../../domain/schedule';
 
 function ExclusionInput() {
   const dispatch = useDispatch();

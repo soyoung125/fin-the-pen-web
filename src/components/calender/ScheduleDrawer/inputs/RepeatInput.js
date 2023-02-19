@@ -11,7 +11,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { DEADLINE, REPEAT } from '../../../../utils/constants/repeat';
 import { SCHEDULE_DRAWER } from '../../../../utils/constants/schedule';
 import { selectSchedule, setDrawerSchedule } from '../../../../utils/redux/schedule/scheduleSlice';
-import { updateRepeat, updateRepeatEndDate } from '../utils/schedule';
+import { updateRepeat, updateRepeatEndDate } from '../domain/schedule';
 
 function RepeatInput() {
   const dispatch = useDispatch();
