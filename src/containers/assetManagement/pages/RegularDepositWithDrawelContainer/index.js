@@ -72,7 +72,7 @@ function RegularDepositWithdrawal() {
         </Stack>
       </Title>
 
-      {Object.keys(depositsGroup).map((d) => <DetailCard data={depositsGroup[d][0]} key={depositsGroup[d][0].id} />)}
+      {Object.keys(depositsGroup).map((d) => <DetailCard data={depositsGroup[d]} key={depositsGroup[d][0].id} />)}
 
       <Title
         type="-"
@@ -86,7 +86,7 @@ function RegularDepositWithdrawal() {
         </Stack>
       </Title>
 
-      {Object.keys(withdrawalsGroup).map((w) => <DetailCard data={withdrawalsGroup[w][0]} key={withdrawalsGroup[w][0].id} />)}
+      {Object.keys(withdrawalsGroup).map((w) => <DetailCard data={withdrawalsGroup[w]} key={withdrawalsGroup[w][0].id} />)}
 
       <AlertModal
         open={openAlertModal}
