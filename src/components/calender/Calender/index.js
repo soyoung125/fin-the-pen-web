@@ -42,6 +42,11 @@ function Calender({ dateHeight }) {
     const fixedWithdrawal = daySchedules.filter((s) => ['고정 입출금', '미분류'].includes(s.category.type));
     const nonFixedWithdrwal = daySchedules.filter((s) => s.category.type !== '고정 입출금');
 
+    // 오늘이 이달에 해당하지 않을 때 마커가 표시되지 않도록 하는 코드
+    if (!day.isSame(value, 'month')) {
+      return <PickersDay {...DayComponentProps} />;
+    }
+
     if (fixedWithdrawal.length > 0) {
       if (nonFixedWithdrwal.length > 0) {
         const categoryForMarker = makeMarkerData(daySchedules);
