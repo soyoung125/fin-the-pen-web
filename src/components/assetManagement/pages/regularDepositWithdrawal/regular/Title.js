@@ -5,7 +5,7 @@ import {
 function Title({ type, title, children }) {
   return (
     <Stack direction="row" justifyContent="space-between" alignItems="center" mt={3} mb={1}>
-      <Stack direction="row">
+      <Stack direction="row" sx={{ display: 'flex', my: 'auto' }}>
         {type && (
         <Button
           variant="contained"

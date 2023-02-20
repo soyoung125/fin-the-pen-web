@@ -4,6 +4,7 @@ import {
 import AccessTimeIcon from '@mui/icons-material/AccessTime';
 import { useLocation } from 'react-router-dom';
 import moment from 'moment';
+import ArrowDropDownRoundedIcon from '@mui/icons-material/ArrowDropDownRounded';
 import Title from '../../../../../components/assetManagement/pages/regularDepositWithdrawal/regular/Title';
 import RoundedBorderBox from '../../../../../components/common/RoundedBorderBox';
 
@@ -29,7 +30,10 @@ function DetailInfomation() {
           </Stack>
         )}
       >
-        <Box sx={{ color: 'primary.main' }}>최신순</Box>
+        <Stack direction="row">
+          <Box sx={{ display: 'flex', my: 'auto', color: 'primary.main' }}>최신순</Box>
+          <ArrowDropDownRoundedIcon fontSize="large" sx={{ color: 'primary.main' }} />
+        </Stack>
       </Title>
 
       <RoundedBorderBox>
