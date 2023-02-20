@@ -20,6 +20,10 @@ function SwipeableDetailCard({ data }) {
     setOpenAlertModal(false);
   };
 
+  const deleteData = () => {
+    data.map((d) => deleteSelectedSchedule(dispatch, d, handleCloseAlert));
+  };
+
   return (
     <Box mb={1}>
       <RoundedBorderBox>
@@ -69,7 +73,7 @@ function SwipeableDetailCard({ data }) {
       <AlertModal
         open={openAlertModal}
         handleClose={() => setOpenAlertModal(false)}
-        handleClickYes={() => deleteSelectedSchedule(dispatch, schedule, handleCloseAlert)}
+        handleClickYes={() => deleteData()}
         mode="delete"
       />
     </Box>
