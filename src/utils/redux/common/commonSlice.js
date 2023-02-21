@@ -6,6 +6,7 @@ const initialState = {
   headerMode: 'home',
   guestMode: false,
   bottomDrawerOpen: false,
+  postAuthenticationPage: null,
 };
 
 export const commonSlice = createSlice({
@@ -34,6 +35,10 @@ export const commonSlice = createSlice({
     setBottomDrawerOpenFalse: (state) => {
       state.bottomDrawerOpen = false;
     },
+    // 간편 인증 후 나올 페이지
+    setPostAuthenticationPage: (state, action) => {
+      state.postAuthenticationPage = action.payload;
+    },
   },
 });
 export const {
@@ -43,11 +48,13 @@ export const {
   setGuestModeFalse,
   setBottomDrawerOpenTrue,
   setBottomDrawerOpenFalse,
+  setPostAuthenticationPage,
 } = commonSlice.actions;
 
 export const selectHeaderOpen = (state) => state.common.headerOpen;
 export const selectHeaderMode = (state) => state.common.headerMode;
 export const selectGuestMode = (state) => state.common.guestMode;
 export const selectBottomDrawerOpen = (state) => state.common.bottomDrawerOpen;
+export const selectPostAuthenticationPage = (state) => state.common.postAuthenticationPage;
 
 export default commonSlice.reducer;
