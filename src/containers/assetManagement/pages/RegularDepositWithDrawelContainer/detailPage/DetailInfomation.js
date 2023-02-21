@@ -5,14 +5,24 @@ import AccessTimeIcon from '@mui/icons-material/AccessTime';
 import { useLocation } from 'react-router-dom';
 import moment from 'moment';
 import ArrowDropDownRoundedIcon from '@mui/icons-material/ArrowDropDownRounded';
+import { useEffect, useState } from 'react';
 import Title from '../../../../../components/assetManagement/pages/regularDepositWithdrawal/regular/Title';
 import RoundedBorderBox from '../../../../../components/common/RoundedBorderBox';
 
 function DetailInfomation() {
   const { state } = useLocation();
-  const { data } = state;
+  const [data, setData] = useState(state.data);
+  const [sortByDate, setSortByDate] = useState(true);
   const listDividerStyle = { borderTop: '2px solid', borderColor: 'primary.main' };
-  console.log(data);
+
+  useEffect(() => {
+    if (sortByDate) {
+      setData(data.sort((a, b) => b.expected_spending - a.expected_spending));
+    } else {
+      setData(data.sort((a, b) => new Date(a.date) - new Date(b.date)));
+    }
+  }, [sortByDate]);
+
   return (
     <>
       <Title
@@ -31,7 +41,7 @@ function DetailInfomation() {
         )}
       >
         <Stack direction="row">
-          <Box sx={{ display: 'flex', my: 'auto', color: 'primary.main' }}>최신순</Box>
+          <Box sx={{ display: 'flex', my: 'auto', color: 'primary.main' }} onClick={() => setSortByDate(!sortByDate)}>{sortByDate ? '최신순' : '금액순'}</Box>
           <ArrowDropDownRoundedIcon fontSize="large" sx={{ color: 'primary.main' }} />
         </Stack>
       </Title>
