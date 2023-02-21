@@ -13,7 +13,7 @@ import moment from 'moment';
 import PATH from '../../utils/constants/path';
 import ScheduleDrawer from '../calender/ScheduleDrawer';
 import { INIT_SCHEDULE, SCHEDULE_DRAWER_MODE } from '../../utils/constants/schedule';
-import { selectDate } from '../../utils/redux/schedule/scheduleSlice';
+import { changeViewMode, selectDate } from '../../utils/redux/schedule/scheduleSlice';
 import { selectBottomDrawerOpen, setBottomDrawerOpenFalse, setBottomDrawerOpenTrue } from '../../utils/redux/common/commonSlice';
 
 function BottomBar({ value, setValue }) {
@@ -42,7 +42,14 @@ function BottomBar({ value, setValue }) {
             setValue(newValue);
           }}
         >
-          <BottomNavigationAction label="홈" icon={<CalendarMonthIcon />} onClick={() => navigate(PATH.home)} />
+          <BottomNavigationAction
+            label="홈"
+            icon={<CalendarMonthIcon />}
+            onClick={() => {
+              dispatch(changeViewMode('schedule'));
+              navigate(PATH.home);
+            }}
+          />
           <BottomNavigationAction label="리포트" icon={<DataSaverOffIcon />} onClick={() => navigate(PATH.analysis)} />
           <BottomNavigationAction label="" icon={<AddCircleIcon />} onClick={() => dispatch(setBottomDrawerOpenTrue())} />
           <BottomNavigationAction label="자산관리" icon={<PaidIcon />} onClick={() => navigate(PATH.assetManagement)} />

@@ -1,8 +1,10 @@
+import { Button } from '@mui/material';
+import { useNavigate } from 'react-router-dom';
+
 function EasyAuthentication() {
+  const navigate = useNavigate();
   return (
-    <>
-      간편 인증
-    </>
+    <Button onClick={() => navigate(-1)}>인증</Button>
   );
 }
 

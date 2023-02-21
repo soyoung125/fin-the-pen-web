@@ -8,14 +8,12 @@ import {
 import moment from 'moment';
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
 import ScheduleStatusCard from '../../components/assetManagement/ScheduleStatusCard';
 import Calender from '../../components/calender/Calender';
 import MonthlyStatement from '../../components/calender/MonthlyStatement.js';
 import ScheduleList from '../../components/calender/scheduleList/ScheduleList';
 import ScheduleViewMode from '../../components/calender/ScheduleViewMode';
 import { CONSUMPTION_ALERTS } from '../../utils/constants/alerts';
-import PATH from '../../utils/constants/path';
 import { fetchMonthSchedules } from '../../utils/redux/API';
 import { selectGuestMode, setHeaderOpenTrue } from '../../utils/redux/common/commonSlice';
 import {
@@ -25,7 +23,6 @@ import { selectUser } from '../../utils/redux/user/userSlice';
 
 function HomeConatiner() {
   const dispatch = useDispatch();
-  const navigate = useNavigate();
   const viewMode = useSelector(selectViewMode);
   const date = useSelector(selectDate);
   const user = useSelector(selectUser);
@@ -45,14 +42,8 @@ function HomeConatiner() {
 
   useEffect(() => {
     dispatch(setHeaderOpenTrue('home'));
-    dispatch(changeViewMode('schedule'));
+    // dispatch(changeViewMode('schedule'));
   }, []);
-
-  useEffect(() => {
-    if (viewMode === 'asset') {
-      navigate(PATH.easyAuthentication);
-    }
-  }, [viewMode]);
 
   // const getSchedules = async () => {
   //   console.log('월별 데이터를 수신할 위치');
