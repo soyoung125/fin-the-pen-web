@@ -4,7 +4,6 @@ import HomeContainer from '../../containers/home/HomeContainer';
 import MyPageContainer from '../../containers/mypage/MyPageContainer';
 import NotificationContainer from '../../containers/notification/NotificationContainer';
 import SettingsContainer from '../../containers/settings/SettingsContainer';
-import EasyAuthentication from '../../containers/sign/EasyAuthentication';
 import SignInContainer from '../../containers/sign/SignInContainer';
 import SignUpContainer from '../../containers/sign/SignUpContainer';
 import TestContainer from '../../containers/test/TestContainer';
@@ -42,10 +41,6 @@ const homeRoutes = [
   {
     path: PATH.settings,
     element: <SettingsContainer />,
-  },
-  {
-    path: PATH.easyAuthentication,
-    element: <EasyAuthentication />,
   },
   {
     path: PATH.test,

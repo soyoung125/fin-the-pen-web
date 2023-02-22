@@ -34,7 +34,6 @@ function ScheduleViewMode() {
           sx={{ borderRadius: 4 }}
           variant={viewMode === VIEW_MODE.자산 ? 'contained' : 'text'}
           onClick={() => {
-            // navigate(PATH.easyAuthentication);
             dispatch(changeViewMode(VIEW_MODE.자산));
           }}
         >
