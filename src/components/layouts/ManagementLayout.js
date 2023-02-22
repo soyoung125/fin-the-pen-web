@@ -6,6 +6,7 @@ import { Outlet, useLocation, useNavigate } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import assetManagements from '../../utils/constants/managements';
 import SwitchingHeader from '../common/SwitchingHeader';
+import EasyAuthentication from '../../containers/sign/EasyAuthentication';
 
 function ManagementLayout() {
   const location = useLocation();
@@ -29,6 +30,7 @@ function ManagementLayout() {
 
   return (
     <Box sx={{ pt: 3, px: 2 }}>
+      <EasyAuthentication />
       <SwitchingHeader
         handleClickLeftArrow={() => handleMovement('-')}
         handleClickRightArrow={() => handleMovement('+')}
