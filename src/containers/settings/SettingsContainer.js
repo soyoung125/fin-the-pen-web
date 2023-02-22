@@ -2,6 +2,8 @@
 import {
   Box, Button, TextField, Typography,
 } from '@mui/material';
+import { useEffect } from 'react';
+import { useDispatch } from 'react-redux';
 import AppLocker from './display/AppLocker';
 import Budget from './display/Budget';
 import ThemeMode from './display/ThemeMode';
@@ -11,8 +13,13 @@ import Accordion from '../../components/common/accordions/Accordion';
 import AccordionSummary from '../../components/common/accordions/AccordionSummary';
 import AccordionDetails from '../../components/common/accordions/AccordionDetails';
 import Change from './version/Change';
+import { setIsAuthenticatedFalse } from '../../utils/redux/common/commonSlice';
 
 export default function SettingsContainer() {
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(setIsAuthenticatedFalse());
+  }, []);
   const handleSubmit = (event) => {
     const data = new FormData(event.currentTarget);
     const requiredData = {

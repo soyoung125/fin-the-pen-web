@@ -11,7 +11,7 @@ import AnalysisList from '../../components/analysis/analysisList/AnalysisList';
 import AnalysisDetailCard from '../../components/analysis/detailCard/AnalysisDetailCard';
 import { CATEGORIES } from '../../utils/constants/categories';
 // import CATEGORIES from '../../utils/constants/categories';
-import { setHeaderOpenTrue } from '../../utils/redux/common/commonSlice';
+import { setHeaderOpenTrue, setIsAuthenticatedFalse } from '../../utils/redux/common/commonSlice';
 import { selectSchedules } from '../../utils/redux/schedule/scheduleSlice';
 
 function AnalysisContainer() {
@@ -32,6 +32,7 @@ function AnalysisContainer() {
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(setHeaderOpenTrue('analysis'));
+    dispatch(setIsAuthenticatedFalse());
   }, []);
 
   useEffect(() => {

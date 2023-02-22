@@ -18,6 +18,7 @@ import {
   getMonthSchedules, selectDate, selectSchedules, selectViewMode, changeViewMode,
 } from '../../utils/redux/schedule/scheduleSlice';
 import { selectUser } from '../../utils/redux/user/userSlice';
+import EasyAuthentication from '../sign/EasyAuthentication';
 
 function HomeConatiner() {
   const dispatch = useDispatch();
@@ -81,6 +82,7 @@ function HomeConatiner() {
         </>
       ) : (
         <Box sx={{ mb: 8 }}>
+          <EasyAuthentication />
           <Box sx={{ mx: 2 }}>
             <MonthlyStatement />
           </Box>

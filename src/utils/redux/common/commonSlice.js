@@ -6,7 +6,7 @@ const initialState = {
   headerMode: 'home',
   guestMode: false,
   bottomDrawerOpen: false,
-  postAuthenticationPage: null,
+  isAuthenticated: false,
 };
 
 export const commonSlice = createSlice({
@@ -35,9 +35,12 @@ export const commonSlice = createSlice({
     setBottomDrawerOpenFalse: (state) => {
       state.bottomDrawerOpen = false;
     },
-    // 간편 인증 후 나올 페이지
-    setPostAuthenticationPage: (state, action) => {
-      state.postAuthenticationPage = action.payload;
+    // 간편 인증 페이지 on/off
+    setIsAuthenticatedTrue: (state) => {
+      state.isAuthenticated = true;
+    },
+    setIsAuthenticatedFalse: (state) => {
+      state.isAuthenticated = false;
     },
   },
 });
@@ -48,13 +51,14 @@ export const {
   setGuestModeFalse,
   setBottomDrawerOpenTrue,
   setBottomDrawerOpenFalse,
-  setPostAuthenticationPage,
+  setIsAuthenticatedTrue,
+  setIsAuthenticatedFalse,
 } = commonSlice.actions;
 
 export const selectHeaderOpen = (state) => state.common.headerOpen;
 export const selectHeaderMode = (state) => state.common.headerMode;
 export const selectGuestMode = (state) => state.common.guestMode;
 export const selectBottomDrawerOpen = (state) => state.common.bottomDrawerOpen;
-export const selectPostAuthenticationPage = (state) => state.common.postAuthenticationPage;
+export const selectIsAuthenticated = (state) => state.common.isAuthenticated;
 
 export default commonSlice.reducer;

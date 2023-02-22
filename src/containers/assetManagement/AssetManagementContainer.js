@@ -8,17 +8,24 @@ import {
   lightBlue, pink, teal, yellow,
 } from '@mui/material/colors';
 import moment from 'moment/moment';
-import { useSelector } from 'react-redux';
+import { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import ScheduleStatusCard from '../../components/assetManagement/ScheduleStatusCard';
 import SettingsPaper from '../../components/assetManagement/SettingsPaper';
 import { CATEGORIES } from '../../utils/constants/categories';
+import { setIsAuthenticatedFalse } from '../../utils/redux/common/commonSlice';
 import { selectSchedules } from '../../utils/redux/schedule/scheduleSlice';
 import { selectUser } from '../../utils/redux/user/userSlice';
 
 function AssetManagementContainer() {
+  const dispatch = useDispatch();
   const schedules = useSelector(selectSchedules);
   const user = useSelector(selectUser);
   const today = moment();
+
+  useEffect(() => {
+    dispatch(setIsAuthenticatedFalse());
+  }, []);
 
   return (
     <Box sx={{ m: 3, wordBreak: 'keep-all' }}>
