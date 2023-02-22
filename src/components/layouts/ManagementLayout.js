@@ -4,13 +4,16 @@ import {
 } from '@mui/material';
 import { Outlet, useLocation, useNavigate } from 'react-router-dom';
 import { useEffect, useState } from 'react';
+import { useSelector } from 'react-redux';
 import assetManagements from '../../utils/constants/managements';
 import SwitchingHeader from '../common/SwitchingHeader';
 import EasyAuthentication from '../../containers/sign/EasyAuthentication';
+import { selectIsAuthenticated } from '../../utils/redux/common/commonSlice';
 
 function ManagementLayout() {
   const location = useLocation();
   const navigate = useNavigate();
+  const isAuthenticated = useSelector(selectIsAuthenticated);
   const [management, setManagement] = useState(0);
 
   useEffect(() => {
@@ -29,19 +32,23 @@ function ManagementLayout() {
   };
 
   return (
-    <Box sx={{ pt: 3, px: 2 }}>
+    <>
       <EasyAuthentication />
-      <SwitchingHeader
-        handleClickLeftArrow={() => handleMovement('-')}
-        handleClickRightArrow={() => handleMovement('+')}
-      >
-        <Typography variant="h6" sx={{ fontWeight: 'bold' }}>{assetManagements[management].title}</Typography>
-      </SwitchingHeader>
+      {isAuthenticated && (
+        <Box sx={{ pt: 3, px: 2 }}>
+          <SwitchingHeader
+            handleClickLeftArrow={() => handleMovement('-')}
+            handleClickRightArrow={() => handleMovement('+')}
+          >
+            <Typography variant="h6" sx={{ fontWeight: 'bold' }}>{assetManagements[management].title}</Typography>
+          </SwitchingHeader>
 
-      <Box sx={{ my: 3, wordBreak: 'keep-all', fontWeight: 'bold' }}>
-        <Outlet />
-      </Box>
-    </Box>
+          <Box sx={{ my: 3, wordBreak: 'keep-all', fontWeight: 'bold' }}>
+            <Outlet />
+          </Box>
+        </Box>
+      )}
+    </>
   );
 }
 
