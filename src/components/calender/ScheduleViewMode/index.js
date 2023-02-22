@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import { Box, Button } from '@mui/material';
 import { grey } from '@mui/material/colors';
 import { useDispatch, useSelector } from 'react-redux';
@@ -33,7 +34,7 @@ function ScheduleViewMode() {
           sx={{ borderRadius: 4 }}
           variant={viewMode === VIEW_MODE.자산 ? 'contained' : 'text'}
           onClick={() => {
-            navigate(PATH.easyAuthentication);
+            // navigate(PATH.easyAuthentication);
             dispatch(changeViewMode(VIEW_MODE.자산));
           }}
         >

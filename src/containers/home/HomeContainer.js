@@ -15,7 +15,7 @@ import ScheduleViewMode from '../../components/calender/ScheduleViewMode';
 import { CONSUMPTION_ALERTS } from '../../utils/constants/alerts';
 import { selectGuestMode, setHeaderOpenTrue } from '../../utils/redux/common/commonSlice';
 import {
-  getMonthSchedules, selectDate, selectSchedules, selectViewMode,
+  getMonthSchedules, selectDate, selectSchedules, selectViewMode, changeViewMode,
 } from '../../utils/redux/schedule/scheduleSlice';
 import { selectUser } from '../../utils/redux/user/userSlice';
 
@@ -40,6 +40,7 @@ function HomeConatiner() {
 
   useEffect(() => {
     dispatch(setHeaderOpenTrue('home'));
+    dispatch(changeViewMode('schedule'));
   }, []);
 
   const getSchedules = () => {
