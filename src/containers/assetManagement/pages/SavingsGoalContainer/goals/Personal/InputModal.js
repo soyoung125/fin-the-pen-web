@@ -26,11 +26,11 @@ function InputModal({
   const divisionByType = (type, money) => {
     switch (type) {
       case 'day':
-        return money / 365;
+        return Math.round(money / 365);
       case 'month':
-        return money / 12;
+        return Math.round(money / 12);
       default:
-        return SOMETHING_IS_WRONG;
+        return Math.round(SOMETHING_IS_WRONG);
     }
   };
 
