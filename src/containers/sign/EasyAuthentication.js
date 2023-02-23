@@ -1,6 +1,7 @@
 import {
-  Box, Button, Dialog, Grid, Stack, TextField,
+  Box, Button, Dialog, Grid, InputBase, Stack,
 } from '@mui/material';
+import { useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import LogoCircle from '../../components/common/LogoCircle';
 import CenterBox from '../../components/layouts/CenterBox';
@@ -9,6 +10,9 @@ import { selectIsAuthenticated, setIsAuthenticatedTrue } from '../../utils/redux
 function EasyAuthentication() {
   const dispatch = useDispatch();
   const isAuthenticated = useSelector(selectIsAuthenticated);
+  const input = useRef();
+
+  console.log(input.current.value);
   return (
     <Dialog
       fullScreen
@@ -30,74 +34,57 @@ function EasyAuthentication() {
             component="form"
           // onSubmit={handleSubmit}
             noValidate
-            sx={{ maxWidth: '400px', mx: 2 }}
+            sx={{ maxWidth: '400px', width: '100%' }}
           >
-            <Grid container spacing={1}>
+            <InputBase sx={{ height: 0, color: 'white' }} inputRef={input} />
+            <Grid container spacing={1} mb={1}>
               <Grid item xs={2}>
-                <TextField
-                  margin="normal"
-                  required
-                  name="pwd1"
-                  type="pwd1"
-                  id="pwd1"
-                  autoComplete="current-password"
-                  autoFocus
-                />
+                <Box sx={{
+                  height: '56px', border: '2px solid', borderColor: 'primary.main', borderRadius: 1,
+                }}
+                >
+                  *
+                </Box>
               </Grid>
               <Grid item xs={2}>
-                <TextField
-                  margin="normal"
-                  hiddenLabel
-                  required
-                  name="password"
-                  type="password"
-                  id="password"
-                  autoComplete="current-password"
-                />
+                <Box sx={{
+                  height: '56px', border: '2px solid', borderColor: 'primary.main', borderRadius: 1,
+                }}
+                >
+                  *
+                </Box>
               </Grid>
               <Grid item xs={2}>
-                <TextField
-                  margin="normal"
-                  hiddenLabel
-                  required
-                  name="password"
-                  type="password"
-                  id="password"
-                  autoComplete="current-password"
-                />
+                <Box sx={{
+                  height: '56px', border: '2px solid', borderColor: 'primary.main', borderRadius: 1,
+                }}
+                >
+                  *
+                </Box>
               </Grid>
               <Grid item xs={2}>
-                <TextField
-                  margin="normal"
-                  hiddenLabel
-                  required
-                  name="password"
-                  type="password"
-                  id="password"
-                  autoComplete="current-password"
-                />
+                <Box sx={{
+                  height: '56px', border: '2px solid', borderColor: 'primary.main', borderRadius: 1,
+                }}
+                >
+                  *
+                </Box>
               </Grid>
               <Grid item xs={2}>
-                <TextField
-                  margin="normal"
-                  hiddenLabel
-                  required
-                  name="password"
-                  type="password"
-                  id="password"
-                  autoComplete="current-password"
-                />
+                <Box sx={{
+                  height: '56px', border: '2px solid', borderColor: 'primary.main', borderRadius: 1,
+                }}
+                >
+                  *
+                </Box>
               </Grid>
               <Grid item xs={2}>
-                <TextField
-                  margin="normal"
-                  hiddenLabel
-                  required
-                  name="password"
-                  type="password"
-                  id="password"
-                  autoComplete="current-password"
-                />
+                <Box sx={{
+                  height: '56px', border: '2px solid', borderColor: 'primary.main', borderRadius: 1,
+                }}
+                >
+                  *
+                </Box>
               </Grid>
             </Grid>
 
