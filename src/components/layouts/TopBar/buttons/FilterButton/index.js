@@ -8,6 +8,7 @@ import { useEffect, useState } from 'react';
 import FilterAltOutlinedIcon from '@mui/icons-material/FilterAltOutlined';
 import { useDispatch, useSelector } from 'react-redux';
 import ClearIcon from '@mui/icons-material/Clear';
+import moment from 'moment';
 import RoundedButton from '../../../../common/RoundedButton';
 import { EXPENDITURE, FIXED, INCOME } from '../../../../../utils/constants/categories';
 import FilterAccordion from './inputs/FilterAccordion';
@@ -34,10 +35,15 @@ function FilterButton() {
   };
 
   const changeSchedule = (state) => {
-    dispatch(setFilteredDate({
-      type: state.target.id,
-      date: state.target.value,
-    }));
+    const date = state.target.value;
+    if (state.target.id === 'end' && moment(date).isBefore(filteredDate.start)) {
+      alert(WRONG_TIME_ORDER);
+    } else {
+      dispatch(setFilteredDate({
+        type: state.target.id,
+        date: state.target.value,
+      }));
+    }
   };
 
   useEffect(() => {
