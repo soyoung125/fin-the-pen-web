@@ -11,6 +11,12 @@ import { createSchedule, getMonthSchedules, setDrawerSchedule } from '../../../.
 /* eslint-disable import/prefer-default-export */
 export const updateSchedule = (dispatch, schedule, state) => {
   dispatch(setDrawerSchedule({ ...schedule, [state.target.id]: state.target.value }));
+  if (state.target.id === 'start_time') {
+    const endTime = moment(state.target.value, 'HH:mm').add(2, 'hours').format('HH:mm');
+    dispatch(setDrawerSchedule({
+      ...schedule, [state.target.id]: state.target.value, end_time: endTime,
+    }));
+  }
 };
 
 export const updateRepeat = (dispatch, schedule, setOpenDatePickerModal, state) => {
