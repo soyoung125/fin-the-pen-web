@@ -133,7 +133,7 @@ export const generateRandomSchedule = (date) => {
     end_time: `2${Math.floor(Math.random() * 4)}:00`,
     repeating_cycle: '없음',
     repeat_deadline: '없음',
-    repeat_endDate: date,
+    repeat_endDate: date.format('YYYY-MM-DD'),
     category: CATEGORIES[Math.floor(Math.random() * CATEGORIES.length)].title,
     type: (Math.floor(Math.random() * 2)) % 2 === 0 ? '-' : '+',
     expected_spending: Math.floor(Math.random() * 1000) * 100,
