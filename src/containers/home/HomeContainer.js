@@ -13,7 +13,7 @@ import MonthlyStatement from '../../components/calender/MonthlyStatement.js';
 import ScheduleList from '../../components/calender/scheduleList/ScheduleList';
 import ScheduleViewMode from '../../components/calender/ScheduleViewMode';
 import { CONSUMPTION_ALERTS } from '../../utils/constants/alerts';
-import { selectGuestMode, setHeaderOpenTrue } from '../../utils/redux/common/commonSlice';
+import { selectGuestMode, selectIsAuthenticated, setHeaderOpenTrue } from '../../utils/redux/common/commonSlice';
 import {
   getMonthSchedules, selectDate, selectSchedules, selectViewMode, changeViewMode,
 } from '../../utils/redux/schedule/scheduleSlice';
@@ -27,6 +27,7 @@ function HomeConatiner() {
   const user = useSelector(selectUser);
   const guestMode = useSelector(selectGuestMode);
   const schedules = useSelector(selectSchedules);
+  const isAuthenticated = useSelector(selectIsAuthenticated);
   const today = moment();
 
   // 추후 삭제 예정
@@ -81,31 +82,36 @@ function HomeConatiner() {
           <ScheduleList />
         </>
       ) : (
-        <Box sx={{ mb: 8 }}>
+        <>
           <EasyAuthentication />
-          <Box sx={{ mx: 2 }}>
-            <MonthlyStatement />
-          </Box>
+          {isAuthenticated
+          && (
+          <Box sx={{ mb: 8 }}>
+            <Box sx={{ mx: 2 }}>
+              <MonthlyStatement />
+            </Box>
 
-          <Accordion expanded={expandAccordion} disableGutters elevation={0}>
-            <AccordionSummary>
-              <Stack direction="row" justifyContent="space-between" width="100%">
-                <Typography sx={{ display: 'flex', alignItems: 'center', fontWeight: 'bold' }}>전체 내역</Typography>
-                <Button onClick={handleExpand}>{expandAccordion ? '달력 닫기' : '달력 보기'}</Button>
-              </Stack>
-            </AccordionSummary>
-            <AccordionDetails sx={{ p: 0 }}>
-              <Calender dateHeight={85} />
-            </AccordionDetails>
-          </Accordion>
+            <Accordion expanded={expandAccordion} disableGutters elevation={0}>
+              <AccordionSummary>
+                <Stack direction="row" justifyContent="space-between" width="100%">
+                  <Typography sx={{ display: 'flex', alignItems: 'center', fontWeight: 'bold' }}>전체 내역</Typography>
+                  <Button onClick={handleExpand}>{expandAccordion ? '달력 닫기' : '달력 보기'}</Button>
+                </Stack>
+              </AccordionSummary>
+              <AccordionDetails sx={{ p: 0 }}>
+                <Calender dateHeight={85} />
+              </AccordionDetails>
+            </Accordion>
 
-          <Box sx={{ mx: 2 }}>
-            <ScheduleStatusCard
-              month={today.format('M월')}
-              numberOfSchedule={schedules.filter((s) => today.isSame(s.date, 'month') && today.isSameOrBefore(s.date, 'day')).length}
-            />
+            <Box sx={{ mx: 2 }}>
+              <ScheduleStatusCard
+                month={today.format('M월')}
+                numberOfSchedule={schedules.filter((s) => today.isSame(s.date, 'month') && today.isSameOrBefore(s.date, 'day')).length}
+              />
+            </Box>
           </Box>
-        </Box>
+          )}
+        </>
       )}
       <ScheduleViewMode />
     </Box>
