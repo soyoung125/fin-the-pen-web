@@ -7,18 +7,18 @@ import {
 import moment from 'moment';
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import ScheduleStatusCard from '../../components/assetManagement/ScheduleStatusCard';
-import Calender from '../../components/calender/Calender';
-import MonthlyStatement from '../../components/calender/MonthlyStatement.js';
-import ScheduleList from '../../components/calender/scheduleList/ScheduleList';
-import ScheduleViewMode from '../../components/calender/ScheduleViewMode';
-import { CONSUMPTION_ALERTS } from '../../utils/constants/alerts';
-import { selectGuestMode, selectIsAuthenticated, setHeaderOpenTrue } from '../../utils/redux/common/commonSlice';
+import ScheduleStatusCard from '../../../components/assetManagement/ScheduleStatusCard';
+import Calender from '../../../components/calender/Calender';
+import MonthlyStatement from '../../../components/calender/MonthlyStatement.js';
+import ScheduleList from '../../../components/calender/scheduleList/ScheduleList';
+import ScheduleViewMode from '../../../components/calender/ScheduleViewMode';
+import { CONSUMPTION_ALERTS } from '../../../utils/constants/alerts';
+import { selectGuestMode, selectIsAuthenticated, setHeaderOpenTrue } from '../../../utils/redux/common/commonSlice';
 import {
   getMonthSchedules, selectDate, selectSchedules, selectViewMode, changeViewMode,
-} from '../../utils/redux/schedule/scheduleSlice';
-import { selectUser } from '../../utils/redux/user/userSlice';
-import EasyAuthentication from '../sign/EasyAuthentication';
+} from '../../../utils/redux/schedule/scheduleSlice';
+import { selectUser } from '../../../utils/redux/user/userSlice';
+import EasyAuthentication from '../../sign/EasyAuthentication';
 
 function HomeConatiner() {
   const dispatch = useDispatch();
@@ -85,32 +85,32 @@ function HomeConatiner() {
         <>
           <EasyAuthentication />
           {isAuthenticated
-          && (
-          <Box sx={{ mb: 8 }}>
-            <Box sx={{ mx: 2 }}>
-              <MonthlyStatement />
-            </Box>
+            && (
+              <Box sx={{ mb: 8 }}>
+                <Box sx={{ mx: 2 }}>
+                  <MonthlyStatement />
+                </Box>
 
-            <Accordion expanded={expandAccordion} disableGutters elevation={0}>
-              <AccordionSummary>
-                <Stack direction="row" justifyContent="space-between" width="100%">
-                  <Typography sx={{ display: 'flex', alignItems: 'center', fontWeight: 'bold' }}>전체 내역</Typography>
-                  <Button onClick={handleExpand}>{expandAccordion ? '달력 닫기' : '달력 보기'}</Button>
-                </Stack>
-              </AccordionSummary>
-              <AccordionDetails sx={{ p: 0 }}>
-                <Calender dateHeight={85} />
-              </AccordionDetails>
-            </Accordion>
+                <Accordion expanded={expandAccordion} disableGutters elevation={0}>
+                  <AccordionSummary>
+                    <Stack direction="row" justifyContent="space-between" width="100%">
+                      <Typography sx={{ display: 'flex', alignItems: 'center', fontWeight: 'bold' }}>전체 내역</Typography>
+                      <Button onClick={handleExpand}>{expandAccordion ? '달력 닫기' : '달력 보기'}</Button>
+                    </Stack>
+                  </AccordionSummary>
+                  <AccordionDetails sx={{ p: 0 }}>
+                    <Calender dateHeight={85} />
+                  </AccordionDetails>
+                </Accordion>
 
-            <Box sx={{ mx: 2 }}>
-              <ScheduleStatusCard
-                month={today.format('M월')}
-                numberOfSchedule={schedules.filter((s) => today.isSame(s.date, 'month') && today.isSameOrBefore(s.date, 'day')).length}
-              />
-            </Box>
-          </Box>
-          )}
+                <Box sx={{ mx: 2 }}>
+                  <ScheduleStatusCard
+                    month={today.format('M월')}
+                    numberOfSchedule={schedules.filter((s) => today.isSame(s.date, 'month') && today.isSameOrBefore(s.date, 'day')).length}
+                  />
+                </Box>
+              </Box>
+            )}
         </>
       )}
       <ScheduleViewMode />
