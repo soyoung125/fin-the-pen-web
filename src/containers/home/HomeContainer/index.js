@@ -8,7 +8,7 @@ import moment from 'moment';
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import ScheduleStatusCard from '../../../components/assetManagement/ScheduleStatusCard';
-import Calender from '../../../components/calender/Calender';
+import Calender from '../Calender';
 import MonthlyStatement from '../../../components/calender/MonthlyStatement.js';
 import ScheduleList from '../../../components/calender/scheduleList/ScheduleList';
 import ScheduleViewMode from '../../../components/calender/ScheduleViewMode';

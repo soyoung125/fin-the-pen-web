@@ -13,14 +13,14 @@ import { CATEGORIES } from '../../../utils/constants/categories';
 import {
   selectDate, selectedDate, selectSchedules, selectViewMode,
 } from '../../../utils/redux/schedule/scheduleSlice';
-import MarkedPickersDay from '../scheduleMarker/MarkedPickersDay';
-import MarkerStack from '../scheduleMarker/MarkerStack';
+import MarkedPickersDay from './boxes/scheduleMarker/MarkedPickersDay';
+import MarkerStack from './boxes/scheduleMarker/MarkerStack';
 import 'moment/locale/ko';
 import CalenderBox from './boxes/CalenderBox';
 import IncomeExpenditureBox from './boxes/IncomeExpenditureBox';
 import { calculateIncomeExpenditure } from '../../../utils/tools';
 import { makeMarkerData } from './utils/calender';
-import WeeklyStatment from '../WeeklyStatment';
+import WeeklyStatment from './boxes/WeeklyStatment';
 
 function Calender({ dateHeight }) {
   const dispatch = useDispatch();
@@ -118,7 +118,7 @@ function Calender({ dateHeight }) {
         >
           {day.isSame(today, 'week')
             ? (
-          // 이번주의 주별 수입/지출 표시
+              // 이번주의 주별 수입/지출 표시
               <Box sx={{
                 width: `calc(100vw / 7 * (${today.diff(day, 'days')} + 1))`,
               }}
@@ -130,7 +130,7 @@ function Calender({ dateHeight }) {
               </Box>
             )
             : (
-          // 지난주들의 주별 수입/지출 표시
+              // 지난주들의 주별 수입/지출 표시
               <Box sx={{
                 width: '100vw',
               }}
