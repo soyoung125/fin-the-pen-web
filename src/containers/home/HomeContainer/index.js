@@ -10,7 +10,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import ScheduleStatusCard from '../../../components/assetManagement/ScheduleStatusCard';
 import Calender from '../Calender';
 import MonthlyStatement from '../../../components/calender/MonthlyStatement.js';
-import ScheduleList from '../../../components/calender/scheduleList/ScheduleList';
 import ScheduleViewMode from '../../../components/calender/ScheduleViewMode';
 import { CONSUMPTION_ALERTS } from '../../../utils/constants/alerts';
 import { selectGuestMode, selectIsAuthenticated, setHeaderOpenTrue } from '../../../utils/redux/common/commonSlice';
@@ -19,6 +18,7 @@ import {
 } from '../../../utils/redux/schedule/scheduleSlice';
 import { selectUser } from '../../../utils/redux/user/userSlice';
 import EasyAuthentication from '../../sign/EasyAuthentication';
+import ScheduleList from '../ScheduleList';
 
 function HomeConatiner() {
   const dispatch = useDispatch();
