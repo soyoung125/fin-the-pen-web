@@ -9,16 +9,16 @@ import moment from 'moment';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { grey, lightBlue, pink } from '@mui/material/colors';
-import { CATEGORIES } from '../../../utils/constants/categories';
+import { CATEGORIES } from '../../../../utils/constants/categories';
 import {
   selectDate, selectedDate, selectSchedules, selectViewMode,
-} from '../../../utils/redux/schedule/scheduleSlice';
+} from '../../../../utils/redux/schedule/scheduleSlice';
 import MarkedPickersDay from './boxes/scheduleMarker/MarkedPickersDay';
 import MarkerStack from './boxes/scheduleMarker/MarkerStack';
 import 'moment/locale/ko';
 import CalenderBox from './boxes/CalenderBox';
 import IncomeExpenditureBox from './boxes/IncomeExpenditureBox';
-import { calculateIncomeExpenditure } from '../../../utils/tools';
+import { calculateIncomeExpenditure } from '../../../../utils/tools';
 import { makeMarkerData } from './domain/calender';
 import WeeklyStatment from './boxes/WeeklyStatment';
 

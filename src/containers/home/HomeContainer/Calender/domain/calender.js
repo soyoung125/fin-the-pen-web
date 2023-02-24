@@ -1,7 +1,7 @@
 /* eslint-disable import/prefer-default-export */
 /* eslint-disable max-len */
 
-import { EXPENDITURE, INCOME } from '../../../../utils/constants/categories';
+import { EXPENDITURE, INCOME } from '../../../../../utils/constants/categories';
 
 /**
    * 해당 일의 일정을 받아 카테고리 수별로 마커위치를 고정하기 위해 새로운 배열을 생성해 반환하는 함수

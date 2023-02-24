@@ -8,7 +8,6 @@ import moment from 'moment';
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import ScheduleStatusCard from '../../../components/assetManagement/ScheduleStatusCard';
-import Calender from '../Calender';
 import MonthlyStatement from '../../../components/calender/MonthlyStatement.js';
 import ScheduleViewMode from '../../../components/calender/ScheduleViewMode';
 import { CONSUMPTION_ALERTS } from '../../../utils/constants/alerts';
@@ -18,7 +17,8 @@ import {
 } from '../../../utils/redux/schedule/scheduleSlice';
 import { selectUser } from '../../../utils/redux/user/userSlice';
 import EasyAuthentication from '../../sign/EasyAuthentication';
-import ScheduleList from '../ScheduleList';
+import Calender from './Calender';
+import ScheduleList from './ScheduleList';
 
 function HomeConatiner() {
   const dispatch = useDispatch();
