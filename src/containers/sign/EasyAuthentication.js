@@ -43,86 +43,27 @@ function EasyAuthentication() {
           >
             <InputBase sx={{ height: 0, width: 0, color: 'white' }} inputRef={input} onChange={(e) => setPassword(e.target.value)} />
             <Grid container spacing={1} mb={1}>
-              <Grid item xs={2}>
-                <Box
-                  sx={{
-                    height: '56px', border: '2px solid', borderColor: 'primary.main', borderRadius: 1, backgroundColor: 'rgba(115, 91, 242, 0.6)',
-                  }}
-                  onClick={() => input.current.focus()}
-                >
-                  <Box sx={{
-                    color: 'white', fontSize: '45px', textAlign: 'center',
-                  }}
+              {[...Array(6)].map(() => (
+                <Grid item xs={2} key={Math.random()}>
+                  <Box
+                    sx={{
+                      height: '56px',
+                      border: '2px solid',
+                      borderColor: 'primary.main',
+                      borderRadius: 1,
+                      backgroundColor: 'rgba(115, 91, 242, 0.6)',
+                    }}
+                    onClick={() => input.current.focus()}
                   >
-                    *
+                    <Box sx={{
+                      color: 'white', fontSize: '45px', textAlign: 'center',
+                    }}
+                    >
+                      *
+                    </Box>
                   </Box>
-                </Box>
-              </Grid>
-              <Grid item xs={2}>
-                <Box sx={{
-                  height: '56px', border: '2px solid', borderColor: 'primary.main', borderRadius: 1, backgroundColor: 'rgba(115, 91, 242, 0.6)',
-                }}
-                >
-                  <Box sx={{
-                    color: 'white', fontSize: '45px', textAlign: 'center',
-                  }}
-                  >
-                    *
-                  </Box>
-                </Box>
-              </Grid>
-              <Grid item xs={2}>
-                <Box sx={{
-                  height: '56px', border: '2px solid', borderColor: 'primary.main', borderRadius: 1,
-                }}
-                >
-                  <Box sx={{
-                    color: 'white', fontSize: '45px', textAlign: 'center',
-                  }}
-                  >
-                    *
-                  </Box>
-                </Box>
-              </Grid>
-              <Grid item xs={2}>
-                <Box sx={{
-                  height: '56px', border: '2px solid', borderColor: 'primary.main', borderRadius: 1,
-                }}
-                >
-                  <Box sx={{
-                    color: 'white', fontSize: '45px', textAlign: 'center',
-                  }}
-                  >
-                    *
-                  </Box>
-                </Box>
-              </Grid>
-              <Grid item xs={2}>
-                <Box sx={{
-                  height: '56px', border: '2px solid', borderColor: 'primary.main', borderRadius: 1,
-                }}
-                >
-                  <Box sx={{
-                    color: 'white', fontSize: '45px', textAlign: 'center',
-                  }}
-                  >
-                    *
-                  </Box>
-                </Box>
-              </Grid>
-              <Grid item xs={2}>
-                <Box sx={{
-                  height: '56px', border: '2px solid', borderColor: 'primary.main', borderRadius: 1,
-                }}
-                >
-                  <Box sx={{
-                    color: 'white', fontSize: '45px', textAlign: 'center',
-                  }}
-                  >
-                    *
-                  </Box>
-                </Box>
-              </Grid>
+                </Grid>
+              ))}
             </Grid>
 
             <Button fullWidth variant="contained" onClick={() => dispatch(setIsAuthenticatedTrue())}>인증</Button>
