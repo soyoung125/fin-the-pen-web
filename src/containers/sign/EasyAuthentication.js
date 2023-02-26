@@ -3,7 +3,6 @@ import {
 } from '@mui/material';
 import { useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import StarIcon from '@mui/icons-material/Star';
 import LogoCircle from '../../components/common/LogoCircle';
 import CenterBox from '../../components/layouts/CenterBox';
 import { selectIsAuthenticated, setIsAuthenticatedTrue } from '../../utils/redux/common/commonSlice';
@@ -44,7 +43,25 @@ function EasyAuthentication() {
                   height: '56px', border: '2px solid', borderColor: 'primary.main', borderRadius: 1, backgroundColor: 'rgba(115, 91, 242, 0.6)',
                 }}
                 >
-                  <StarIcon sx={{ color: 'white' }} />
+                  <Box sx={{
+                    color: 'white', fontSize: '45px', textAlign: 'center',
+                  }}
+                  >
+                    *
+                  </Box>
+                </Box>
+              </Grid>
+              <Grid item xs={2}>
+                <Box sx={{
+                  height: '56px', border: '2px solid', borderColor: 'primary.main', borderRadius: 1, backgroundColor: 'rgba(115, 91, 242, 0.6)',
+                }}
+                >
+                  <Box sx={{
+                    color: 'white', fontSize: '45px', textAlign: 'center',
+                  }}
+                  >
+                    *
+                  </Box>
                 </Box>
               </Grid>
               <Grid item xs={2}>
@@ -52,7 +69,12 @@ function EasyAuthentication() {
                   height: '56px', border: '2px solid', borderColor: 'primary.main', borderRadius: 1,
                 }}
                 >
-                  *
+                  <Box sx={{
+                    color: 'white', fontSize: '45px', textAlign: 'center',
+                  }}
+                  >
+                    *
+                  </Box>
                 </Box>
               </Grid>
               <Grid item xs={2}>
@@ -60,7 +82,12 @@ function EasyAuthentication() {
                   height: '56px', border: '2px solid', borderColor: 'primary.main', borderRadius: 1,
                 }}
                 >
-                  *
+                  <Box sx={{
+                    color: 'white', fontSize: '45px', textAlign: 'center',
+                  }}
+                  >
+                    *
+                  </Box>
                 </Box>
               </Grid>
               <Grid item xs={2}>
@@ -68,7 +95,12 @@ function EasyAuthentication() {
                   height: '56px', border: '2px solid', borderColor: 'primary.main', borderRadius: 1,
                 }}
                 >
-                  *
+                  <Box sx={{
+                    color: 'white', fontSize: '45px', textAlign: 'center',
+                  }}
+                  >
+                    *
+                  </Box>
                 </Box>
               </Grid>
               <Grid item xs={2}>
@@ -76,15 +108,12 @@ function EasyAuthentication() {
                   height: '56px', border: '2px solid', borderColor: 'primary.main', borderRadius: 1,
                 }}
                 >
-                  *
-                </Box>
-              </Grid>
-              <Grid item xs={2}>
-                <Box sx={{
-                  height: '56px', border: '2px solid', borderColor: 'primary.main', borderRadius: 1,
-                }}
-                >
-                  *
+                  <Box sx={{
+                    color: 'white', fontSize: '45px', textAlign: 'center',
+                  }}
+                  >
+                    *
+                  </Box>
                 </Box>
               </Grid>
             </Grid>
