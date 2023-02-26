@@ -1,7 +1,7 @@
 import {
   Box, Button, Dialog, Grid, InputBase, Stack,
 } from '@mui/material';
-import { useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import LogoCircle from '../../components/common/LogoCircle';
 import CenterBox from '../../components/layouts/CenterBox';
@@ -11,6 +11,11 @@ function EasyAuthentication() {
   const dispatch = useDispatch();
   const isAuthenticated = useSelector(selectIsAuthenticated);
   const input = useRef();
+  const [password, setPassword] = useState('');
+
+  useEffect(() => {
+    console.log(password);
+  }, [password]);
 
   // console.log(input.current.value);
   return (
@@ -36,12 +41,14 @@ function EasyAuthentication() {
             noValidate
             sx={{ maxWidth: '400px', width: '100%' }}
           >
-            <InputBase sx={{ height: 0, color: 'white' }} inputRef={input} />
+            <InputBase sx={{ height: 0, width: 0, color: 'white' }} inputRef={input} onChange={(e) => setPassword(e.target.value)} />
             <Grid container spacing={1} mb={1}>
               <Grid item xs={2}>
-                <Box sx={{
-                  height: '56px', border: '2px solid', borderColor: 'primary.main', borderRadius: 1, backgroundColor: 'rgba(115, 91, 242, 0.6)',
-                }}
+                <Box
+                  sx={{
+                    height: '56px', border: '2px solid', borderColor: 'primary.main', borderRadius: 1, backgroundColor: 'rgba(115, 91, 242, 0.6)',
+                  }}
+                  onClick={() => input.current.focus()}
                 >
                   <Box sx={{
                     color: 'white', fontSize: '45px', textAlign: 'center',
