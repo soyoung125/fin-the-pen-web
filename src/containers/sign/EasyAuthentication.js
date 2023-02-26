@@ -11,7 +11,7 @@ function EasyAuthentication() {
   const dispatch = useDispatch();
   const isAuthenticated = useSelector(selectIsAuthenticated);
   const input = useRef();
-  const [password, setPassword] = useState('');
+  const [password, setPassword] = useState('12');
 
   useEffect(() => {
     console.log(password);
@@ -43,7 +43,7 @@ function EasyAuthentication() {
           >
             <InputBase sx={{ height: 0, width: 0, color: 'white' }} inputRef={input} onChange={(e) => setPassword(e.target.value)} />
             <Grid container spacing={1} mb={1}>
-              {[...Array(6)].map(() => (
+              {[...Array(6)].map((d, index) => (
                 <Grid item xs={2} key={Math.random()}>
                   <Box
                     sx={{
@@ -51,7 +51,7 @@ function EasyAuthentication() {
                       border: '2px solid',
                       borderColor: 'primary.main',
                       borderRadius: 1,
-                      backgroundColor: 'rgba(115, 91, 242, 0.6)',
+                      backgroundColor: index < password.length ? 'rgba(115, 91, 242, 0.6)' : 'white',
                     }}
                     onClick={() => input.current.focus()}
                   >
