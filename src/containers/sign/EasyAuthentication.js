@@ -8,10 +8,11 @@ import CenterBox from '../../components/layouts/CenterBox';
 import { selectIsAuthenticated, setIsAuthenticatedTrue } from '../../utils/redux/common/commonSlice';
 
 function EasyAuthentication() {
+  const CHARACTER_LIMIT = 6;
   const dispatch = useDispatch();
   const isAuthenticated = useSelector(selectIsAuthenticated);
   const input = useRef();
-  const [password, setPassword] = useState('12');
+  const [password, setPassword] = useState('');
 
   useEffect(() => {
     console.log(password);
@@ -41,9 +42,16 @@ function EasyAuthentication() {
             noValidate
             sx={{ maxWidth: '400px', width: '100%' }}
           >
-            <InputBase sx={{ height: 0, width: 0, color: 'white' }} inputRef={input} onChange={(e) => setPassword(e.target.value)} />
+            <InputBase
+              sx={{ height: 0, width: 0, color: 'white' }}
+              inputRef={input}
+              onChange={(e) => setPassword(e.target.value)}
+              inputProps={{
+                maxLength: CHARACTER_LIMIT,
+              }}
+            />
             <Grid container spacing={1} mb={1}>
-              {[...Array(6)].map((d, index) => (
+              {[...Array(CHARACTER_LIMIT)].map((d, index) => (
                 <Grid item xs={2} key={Math.random()}>
                   <Box
                     sx={{
