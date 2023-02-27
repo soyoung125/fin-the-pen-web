@@ -11,10 +11,12 @@ import AnalysisList from '../../components/analysis/analysisList/AnalysisList';
 import AnalysisDetailCard from '../../components/analysis/detailCard/AnalysisDetailCard';
 import { CATEGORIES } from '../../utils/constants/categories';
 // import CATEGORIES from '../../utils/constants/categories';
-import { setHeaderOpenTrue, setIsAuthenticatedFalse } from '../../utils/redux/common/commonSlice';
+import { selectIsAuthenticated, setHeaderOpenTrue, setIsAuthenticatedFalse } from '../../utils/redux/common/commonSlice';
 import { selectSchedules } from '../../utils/redux/schedule/scheduleSlice';
+import EasyAuthentication from '../sign/EasyAuthentication';
 
 function AnalysisContainer() {
+  const isAuthenticated = useSelector(selectIsAuthenticated);
   const [data, setData] = useState([]); // color 추가할 계획
   const [total, setTotal] = useState([]); // color 추가할 계획
   const [showDetailCard, setShowDetailCard] = useState(false);
@@ -93,21 +95,26 @@ function AnalysisContainer() {
   };
 
   return (
-    <Box sx={{ mt: 2 }}>
-      <AnalysisHeader />
-      {total > 0 ? (
-        showDetailCard
-          ? <AnalysisDetailCard closeDetailCard={closeDetailCard} selectedItem={selectedItem} />
-          : (
-            <>
-              <Box sx={{ width: '100vw', height: '100vw', padding: 5 }}>
-                <AnalysisGraph data={data} total={total} />
-              </Box>
-              <AnalysisList data={data} clickListItem={clickListItem} hexToRGB={hexToRGB} />
-            </>
-          )
-      ) : <Alert sx={{ margin: 2 }} severity="info">이체/지출 데이터가 존재하지 않습니다.</Alert>}
-    </Box>
+    <>
+      <EasyAuthentication />
+      {isAuthenticated && (
+        <Box sx={{ mt: 2 }}>
+          <AnalysisHeader />
+          {total > 0 ? (
+            showDetailCard
+              ? <AnalysisDetailCard closeDetailCard={closeDetailCard} selectedItem={selectedItem} />
+              : (
+                <>
+                  <Box sx={{ width: '100vw', height: '100vw', padding: 5 }}>
+                    <AnalysisGraph data={data} total={total} />
+                  </Box>
+                  <AnalysisList data={data} clickListItem={clickListItem} hexToRGB={hexToRGB} />
+                </>
+              )
+          ) : <Alert sx={{ margin: 2 }} severity="info">이체/지출 데이터가 존재하지 않습니다.</Alert>}
+        </Box>
+      )}
+    </>
   );
 }
 export default AnalysisContainer;
