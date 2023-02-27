@@ -1,15 +1,29 @@
 /* eslint-disable max-len */
 import {
   Alert,
-  Card, CardContent, CardHeader, IconButton, Stack, Typography,
+  Box,
+  Card, CardContent, CardHeader, IconButton, Stack,
 } from '@mui/material';
+import ArrowDropDownRoundedIcon from '@mui/icons-material/ArrowDropDownRounded';
 import CloseIcon from '@mui/icons-material/Close';
+import { useEffect, useState } from 'react';
 import AssetManagement from './AssetManagement';
 import SpendingDetailCard from './SpendingDetailCard';
 import { CONSUMPTION_ALERTS } from '../../../utils/constants/alerts';
+import Title from '../../assetManagement/pages/regularDepositWithdrawal/regular/Title';
 
 function AnalysisDetailCard({ closeDetailCard, selectedItem }) {
+  const [data, setData] = useState(selectedItem.history);
+  const [sortByDate, setSortByDate] = useState(true);
   const random = Math.floor((Math.random() * 5));
+
+  useEffect(() => {
+    if (sortByDate) {
+      setData([...data.sort((a, b) => new Date(a.date) - new Date(b.date))]);
+    } else {
+      setData([...data.sort((a, b) => b.expected_spending - a.expected_spending)]);
+    }
+  }, [sortByDate]);
 
   return (
     <Card sx={{ height: '100%', border: '0px' }} variant="outlined">
@@ -21,12 +35,28 @@ function AnalysisDetailCard({ closeDetailCard, selectedItem }) {
         )}
       />
       <CardContent>
-        <Stack direction="row" justifyContent="space-between" alignItems="flex-end">
-          <Typography variant="h4" sx={{ fontWeight: 'bold' }}>{`${selectedItem.label} 지출 내역`}</Typography>
-          <Typography sx={{ color: 'primary.main', fontWeight: 'bold' }}>{`총 ${selectedItem.history.length}건`}</Typography>
-        </Stack>
+        <Title
+          type={null}
+          title={(
+            <Stack direction="row">
+              <Box mr={1}>{`${selectedItem.label} 지출 내역`}</Box>
+              <Box
+                sx={{
+                  typography: 'subtitle2', color: 'primary.main', display: 'flex', mt: 'auto',
+                }}
+              >
+                {`총 ${selectedItem.history.length}건`}
+              </Box>
+            </Stack>
+        )}
+        >
+          <Stack direction="row">
+            <Box sx={{ display: 'flex', my: 'auto', color: 'primary.main' }} onClick={() => setSortByDate(!sortByDate)}>{sortByDate ? '최신순' : '금액순'}</Box>
+            <ArrowDropDownRoundedIcon fontSize="large" sx={{ color: 'primary.main' }} />
+          </Stack>
+        </Title>
         <Stack sx={{ borderRadius: 3, marginBottom: 2 }}>
-          {selectedItem.history.map((s) => (
+          {data.map((s) => (
             <SpendingDetailCard schedule={s} key={Math.random()} bgColor={selectedItem.color} />
           ))}
         </Stack>
