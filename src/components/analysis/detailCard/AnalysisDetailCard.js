@@ -1,8 +1,7 @@
-/* eslint-disable max-len */
 import {
   Alert,
   Box,
-  Card, CardContent, CardHeader, IconButton, Stack,
+  Card, CardHeader, IconButton, Stack,
 } from '@mui/material';
 import ArrowDropDownRoundedIcon from '@mui/icons-material/ArrowDropDownRounded';
 import CloseIcon from '@mui/icons-material/Close';
@@ -34,7 +33,7 @@ function AnalysisDetailCard({ closeDetailCard, selectedItem }) {
           </IconButton>
         )}
       />
-      <CardContent>
+      <Box px={2}>
         <Title
           type={null}
           title={(
@@ -64,7 +63,7 @@ function AnalysisDetailCard({ closeDetailCard, selectedItem }) {
         <Alert color={CONSUMPTION_ALERTS[random].color} sx={{ width: '100%' }} icon={CONSUMPTION_ALERTS[random].icon}>
           {CONSUMPTION_ALERTS[random].message}
         </Alert>
-      </CardContent>
+      </Box>
     </Card>
   );
 }
