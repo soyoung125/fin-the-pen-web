@@ -1,3 +1,5 @@
+/* eslint-disable no-unused-vars */
+/* eslint-disable max-len */
 import {
   Box, Button, Grid, Stack, Typography,
 } from '@mui/material';
@@ -17,9 +19,9 @@ function DetailInfomation() {
 
   useEffect(() => {
     if (sortByDate) {
-      setData(data.sort((a, b) => b.expected_spending - a.expected_spending));
+      setData([...data.sort((a, b) => new Date(a.date) - new Date(b.date))]);
     } else {
-      setData(data.sort((a, b) => new Date(a.date) - new Date(b.date)));
+      setData([...data.sort((a, b) => b.expected_spending - a.expected_spending)]);
     }
   }, [sortByDate]);
 
@@ -29,13 +31,13 @@ function DetailInfomation() {
         type={null}
         title={(
           <Stack direction="row">
-            <Box mr={1}>{data[0].event_name}</Box>
+            <Box mr={1}>{state.data[0].event_name}</Box>
             <Box
               sx={{
                 typography: 'subtitle2', color: 'primary.main', display: 'flex', mt: 'auto',
               }}
             >
-              {`총${data.length}건`}
+              {`총${state.data.length}건`}
             </Box>
           </Stack>
         )}
