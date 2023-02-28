@@ -86,7 +86,7 @@ function EasyAuthentication() {
               </Stack>
             </CenterBox>
           </Dialog>
-        ) : <Alert severity="error">로그인이 필요한 페이지입니다.</Alert>}
+        ) : <Alert severity="error" sx={{ m: 3 }}>로그인이 필요한 페이지입니다.</Alert>}
     </>
   );
 }
