@@ -4,7 +4,7 @@ import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import ScheduleViewMode from './layout/ScheduleViewMode';
 import useHeader from '../../../utils/hooks/useHeader';
-import { selectGuestMode, selectIsAuthenticated } from '../../../utils/redux/common/commonSlice';
+import { selectGuestMode, selectIsAuthenticated, setIsAuthenticatedFalse } from '../../../utils/redux/common/commonSlice';
 import {
   getMonthSchedules, selectDate, selectViewMode, changeViewMode,
 } from '../../../utils/redux/schedule/scheduleSlice';
@@ -25,6 +25,7 @@ function HomeConatiner() {
 
   useEffect(() => {
     dispatch(changeViewMode('schedule'));
+    dispatch(setIsAuthenticatedFalse());
   }, []);
 
   useHeader(true, 'home');
