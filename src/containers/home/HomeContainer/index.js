@@ -1,25 +1,21 @@
 import {
-  Accordion,
-  AccordionDetails,
-  AccordionSummary,
-  Alert, Box, Button, Divider, Snackbar, Stack, Typography,
+  Alert, Box, Divider, Snackbar,
 } from '@mui/material';
 import moment from 'moment';
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import ScheduleStatusCard from '../../../components/assetManagement/ScheduleStatusCard';
-import MonthlyStatement from './MonthlyStatement';
 import ScheduleViewMode from './ScheduleViewMode';
 import { CONSUMPTION_ALERTS } from '../../../utils/constants/alerts';
 import useHeader from '../../../utils/hooks/useHeader';
 import { selectGuestMode, selectIsAuthenticated } from '../../../utils/redux/common/commonSlice';
 import {
-  getMonthSchedules, selectDate, selectSchedules, selectViewMode, changeViewMode,
+  getMonthSchedules, selectDate, selectViewMode, changeViewMode,
 } from '../../../utils/redux/schedule/scheduleSlice';
 import { selectUser } from '../../../utils/redux/user/userSlice';
 import EasyAuthentication from '../../sign/EasyAuthentication';
 import Calender from './Calender';
 import ScheduleList from './ScheduleList';
+import AssetManagement from './AssetManagement';
 
 function HomeConatiner() {
   const dispatch = useDispatch();
@@ -27,19 +23,11 @@ function HomeConatiner() {
   const date = useSelector(selectDate);
   const user = useSelector(selectUser);
   const guestMode = useSelector(selectGuestMode);
-  const schedules = useSelector(selectSchedules);
   const isAuthenticated = useSelector(selectIsAuthenticated);
-  const today = moment();
 
   // 추후 삭제 예정
   const random = Math.floor((Math.random() * 5));
   const [snackbarOpen, setSnackbarOpen] = useState(true);
-
-  const [expandAccordion, setExpandAccordion] = useState(false);
-
-  const handleExpand = () => {
-    setExpandAccordion(!expandAccordion);
-  };
 
   useEffect(() => {
     dispatch(changeViewMode('schedule'));
@@ -86,33 +74,8 @@ function HomeConatiner() {
       ) : (
         <>
           <EasyAuthentication />
-          {isAuthenticated
-            && (
-              <Box sx={{ mb: 8 }}>
-                <Box sx={{ mx: 2 }}>
-                  <MonthlyStatement />
-                </Box>
-
-                <Accordion expanded={expandAccordion} disableGutters elevation={0}>
-                  <AccordionSummary>
-                    <Stack direction="row" justifyContent="space-between" width="100%">
-                      <Typography sx={{ display: 'flex', alignItems: 'center', fontWeight: 'bold' }}>전체 내역</Typography>
-                      <Button onClick={handleExpand}>{expandAccordion ? '달력 닫기' : '달력 보기'}</Button>
-                    </Stack>
-                  </AccordionSummary>
-                  <AccordionDetails sx={{ p: 0 }}>
-                    <Calender dateHeight={85} />
-                  </AccordionDetails>
-                </Accordion>
-
-                <Box sx={{ mx: 2 }}>
-                  <ScheduleStatusCard
-                    month={today.format('M월')}
-                    numberOfSchedule={schedules.filter((s) => today.isSame(s.date, 'month') && today.isSameOrBefore(s.date, 'day')).length}
-                  />
-                </Box>
-              </Box>
-            )}
+          {/* isAuthenticated을 AssetManagement 내부에서 하는건 가독성이 떨어질까? */}
+          {isAuthenticated && <AssetManagement />}
         </>
       )}
       <ScheduleViewMode />
