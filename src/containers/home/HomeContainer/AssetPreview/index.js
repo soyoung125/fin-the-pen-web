@@ -9,7 +9,7 @@ import Calender from '../Calender';
 import MonthlyStatement from '../MonthlyStatement';
 import ScheduleStatusCard from '../../../../components/assetManagement/ScheduleStatusCard';
 
-function AssetManagement() {
+function AssetPreview() {
   const schedules = useSelector(selectSchedules);
   const today = moment();
 
@@ -45,4 +45,4 @@ function AssetManagement() {
     </Box>
   );
 }
-export default AssetManagement;
+export default AssetPreview;

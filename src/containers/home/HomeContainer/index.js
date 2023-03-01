@@ -12,7 +12,7 @@ import { selectUser } from '../../../utils/redux/user/userSlice';
 import EasyAuthentication from '../../sign/EasyAuthentication';
 import Calender from './Calender';
 import ScheduleList from './ScheduleList';
-import AssetManagement from './AssetManagement';
+import AssetPreview from './AssetPreview';
 import ConsumptionAlert from './ConsumptionAlert';
 
 function HomeConatiner() {
@@ -55,8 +55,8 @@ function HomeConatiner() {
       ) : (
         <>
           <EasyAuthentication />
-          {/* isAuthenticated을 AssetManagement 내부에서 하는건 가독성이 떨어질까? */}
-          {isAuthenticated && <AssetManagement />}
+          {/* isAuthenticated을 AssetPreview 내부에서 하는건 가독성이 떨어질까? */}
+          {isAuthenticated && <AssetPreview />}
         </>
       )}
       <ScheduleViewMode />
