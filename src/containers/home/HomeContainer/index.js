@@ -2,7 +2,7 @@ import { Box, Divider } from '@mui/material';
 import moment from 'moment';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import ScheduleViewMode from './ScheduleViewMode';
+import ScheduleViewMode from './layout/ScheduleViewMode';
 import useHeader from '../../../utils/hooks/useHeader';
 import { selectGuestMode, selectIsAuthenticated } from '../../../utils/redux/common/commonSlice';
 import {
@@ -10,10 +10,10 @@ import {
 } from '../../../utils/redux/schedule/scheduleSlice';
 import { selectUser } from '../../../utils/redux/user/userSlice';
 import EasyAuthentication from '../../sign/EasyAuthentication';
-import Calender from './Calender';
-import ScheduleList from './ScheduleList';
-import AssetPreview from './AssetPreview';
-import ConsumptionAlert from './ConsumptionAlert';
+import Calender from './view/Calender';
+import ScheduleList from './view/ScheduleList';
+import AssetPreview from './view/AssetPreview';
+import ConsumptionAlert from './layout/ConsumptionAlert';
 
 function HomeConatiner() {
   const dispatch = useDispatch();

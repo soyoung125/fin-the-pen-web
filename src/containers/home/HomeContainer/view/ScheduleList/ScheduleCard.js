@@ -8,8 +8,8 @@ import { grey } from '@mui/material/colors';
 import { useState } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { useDispatch } from 'react-redux';
-import { deleteSelectedSchedule } from '../../../../utils/tools';
-import { setBottomDrawerOpenFalse } from '../../../../utils/redux/common/commonSlice';
+import { deleteSelectedSchedule } from '../../../../../utils/tools';
+import { setBottomDrawerOpenFalse } from '../../../../../utils/redux/common/commonSlice';
 
 function ScheduleCard({ schedule, handleModal, category }) {
   const dispatch = useDispatch();

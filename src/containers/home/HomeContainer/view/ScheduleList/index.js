@@ -4,10 +4,10 @@ import {
 import moment from 'moment';
 import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
-import ScheduleDrawer from '../../ScheduleDrawer';
-import { CATEGORIES } from '../../../../utils/constants/categories';
-import { SCHEDULE_DRAWER_MODE } from '../../../../utils/constants/schedule';
-import { selectDate, selectSchedules, selectStatus } from '../../../../utils/redux/schedule/scheduleSlice';
+import ScheduleDrawer from '../../../ScheduleDrawer';
+import { CATEGORIES } from '../../../../../utils/constants/categories';
+import { SCHEDULE_DRAWER_MODE } from '../../../../../utils/constants/schedule';
+import { selectDate, selectSchedules, selectStatus } from '../../../../../utils/redux/schedule/scheduleSlice';
 // import ScheduleDrawer from '../ScheduleDrawer';
 import ScheduleCard from './ScheduleCard';
 
