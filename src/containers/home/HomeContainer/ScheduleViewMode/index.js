@@ -3,9 +3,9 @@ import { Box, Button } from '@mui/material';
 import { grey } from '@mui/material/colors';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import PATH from '../../../utils/constants/path';
-import { VIEW_MODE } from '../../../utils/constants/schedule';
-import { changeViewMode, selectViewMode } from '../../../utils/redux/schedule/scheduleSlice';
+import PATH from '../../../../utils/constants/path';
+import { VIEW_MODE } from '../../../../utils/constants/schedule';
+import { changeViewMode, selectViewMode } from '../../../../utils/redux/schedule/scheduleSlice';
 
 function ScheduleViewMode() {
   const navigate = useNavigate();
