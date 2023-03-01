@@ -10,8 +10,9 @@ import AnalysisHeader from '../../components/analysis/AnalysisHeader';
 import AnalysisList from '../../components/analysis/analysisList/AnalysisList';
 import AnalysisDetailCard from '../../components/analysis/detailCard/AnalysisDetailCard';
 import { CATEGORIES } from '../../utils/constants/categories';
+import useHeader from '../../utils/hooks/useHeader';
 // import CATEGORIES from '../../utils/constants/categories';
-import { selectIsAuthenticated, setHeaderOpenTrue, setIsAuthenticatedFalse } from '../../utils/redux/common/commonSlice';
+import { selectIsAuthenticated, setIsAuthenticatedFalse } from '../../utils/redux/common/commonSlice';
 import { selectSchedules } from '../../utils/redux/schedule/scheduleSlice';
 import EasyAuthentication from '../sign/EasyAuthentication';
 
@@ -33,9 +34,10 @@ function AnalysisContainer() {
 
   const dispatch = useDispatch();
   useEffect(() => {
-    dispatch(setHeaderOpenTrue('analysis'));
     dispatch(setIsAuthenticatedFalse());
   }, []);
+
+  useHeader(true, 'analysis');
 
   useEffect(() => {
     const newData = [];

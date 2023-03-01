@@ -1,13 +1,7 @@
-/* eslint-disable no-unused-vars */
 import {
-  Avatar, Box, Button, Container, CssBaseline, InputAdornment, Stack, TextField, Typography,
+  Box, Button, InputAdornment, Stack, TextField, Typography,
 } from '@mui/material';
-import { useEffect } from 'react';
-import { useDispatch } from 'react-redux';
-import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
-import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
-import { setHeaderOpenFalse, setHeaderOpenTrue } from '../../utils/redux/common/commonSlice';
 import { fetchSignUp } from '../../utils/redux/API';
 import { isObjectValuesEmpty } from '../../utils/tools';
 import {
@@ -16,17 +10,12 @@ import {
 import PATH from '../../utils/constants/path';
 import CenterBox from '../../components/layouts/CenterBox';
 import LogoCircle from '../../components/common/LogoCircle';
+import useHeader from '../../utils/hooks/useHeader';
 
 function SignUpContainer() {
-  const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  useEffect(() => {
-    dispatch(setHeaderOpenFalse()); // 페이지 진입 시 헤더 감추기
-    return () => {
-      dispatch(setHeaderOpenTrue()); // 페이지 탈출 시 헤더 복구
-    };
-  }, []);
+  useHeader(false);
 
   const signUp = async (user) => {
     const result = await fetchSignUp(user);

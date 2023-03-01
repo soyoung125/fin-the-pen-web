@@ -11,7 +11,8 @@ import ScheduleStatusCard from '../../../components/assetManagement/ScheduleStat
 import MonthlyStatement from '../../../components/calender/MonthlyStatement.js';
 import ScheduleViewMode from '../../../components/calender/ScheduleViewMode';
 import { CONSUMPTION_ALERTS } from '../../../utils/constants/alerts';
-import { selectGuestMode, selectIsAuthenticated, setHeaderOpenTrue } from '../../../utils/redux/common/commonSlice';
+import useHeader from '../../../utils/hooks/useHeader';
+import { selectGuestMode, selectIsAuthenticated } from '../../../utils/redux/common/commonSlice';
 import {
   getMonthSchedules, selectDate, selectSchedules, selectViewMode, changeViewMode,
 } from '../../../utils/redux/schedule/scheduleSlice';
@@ -41,9 +42,10 @@ function HomeConatiner() {
   };
 
   useEffect(() => {
-    dispatch(setHeaderOpenTrue('home'));
     dispatch(changeViewMode('schedule'));
   }, []);
+
+  useHeader(true, 'home');
 
   const getSchedules = () => {
     dispatch(getMonthSchedules({
