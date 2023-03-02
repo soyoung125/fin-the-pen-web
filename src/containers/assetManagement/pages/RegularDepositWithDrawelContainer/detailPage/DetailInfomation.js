@@ -43,7 +43,7 @@ function DetailInfomation() {
         )}
       >
         <Stack direction="row">
-          <Box sx={{ display: 'flex', my: 'auto', color: 'primary.main' }} onClick={() => setSortByDate(!sortByDate)}>{sortByDate ? '최신순' : '금액순'}</Box>
+          <Box sx={{ display: 'flex', my: 'auto', color: 'primary.main' }} onClick={() => setSortByDate(!sortByDate)}>{sortByDate ? '날짜순' : '금액순'}</Box>
           <ArrowDropDownRoundedIcon fontSize="large" sx={{ color: 'primary.main' }} />
         </Stack>
       </Title>
