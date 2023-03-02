@@ -38,6 +38,7 @@ function AnalysisContainer() {
   useEffect(() => {
     dispatch(setIsAuthenticatedFalse());
     dispatch(selectedDate(moment(new Date())));
+    console.log(moment(new Date()));
   }, []);
 
   useHeader(true, 'analysis');

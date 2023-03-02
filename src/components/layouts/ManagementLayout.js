@@ -37,6 +37,7 @@ function ManagementLayout() {
       {isAuthenticated && (
         <Box sx={{ pt: 3, px: 2 }}>
           <SwitchingHeader
+            justifyContent="space-between"
             handleClickLeftArrow={() => handleMovement('-')}
             handleClickRightArrow={() => handleMovement('+')}
           >

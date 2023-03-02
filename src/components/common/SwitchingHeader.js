@@ -2,13 +2,15 @@ import { IconButton, Stack } from '@mui/material';
 import KeyboardArrowLeftIcon from '@mui/icons-material/KeyboardArrowLeft';
 import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight';
 
-function SwitchingHeader({ children, handleClickLeftArrow, handleClickRightArrow }) {
+function SwitchingHeader({
+  children, handleClickLeftArrow, handleClickRightArrow, justifyContent,
+}) {
   return (
-    <Stack direction="row" alignItems="center" justifyContent="space-between" sx={{ height: '100%' }}>
+    <Stack direction="row" alignItems="center" justifyContent={justifyContent} sx={{ height: '100%' }}>
       <IconButton
         aria-label="delete"
         sx={{
-          padding: '5px', marginRight: '-3px', border: '1px solid', borderRadius: 2,
+          padding: 0, marginRight: '-3px', border: '1px solid', borderRadius: 2,
         }}
         onClick={handleClickLeftArrow}
       >
@@ -20,7 +22,7 @@ function SwitchingHeader({ children, handleClickLeftArrow, handleClickRightArrow
       <IconButton
         aria-label="delete"
         sx={{
-          padding: '5px', marginLeft: '-3px', border: '1px solid', borderRadius: 2,
+          padding: 0, marginLeft: '-3px', border: '1px solid', borderRadius: 2,
         }}
         onClick={handleClickRightArrow}
       >

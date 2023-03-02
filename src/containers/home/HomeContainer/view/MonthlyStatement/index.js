@@ -18,6 +18,7 @@ function MonthlyStatement() {
   return (
     <RoundedPaper>
       <SwitchingHeader
+        justifyContent="space-between"
         handleClickLeftArrow={() => dispatch(selectedDate(moment(date).subtract(1, 'months')))}
         handleClickRightArrow={() => dispatch(selectedDate(moment(date).add(1, 'months')))}
       >
