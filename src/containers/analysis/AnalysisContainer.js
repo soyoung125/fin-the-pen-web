@@ -6,11 +6,13 @@ import {
 import moment from 'moment';
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 import AnalysisGraph from '../../components/analysis/AnalysisGraph';
 import AnalysisHeader from '../../components/analysis/AnalysisHeader';
 import AnalysisList from '../../components/analysis/analysisList/AnalysisList';
 import AnalysisDetailCard from '../../components/analysis/detailCard/AnalysisDetailCard';
 import { CATEGORIES } from '../../utils/constants/categories';
+import PATH from '../../utils/constants/path';
 import useHeader from '../../utils/hooks/useHeader';
 // import CATEGORIES from '../../utils/constants/categories';
 import { selectIsAuthenticated, setIsAuthenticatedFalse } from '../../utils/redux/common/commonSlice';
@@ -18,6 +20,7 @@ import { selectDate, selectedDate, selectSchedules } from '../../utils/redux/sch
 import EasyAuthentication from '../sign/EasyAuthentication';
 
 function AnalysisContainer() {
+  const navigate = useNavigate();
   const isAuthenticated = useSelector(selectIsAuthenticated);
   const date = useSelector(selectDate);
   const [data, setData] = useState([]); // color 추가할 계획
@@ -38,7 +41,6 @@ function AnalysisContainer() {
   useEffect(() => {
     dispatch(setIsAuthenticatedFalse());
     dispatch(selectedDate(moment(new Date())));
-    console.log(moment(new Date()));
   }, []);
 
   useHeader(true, 'analysis');
@@ -78,11 +80,12 @@ function AnalysisContainer() {
     console.log(newData);
     setTotal(newTotal);
     setData(newData.sort((a, b) => b.value - a.value));
-  }, []);
+  }, [date]);
 
   const clickListItem = (category) => {
-    setShowDetailCard(true);
+    // setShowDetailCard(true);
     setSelectedItem(category);
+    navigate(PATH.analysisDetail, { state: { color: category.color, category: category.label } });
   };
 
   const closeDetailCard = () => {

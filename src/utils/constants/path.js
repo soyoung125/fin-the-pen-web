@@ -1,6 +1,7 @@
 const PATH = Object.freeze({
   home: '/',
   analysis: '/analysis',
+  analysisDetail: '/analysis-detail',
   signIn: '/sign-in',
   signUp: '/sign-up',
   mypage: '/mypage',
