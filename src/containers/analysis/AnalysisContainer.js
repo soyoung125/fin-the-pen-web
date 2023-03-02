@@ -3,6 +3,7 @@ import { Alert, Box } from '@mui/material';
 import {
   blue, blueGrey, brown, green, indigo, pink, red,
 } from '@mui/material/colors';
+import moment from 'moment';
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import AnalysisGraph from '../../components/analysis/AnalysisGraph';
@@ -13,11 +14,12 @@ import { CATEGORIES } from '../../utils/constants/categories';
 import useHeader from '../../utils/hooks/useHeader';
 // import CATEGORIES from '../../utils/constants/categories';
 import { selectIsAuthenticated, setIsAuthenticatedFalse } from '../../utils/redux/common/commonSlice';
-import { selectSchedules } from '../../utils/redux/schedule/scheduleSlice';
+import { selectDate, selectedDate, selectSchedules } from '../../utils/redux/schedule/scheduleSlice';
 import EasyAuthentication from '../sign/EasyAuthentication';
 
 function AnalysisContainer() {
   const isAuthenticated = useSelector(selectIsAuthenticated);
+  const date = useSelector(selectDate);
   const [data, setData] = useState([]); // color 추가할 계획
   const [total, setTotal] = useState([]); // color 추가할 계획
   const [showDetailCard, setShowDetailCard] = useState(false);
@@ -35,6 +37,7 @@ function AnalysisContainer() {
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(setIsAuthenticatedFalse());
+    dispatch(selectedDate(moment(new Date())));
   }, []);
 
   useHeader(true, 'analysis');
@@ -47,7 +50,7 @@ function AnalysisContainer() {
 
     // eslint-disable-next-line array-callback-return
     expenditureCategories.map((c, index) => {
-      const schByCategory = schedules.filter((s) => s.category === c.title);
+      const schByCategory = schedules.filter((s) => date.isSame(s.date, 'month') && s.category === c.title);
       const cnt = schByCategory.length;
       if (cnt > 0) {
         // eslint-disable-next-line function-paren-newline
