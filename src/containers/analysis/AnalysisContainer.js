@@ -44,24 +44,20 @@ function AnalysisContainer() {
         const spending = schByCategory.reduce(
           // eslint-disable-next-line prefer-arrow-callback
           function (result, schedule) {
-            return {
-              sum: result.sum + parseInt(schedule.expected_spending, 10),
-              history: result.history.concat(schedule),
-            };
-          }, { sum: 0, history: [] });
-        if (spending.sum > 0) {
+            return result + parseInt(schedule.expected_spending, 10);
+          }, 0);
+        if (spending > 0) {
           newData.push({
             id: c.title,
             label: c.title,
-            value: spending.sum,
+            value: spending,
             color: colorList[index],
-            history: spending.history,
           });
-          newTotal += spending.sum;
+          newTotal += spending;
         }
       }
     });
-    console.log(newData);
+
     setTotal(newTotal);
     setData(newData.sort((a, b) => b.value - a.value));
   }, [date]);
