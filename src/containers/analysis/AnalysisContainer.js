@@ -1,32 +1,22 @@
-/* eslint-disable no-unused-vars */
-/* eslint-disable no-nested-ternary */
 import { Alert, Box } from '@mui/material';
 import {
   blue, blueGrey, brown, green, indigo, pink, red,
 } from '@mui/material/colors';
-import moment from 'moment';
 import { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import AnalysisGraph from '../../components/analysis/AnalysisGraph';
-import AnalysisHeader from '../../components/analysis/AnalysisHeader';
 import AnalysisList from '../../components/analysis/analysisList/AnalysisList';
-import AnalysisDetailCard from '../../components/analysis/detailCard/AnalysisDetailCard';
 import { CATEGORIES } from '../../utils/constants/categories';
 import PATH from '../../utils/constants/path';
 import useHeader from '../../utils/hooks/useHeader';
-// import CATEGORIES from '../../utils/constants/categories';
-import { selectIsAuthenticated, setIsAuthenticatedFalse } from '../../utils/redux/common/commonSlice';
-import { selectDate, selectedDate, selectSchedules } from '../../utils/redux/schedule/scheduleSlice';
-import EasyAuthentication from '../sign/EasyAuthentication';
+import { selectDate, selectSchedules } from '../../utils/redux/schedule/scheduleSlice';
 
 function AnalysisContainer() {
   const navigate = useNavigate();
   const date = useSelector(selectDate);
   const [data, setData] = useState([]); // color 추가할 계획
   const [total, setTotal] = useState([]); // color 추가할 계획
-  const [showDetailCard, setShowDetailCard] = useState(false);
-  const [selectedItem, setSelectedItem] = useState({});
   const schedules = useSelector(selectSchedules);
   const colorList = [
     indigo[100], indigo[200], indigo[300], indigo[400], indigo[500], indigo[600], indigo[700],
@@ -36,12 +26,6 @@ function AnalysisContainer() {
     pink[100], red[100], pink[200], red[200], pink[300],
     brown[100], brown[200],
   ];
-
-  const dispatch = useDispatch();
-  useEffect(() => {
-    // dispatch(setIsAuthenticatedFalse());
-    // dispatch(selectedDate(moment(new Date())));
-  }, []);
 
   useHeader(true, 'analysis');
 
@@ -83,8 +67,6 @@ function AnalysisContainer() {
   }, [date]);
 
   const clickListItem = (category) => {
-    // setShowDetailCard(true);
-    setSelectedItem(category);
     navigate(PATH.analysisDetail, { state: { color: category.color, category: category.label } });
   };
 
