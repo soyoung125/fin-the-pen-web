@@ -1,11 +1,11 @@
 import './App.css';
 import { Route, Routes } from 'react-router-dom';
-import HomeLayout from './components/layouts/HomeLayout';
+import HomeLayout from './components/layouts/containerLayout/HomeLayout';
 import homeRoutes from './utils/routes/homeRoutes';
 import managementRoutes from './utils/routes/managementRoutes';
-import ManagementLayout from './components/layouts/ManagementLayout';
+import ManagementLayout from './components/layouts/containerLayout/ManagementLayout';
 import analysisRoutes from './utils/routes/analysisRoutes';
-import AnalysisLayout from './components/layouts/AnalysisLayout';
+import AnalysisLayout from './components/layouts/containerLayout/AnalysisLayout';
 
 function App() {
   return (
