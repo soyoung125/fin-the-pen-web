@@ -4,6 +4,8 @@ import HomeLayout from './components/layouts/HomeLayout';
 import homeRoutes from './utils/routes/homeRoutes';
 import managementRoutes from './utils/routes/managementRoutes';
 import ManagementLayout from './components/layouts/ManagementLayout';
+import analysisRoutes from './utils/routes/analysisRoutes';
+import AnalysisLayout from './components/layouts/AnalysisLayout';
 
 function App() {
   return (
@@ -16,6 +18,12 @@ function App() {
         <Route path="/management" element={<ManagementLayout />}>
           {
             managementRoutes
+              .map((route) => <Route path={route.path} element={route.element} key={route.path} />)
+          }
+        </Route>
+        <Route path="/analysis" element={<AnalysisLayout />}>
+          {
+            analysisRoutes
               .map((route) => <Route path={route.path} element={route.element} key={route.path} />)
           }
         </Route>

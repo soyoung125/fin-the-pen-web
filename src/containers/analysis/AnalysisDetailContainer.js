@@ -6,7 +6,6 @@ import { useEffect, useState } from 'react';
 import Title from '../../components/assetManagement/pages/regularDepositWithdrawal/regular/Title';
 import SpendingDetailCard from '../../components/analysis/detailCard/SpendingDetailCard';
 import { selectDate, selectSchedules } from '../../utils/redux/schedule/scheduleSlice';
-import AnalysisHeader from '../../components/analysis/AnalysisHeader';
 
 function AnalysisDetailContainer() {
   const { state } = useLocation();
@@ -34,38 +33,34 @@ function AnalysisDetailContainer() {
   }, [selectedItem]);
 
   return (
-    <>
-      <AnalysisHeader />
-      <Box px={2}>
-        <Title
-          type={null}
-          title={(
-            <Stack direction="row">
-              <Box mr={1}>{`${category} 지출 내역`}</Box>
-              <Box
-                sx={{
-                  typography: 'subtitle2', color: 'primary.main', display: 'flex', mt: 'auto',
-                }}
-              >
-                {`총 ${selectedItem.length}건`}
-              </Box>
-            </Stack>
-              )}
-        >
+    <Box px={2}>
+      <Title
+        type={null}
+        title={(
           <Stack direction="row">
-            <Box sx={{ display: 'flex', my: 'auto', color: 'primary.main' }} onClick={() => setSortByDate(!sortByDate)}>{sortByDate ? '최신순' : '금액순'}</Box>
-            <ArrowDropDownRoundedIcon fontSize="large" sx={{ color: 'primary.main' }} />
+            <Box mr={1}>{`${category} 지출 내역`}</Box>
+            <Box
+              sx={{
+                typography: 'subtitle2', color: 'primary.main', display: 'flex', mt: 'auto',
+              }}
+            >
+              {`총 ${selectedItem.length}건`}
+            </Box>
           </Stack>
-        </Title>
-        <Stack sx={{ borderRadius: 3, marginBottom: 2 }}>
-          {selectedItem.map((s) => (
-            <SpendingDetailCard schedule={s} key={Math.random()} bgColor={color} />
-          ))}
+              )}
+      >
+        <Stack direction="row">
+          <Box sx={{ display: 'flex', my: 'auto', color: 'primary.main' }} onClick={() => setSortByDate(!sortByDate)}>{sortByDate ? '최신순' : '금액순'}</Box>
+          <ArrowDropDownRoundedIcon fontSize="large" sx={{ color: 'primary.main' }} />
         </Stack>
-        {/* <AssetManagement selectedItem={selectedItem} /> */}
-      </Box>
-
-    </>
+      </Title>
+      <Stack sx={{ borderRadius: 3, marginBottom: 2 }}>
+        {selectedItem.map((s) => (
+          <SpendingDetailCard schedule={s} key={Math.random()} bgColor={color} />
+        ))}
+      </Stack>
+      {/* <AssetManagement selectedItem={selectedItem} /> */}
+    </Box>
   );
 }
 

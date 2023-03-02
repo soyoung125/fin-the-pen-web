@@ -1,5 +1,3 @@
-import AnalysisContainer from '../../containers/analysis/AnalysisContainer';
-import AnalysisDetailContainer from '../../containers/analysis/AnalysisDetailContainer';
 import AssetManagementContainer from '../../containers/assetManagement/AssetManagementContainer';
 import HomeContainer from '../../containers/home/HomeContainer';
 import MyPageContainer from '../../containers/mypage/MyPageContainer';
@@ -14,14 +12,6 @@ const homeRoutes = [
   {
     path: PATH.home,
     element: <HomeContainer />,
-  },
-  {
-    path: PATH.analysis,
-    element: <AnalysisContainer />,
-  },
-  {
-    path: PATH.analysisDetail,
-    element: <AnalysisDetailContainer />,
   },
   {
     path: PATH.signIn,
