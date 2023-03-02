@@ -1,3 +1,4 @@
+/* eslint-disable array-callback-return */
 import { Alert, Box } from '@mui/material';
 import {
   blue, blueGrey, brown, green, indigo, pink, red,
@@ -31,21 +32,15 @@ function AnalysisContainer() {
 
   useEffect(() => {
     const newData = [];
-    // eslint-disable-next-line no-unused-vars
     let newTotal = 0;
     const expenditureCategories = CATEGORIES.filter((c) => c.type === '지출' || c.nestedType === '출금');
 
-    // eslint-disable-next-line array-callback-return
     expenditureCategories.map((c, index) => {
       const schByCategory = schedules.filter((s) => date.isSame(s.date, 'month') && s.category === c.title);
       const cnt = schByCategory.length;
       if (cnt > 0) {
-        // eslint-disable-next-line function-paren-newline
-        const spending = schByCategory.reduce(
-          // eslint-disable-next-line prefer-arrow-callback
-          function (result, schedule) {
-            return result + parseInt(schedule.expected_spending, 10);
-          }, 0);
+        const spending = schByCategory
+          .reduce((result, schedule) => result + parseInt(schedule.expected_spending, 10), 0);
         if (spending > 0) {
           newData.push({
             id: c.title,
