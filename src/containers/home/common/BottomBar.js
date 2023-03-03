@@ -10,11 +10,11 @@ import SettingsIcon from '@mui/icons-material/Settings';
 import PaidIcon from '@mui/icons-material/Paid';
 import { useDispatch, useSelector } from 'react-redux';
 import moment from 'moment';
-import PATH from '../../utils/constants/path';
-import ScheduleDrawer from '../../containers/home/ScheduleDrawer';
-import { INIT_SCHEDULE, SCHEDULE_DRAWER_MODE } from '../../utils/constants/schedule';
-import { changeViewMode, selectDate } from '../../utils/redux/schedule/scheduleSlice';
-import { selectBottomDrawerOpen, setBottomDrawerOpenFalse, setBottomDrawerOpenTrue } from '../../utils/redux/common/commonSlice';
+import PATH from '../../../utils/constants/path';
+import ScheduleDrawer from '../ScheduleDrawer';
+import { INIT_SCHEDULE, SCHEDULE_DRAWER_MODE } from '../../../utils/constants/schedule';
+import { changeViewMode, selectDate } from '../../../utils/redux/schedule/scheduleSlice';
+import { selectBottomDrawerOpen, setBottomDrawerOpenFalse, setBottomDrawerOpenTrue } from '../../../utils/redux/common/commonSlice';
 
 function BottomBar({ value, setValue }) {
   const dispatch = useDispatch();

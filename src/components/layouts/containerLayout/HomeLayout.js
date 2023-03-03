@@ -2,9 +2,9 @@ import Box from '@mui/material/Box';
 import CssBaseline from '@mui/material/CssBaseline';
 import { useRef, useState } from 'react';
 import { Outlet } from 'react-router-dom';
+import BottomBar from '../../../containers/home/common/BottomBar';
 import TopBar from '../../../containers/home/common/TopBar';
 
-import BottomBar from '../BottomBar';
 // const messageExamples = [
 //   {
 //     primary: 'Brunch this week?',
