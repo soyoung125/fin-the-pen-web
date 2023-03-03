@@ -1,7 +1,7 @@
 import { Typography } from '@mui/material';
-import Accordion from '../../../../../common/accordions/Accordion';
-import AccordionSummary from '../../../../../common/accordions/AccordionSummary';
-import AccordionDetails from '../../../../../common/accordions/AccordionDetails';
+import Accordion from '../../../../../../../components/common/accordions/Accordion';
+import AccordionDetails from '../../../../../../../components/common/accordions/AccordionDetails';
+import AccordionSummary from '../../../../../../../components/common/accordions/AccordionSummary';
 import FilterChips from './FilterChips';
 
 function FilterAccordion({ tag }) {

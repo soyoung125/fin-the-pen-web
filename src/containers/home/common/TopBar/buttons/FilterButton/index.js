@@ -9,15 +9,15 @@ import FilterAltOutlinedIcon from '@mui/icons-material/FilterAltOutlined';
 import { useDispatch, useSelector } from 'react-redux';
 import ClearIcon from '@mui/icons-material/Clear';
 import moment from 'moment';
-import RoundedButton from '../../../../common/RoundedButton';
-import { EXPENDITURE, FIXED, INCOME } from '../../../../../utils/constants/categories';
+
 import FilterAccordion from './inputs/FilterAccordion';
 import {
   initFilter, selectFiltered, selectFilteredDate, setFilteredDate, updateFilter,
-} from '../../../../../utils/redux/schedule/scheduleSlice';
-import { SOMETHING_IS_WRONG } from '../../../../../utils/constants/common';
-import { isTimeOrderCorrect } from '../../../../../utils/tools';
-import { WRONG_TIME_ORDER } from '../../../../../utils/constants/schedule';
+} from '../../../../../../utils/redux/schedule/scheduleSlice';
+import { WRONG_TIME_ORDER } from '../../../../../../utils/constants/schedule';
+import { isTimeOrderCorrect } from '../../../../../../utils/tools';
+import RoundedButton from '../../../../../../components/common/RoundedButton';
+import { EXPENDITURE, FIXED, INCOME } from '../../../../../../utils/constants/categories';
 
 function FilterButton() {
   const dispatch = useDispatch();

@@ -4,7 +4,7 @@ import {
 } from '@mui/material';
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect, useState } from 'react';
-import { selectFiltered, updateFilter, updateFiltersForce } from '../../../../../../utils/redux/schedule/scheduleSlice';
+import { selectFiltered, updateFilter, updateFiltersForce } from '../../../../../../../utils/redux/schedule/scheduleSlice';
 
 function FilterChips({ nested }) {
   const dispatch = useDispatch();
