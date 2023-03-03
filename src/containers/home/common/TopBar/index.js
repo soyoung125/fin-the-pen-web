@@ -1,6 +1,4 @@
-import {
-  Box, Paper, Stack, Typography,
-} from '@mui/material';
+import { Box, Paper, Stack } from '@mui/material';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
@@ -8,43 +6,20 @@ import SearchIcon from '@mui/icons-material/Search';
 import NotificationsOutlinedIcon from '@mui/icons-material/NotificationsOutlined';
 import FilterButton from './buttons/FilterButton';
 import PersonalButton from './buttons/PersonalButton';
-import logo from '../../../../assets/logos/logo_removebg.png';
-import { selectSavingGoal } from '../../../../utils/redux/asset/assetSlice';
 import {
-  selectGuestMode, selectHeaderMode, selectHeaderOpen, setGuestModeFalse, setGuestModeTrue,
+  selectHeaderMode, selectHeaderOpen, setGuestModeFalse, setGuestModeTrue,
 } from '../../../../utils/redux/common/commonSlice';
 import PATH from '../../../../utils/constants/path';
 import { selectUser } from '../../../../utils/redux/user/userSlice';
 import RoundedButton from '../../../../components/common/RoundedButton';
-
-function LogoButton({ navigate }) {
-  const guestMode = useSelector(selectGuestMode);
-  return (
-    <RoundedButton value="user" onClick={() => navigate(PATH.home)}>
-      <img src={logo} alt="" width="26px" height="26px" />
-      {
-        guestMode && (
-          <Typography ml={1}>GUEST MODE</Typography>
-        )
-      }
-    </RoundedButton>
-  );
-}
+import LogoButton from './buttons/LogoButton';
 
 function TopBar() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const user = useSelector(selectUser);
-  const savingGoal = useSelector(selectSavingGoal);
   const headerOpen = useSelector(selectHeaderOpen);
   const headerMode = useSelector(selectHeaderMode);
-
-  useEffect(() => {
-    console.log(user, savingGoal);
-    if (user && savingGoal.year === 0 && savingGoal.skipRequest === false) {
-      console.log('목표가 없는 사람임?');
-    }
-  }, [user]);
 
   useEffect(() => {
     // 옵셔널 체이닝 사용하면 eslint에서 오류 발생
@@ -83,7 +58,7 @@ function TopBar() {
                 alignItems="center"
               >
                 {headerMode === 'home' && (
-                  <LogoButton navigate={navigate} />
+                  <LogoButton />
                 )}
                 {headerMode === 'analysis' && (
                   <FilterButton />
@@ -97,7 +72,7 @@ function TopBar() {
                 alignItems="center"
               >
                 {headerMode === 'analysis' && (
-                  <LogoButton navigate={navigate} />
+                  <LogoButton />
                 )}
               </Stack>
 
@@ -113,7 +88,6 @@ function TopBar() {
                       <SearchIcon />
                     </RoundedButton>
                     <RoundedButton value="notification" onClick={() => navigate(PATH.notification)}>
-                      {/* <NotificationsIcon /> */}
                       <NotificationsOutlinedIcon />
                     </RoundedButton>
                     <PersonalButton />
