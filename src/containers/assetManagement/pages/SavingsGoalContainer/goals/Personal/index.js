@@ -13,17 +13,24 @@ import RoundedBorderBox from '../../../../../../components/common/RoundedBorderB
 import { SOMETHING_IS_WRONG } from '../../../../../../utils/constants/common';
 import InputModal from './InputModal';
 import { selectPersonalGoal } from '../../../../../../utils/redux/asset/assetSlice';
+import AlertModal from '../../../../../../components/common/AlertModal';
 
 function Personal() {
   const [personalGoalModalOpen, setPersonalGoalModalOpen] = useState(false);
+  const [openAlertModal, setOpenAlertModal] = useState(false);
   const personal = useSelector(selectPersonalGoal);
+
+  const openPersonalGoalModal = () => {
+    setOpenAlertModal(false);
+    setPersonalGoalModalOpen(true);
+  };
   return (
     <>
       <Stack direction="row" justifyContent="space-between" alignItems="center">
         <Box sx={{ fontWeight: 'bold' }}>
           당신의 또 다른 목표는 무엇인가요?
         </Box>
-        <IconButton color="primary" onClick={() => setPersonalGoalModalOpen(true)}>
+        <IconButton color="primary" onClick={() => setOpenAlertModal(true)}>
           <BorderColorIcon fontSize="small" />
         </IconButton>
       </Stack>
@@ -75,6 +82,13 @@ function Personal() {
         component={(
           <InputModal setPersonalGoalModalOpen={setPersonalGoalModalOpen} />
         )}
+      />
+
+      <AlertModal
+        open={openAlertModal}
+        handleClose={() => setOpenAlertModal(false)}
+        handleClickYes={() => openPersonalGoalModal()}
+        mode="modify"
       />
     </>
   );
