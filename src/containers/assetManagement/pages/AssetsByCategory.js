@@ -12,7 +12,7 @@ function AssetsByCategory() {
       <RoundedPaper>
         <Box sx={{ fontWeight: 'bold' }}>{`${today.format('M월')} Goal`}</Box>
         <Box sx={{
-          typography: 'h4', fontWeight: 'bold', color: 'primary.main', marginTop: 1,
+          typography: 'h4', fontWeight: 'bold', color: 'primary.main', my: 1,
         }}
         >
           xxxxxxx원
@@ -41,11 +41,11 @@ function AssetsByCategory() {
             </IconButton>
           </Tooltip>
         </Box>
-        <Stack direction="row" justifyContent="space-between">
+        <Stack direction="row" justifyContent="space-between" sx={{ color: '#979797', fontSize: '14px' }}>
           <Box>지난 달 지출</Box>
           <Box>xxxxxxx원</Box>
         </Stack>
-        <Stack direction="row" justifyContent="space-between">
+        <Stack direction="row" justifyContent="space-between" sx={{ color: '#979797', fontSize: '14px' }}>
           <Box>최근 3개월 평균 지출</Box>
           <Box>xxxxxxx원</Box>
         </Stack>
