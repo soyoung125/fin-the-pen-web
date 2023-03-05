@@ -2,6 +2,7 @@ import {
   Box, IconButton, Stack, Tooltip,
 } from '@mui/material';
 import BorderColorIcon from '@mui/icons-material/BorderColor';
+import RefreshIcon from '@mui/icons-material/Refresh';
 import moment from 'moment';
 import RoundedPaper from '../../../components/common/RoundedPaper';
 
@@ -50,7 +51,17 @@ function AssetsByCategory() {
           <Box>xxxxxxx원</Box>
         </Stack>
       </RoundedPaper>
-      카테고리별 자산 설정
+
+      <Stack direction="row" justifyContent="space-between" sx={{ fontSize: '14px' }}>
+        <Box sx={{ color: '#979797' }}>설정 가능한 카테고리별 자산</Box>
+        <Box sx={{ color: 'primary.main' }}>xxxxxxx원</Box>
+      </Stack>
+
+      <Box sx={{ display: 'flex', justifyContent: 'flex-end', mt: 1 }}>
+        <IconButton color="primary" onClick={() => console.log('refresh')} sx={{ p: 0 }}>
+          <RefreshIcon fontSize="small" />
+        </IconButton>
+      </Box>
     </>
   );
 }
