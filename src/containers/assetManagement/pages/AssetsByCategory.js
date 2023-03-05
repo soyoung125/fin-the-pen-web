@@ -1,5 +1,5 @@
 import {
-  Box, IconButton, Stack,
+  Box, IconButton, Stack, Tooltip,
 } from '@mui/material';
 import BorderColorIcon from '@mui/icons-material/BorderColor';
 import moment from 'moment';
@@ -16,9 +16,30 @@ function AssetsByCategory() {
         }}
         >
           xxxxxxx원
-          <IconButton color="primary" onClick={() => console.log('modify')} sx={{ p: 0 }}>
-            <BorderColorIcon fontSize="small" />
-          </IconButton>
+          <Tooltip
+            open
+            arrow
+            placement="top"
+            title="목표액 수정하기"
+            componentsProps={{
+              tooltip: {
+                sx: {
+                  bgcolor: 'primary.main',
+                },
+              },
+              arrow: {
+                sx: {
+                  '&::before': {
+                    backgroundColor: 'primary.main',
+                  },
+                },
+              },
+            }}
+          >
+            <IconButton color="primary" onClick={() => console.log('modify')} sx={{ p: 0 }}>
+              <BorderColorIcon fontSize="small" />
+            </IconButton>
+          </Tooltip>
         </Box>
         <Stack direction="row" justifyContent="space-between">
           <Box>지난 달 지출</Box>
