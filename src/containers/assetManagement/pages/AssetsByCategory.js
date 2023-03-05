@@ -80,18 +80,23 @@ function AssetsByCategory() {
           <>
             <ListItemButton onClick={() => handleClick(category.type)}>
               <Stack direction="row" justifyContent="space-between" sx={{ width: '100%' }}>
-                <Box>
+                <Stack direction="row">
+                  <Box
+                    sx={{
+                      width: '15px', height: '15px', border: '4px solid', borderRadius: 3, borderColor: category.color, marginY: 'auto', marginRight: 0.5,
+                    }}
+                  />
                   {category.type}
-                </Box>
+                </Stack>
                 xxxxxxx원
               </Stack>
             </ListItemButton>
             <Collapse in={open === category.type} timeout="auto" unmountOnExit>
               <List component="div" disablePadding>
                 {category.categories.map((c) => (
-                  <ListItemButton>
-                    <Stack direction="row" justifyContent="space-between" sx={{ width: '100%', color: 'primary.main' }}>
-                      <Box>
+                  <ListItemButton sx={{ py: 0 }}>
+                    <Stack direction="row" justifyContent="space-between" sx={{ width: '100%', color: 'primary.main', fontSize: '14px' }}>
+                      <Box sx={{ ml: 2 }}>
                         {c}
                       </Box>
                       xxxxxxx원
