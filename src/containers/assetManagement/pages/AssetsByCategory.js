@@ -1,13 +1,25 @@
 import {
-  Box, IconButton, Stack, Tooltip,
+  Box, Collapse, IconButton, List, ListItemButton, Stack, Tooltip,
 } from '@mui/material';
 import BorderColorIcon from '@mui/icons-material/BorderColor';
 import RefreshIcon from '@mui/icons-material/Refresh';
 import moment from 'moment';
+import { useState } from 'react';
 import RoundedPaper from '../../../components/common/RoundedPaper';
+import { EXPENDITURE } from '../../../utils/constants/categories';
 
 function AssetsByCategory() {
+  const [open, setOpen] = useState('');
   const today = moment();
+
+  const handleClick = (type) => {
+    if (open === type) {
+      setOpen('');
+    } else {
+      setOpen(type);
+    }
+  };
+
   return (
     <>
       <RoundedPaper>
@@ -62,6 +74,36 @@ function AssetsByCategory() {
           <RefreshIcon fontSize="small" />
         </IconButton>
       </Box>
+
+      <List>
+        {EXPENDITURE.nested.map((category) => (
+          <>
+            <ListItemButton onClick={() => handleClick(category.type)}>
+              <Stack direction="row" justifyContent="space-between" sx={{ width: '100%' }}>
+                <Box>
+                  {category.type}
+                </Box>
+                xxxxxxx원
+              </Stack>
+            </ListItemButton>
+            <Collapse in={open === category.type} timeout="auto" unmountOnExit>
+              <List component="div" disablePadding>
+                {category.categories.map((c) => (
+                  <ListItemButton>
+                    <Stack direction="row" justifyContent="space-between" sx={{ width: '100%', color: 'primary.main' }}>
+                      <Box>
+                        {c}
+                      </Box>
+                      xxxxxxx원
+                    </Stack>
+                  </ListItemButton>
+                ))}
+              </List>
+            </Collapse>
+
+          </>
+        ))}
+      </List>
     </>
   );
 }
