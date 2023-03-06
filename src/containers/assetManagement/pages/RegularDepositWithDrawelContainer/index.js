@@ -16,6 +16,7 @@ import PATH from '../../../../utils/constants/path';
 import { selectSchedules } from '../../../../utils/redux/schedule/scheduleSlice';
 import AlertModal from '../../../../components/common/AlertModal';
 import { selectBottomDrawerOpen } from '../../../../utils/redux/common/commonSlice';
+import ArrowTooltip from '../../../../components/common/ArrowTooltip';
 
 function RegularDepositWithdrawal() {
   const navigate = useNavigate();
@@ -106,28 +107,9 @@ function RegularDepositWithdrawal() {
           justifyContent: 'center',
         }}
       >
-        <Tooltip
-          open={!bottomDrawerOpen}
-          arrow
-          placement="top"
-          title="정기 입출금 일정 추가하기"
-          componentsProps={{
-            tooltip: {
-              sx: {
-                bgcolor: 'primary.main',
-              },
-            },
-            arrow: {
-              sx: {
-                '&::before': {
-                  backgroundColor: 'primary.main',
-                },
-              },
-            },
-          }}
-        >
+        <ArrowTooltip open={!bottomDrawerOpen} title="정기 입출금 일정 추가하기">
           <Button />
-        </Tooltip>
+        </ArrowTooltip>
       </Box>
     </>
   );
