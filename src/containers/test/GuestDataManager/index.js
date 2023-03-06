@@ -1,8 +1,8 @@
 import {
   Stack, Typography,
 } from '@mui/material';
-import DataBackUpButton from '../../components/test/DataBackUpButton';
-import DataRecoveryButtons from '../../components/test/DataRecoveryButtons';
+import DataBackUpButton from './DataBackUpButton';
+import DataRecoveryButtons from './DataRecoveryButtons';
 
 function GuestDataManager() {
   return (
