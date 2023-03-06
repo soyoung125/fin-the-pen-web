@@ -27,3 +27,6 @@ function ScheduleStatusCard({ month, numberOfSchedule }) {
 }
 
 export default ScheduleStatusCard;
+/**
+ * 이 파일은 공동으로 사용하는 곳이 많습니다. 위치를 옮기기 전에 고민이 필요함
+ */
