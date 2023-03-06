@@ -1,17 +1,26 @@
+/* eslint-disable max-len */
 import {
   Box, Collapse, IconButton, List, ListItemButton, Stack, Tooltip,
 } from '@mui/material';
 import BorderColorIcon from '@mui/icons-material/BorderColor';
 import RefreshIcon from '@mui/icons-material/Refresh';
 import moment from 'moment';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import RoundedPaper from '../../../components/common/RoundedPaper';
 import { EXPENDITURE } from '../../../utils/constants/categories';
 
 function AssetsByCategory() {
   const [open, setOpen] = useState('');
+  const [assets, setAssets] = useState([]);
   const today = moment();
 
+  useEffect(() => {
+    setAssets(EXPENDITURE.nested
+      .map((category) => ({
+        ...category,
+        categories: category.categories.map((c) => ({ title: c, asset: 0 })),
+      })));
+  }, []);
   const handleClick = (type) => {
     if (open === type) {
       setOpen('');
@@ -76,7 +85,7 @@ function AssetsByCategory() {
       </Box>
 
       <List>
-        {EXPENDITURE.nested.map((category) => (
+        {assets.map((category) => (
           <>
             <ListItemButton onClick={() => handleClick(category.type)}>
               <Stack direction="row" justifyContent="space-between" sx={{ width: '100%' }}>
@@ -97,9 +106,9 @@ function AssetsByCategory() {
                   <ListItemButton sx={{ py: 0 }}>
                     <Stack direction="row" justifyContent="space-between" sx={{ width: '100%', color: 'primary.main', fontSize: '14px' }}>
                       <Box sx={{ ml: 2 }}>
-                        {c}
+                        {c.title}
                       </Box>
-                      xxxxxxx원
+                      {`${c.asset}원`}
                     </Stack>
                   </ListItemButton>
                 ))}
