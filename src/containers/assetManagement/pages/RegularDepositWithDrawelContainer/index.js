@@ -1,9 +1,7 @@
-/* eslint-disable no-use-before-define */
-/* eslint-disable max-len */
-/* eslint-disable no-unused-vars */
 /* eslint-disable camelcase */
+/* eslint-disable no-use-before-define */
 import {
-  Box, Button, IconButton, Stack, Tooltip,
+  Box, Button, IconButton, Stack,
 } from '@mui/material';
 import BorderColorIcon from '@mui/icons-material/BorderColor';
 import { useNavigate } from 'react-router-dom';
@@ -23,9 +21,7 @@ function RegularDepositWithdrawal() {
   const bottomDrawerOpen = useSelector(selectBottomDrawerOpen);
   const schedules = useSelector(selectSchedules);
   const [deposits, setDeposits] = useState([]);
-  const [depositsGroup, setDepositsGroup] = useState([]);
   const [withdrawals, setWithdrawals] = useState([]);
-  const [withdrawalsGroup, setWithdrawalsGroup] = useState([]);
   const [openAlertModal, setOpenAlertModal] = useState(false);
   const [type, setType] = useState('+');
 
@@ -33,11 +29,6 @@ function RegularDepositWithdrawal() {
     setDeposits(makeGroup(schedules.filter((s) => s.repeating_cycle !== '없음' && s.type === '+')));
     setWithdrawals(makeGroup(schedules.filter((s) => s.repeating_cycle !== '없음' && s.type === '-')));
   }, [schedules]);
-
-  // useEffect(() => {
-  //   setDepositsGroup(makeGroup(deposits));
-  //   setWithdrawalsGroup(makeGroup(withdrawals));
-  // }, [deposits, withdrawals]);
 
   const makeGroup = (data) => data.reduce((acc, curr) => {
     const { event_name } = curr;
@@ -87,7 +78,8 @@ function RegularDepositWithdrawal() {
         </Stack>
       </Title>
 
-      {Object.keys(withdrawals).map((w) => <DetailCard data={withdrawals[w]} key={withdrawals[w][0].id} />)}
+      {Object.keys(withdrawals)
+        .map((w) => <DetailCard data={withdrawals[w]} key={withdrawals[w][0].id} />)}
 
       <AlertModal
         open={openAlertModal}
