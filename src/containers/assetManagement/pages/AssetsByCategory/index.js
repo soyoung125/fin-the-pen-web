@@ -1,13 +1,9 @@
-/* eslint-disable no-unused-vars */
-/* eslint-disable max-len */
 import {
-  Box, Collapse, IconButton, List, ListItemButton, Stack, Tooltip,
+  Box, IconButton, Stack,
 } from '@mui/material';
-import BorderColorIcon from '@mui/icons-material/BorderColor';
 import RefreshIcon from '@mui/icons-material/Refresh';
 import moment from 'moment';
 import { useEffect, useState } from 'react';
-import RoundedPaper from '../../../../components/common/RoundedPaper';
 import { EXPENDITURE } from '../../../../utils/constants/categories';
 import MonthlyGoal from './MonthlyGoal';
 import CategoryList from './CategoryList';
