@@ -8,7 +8,7 @@ function WeeklyStatment({ expenditure, income }) {
     }}
     >
       <Box sx={{ fontSize: 'small', paddingRight: 1, color: 'primary.main' }}>
-        {`${expenditure}`}
+        {`${expenditure < 0 ? expenditure : '-0'}`}
       </Box>
       <Box sx={{ fontSize: 'small', color: grey[500] }}>
         {`+${income}`}
