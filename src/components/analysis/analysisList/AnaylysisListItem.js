@@ -1,6 +1,7 @@
 import {
   Box, Grid, ListItem, Stack,
 } from '@mui/material';
+import CategoryTypeBadge from '../../common/CategoryTypeBadge';
 
 function AnalysisListItem({
   category, rank, clickListItem, bgColor,
@@ -24,11 +25,7 @@ function AnalysisListItem({
               backgroundColor: bgColor,
             }}
           >
-            <Box
-              sx={{
-                width: '15px', height: '15px', border: '4px solid', borderRadius: 3, borderColor: category.color, marginY: 'auto', marginRight: 0.5,
-              }}
-            />
+            <CategoryTypeBadge color={category.color} mr={0.5} />
             {category.label}
           </Stack>
         </Grid>

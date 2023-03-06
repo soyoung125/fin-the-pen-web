@@ -10,6 +10,7 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import { useDispatch } from 'react-redux';
 import { deleteSelectedSchedule } from '../../../../../utils/tools';
 import { setBottomDrawerOpenFalse } from '../../../../../utils/redux/common/commonSlice';
+import CategoryTypeBadge from '../../../../../components/common/CategoryTypeBadge';
 
 function ScheduleCard({ schedule, handleModal, category }) {
   const dispatch = useDispatch();
@@ -34,11 +35,7 @@ function ScheduleCard({ schedule, handleModal, category }) {
           <CardActionArea onClick={() => handleModal(schedule)}>
             <Box px={3} py={2}>
               <Stack direction="row">
-                <Box
-                  sx={{
-                    width: '15px', height: '15px', border: '4px solid', borderRadius: 3, borderColor: category.color, marginY: 'auto', marginRight: 2,
-                  }}
-                />
+                <CategoryTypeBadge color={category.color} mr={2} />
                 <Typography variant="caption">{`${schedule.start_time} - ${schedule.end_time}`}</Typography>
               </Stack>
               <Stack

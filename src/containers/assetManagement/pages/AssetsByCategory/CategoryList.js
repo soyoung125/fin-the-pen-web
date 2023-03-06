@@ -1,6 +1,7 @@
 import {
   Box, Collapse, List, ListItemButton, Stack,
 } from '@mui/material';
+import CategoryTypeBadge from '../../../../components/common/CategoryTypeBadge';
 
 function CategoryList({ assets, handleClick, open }) {
   return (
@@ -10,11 +11,7 @@ function CategoryList({ assets, handleClick, open }) {
           <ListItemButton onClick={() => handleClick(category.type)}>
             <Stack direction="row" justifyContent="space-between" sx={{ width: '100%' }}>
               <Stack direction="row">
-                <Box
-                  sx={{
-                    width: '15px', height: '15px', border: '4px solid', borderRadius: 3, borderColor: category.color, marginY: 'auto', marginRight: 0.5,
-                  }}
-                />
+                <CategoryTypeBadge color={category.color} mr={0.5} />
                 {category.type}
               </Stack>
               xxxxxxx원
