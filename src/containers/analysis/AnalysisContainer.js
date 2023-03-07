@@ -1,3 +1,4 @@
+/* eslint-disable max-len */
 /* eslint-disable array-callback-return */
 import { Alert, Box } from '@mui/material';
 import {
@@ -20,7 +21,7 @@ function AnalysisContainer() {
   const [total, setTotal] = useState([]); // color 추가할 계획
   const schedules = useSelector(selectSchedules);
   const colorList = [
-    indigo[100], indigo[200], indigo[300], indigo[400], indigo[500], indigo[600], indigo[700],
+    indigo[100], indigo[200], indigo[300], indigo[400], indigo[500], indigo[600], indigo[700], indigo[800],
     green[100], green[200], green[300],
     blue[100], blue[200], blue[300], blue[400], blue[500], blue[600], blue[700],
     blueGrey[100], blueGrey[200],
