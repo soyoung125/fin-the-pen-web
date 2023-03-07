@@ -38,7 +38,7 @@ function Saving() {
             typography: 'h6', fontWeight: 'bold', color: 'primary.main', textAlign: 'end', p: 2,
           }}
           >
-            {saving.year}
+            {parseInt(saving.year, 10).toLocaleString('ko-KR')}
             원
           </Box>
         </RoundedBorderBox>
@@ -53,7 +53,7 @@ function Saving() {
             typography: 'h6', fontWeight: 'bold', color: 'primary.main', textAlign: 'end', p: 2,
           }}
           >
-            {saving.month}
+            {parseInt(saving.month, 10).toLocaleString('ko-KR')}
             원
           </Box>
         </RoundedBorderBox>
