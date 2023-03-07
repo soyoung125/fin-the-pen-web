@@ -58,6 +58,7 @@ function SpendingInput({ mode }) {
           onChange={changeSchedule}
           label={SCHEDULE_DRAWER.expected_spending}
           type="number"
+          onFocus={(e) => e.target.select()}
           InputLabelProps={{
             shrink: true,
           }}

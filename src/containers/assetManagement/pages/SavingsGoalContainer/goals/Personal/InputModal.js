@@ -93,6 +93,8 @@ function InputModal({
             inputProps={{
               style: { textAlign: 'right' },
             }}
+            type="number"
+            onFocus={(e) => e.target.select()}
           />
         </FormControl>
 

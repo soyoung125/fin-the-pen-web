@@ -63,6 +63,7 @@ function InputModal({
           placeholder="한해동안의 저축 목표액을 입력하세요"
           type="number"
           value={form.year}
+          onFocus={(e) => e.target.select()}
           onChange={handleChange}
           id="year"
         />
@@ -72,6 +73,7 @@ function InputModal({
           placeholder="한해 저축 목표액을 입력하면 한달 저축 목표금액이 표시됩니다. "
           type="number"
           value={form.month}
+          onFocus={(e) => e.target.select()}
           onChange={handleChange}
           id="month"
         />
