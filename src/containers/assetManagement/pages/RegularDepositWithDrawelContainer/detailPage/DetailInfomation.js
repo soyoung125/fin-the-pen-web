@@ -1,5 +1,3 @@
-/* eslint-disable no-unused-vars */
-/* eslint-disable max-len */
 import {
   Box, Button, Grid, Stack, Typography,
 } from '@mui/material';

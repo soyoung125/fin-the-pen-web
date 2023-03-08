@@ -1,4 +1,3 @@
-/* eslint-disable max-len */
 import {
   Box,
   Button, Grid, Paper, Stack, Typography,
@@ -9,7 +8,12 @@ import moment from 'moment';
 function SpendingDetailCard({ schedule, bgColor }) {
   return (
     <Paper sx={{
-      marginY: 1, paddingY: 2, paddingX: 3, borderRadius: 3, borderLeft: 12, borderLeftColor: bgColor,
+      marginY: 1,
+      paddingY: 2,
+      paddingX: 3,
+      borderRadius: 3,
+      borderLeft: 12,
+      borderLeftColor: bgColor,
     }}
     >
       <Stack direction="row" justifyContent="space-between">

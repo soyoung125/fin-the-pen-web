@@ -1,8 +1,7 @@
-/* eslint-disable no-unused-vars */
 import {
   Alert,
   Box,
-  Button, Chip, Drawer, ListItem, Paper, Stack, TextField, Typography,
+  Button, Chip, Drawer, Paper, Stack, TextField, Typography,
 } from '@mui/material';
 import { useEffect, useState } from 'react';
 import FilterAltOutlinedIcon from '@mui/icons-material/FilterAltOutlined';

@@ -1,16 +1,13 @@
-/* eslint-disable no-unused-vars */
 import {
-  Box, Button, Divider, IconButton, Stack, TextField, Typography,
+  Box, IconButton, Stack,
 } from '@mui/material';
 import BorderColorIcon from '@mui/icons-material/BorderColor';
-import { useEffect, useState } from 'react';
-import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
-import ClearIcon from '@mui/icons-material/Clear';
-import { useDispatch, useSelector } from 'react-redux';
+import { useState } from 'react';
+import { useSelector } from 'react-redux';
 import RoundedPaper from '../../../../../../components/common/RoundedPaper';
 import ModalStaticBackdrop from '../../../../../../components/layouts/ModalStaticBackdrop';
 import RoundedBorderBox from '../../../../../../components/common/RoundedBorderBox';
-import { selectSavingGoal, setSavingGoal } from '../../../../../../utils/redux/asset/assetSlice';
+import { selectSavingGoal } from '../../../../../../utils/redux/asset/assetSlice';
 import InputModal from './InputModal';
 import AlertModal from '../../../../../../components/common/AlertModal';
 

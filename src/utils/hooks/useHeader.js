@@ -1,6 +1,4 @@
-/* eslint-disable no-empty */
 /* eslint-disable consistent-return */
-/* eslint-disable no-unused-vars */
 import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { setHeaderOpenFalse, setHeaderOpenTrue } from '../redux/common/commonSlice';

@@ -1,11 +1,9 @@
-/* eslint-disable no-unused-vars */
 import {
   Box, Button, CardActionArea, Divider, Stack, Typography,
 } from '@mui/material';
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 import SettingsIcon from '@mui/icons-material/Settings';
 import { grey } from '@mui/material/colors';
-import { useState } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { useDispatch } from 'react-redux';
 import { deleteSelectedSchedule } from '../../../../../utils/tools';

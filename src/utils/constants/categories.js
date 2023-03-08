@@ -1,5 +1,3 @@
-/* eslint-disable no-unused-vars */
-
 const FIXED = {
   type: '고정 입출금',
   nested: [
