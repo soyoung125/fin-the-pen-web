@@ -1,22 +1,34 @@
-/* eslint-disable react/no-unescaped-entities */
-import { Stack, Typography } from '@mui/material';
-import moment from 'moment';
+import { Box, LinearProgress, Stack } from '@mui/material';
+import RoundedPapaer from '../../common/RoundedPaper';
 
-function AssetManagement({ selectedItem }) {
+function AssetManagement({ selectedItem, spending, bgColor }) {
+  console.log(selectedItem);
   return (
-    <Stack
-      justifyContent="center"
-      sx={{
-        borderRadius: 3, backgroundColor: 'primary.main', padding: 3, marginBottom: 2, color: 'white', textAlign: 'center',
-      }}
-    >
-      <Typography variant="buttontext">
-        {`${moment(new Date()).format('M월 D일')} 기준 ${selectedItem.label} 지출 내역 총 ${selectedItem.history.length}건 (${selectedItem.value.toLocaleString('ko-KR')}원)`}
-      </Typography>
-      <Typography variant="buttontext">
-        {`'${selectedItem.label}' 카테고리 소비 목표액인 100,000의 25%`}
-      </Typography>
-    </Stack>
+    <RoundedPapaer>
+      <Stack direction="row" justifyContent="space-between">
+        <Box>{selectedItem[0].category}</Box>
+        <Box>xxxxx원 남음</Box>
+      </Stack>
+
+      <LinearProgress
+        variant="determinate"
+        value={50}
+        sx={{
+          height: '10px',
+          borderRadius: '10px',
+          backgroundColor: 'rgba(216, 216, 216, 0.62)',
+          '.MuiLinearProgress-bar1Determinate': {
+            borderRadius: '10px',
+            backgroundColor: bgColor,
+          },
+        }}
+      />
+
+      <Stack direction="row" justifyContent="space-between">
+        <Box>{`${spending}월 지출`}</Box>
+        <Box>예산 xxxxxxx원</Box>
+      </Stack>
+    </RoundedPapaer>
   );
 }
 

@@ -15,7 +15,7 @@ function AnalysisHeader() {
         handleClickLeftArrow={() => dispatch(selectedDate(moment(date).subtract(1, 'months')))}
         handleClickRightArrow={() => dispatch(selectedDate(moment(date).add(1, 'months')))}
       >
-        <Box sx={{ typography: 'caption', mx: 1 }}>{`${date.format('YYYY년 M월')}`}</Box>
+        <Box sx={{ typography: 'caption', mx: 1 }}>{`${moment(date).format('YYYY년 M월')}`}</Box>
       </SwitchingHeader>
     </Stack>
   );

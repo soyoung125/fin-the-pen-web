@@ -6,6 +6,7 @@ import { useEffect, useState } from 'react';
 import Title from '../../components/assetManagement/pages/regularDepositWithdrawal/regular/Title';
 import SpendingDetailCard from '../../components/analysis/detailCard/SpendingDetailCard';
 import { selectDate, selectSchedules } from '../../utils/redux/schedule/scheduleSlice';
+import AssetManagement from '../../components/analysis/detailCard/AssetManagement';
 
 function AnalysisDetailContainer() {
   const { state } = useLocation();
@@ -13,12 +14,17 @@ function AnalysisDetailContainer() {
   const date = useSelector(selectDate);
   const schedules = useSelector(selectSchedules);
   const [selectedItem, setSelectedItem] = useState(schedules.filter((s) => date.isSame(s.date, 'month') && s.category === category));
+  const [spending, setSpending] = useState(0);
   const [sortByDate, setSortByDate] = useState(true);
 
   useEffect(() => {
     setSelectedItem([...schedules.filter((s) => date.isSame(s.date, 'month') && s.category === category).sort((a, b) => new Date(a.date) - new Date(b.date))]);
-    console.log(schedules.filter((s) => date.isSame(s.date, 'month') && s.category === category).sort((a, b) => new Date(a.date) - new Date(b.date)));
   }, [date]);
+
+  useEffect(() => {
+    setSpending(selectedItem
+      .reduce((result, schedule) => result + parseInt(schedule.expected_spending, 10), 0));
+  }, [selectedItem]);
 
   useEffect(() => {
     if (sortByDate) {
@@ -27,10 +33,6 @@ function AnalysisDetailContainer() {
       setSelectedItem([...selectedItem.sort((a, b) => b.expected_spending - a.expected_spending)]);
     }
   }, [sortByDate]);
-
-  useEffect(() => {
-    console.log(selectedItem);
-  }, [selectedItem]);
 
   return (
     <Box px={2}>
@@ -59,7 +61,7 @@ function AnalysisDetailContainer() {
           <SpendingDetailCard schedule={s} key={Math.random()} bgColor={color} />
         ))}
       </Stack>
-      {/* <AssetManagement selectedItem={selectedItem} /> */}
+      <AssetManagement selectedItem={selectedItem} spending={spending} bgColor={color} />
     </Box>
   );
 }
