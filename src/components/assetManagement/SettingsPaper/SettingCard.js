@@ -15,6 +15,7 @@ function SettingCard({ setting }) {
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',
+          textAlign: 'center',
         }}
         >
           {setting.title}
