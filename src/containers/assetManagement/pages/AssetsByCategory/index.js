@@ -31,7 +31,7 @@ function AssetsByCategory() {
   return (
     <>
       <MonthlyGoal
-        title={`${today.format('M월')} Goal`}
+        title={`${today.format('M월')} 지출 Goal`}
       />
 
       <Stack direction="row" justifyContent="space-between">
