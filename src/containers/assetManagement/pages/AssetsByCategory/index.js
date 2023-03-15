@@ -17,7 +17,7 @@ function AssetsByCategory() {
     setAssets(EXPENDITURE.nested
       .map((category) => ({
         ...category,
-        categories: category.categories.map((c) => ({ title: c, asset: 0 })),
+        categories: category.categories.map((c) => ({ title: c, asset: '-' })),
       })));
   }, []);
   const handleClick = (type) => {
