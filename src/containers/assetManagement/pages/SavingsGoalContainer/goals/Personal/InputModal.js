@@ -43,12 +43,6 @@ function InputModal({
   return (
     <Stack p={2} spacing={1}>
       <Stack direction="row" alignItems="center" justifyContent="space-between">
-        <IconButton onClick={() => setPersonalGoalModalOpen(false)}>
-          <ClearIcon />
-        </IconButton>
-        <Typography variant="h5" sx={{ fontWeight: 'bold' }}>
-          Personal Goal
-        </Typography>
         <IconButton
           onClick={() => setForm({
             name: '',
@@ -60,6 +54,12 @@ function InputModal({
           color="error"
         >
           <DeleteForeverIcon />
+        </IconButton>
+        <Typography variant="h5" sx={{ fontWeight: 'bold' }}>
+          Personal Goal
+        </Typography>
+        <IconButton onClick={() => setPersonalGoalModalOpen(false)}>
+          <ClearIcon />
         </IconButton>
       </Stack>
       <Box my={1}>

@@ -39,10 +39,6 @@ function InputModal({
   return (
     <Stack p={2} spacing={1}>
       <Stack direction="row" alignItems="center" justifyContent="space-between">
-        <IconButton onClick={() => setSavingGoalModalOpen(false)}>
-          <ClearIcon />
-        </IconButton>
-        <Typography variant="h5" sx={{ fontWeight: 'bold' }}>저축 목표 설정</Typography>
         <IconButton
           onClick={() => setForm({
             year: 0,
@@ -51,6 +47,10 @@ function InputModal({
           color="error"
         >
           <DeleteForeverIcon />
+        </IconButton>
+        <Typography variant="h5" sx={{ fontWeight: 'bold' }}>저축 목표 설정</Typography>
+        <IconButton onClick={() => setSavingGoalModalOpen(false)}>
+          <ClearIcon />
         </IconButton>
       </Stack>
       <Box my={1}>

@@ -16,9 +16,6 @@ function ScheduleDrawerHeader({ mode, handleClose }) {
 
   return (
     <Stack direction="row" alignItems="center" justifyContent="space-between">
-      <Button onClick={handleClose}><ClearIcon /></Button>
-      <Typography variant="h5" sx={{ fontWeight: 'bold' }}>{SCHEDULE_DRAWER.drawer_title[mode]}</Typography>
-
       {
         mode === SCHEDULE_DRAWER_MODE.수정
           ? (
@@ -37,6 +34,9 @@ function ScheduleDrawerHeader({ mode, handleClose }) {
           )
           : <Button disabled />
       }
+
+      <Typography variant="h5" sx={{ fontWeight: 'bold' }}>{SCHEDULE_DRAWER.drawer_title[mode]}</Typography>
+      <Button onClick={handleClose}><ClearIcon /></Button>
     </Stack>
   );
 }
