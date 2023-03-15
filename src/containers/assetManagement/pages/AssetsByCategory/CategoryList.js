@@ -1,5 +1,5 @@
 import {
-  Box, Collapse, List, ListItemButton, Stack,
+  Box, Collapse, List, ListItem, ListItemButton, Stack,
 } from '@mui/material';
 import CategoryTypeBadge from '../../../../components/common/CategoryTypeBadge';
 
@@ -20,14 +20,16 @@ function CategoryList({ assets, handleClick, open }) {
           <Collapse in={open === category.type} timeout="auto" unmountOnExit>
             <List component="div" disablePadding>
               {category.categories.map((c) => (
-                <ListItemButton sx={{ py: 0 }} key={c.title}>
+                <ListItem sx={{ py: 0 }} key={c.title}>
                   <Stack direction="row" justifyContent="space-between" sx={{ width: '100%', color: c.asset === '-' ? '#979797' : 'primary.main', fontSize: '14px' }}>
                     <Box sx={{ ml: 2 }}>
                       {c.title}
                     </Box>
-                    {`${c.asset}원`}
+                    <Box onClick={() => console.log(category.type, c.title)}>
+                      {`${c.asset}원`}
+                    </Box>
                   </Stack>
-                </ListItemButton>
+                </ListItem>
               ))}
             </List>
           </Collapse>
