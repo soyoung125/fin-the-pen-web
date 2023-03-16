@@ -4,8 +4,16 @@ import {
 import { useState } from 'react';
 import CategoryTypeBadge from '../../../../components/common/CategoryTypeBadge';
 
-function CategoryList({ assets, handleClick, open }) {
+function CategoryList({
+  assets, handleClick, open, modifyAsset,
+}) {
   const [selectedCategory, setSelectedCategory] = useState('');
+  const [asset, setAsset] = useState(0);
+
+  const modify = (type, title) => {
+    setSelectedCategory('');
+    modifyAsset(type, title, parseInt(asset, 10));
+  };
 
   return (
     <List>
@@ -31,11 +39,13 @@ function CategoryList({ assets, handleClick, open }) {
                     {selectedCategory === c.title
                       ? (
                         <Box>
-                          <InputBase sx={{
-                            border: '1px solid', borderRadius: 1, fontSize: '14px', height: '21px', width: '100px',
-                          }}
+                          <InputBase
+                            onChange={(e) => setAsset(e.target.value)}
+                            sx={{
+                              border: '1px solid', borderRadius: 1, fontSize: '14px', height: '21px', width: '100px',
+                            }}
                           />
-                          <Button sx={{ fontSize: '14px', height: '21px' }} onClick={() => setSelectedCategory('')}>save</Button>
+                          <Button sx={{ fontSize: '14px', height: '21px' }} onClick={() => modify(category.type, c.title)}>save</Button>
                         </Box>
                       )
                       : (

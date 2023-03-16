@@ -28,6 +28,16 @@ function AssetsByCategory() {
     }
   };
 
+  const modifyAsset = (type, title, value) => {
+    setAssets(assets.map((category) => (category.type === type
+      ? {
+        ...category,
+        categories: category.categories
+          .map((c) => (c.title === title ? { ...c, asset: value.toLocaleString('kr-KO') } : c)),
+      }
+      : category)));
+  };
+
   return (
     <>
       <MonthlyGoal
@@ -49,6 +59,7 @@ function AssetsByCategory() {
         assets={assets}
         handleClick={handleClick}
         open={open}
+        modifyAsset={modifyAsset}
       />
     </>
   );
