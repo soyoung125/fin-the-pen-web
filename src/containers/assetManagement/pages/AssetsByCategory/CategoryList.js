@@ -10,9 +10,9 @@ function CategoryList({
   const [selectedCategory, setSelectedCategory] = useState('');
   const [asset, setAsset] = useState(0);
 
-  const modify = (type, title) => {
+  const modify = (type, title, preValue) => {
     setSelectedCategory('');
-    modifyAsset(type, title, parseInt(asset, 10));
+    modifyAsset(type, title, preValue === '-' ? 0 : preValue, parseInt(asset, 10));
   };
 
   return (
@@ -25,7 +25,7 @@ function CategoryList({
                 <CategoryTypeBadge color={category.color} mr={0.5} />
                 {category.type}
               </Stack>
-              xxxxxxx원
+              {`${category.total.toLocaleString('kr-KO')}원`}
             </Stack>
           </ListItemButton>
           <Collapse in={open === category.type} timeout="auto" unmountOnExit>
@@ -45,7 +45,7 @@ function CategoryList({
                               border: '1px solid', borderRadius: 1, fontSize: '14px', height: '21px', width: '100px',
                             }}
                           />
-                          <Button sx={{ fontSize: '14px', height: '21px' }} onClick={() => modify(category.type, c.title)}>save</Button>
+                          <Button sx={{ fontSize: '14px', height: '21px' }} onClick={() => modify(category.type, c.title, c.asset)}>save</Button>
                         </Box>
                       )
                       : (

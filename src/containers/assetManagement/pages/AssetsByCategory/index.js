@@ -18,6 +18,7 @@ function AssetsByCategory() {
       .map((category) => ({
         ...category,
         categories: category.categories.map((c) => ({ title: c, asset: '-' })),
+        total: 0,
       })));
   }, []);
   const handleClick = (type) => {
@@ -28,12 +29,13 @@ function AssetsByCategory() {
     }
   };
 
-  const modifyAsset = (type, title, value) => {
+  const modifyAsset = (type, title, preValue, value) => {
     setAssets(assets.map((category) => (category.type === type
       ? {
         ...category,
         categories: category.categories
           .map((c) => (c.title === title ? { ...c, asset: value.toLocaleString('kr-KO') } : c)),
+        total: category.total - parseInt(preValue, 10) + value,
       }
       : category)));
   };
