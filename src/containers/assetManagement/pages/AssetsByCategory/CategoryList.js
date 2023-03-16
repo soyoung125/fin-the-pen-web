@@ -1,9 +1,12 @@
 import {
-  Box, Collapse, List, ListItem, ListItemButton, Stack,
+  Box, Button, Collapse, InputBase, List, ListItem, ListItemButton, Stack,
 } from '@mui/material';
+import { useState } from 'react';
 import CategoryTypeBadge from '../../../../components/common/CategoryTypeBadge';
 
 function CategoryList({ assets, handleClick, open }) {
+  const [selectedCategory, setSelectedCategory] = useState('');
+
   return (
     <List>
       {assets.map((category) => (
@@ -25,9 +28,21 @@ function CategoryList({ assets, handleClick, open }) {
                     <Box sx={{ ml: 2 }}>
                       {c.title}
                     </Box>
-                    <Box onClick={() => console.log(category.type, c.title)}>
-                      {`${c.asset}원`}
-                    </Box>
+                    {selectedCategory === c.title
+                      ? (
+                        <Box>
+                          <InputBase sx={{
+                            border: '1px solid', borderRadius: 1, fontSize: '14px', height: '21px', width: '100px',
+                          }}
+                          />
+                          <Button sx={{ fontSize: '14px', height: '21px' }} onClick={() => setSelectedCategory('')}>save</Button>
+                        </Box>
+                      )
+                      : (
+                        <Box onClick={() => setSelectedCategory(c.title)}>
+                          {`${c.asset}원`}
+                        </Box>
+                      )}
                   </Stack>
                 </ListItem>
               ))}
