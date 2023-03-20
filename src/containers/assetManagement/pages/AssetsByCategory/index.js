@@ -1,26 +1,32 @@
+/* eslint-disable no-unused-vars */
 import {
   Box, IconButton, Stack,
 } from '@mui/material';
 import RefreshIcon from '@mui/icons-material/Refresh';
 import moment from 'moment';
 import { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { EXPENDITURE } from '../../../../utils/constants/categories';
 import MonthlyGoal from './MonthlyGoal';
 import CategoryList from './CategoryList';
+import {
+  selectAssetsByCategory, selectUpdateDate, setAssetsByCategory, setInitAssetsByCategory,
+} from '../../../../utils/redux/asset/assetSlice';
 
 function AssetsByCategory() {
+  const dispatch = useDispatch();
   const [open, setOpen] = useState('');
-  const [assets, setAssets] = useState([]);
+  // const [assets, setAssets] = useState([]);
   const today = moment();
+  const assets = useSelector(selectAssetsByCategory);
+  const updateDate = useSelector(selectUpdateDate);
 
   useEffect(() => {
-    setAssets(EXPENDITURE.nested
-      .map((category) => ({
-        ...category,
-        categories: category.categories.map((c) => ({ title: c, asset: '-' })),
-        total: 0,
-      })));
+    if (today.isAfter(updateDate, 'month')) {
+      dispatch(setInitAssetsByCategory());
+    }
   }, []);
+
   const handleClick = (type) => {
     if (open === type) {
       setOpen('');
@@ -30,14 +36,16 @@ function AssetsByCategory() {
   };
 
   const modifyAsset = (type, title, preValue, value) => {
-    setAssets(assets.map((category) => (category.type === type
+    const data = assets.map((category) => (category.type === type
       ? {
         ...category,
         categories: category.categories
           .map((c) => (c.title === title ? { ...c, asset: value.toLocaleString('kr-KO') } : c)),
         total: category.total - parseInt(preValue, 10) + value,
       }
-      : category)));
+      : category));
+    const date = moment().format('YYYY-MM-DD');
+    dispatch(setAssetsByCategory({ assets: data, updateDate: date }));
   };
 
   return (
@@ -58,7 +66,6 @@ function AssetsByCategory() {
       </Box>
 
       <CategoryList
-        assets={assets}
         handleClick={handleClick}
         open={open}
         modifyAsset={modifyAsset}

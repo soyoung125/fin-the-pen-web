@@ -2,11 +2,14 @@ import {
   Box, Button, Collapse, InputBase, List, ListItem, ListItemButton, Stack,
 } from '@mui/material';
 import { useState } from 'react';
+import { useSelector } from 'react-redux';
 import CategoryTypeBadge from '../../../../components/common/CategoryTypeBadge';
+import { selectAssetsByCategory } from '../../../../utils/redux/asset/assetSlice';
 
 function CategoryList({
-  assets, handleClick, open, modifyAsset,
+  handleClick, open, modifyAsset,
 }) {
+  const assets = useSelector(selectAssetsByCategory);
   const [selectedCategory, setSelectedCategory] = useState('');
   const [asset, setAsset] = useState(0);
 
