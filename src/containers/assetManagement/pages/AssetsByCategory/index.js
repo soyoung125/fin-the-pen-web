@@ -1,4 +1,3 @@
-/* eslint-disable no-unused-vars */
 import {
   Box, IconButton, Stack,
 } from '@mui/material';
@@ -6,7 +5,6 @@ import RefreshIcon from '@mui/icons-material/Refresh';
 import moment from 'moment';
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { EXPENDITURE } from '../../../../utils/constants/categories';
 import MonthlyGoal from './MonthlyGoal';
 import CategoryList from './CategoryList';
 import {
