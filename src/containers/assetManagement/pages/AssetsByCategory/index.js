@@ -38,8 +38,8 @@ function AssetsByCategory() {
       ? {
         ...category,
         categories: category.categories
-          .map((c) => (c.title === title ? { ...c, asset: value.toLocaleString('kr-KO') } : c)),
-        total: category.total - parseInt(preValue, 10) + value,
+          .map((c) => (c.title === title ? { ...c, asset: value } : c)),
+        total: category.total - preValue + value,
       }
       : category));
     const date = moment().format('YYYY-MM-DD');

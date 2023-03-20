@@ -70,7 +70,7 @@ function AnalysisDetailContainer() {
         bgColor={color}
         type={type}
         asset={asset}
-        balance={parseInt(asset, 10) - spending}
+        balance={asset - spending}
       />
     </Box>
   );

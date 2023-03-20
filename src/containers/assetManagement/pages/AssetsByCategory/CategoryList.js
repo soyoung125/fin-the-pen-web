@@ -53,7 +53,7 @@ function CategoryList({
                       )
                       : (
                         <Box onClick={() => setSelectedCategory(c.title)}>
-                          {`${c.asset}원`}
+                          {c.asset === '-' ? `${c.asset}원` : `${c.asset.toLocaleString('kr-KO')}원`}
                         </Box>
                       )}
                   </Stack>

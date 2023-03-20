@@ -5,7 +5,7 @@ import RoundedPapaer from '../../common/RoundedPaper';
 function AssetManagement({
   selectedItem, spending, bgColor, type, asset, balance,
 }) {
-  console.log(parseInt(asset, 10));
+  console.log(asset);
   return (
     <RoundedPapaer>
       <Stack direction="row" justifyContent="space-between">
@@ -18,7 +18,7 @@ function AssetManagement({
 
       <LinearProgress
         variant="determinate"
-        value={balance > 0 ? (spending / parseInt(asset, 10) * 100) : 100}
+        value={balance > 0 ? (spending / asset * 100) : 100}
         sx={{
           height: '10px',
           borderRadius: '10px',
