@@ -15,7 +15,6 @@ import { createTheme, responsiveFontSizes, ThemeProvider } from '@mui/material';
 
 const theme = responsiveFontSizes(createTheme({
   palette: {
-    type: 'light',
     primary: {
       main: '#7c4dff',
     },
@@ -25,7 +24,7 @@ const theme = responsiveFontSizes(createTheme({
   }
 }));
 
-const root = ReactDOM.createRoot(document.getElementById('root'));
+const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement);
 let persistor = persistStore(store);
 root.render(
   <React.StrictMode>
