@@ -64,6 +64,9 @@ function AnalysisDetailContainer() {
           <SpendingDetailCard schedule={s} key={Math.random()} bgColor={color} />
         ))}
       </Stack>
+
+      {asset !== '-'
+      && (
       <AssetManagement
         selectedItem={selectedItem}
         spending={spending}
@@ -72,6 +75,7 @@ function AnalysisDetailContainer() {
         asset={asset}
         balance={asset - spending}
       />
+      )}
     </Box>
   );
 }
