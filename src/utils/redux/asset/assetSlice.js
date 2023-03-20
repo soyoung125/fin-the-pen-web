@@ -38,6 +38,8 @@ export const assetSlice = createSlice({
       state.goal.personal = action.payload;
     },
     setAssetsByCategory: (state, action) => {
+      console.log(state.assetByCategory.assets);
+      console.log(action.payload.assets);
       state.assetByCategory.assets = action.payload.assets;
       state.assetByCategory.updateDate = action.payload.updateDate;
     },

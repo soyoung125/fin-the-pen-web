@@ -43,23 +43,25 @@ function AnalysisContainer() {
         const spending = schByCategory
           .reduce((result, schedule) => result + parseInt(schedule.expected_spending, 10), 0);
         if (spending > 0) {
+          console.log(c);
           newData.push({
             id: c.title,
             label: c.title,
+            nestedType: c.nestedType,
             value: spending,
             color: colorList[index],
           });
           newTotal += spending;
         }
       }
-    });
+    }, []);
 
     setTotal(newTotal);
     setData(newData.sort((a, b) => b.value - a.value));
   }, [date]);
 
   const clickListItem = (category) => {
-    navigate(PATH.analysisDetail, { state: { color: category.color, category: category.label } });
+    navigate(PATH.analysisDetail, { state: { color: category.color, category: category.label, type: category.nestedType } });
   };
 
   const hexToRGB = (hex, alpha) => {

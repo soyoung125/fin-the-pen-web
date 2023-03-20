@@ -7,12 +7,15 @@ import Title from '../../components/assetManagement/pages/regularDepositWithdraw
 import SpendingDetailCard from '../../components/analysis/detailCard/SpendingDetailCard';
 import { selectDate, selectSchedules } from '../../utils/redux/schedule/scheduleSlice';
 import AssetManagement from '../../components/analysis/detailCard/AssetManagement';
+import { selectAssetsByCategory } from '../../utils/redux/asset/assetSlice';
 
 function AnalysisDetailContainer() {
   const { state } = useLocation();
-  const { color, category } = state;
+  const { color, category, type } = state;
   const date = useSelector(selectDate);
   const schedules = useSelector(selectSchedules);
+  const { asset } = useSelector(selectAssetsByCategory)
+    .find((c) => c.type === type).categories.find((c) => c.title === category);
   const [selectedItem, setSelectedItem] = useState(schedules.filter((s) => date.isSame(s.date, 'month') && s.category === category));
   const [spending, setSpending] = useState(0);
   const [sortByDate, setSortByDate] = useState(true);
@@ -61,7 +64,14 @@ function AnalysisDetailContainer() {
           <SpendingDetailCard schedule={s} key={Math.random()} bgColor={color} />
         ))}
       </Stack>
-      <AssetManagement selectedItem={selectedItem} spending={spending} bgColor={color} />
+      <AssetManagement
+        selectedItem={selectedItem}
+        spending={spending}
+        bgColor={color}
+        type={type}
+        asset={asset}
+        balance={parseInt(asset, 10) - spending}
+      />
     </Box>
   );
 }
