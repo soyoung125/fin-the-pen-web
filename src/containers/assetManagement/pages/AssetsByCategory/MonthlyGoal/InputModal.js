@@ -18,13 +18,13 @@ function InputModal({
   const dispatch = useDispatch();
   const saving = useSelector(selectMonthlyConsumptionGoal);
   useEffect(() => {
-    setGoal(saving);
+    setGoal(parseInt(saving, 10));
   }, [saving]);
 
   const handleChange = (event) => {
     const { value } = event.target;
     if (value >= 0) {
-      setGoal(value);
+      setGoal(parseInt(value, 10));
     } else {
       alert('숫자는 0 이하일 수 없습니다.');
     }

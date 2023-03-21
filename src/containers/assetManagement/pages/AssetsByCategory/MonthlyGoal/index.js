@@ -5,7 +5,9 @@ import BorderColorIcon from '@mui/icons-material/BorderColor';
 import RoundedPaper from '../../../../../components/common/RoundedPaper';
 import ArrowTooltip from '../../../../../components/common/ArrowTooltip';
 
-function MonthlyGoal({ title, openAlertModal, open }) {
+function MonthlyGoal({
+  title, openAlertModal, open, monthlyconsumptionGoal,
+}) {
   return (
     <RoundedPaper>
       <Box sx={{ typography: 'button-text', fontWeight: 'bold' }}>{title}</Box>
@@ -14,7 +16,7 @@ function MonthlyGoal({ title, openAlertModal, open }) {
         typography: 'h4', fontWeight: 'bold', color: 'primary.main', my: 1,
       }}
       >
-        xxxxxxx원
+        {`${monthlyconsumptionGoal.toLocaleString('ko-KR')}원`}
         <ArrowTooltip open={open} title="목표액 수정하기">
           <IconButton color="primary" onClick={openAlertModal} sx={{ p: 0 }}>
             <BorderColorIcon fontSize="small" />

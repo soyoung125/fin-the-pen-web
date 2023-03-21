@@ -7,7 +7,11 @@ import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import CategoryList from './CategoryList';
 import {
-  selectAssetsByCategory, selectUpdateDate, setAssetsByCategory, setInitAssetsByCategory,
+  selectAssetsByCategory,
+  selectMonthlyConsumptionGoal,
+  selectUpdateDate,
+  setAssetsByCategory,
+  setInitAssetsByCategory,
 } from '../../../../utils/redux/asset/assetSlice';
 import MonthlyGoal from './MonthlyGoal';
 import AlertModal from '../../../../components/common/AlertModal';
@@ -23,6 +27,7 @@ function AssetsByCategory() {
   const today = moment();
   const assets = useSelector(selectAssetsByCategory);
   const updateDate = useSelector(selectUpdateDate);
+  const monthlyconsumptionGoal = useSelector(selectMonthlyConsumptionGoal);
 
   useEffect(() => {
     if (today.isAfter(updateDate, 'month')) {
@@ -62,11 +67,12 @@ function AssetsByCategory() {
         title={`${today.format('M월')} 지출 Goal`}
         openAlertModal={() => setAlertModalOpen(true)}
         open={!monthlyGoalModalOpen && !alertModalOpen}
+        monthlyconsumptionGoal={monthlyconsumptionGoal}
       />
 
       <Stack direction="row" justifyContent="space-between">
         <Box sx={{ color: '#979797' }}>설정 가능한 카테고리별 자산</Box>
-        <Box sx={{ color: 'primary.main' }}>xxxxxxx원</Box>
+        <Box sx={{ color: 'primary.main' }}>{`${monthlyconsumptionGoal.toLocaleString('ko-KR')}원`}</Box>
       </Stack>
 
       <Box sx={{ display: 'flex', justifyContent: 'flex-end', mt: 1 }}>
