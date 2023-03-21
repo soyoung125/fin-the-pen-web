@@ -8,7 +8,7 @@ function AssetManagement({
   return (
     <RoundedPapaer>
       <Stack direction="row" justifyContent="space-between">
-        <Box>{`${type}/${selectedItem[0].category} 예산`}</Box>
+        <Box sx={{ fontSize: '17px', fontWeight: 'bolder' }}>{`${type}/${selectedItem[0].category} 예산`}</Box>
         <Box>
           {`${balance.toLocaleString('ko-KR')}원 `}
           {balance > 0 ? '남음' : '초과'}
@@ -22,6 +22,7 @@ function AssetManagement({
           height: '10px',
           borderRadius: '10px',
           backgroundColor: 'rgba(216, 216, 216, 0.62)',
+          my: 1,
           '.MuiLinearProgress-bar1Determinate': {
             borderRadius: '10px',
             backgroundColor: bgColor,
@@ -31,7 +32,7 @@ function AssetManagement({
 
       <Stack direction="row" justifyContent="space-between">
         <Box>{`${spending.toLocaleString('ko-KR')}원 지출`}</Box>
-        <Box>{`예산 ${asset.toLocaleString('ko-KR')}원`}</Box>
+        <Box sx={{ color: '#979797' }}>{`예산 ${asset.toLocaleString('ko-KR')}원`}</Box>
       </Stack>
     </RoundedPapaer>
   );
