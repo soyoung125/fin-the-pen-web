@@ -6,7 +6,6 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { BrowserRouter } from 'react-router-dom';
 
-// import { store } from 'api/redux/store';
 import { Provider } from 'react-redux';
 
 import { PersistGate } from 'redux-persist/integration/react';
@@ -15,8 +14,7 @@ import { store } from './utils/redux/store';
 import { createTheme, responsiveFontSizes, ThemeProvider } from '@mui/material';
 
 const theme = responsiveFontSizes(createTheme({
-  palette:{
-    type: 'light',
+  palette: {
     primary: {
       main: '#7c4dff',
     },
@@ -26,7 +24,7 @@ const theme = responsiveFontSizes(createTheme({
   }
 }));
 
-const root = ReactDOM.createRoot(document.getElementById('root'));
+const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement);
 let persistor = persistStore(store);
 root.render(
   <React.StrictMode>
@@ -34,7 +32,7 @@ root.render(
       <PersistGate loading={null} persistor={persistor}>
         <BrowserRouter basename='fin-the-pen-web'>
           <ThemeProvider theme={theme}>
-          <App />
+            <App />
           </ThemeProvider>
         </BrowserRouter>
       </PersistGate>
