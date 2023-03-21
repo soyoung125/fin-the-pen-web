@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import { Box, Stack } from '@mui/material';
 import ArrowDropDownRoundedIcon from '@mui/icons-material/ArrowDropDownRounded';
 import { useLocation } from 'react-router-dom';
@@ -14,11 +15,18 @@ function AnalysisDetailContainer() {
   const { color, category, type } = state;
   const date = useSelector(selectDate);
   const schedules = useSelector(selectSchedules);
-  const { asset } = useSelector(selectAssetsByCategory)
-    .find((c) => c.type === type).categories.find((c) => c.title === category);
+  const assetsByCategory = useSelector(selectAssetsByCategory);
   const [selectedItem, setSelectedItem] = useState(schedules.filter((s) => date.isSame(s.date, 'month') && s.category === category));
   const [spending, setSpending] = useState(0);
   const [sortByDate, setSortByDate] = useState(true);
+  const [asset, setAsset] = useState('-');
+
+  useEffect(() => {
+    const categoryType = assetsByCategory.find((c) => c.type === type);
+    if (categoryType) {
+      setAsset(categoryType.categories.find((c) => c.title === category).asset);
+    }
+  }, []);
 
   useEffect(() => {
     setSelectedItem([...schedules.filter((s) => date.isSame(s.date, 'month') && s.category === category).sort((a, b) => new Date(a.date) - new Date(b.date))]);
