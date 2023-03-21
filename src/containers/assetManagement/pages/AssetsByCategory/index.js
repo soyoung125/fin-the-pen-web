@@ -5,11 +5,11 @@ import RefreshIcon from '@mui/icons-material/Refresh';
 import moment from 'moment';
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import MonthlyGoal from './MonthlyGoal';
 import CategoryList from './CategoryList';
 import {
   selectAssetsByCategory, selectUpdateDate, setAssetsByCategory, setInitAssetsByCategory,
 } from '../../../../utils/redux/asset/assetSlice';
+import MonthlyGoal from './MonthlyGoal';
 
 function AssetsByCategory() {
   const dispatch = useDispatch();

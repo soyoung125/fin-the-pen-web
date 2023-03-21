@@ -2,8 +2,8 @@ import {
   Box, IconButton, Stack,
 } from '@mui/material';
 import BorderColorIcon from '@mui/icons-material/BorderColor';
-import RoundedPaper from '../../../../components/common/RoundedPaper';
-import ArrowTooltip from '../../../../components/common/ArrowTooltip';
+import RoundedPaper from '../../../../../components/common/RoundedPaper';
+import ArrowTooltip from '../../../../../components/common/ArrowTooltip';
 
 function MonthlyGoal({ title }) {
   return (
