@@ -70,7 +70,7 @@ function AssetsByCategory() {
       </Stack>
 
       <Box sx={{ display: 'flex', justifyContent: 'flex-end', mt: 1 }}>
-        <IconButton color="primary" onClick={() => console.log('refresh')} sx={{ p: 0 }}>
+        <IconButton color="primary" onClick={() => dispatch(setInitAssetsByCategory())} sx={{ p: 0 }}>
           <RefreshIcon fontSize="small" />
         </IconButton>
       </Box>
