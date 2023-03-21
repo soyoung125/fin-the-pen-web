@@ -19,6 +19,7 @@ const initialState = {
     },
   },
   assetByCategory: {
+    goal: 0,
     assets: initAssetsByCategory(),
     updateDate: moment().format('YYYY-MM-DD'),
   },
@@ -38,14 +39,15 @@ export const assetSlice = createSlice({
       state.goal.personal = action.payload;
     },
     setAssetsByCategory: (state, action) => {
-      console.log(state.assetByCategory.assets);
-      console.log(action.payload.assets);
       state.assetByCategory.assets = action.payload.assets;
       state.assetByCategory.updateDate = action.payload.updateDate;
     },
     setInitAssetsByCategory: (state) => {
       state.assetByCategory.assets = initAssetsByCategory();
       state.assetByCategory.updateDate = moment().format('YYYY-MM-DD');
+    },
+    setMonthlyConsumptionGoal: (state, action) => {
+      state.assetByCategory.goal = action.payload;
     },
   },
 });
@@ -55,11 +57,13 @@ export const {
   setPersonalGoal,
   setAssetsByCategory,
   setInitAssetsByCategory,
+  setMonthlyConsumptionGoal,
 } = assetSlice.actions;
 
 export const selectSavingGoal = (state) => state.asset.goal.saving;
 export const selectPersonalGoal = (state) => state.asset.goal.personal;
 export const selectAssetsByCategory = (state) => state.asset.assetByCategory.assets;
 export const selectUpdateDate = (state) => state.asset.assetByCategory.updateDate;
+export const selectMonthlyConsumptionGoal = (state) => state.asset.assetByCategory.goal;
 
 export default assetSlice.reducer;

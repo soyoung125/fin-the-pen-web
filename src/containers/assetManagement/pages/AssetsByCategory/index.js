@@ -10,10 +10,15 @@ import {
   selectAssetsByCategory, selectUpdateDate, setAssetsByCategory, setInitAssetsByCategory,
 } from '../../../../utils/redux/asset/assetSlice';
 import MonthlyGoal from './MonthlyGoal';
+import AlertModal from '../../../../components/common/AlertModal';
+import ModalStaticBackdrop from '../../../../components/layouts/ModalStaticBackdrop';
+import InputModal from './MonthlyGoal/InputModal';
 
 function AssetsByCategory() {
   const dispatch = useDispatch();
   const [open, setOpen] = useState('');
+  const [monthlyGoalModalOpen, setMonthlyGoalModalOpen] = useState(false);
+  const [alertModalOpen, setAlertModalOpen] = useState(false);
   // const [assets, setAssets] = useState([]);
   const today = moment();
   const assets = useSelector(selectAssetsByCategory);
@@ -46,10 +51,17 @@ function AssetsByCategory() {
     dispatch(setAssetsByCategory({ assets: data, updateDate: date }));
   };
 
+  const openMonthlyGoalModal = () => {
+    setAlertModalOpen(false);
+    setMonthlyGoalModalOpen(true);
+  };
+
   return (
     <>
       <MonthlyGoal
         title={`${today.format('M월')} 지출 Goal`}
+        openAlertModal={() => setAlertModalOpen(true)}
+        open={!monthlyGoalModalOpen && !alertModalOpen}
       />
 
       <Stack direction="row" justifyContent="space-between">
@@ -67,6 +79,22 @@ function AssetsByCategory() {
         handleClick={handleClick}
         open={open}
         modifyAsset={modifyAsset}
+      />
+
+      <ModalStaticBackdrop
+        keepMounted
+        width="xs"
+        open={monthlyGoalModalOpen}
+        component={(
+          <InputModal setMonthlyGoalModalOpen={setMonthlyGoalModalOpen} />
+        )}
+      />
+
+      <AlertModal
+        open={alertModalOpen}
+        handleClose={() => setAlertModalOpen(false)}
+        handleClickYes={() => openMonthlyGoalModal()}
+        mode="modify"
       />
     </>
   );
