@@ -13,10 +13,10 @@ import { selectIsDarkMode } from './utils/redux/setting/settingSlice';
 import { darkThemeOptions, lightThemeOptions } from './theme';
 
 function App() {
-  const isDarkMode: string = useSelector(selectIsDarkMode);
+  const isDarkMode: boolean = useSelector(selectIsDarkMode);
 
   return (
-    <ThemeProvider theme={isDarkMode === 'light' ? createTheme(lightThemeOptions) : createTheme(darkThemeOptions)}>
+    <ThemeProvider theme={isDarkMode ? createTheme(darkThemeOptions) : createTheme(lightThemeOptions)}>
       <Routes>
         <Route path="/" element={<HomeLayout />}>
           {

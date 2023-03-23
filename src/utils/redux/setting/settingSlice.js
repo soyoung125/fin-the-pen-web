@@ -6,7 +6,7 @@ const initialState = {
     // 화면설정
     앱비밀번호: false,
     인증단계: 1,
-    화면테마: 'dark',
+    다크모드: false,
     예산숨김: false,
     // 일정
     반복일정목록: [],
@@ -37,13 +37,13 @@ export const settingSlice = createSlice({
       state.settings = action.payload;
     },
     changeThemeMode: (state, action) => {
-      state.settings.화면테마 = action.payload;
+      state.settings.다크모드 = action.payload;
     },
   },
 });
-export const { updateSettings } = settingSlice.actions;
+export const { updateSettings, changeThemeMode } = settingSlice.actions;
 
 export const selectSettings = (state) => state.setting.settings;
-export const selectIsDarkMode = (state) => state.setting.settings.화면테마;
+export const selectIsDarkMode = (state) => state.setting.settings.다크모드;
 
 export default settingSlice.reducer;
