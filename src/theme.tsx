@@ -1,4 +1,4 @@
-/* eslint-disable no-unused-vars */
+/* eslint-disable */
 import { ThemeOptions } from '@mui/material/styles';
 
 export const lightThemeOptions: ThemeOptions = {
