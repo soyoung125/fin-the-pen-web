@@ -1,3 +1,4 @@
+/* eslint-disable no-param-reassign */
 import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
@@ -5,7 +6,7 @@ const initialState = {
     // 화면설정
     앱비밀번호: false,
     인증단계: 1,
-    화면테마: 'default',
+    화면테마: 'dark',
     예산숨김: false,
     // 일정
     반복일정목록: [],
@@ -33,13 +34,16 @@ export const settingSlice = createSlice({
   initialState,
   reducers: {
     updateSettings: (state, action) => {
-      // eslint-disable-next-line no-param-reassign
       state.settings = action.payload;
+    },
+    changeThemeMode: (state, action) => {
+      state.settings.화면테마 = action.payload;
     },
   },
 });
 export const { updateSettings } = settingSlice.actions;
 
 export const selectSettings = (state) => state.setting.settings;
+export const selectIsDarkMode = (state) => state.setting.settings.화면테마;
 
 export default settingSlice.reducer;

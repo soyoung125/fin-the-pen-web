@@ -6,12 +6,14 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { BrowserRouter } from 'react-router-dom';
 
-import { Provider } from 'react-redux';
+import { Provider, useSelector } from 'react-redux';
 
 import { PersistGate } from 'redux-persist/integration/react';
 import { persistStore } from 'redux-persist';
 import { store } from './utils/redux/store';
 import { createTheme, responsiveFontSizes, ThemeProvider } from '@mui/material';
+import { selectIsDarkMode } from './utils/redux/setting/settingSlice';
+import { darkThemeOptions, lightThemeOptions } from './theme';
 
 const theme = responsiveFontSizes(createTheme({
   palette: {
@@ -26,14 +28,17 @@ const theme = responsiveFontSizes(createTheme({
 
 const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement);
 let persistor = persistStore(store);
+// const isDarkMode: string = useSelector(selectIsDarkMode);
+
 root.render(
   <React.StrictMode>
     <Provider store={store}>
       <PersistGate loading={null} persistor={persistor}>
         <BrowserRouter basename='fin-the-pen-web'>
-          <ThemeProvider theme={theme}>
+          {/* <ThemeProvider theme={theme}> */}
+            {/* isDarkMode === 'light' ? createTheme(lightThemeOptions) : createTheme(darkThemeOptions) */}
             <App />
-          </ThemeProvider>
+          {/* </ThemeProvider> */}
         </BrowserRouter>
       </PersistGate>
     </Provider>
