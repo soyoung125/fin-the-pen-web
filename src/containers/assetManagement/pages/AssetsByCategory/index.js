@@ -37,11 +37,15 @@ function AssetsByCategory() {
   }, []);
 
   useEffect(() => {
-    setShowTooltip(!monthlyGoalModalOpen && !alertModalOpen);
+    if (showTooltip !== !(monthlyGoalModalOpen || alertModalOpen)) {
+      setShowTooltip(!showTooltip);
+    }
   }, [monthlyGoalModalOpen, alertModalOpen]);
 
   useEffect(() => {
-    setTimeout(() => { setShowTooltip(false); }, 5000);
+    if (showTooltip) {
+      setTimeout(() => { setShowTooltip(false); }, 5000);
+    }
   }, [showTooltip]);
 
   const handleClick = (type) => {
