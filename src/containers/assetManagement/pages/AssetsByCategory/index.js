@@ -23,6 +23,7 @@ function AssetsByCategory() {
   const [open, setOpen] = useState('');
   const [monthlyGoalModalOpen, setMonthlyGoalModalOpen] = useState(false);
   const [alertModalOpen, setAlertModalOpen] = useState(false);
+  const [showTooltip, setShowTooltip] = useState(true);
   // const [assets, setAssets] = useState([]);
   const today = moment();
   const assets = useSelector(selectAssetsByCategory);
@@ -34,6 +35,14 @@ function AssetsByCategory() {
       dispatch(setInitAssetsByCategory());
     }
   }, []);
+
+  useEffect(() => {
+    setShowTooltip(!monthlyGoalModalOpen && !alertModalOpen);
+  }, [monthlyGoalModalOpen, alertModalOpen]);
+
+  useEffect(() => {
+    setTimeout(() => { setShowTooltip(false); }, 5000);
+  }, [showTooltip]);
 
   const handleClick = (type) => {
     if (open === type) {
@@ -66,7 +75,7 @@ function AssetsByCategory() {
       <MonthlyGoal
         title={`${today.format('M월')} 지출 Goal`}
         openAlertModal={() => setAlertModalOpen(true)}
-        open={!monthlyGoalModalOpen && !alertModalOpen}
+        open={showTooltip}
         monthlyconsumptionGoal={monthlyconsumptionGoal}
       />
 
