@@ -56,7 +56,7 @@ import TopBar from '../../../containers/home/common/TopBar';
 // }
 
 export default function HomeLayout() {
-  const [value, setValue] = useState(0);
+  const [value, setValue] = useState<number>(0);
   const ref = useRef(null);
   // const [messages, setMessages] = React.useState(() => refreshMessages());
 
