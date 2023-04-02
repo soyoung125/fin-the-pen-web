@@ -16,13 +16,21 @@ import { INIT_SCHEDULE, SCHEDULE_DRAWER_MODE } from '../../../utils/constants/sc
 import { changeViewMode, selectDate } from '../../../utils/redux/schedule/scheduleSlice';
 import { selectBottomDrawerOpen, setBottomDrawerOpenFalse, setBottomDrawerOpenTrue } from '../../../utils/redux/common/commonSlice';
 
-function BottomBar({ value, setValue }) {
+/**
+ * value와 setValue의 이름을 새로 지어주면 좋겠어요
+ */
+type BottomBarProps = {
+  value: number;
+  setValue: (value: number) => void;
+}
+
+function BottomBar({ value, setValue }: BottomBarProps) {
   const dispatch = useDispatch();
   const bottomDrawerOpen = useSelector(selectBottomDrawerOpen);
   const date = useSelector(selectDate);
   const navigate = useNavigate();
 
-  const [drawerWidth, setDrawerWidth] = useState(0);
+  const [drawerWidth, setDrawerWidth] = useState<number>(0);
 
   return (
     <>
