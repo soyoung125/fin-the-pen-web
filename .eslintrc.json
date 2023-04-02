@@ -15,5 +15,13 @@
     "react/jsx-uses-react": 0,
     "react/prop-types": 0,
     "import/no-unresolved": "off"
-  }
+  },
+  "overrides": [
+    {
+      "files": ["*.ts", "*.tsx"],
+      "rules": {
+        "no-undef": "off"
+      }
+    }
+  ]
 }
