@@ -3,9 +3,23 @@ import SentimentDissatisfiedIcon from '@mui/icons-material/SentimentDissatisfied
 import SentimentSatisfiedIcon from '@mui/icons-material/SentimentSatisfied';
 import SentimentVerySatisfiedIcon from '@mui/icons-material/SentimentVerySatisfied';
 import SentimentSatisfiedAltIcon from '@mui/icons-material/SentimentSatisfiedAlt';
+import { MUIColor } from '../../types/common';
+
+interface ConsumptionAlert {
+  readonly message: string;
+  readonly color: MUIColor;
+  readonly icon: JSX.Element;
+}
+
+interface ControllingAlert {
+  readonly setting: string;
+  readonly modify: string;
+  readonly reset: string;
+  readonly delete: string;
+}
 
 // 소비 주의 5단계 알림
-const CONSUMPTION_ALERTS = Object.freeze([
+const CONSUMPTION_ALERTS: ReadonlyArray<ConsumptionAlert> = [
   {
     message: '경고! 자산이 거의 남지 않았습니다.',
     color: 'error',
@@ -31,10 +45,10 @@ const CONSUMPTION_ALERTS = Object.freeze([
     color: 'secondary',
     icon: <SentimentVerySatisfiedIcon fontSize="inherit" />,
   },
-]);
+];
 
 // 설정/수정/초기화/삭제 알림
-const CONTROLLING_ALERT = {
+const CONTROLLING_ALERT: ControllingAlert = {
   setting: '현재 정보로 설정하시겠습니까?',
   modify: '정보를 수정하시겠습니까?',
   reset: '모든 정보를 초기화하시겠습니까?',
