@@ -5,6 +5,9 @@
     "node": true
   },
   "extends": ["airbnb", "airbnb-typescript"],
+  "parserOptions": {
+    "project": "./tsconfig.json"
+  },
   "rules": {
     "react/jsx-filename-extension": [
       1,
