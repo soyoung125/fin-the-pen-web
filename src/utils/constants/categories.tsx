@@ -1,4 +1,18 @@
-const FIXED = {
+/**
+ * 타입 지정 부분 좀 더 수정 예정
+ */
+interface CategorySmall {
+  type: string,
+  categories: string[],
+  color: string,
+}
+
+interface CategoryBig {
+  type: '고정 입출금' | '수입' | '지출',
+  nested: CategorySmall[]
+}
+
+const FIXED: CategoryBig = {
   type: '고정 입출금',
   nested: [
     {
@@ -14,7 +28,7 @@ const FIXED = {
   ],
 };
 
-const INCOME = {
+const INCOME: CategoryBig = {
   type: '수입',
   nested: [
     {
@@ -35,7 +49,7 @@ const INCOME = {
   ],
 };
 
-const EXPENDITURE = {
+const EXPENDITURE: CategoryBig = {
   type: '지출',
   nested: [
     {
@@ -66,8 +80,9 @@ const EXPENDITURE = {
   ],
 };
 
-const categoryFlatter = (obj) => {
-  const flatNestedCategories = (type, nestedType, categories, color) => categories.map((title) => ({
+const categoryFlatter = (obj: CategoryBig) => {
+  // eslint-disable-next-line max-len
+  const flatNestedCategories = (type: string, nestedType: string, categories: string[], color: string) => categories.map((title) => ({
     type,
     nestedType,
     title,
