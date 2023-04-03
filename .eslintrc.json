@@ -4,11 +4,21 @@
     "es6": true,
     "node": true
   },
-  "extends": ["airbnb"],
+  "extends": ["airbnb", "airbnb-typescript"],
   "rules": {
     "react/jsx-filename-extension": [
       1,
       { "extensions": [".js", ".jsx", ".ts", ".tsx"] }
+    ],
+    "import/extensions": [
+      "error",
+      "ignorePackages",
+      {
+        "js": "never",
+        "jsx": "never",
+        "ts": "never",
+        "tsx": "never"
+      }
     ],
     "linebreak-style": "off",
     "react/react-in-jsx-scope": 0,
