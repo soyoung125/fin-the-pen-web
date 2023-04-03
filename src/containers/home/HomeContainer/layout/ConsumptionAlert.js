@@ -1,6 +1,6 @@
 import { Alert, Snackbar } from '@mui/material';
 import { useState } from 'react';
-import { CONSUMPTION_ALERTS } from '../../../../utils/constants/alerts';
+import { CONSUMPTION_ALERTS } from '../../../../domain/constants/alerts';
 
 /**
  * 이 부분을 레이아웃에서 통합 관리하고 싶습니다. (Drawer에서도 중복 사용중인 코드로 생각됨)

@@ -4,7 +4,7 @@ import {
   Dialog, Divider, Grid, Stack, Typography,
 } from '@mui/material';
 import ClearIcon from '@mui/icons-material/Clear';
-import { CONTROLLING_ALERT } from '../../utils/constants/alerts';
+import { CONTROLLING_ALERT } from '../../domain/constants/alerts';
 
 function AlertModal(props) {
   const {
