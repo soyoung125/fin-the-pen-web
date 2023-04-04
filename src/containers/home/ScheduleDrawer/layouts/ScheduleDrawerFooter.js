@@ -1,6 +1,6 @@
 import { Button, Stack, Tooltip } from '@mui/material';
 import { useDispatch, useSelector } from 'react-redux';
-import { NEED_SIGN_IN, NOT_AVAILABLE } from '../../../../utils/constants/common';
+import { NEED_SIGN_IN, NOT_AVAILABLE } from '../../../../domain/constants/messages';
 import {
   NEED_TITLE, SCHEDULE_DRAWER,
 } from '../../../../utils/constants/schedule';

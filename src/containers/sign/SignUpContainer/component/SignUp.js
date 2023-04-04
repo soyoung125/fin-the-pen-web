@@ -6,7 +6,7 @@ import PATH from '../../../../utils/constants/path';
 import { isObjectValuesEmpty } from '../../../../utils/tools';
 import {
   NO_BLANKS, NO_DUPLICATION_ID, NO_SIGNAL_FROM_SERVER, SIGN_UP_SUCCESS,
-} from '../../../../utils/constants/common';
+} from '../../../../domain/constants/messages';
 import { fetchSignUp } from '../../../../utils/redux/API';
 
 function SignUp() {

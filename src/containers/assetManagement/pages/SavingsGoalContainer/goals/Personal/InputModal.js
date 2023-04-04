@@ -6,7 +6,7 @@ import ClearIcon from '@mui/icons-material/Clear';
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { SOMETHING_IS_WRONG } from '../../../../../../utils/constants/common';
+import { SOMETHING_IS_WRONG } from '../../../../../../domain/constants/messages';
 import { selectPersonalGoal, setPersonalGoal } from '../../../../../../utils/redux/asset/assetSlice';
 
 function InputModal({

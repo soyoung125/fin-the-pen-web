@@ -1,6 +1,6 @@
 /* eslint-disable no-param-reassign */
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import { NO_SIGNAL_FROM_SERVER } from '../../constants/common';
+import { NO_SIGNAL_FROM_SERVER } from '../../../domain/constants/messages';
 import { fetchLogin } from '../API';
 import { fetchMockLogin } from '../mockAPI';
 
