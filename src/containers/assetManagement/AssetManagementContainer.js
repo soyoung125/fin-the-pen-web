@@ -1,18 +1,11 @@
 /* eslint-disable max-len */
 /* eslint-disable no-unused-vars */
-import {
-  Alert,
-  Box, Grid, Paper, Stack,
-} from '@mui/material';
-import {
-  lightBlue, pink, teal, yellow,
-} from '@mui/material/colors';
+import { Alert, Box } from '@mui/material';
 import moment from 'moment/moment';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import ScheduleStatusCard from '../../components/assetManagement/ScheduleStatusCard';
 import SettingsPaper from '../../components/assetManagement/SettingsPaper';
-import { CATEGORIES } from '../../utils/constants/categories';
 import { setIsAuthenticatedFalse } from '../../utils/redux/common/commonSlice';
 import { selectSchedules } from '../../utils/redux/schedule/scheduleSlice';
 import { selectUser } from '../../utils/redux/user/userSlice';

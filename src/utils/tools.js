@@ -1,6 +1,6 @@
 /* eslint-disable import/prefer-default-export */
 
-import { EXPENDITURE } from './constants/categories';
+import { EXPENDITURE } from '../domain/constants/categories';
 import { TIME_SELECTOR } from './constants/schedule';
 import { deleteSchedule } from './redux/schedule/scheduleSlice';
 

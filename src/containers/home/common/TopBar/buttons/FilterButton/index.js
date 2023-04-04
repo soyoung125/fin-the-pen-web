@@ -16,7 +16,7 @@ import {
 import { WRONG_TIME_ORDER } from '../../../../../../utils/constants/schedule';
 import { isTimeOrderCorrect } from '../../../../../../utils/tools';
 import RoundedButton from '../../../../../../components/common/RoundedButton';
-import { EXPENDITURE, FIXED, INCOME } from '../../../../../../utils/constants/categories';
+import { EXPENDITURE, FIXED, INCOME } from '../../../../../../domain/constants/categories';
 
 function FilterButton() {
   const dispatch = useDispatch();

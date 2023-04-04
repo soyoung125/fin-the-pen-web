@@ -1,18 +1,15 @@
-/**
- * 타입 지정 부분 좀 더 수정 예정
- */
-interface CategorySmall {
+interface NestedCategory {
   type: string,
   categories: string[],
   color: string,
 }
 
-interface CategoryBig {
+interface CategoryType {
   type: '고정 입출금' | '수입' | '지출',
-  nested: CategorySmall[]
+  nested: NestedCategory[]
 }
 
-const FIXED: CategoryBig = {
+const FIXED: CategoryType = {
   type: '고정 입출금',
   nested: [
     {
@@ -28,7 +25,7 @@ const FIXED: CategoryBig = {
   ],
 };
 
-const INCOME: CategoryBig = {
+const INCOME: CategoryType = {
   type: '수입',
   nested: [
     {
@@ -49,7 +46,7 @@ const INCOME: CategoryBig = {
   ],
 };
 
-const EXPENDITURE: CategoryBig = {
+const EXPENDITURE: CategoryType = {
   type: '지출',
   nested: [
     {
@@ -80,24 +77,36 @@ const EXPENDITURE: CategoryBig = {
   ],
 };
 
-const categoryFlatter = (obj: CategoryBig) => {
-  // eslint-disable-next-line max-len
-  const flatNestedCategories = (type: string, nestedType: string, categories: string[], color: string) => categories.map((title) => ({
-    type,
-    nestedType,
+interface Category {
+  type: string,
+  nestedType: string,
+  title: string,
+  color: string,
+}
+
+const flatNestedCategories = (bigType: string, cat: NestedCategory): Category[] => {
+  const { type, categories, color } = cat;
+  return categories.map((title) => ({
+    type: bigType,
+    nestedType: type,
     title,
     color,
   }));
-  const { type } = obj;
-  return obj.nested
-    .map((cat) => flatNestedCategories(type, cat.type, cat.categories, cat.color))
-    .flat(Infinity);
 };
 
-const CATEGORIES = Object.freeze(
-  [...categoryFlatter(FIXED), ...categoryFlatter(INCOME), ...categoryFlatter(EXPENDITURE)],
-);
+const categoryFlatter = (obj: CategoryType): Category[] => {
+  const { type, nested } = obj;
+  const flattenedCategories = nested
+    .map((cat) => flatNestedCategories(type, cat))
+    .flat(Infinity);
+  return flattenedCategories as Category[];
+};
 
+const CATEGORIES: ReadonlyArray<Category> = [
+  ...categoryFlatter(FIXED),
+  ...categoryFlatter(INCOME),
+  ...categoryFlatter(EXPENDITURE),
+];
 export default null;
 export {
   CATEGORIES, FIXED, INCOME, EXPENDITURE,

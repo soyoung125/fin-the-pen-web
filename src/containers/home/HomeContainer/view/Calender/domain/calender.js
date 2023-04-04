@@ -2,7 +2,7 @@
 /* eslint-disable max-len */
 
 import { useSelector } from 'react-redux';
-import { EXPENDITURE, INCOME } from '../../../../../../utils/constants/categories';
+import { EXPENDITURE, INCOME } from '../../../../../../domain/constants/categories';
 import { selectIsDarkMode } from '../../../../../../utils/redux/setting/settingSlice';
 
 /**

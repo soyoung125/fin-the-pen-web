@@ -9,7 +9,7 @@ import moment from 'moment';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { grey, lightBlue, pink } from '@mui/material/colors';
-import { CATEGORIES } from '../../../../../utils/constants/categories';
+import { CATEGORIES } from '../../../../../domain/constants/categories';
 import {
   selectDate, selectedDate, selectSchedules, selectViewMode,
 } from '../../../../../utils/redux/schedule/scheduleSlice';
