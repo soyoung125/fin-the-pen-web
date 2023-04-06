@@ -22,7 +22,7 @@ import { selectBottomDrawerOpen, setBottomDrawerOpenFalse, setBottomDrawerOpenTr
 type BottomBarProps = {
   value: number;
   setValue: (value: number) => void;
-}
+};
 
 function BottomBar({ value, setValue }: BottomBarProps) {
   const dispatch = useDispatch();

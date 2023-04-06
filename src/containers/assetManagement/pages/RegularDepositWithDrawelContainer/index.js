@@ -1,5 +1,5 @@
-/* eslint-disable camelcase */
-/* eslint-disable no-use-before-define */
+/* eslint-disable @typescript-eslint/no-use-before-define */
+/* eslint-disable @typescript-eslint/naming-convention */
 import {
   Box, Button, IconButton, Stack,
 } from '@mui/material';

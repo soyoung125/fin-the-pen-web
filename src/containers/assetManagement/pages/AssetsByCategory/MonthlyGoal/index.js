@@ -1,4 +1,4 @@
-/* eslint-disable no-use-before-define */
+/* eslint-disable @typescript-eslint/no-use-before-define */
 import {
   Box, IconButton, Stack,
 } from '@mui/material';

@@ -1,4 +1,4 @@
-/* eslint-disable camelcase */
+/* eslint-disable @typescript-eslint/naming-convention */
 import { Box } from '@mui/material';
 import { useLocation } from 'react-router-dom';
 import { useEffect, useState } from 'react';
