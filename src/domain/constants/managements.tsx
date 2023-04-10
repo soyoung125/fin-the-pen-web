@@ -1,9 +1,15 @@
 import {
   lightBlue, pink, teal, yellow,
 } from '@mui/material/colors';
-import PATH from './path';
+import PATH from '../../utils/constants/path';
 
-const assetManagements = Object.freeze([
+interface AssetManagement {
+  title: string,
+  color: string,
+  path: string,
+}
+
+const assetManagements: ReadonlyArray<AssetManagement> = [
   {
     title: '저축 목표 금액 설정',
     color: pink[200],
@@ -24,6 +30,6 @@ const assetManagements = Object.freeze([
     color: teal[200],
     path: PATH.scheduleManagement,
   },
-]);
+];
 
 export default assetManagements;

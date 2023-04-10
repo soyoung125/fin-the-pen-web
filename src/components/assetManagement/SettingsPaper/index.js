@@ -1,5 +1,5 @@
 import { Grid } from '@mui/material';
-import assetManagements from '../../../utils/constants/managements';
+import assetManagements from '../../../domain/constants/managements';
 import RoundedPaper from '../../common/RoundedPaper';
 import SettingCard from './SettingCard';
 
