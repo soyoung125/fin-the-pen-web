@@ -36,6 +36,7 @@ function CategoryList({
               {`${category.total.toLocaleString('kr-KO')}원`}
             </Stack>
           </ListItemButton>
+
           <Collapse in={open === category.type} timeout="auto" unmountOnExit>
             <List component="div" disablePadding>
               {category.categories.map((c, index) => (
@@ -44,6 +45,7 @@ function CategoryList({
                     <Box sx={{ ml: 2 }}>
                       {c.title}
                     </Box>
+
                     {selectedCategory === index
                       ? (
                         <Box>
@@ -57,7 +59,6 @@ function CategoryList({
                             }}
                             onKeyDown={(ev) => {
                               if (ev.key === 'Enter') {
-                                // setSelectedCategory(index + 1);
                                 modify(category.type, index + 1, c.title, c.asset);
                               }
                             }}
@@ -74,7 +75,6 @@ function CategoryList({
               ))}
             </List>
           </Collapse>
-
         </Box>
       ))}
     </List>
