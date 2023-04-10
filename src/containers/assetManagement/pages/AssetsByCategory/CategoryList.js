@@ -18,11 +18,16 @@ function CategoryList({
     modifyAsset(type, title, preValue === '-' ? 0 : preValue, parseInt(asset, 10));
   };
 
+  const clickCategory = (category) => {
+    handleClick(category);
+    setSelectedCategory(0);
+  };
+
   return (
     <List>
       {assets.map((category) => (
         <Box key={category.type}>
-          <ListItemButton onClick={() => handleClick(category.type)}>
+          <ListItemButton onClick={() => clickCategory(category.type)}>
             <Stack direction="row" justifyContent="space-between" sx={{ width: '100%' }}>
               <Stack direction="row">
                 <CategoryTypeBadge color={category.color} mr={0.5} />
