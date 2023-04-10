@@ -1,5 +1,5 @@
 import {
-  Box, Button, Collapse, InputBase, List, ListItem, ListItemButton, Stack,
+  Box, Collapse, InputBase, List, ListItem, ListItemButton, Stack,
 } from '@mui/material';
 import { useState } from 'react';
 import { useSelector } from 'react-redux';
@@ -60,7 +60,6 @@ function CategoryList({
                               }
                             }}
                           />
-                          <Button sx={{ fontSize: '14px', height: '21px' }} onClick={() => modify(category.type, c.title, c.asset)}>save</Button>
                         </Box>
                       )
                       : (
