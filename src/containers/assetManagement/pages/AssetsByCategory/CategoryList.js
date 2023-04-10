@@ -50,6 +50,8 @@ function CategoryList({
                           <InputBase
                             onChange={(e) => setAsset(e.target.value)}
                             autoFocus
+                            onFocus={() => setAsset(c.asset)}
+                            defaultValue={c.asset}
                             sx={{
                               border: '1px solid', borderRadius: 1, fontSize: '14px', height: '21px', width: '100px',
                             }}
