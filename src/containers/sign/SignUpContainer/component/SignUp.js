@@ -2,7 +2,7 @@ import {
   Box, Button, InputAdornment, Stack, TextField,
 } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
-import PATH from '../../../../utils/constants/path';
+import PATH from '../../../../domain/constants/path';
 import { isObjectValuesEmpty } from '../../../../utils/tools';
 import {
   NO_BLANKS, NO_DUPLICATION_ID, NO_SIGNAL_FROM_SERVER, SIGN_UP_SUCCESS,

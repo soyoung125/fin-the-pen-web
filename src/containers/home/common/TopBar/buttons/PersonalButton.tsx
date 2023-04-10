@@ -5,7 +5,7 @@ import LoginIcon from '@mui/icons-material/Login';
 import PersonOutlineOutlinedIcon from '@mui/icons-material/PersonOutlineOutlined';
 import { selectUser } from '../../../../../utils/redux/user/userSlice';
 import RoundedButton from '../../../../../components/common/RoundedButton';
-import PATH from '../../../../../utils/constants/path';
+import PATH from '../../../../../domain/constants/path';
 
 function PersonalButton() {
   const navigate = useNavigate();

@@ -10,7 +10,7 @@ import { useNavigate } from 'react-router-dom';
 import AnalysisGraph from '../../components/analysis/AnalysisGraph';
 import AnalysisList from '../../components/analysis/analysisList/AnalysisList';
 import { CATEGORIES } from '../../domain/constants/categories';
-import PATH from '../../utils/constants/path';
+import PATH from '../../domain/constants/path';
 import useHeader from '../../utils/hooks/useHeader';
 import { selectDate, selectSchedules } from '../../utils/redux/schedule/scheduleSlice';
 

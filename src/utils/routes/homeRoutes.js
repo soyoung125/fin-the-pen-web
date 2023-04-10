@@ -6,7 +6,7 @@ import SettingsContainer from '../../containers/settings/SettingsContainer';
 import SignInContainer from '../../containers/sign/SignInContainer';
 import SignUpContainer from '../../containers/sign/SignUpContainer';
 import TestContainer from '../../containers/test/TestContainer';
-import PATH from '../constants/path';
+import PATH from '../../domain/constants/path';
 
 const homeRoutes = [
   {

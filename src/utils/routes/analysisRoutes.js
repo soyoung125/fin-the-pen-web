@@ -1,6 +1,6 @@
 import AnalysisContainer from '../../containers/analysis/AnalysisContainer';
 import AnalysisDetailContainer from '../../containers/analysis/AnalysisDetailContainer';
-import PATH from '../constants/path';
+import PATH from '../../domain/constants/path';
 
 const analysisRoutes = [
   {

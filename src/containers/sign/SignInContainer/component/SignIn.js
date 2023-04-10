@@ -3,7 +3,7 @@ import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { NO_BLANKS } from '../../../../domain/constants/messages';
-import PATH from '../../../../utils/constants/path';
+import PATH from '../../../../domain/constants/path';
 import { login, selectUser } from '../../../../utils/redux/user/userSlice';
 import { isObjectValuesEmpty } from '../../../../utils/tools';
 

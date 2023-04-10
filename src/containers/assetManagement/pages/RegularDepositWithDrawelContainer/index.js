@@ -10,7 +10,7 @@ import { useSelector } from 'react-redux';
 import { REGULAR_DEPOSIT_WITHDRAWAL_TYPE } from '../../../../utils/constants/schedule';
 import DetailCard from '../../../../components/assetManagement/pages/regularDepositWithdrawal/regular/DetailCard';
 import Title from '../../../../components/assetManagement/pages/regularDepositWithdrawal/regular/Title';
-import PATH from '../../../../utils/constants/path';
+import PATH from '../../../../domain/constants/path';
 import { selectSchedules } from '../../../../utils/redux/schedule/scheduleSlice';
 import AlertModal from '../../../../components/common/AlertModal';
 import { selectBottomDrawerOpen } from '../../../../utils/redux/common/commonSlice';

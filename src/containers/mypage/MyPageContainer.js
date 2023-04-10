@@ -8,7 +8,7 @@ import {
   useSelector,
 } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import PATH from '../../utils/constants/path';
+import PATH from '../../domain/constants/path';
 import { selectGuestMode } from '../../utils/redux/common/commonSlice';
 import {
   // logOut,

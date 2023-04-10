@@ -1,7 +1,7 @@
 import {
   lightBlue, pink, teal, yellow,
 } from '@mui/material/colors';
-import PATH from '../../utils/constants/path';
+import PATH from './path';
 
 interface AssetManagement {
   title: string,
