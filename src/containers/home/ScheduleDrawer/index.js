@@ -34,7 +34,7 @@ function ScheduleDrawer({
   const dispatch = useDispatch();
   const schedule = useSelector(selectSchedule);
 
-  const [expandAccordion, setExpandAccordion] = useState(mode !== SCHEDULE_DRAWER_MODE.생성);
+  const [expandAccordion, setExpandAccordion] = useState(mode !== SCHEDULE_DRAWER_MODE.create);
   const [snackbarOpen, setSnackbarOpen] = useState(true);
 
   const handleExpand = () => {
@@ -95,12 +95,12 @@ function ScheduleDrawer({
                 {/* 이벤트 카테고리 */}
                 <CategoryInput
                   selected={
-                    mode === SCHEDULE_DRAWER_MODE.생성 ? '' : schedule.category
+                    mode === SCHEDULE_DRAWER_MODE.create ? '' : schedule.category
                   }
                 />
 
                 {/* 자산 설정하기 */}
-                {mode === SCHEDULE_DRAWER_MODE.수정
+                {mode === SCHEDULE_DRAWER_MODE.modify
                   ? (
                     <AssetSettings mode={mode} />
                   )

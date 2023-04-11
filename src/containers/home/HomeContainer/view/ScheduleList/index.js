@@ -88,7 +88,7 @@ function ScheduleList() {
           setDrawerWidth={setDrawerWidth}
           handleClose={() => setBottomDrawerOpen(false)}
           data={selectedSchedule}
-          mode={SCHEDULE_DRAWER_MODE.수정}
+          mode={SCHEDULE_DRAWER_MODE.modify}
         />
       </Drawer>
     </>

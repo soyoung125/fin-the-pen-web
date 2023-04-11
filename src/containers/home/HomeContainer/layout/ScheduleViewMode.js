@@ -29,17 +29,17 @@ function ScheduleViewMode() {
       >
         <Button
           sx={{ borderRadius: 4 }}
-          variant={viewMode === VIEW_MODE.자산 ? 'contained' : 'text'}
+          variant={viewMode === VIEW_MODE.asset ? 'contained' : 'text'}
           onClick={() => {
-            dispatch(changeViewMode(VIEW_MODE.자산));
+            dispatch(changeViewMode(VIEW_MODE.asset));
           }}
         >
           자산
         </Button>
         <Button
           sx={{ borderRadius: 4 }}
-          variant={viewMode === VIEW_MODE.일정 ? 'contained' : 'text'}
-          onClick={() => dispatch(changeViewMode(VIEW_MODE.일정))}
+          variant={viewMode === VIEW_MODE.schedule ? 'contained' : 'text'}
+          onClick={() => dispatch(changeViewMode(VIEW_MODE.schedule))}
         >
           일정
         </Button>

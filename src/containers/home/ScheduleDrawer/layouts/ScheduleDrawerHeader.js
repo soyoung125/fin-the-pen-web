@@ -17,7 +17,7 @@ function ScheduleDrawerHeader({ mode, handleClose }) {
   return (
     <Stack direction="row" alignItems="center" justifyContent="space-between">
       {
-        mode === SCHEDULE_DRAWER_MODE.수정
+        mode === SCHEDULE_DRAWER_MODE.modify
           ? (
             <Tooltip
               title={!guestMode && '아직 일반 모드에서는 동작하지 않습니다.'}

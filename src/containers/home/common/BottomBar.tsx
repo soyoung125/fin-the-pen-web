@@ -83,7 +83,7 @@ function BottomBar({ value, setValue }: BottomBarProps) {
           data={{
             ...INIT_SCHEDULE(moment(date).format('YYYY-MM-DD')),
           }}
-          mode={SCHEDULE_DRAWER_MODE.생성}
+          mode={SCHEDULE_DRAWER_MODE.create}
         />
       </Drawer>
 
