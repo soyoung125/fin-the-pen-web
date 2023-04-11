@@ -30,24 +30,18 @@ export const darkThemeOptions: ThemeOptions = {
   palette: {
     mode: 'dark',
     primary: {
-      main: '#735bf2',
-      light: 'rgba(143,123,244,0.57)',
+      main: '#44b9d6',
     },
     secondary: {
-      main: '#bfbaf3',
+      main: '#7497a4',
     },
-    error: {
-      main: '#ffea00',
-    },
-    warning: {
-      main: '#ff5252',
-    },
-    success: {
-      main: '#b9f6ca',
+    background: {
+      default: '#2a2e33',
+      paper: '#12293b',
     },
     text: {
-      primary: '#ffffff',
+      primary: '#eaeded',
+      secondary: '#44b9d6',
     },
-    divider: '#c8c1ef',
   },
 };
