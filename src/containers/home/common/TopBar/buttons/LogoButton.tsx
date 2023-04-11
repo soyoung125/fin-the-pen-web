@@ -2,7 +2,7 @@ import { Typography } from '@mui/material';
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import RoundedButton from '../../../../../components/common/RoundedButton';
-import PATH from '../../../../../utils/constants/path';
+import PATH from '../../../../../domain/constants/path';
 import { selectGuestMode } from '../../../../../utils/redux/common/commonSlice';
 import logo from '../../../../../assets/logos/logo_removebg.png';
 

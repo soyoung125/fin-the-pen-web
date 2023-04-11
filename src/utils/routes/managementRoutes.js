@@ -4,7 +4,7 @@ import DetailInfomation from '../../containers/assetManagement/pages/RegularDepo
 import DetailSetting from '../../containers/assetManagement/pages/RegularDepositWithDrawelContainer/detailPage/DetailSetting';
 import SavingsGoal from '../../containers/assetManagement/pages/SavingsGoalContainer';
 import ScheduleManagement from '../../containers/assetManagement/pages/ScheduleManagement';
-import PATH from '../constants/path';
+import PATH from '../../domain/constants/path';
 
 const managementRoutes = [
   {

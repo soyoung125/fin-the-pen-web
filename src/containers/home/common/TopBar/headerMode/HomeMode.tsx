@@ -4,7 +4,7 @@ import NotificationsOutlinedIcon from '@mui/icons-material/NotificationsOutlined
 import { useNavigate } from 'react-router-dom';
 import LogoButton from '../buttons/LogoButton';
 import RoundedButton from '../../../../../components/common/RoundedButton';
-import PATH from '../../../../../utils/constants/path';
+import PATH from '../../../../../domain/constants/path';
 import PersonalButton from '../buttons/PersonalButton';
 
 function HomeMode() {

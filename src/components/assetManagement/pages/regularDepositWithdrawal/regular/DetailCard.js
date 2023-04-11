@@ -5,7 +5,7 @@ import 'swiper/css';
 import moment from 'moment';
 import { useNavigate } from 'react-router-dom';
 import RoundedBorderBox from '../../../../common/RoundedBorderBox';
-import PATH from '../../../../../utils/constants/path';
+import PATH from '../../../../../domain/constants/path';
 
 function DetailCard({ data }) {
   const navigate = useNavigate();

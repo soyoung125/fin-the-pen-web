@@ -5,7 +5,7 @@ import {
 import { Outlet, useLocation, useNavigate } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
-import assetManagements from '../../../utils/constants/managements';
+import assetManagements from '../../../domain/constants/managements';
 import SwitchingHeader from '../../common/SwitchingHeader';
 import EasyAuthentication from '../../../containers/sign/EasyAuthentication';
 import { selectIsAuthenticated } from '../../../utils/redux/common/commonSlice';

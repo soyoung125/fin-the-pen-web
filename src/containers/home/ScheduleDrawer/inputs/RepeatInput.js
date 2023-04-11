@@ -8,7 +8,7 @@ import { AdapterMoment } from '@mui/x-date-pickers/AdapterMoment';
 import moment from 'moment';
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { DEADLINE, REPEAT } from '../../../../utils/constants/repeat';
+import { DEADLINE, REPEAT } from '../../../../domain/constants/repeat';
 import { SCHEDULE_DRAWER } from '../../../../utils/constants/schedule';
 import { selectSchedule, setDrawerSchedule } from '../../../../utils/redux/schedule/scheduleSlice';
 import { updateRepeat, updateRepeatEndDate } from '../domain/schedule';

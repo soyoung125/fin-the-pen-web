@@ -1,4 +1,23 @@
-const PATH = Object.freeze({
+interface Path {
+  readonly home: string;
+  readonly signIn: string;
+  readonly signUp: string;
+  readonly mypage: string;
+  readonly notification: string;
+  readonly assetManagement: string;
+  readonly settings: string;
+  readonly test: string;
+  readonly analysis: string;
+  readonly analysisDetail: string;
+  readonly savingsGoal: string;
+  readonly regularDepositWithdrawal: string;
+  readonly DetailSetting: string;
+  readonly DetailInfomation: string;
+  readonly assetsByCategory: string;
+  readonly scheduleManagement: string;
+}
+
+const PATH: Readonly<Path> = Object.freeze({
   home: '/',
   signIn: '/sign-in',
   signUp: '/sign-up',
