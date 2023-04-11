@@ -5,7 +5,7 @@ import {
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { CATEGORIES } from '../../../../domain/constants/categories';
-import { SCHEDULE_DRAWER } from '../../../../utils/constants/schedule';
+import { SCHEDULE_DRAWER } from '../../../../domain/constants/schedule';
 import { selectSchedule } from '../../../../utils/redux/schedule/scheduleSlice';
 import { updateSchedule } from '../domain/schedule';
 

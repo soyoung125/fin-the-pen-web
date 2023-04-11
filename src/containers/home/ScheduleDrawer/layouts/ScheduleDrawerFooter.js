@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { NEED_SIGN_IN, NOT_AVAILABLE } from '../../../../domain/constants/messages';
 import {
   NEED_TITLE, SCHEDULE_DRAWER,
-} from '../../../../utils/constants/schedule';
+} from '../../../../domain/constants/schedule';
 import { selectGuestMode } from '../../../../utils/redux/common/commonSlice';
 import {
   // mockCreateNewSchedule,

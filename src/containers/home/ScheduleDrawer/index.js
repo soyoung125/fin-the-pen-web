@@ -9,7 +9,7 @@ import NameInput from './inputs/NameInput';
 import DateInput from './inputs/DateInput';
 import {
   SCHEDULE_DRAWER, SCHEDULE_DRAWER_MODE,
-} from '../../../utils/constants/schedule';
+} from '../../../domain/constants/schedule';
 import {
   selectSchedule, setDrawerSchedule,
 } from '../../../utils/redux/schedule/scheduleSlice';

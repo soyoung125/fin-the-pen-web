@@ -6,7 +6,7 @@ import ClearIcon from '@mui/icons-material/Clear';
 import RestartAltIcon from '@mui/icons-material/RestartAlt';
 import 'swiper/css';
 import ModalStaticBackdrop from '../../../../layouts/ModalStaticBackdrop';
-import { REGULAR_DEPOSIT_WITHDRAWAL_TYPE } from '../../../../../utils/constants/schedule';
+import { REGULAR_DEPOSIT_WITHDRAWAL_TYPE } from '../../../../../domain/constants/schedule';
 
 function ModifyModal({ settingModalOpen, setSettingModalOpen, data }) {
   const type = REGULAR_DEPOSIT_WITHDRAWAL_TYPE[data.type];
@@ -40,7 +40,7 @@ function ModifyModal({ settingModalOpen, setSettingModalOpen, data }) {
                 id="name"
                 startAdornment={<InputAdornment position="start">{`${type}명`}</InputAdornment>}
                 value={data.event_name}
-                  // onChange={changePersonalGoal}
+                // onChange={changePersonalGoal}
                 size="small"
                 inputProps={{
                   style: { textAlign: 'right' },
@@ -54,7 +54,7 @@ function ModifyModal({ settingModalOpen, setSettingModalOpen, data }) {
                 id="nickName"
                 startAdornment={<InputAdornment position="start">별명</InputAdornment>}
                 value={data.event_name}
-                  // onChange={changePersonalGoal}
+                // onChange={changePersonalGoal}
                 size="small"
                 inputProps={{
                   style: { textAlign: 'right' },
@@ -70,12 +70,12 @@ function ModifyModal({ settingModalOpen, setSettingModalOpen, data }) {
               InputProps={{
                 startAdornment: <InputAdornment position="start">{`${type}일`}</InputAdornment>,
               }}
-                // eslint-disable-next-line react/jsx-no-duplicate-props
+              // eslint-disable-next-line react/jsx-no-duplicate-props
               inputProps={{
                 style: { textAlign: 'right' },
               }}
               value={data.date}
-                // onChange={changePersonalGoal}
+              // onChange={changePersonalGoal}
               size="small"
             />
 
@@ -87,12 +87,12 @@ function ModifyModal({ settingModalOpen, setSettingModalOpen, data }) {
               InputProps={{
                 startAdornment: <InputAdornment position="start">{`${type}기간`}</InputAdornment>,
               }}
-                // eslint-disable-next-line react/jsx-no-duplicate-props
+              // eslint-disable-next-line react/jsx-no-duplicate-props
               inputProps={{
                 style: { textAlign: 'right' },
               }}
               value={data.repeat_endDate}
-                // onChange={changePersonalGoal}
+              // onChange={changePersonalGoal}
               size="small"
             />
 
@@ -102,16 +102,16 @@ function ModifyModal({ settingModalOpen, setSettingModalOpen, data }) {
                 startAdornment={<InputAdornment position="start">{`${type}액 고정`}</InputAdornment>}
                 endAdornment={(
                   <Switch
-                      // checked={personalGoal.autoSaving}
-                      // onChange={() => changePersonalGoal({
-                      //   target: {
-                      //     id: 'autoSaving',
-                      //     value: !personalGoal.autoSaving,
-                      //   },
-                      // })}
+                    // checked={personalGoal.autoSaving}
+                    // onChange={() => changePersonalGoal({
+                    //   target: {
+                    //     id: 'autoSaving',
+                    //     value: !personalGoal.autoSaving,
+                    //   },
+                    // })}
                     inputProps={{ 'aria-label': 'controlled' }}
                   />
-)}
+                )}
                 size="small"
                 readOnly
               />
@@ -123,7 +123,7 @@ function ModifyModal({ settingModalOpen, setSettingModalOpen, data }) {
                 id="amount"
                 startAdornment={<InputAdornment position="start">{`${type}액`}</InputAdornment>}
                 value={data.expected_spending}
-                  // onChange={changePersonalGoal}
+                // onChange={changePersonalGoal}
                 size="small"
                 inputProps={{
                   style: { textAlign: 'right' },
@@ -135,7 +135,7 @@ function ModifyModal({ settingModalOpen, setSettingModalOpen, data }) {
             정기 출금액 설정
           </Button>
         </Stack>
-        )}
+      )}
     />
   );
 }

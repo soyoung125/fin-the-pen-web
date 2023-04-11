@@ -2,7 +2,7 @@ import {
   Button, Stack, TextField, Typography,
 } from '@mui/material';
 import { useDispatch, useSelector } from 'react-redux';
-import { SCHEDULE_DRAWER } from '../../../../../utils/constants/schedule';
+import { SCHEDULE_DRAWER } from '../../../../../domain/constants/schedule';
 import { selectSchedule } from '../../../../../utils/redux/schedule/scheduleSlice';
 import { updateSchedule, updateSpendingType } from '../../domain/schedule';
 

@@ -7,7 +7,7 @@ import BorderColorIcon from '@mui/icons-material/BorderColor';
 import { useNavigate } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
-import { REGULAR_DEPOSIT_WITHDRAWAL_TYPE } from '../../../../utils/constants/schedule';
+import { REGULAR_DEPOSIT_WITHDRAWAL_TYPE } from '../../../../domain/constants/schedule';
 import DetailCard from '../../../../components/assetManagement/pages/regularDepositWithdrawal/regular/DetailCard';
 import Title from '../../../../components/assetManagement/pages/regularDepositWithdrawal/regular/Title';
 import PATH from '../../../../domain/constants/path';

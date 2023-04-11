@@ -4,7 +4,7 @@ import {
 import ClearIcon from '@mui/icons-material/Clear';
 import { useDispatch, useSelector } from 'react-redux';
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
-import { SCHEDULE_DRAWER, SCHEDULE_DRAWER_MODE } from '../../../../utils/constants/schedule';
+import { SCHEDULE_DRAWER, SCHEDULE_DRAWER_MODE } from '../../../../domain/constants/schedule';
 import { selectSchedule } from '../../../../utils/redux/schedule/scheduleSlice';
 import { selectGuestMode } from '../../../../utils/redux/common/commonSlice';
 import { deleteSelectedSchedule } from '../../../../utils/tools';

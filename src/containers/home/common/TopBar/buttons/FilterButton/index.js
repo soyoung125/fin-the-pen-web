@@ -13,7 +13,7 @@ import FilterAccordion from './inputs/FilterAccordion';
 import {
   initFilter, selectFiltered, selectFilteredDate, setFilteredDate, updateFilter,
 } from '../../../../../../utils/redux/schedule/scheduleSlice';
-import { WRONG_TIME_ORDER } from '../../../../../../utils/constants/schedule';
+import { WRONG_TIME_ORDER } from '../../../../../../domain/constants/schedule';
 import { isTimeOrderCorrect } from '../../../../../../utils/tools';
 import RoundedButton from '../../../../../../components/common/RoundedButton';
 import { EXPENDITURE, FIXED, INCOME } from '../../../../../../domain/constants/categories';

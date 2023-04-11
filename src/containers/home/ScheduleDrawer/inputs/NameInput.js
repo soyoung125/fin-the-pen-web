@@ -3,7 +3,7 @@ import {
 } from '@mui/material';
 import NotificationsNoneIcon from '@mui/icons-material/NotificationsNone';
 import { useDispatch, useSelector } from 'react-redux';
-import { SCHEDULE_DRAWER } from '../../../../utils/constants/schedule';
+import { SCHEDULE_DRAWER } from '../../../../domain/constants/schedule';
 import { updateSchedule } from '../domain/schedule';
 import { selectSchedule } from '../../../../utils/redux/schedule/scheduleSlice';
 
