@@ -62,7 +62,7 @@ function AssetsByCategory() {
         ...category,
         categories: category.categories
           .map((c) => (c.title === title ? { ...c, asset: value } : c)),
-        total: category.total - preValue + value,
+        total: category.total === '-' ? value : category.total - preValue + value,
       }
       : category));
     const date = moment().format('YYYY-MM-DD');

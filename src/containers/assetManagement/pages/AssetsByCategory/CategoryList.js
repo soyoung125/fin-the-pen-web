@@ -33,7 +33,9 @@ function CategoryList({
                 <CategoryTypeBadge color={category.color} mr={0.5} />
                 {category.type}
               </Stack>
-              {`${category.total.toLocaleString('kr-KO')}원`}
+              <Box sx={{ color: category.total === '-' ? '#979797' : 'black' }}>
+                {category.total === '-' ? `${category.total}원` : `${category.total.toLocaleString('kr-KO')}원`}
+              </Box>
             </Stack>
           </ListItemButton>
 
@@ -53,7 +55,7 @@ function CategoryList({
                             onChange={(e) => setAsset(e.target.value)}
                             autoFocus
                             onFocus={() => setAsset(c.asset)}
-                            defaultValue={c.asset}
+                            defaultValue={c.asset === '-' ? '' : c.asset}
                             sx={{
                               border: '1px solid', borderRadius: 1, fontSize: '14px', height: '21px', width: '100px',
                             }}

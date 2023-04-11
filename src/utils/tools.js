@@ -125,5 +125,5 @@ export const initAssetsByCategory = () => EXPENDITURE.nested
   .map((category) => ({
     ...category,
     categories: category.categories.map((c) => ({ title: c, asset: '-' })),
-    total: 0,
+    total: '-',
   }));
