@@ -55,6 +55,7 @@ function CategoryList({
                             onChange={(e) => setAsset(e.target.value)}
                             autoFocus
                             onFocus={() => setAsset(c.asset)}
+                            type="number"
                             defaultValue={c.asset === '-' ? '' : c.asset}
                             sx={{
                               border: '1px solid', borderRadius: 1, fontSize: '14px', height: '21px', width: '100px',
@@ -63,6 +64,9 @@ function CategoryList({
                               if (ev.key === 'Enter') {
                                 modify(category.type, index + 1, c.title, c.asset);
                               }
+                            }}
+                            inputProps={{
+                              style: { textAlign: 'right' },
                             }}
                           />
                         </Box>
