@@ -7,7 +7,7 @@ import { combineReducers } from 'redux';
 import { persistReducer } from 'redux-persist';
 import thunk from 'redux-thunk';
 import userReducer from './user/userSlice';
-import scheduleReducer from './schedule/scheduleSlice';
+import scheduleReducer from '../../domain/redux/schedule/scheduleSlice';
 import commonReducer from './common/commonSlice';
 import settingReducer from './setting/settingSlice';
 import assetReducer from './asset/assetSlice';

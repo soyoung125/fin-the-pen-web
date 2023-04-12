@@ -7,7 +7,7 @@ import { useSelector } from 'react-redux';
 import ScheduleDrawer from '../../../ScheduleDrawer';
 import { CATEGORIES } from '../../../../../domain/constants/categories';
 import { SCHEDULE_DRAWER_MODE } from '../../../../../domain/constants/schedule';
-import { selectDate, selectSchedules, selectStatus } from '../../../../../utils/redux/schedule/scheduleSlice';
+import { selectDate, selectSchedules, selectStatus } from '../../../../../domain/redux/schedule/scheduleSlice';
 // import ScheduleDrawer from '../ScheduleDrawer';
 import ScheduleCard from './ScheduleCard';
 

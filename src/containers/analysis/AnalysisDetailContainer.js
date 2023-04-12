@@ -6,7 +6,7 @@ import { useSelector } from 'react-redux';
 import { useEffect, useState } from 'react';
 import Title from '../../components/assetManagement/pages/regularDepositWithdrawal/regular/Title';
 import SpendingDetailCard from '../../components/analysis/detailCard/SpendingDetailCard';
-import { selectDate, selectSchedules } from '../../utils/redux/schedule/scheduleSlice';
+import { selectDate, selectSchedules } from '../../domain/redux/schedule/scheduleSlice';
 import AssetManagement from '../../components/analysis/detailCard/AssetManagement';
 import { selectAssetsByCategory } from '../../utils/redux/asset/assetSlice';
 
@@ -60,7 +60,7 @@ function AnalysisDetailContainer() {
               {`총 ${selectedItem.length}건`}
             </Box>
           </Stack>
-              )}
+        )}
       >
         <Stack direction="row">
           <Box sx={{ display: 'flex', my: 'auto', color: 'primary.main' }} onClick={() => setSortByDate(!sortByDate)}>{sortByDate ? '날짜순' : '금액순'}</Box>
@@ -74,16 +74,16 @@ function AnalysisDetailContainer() {
       </Stack>
 
       {asset !== '-'
-      && (
-      <AssetManagement
-        selectedItem={selectedItem}
-        spending={spending}
-        bgColor={color}
-        type={type}
-        asset={asset}
-        balance={asset - spending}
-      />
-      )}
+        && (
+          <AssetManagement
+            selectedItem={selectedItem}
+            spending={spending}
+            bgColor={color}
+            type={type}
+            asset={asset}
+            balance={asset - spending}
+          />
+        )}
     </Box>
   );
 }

@@ -8,7 +8,7 @@ import moment from 'moment';
 import { useSelector } from 'react-redux';
 import RoundedPaper from '../../../../../components/common/RoundedPaper';
 import ArrowTooltip from '../../../../../components/common/ArrowTooltip';
-import { selectSchedules } from '../../../../../utils/redux/schedule/scheduleSlice';
+import { selectSchedules } from '../../../../../domain/redux/schedule/scheduleSlice';
 
 function MonthlyGoal({
   title, openAlertModal, open, monthlyconsumptionGoal,

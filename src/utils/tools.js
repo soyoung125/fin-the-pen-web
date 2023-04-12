@@ -1,7 +1,7 @@
 /* eslint-disable import/prefer-default-export */
 
 import { EXPENDITURE } from '../domain/constants/categories';
-import { deleteSchedule } from './redux/schedule/scheduleSlice';
+import { deleteSchedule } from '../domain/redux/schedule/scheduleSlice';
 
 /**
  * 유용한 함수들을 모아두는 곳.

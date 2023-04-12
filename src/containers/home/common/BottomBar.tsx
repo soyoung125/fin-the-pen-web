@@ -13,7 +13,7 @@ import moment from 'moment';
 import PATH from '../../../domain/constants/path';
 import ScheduleDrawer from '../ScheduleDrawer';
 import { INIT_SCHEDULE, SCHEDULE_DRAWER_MODE } from '../../../domain/constants/schedule';
-import { changeViewMode, selectDate } from '../../../utils/redux/schedule/scheduleSlice';
+import { changeViewMode, selectDate } from '../../../domain/redux/schedule/scheduleSlice';
 import { selectBottomDrawerOpen, setBottomDrawerOpenFalse, setBottomDrawerOpenTrue } from '../../../utils/redux/common/commonSlice';
 
 /**

@@ -11,7 +11,7 @@ import { REGULAR_DEPOSIT_WITHDRAWAL_TYPE } from '../../../../domain/constants/sc
 import DetailCard from '../../../../components/assetManagement/pages/regularDepositWithdrawal/regular/DetailCard';
 import Title from '../../../../components/assetManagement/pages/regularDepositWithdrawal/regular/Title';
 import PATH from '../../../../domain/constants/path';
-import { selectSchedules } from '../../../../utils/redux/schedule/scheduleSlice';
+import { selectSchedules } from '../../../../domain/redux/schedule/scheduleSlice';
 import AlertModal from '../../../../components/common/AlertModal';
 import { selectBottomDrawerOpen } from '../../../../utils/redux/common/commonSlice';
 import ArrowTooltip from '../../../../components/common/ArrowTooltip';

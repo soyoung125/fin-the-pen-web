@@ -12,7 +12,7 @@ import { grey, lightBlue, pink } from '@mui/material/colors';
 import { CATEGORIES } from '../../../../../domain/constants/categories';
 import {
   selectDate, selectedDate, selectSchedules, selectViewMode,
-} from '../../../../../utils/redux/schedule/scheduleSlice';
+} from '../../../../../domain/redux/schedule/scheduleSlice';
 import MarkedPickersDay from './boxes/scheduleMarker/MarkedPickersDay';
 import MarkerStack from './boxes/scheduleMarker/MarkerStack';
 import 'moment/locale/ko';

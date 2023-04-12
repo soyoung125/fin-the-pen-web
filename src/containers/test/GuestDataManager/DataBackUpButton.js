@@ -4,7 +4,7 @@ import {
 import { useState } from 'react';
 import { useSelector } from 'react-redux';
 import ModalStaticBackdrop from '../../../components/layouts/ModalStaticBackdrop';
-import { selectSchedules } from '../../../utils/redux/schedule/scheduleSlice';
+import { selectSchedules } from '../../../domain/redux/schedule/scheduleSlice';
 import { selectSettings } from '../../../utils/redux/setting/settingSlice';
 
 function DataBackUpButton() {

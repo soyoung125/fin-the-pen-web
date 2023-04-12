@@ -8,7 +8,7 @@ import moment from 'moment';
 import EasyAuthentication from '../../../containers/sign/EasyAuthentication';
 import { selectIsAuthenticated, setIsAuthenticatedFalse } from '../../../utils/redux/common/commonSlice';
 import AnalysisHeader from '../../analysis/AnalysisHeader';
-import { selectedDate } from '../../../utils/redux/schedule/scheduleSlice';
+import { selectedDate } from '../../../domain/redux/schedule/scheduleSlice';
 
 function AnalysisLayout() {
   const isAuthenticated = useSelector(selectIsAuthenticated);

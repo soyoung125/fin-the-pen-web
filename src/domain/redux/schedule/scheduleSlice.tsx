@@ -2,8 +2,8 @@
 /* eslint-disable no-param-reassign */
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import moment from 'moment';
-import { fetchCreateSchedule, fetchDeleteSchedule, fetchMonthSchedules } from '../API';
-import { fetchMockCreateSchedule, fetchMockDeleteSchedule } from '../mockAPI';
+import { fetchCreateSchedule, fetchDeleteSchedule, fetchMonthSchedules } from '../../../utils/redux/API';
+import { fetchMockCreateSchedule, fetchMockDeleteSchedule } from '../../../utils/redux/mockAPI';
 
 interface InitialState {
   // 메인

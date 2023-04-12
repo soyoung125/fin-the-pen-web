@@ -1,7 +1,7 @@
 import { Box, Stack, Typography } from '@mui/material';
 import moment from 'moment';
 import { useDispatch, useSelector } from 'react-redux';
-import { selectDate, selectedDate } from '../../utils/redux/schedule/scheduleSlice';
+import { selectDate, selectedDate } from '../../domain/redux/schedule/scheduleSlice';
 import SwitchingHeader from '../common/SwitchingHeader';
 
 function AnalysisHeader() {

@@ -7,7 +7,7 @@ import useHeader from '../../../utils/hooks/useHeader';
 import { selectGuestMode, selectIsAuthenticated, setIsAuthenticatedFalse } from '../../../utils/redux/common/commonSlice';
 import {
   getMonthSchedules, selectDate, selectViewMode, changeViewMode,
-} from '../../../utils/redux/schedule/scheduleSlice';
+} from '../../../domain/redux/schedule/scheduleSlice';
 import { selectUser } from '../../../utils/redux/user/userSlice';
 import EasyAuthentication from '../../sign/EasyAuthentication';
 import Calender from './view/Calender';

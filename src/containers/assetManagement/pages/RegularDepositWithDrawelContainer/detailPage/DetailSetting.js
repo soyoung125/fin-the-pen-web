@@ -6,7 +6,7 @@ import { useSelector } from 'react-redux';
 import { REGULAR_DEPOSIT_WITHDRAWAL_TYPE } from '../../../../../domain/constants/schedule';
 import Title from '../../../../../components/assetManagement/pages/regularDepositWithdrawal/regular/Title';
 import SwipeableDetailCard from '../../../../../components/assetManagement/pages/regularDepositWithdrawal/regular/SwipeableDetailCard';
-import { selectSchedules } from '../../../../../utils/redux/schedule/scheduleSlice';
+import { selectSchedules } from '../../../../../domain/redux/schedule/scheduleSlice';
 
 function DetailSetting() {
   const schedules = useSelector(selectSchedules);

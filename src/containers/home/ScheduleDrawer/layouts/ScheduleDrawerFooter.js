@@ -8,7 +8,7 @@ import { selectGuestMode } from '../../../../utils/redux/common/commonSlice';
 import {
   // mockCreateNewSchedule,
   modifySchedule, selectDate, selectSchedule, setDrawerSchedule,
-} from '../../../../utils/redux/schedule/scheduleSlice';
+} from '../../../../domain/redux/schedule/scheduleSlice';
 import { selectUser } from '../../../../utils/redux/user/userSlice';
 import { generateRandomSchedule, handleCreate } from '../domain/schedule';
 

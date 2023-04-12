@@ -9,7 +9,7 @@ import moment from 'moment';
 import FilterAccordion from './inputs/FilterAccordion';
 import {
   initFilter, selectFiltered, selectFilteredDate, setFilteredDate, updateFilter,
-} from '../../../../../../utils/redux/schedule/scheduleSlice';
+} from '../../../../../../domain/redux/schedule/scheduleSlice';
 import { WRONG_TIME_ORDER } from '../../../../../../domain/constants/schedule';
 import { isTimeOrderCorrect } from '../../../../../../utils/tools';
 import RoundedButton from '../../../../../../components/common/RoundedButton';
