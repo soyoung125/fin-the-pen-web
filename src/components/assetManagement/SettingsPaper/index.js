@@ -1,17 +1,24 @@
-import { Grid } from '@mui/material';
+import { Stack, Box, Paper } from '@mui/material';
+import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight';
 import assetManagements from '../../../domain/constants/managements';
-import RoundedPaper from '../../common/RoundedPaper';
-import SettingCard from './SettingCard';
 
 function SettingsPaper() {
   return (
-    <RoundedPaper>
-      <Grid container spacing={2} alignItems="stretch">
-        {assetManagements.map((s) => (
-          <SettingCard setting={s} key={Math.random()} />
-        ))}
-      </Grid>
-    </RoundedPaper>
+    <Stack>
+      {assetManagements.map((s) => (
+        <Paper
+          elevation={8}
+          sx={{
+            marginY: 1, padding: 2, borderRadius: 3,
+          }}
+        >
+          <Stack direction="row" justifyContent="space-between">
+            <Box sx={{ fontWeight: 'bold' }}>{s.title}</Box>
+            <KeyboardArrowRightIcon />
+          </Stack>
+        </Paper>
+      ))}
+    </Stack>
   );
 }
 
