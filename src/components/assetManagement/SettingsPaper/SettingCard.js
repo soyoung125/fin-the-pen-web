@@ -1,27 +1,26 @@
-import { Box, CardActionArea, Grid } from '@mui/material';
+import {
+  Box, Paper, Stack,
+} from '@mui/material';
+import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight';
 import { useNavigate } from 'react-router-dom';
 
 function SettingCard({ setting }) {
   const navigatie = useNavigate();
 
   return (
-    <Grid item xs={6}>
-      <CardActionArea onClick={() => navigatie(setting.path)}>
-        <Box sx={{
-          height: '15vh',
-          backgroundColor: setting.color,
-          paddingX: 1,
-          borderRadius: 4,
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-          textAlign: 'center',
-        }}
-        >
-          {setting.title}
-        </Box>
-      </CardActionArea>
-    </Grid>
+    <Paper
+      elevation={8}
+      sx={{
+        marginY: 1, padding: 2, borderRadius: 3,
+      }}
+    >
+      <Box onClick={() => navigatie(setting.path)}>
+        <Stack direction="row" justifyContent="space-between">
+          <Box sx={{ fontWeight: 'bold' }}>{setting.title}</Box>
+          <KeyboardArrowRightIcon />
+        </Stack>
+      </Box>
+    </Paper>
   );
 }
 
