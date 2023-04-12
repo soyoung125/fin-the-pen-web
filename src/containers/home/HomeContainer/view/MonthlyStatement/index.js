@@ -16,7 +16,7 @@ function MonthlyStatement() {
   const date = useSelector(selectDate);
 
   return (
-    <RoundedPaper>
+    <RoundedPaper my={2}>
       <SwitchingHeader
         justifyContent="space-between"
         handleClickLeftArrow={() => dispatch(selectedDate(moment(date).subtract(1, 'months')))}

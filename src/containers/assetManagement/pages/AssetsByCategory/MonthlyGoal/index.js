@@ -34,7 +34,7 @@ function MonthlyGoal({
   };
 
   return (
-    <RoundedPaper>
+    <RoundedPaper my={2}>
       <Box sx={{ typography: 'button-text', fontWeight: 'bold' }}>{title}</Box>
 
       <Box sx={{

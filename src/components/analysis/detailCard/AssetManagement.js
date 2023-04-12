@@ -6,7 +6,7 @@ function AssetManagement({
   selectedItem, spending, bgColor, type, asset, balance,
 }) {
   return (
-    <RoundedPapaer>
+    <RoundedPapaer my={2}>
       <Stack direction="row" justifyContent="space-between">
         <Box sx={{ fontSize: '17px', fontWeight: 'bolder' }}>{`${type}/${selectedItem[0].category} 예산`}</Box>
         <Box>
