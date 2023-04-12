@@ -1,14 +1,11 @@
 import {
-  Alert,
-  Box,
-  Button, Chip, Drawer, Paper, Stack, TextField, Typography,
+  Alert, Box, Button, Chip, Drawer, Paper, Stack, TextField, Typography,
 } from '@mui/material';
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import FilterAltOutlinedIcon from '@mui/icons-material/FilterAltOutlined';
 import { useDispatch, useSelector } from 'react-redux';
 import ClearIcon from '@mui/icons-material/Clear';
 import moment from 'moment';
-
 import FilterAccordion from './inputs/FilterAccordion';
 import {
   initFilter, selectFiltered, selectFilteredDate, setFilteredDate, updateFilter,
@@ -23,24 +20,25 @@ function FilterButton() {
   const [bottomDrawerOpen, setBottomDrawerOpen] = useState(false);
   const filtered = useSelector(selectFiltered);
   const filteredDate = useSelector(selectFilteredDate);
-  const [error, setError] = useState(null);
+  const [error, setError] = useState(false);
 
-  const handleClick = (state) => {
-    dispatch(updateFilter(state.target.innerText));
+  const handleClick = (event: React.MouseEvent<HTMLDivElement>) => {
+    const target = event.target as HTMLDivElement;
+    dispatch(updateFilter(target.innerText));
   };
 
-  const handleDelete = (cat) => {
+  const handleDelete = (cat: string) => {
     dispatch(updateFilter(cat));
   };
 
-  const changeSchedule = (state) => {
-    const date = state.target.value;
-    if (state.target.id === 'end' && moment(date).isBefore(filteredDate.start)) {
+  const changeSchedule = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const date = event.target.value;
+    if (event.target.id === 'end' && moment(date).isBefore(filteredDate.start)) {
       alert(WRONG_TIME_ORDER);
     } else {
       dispatch(setFilteredDate({
-        type: state.target.id,
-        date: state.target.value,
+        type: event.target.id,
+        date: event.target.value,
       }));
     }
   };
@@ -92,7 +90,7 @@ function FilterButton() {
                     </Alert>
                   </Box>
                   <Stack direction="row" sx={{ overflowX: 'scroll' }}>
-                    {filtered.map((cat) => (
+                    {filtered.map((cat: string) => (
                       <Chip
                         label={cat}
                         key={cat}

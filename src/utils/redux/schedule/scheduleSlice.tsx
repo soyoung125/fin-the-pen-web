@@ -5,16 +5,29 @@ import moment from 'moment';
 import { fetchCreateSchedule, fetchDeleteSchedule, fetchMonthSchedules } from '../API';
 import { fetchMockCreateSchedule, fetchMockDeleteSchedule } from '../mockAPI';
 
-const initialState = {
+interface InitialState {
   // 메인
+  date: moment.Moment;
+  status: string; // 타입 유니온 필요
+  viewMode: string; // 타입 유니온 필요
+  // 전체 일정 데이터
+  schedules: any[]; // 수정 필요
+  // 서랍에 표시될 일정 1개
+  schedule: any | null; // any 수정 필요
+  // 필터
+  filtered: string[];
+  filtered_date: {
+    start: string;
+    end: string;
+  },
+}
+
+const initialState: InitialState = {
   date: moment(new Date()),
   status: 'idle',
   viewMode: 'asset',
-  // 전체 일정 데이터
   schedules: [],
-  // 서랍에 표시될 일정 1개
   schedule: null,
-  // 필터
   filtered: [],
   filtered_date: {
     start: '',
@@ -32,7 +45,7 @@ export const getMonthSchedules = createAsyncThunk(
 
 export const createSchedule = createAsyncThunk(
   'schedule/createSchedule',
-  async (scheduleWithUuid, { getState }) => {
+  async (scheduleWithUuid, { getState }: any) => {
     const { guestMode } = getState().common;
     if (guestMode) {
       // console.log('게스트 모드에서 추가');/
@@ -48,7 +61,7 @@ export const createSchedule = createAsyncThunk(
 
 export const deleteSchedule = createAsyncThunk(
   'schedule/deleteSchedule',
-  async (id, { getState }) => {
+  async (id, { getState }: any) => {
     // console.log(id);
     const { guestMode } = getState().common;
     if (guestMode) {
@@ -66,8 +79,8 @@ export const scheduleSlice = createSlice({
   name: 'schedule',
   initialState,
   reducers: {
-    modifySchedule: (state, action) => {
-      state.schedules = state.schedules.map((s) => (s.id === action.payload.id ? action.payload : s));
+    modifySchedule: (state: any, action) => {
+      state.schedules = state.schedules.map((s: any) => (s.id === action.payload.id ? action.payload : s));
     },
     setSchedules: (state, action) => {
       state.schedules = action.payload;
@@ -83,10 +96,11 @@ export const scheduleSlice = createSlice({
        * 1. 배열 안에 이미 있는 단어라면 제거
        * 2. 배열 안에 없는 단어라면 추가
        */
-      if (state.filtered.includes(action.payload)) {
-        state.filtered = state.filtered.filter((f) => f !== action.payload);
+
+      if (state.filtered.includes(action.payload as string)) {
+        state.filtered = state.filtered.filter((filteredWord) => filteredWord !== action.payload);
       } else {
-        const set = new Set([...state.filtered].concat(action.payload));
+        const set = new Set([...state.filtered].concat(action.payload as string));
         state.filtered = Array.from(set);
       }
     },
@@ -101,15 +115,15 @@ export const scheduleSlice = createSlice({
           state.filtered = Array.from(new Set([...state.filtered].concat(categories)));
           break;
         case 'remove':
-          categories.forEach((cat) => {
+          categories.forEach((cat: any) => {
             state.filtered = state.filtered.filter((f) => f !== cat);
           });
           break;
         default:
-          alert('잘못 된 요청입니다.');
+          alert('잘못된 요청입니다.');
       }
     },
-    setFilteredDate: (state, action) => {
+    setFilteredDate: (state: any, action) => {
       state.filtered_date[action.payload.type] = action.payload.date;
     },
     initFilter: (state) => {
@@ -134,16 +148,16 @@ export const scheduleSlice = createSlice({
         state.status = 'idle';
         state.schedules = action.payload;
       })
-      .addCase(createSchedule.fulfilled, (state, action) => {
-        // createSchedul 가 끝나면
+      .addCase(createSchedule.fulfilled, (state, action: any) => {
+        // createSchedule 가 끝나면
         if (action.payload !== null) {
-          state.schedules.push(action.payload);
+          state.schedules.push(action.payload as never); // schedules의 타입이 지정되면 never를 제거할 수 있습니다...!
         }
       })
       .addCase(deleteSchedule.fulfilled, (state, action) => {
         // deleteSchedule 가 끝나면
         if (action.payload !== null) {
-          state.schedules = state.schedules.filter((s) => s.id !== action.payload);
+          state.schedules = state.schedules.filter((s: any) => s.id !== action.payload);
         }
       });
   },
@@ -160,12 +174,12 @@ export const {
   changeViewMode,
 } = scheduleSlice.actions;
 
-export const selectSchedules = (state) => [...state.schedule.schedules].sort((a, b) => a.start_time.localeCompare(b.start_time));
-export const selectDate = (state) => state.schedule.date;
-export const selectFiltered = (state) => state.schedule.filtered;
-export const selectFilteredDate = (state) => state.schedule.filtered_date;
-export const selectViewMode = (state) => state.schedule.viewMode;
-export const selectSchedule = (state) => state.schedule.schedule;
-export const selectStatus = (state) => state.schedule.status;
+export const selectSchedules = (state: any) => [...state.schedule.schedules].sort((a, b) => a.start_time.localeCompare(b.start_time));
+export const selectDate = (state: any) => state.schedule.date;
+export const selectFiltered = (state: any): string[] => state.schedule.filtered;
+export const selectFilteredDate = (state: any) => state.schedule.filtered_date;
+export const selectViewMode = (state: any) => state.schedule.viewMode;
+export const selectSchedule = (state: any) => state.schedule.schedule;
+export const selectStatus = (state: any) => state.schedule.status;
 
 export default scheduleSlice.reducer;
