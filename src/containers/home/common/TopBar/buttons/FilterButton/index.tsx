@@ -11,7 +11,7 @@ import {
   initFilter, selectFiltered, selectFilteredDate, setFilteredDate, updateFilter,
 } from '../../../../../../domain/redux/schedule/scheduleSlice';
 import { WRONG_TIME_ORDER } from '../../../../../../domain/constants/schedule';
-import { isTimeOrderCorrect } from '../../../../../../utils/tools';
+import { isTimeOrderCorrect } from '../../../../../../domain/tools';
 import RoundedButton from '../../../../../../components/common/RoundedButton';
 import { EXPENDITURE, FIXED, INCOME } from '../../../../../../domain/constants/categories';
 

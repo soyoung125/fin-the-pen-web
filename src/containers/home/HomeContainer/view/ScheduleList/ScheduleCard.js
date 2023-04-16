@@ -6,7 +6,7 @@ import SettingsIcon from '@mui/icons-material/Settings';
 import { grey } from '@mui/material/colors';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { useDispatch } from 'react-redux';
-import { deleteSelectedSchedule } from '../../../../../utils/tools';
+import { deleteSelectedSchedule } from '../../../../../domain/tools';
 import { setBottomDrawerOpenFalse } from '../../../../../utils/redux/common/commonSlice';
 import CategoryTypeBadge from '../../../../../components/common/CategoryTypeBadge';
 

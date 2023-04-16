@@ -8,7 +8,7 @@ import { useDispatch } from 'react-redux';
 import RoundedBorderBox from '../../../../common/RoundedBorderBox';
 import ModifyModal from './ModifyModal';
 import AlertModal from '../../../../common/AlertModal';
-import { deleteSelectedSchedule } from '../../../../../utils/tools';
+import { deleteSelectedSchedule } from '../../../../../domain/tools';
 
 function SwipeableDetailCard({ data }) {
   const dispatch = useDispatch();

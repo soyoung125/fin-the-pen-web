@@ -4,7 +4,7 @@ import {
 import moment from 'moment';
 import { useDispatch, useSelector } from 'react-redux';
 import { selectDate, selectSchedules, selectedDate } from '../../../../../domain/redux/schedule/scheduleSlice';
-import { calculateIncomeExpenditure } from '../../../../../utils/tools';
+import { calculateIncomeExpenditure } from '../../../../../domain/tools';
 import StatusStack from '../../../../../components/assetManagement/ScheduleStatusCard/StatusStack';
 import SwitchingHeader from '../../../../../components/common/SwitchingHeader';
 import RoundedPaper from '../../../../../components/common/RoundedPaper';
