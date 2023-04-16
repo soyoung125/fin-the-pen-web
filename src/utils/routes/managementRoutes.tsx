@@ -5,8 +5,9 @@ import DetailSetting from '../../containers/assetManagement/pages/RegularDeposit
 import SavingsGoal from '../../containers/assetManagement/pages/SavingsGoalContainer';
 import ScheduleManagement from '../../containers/assetManagement/pages/ScheduleManagement';
 import PATH from '../../domain/constants/path';
+import { Route } from '../../types/common';
 
-const managementRoutes = [
+const managementRoutes: Route[] = [
   {
     path: PATH.savingsGoal,
     element: <SavingsGoal />,

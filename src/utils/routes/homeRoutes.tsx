@@ -7,8 +7,9 @@ import SignInContainer from '../../containers/sign/SignInContainer';
 import SignUpContainer from '../../containers/sign/SignUpContainer';
 import TestContainer from '../../containers/test/TestContainer';
 import PATH from '../../domain/constants/path';
+import { Route } from '../../types/common';
 
-const homeRoutes = [
+const homeRoutes: Route[] = [
   {
     path: PATH.home,
     element: <HomeContainer />,
