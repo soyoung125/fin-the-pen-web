@@ -5,3 +5,4 @@ export interface RouterDOM {
   path: string;
   element: React.ReactNode
 }
+export type HeaderMode = 'analysis' | 'home';
