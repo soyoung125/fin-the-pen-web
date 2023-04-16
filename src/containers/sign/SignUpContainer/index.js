@@ -1,6 +1,6 @@
 import { Stack } from '@mui/material';
 import CenterBox from '../../../components/layouts/CenterBox';
-import useHeader from '../../../utils/hooks/useHeader';
+import useHeader from '../../../hooks/useHeader';
 import Header from './component/Header';
 import SignUp from './component/SignUp';
 

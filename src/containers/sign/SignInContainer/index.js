@@ -4,7 +4,7 @@ import Header from './component/Header';
 import SignIn from './component/SignIn';
 import MockSignIn from './component/MockSignIn';
 import Footer from './component/Footer';
-import useHeader from '../../../utils/hooks/useHeader';
+import useHeader from '../../../hooks/useHeader';
 
 export default function SignInContainer() {
   useHeader(false);

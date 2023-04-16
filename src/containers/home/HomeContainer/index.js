@@ -3,7 +3,7 @@ import moment from 'moment';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import ScheduleViewMode from './layout/ScheduleViewMode';
-import useHeader from '../../../utils/hooks/useHeader';
+import useHeader from '../../../hooks/useHeader';
 import { selectGuestMode, selectIsAuthenticated, setIsAuthenticatedFalse } from '../../../utils/redux/common/commonSlice';
 import {
   getMonthSchedules, selectDate, selectViewMode, changeViewMode,

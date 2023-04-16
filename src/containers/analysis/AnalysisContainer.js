@@ -11,7 +11,7 @@ import AnalysisGraph from '../../components/analysis/AnalysisGraph';
 import AnalysisList from '../../components/analysis/analysisList/AnalysisList';
 import { CATEGORIES } from '../../domain/constants/categories';
 import PATH from '../../domain/constants/path';
-import useHeader from '../../utils/hooks/useHeader';
+import useHeader from '../../hooks/useHeader';
 import { selectDate, selectSchedules } from '../../domain/redux/schedule/scheduleSlice';
 
 function AnalysisContainer() {
