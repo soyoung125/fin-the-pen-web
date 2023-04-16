@@ -5,9 +5,9 @@ import DetailSetting from '../containers/assetManagement/pages/RegularDepositWit
 import SavingsGoal from '../containers/assetManagement/pages/SavingsGoalContainer';
 import ScheduleManagement from '../containers/assetManagement/pages/ScheduleManagement';
 import PATH from '../domain/constants/path';
-import { URL } from '../types/common';
+import { RouterDOM } from '../types/common';
 
-const managementRoutes: URL[] = [
+const managementRoutes: RouterDOM[] = [
   {
     path: PATH.savingsGoal,
     element: <SavingsGoal />,

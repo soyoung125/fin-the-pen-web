@@ -11,29 +11,28 @@ import analysisRoutes from './routes/analysisRoutes';
 import AnalysisLayout from './components/layouts/containerLayout/AnalysisLayout';
 import { selectIsDarkMode } from './utils/redux/setting/settingSlice';
 import { darkThemeOptions, lightThemeOptions } from './theme';
+import { RouterDOM } from './types/common';
 
 function App() {
   const isDarkMode: boolean = useSelector(selectIsDarkMode);
+  const routesMapper = (routes: RouterDOM[]) => routes.map((route: RouterDOM) => (
+    <Route
+      key={route.path}
+      path={route.path}
+      element={route.element}
+    />
+  ))
 
   return (
     <ThemeProvider theme={isDarkMode ? createTheme(darkThemeOptions) : createTheme(lightThemeOptions)}>
       <Routes>
         <Route path="/" element={<HomeLayout />}>
-          {
-            homeRoutes
-              .map((route) => <Route path={route.path} element={route.element} key={route.path} />)
-          }
+          {routesMapper(homeRoutes)}
           <Route path="/management" element={<ManagementLayout />}>
-            {
-              managementRoutes
-                .map((route) => <Route path={route.path} element={route.element} key={route.path} />)
-            }
+            {routesMapper(managementRoutes)}
           </Route>
           <Route path="/analysis" element={<AnalysisLayout />}>
-            {
-              analysisRoutes
-                .map((route) => <Route path={route.path} element={route.element} key={route.path} />)
-            }
+            {routesMapper(analysisRoutes)}
           </Route>
         </Route>
       </Routes>

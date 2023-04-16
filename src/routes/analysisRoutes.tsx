@@ -1,9 +1,9 @@
 import AnalysisContainer from '../containers/analysis/AnalysisContainer';
 import AnalysisDetailContainer from '../containers/analysis/AnalysisDetailContainer';
 import PATH from '../domain/constants/path';
-import { URL } from '../types/common';
+import { RouterDOM } from '../types/common';
 
-const analysisRoutes: URL[] = [
+const analysisRoutes: RouterDOM[] = [
   {
     path: PATH.analysis,
     element: <AnalysisContainer />,
