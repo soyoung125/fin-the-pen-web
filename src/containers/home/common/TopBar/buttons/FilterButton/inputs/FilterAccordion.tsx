@@ -3,8 +3,13 @@ import Accordion from '../../../../../../../components/common/accordions/Accordi
 import AccordionDetails from '../../../../../../../components/common/accordions/AccordionDetails';
 import AccordionSummary from '../../../../../../../components/common/accordions/AccordionSummary';
 import FilterChips from './FilterChips';
+import { CategoryType } from '../../../../../../../domain/constants/categories';
 
-function FilterAccordion({ tag }) {
+interface FilterAccordionProps {
+  tag: CategoryType
+}
+
+function FilterAccordion({ tag }: FilterAccordionProps) {
   return (
     <Accordion>
       <AccordionSummary

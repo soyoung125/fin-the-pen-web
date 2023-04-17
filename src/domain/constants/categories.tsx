@@ -1,10 +1,10 @@
-interface NestedCategory {
+export interface NestedCategory {
   type: string,
   categories: string[],
   color: string,
 }
 
-interface CategoryType {
+export interface CategoryType {
   type: '고정 입출금' | '수입' | '지출',
   nested: NestedCategory[]
 }

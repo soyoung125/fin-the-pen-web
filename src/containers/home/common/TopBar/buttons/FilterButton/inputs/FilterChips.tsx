@@ -5,12 +5,17 @@ import {
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect, useState } from 'react';
 import { selectFiltered, updateFilter, updateFiltersForce } from '../../../../../../../domain/redux/schedule/scheduleSlice';
+import { NestedCategory } from '../../../../../../../domain/constants/categories';
 
-function FilterChips({ nested }) {
+interface FilterChipsProps {
+  nested: NestedCategory
+}
+
+function FilterChips({ nested }: FilterChipsProps) {
   const dispatch = useDispatch();
   const filtered = useSelector(selectFiltered);
   const [checked, setChecked] = useState(true);
-  const [categories, setCategories] = useState([]);
+  const [categories, setCategories] = useState<string[]>([]);
 
   useEffect(() => {
     setCategories(nested.categories);
@@ -33,19 +38,20 @@ function FilterChips({ nested }) {
     }
   }, [categories, filtered]);
 
-  const handleClick = (state) => {
-    dispatch(updateFilter(state.target.innerText));
+  const handleClick = (event: React.MouseEvent<HTMLDivElement>) => {
+    const target = event.target as HTMLDivElement;
+    dispatch(updateFilter(target.innerText));
   };
 
-  const handleChange = (event) => {
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setChecked(event.target.checked);
     dispatch(updateFiltersForce({
-      mode: checked ? 'write' : 'remove',
+      mode: checked ? 'write' : 'remove', // ts 적용 필요
       categories,
     }));
   };
 
-  const isFiltered = (cat) => filtered.findIndex((word) => word === cat) === -1;
+  const isFiltered: any = (cat: any) => filtered.findIndex((word) => word === cat) === -1;
 
   return (
     <Box key={nested.type}>
@@ -61,7 +67,7 @@ function FilterChips({ nested }) {
         <Chip
           key={cat}
           label={cat}
-          variant={isFiltered(cat) ? 'outlined' : 'contained'}
+          variant={isFiltered(cat) ? 'outlined' : 'filled'} // outlined에서 filled로 바꿨는데 TS 오류로 추정중
           onClick={handleClick}
           sx={{
             mr: 1,
