@@ -13,7 +13,7 @@ import Title from '../../../../components/assetManagement/pages/regularDepositWi
 import PATH from '../../../../domain/constants/path';
 import { selectSchedules } from '../../../../domain/redux/schedule/scheduleSlice';
 import AlertModal from '../../../../components/common/AlertModal';
-import { selectBottomDrawerOpen } from '../../../../utils/redux/common/commonSlice';
+import { selectBottomDrawerOpen } from '../../../../domain/redux/common/commonSlice';
 import ArrowTooltip from '../../../../components/common/ArrowTooltip';
 
 function RegularDepositWithdrawal() {

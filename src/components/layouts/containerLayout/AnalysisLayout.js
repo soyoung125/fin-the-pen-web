@@ -6,7 +6,7 @@ import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import moment from 'moment';
 import EasyAuthentication from '../../../containers/sign/EasyAuthentication';
-import { selectIsAuthenticated, setIsAuthenticatedFalse } from '../../../utils/redux/common/commonSlice';
+import { selectIsAuthenticated, setIsAuthenticatedFalse } from '../../../domain/redux/common/commonSlice';
 import AnalysisHeader from '../../analysis/AnalysisHeader';
 import { selectedDate } from '../../../domain/redux/schedule/scheduleSlice';
 

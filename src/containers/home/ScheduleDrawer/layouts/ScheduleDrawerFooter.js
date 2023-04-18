@@ -4,7 +4,7 @@ import { NEED_SIGN_IN, NOT_AVAILABLE } from '../../../../domain/constants/messag
 import {
   NEED_TITLE, SCHEDULE_DRAWER,
 } from '../../../../domain/constants/schedule';
-import { selectGuestMode } from '../../../../utils/redux/common/commonSlice';
+import { selectGuestMode } from '../../../../domain/redux/common/commonSlice';
 import {
   // mockCreateNewSchedule,
   modifySchedule, selectDate, selectSchedule, setDrawerSchedule,

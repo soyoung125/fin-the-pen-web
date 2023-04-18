@@ -9,7 +9,7 @@ import {
 } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import PATH from '../../domain/constants/path';
-import { selectGuestMode } from '../../utils/redux/common/commonSlice';
+import { selectGuestMode } from '../../domain/redux/common/commonSlice';
 import {
   // logOut,
   selectUser,

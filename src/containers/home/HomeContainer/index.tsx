@@ -4,7 +4,7 @@ import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import ScheduleViewMode from './layout/ScheduleViewMode';
 import useHeader from '../../../hooks/useHeader';
-import { selectGuestMode, selectIsAuthenticated, setIsAuthenticatedFalse } from '../../../utils/redux/common/commonSlice';
+import { selectGuestMode, selectIsAuthenticated, setIsAuthenticatedFalse } from '../../../domain/redux/common/commonSlice';
 import {
   getMonthSchedules, selectDate, selectViewMode, changeViewMode,
 } from '../../../domain/redux/schedule/scheduleSlice';
@@ -36,7 +36,7 @@ function HomeConatiner() {
       date: moment(date).format('YYYY-MM'),
     };
     /// / 버그 있을 수 있음
-    dispatch(getMonthSchedules(query) as any);
+    dispatch(getMonthSchedules(query) as any); // any를 써야 redux createAsyncThunk에 넘길 수 있다고 함
   };
 
   useEffect(() => {
@@ -58,7 +58,6 @@ function HomeConatiner() {
       ) : (
         <>
           <EasyAuthentication />
-          {/* isAuthenticated을 AssetPreview 내부에서 하는건 가독성이 떨어질까? */}
           {isAuthenticated && <AssetPreview />}
         </>
       )}

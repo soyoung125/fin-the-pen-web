@@ -176,12 +176,12 @@ export const {
   changeViewMode,
 } = scheduleSlice.actions;
 
-export const selectSchedules = (state: any) => [...state.schedule.schedules].sort((a, b) => a.start_time.localeCompare(b.start_time));
-export const selectDate = (state: any) => state.schedule.date;
-export const selectFiltered = (state: any): string[] => state.schedule.filtered;
-export const selectFilteredDate = (state: any) => state.schedule.filtered_date;
-export const selectViewMode = (state: any) => state.schedule.viewMode;
-export const selectSchedule = (state: any) => state.schedule.schedule;
-export const selectStatus = (state: any) => state.schedule.status;
+export const selectSchedules = (state: any) => [...(state.schedule as InitialState).schedules].sort((a, b) => a.start_time.localeCompare(b.start_time));
+export const selectDate = (state: any) => (state.schedule as InitialState).date;
+export const selectFiltered = (state: any): string[] => (state.schedule as InitialState).filtered;
+export const selectFilteredDate = (state: any) => (state.schedule as InitialState).filtered_date;
+export const selectViewMode = (state: any) => (state.schedule as InitialState).viewMode;
+export const selectSchedule = (state: any) => (state.schedule as InitialState).schedule;
+export const selectStatus = (state: any) => (state.schedule as InitialState).status;
 
 export default scheduleSlice.reducer;

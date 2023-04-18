@@ -6,7 +6,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 import { SCHEDULE_DRAWER, SCHEDULE_DRAWER_MODE } from '../../../../domain/constants/schedule';
 import { selectSchedule } from '../../../../domain/redux/schedule/scheduleSlice';
-import { selectGuestMode } from '../../../../utils/redux/common/commonSlice';
+import { selectGuestMode } from '../../../../domain/redux/common/commonSlice';
 import { deleteSelectedSchedule } from '../../../../domain/tools';
 
 function ScheduleDrawerHeader({ mode, handleClose }) {

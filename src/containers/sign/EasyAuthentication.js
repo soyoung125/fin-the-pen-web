@@ -7,7 +7,7 @@ import { useEffect, useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import LogoCircle from '../../components/common/LogoCircle';
 import CenterBox from '../../components/layouts/CenterBox';
-import { selectIsAuthenticated, setIsAuthenticatedTrue } from '../../utils/redux/common/commonSlice';
+import { selectIsAuthenticated, setIsAuthenticatedTrue } from '../../domain/redux/common/commonSlice';
 import { selectUser } from '../../utils/redux/user/userSlice';
 
 function EasyAuthentication() {
@@ -45,7 +45,7 @@ function EasyAuthentication() {
 
                 <Box
                   component="form"
-          // onSubmit={handleSubmit}
+                  // onSubmit={handleSubmit}
                   noValidate
                   sx={{ maxWidth: '400px', width: '100%' }}
                 >

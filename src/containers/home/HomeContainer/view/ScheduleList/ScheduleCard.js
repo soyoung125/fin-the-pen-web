@@ -7,7 +7,7 @@ import { grey } from '@mui/material/colors';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { useDispatch } from 'react-redux';
 import { deleteSelectedSchedule } from '../../../../../domain/tools';
-import { setBottomDrawerOpenFalse } from '../../../../../utils/redux/common/commonSlice';
+import { setBottomDrawerOpenFalse } from '../../../../../domain/redux/common/commonSlice';
 import CategoryTypeBadge from '../../../../../components/common/CategoryTypeBadge';
 
 function ScheduleCard({ schedule, handleModal, category }) {

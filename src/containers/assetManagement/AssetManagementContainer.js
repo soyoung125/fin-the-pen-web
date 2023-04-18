@@ -6,7 +6,7 @@ import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import ScheduleStatusCard from '../../components/assetManagement/ScheduleStatusCard';
 import SettingsPaper from '../../components/assetManagement/SettingsPaper';
-import { setIsAuthenticatedFalse } from '../../utils/redux/common/commonSlice';
+import { setIsAuthenticatedFalse } from '../../domain/redux/common/commonSlice';
 import { selectSchedules } from '../../domain/redux/schedule/scheduleSlice';
 import { selectUser } from '../../utils/redux/user/userSlice';
 

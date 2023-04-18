@@ -1,5 +1,5 @@
 import { useSelector } from 'react-redux';
-import { selectGuestMode } from '../../utils/redux/common/commonSlice';
+import { selectGuestMode } from '../../domain/redux/common/commonSlice';
 import TestBox from './box/TestBox';
 
 function GuestMode() {

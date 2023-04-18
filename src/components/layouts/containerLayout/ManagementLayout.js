@@ -8,7 +8,7 @@ import { useSelector } from 'react-redux';
 import assetManagements from '../../../domain/constants/managements';
 import SwitchingHeader from '../../common/SwitchingHeader';
 import EasyAuthentication from '../../../containers/sign/EasyAuthentication';
-import { selectIsAuthenticated } from '../../../utils/redux/common/commonSlice';
+import { selectIsAuthenticated } from '../../../domain/redux/common/commonSlice';
 
 function ManagementLayout() {
   const location = useLocation();

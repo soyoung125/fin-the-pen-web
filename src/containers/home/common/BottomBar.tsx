@@ -14,7 +14,7 @@ import PATH from '../../../domain/constants/path';
 import ScheduleDrawer from '../ScheduleDrawer';
 import { INIT_SCHEDULE, SCHEDULE_DRAWER_MODE } from '../../../domain/constants/schedule';
 import { changeViewMode, selectDate } from '../../../domain/redux/schedule/scheduleSlice';
-import { selectBottomDrawerOpen, setBottomDrawerOpenFalse, setBottomDrawerOpenTrue } from '../../../utils/redux/common/commonSlice';
+import { selectBottomDrawerOpen, setBottomDrawerOpenFalse, setBottomDrawerOpenTrue } from '../../../domain/redux/common/commonSlice';
 
 /**
  * value와 setValue의 이름을 새로 지어주면 좋겠어요

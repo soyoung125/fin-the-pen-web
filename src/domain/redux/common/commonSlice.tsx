@@ -1,7 +1,16 @@
 /* eslint-disable no-param-reassign */
 import { createSlice } from '@reduxjs/toolkit';
+import { HeaderMode } from '../../../types/common';
 
-const initialState = {
+interface InitialState {
+  headerOpen: boolean;
+  headerMode: HeaderMode;
+  guestMode: boolean;
+  bottomDrawerOpen: boolean;
+  isAuthenticated: boolean;
+}
+
+const initialState: InitialState = {
   headerOpen: true,
   headerMode: 'home',
   guestMode: false,
@@ -55,10 +64,11 @@ export const {
   setIsAuthenticatedFalse,
 } = commonSlice.actions;
 
-export const selectHeaderOpen = (state) => state.common.headerOpen;
-export const selectHeaderMode = (state) => state.common.headerMode;
-export const selectGuestMode = (state) => state.common.guestMode;
-export const selectBottomDrawerOpen = (state) => state.common.bottomDrawerOpen;
-export const selectIsAuthenticated = (state) => state.common.isAuthenticated;
+export const selectHeaderOpen = (state: any) => (state.common as InitialState).headerOpen;
+export const selectHeaderMode = (state: any) => (state.common as InitialState).headerMode;
+export const selectGuestMode = (state: any) => (state.common as InitialState).guestMode;
+// eslint-disable-next-line max-len
+export const selectBottomDrawerOpen = (state: any) => (state.common as InitialState).bottomDrawerOpen;
+export const selectIsAuthenticated = (state: any) => (state.common as InitialState).isAuthenticated;
 
 export default commonSlice.reducer;

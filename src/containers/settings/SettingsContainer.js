@@ -13,7 +13,7 @@ import Accordion from '../../components/common/accordions/Accordion';
 import AccordionSummary from '../../components/common/accordions/AccordionSummary';
 import AccordionDetails from '../../components/common/accordions/AccordionDetails';
 import Change from './version/Change';
-import { setIsAuthenticatedFalse } from '../../utils/redux/common/commonSlice';
+import { setIsAuthenticatedFalse } from '../../domain/redux/common/commonSlice';
 
 export default function SettingsContainer() {
   const dispatch = useDispatch();
@@ -29,13 +29,11 @@ export default function SettingsContainer() {
     const tmpWindow = window.open('about:blank');
 
     tmpWindow.location = `${'https://testapi.openbanking.or.kr/oauth/2.0/authorize?'
-    + 'response_type=code&'
-    + 'client_id='}${
-      requiredData.client_id
-    }&redirect_uri=http://localhost:63342/fin-the-pen/fin_the_pen.main/resource/home&`
-    + 'scope=login inquiry transfer&'
-    + 'state=12345678901234567890123456789012&'
-    + 'auth_type=0';
+      + 'response_type=code&'
+      + 'client_id='}${requiredData.client_id}&redirect_uri=http://localhost:63342/fin-the-pen/fin_the_pen.main/resource/home&`
+      + 'scope=login inquiry transfer&'
+      + 'state=12345678901234567890123456789012&'
+      + 'auth_type=0';
   };
 
   return (
