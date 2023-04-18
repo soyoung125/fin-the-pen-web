@@ -31,10 +31,12 @@ function HomeConatiner() {
   useHeader(true, 'home');
 
   const getSchedules = () => {
-    dispatch(getMonthSchedules({
+    const query = {
       user_id: user.user_id,
       date: moment(date).format('YYYY-MM'),
-    }));
+    };
+    /// / 버그 있을 수 있음
+    dispatch(getMonthSchedules(query) as any);
   };
 
   useEffect(() => {

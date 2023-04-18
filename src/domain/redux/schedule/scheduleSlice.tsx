@@ -4,6 +4,7 @@ import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import moment from 'moment';
 import { fetchCreateSchedule, fetchDeleteSchedule, fetchMonthSchedules } from '../../../utils/redux/API';
 import { fetchMockCreateSchedule, fetchMockDeleteSchedule } from '../../../utils/redux/mockAPI';
+import { Schedule } from '../../../types/schedule';
 
 interface InitialState {
   // 메인
@@ -11,9 +12,9 @@ interface InitialState {
   status: string; // 타입 유니온 필요
   viewMode: string; // 타입 유니온 필요
   // 전체 일정 데이터
-  schedules: any[]; // 수정 필요
+  schedules: Schedule[];
   // 서랍에 표시될 일정 1개
-  schedule: any | null; // any 수정 필요
+  schedule: Schedule | null;
   // 필터
   filtered: string[];
   filtered_date: {
@@ -35,11 +36,12 @@ const initialState: InitialState = {
   },
 };
 
+// 버그 있을 수 있음
 export const getMonthSchedules = createAsyncThunk(
   'schedule/getMonthSchedules',
-  async (schedule) => {
-    const response = await fetchMonthSchedules(schedule);
-    return response;
+  async ({ user_id, date }: { user_id: string, date: string }) => {
+    const response = await fetchMonthSchedules({ user_id, date });
+    return response.data;
   },
 );
 
