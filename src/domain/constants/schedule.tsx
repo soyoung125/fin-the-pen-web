@@ -1,3 +1,5 @@
+import { Schedule } from '../../types/schedule';
+
 interface ScheduleDrawer {
   readonly drawer_title: {
     readonly create: string;
@@ -77,23 +79,7 @@ const SCHEDULE_DRAWER_MODE: Readonly<ScheduleDrawerMode> = {
 const NEED_TITLE = '제목을 입력해야 합니다.';
 const WRONG_TIME_ORDER = '종료 시각이 시작 시각보다 빠르지 않았으면 좋겠어요.';
 
-interface InitSchedule {
-  event_name: string;
-  alarm: boolean;
-  date: string;
-  start_time: string;
-  end_time: string;
-  repeating_cycle: string;
-  repeat_deadline: string;
-  repeat_endDate: string;
-  category: string;
-  type: string;
-  expected_spending: number,
-  importance: string;
-  exclusion: boolean;
-}
-
-const INIT_SCHEDULE = (date: string): InitSchedule => ({
+const INIT_SCHEDULE = (date: string): Schedule => ({
   event_name: '',
   alarm: false,
   date,
