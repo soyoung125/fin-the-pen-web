@@ -5,11 +5,21 @@ import {
 import ClearIcon from '@mui/icons-material/Clear';
 import RestartAltIcon from '@mui/icons-material/RestartAlt';
 import 'swiper/css';
+import { useState } from 'react';
+import { useDispatch } from 'react-redux';
 import ModalStaticBackdrop from '../../../../layouts/ModalStaticBackdrop';
 import { REGULAR_DEPOSIT_WITHDRAWAL_TYPE } from '../../../../../domain/constants/schedule';
+import { modifySchedule } from '../../../../../domain/redux/schedule/scheduleSlice';
 
 function ModifyModal({ settingModalOpen, setSettingModalOpen, data }) {
+  const dispatch = useDispatch();
   const type = REGULAR_DEPOSIT_WITHDRAWAL_TYPE[data.type];
+  const [form, setForm] = useState(data);
+
+  const changeDetailInfo = (state) => {
+    setForm({ ...form, [state.target.id]: state.target.value });
+  };
+
   return (
     <ModalStaticBackdrop
       keepMounted
@@ -37,10 +47,10 @@ function ModifyModal({ settingModalOpen, setSettingModalOpen, data }) {
             {/* 출금명 */}
             <FormControl fullWidth>
               <OutlinedInput
-                id="name"
+                id="event_name"
                 startAdornment={<InputAdornment position="start">{`${type}명`}</InputAdornment>}
-                value={data.event_name}
-                // onChange={changePersonalGoal}
+                value={form.event_name}
+                onChange={changeDetailInfo}
                 size="small"
                 inputProps={{
                   style: { textAlign: 'right' },
@@ -53,8 +63,8 @@ function ModifyModal({ settingModalOpen, setSettingModalOpen, data }) {
               <OutlinedInput
                 id="nickName"
                 startAdornment={<InputAdornment position="start">별명</InputAdornment>}
-                value={data.event_name}
-                // onChange={changePersonalGoal}
+                value={form.event_name}
+                // onChange={changeDetailInfo}
                 size="small"
                 inputProps={{
                   style: { textAlign: 'right' },
@@ -64,7 +74,7 @@ function ModifyModal({ settingModalOpen, setSettingModalOpen, data }) {
 
             {/* 입출금일 */}
             <TextField
-              id="deadline"
+              id="date"
               type="date"
               fullWidth
               InputProps={{
@@ -74,14 +84,14 @@ function ModifyModal({ settingModalOpen, setSettingModalOpen, data }) {
               inputProps={{
                 style: { textAlign: 'right' },
               }}
-              value={data.date}
-              // onChange={changePersonalGoal}
+              value={form.date}
+              onChange={changeDetailInfo}
               size="small"
             />
 
             {/* 입출금기간 */}
             <TextField
-              id="endDate"
+              id="repeat_endDate"
               type="date"
               fullWidth
               InputProps={{
@@ -91,8 +101,8 @@ function ModifyModal({ settingModalOpen, setSettingModalOpen, data }) {
               inputProps={{
                 style: { textAlign: 'right' },
               }}
-              value={data.repeat_endDate}
-              // onChange={changePersonalGoal}
+              value={form.repeat_endDate}
+              onChange={changeDetailInfo}
               size="small"
             />
 
@@ -120,10 +130,10 @@ function ModifyModal({ settingModalOpen, setSettingModalOpen, data }) {
             {/* 입출금액 */}
             <FormControl fullWidth>
               <OutlinedInput
-                id="amount"
+                id="expected_spending"
                 startAdornment={<InputAdornment position="start">{`${type}액`}</InputAdornment>}
                 value={data.expected_spending}
-                // onChange={changePersonalGoal}
+                onChange={changeDetailInfo}
                 size="small"
                 inputProps={{
                   style: { textAlign: 'right' },
@@ -131,7 +141,14 @@ function ModifyModal({ settingModalOpen, setSettingModalOpen, data }) {
               />
             </FormControl>
           </Stack>
-          <Button fullWidth variant="contained">
+          <Button
+            fullWidth
+            variant="contained"
+            onClick={() => {
+              dispatch(modifySchedule(form));
+              setSettingModalOpen(false);
+            }}
+          >
             정기 출금액 설정
           </Button>
         </Stack>
