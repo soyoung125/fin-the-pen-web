@@ -3,10 +3,10 @@ import { Box } from '@mui/material';
 import { useLocation } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
-import { REGULAR_DEPOSIT_WITHDRAWAL_TYPE } from '../../../../../domain/constants/schedule';
-import Title from '../../../../../components/assetManagement/pages/regularDepositWithdrawal/regular/Title';
-import SwipeableDetailCard from '../../../../../components/assetManagement/pages/regularDepositWithdrawal/regular/SwipeableDetailCard';
-import { selectSchedules } from '../../../../../domain/redux/schedule/scheduleSlice';
+import { REGULAR_DEPOSIT_WITHDRAWAL_TYPE } from '../../../../../../domain/constants/schedule';
+import Title from '../../../../../../components/common/Title';
+import { selectSchedules } from '../../../../../../domain/redux/schedule/scheduleSlice';
+import SwipeableDetailCard from './SwipeableDetailCard';
 
 function DetailSetting() {
   const schedules = useSelector(selectSchedules);

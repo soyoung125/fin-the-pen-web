@@ -4,7 +4,7 @@ import ArrowDropDownRoundedIcon from '@mui/icons-material/ArrowDropDownRounded';
 import { useLocation } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { useEffect, useState } from 'react';
-import Title from '../../components/assetManagement/pages/regularDepositWithdrawal/regular/Title';
+import Title from '../../components/common/Title';
 import SpendingDetailCard from '../../components/analysis/detailCard/SpendingDetailCard';
 import { selectDate, selectSchedules } from '../../domain/redux/schedule/scheduleSlice';
 import AssetManagement from '../../components/analysis/detailCard/AssetManagement';

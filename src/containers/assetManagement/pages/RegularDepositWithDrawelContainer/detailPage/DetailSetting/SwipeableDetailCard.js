@@ -5,10 +5,10 @@ import SettingsIcon from '@mui/icons-material/Settings';
 import { useState } from 'react';
 import moment from 'moment';
 import { useDispatch } from 'react-redux';
-import RoundedBorderBox from '../../../../common/RoundedBorderBox';
 import ModifyModal from './ModifyModal';
-import AlertModal from '../../../../common/AlertModal';
-import { deleteSelectedSchedule } from '../../../../../domain/tools';
+import { deleteSelectedSchedule } from '../../../../../../domain/tools';
+import RoundedBorderBox from '../../../../../../components/common/RoundedBorderBox';
+import AlertModal from '../../../../../../components/common/AlertModal';
 
 function SwipeableDetailCard({ data }) {
   const dispatch = useDispatch();

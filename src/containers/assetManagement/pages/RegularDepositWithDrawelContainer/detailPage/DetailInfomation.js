@@ -6,7 +6,7 @@ import { useLocation } from 'react-router-dom';
 import moment from 'moment';
 import ArrowDropDownRoundedIcon from '@mui/icons-material/ArrowDropDownRounded';
 import { useEffect, useState } from 'react';
-import Title from '../../../../../components/assetManagement/pages/regularDepositWithdrawal/regular/Title';
+import Title from '../../../../../components/common/Title';
 import RoundedBorderBox from '../../../../../components/common/RoundedBorderBox';
 
 function DetailInfomation() {
