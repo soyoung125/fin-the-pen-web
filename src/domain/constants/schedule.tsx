@@ -1,4 +1,4 @@
-import { Schedule } from '../../types/schedule';
+import { Schedule, ViewMode } from '../../types/schedule';
 
 interface ScheduleDrawer {
   readonly drawer_title: {
@@ -108,10 +108,6 @@ const REPEAT_CYCLE: Readonly<RepeatCycle> = {
   years: 'years',
 };
 
-interface ViewMode {
-  asset: 'asset';
-  schedule: 'schedule';
-}
 const VIEW_MODE: ViewMode = {
   asset: 'asset',
   schedule: 'schedule',

@@ -4,13 +4,13 @@ import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import moment from 'moment';
 import { fetchCreateSchedule, fetchDeleteSchedule, fetchMonthSchedules } from '../../../utils/redux/API';
 import { fetchMockCreateSchedule, fetchMockDeleteSchedule } from '../../../utils/redux/mockAPI';
-import { Schedule } from '../../../types/schedule';
+import { Schedule, ViewMode } from '../../../types/schedule';
 
 interface InitialState {
   // 메인
   date: moment.Moment;
   status: string; // 타입 유니온 필요
-  viewMode: string; // 타입 유니온 필요
+  viewMode: ViewMode[keyof ViewMode];
   // 전체 일정 데이터
   schedules: Schedule[];
   // 서랍에 표시될 일정 1개

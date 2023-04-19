@@ -13,3 +13,8 @@ export interface Schedule {
   importance: string;
   exclusion: boolean;
 }
+
+export interface ViewMode {
+  asset: 'asset';
+  schedule: 'schedule';
+}
