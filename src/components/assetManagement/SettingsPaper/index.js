@@ -6,7 +6,7 @@ function SettingsPaper() {
   return (
     <Stack>
       {assetManagements.map((s) => (
-        <SettingCard setting={s} />
+        <SettingCard setting={s} key={s.path} />
       ))}
     </Stack>
   );
