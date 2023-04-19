@@ -19,3 +19,9 @@ export interface ViewMode {
   asset: 'asset';
   schedule: 'schedule';
 }
+
+export type ScheduleDrawerModeValue = ScheduleDrawerMode[keyof ScheduleDrawerMode];
+export interface ScheduleDrawerMode {
+  modify: 'modify';
+  create: 'create'
+}

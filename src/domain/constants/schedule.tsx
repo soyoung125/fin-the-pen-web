@@ -1,4 +1,4 @@
-import { Schedule, ViewMode } from '../../types/schedule';
+import { Schedule, ScheduleDrawerMode, ViewMode } from '../../types/schedule';
 
 interface ScheduleDrawer {
   readonly drawer_title: {
@@ -65,11 +65,6 @@ const SCHEDULE_DRAWER: Readonly<ScheduleDrawer> = Object.freeze({
     modify: '수정 완료',
   },
 });
-
-interface ScheduleDrawerMode {
-  modify: 'modify';
-  create: 'create'
-}
 
 const SCHEDULE_DRAWER_MODE: Readonly<ScheduleDrawerMode> = {
   modify: 'modify',

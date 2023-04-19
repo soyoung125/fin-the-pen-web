@@ -19,15 +19,23 @@ import AssetSettings from './inputs/AssetSettings';
 import ScheduleDrawerHeader from './layouts/ScheduleDrawerHeader';
 import ScheduleDrawerFooter from './layouts/ScheduleDrawerFooter';
 import { CONSUMPTION_ALERTS } from '../../../domain/constants/alerts';
+import { Schedule, ScheduleDrawerModeValue } from '../../../types/schedule';
 
-function TransitionUp(props) {
+function TransitionUp(props: any) {
   // eslint-disable-next-line react/jsx-props-no-spreading
   return <Slide {...props} direction="right" />;
 }
 
+interface ScheduleDrawerProps {
+  setDrawerWidth: React.Dispatch<React.SetStateAction<number>>;
+  handleClose: () => void;
+  data: Schedule;
+  mode: ScheduleDrawerModeValue;
+}
+
 function ScheduleDrawer({
   setDrawerWidth, handleClose, data, mode,
-}) {
+}: ScheduleDrawerProps) {
   // 추후 삭제 예정
   const random = Math.floor((Math.random() * 5));
 
@@ -47,7 +55,7 @@ function ScheduleDrawer({
     }
   }, []);
 
-  const ref = useRef(null);
+  const ref = useRef<HTMLDivElement>(null);
   useEffect(() => {
     // 현재 버그 있음
     console.log('width', ref.current ? ref.current.offsetWidth : 0);
