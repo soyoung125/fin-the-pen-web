@@ -15,7 +15,12 @@ function CategoryList({
 
   const modify = (type, index, title, preValue) => {
     setSelectedCategory(index);
-    modifyAsset(type, title, preValue === '-' ? 0 : preValue, parseInt(asset, 10));
+    if (asset !== '-') {
+      modifyAsset(type, title, preValue === '-' ? 0 : preValue, parseInt(asset, 10));
+    }
+    if (asset === '') {
+      modifyAsset(type, title, preValue === '-' ? 0 : preValue, 0);
+    }
   };
 
   const clickCategory = (category) => {
