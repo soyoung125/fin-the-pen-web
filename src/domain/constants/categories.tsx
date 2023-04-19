@@ -77,7 +77,7 @@ const EXPENDITURE: CategoryType = {
   ],
 };
 
-interface Category {
+export interface Category {
   type: string,
   nestedType: string,
   title: string,

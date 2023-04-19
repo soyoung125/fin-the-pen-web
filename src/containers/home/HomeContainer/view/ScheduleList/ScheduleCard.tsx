@@ -9,8 +9,15 @@ import { useDispatch } from 'react-redux';
 import { deleteSelectedSchedule } from '../../../../../domain/tools';
 import { setBottomDrawerOpenFalse } from '../../../../../domain/redux/common/commonSlice';
 import CategoryTypeBadge from '../../../../../components/common/CategoryTypeBadge';
+import { Schedule } from '../../../../../types/schedule';
+import { Category } from '../../../../../domain/constants/categories';
 
-function ScheduleCard({ schedule, handleModal, category }) {
+interface ScheduleCardProps {
+  schedule: Schedule;
+  handleModal: (schedule: Schedule) => void;
+  category: Category;
+}
+function ScheduleCard({ schedule, handleModal, category }: ScheduleCardProps) {
   const dispatch = useDispatch();
 
   const handleClose = () => {

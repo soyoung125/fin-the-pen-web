@@ -9,7 +9,7 @@ export interface Schedule {
   repeat_endDate: string;
   category: string;
   type: string;
-  expected_spending: number,
+  expected_spending: string,
   importance: string;
   exclusion: boolean;
 }
