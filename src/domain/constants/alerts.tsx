@@ -1,13 +1,13 @@
 import SentimentVeryDissatisfiedIcon from '@mui/icons-material/SentimentVeryDissatisfied';
 import SentimentDissatisfiedIcon from '@mui/icons-material/SentimentDissatisfied';
 import SentimentSatisfiedIcon from '@mui/icons-material/SentimentSatisfied';
-import SentimentVerySatisfiedIcon from '@mui/icons-material/SentimentVerySatisfied';
+// import SentimentVerySatisfiedIcon from '@mui/icons-material/SentimentVerySatisfied';
 import SentimentSatisfiedAltIcon from '@mui/icons-material/SentimentSatisfiedAlt';
-import { MUIColor } from '../../types/common';
+import { AlertColor } from '@mui/material';
 
 interface ConsumptionAlert {
   readonly message: string;
-  readonly color: MUIColor;
+  readonly color: AlertColor;
   readonly icon: JSX.Element;
 }
 
@@ -40,11 +40,11 @@ const CONSUMPTION_ALERTS: ReadonlyArray<ConsumptionAlert> = [
     color: 'success',
     icon: <SentimentSatisfiedAltIcon fontSize="inherit" />,
   },
-  {
-    message: '우수! 똑똑한 소비 생활을 실천중입니다.',
-    color: 'secondary',
-    icon: <SentimentVerySatisfiedIcon fontSize="inherit" />,
-  },
+  // {
+  //   message: '우수! 똑똑한 소비 생활을 실천중입니다.',
+  //   color: 'secondary', // AlertColor 스펙에 없는 색상이라서 일단 주석 처리 해놨음
+  //   icon: <SentimentVerySatisfiedIcon fontSize="inherit" />,
+  // },
 ];
 
 // 설정/수정/초기화/삭제 알림
