@@ -10,16 +10,17 @@ import { SCHEDULE_DRAWER_MODE } from '../../../../../domain/constants/schedule';
 import { selectDate, selectSchedules, selectStatus } from '../../../../../domain/redux/schedule/scheduleSlice';
 // import ScheduleDrawer from '../ScheduleDrawer';
 import ScheduleCard from './ScheduleCard';
+import { Schedule } from '../../../../../types/schedule';
 
 function ScheduleList() {
-  const [selectedSchedule, setSelectedSchedule] = useState(null);
+  const [selectedSchedule, setSelectedSchedule] = useState<Schedule | null>(null);
   const status = useSelector(selectStatus);
   const schedules = useSelector(selectSchedules);
   const date = moment(useSelector(selectDate)).format('YYYY-MM-DD');
-  const [todaySchedules, setTodaySchedules] = useState([]);
+  const [todaySchedules, setTodaySchedules] = useState<Schedule[]>([]);
   const [bottomDrawerOpen, setBottomDrawerOpen] = useState(false);
 
-  const handleModal = (schedule) => {
+  const handleModal = (schedule: Schedule) => {
     setSelectedSchedule(schedule);
     setBottomDrawerOpen(true);
   };
@@ -87,7 +88,7 @@ function ScheduleList() {
         <ScheduleDrawer
           setDrawerWidth={setDrawerWidth}
           handleClose={() => setBottomDrawerOpen(false)}
-          data={selectedSchedule}
+          data={selectedSchedule as Schedule}
           mode={SCHEDULE_DRAWER_MODE.modify}
         />
       </Drawer>
