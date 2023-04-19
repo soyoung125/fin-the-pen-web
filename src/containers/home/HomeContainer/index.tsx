@@ -14,6 +14,7 @@ import Calender from './view/Calender';
 import ScheduleList from './view/ScheduleList';
 import AssetPreview from './view/AssetPreview';
 import ConsumptionAlert from './layout/ConsumptionAlert';
+import { HEADER_MODE } from '../../../domain/constants/common';
 
 function HomeConatiner() {
   const dispatch = useDispatch();
@@ -28,7 +29,7 @@ function HomeConatiner() {
     dispatch(setIsAuthenticatedFalse());
   }, []);
 
-  useHeader(true, 'home');
+  useHeader(true, HEADER_MODE.home);
 
   const getSchedules = () => {
     const query = {

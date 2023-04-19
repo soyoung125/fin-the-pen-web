@@ -1,10 +1,11 @@
 /* eslint-disable no-param-reassign */
 import { createSlice } from '@reduxjs/toolkit';
-import { HeaderMode } from '../../../types/common';
+import { HEADER_MODE } from '../../constants/common';
+import { HeaderModeValue } from '../../../types/common';
 
 interface InitialState {
   headerOpen: boolean;
-  headerMode: HeaderMode;
+  headerMode: HeaderModeValue;
   guestMode: boolean;
   bottomDrawerOpen: boolean;
   isAuthenticated: boolean;
@@ -12,7 +13,7 @@ interface InitialState {
 
 const initialState: InitialState = {
   headerOpen: true,
-  headerMode: 'home',
+  headerMode: HEADER_MODE.home,
   guestMode: false,
   bottomDrawerOpen: false,
   isAuthenticated: false,

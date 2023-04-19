@@ -6,11 +6,12 @@ import { fetchCreateSchedule, fetchDeleteSchedule, fetchMonthSchedules } from '.
 import { fetchMockCreateSchedule, fetchMockDeleteSchedule } from '../../../utils/redux/mockAPI';
 import { Schedule, ViewModeValue } from '../../../types/schedule';
 import { ASYNC_THUNK_STATUS } from '../../constants/common';
+import { AsyncThunkStatusValue } from '../../../types/common';
 
 interface InitialState {
   // 메인
   date: moment.Moment;
-  status: string; // 타입 유니온 필요
+  status: AsyncThunkStatusValue; // 타입 유니온 필요
   viewMode: ViewModeValue;
   // 전체 일정 데이터
   schedules: Schedule[];
