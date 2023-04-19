@@ -1,6 +1,6 @@
 import {
   Accordion, AccordionDetails, AccordionSummary, Alert,
-  Box, Slide, Snackbar, Stack, Typography,
+  Box, Slide, SlideProps, Snackbar, Stack, Typography,
 } from '@mui/material';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import { useEffect, useRef, useState } from 'react';
@@ -21,7 +21,7 @@ import ScheduleDrawerFooter from './layouts/ScheduleDrawerFooter';
 import { CONSUMPTION_ALERTS } from '../../../domain/constants/alerts';
 import { Schedule, ScheduleDrawerModeValue } from '../../../types/schedule';
 
-function TransitionUp(props: any) {
+function TransitionUp(props: SlideProps) {
   // eslint-disable-next-line react/jsx-props-no-spreading
   return <Slide {...props} direction="right" />;
 }
