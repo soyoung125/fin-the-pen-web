@@ -11,16 +11,22 @@ import {
 } from '../../../../domain/redux/schedule/scheduleSlice';
 import { selectUser } from '../../../../utils/redux/user/userSlice';
 import { generateRandomSchedule, handleCreate } from '../domain/schedule';
+import { Schedule, ScheduleDrawerModeValue } from '../../../../types/schedule';
 
 /**
  * 각종 로직들 모듈로 이전 예정
  */
 
-function ScheduleDrawerFooter({ mode, handleClose }) {
+interface ScheduleDrawerFooterProps {
+  mode: ScheduleDrawerModeValue;
+  handleClose: () => void;
+}
+
+function ScheduleDrawerFooter({ mode, handleClose }: ScheduleDrawerFooterProps) {
   const date = useSelector(selectDate);
   const user = useSelector(selectUser);
   const guestMode = useSelector(selectGuestMode);
-  const schedule = useSelector(selectSchedule);
+  const schedule = useSelector(selectSchedule) as Schedule;
   const dispatch = useDispatch();
 
   const handleModify = async () => {
