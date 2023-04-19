@@ -9,7 +9,7 @@ import { CONSUMPTION_ALERTS } from '../../../../domain/constants/alerts';
 
 function ConsumptionAlert() {
   // 추후 삭제 예정
-  const random = Math.floor((Math.random() * 5));
+  const random = Math.floor((Math.random() * 4)); // CONSUMPTION_ALERTS에 우수가 추가되면 5로 수정
   const [snackbarOpen, setSnackbarOpen] = useState(true);
 
   const handleClose = () => {
