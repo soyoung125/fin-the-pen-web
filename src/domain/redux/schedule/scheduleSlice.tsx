@@ -4,13 +4,14 @@ import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import moment from 'moment';
 import { fetchCreateSchedule, fetchDeleteSchedule, fetchMonthSchedules } from '../../../utils/redux/API';
 import { fetchMockCreateSchedule, fetchMockDeleteSchedule } from '../../../utils/redux/mockAPI';
-import { Schedule, ViewMode } from '../../../types/schedule';
+import { Schedule, ViewModeValue } from '../../../types/schedule';
+import { ASYNC_THUNK_STATUS } from '../../constants/common';
 
 interface InitialState {
   // 메인
   date: moment.Moment;
   status: string; // 타입 유니온 필요
-  viewMode: ViewMode[keyof ViewMode];
+  viewMode: ViewModeValue;
   // 전체 일정 데이터
   schedules: Schedule[];
   // 서랍에 표시될 일정 1개
@@ -143,11 +144,11 @@ export const scheduleSlice = createSlice({
     builder
       .addCase(getMonthSchedules.pending, (state) => {
         // getMonthSchedules 가 진행중일 때
-        state.status = 'loading';
+        state.status = ASYNC_THUNK_STATUS.pending;
       })
       .addCase(getMonthSchedules.fulfilled, (state, action) => {
         // getMonthSchedules 가 끝나면
-        state.status = 'idle';
+        state.status = ASYNC_THUNK_STATUS.fulfilled;
         state.schedules = action.payload;
       })
       .addCase(createSchedule.fulfilled, (state, action: any) => {

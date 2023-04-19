@@ -14,6 +14,7 @@ export interface Schedule {
   exclusion: boolean;
 }
 
+export type ViewModeValue = ViewMode[keyof ViewMode];
 export interface ViewMode {
   asset: 'asset';
   schedule: 'schedule';

@@ -6,3 +6,9 @@ export interface RouterDOM {
   element: React.ReactNode
 }
 export type HeaderMode = 'analysis' | 'home';
+
+export type AsyncThunkStatusValue = AsyncThunkStatus[keyof AsyncThunkStatus];
+export interface AsyncThunkStatus {
+  pending: 'loading';
+  fulfilled: 'idle';
+}
