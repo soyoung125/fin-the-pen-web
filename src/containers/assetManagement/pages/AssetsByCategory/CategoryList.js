@@ -1,7 +1,7 @@
 import {
   Box, Collapse, InputBase, List, ListItem, ListItemButton, Stack,
 } from '@mui/material';
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 import { useSelector } from 'react-redux';
 import CategoryTypeBadge from '../../../../components/common/CategoryTypeBadge';
 import { selectAssetsByCategory } from '../../../../utils/redux/asset/assetSlice';
@@ -12,20 +12,29 @@ function CategoryList({
   const assets = useSelector(selectAssetsByCategory);
   const [selectedCategory, setSelectedCategory] = useState(null);
   const [asset, setAsset] = useState(0);
+  const totalAsset = useRef();
 
-  const modify = (type, index, title, preValue) => {
-    setSelectedCategory(index);
-    if (asset !== '-') {
-      modifyAsset(type, title, preValue === '-' ? 0 : preValue, parseInt(asset, 10));
-    }
+  const modify = (category, title, preValue) => {
+    let sum = 0;
+    const total = category.total === '-' ? 0 : category.total;
     if (asset === '') {
-      modifyAsset(type, title, preValue === '-' ? 0 : preValue, 0);
+      sum = category.sum - (preValue === '-' ? 0 : preValue);
+      modifyAsset(category.type, title, sum, 0);
     }
+    if (asset !== '-') {
+      sum = category.sum - (preValue === '-' ? 0 : preValue) + parseInt(asset, 10);
+      if (sum > total) {
+        alert('합계가 설정한 카테고리 지출 목표 금액을 넘었습니다.');
+        return;
+      }
+      modifyAsset(category.type, title, sum, parseInt(asset, 10));
+    }
+    setSelectedCategory(selectedCategory + 1);
   };
 
   const clickCategory = (category) => {
     handleClick(category);
-    setSelectedCategory(0);
+    setSelectedCategory(null);
   };
 
   return (
@@ -38,9 +47,32 @@ function CategoryList({
                 <CategoryTypeBadge color={category.color} mr={0.5} />
                 {category.type}
               </Stack>
-              <Box sx={{ color: category.total === '-' ? '#979797' : 'black' }}>
-                {category.total === '-' ? `${category.total}원` : `${category.total.toLocaleString('kr-KO')}원`}
-              </Box>
+              {open === category.type && !selectedCategory
+                ? (
+                  <InputBase
+                    autoFocus
+                    type="number"
+                    ref={totalAsset}
+                    defaultValue={category.total === '-' ? '' : category.total}
+                    sx={{
+                      border: '1px solid', borderRadius: 1, fontSize: '14px', height: '21px', width: '100px',
+                    }}
+                    onKeyDown={(ev) => {
+                      if (ev.key === 'Enter') {
+                        // modify(category.type, index + 1, c.title, c.asset);
+                        setSelectedCategory(0);
+                      }
+                    }}
+                    inputProps={{
+                      style: { textAlign: 'right' },
+                    }}
+                  />
+                )
+                : (
+                  <Box sx={{ color: category.total === '-' ? '#979797' : 'black' }}>
+                    {category.total === '-' ? `${category.total}원` : `${category.total.toLocaleString('kr-KO')}원`}
+                  </Box>
+                )}
             </Stack>
           </ListItemButton>
 
@@ -67,7 +99,7 @@ function CategoryList({
                             }}
                             onKeyDown={(ev) => {
                               if (ev.key === 'Enter') {
-                                modify(category.type, index + 1, c.title, c.asset);
+                                modify(category, c.title, c.asset);
                               }
                             }}
                             inputProps={{

@@ -56,13 +56,13 @@ function AssetsByCategory() {
     }
   };
 
-  const modifyAsset = (type, title, preValue, value) => {
+  const modifyAsset = (type, title, sumary, value) => {
     const data = assets.map((category) => (category.type === type
       ? {
         ...category,
         categories: category.categories
           .map((c) => (c.title === title ? { ...c, asset: value } : c)),
-        total: category.total === '-' ? value : category.total - preValue + value,
+        sum: sumary,
       }
       : category));
     const date = moment().format('YYYY-MM-DD');
