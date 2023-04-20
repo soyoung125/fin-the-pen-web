@@ -10,7 +10,7 @@ import { Provider } from 'react-redux';
 
 import { PersistGate } from 'redux-persist/integration/react';
 import { persistStore } from 'redux-persist';
-import { store } from './utils/redux/store';
+import { store } from './store';
 import { createTheme, responsiveFontSizes } from '@mui/material';
 
 const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement);
