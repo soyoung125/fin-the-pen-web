@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import {
   selectHeaderMode, selectHeaderOpen, setGuestModeFalse, setGuestModeTrue,
 } from '../../../../domain/redux/common/commonSlice';
-import { selectUser } from '../../../../utils/redux/user/userSlice';
+import { selectUser } from '../../../../domain/redux/user/userSlice';
 import AnalysisMode from './headerMode/AnalysisMode';
 import HomeMode from './headerMode/HomeMode';
 

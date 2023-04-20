@@ -8,7 +8,7 @@ import ScheduleStatusCard from '../../components/assetManagement/ScheduleStatusC
 import SettingsPaper from '../../components/assetManagement/SettingsPaper';
 import { setIsAuthenticatedFalse } from '../../domain/redux/common/commonSlice';
 import { selectSchedules } from '../../domain/redux/schedule/scheduleSlice';
-import { selectUser } from '../../utils/redux/user/userSlice';
+import { selectUser } from '../../domain/redux/user/userSlice';
 
 function AssetManagementContainer() {
   const dispatch = useDispatch();

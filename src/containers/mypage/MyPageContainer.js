@@ -13,7 +13,7 @@ import { selectGuestMode } from '../../domain/redux/common/commonSlice';
 import {
   // logOut,
   selectUser,
-} from '../../utils/redux/user/userSlice';
+} from '../../domain/redux/user/userSlice';
 import GuestDataManager from '../test/GuestDataManager';
 import GuestMode from '../test/GuestMode';
 import SchedulesData from '../test/SchedulesData';

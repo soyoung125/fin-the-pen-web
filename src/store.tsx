@@ -6,7 +6,7 @@ import storage from 'redux-persist/lib/storage/session'; // for session storage
 import { combineReducers } from 'redux';
 import { persistReducer } from 'redux-persist';
 import thunk from 'redux-thunk';
-import userReducer from './utils/redux/user/userSlice';
+import userReducer from './domain/redux/user/userSlice';
 import scheduleReducer from './domain/redux/schedule/scheduleSlice';
 import commonReducer from './domain/redux/common/commonSlice';
 import settingReducer from './utils/redux/setting/settingSlice';

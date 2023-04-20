@@ -8,7 +8,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import LogoCircle from '../../components/common/LogoCircle';
 import CenterBox from '../../components/layouts/CenterBox';
 import { selectIsAuthenticated, setIsAuthenticatedTrue } from '../../domain/redux/common/commonSlice';
-import { selectUser } from '../../utils/redux/user/userSlice';
+import { selectUser } from '../../domain/redux/user/userSlice';
 
 function EasyAuthentication() {
   const CHARACTER_LIMIT = 6;

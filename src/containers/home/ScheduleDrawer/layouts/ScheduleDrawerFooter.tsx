@@ -9,7 +9,7 @@ import {
   // mockCreateNewSchedule,
   modifySchedule, selectDate, selectSchedule, setDrawerSchedule,
 } from '../../../../domain/redux/schedule/scheduleSlice';
-import { selectUser } from '../../../../utils/redux/user/userSlice';
+import { selectUser } from '../../../../domain/redux/user/userSlice';
 import { generateRandomSchedule, handleCreate } from '../domain/schedule';
 import { Schedule, ScheduleDrawerModeValue } from '../../../../types/schedule';
 

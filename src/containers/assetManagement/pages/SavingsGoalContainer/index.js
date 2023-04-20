@@ -1,6 +1,6 @@
 import { Box } from '@mui/material';
 import { useSelector } from 'react-redux';
-import { selectUser } from '../../../../utils/redux/user/userSlice';
+import { selectUser } from '../../../../domain/redux/user/userSlice';
 import Saving from './goals/Saving';
 import Personal from './goals/Personal';
 

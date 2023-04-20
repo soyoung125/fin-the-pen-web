@@ -1,10 +1,17 @@
 /* eslint-disable no-param-reassign */
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import { NO_SIGNAL_FROM_SERVER } from '../../../domain/constants/messages';
-import { fetchLogin } from '../API';
-import { fetchMockLogin } from '../mockAPI';
+import { NO_SIGNAL_FROM_SERVER } from '../../constants/messages';
+import { fetchLogin } from '../../../utils/redux/API';
+import { fetchMockLogin } from '../../../utils/redux/mockAPI';
+import { AsyncThunkStatusValue, User } from '../../../types/common';
+import { ASYNC_THUNK_STATUS } from '../../constants/common';
 
-const initialState = {
+interface InitialState {
+  user: User | null; // User
+  status: AsyncThunkStatusValue;
+}
+
+const initialState: InitialState = {
   user: null,
   status: 'idle',
 };
@@ -43,7 +50,7 @@ export const userSlice = createSlice({
   reducers: {
     // Use the PayloadAction type to declare the contents of `action.payload`
     initStatus: (state) => {
-      state.status = 'idle';
+      state.status = ASYNC_THUNK_STATUS.fulfilled;
     },
     setUser: (state, action) => {
       // 삭제 될 예정인 메소드 (createAsyncThunk로 이전 예정)
@@ -78,7 +85,7 @@ export const userSlice = createSlice({
 
 export const { initStatus, setUser, logOut } = userSlice.actions;
 
-export const selectUser = (state) => state.user.user;
-export const selectStatus = (state) => state.user.status;
+export const selectUser = (state: any) => (state.user as InitialState).user;
+export const selectStatus = (state: any) => (state.user as InitialState).status;
 
 export default userSlice.reducer;

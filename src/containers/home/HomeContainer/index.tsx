@@ -8,7 +8,7 @@ import { selectGuestMode, selectIsAuthenticated, setIsAuthenticatedFalse } from 
 import {
   getMonthSchedules, selectDate, selectViewMode, changeViewMode,
 } from '../../../domain/redux/schedule/scheduleSlice';
-import { selectUser } from '../../../utils/redux/user/userSlice';
+import { selectUser } from '../../../domain/redux/user/userSlice';
 import EasyAuthentication from '../../sign/EasyAuthentication';
 import Calender from './view/Calender';
 import ScheduleList from './view/ScheduleList';
@@ -32,12 +32,14 @@ function HomeConatiner() {
   useHeader(true, HEADER_MODE.home);
 
   const getSchedules = () => {
-    const query = {
-      user_id: user.user_id,
-      date: moment(date).format('YYYY-MM'),
-    };
-    /// / 버그 있을 수 있음
-    dispatch(getMonthSchedules(query) as any); // any를 써야 redux createAsyncThunk에 넘길 수 있다고 함
+    if (user) { // type guard
+      const query = {
+        user_id: user.user_id,
+        date: moment(date).format('YYYY-MM'),
+      };
+      // 버그 있을 수 있음
+      dispatch(getMonthSchedules(query) as any); // any를 써야 redux createAsyncThunk에 넘길 수 있다고 함
+    }
   };
 
   useEffect(() => {
