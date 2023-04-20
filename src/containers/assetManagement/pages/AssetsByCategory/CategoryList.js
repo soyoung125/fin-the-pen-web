@@ -20,8 +20,7 @@ function CategoryList({
     if (asset === '') {
       sum = category.sum - (preValue === '-' ? 0 : preValue);
       modifySubcategoryAsset(category.type, title, sum, 0);
-    }
-    if (asset !== '-') {
+    } else if (asset !== '-') {
       sum = category.sum - (preValue === '-' ? 0 : preValue) + parseInt(asset, 10);
       if (sum > total) {
         alert('합계가 설정한 카테고리 지출 목표 금액을 넘었습니다.');
