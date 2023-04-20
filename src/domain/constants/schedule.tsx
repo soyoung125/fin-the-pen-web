@@ -85,7 +85,7 @@ const INIT_SCHEDULE = (date: string): Schedule => ({
   repeat_endDate: date,
   category: '',
   type: SCHEDULE_DRAWER.type_minus,
-  expected_spending: 0,
+  expected_spending: '0',
   importance: SCHEDULE_DRAWER.importance_middle,
   exclusion: false, // false면 포함
 });
