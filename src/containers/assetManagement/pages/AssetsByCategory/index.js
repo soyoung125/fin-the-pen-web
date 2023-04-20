@@ -56,7 +56,18 @@ function AssetsByCategory() {
     }
   };
 
-  const modifyAsset = (type, title, sumary, value) => {
+  const modifyCategoryAsset = (type, value) => {
+    const data = assets.map((category) => (category.type === type
+      ? {
+        ...category,
+        total: (category.total === '-' && value === 0 ? '-' : value),
+      }
+      : category));
+    const date = moment().format('YYYY-MM-DD');
+    dispatch(setAssetsByCategory({ assets: data, updateDate: date }));
+  };
+
+  const modifySubcategoryAsset = (type, title, sumary, value) => {
     const data = assets.map((category) => (category.type === type
       ? {
         ...category,
@@ -97,7 +108,8 @@ function AssetsByCategory() {
       <CategoryList
         handleClick={handleClick}
         open={open}
-        modifyAsset={modifyAsset}
+        modifyCategoryAsset={modifyCategoryAsset}
+        modifySubcategoryAsset={modifySubcategoryAsset}
       />
 
       <ModalStaticBackdrop
