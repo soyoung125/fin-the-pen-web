@@ -30,7 +30,7 @@ function TopBar() {
         headerOpen
         && (
           <Paper
-            elevation={10}
+            // elevation={10} // shadow 해제함
             sx={{
               backgroundColor: 'primary.main',
               height: 100,
