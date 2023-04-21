@@ -1,3 +1,4 @@
+/* eslint-disable max-len */
 /* eslint-disable no-param-reassign */
 import { createSlice } from '@reduxjs/toolkit';
 import { HEADER_MODE } from '../../constants/common';
@@ -8,6 +9,7 @@ interface InitialState {
   headerMode: HeaderModeValue;
   guestMode: boolean;
   bottomDrawerOpen: boolean;
+  bottomDrawerTabMenu: number;
   isAuthenticated: boolean;
 }
 
@@ -16,6 +18,7 @@ const initialState: InitialState = {
   headerMode: HEADER_MODE.home,
   guestMode: false,
   bottomDrawerOpen: false,
+  bottomDrawerTabMenu: 0,
   isAuthenticated: false,
 };
 
@@ -45,6 +48,10 @@ export const commonSlice = createSlice({
     setBottomDrawerOpenFalse: (state) => {
       state.bottomDrawerOpen = false;
     },
+    setBottomDrawerTabMenu: (state, action) => {
+      console.log(action.type);
+      state.bottomDrawerTabMenu = action.payload;
+    },
     // 간편 인증 페이지 on/off
     setIsAuthenticatedTrue: (state) => {
       state.isAuthenticated = true;
@@ -61,6 +68,7 @@ export const {
   setGuestModeFalse,
   setBottomDrawerOpenTrue,
   setBottomDrawerOpenFalse,
+  setBottomDrawerTabMenu,
   setIsAuthenticatedTrue,
   setIsAuthenticatedFalse,
 } = commonSlice.actions;
@@ -68,8 +76,8 @@ export const {
 export const selectHeaderOpen = (state: any) => (state.common as InitialState).headerOpen;
 export const selectHeaderMode = (state: any) => (state.common as InitialState).headerMode;
 export const selectGuestMode = (state: any) => (state.common as InitialState).guestMode;
-// eslint-disable-next-line max-len
 export const selectBottomDrawerOpen = (state: any) => (state.common as InitialState).bottomDrawerOpen;
+export const selectBottomDrawerTabMenu = (state: any) => (state.common as InitialState).bottomDrawerTabMenu;
 export const selectIsAuthenticated = (state: any) => (state.common as InitialState).isAuthenticated;
 
 export default commonSlice.reducer;

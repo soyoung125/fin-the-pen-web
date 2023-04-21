@@ -1,6 +1,6 @@
 import Box from '@mui/material/Box';
 import CssBaseline from '@mui/material/CssBaseline';
-import { useRef, useState } from 'react';
+import { useRef } from 'react';
 import { Outlet } from 'react-router-dom';
 import BottomBar from '../../../containers/home/common/BottomBar';
 import TopBar from '../../../containers/home/common/TopBar';
@@ -56,7 +56,6 @@ import TopBar from '../../../containers/home/common/TopBar';
 // }
 
 export default function HomeLayout() {
-  const [value, setValue] = useState<number>(0);
   const ref = useRef(null);
   // const [messages, setMessages] = React.useState(() => refreshMessages());
 
@@ -79,7 +78,7 @@ export default function HomeLayout() {
       <Box>
         <Outlet />
       </Box>
-      <BottomBar value={value} setValue={setValue} />
+      <BottomBar />
     </Box>
   );
 }

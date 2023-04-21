@@ -14,19 +14,16 @@ import PATH from '../../../domain/constants/path';
 import ScheduleDrawer from '../ScheduleDrawer';
 import { INIT_SCHEDULE, SCHEDULE_DRAWER_MODE } from '../../../domain/constants/schedule';
 import { changeViewMode, selectDate } from '../../../domain/redux/schedule/scheduleSlice';
-import { selectBottomDrawerOpen, setBottomDrawerOpenFalse, setBottomDrawerOpenTrue } from '../../../domain/redux/common/commonSlice';
+import {
+  selectBottomDrawerOpen, selectBottomDrawerTabMenu,
+  setBottomDrawerOpenFalse, setBottomDrawerOpenTrue, setBottomDrawerTabMenu,
+} from '../../../domain/redux/common/commonSlice';
 
-/**
- * value와 setValue의 이름을 새로 지어주면 좋겠어요
- */
-type BottomBarProps = {
-  value: number;
-  setValue: (value: number) => void;
-};
-
-function BottomBar({ value, setValue }: BottomBarProps) {
+function BottomBar() {
   const dispatch = useDispatch();
   const bottomDrawerOpen = useSelector(selectBottomDrawerOpen);
+  const bottomDrawerTabMenu = useSelector(selectBottomDrawerTabMenu);
+
   const date = useSelector(selectDate);
   const navigate = useNavigate();
 
@@ -45,9 +42,9 @@ function BottomBar({ value, setValue }: BottomBarProps) {
         elevation={3}
       >
         <BottomNavigation
-          value={value}
+          value={bottomDrawerTabMenu}
           onChange={(event, newValue) => {
-            setValue(newValue);
+            dispatch(setBottomDrawerTabMenu(newValue));
           }}
         >
           <BottomNavigationAction
