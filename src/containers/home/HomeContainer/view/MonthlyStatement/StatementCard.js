@@ -2,6 +2,12 @@ import {
   Box, Grid, Paper, Stack, Typography,
 } from '@mui/material';
 
+/**
+ * 미사용 컴포넌트?
+ * @param {} param0
+ * @returns
+ */
+
 function StatementCard({ title, value, color }) {
   return (
     <Grid item xs={6}>
