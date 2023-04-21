@@ -49,7 +49,6 @@ export const commonSlice = createSlice({
       state.bottomDrawerOpen = false;
     },
     setBottomDrawerTabMenu: (state, action) => {
-      console.log(action.type);
       state.bottomDrawerTabMenu = action.payload;
     },
     // 간편 인증 페이지 on/off
