@@ -8,8 +8,13 @@ import { SCHEDULE_DRAWER, SCHEDULE_DRAWER_MODE } from '../../../../domain/consta
 import { selectSchedule } from '../../../../domain/redux/schedule/scheduleSlice';
 import { selectGuestMode } from '../../../../domain/redux/common/commonSlice';
 import { deleteSelectedSchedule } from '../../../../domain/tools';
+import { ScheduleDrawerModeValue } from '../../../../types/schedule';
 
-function ScheduleDrawerHeader({ mode, handleClose }) {
+interface ScheduleDrawerHeaderProps {
+  mode: ScheduleDrawerModeValue;
+  handleClose: () => void;
+}
+function ScheduleDrawerHeader({ mode, handleClose }: ScheduleDrawerHeaderProps) {
   const dispatch = useDispatch();
   const schedule = useSelector(selectSchedule);
   const guestMode = useSelector(selectGuestMode);
