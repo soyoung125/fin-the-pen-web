@@ -17,7 +17,7 @@
 
 ## ⚙️ Tech
 
-React, Redux, Axios, React Router Dom, EsLint, chart.js
+React, Redux, Axios, React Router Dom, EsLint, chart.js, Storybook
 
 ## ✅ Features
 
