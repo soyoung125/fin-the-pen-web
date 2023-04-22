@@ -1,4 +1,3 @@
-/* eslint-disable */
 import './App.css';
 import { Route, Routes } from 'react-router-dom';
 import { useSelector } from 'react-redux';
@@ -21,10 +20,12 @@ function App() {
       path={route.path}
       element={route.element}
     />
-  ))
+  ));
 
   return (
-    <ThemeProvider theme={isDarkMode ? createTheme(darkThemeOptions) : createTheme(lightThemeOptions)}>
+    <ThemeProvider
+      theme={createTheme(isDarkMode ? darkThemeOptions : lightThemeOptions)}
+    >
       <Routes>
         <Route path="/" element={<HomeLayout />}>
           {routesMapper(homeRoutes)}
