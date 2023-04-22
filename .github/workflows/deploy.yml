@@ -11,6 +11,8 @@ jobs:
       contents: write
     concurrency:
       group: ${{ github.workflow }}-${{ github.ref }}
+    env:
+      CI: false
 
     steps:
       - uses: actions/checkout@v3
