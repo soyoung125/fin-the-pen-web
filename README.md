@@ -1,27 +1,26 @@
 # 💸 핀더펜 (Financial The Penny)
 
-
 ### [웹에서 데모버전 확인하기](https://soyoung125.github.io/fin-the-pen-web/)
-
 
 [서버 설치하기](https://github.com/eomheeseung/fin-the-pen)
 
 ## 👤 Team Members
 
-| role | name |
-|------|------|
-| `기획/팀장` | [@5minha (오민하)](https://github.com/5minha) |
-| `기획` | [김상우]() |
-| `프론트엔드` | [@soyoung125 (박소영)](https://github.com/soyoung125) |
+| role         | name                                                                            |
+| ------------ | ------------------------------------------------------------------------------- |
+| `기획/팀장`  | [@5minha (오민하)](https://github.com/5minha)                                   |
+| `기획`       | [김상우]()                                                                      |
+| `프론트엔드` | [@soyoung125 (박소영)](https://github.com/soyoung125)                           |
 | `프론트엔드` | [@gabrielyoon7 (윤주현, Gabriel Ju Hyun Yoon)](https://github.com/gabrielyoon7) |
-| `백엔드` | [이태양]() |
-| `백엔드` | [엄희승]() |
-
+| `백엔드`     | [이태양]()                                                                      |
+| `백엔드`     | [엄희승]()                                                                      |
 
 ## ⚙️ Tech
+
 React, Redux, Axios, React Router Dom, EsLint, chart.js
 
 ## ✅ Features
+
     .
     ├─홈화면
     │  ├─일정 등록 하기
@@ -47,13 +46,11 @@ React, Redux, Axios, React Router Dom, EsLint, chart.js
        ├─로그인
        └─회원가입
 
-
 ## ⚙️ Run Locally
 
-  실행 전, Node.js 설치를 반드시 해주세요.
-  
-  vscode에서 실행하시면 편합니다.
+실행 전, Node.js 설치를 반드시 해주세요.
 
+vscode에서 실행하시면 편합니다.
 
 Clone the project
 
@@ -70,17 +67,15 @@ Go to the project directory
 Install dependencies
 
 ```bash
-  npm install
+  yarn
 ```
 
 Start the server
 
 ```bash
-  npm start
+  yarn start
 ```
-
 
 ## 📜 Documentation
 
-[Figma](https://www.figma.com/file/jvJSoUfl0I4SKo59OB6Sua/%ED%95%80%EB%8D%94%ED%8E%9C?node-id=0%3A1&t=XbgFd2dax5HIYz3J-0
-)
+[Figma](https://www.figma.com/file/jvJSoUfl0I4SKo59OB6Sua/%ED%95%80%EB%8D%94%ED%8E%9C?node-id=0%3A1&t=XbgFd2dax5HIYz3J-0)
