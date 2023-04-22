@@ -20,7 +20,7 @@ import CalenderBox from './boxes/CalenderBox';
 import IncomeExpenditureBox from './boxes/IncomeExpenditureBox';
 import { calculateIncomeExpenditure } from '../../../../../domain/tools';
 import { makeMarkerData } from './domain/calender';
-import WeeklyStatment from './boxes/WeeklyStatment';
+import WeeklyStatment from './boxes/WeeklyStatement';
 
 function Calender({ dateHeight }) {
   const dispatch = useDispatch();
