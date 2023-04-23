@@ -37,7 +37,7 @@ function ScheduleDrawer({
   setDrawerWidth, handleClose, data, mode,
 }: ScheduleDrawerProps) {
   // 추후 삭제 예정
-  const random = Math.floor((Math.random() * 5));
+  const random = Math.floor((Math.random() * 4)); // 현재 CONSUMPTION_ALERTS의 길이가 4임
 
   const dispatch = useDispatch();
   const schedule = useSelector(selectSchedule);
