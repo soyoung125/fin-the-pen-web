@@ -17,6 +17,7 @@ function ModifyModal({
   // const dispatch = useDispatch();
   const type = REGULAR_DEPOSIT_WITHDRAWAL_TYPE[data.type];
   const [form, setForm] = useState(data);
+  console.log(form);
 
   const changeDetailInfo = (state) => {
     setForm({ ...form, [state.target.id]: state.target.value });
@@ -140,7 +141,7 @@ function ModifyModal({
               <OutlinedInput
                 id="expected_spending"
                 startAdornment={<InputAdornment position="start">{`${type}액`}</InputAdornment>}
-                value={data.expected_spending}
+                value={form.expected_spending}
                 onChange={changeDetailInfo}
                 size="small"
                 inputProps={{

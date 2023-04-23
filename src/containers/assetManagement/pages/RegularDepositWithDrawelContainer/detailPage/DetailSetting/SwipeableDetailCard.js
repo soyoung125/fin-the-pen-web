@@ -1,3 +1,4 @@
+/* eslint-disable array-callback-return */
 import { Box, Button, Stack } from '@mui/material';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
@@ -26,14 +27,22 @@ function SwipeableDetailCard({ data }) {
   };
 
   const modifyData = (form) => {
-    data.map((d) => dispatch(
-      modifySchedule({
-        ...d,
-        event_name: form.event_name,
-        repeat_endDate: form.repeat_endDate,
-        expected_spending: form.expected_spending
-      })
-    ));
+    data.map((d) => {
+      if (moment().isBefore(d.date)) {
+        dispatch(modifySchedule({
+          ...d,
+          event_name: form.event_name,
+          repeat_endDate: form.repeat_endDate,
+        }));
+      } else {
+        dispatch(modifySchedule({
+          ...d,
+          event_name: form.event_name,
+          repeat_endDate: form.repeat_endDate,
+          expected_spending: form.expected_spending
+        }));
+      }
+    });
   };
 
   return (
