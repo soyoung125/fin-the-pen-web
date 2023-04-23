@@ -6,18 +6,26 @@ import ClearIcon from '@mui/icons-material/Clear';
 import RestartAltIcon from '@mui/icons-material/RestartAlt';
 import 'swiper/css';
 import { useState } from 'react';
-import { useDispatch } from 'react-redux';
+// import { useDispatch } from 'react-redux';
 import ModalStaticBackdrop from '../../../../../../components/layouts/ModalStaticBackdrop';
 import { REGULAR_DEPOSIT_WITHDRAWAL_TYPE } from '../../../../../../domain/constants/schedule';
-import { modifySchedule } from '../../../../../../domain/redux/schedule/scheduleSlice';
+// import { modifySchedule } from '../../../../../../domain/redux/schedule/scheduleSlice';
 
-function ModifyModal({ settingModalOpen, setSettingModalOpen, data }) {
-  const dispatch = useDispatch();
+function ModifyModal({
+  settingModalOpen, setSettingModalOpen, modifyData, data
+}) {
+  // const dispatch = useDispatch();
   const type = REGULAR_DEPOSIT_WITHDRAWAL_TYPE[data.type];
   const [form, setForm] = useState(data);
 
   const changeDetailInfo = (state) => {
     setForm({ ...form, [state.target.id]: state.target.value });
+  };
+
+  const updateSchedule = () => {
+    // dispatch(modifySchedule(form));
+    modifyData(form);
+    setSettingModalOpen(false);
   };
 
   return (
@@ -144,10 +152,7 @@ function ModifyModal({ settingModalOpen, setSettingModalOpen, data }) {
           <Button
             fullWidth
             variant="contained"
-            onClick={() => {
-              dispatch(modifySchedule(form));
-              setSettingModalOpen(false);
-            }}
+            onClick={() => updateSchedule()}
           >
             정기 출금액 설정
           </Button>
