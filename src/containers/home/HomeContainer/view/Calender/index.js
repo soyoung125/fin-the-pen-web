@@ -21,6 +21,7 @@ import IncomeExpenditureBox from './boxes/IncomeExpenditureBox';
 import { calculateIncomeExpenditure } from '../../../../../domain/tools';
 import { makeMarkerData } from './domain/calender';
 import WeeklyStatment from './boxes/WeeklyStatement';
+import { selectIsDarkMode } from '../../../../../utils/redux/setting/settingSlice';
 
 function Calender({ dateHeight }) {
   const dispatch = useDispatch();
@@ -28,6 +29,7 @@ function Calender({ dateHeight }) {
   const schedules = useSelector(selectSchedules);
   const viewMode = useSelector(selectViewMode);
   const today = moment(new Date());
+  const isDarkMode = useSelector(selectIsDarkMode);
 
   const DATE_SIZE = 25;
   const DATE_HEIGHT = dateHeight;
@@ -37,19 +39,19 @@ function Calender({ dateHeight }) {
   }, []);
 
   const renderDayInPicker = (day, _value, DayComponentProps) => {
-    const daySchedules = schedules.filter((e) => e.date === day.format('YYYY-MM-DD')).map((s) => ({ ...s, category: CATEGORIES.find((c) => c.title === s.category) || { type: '미분류', color: '#C8A2C8' } }));
-
-    const fixedWithdrawal = daySchedules.filter((s) => ['고정 입출금', '미분류'].includes(s.category.type));
-    const nonFixedWithdrwal = daySchedules.filter((s) => s.category.type !== '고정 입출금');
-
     // 오늘이 이달에 해당하지 않을 때 마커가 표시되지 않도록 하는 코드
     if (!day.isSame(value, 'month')) {
       return <PickersDay {...DayComponentProps} />;
     }
 
+    const daySchedules = schedules.filter((e) => e.date === day.format('YYYY-MM-DD')).map((s) => ({ ...s, category: CATEGORIES.find((c) => c.title === s.category) || { type: '미분류', color: '#C8A2C8' } }));
+
+    const fixedWithdrawal = daySchedules.filter((s) => ['고정 입출금', '미분류'].includes(s.category.type));
+    const nonFixedWithdrwal = daySchedules.filter((s) => s.category.type !== '고정 입출금');
+
     if (fixedWithdrawal.length > 0) {
       if (nonFixedWithdrwal.length > 0) {
-        const categoryForMarker = makeMarkerData(daySchedules);
+        const categoryForMarker = makeMarkerData(daySchedules, isDarkMode);
         return (
           <Box sx={{ width: 'calc(100vw / 7)' }} key={DayComponentProps.key}>
             <Box sx={{ display: 'flex', justifyContent: 'center' }}>
@@ -59,7 +61,7 @@ function Calender({ dateHeight }) {
               />
             </Box>
             <MarkerStack
-              nonFixedWithdrwal={nonFixedWithdrwal}
+              // nonFixedWithdrwal={nonFixedWithdrwal}
               categoryForMarker={categoryForMarker}
             />
           </Box>
@@ -75,14 +77,14 @@ function Calender({ dateHeight }) {
     }
 
     if (nonFixedWithdrwal.length > 0) {
-      const categoryForMarker = makeMarkerData(daySchedules);
+      const categoryForMarker = makeMarkerData(daySchedules, isDarkMode);
       return (
         <Box sx={{ width: 'calc(100vw / 7)' }} key={DayComponentProps.key}>
           <Box sx={{ display: 'flex', justifyContent: 'center' }}>
             <PickersDay {...DayComponentProps} />
           </Box>
           <MarkerStack
-            nonFixedWithdrwal={nonFixedWithdrwal}
+            // nonFixedWithdrwal={nonFixedWithdrwal}
             categoryForMarker={categoryForMarker}
           />
         </Box>
