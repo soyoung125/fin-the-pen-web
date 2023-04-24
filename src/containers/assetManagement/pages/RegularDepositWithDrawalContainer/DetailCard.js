@@ -28,7 +28,7 @@ function DetailCard({ data }) {
           <Box sx={{ textAlign: 'end' }}>
             <Box
               sx={{ mb: 1 }}
-              onClick={() => navigate(PATH.DetailInfomation, { state: { data } })}
+              onClick={() => navigate(PATH.DetailInformation, { state: { data } })}
             >
               {schedule.event_name}
             </Box>

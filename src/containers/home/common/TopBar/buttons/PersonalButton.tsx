@@ -19,7 +19,7 @@ function PersonalButton() {
     );
   }
   return (
-    <RoundedButton value="user" onClick={() => navigate(PATH.mypage)}>
+    <RoundedButton value="user" onClick={() => navigate(PATH.myPage)}>
       <PersonOutlineOutlinedIcon />
     </RoundedButton>
   );

@@ -1,7 +1,7 @@
 import { Box } from '@mui/material';
 import { grey } from '@mui/material/colors';
 
-function WeeklyStatment({ expenditure, income }) {
+function WeeklyStatement({ expenditure, income }) {
   return (
     <Box sx={{
       background: grey[200], overflow: 'visible', borderRadius: 3, display: 'flex', justifyContent: 'flex-end', paddingX: 2, height: '20px',
@@ -17,4 +17,4 @@ function WeeklyStatment({ expenditure, income }) {
   );
 }
 
-export default WeeklyStatment;
+export default WeeklyStatement;

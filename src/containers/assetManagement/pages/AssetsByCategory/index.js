@@ -28,7 +28,7 @@ function AssetsByCategory() {
   const today = moment();
   const assets = useSelector(selectAssetsByCategory);
   const updateDate = useSelector(selectUpdateDate);
-  const monthlyconsumptionGoal = useSelector(selectMonthlyConsumptionGoal);
+  const monthlyConsumptionGoal = useSelector(selectMonthlyConsumptionGoal);
 
   useEffect(() => {
     if (today.isAfter(updateDate, 'month')) {
@@ -67,13 +67,13 @@ function AssetsByCategory() {
     dispatch(setAssetsByCategory({ assets: data, updateDate: date }));
   };
 
-  const modifySubcategoryAsset = (type, title, sumary, value) => {
+  const modifySubcategoryAsset = (type, title, summary, value) => {
     const data = assets.map((category) => (category.type === type
       ? {
         ...category,
         categories: category.categories
           .map((c) => (c.title === title ? { ...c, asset: value } : c)),
-        sum: sumary,
+        sum: summary,
       }
       : category));
     const date = moment().format('YYYY-MM-DD');
@@ -91,12 +91,12 @@ function AssetsByCategory() {
         title={`${today.format('M월')} 지출 Goal`}
         openAlertModal={() => setAlertModalOpen(true)}
         open={showTooltip}
-        monthlyconsumptionGoal={monthlyconsumptionGoal}
+        monthlyConsumptionGoal={monthlyConsumptionGoal}
       />
 
       <Stack direction="row" justifyContent="space-between">
         <Box sx={{ color: '#979797' }}>설정 가능한 카테고리별 자산</Box>
-        <Box sx={{ color: 'primary.main' }}>{`${monthlyconsumptionGoal.toLocaleString('ko-KR')}원`}</Box>
+        <Box sx={{ color: 'primary.main' }}>{`${monthlyConsumptionGoal.toLocaleString('ko-KR')}원`}</Box>
       </Stack>
 
       <Box sx={{ display: 'flex', justifyContent: 'flex-end', mt: 1 }}>

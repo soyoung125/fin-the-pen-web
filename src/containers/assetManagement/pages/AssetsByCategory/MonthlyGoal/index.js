@@ -11,7 +11,7 @@ import ArrowTooltip from '../../../../../components/common/ArrowTooltip';
 import { selectSchedules } from '../../../../../domain/redux/schedule/scheduleSlice';
 
 function MonthlyGoal({
-  title, openAlertModal, open, monthlyconsumptionGoal,
+  title, openAlertModal, open, monthlyConsumptionGoal,
 }) {
   const schedules = useSelector(selectSchedules);
   const [lastMonthSpending, setLastMonthSpending] = useState(0);
@@ -41,7 +41,7 @@ function MonthlyGoal({
         typography: 'h4', fontWeight: 'bold', color: 'primary.main', my: 1,
       }}
       >
-        {`${monthlyconsumptionGoal.toLocaleString('ko-KR')}원`}
+        {`${monthlyConsumptionGoal.toLocaleString('ko-KR')}원`}
         <ArrowTooltip open={open} title="목표액 수정하기">
           <IconButton color="primary" onClick={openAlertModal} sx={{ p: 0 }}>
             <BorderColorIcon fontSize="small" />

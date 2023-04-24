@@ -1,12 +1,12 @@
 /* eslint-disable no-mixed-operators */
 import { Box, LinearProgress, Stack } from '@mui/material';
-import RoundedPapaer from '../../common/RoundedPaper';
+import RoundedPaper from '../../common/RoundedPaper';
 
 function AssetManagement({
   selectedItem, spending, bgColor, type, asset, balance,
 }) {
   return (
-    <RoundedPapaer my={2}>
+    <RoundedPaper my={2}>
       <Stack direction="row" justifyContent="space-between">
         <Box sx={{ fontSize: '17px', fontWeight: 'bolder' }}>{`${type}/${selectedItem[0].category} 예산`}</Box>
         <Box>
@@ -34,7 +34,7 @@ function AssetManagement({
         <Box>{`${spending.toLocaleString('ko-KR')}원 지출`}</Box>
         <Box sx={{ color: '#979797' }}>{`예산 ${asset.toLocaleString('ko-KR')}원`}</Box>
       </Stack>
-    </RoundedPapaer>
+    </RoundedPaper>
   );
 }
 

@@ -1,7 +1,7 @@
 import AssetsByCategory from '../containers/assetManagement/pages/AssetsByCategory';
-import RegularDepositWithdrawal from '../containers/assetManagement/pages/RegularDepositWithDrawelContainer';
-import DetailInfomation from '../containers/assetManagement/pages/RegularDepositWithDrawelContainer/detailPage/DetailInfomation';
-import DetailSetting from '../containers/assetManagement/pages/RegularDepositWithDrawelContainer/detailPage/DetailSetting';
+import RegularDepositWithdrawal from '../containers/assetManagement/pages/RegularDepositWithDrawalContainer';
+import DetailInformation from '../containers/assetManagement/pages/RegularDepositWithDrawalContainer/detailPage/DetailInformation';
+import DetailSetting from '../containers/assetManagement/pages/RegularDepositWithDrawalContainer/detailPage/DetailSetting';
 import SavingsGoal from '../containers/assetManagement/pages/SavingsGoalContainer';
 import ScheduleManagement from '../containers/assetManagement/pages/ScheduleManagement';
 import PATH from '../domain/constants/path';
@@ -21,8 +21,8 @@ const managementRoutes: RouterDOM[] = [
     element: <DetailSetting />,
   },
   {
-    path: PATH.DetailInfomation,
-    element: <DetailInfomation />,
+    path: PATH.DetailInformation,
+    element: <DetailInformation />,
   },
   {
     path: PATH.assetsByCategory,

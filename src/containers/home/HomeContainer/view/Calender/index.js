@@ -20,7 +20,7 @@ import CalenderBox from './boxes/CalenderBox';
 import IncomeExpenditureBox from './boxes/IncomeExpenditureBox';
 import { calculateIncomeExpenditure } from '../../../../../domain/tools';
 import { makeMarkerData } from './domain/calender';
-import WeeklyStatment from './boxes/WeeklyStatement';
+import WeeklyStatement from './boxes/WeeklyStatement';
 import { selectIsDarkMode } from '../../../../../utils/redux/setting/settingSlice';
 
 function Calender({ dateHeight }) {
@@ -125,7 +125,7 @@ function Calender({ dateHeight }) {
                 width: `calc(100vw / 7 * (${today.diff(day, 'days')} + 1))`,
               }}
               >
-                <WeeklyStatment
+                <WeeklyStatement
                   expenditure={schedules.filter((s) => day.isSameOrBefore(s.date) && day.isSame(s.date, 'week')).reduce((sum, current) => (current.type === '-' ? sum - parseInt(current.expected_spending, 10) : sum), 0)}
                   income={schedules.filter((s) => day.isSameOrBefore(s.date) && day.isSame(s.date, 'week')).reduce((sum, current) => (current.type === '+' ? sum + parseInt(current.expected_spending, 10) : sum), 0)}
                 />
@@ -137,7 +137,7 @@ function Calender({ dateHeight }) {
                 width: '100vw',
               }}
               >
-                <WeeklyStatment
+                <WeeklyStatement
                   expenditure={calculateIncomeExpenditure(schedules, day, 'week', '-')}
                   income={calculateIncomeExpenditure(schedules, day, 'week', '+')}
                 />

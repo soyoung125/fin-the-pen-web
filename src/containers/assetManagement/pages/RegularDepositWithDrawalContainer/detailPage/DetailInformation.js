@@ -9,7 +9,7 @@ import { useEffect, useState } from 'react';
 import Title from '../../../../../components/common/Title';
 import RoundedBorderBox from '../../../../../components/common/RoundedBorderBox';
 
-function DetailInfomation() {
+function DetailInformation() {
   const { state } = useLocation();
   const [data, setData] = useState(state.data);
   const [sortByDate, setSortByDate] = useState(true);
@@ -85,4 +85,4 @@ function DetailInfomation() {
   );
 }
 
-export default DetailInfomation;
+export default DetailInformation;

@@ -6,11 +6,11 @@ import { useNavigate } from 'react-router-dom';
 import RoundedPaper from '../../common/RoundedPaper';
 
 function SettingCard({ setting }) {
-  const navigatie = useNavigate();
+  const navigate = useNavigate();
 
   return (
     <RoundedPaper my={1}>
-      <Box onClick={() => navigatie(setting.path)}>
+      <Box onClick={() => navigate(setting.path)}>
         <Stack direction="row" justifyContent="space-between">
           <Box sx={{ fontWeight: 'bold' }}>{setting.title}</Box>
           <KeyboardArrowRightIcon />

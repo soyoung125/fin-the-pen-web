@@ -2,7 +2,7 @@ import {
   Box,
   List, Typography,
 } from '@mui/material';
-import AnalysisListItem from './AnaylysisListItem';
+import AnalysisListItem from './AnalysisListItem';
 
 function AnalysisList({ data, clickListItem, hexToRGB }) {
   return (
