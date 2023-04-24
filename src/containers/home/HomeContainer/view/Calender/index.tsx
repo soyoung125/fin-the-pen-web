@@ -133,8 +133,10 @@ function Calender({ dateHeight }: CalenderProps) {
               }}
               >
                 <WeeklyStatment
-                  expenditure={schedules.filter((s) => day.isSameOrBefore(s.date) && day.isSame(s.date, 'week')).reduce((sum, current) => (current.type === '-' ? sum - parseInt(current.expected_spending, 10) : sum), 0)}
-                  income={schedules.filter((s) => day.isSameOrBefore(s.date) && day.isSame(s.date, 'week')).reduce((sum, current) => (current.type === '+' ? sum + parseInt(current.expected_spending, 10) : sum), 0)}
+                  // expenditure={schedules.filter((s) => day.isSameOrBefore(s.date) && day.isSame(s.date, 'week')).reduce((sum, current) => (current.type === '-' ? sum - parseInt(current.expected_spending, 10) : sum), 0)}
+                  // income={schedules.filter((s) => day.isSameOrBefore(s.date) && day.isSame(s.date, 'week')).reduce((sum, current) => (current.type === '+' ? sum + parseInt(current.expected_spending, 10) : sum), 0)}
+                  expenditure={calculateIncomeExpenditure(schedules, day, 'week', '-')}
+                  income={calculateIncomeExpenditure(schedules, day, 'week', '+')}
                 />
               </Box>
             )

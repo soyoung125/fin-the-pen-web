@@ -1,9 +1,14 @@
 /* eslint-disable react/jsx-props-no-spreading */
-import { PickersDay } from '@mui/x-date-pickers';
+import { PickersDay, PickersDayProps } from '@mui/x-date-pickers';
+import moment from 'moment';
 import { useSelector } from 'react-redux';
 import { selectIsDarkMode } from '../../../../../../../utils/redux/setting/settingSlice';
 
-function MarkedPickersDay({ color, DayComponentProps }) {
+interface MarkedPickersDayProps {
+  color: string;
+  DayComponentProps: PickersDayProps<moment.Moment>;
+}
+function MarkedPickersDay({ color, DayComponentProps }: MarkedPickersDayProps) {
   const isDarkMode = useSelector(selectIsDarkMode);
   return (
     <PickersDay

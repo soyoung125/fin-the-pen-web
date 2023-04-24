@@ -1,6 +1,13 @@
 import { Box, Stack } from '@mui/material';
 
-function MarkerStack({ categoryForMarker }) {
+interface CategoryColor {
+  color: string;
+}
+interface MarkerStackProps {
+  categoryForMarker: CategoryColor[];
+}
+
+function MarkerStack({ categoryForMarker }: MarkerStackProps) {
   return (
     <Stack>
       <Stack direction="row" justifyContent="center" spacing={0.5} mt={0.2}>

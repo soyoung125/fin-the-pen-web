@@ -1,8 +1,14 @@
 import { Box } from '@mui/material';
 
+interface CalendarBoxProps {
+  dateHeight: number;
+  dateSize: number;
+  children: JSX.Element;
+  week: number;
+}
 function CalenderBox({
   dateHeight, dateSize, children, week,
-}) {
+}: CalendarBoxProps) {
   const DATE_HEIGHT = dateHeight;
   const DATE_SIZE = dateSize;
 
@@ -14,7 +20,6 @@ function CalenderBox({
         },
         '& > div > div, & > div > div > div, & .MuiCalendarPicker-root': {
           width: '100%',
-          // display: 'inline-flex',
           minHeight: DATE_HEIGHT * week + 100,
         },
         // 헤더 디자인을 위한 css
