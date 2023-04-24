@@ -113,8 +113,8 @@ function Calender({ dateHeight }: CalenderProps) {
 
     // 오늘 이전의 일별 수입/지출, 주별 수입/지출을 표시하기 위한 조건문
     if (isSameOrBefore && weekday === '일') {
-      const income = !day.isSame(value, 'month') ? '0' : calculateIncomeExpenditure(schedules, day, 'day', '+');
-      const expenditure = !day.isSame(value, 'month') ? '0' : calculateIncomeExpenditure(schedules, day, 'day', '-');
+      const income = !day.isSame(value, 'month') ? '0' : calculateIncomeExpenditure(schedules, (s: { date: moment.Moment; }) => day.isSame(s.date, 'day'), '+');
+      const expenditure = !day.isSame(value, 'month') ? '0' : calculateIncomeExpenditure(schedules, (s: { date: moment.Moment; }) => day.isSame(s.date, 'day'), '-');
 
       return (
         <IncomeExpenditureBox
@@ -133,10 +133,8 @@ function Calender({ dateHeight }: CalenderProps) {
               }}
               >
                 <WeeklyStatment
-                  // expenditure={schedules.filter((s) => day.isSameOrBefore(s.date) && day.isSame(s.date, 'week')).reduce((sum, current) => (current.type === '-' ? sum - parseInt(current.expected_spending, 10) : sum), 0)}
-                  // income={schedules.filter((s) => day.isSameOrBefore(s.date) && day.isSame(s.date, 'week')).reduce((sum, current) => (current.type === '+' ? sum + parseInt(current.expected_spending, 10) : sum), 0)}
-                  expenditure={calculateIncomeExpenditure(schedules, day, 'week', '-')}
-                  income={calculateIncomeExpenditure(schedules, day, 'week', '+')}
+                  expenditure={calculateIncomeExpenditure(schedules, (s: { date: moment.Moment; }) => day.isSameOrBefore(s.date) && day.isSame(s.date, 'week'), '-')}
+                  income={calculateIncomeExpenditure(schedules, (s: { date: moment.Moment; }) => day.isSameOrBefore(s.date) && day.isSame(s.date, 'week'), '+')}
                 />
               </Box>
             )
@@ -147,8 +145,8 @@ function Calender({ dateHeight }: CalenderProps) {
               }}
               >
                 <WeeklyStatment
-                  expenditure={calculateIncomeExpenditure(schedules, day, 'week', '-')}
-                  income={calculateIncomeExpenditure(schedules, day, 'week', '+')}
+                  expenditure={calculateIncomeExpenditure(schedules, (s: { date: moment.Moment; }) => day.isSame(s.date, 'week'), '-')}
+                  income={calculateIncomeExpenditure(schedules, (s: { date: moment.Moment; }) => day.isSame(s.date, 'week'), '+')}
                 />
               </Box>
             )}
@@ -160,8 +158,8 @@ function Calender({ dateHeight }: CalenderProps) {
     return (
       <IncomeExpenditureBox
         key={DayComponentProps.key}
-        income={calculateIncomeExpenditure(schedules, day, 'day', '+')}
-        expenditure={calculateIncomeExpenditure(schedules, day, 'day', '-')}
+        income={calculateIncomeExpenditure(schedules, (s: { date: moment.Moment; }) => day.isSame(s.date, 'day'), '+')}
+        expenditure={calculateIncomeExpenditure(schedules, (s: { date: moment.Moment; }) => day.isSame(s.date, 'day'), '-')}
         incomeColor={isSameOrBefore ? pink[100] : grey[500]}
         expenditureColor={isSameOrBefore ? lightBlue[200] : grey[500]}
         pickersDay={<PickersDay {...DayComponentProps} />}
@@ -184,11 +182,10 @@ function Calender({ dateHeight }: CalenderProps) {
           dayOfWeekFormatter={(day) => day.substring(0, 3)}
           value={value}
           onChange={(newValue) => {
-            dispatch(selectedDate(moment(newValue)));
+            dispatch(selectedDate(newValue));
           }}
           onMonthChange={(month) => {
-            // dispatch(selectedDate(moment(month._d)));
-            console.log(moment(month));
+            dispatch(selectedDate(month));
           }}
           renderDay={viewMode === 'schedule' ? renderDayInPicker : renderAssetDayPicker}
           renderInput={(params) => <TextField {...params} />}

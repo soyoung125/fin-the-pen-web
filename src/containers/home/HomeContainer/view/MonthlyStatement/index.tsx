@@ -30,12 +30,12 @@ function MonthlyStatement() {
         <Stack direction="row" spacing={2} p={2}>
           <StatusStack
             title="수입"
-            content={`+${calculateIncomeExpenditure(schedules, moment(date), 'month', '+')}`}
+            content={`+${calculateIncomeExpenditure(schedules, (s: { date: moment.Moment; }) => moment(date).isSame(s.date, 'month'), '+')}`}
           />
 
           <StatusStack
             title="지출"
-            content={`-${calculateIncomeExpenditure(schedules, moment(date), 'month', '-')}`}
+            content={`-${calculateIncomeExpenditure(schedules, (s: { date: moment.Moment; }) => moment(date).isSame(s.date, 'month'), '-')}`}
           />
         </Stack>
       </RoundedBorderBox>

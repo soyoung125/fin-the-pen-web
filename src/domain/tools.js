@@ -24,17 +24,17 @@ export const isObjectValuesEmpty = (obj) => (
   * @param {Sting} type '-', '+' 수입/지출을 확인하기 위한 매개변수
   * @returns 일/주/월별 수입/지출 액
   */
-export const calculateIncomeExpenditure = (schedules, baseDate, unit, type) => {
+export const calculateIncomeExpenditure = (schedules, expression, type) => {
   let result = 0;
   if (type === '-') {
-    result = schedules.filter((s) => baseDate.isSame(s.date, unit))
+    result = schedules.filter((s) => expression(s))
       .reduce((sum, current) => (
         current.type === type
           ? sum - parseInt(current.expected_spending, 10)
           : sum
       ), result);
   } else {
-    result = schedules.filter((s) => baseDate.isSame(s.date, unit))
+    result = schedules.filter((s) => expression(s))
       .reduce((sum, current) => (
         current.type === type
           ? sum + parseInt(current.expected_spending, 10)
