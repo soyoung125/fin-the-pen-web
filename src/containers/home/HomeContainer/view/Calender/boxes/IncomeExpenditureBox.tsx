@@ -1,8 +1,17 @@
 import { Box, Stack } from '@mui/material';
 
+interface IncomeExpenditureBoxProps {
+  income: string;
+  expenditure: string;
+  incomeColor: '#f8bbd0' | '#9e9e9e';
+  expenditureColor: '#81d4fa' | '#9e9e9e';
+  pickersDay: JSX.Element;
+  children?: JSX.Element;
+}
+
 function IncomeExpenditureBox({
   income, expenditure, incomeColor, expenditureColor, pickersDay, children,
-}) {
+}: IncomeExpenditureBoxProps) {
   return (
     <Box sx={{ width: 'calc(100vw / 7)' }}>
       <Box sx={{ display: 'flex', justifyContent: 'center' }}>
