@@ -1,8 +1,8 @@
 import { Box, Button } from '@mui/material';
 import { grey } from '@mui/material/colors';
 import { useDispatch, useSelector } from 'react-redux';
-import { VIEW_MODE } from '../../../../domain/constants/schedule';
-import { changeViewMode, selectViewMode } from '../../../../domain/redux/schedule/scheduleSlice';
+import { VIEW_MODE } from '../../../../../domain/constants/schedule';
+import { changeViewMode, selectViewMode } from '../../../../../domain/redux/schedule/scheduleSlice';
 
 function ScheduleViewMode() {
   const dispatch = useDispatch();
