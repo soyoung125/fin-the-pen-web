@@ -3,9 +3,15 @@ import {
 } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 
+interface ClickableListItemProps {
+  icon: React.ReactNode
+  to?: string;
+  title: string;
+  subTitle: string;
+}
 function ClickableListItem({
   icon, to, title, subTitle,
-}) {
+}: ClickableListItemProps) {
   const navigate = useNavigate();
   return (
     <ListItemButton onClick={() => to && navigate(to)}>

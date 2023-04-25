@@ -19,10 +19,10 @@ function AppLocker() {
         setChecked={handleToggle}
       />
       {
-      checked && (
-        <ClickableListItem to="/test" title="비밀번호 인증 단계" subTitle="1단계" />
-      )
-    }
+        checked && (
+          <ClickableListItem icon="" to="/test" title="비밀번호 인증 단계" subTitle="1단계" />
+        )
+      }
     </>
   );
 }

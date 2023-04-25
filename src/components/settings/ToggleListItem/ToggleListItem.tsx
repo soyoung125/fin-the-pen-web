@@ -1,11 +1,16 @@
 import {
-  CardActionArea,
-  ListItem, ListItemIcon, ListItemText, Switch,
+  CardActionArea, ListItem, ListItemIcon, ListItemText, Switch,
 } from '@mui/material';
 
+interface ToggleListItemProps {
+  icon: React.ReactNode;
+  title: string;
+  checked: boolean;
+  setChecked: () => void;
+}
 function ToggleListItem({
   icon, title, checked, setChecked,
-}) {
+}: ToggleListItemProps) {
   return (
     <CardActionArea onClick={setChecked}>
       <ListItem>
@@ -18,7 +23,7 @@ function ToggleListItem({
           onChange={setChecked}
           checked={checked}
           inputProps={{
-            'aria-labelledby': { title },
+            'aria-labelledby': title,
           }}
         />
       </ListItem>
