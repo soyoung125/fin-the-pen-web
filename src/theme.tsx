@@ -24,6 +24,9 @@ export const lightThemeOptions: ThemeOptions = {
       primary: '#000000',
     },
   },
+  typography: {
+    fontFamily: 'Noto Sans KR',
+  },
 };
 
 export const darkThemeOptions: ThemeOptions = {
@@ -43,5 +46,8 @@ export const darkThemeOptions: ThemeOptions = {
       primary: '#eaeded',
       secondary: '#44b9d6',
     },
+  },
+  typography: {
+    fontFamily: 'Noto Sans KR',
   },
 };
