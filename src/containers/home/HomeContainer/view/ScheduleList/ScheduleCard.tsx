@@ -39,6 +39,18 @@ function ScheduleCard({ schedule, handleModal, category }: ScheduleCardProps) {
         <SwiperSlide>
           <CardActionArea onClick={() => handleModal(schedule)}>
             <Box px={3} py={2}>
+              {/* <Stack
+                sx={{
+                  backgroundColor: 'primary.main',
+                  color: '#FFFFFF',
+                  p: 1,
+                  fontSize: 'smaller',
+                  borderRadius: '10px',
+                }}
+              >
+                <Box>소비추천금액</Box>
+                <Box>8,000원</Box>
+              </Stack> */}
               <Stack direction="row">
                 <CategoryTypeBadge color={category.color} mr={2} />
                 <Typography variant="caption">{`${schedule.start_time} - ${schedule.end_time}`}</Typography>
@@ -46,7 +58,6 @@ function ScheduleCard({ schedule, handleModal, category }: ScheduleCardProps) {
               <Stack
                 direction="row"
                 pl={1}
-                pt={1}
                 alignItems="center"
                 justifyContent="space-between"
               >
@@ -56,6 +67,25 @@ function ScheduleCard({ schedule, handleModal, category }: ScheduleCardProps) {
                 >
                   {schedule.event_name}
                 </Typography>
+
+                <Box
+                  sx={{
+                    backgroundColor: 'primary.main',
+                    color: '#FFFFFF',
+                    p: 1,
+                    fontSize: '10px',
+                    borderRadius: '10px',
+                    textAlign: 'end',
+                  }}
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    console.log('소비추천금액 적용하기');
+                  }}
+                >
+                  <Box>소비추천금액</Box>
+                  <Box>8,000원</Box>
+                </Box>
+
                 {/* 색상은 실제 소비 내역 데이터 연동 후 바꿀 예정 */}
                 <Typography sx={{ color: grey[500] }}>
                   {`${schedule.type}${parseInt(schedule.expected_spending, 10).toLocaleString('ko-KR')}`}
