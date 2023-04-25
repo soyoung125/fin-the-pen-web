@@ -20,7 +20,8 @@ export default function SettingsContainer() {
   useEffect(() => {
     dispatch(setIsAuthenticatedFalse());
   }, []);
-  const handleSubmit = (event) => {
+
+  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     const data = new FormData(event.currentTarget);
     const requiredData = {
       client_id: data.get('client_id'),
@@ -28,7 +29,7 @@ export default function SettingsContainer() {
     };
     const tmpWindow = window.open('about:blank');
 
-    tmpWindow.location = `${'https://testapi.openbanking.or.kr/oauth/2.0/authorize?'
+    (tmpWindow as Window).location = `${'https://testapi.openbanking.or.kr/oauth/2.0/authorize?'
       + 'response_type=code&'
       + 'client_id='}${requiredData.client_id}&redirect_uri=http://localhost:63342/fin-the-pen/fin_the_pen.main/resource/home&`
       + 'scope=login inquiry transfer&'

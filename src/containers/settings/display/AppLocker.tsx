@@ -20,7 +20,7 @@ function AppLocker() {
       />
       {
         checked && (
-          <ClickableListItem to="/test" title="비밀번호 인증 단계" subTitle="1단계" />
+          <ClickableListItem icon="" to="/test" title="비밀번호 인증 단계" subTitle="1단계" />
         )
       }
     </>
