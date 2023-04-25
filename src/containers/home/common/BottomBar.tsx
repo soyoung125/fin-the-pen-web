@@ -38,6 +38,7 @@ function BottomBar() {
           left: 0,
           right: 0,
           paddingBottom: 1,
+          zIndex: 1000,
         }}
         elevation={3}
       >
