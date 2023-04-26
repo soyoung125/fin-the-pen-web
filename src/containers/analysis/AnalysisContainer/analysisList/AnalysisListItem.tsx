@@ -1,8 +1,8 @@
 import {
   Box, Grid, ListItem, Stack,
 } from '@mui/material';
-import CategoryTypeBadge from '../../common/CategoryTypeBadge';
-import { AnalysisData } from '../../../types/common';
+import CategoryTypeBadge from '../../../../components/common/CategoryTypeBadge';
+import { AnalysisData } from '../../../../types/common';
 
 interface AnalysisListItemProps {
   category: AnalysisData;

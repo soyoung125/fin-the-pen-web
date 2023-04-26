@@ -1,7 +1,7 @@
 /* eslint-disable no-mixed-operators */
 import { Box, LinearProgress, Stack } from '@mui/material';
-import RoundedPaper from '../../common/RoundedPaper';
-import { Schedule } from '../../../types/schedule';
+import RoundedPaper from '../../../../components/common/RoundedPaper';
+import { Schedule } from '../../../../types/schedule';
 
 interface AssetManagementProps {
   selectedItem: Schedule[],

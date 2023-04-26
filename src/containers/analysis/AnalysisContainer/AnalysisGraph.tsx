@@ -1,5 +1,5 @@
 import { ResponsivePie } from '@nivo/pie';
-import { AnalysisData } from '../../types/common';
+import { AnalysisData } from '../../../types/common';
 
 interface AnalysisGraphProps {
   data: AnalysisData[];

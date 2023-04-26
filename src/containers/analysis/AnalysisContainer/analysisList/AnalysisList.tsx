@@ -3,7 +3,7 @@ import {
   List, Typography,
 } from '@mui/material';
 import AnalysisListItem from './AnalysisListItem';
-import { AnalysisData } from '../../../types/common';
+import { AnalysisData } from '../../../../types/common';
 
 interface AnalysisListProps {
   data: AnalysisData[];

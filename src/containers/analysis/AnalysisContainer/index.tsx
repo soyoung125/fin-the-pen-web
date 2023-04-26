@@ -7,13 +7,13 @@ import {
 import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import AnalysisGraph from '../../components/analysis/AnalysisGraph';
-import AnalysisList from '../../components/analysis/analysisList/AnalysisList';
-import { CATEGORIES } from '../../domain/constants/categories';
-import PATH from '../../domain/constants/path';
-import useHeader from '../../hooks/useHeader';
-import { selectDate, selectSchedules } from '../../domain/redux/schedule/scheduleSlice';
-import { AnalysisData } from '../../types/common';
+import AnalysisGraph from './AnalysisGraph';
+import AnalysisList from './analysisList/AnalysisList';
+import { CATEGORIES } from '../../../domain/constants/categories';
+import PATH from '../../../domain/constants/path';
+import useHeader from '../../../hooks/useHeader';
+import { selectDate, selectSchedules } from '../../../domain/redux/schedule/scheduleSlice';
+import { AnalysisData } from '../../../types/common';
 
 function AnalysisContainer() {
   const navigate = useNavigate();
