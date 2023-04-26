@@ -1,6 +1,10 @@
 import { Stack, Typography } from '@mui/material';
 
-function TestBox({ title, children }) {
+interface TestBoxProps {
+  title: string;
+  children: React.ReactNode;
+}
+function TestBox({ title, children }: TestBoxProps) {
   return (
     <Stack spacing={2} m={2} border={1} p={2}>
       <Typography>{title}</Typography>
