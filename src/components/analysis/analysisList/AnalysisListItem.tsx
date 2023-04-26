@@ -2,10 +2,18 @@ import {
   Box, Grid, ListItem, Stack,
 } from '@mui/material';
 import CategoryTypeBadge from '../../common/CategoryTypeBadge';
+import { AnalysisData } from '../../../types/common';
+
+interface AnalysisListItemProps {
+  category: AnalysisData;
+  rank: number;
+  clickListItem: (category: AnalysisData) => void;
+  bgColor: string;
+}
 
 function AnalysisListItem({
   category, rank, clickListItem, bgColor,
-}) {
+}: AnalysisListItemProps) {
   return (
     <ListItem onClick={() => clickListItem(category)}>
       <Grid container spacing={2}>

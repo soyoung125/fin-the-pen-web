@@ -3,8 +3,15 @@ import {
   List, Typography,
 } from '@mui/material';
 import AnalysisListItem from './AnalysisListItem';
+import { AnalysisData } from '../../../types/common';
 
-function AnalysisList({ data, clickListItem, hexToRGB }) {
+interface AnalysisListProps {
+  data: AnalysisData[];
+  clickListItem: (category: AnalysisData) => void;
+  hexToRGB: (hex: string, alhpa: number) => string;
+}
+
+function AnalysisList({ data, clickListItem, hexToRGB }: AnalysisListProps) {
   return (
     <Box mx={3}>
       <Typography sx={{ mt: 4 }} variant="h6" component="div">

@@ -25,3 +25,11 @@ export interface User {
   registerDate: string;
   phone_number: string;
 }
+
+export interface AnalysisData {
+  id: string;
+  label: string;
+  nestedType: string;
+  value: number;
+  color: string;
+}

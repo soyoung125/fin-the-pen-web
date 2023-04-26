@@ -13,12 +13,13 @@ import { CATEGORIES } from '../../domain/constants/categories';
 import PATH from '../../domain/constants/path';
 import useHeader from '../../hooks/useHeader';
 import { selectDate, selectSchedules } from '../../domain/redux/schedule/scheduleSlice';
+import { AnalysisData } from '../../types/common';
 
 function AnalysisContainer() {
   const navigate = useNavigate();
   const date = useSelector(selectDate);
-  const [data, setData] = useState([]); // color 추가할 계획
-  const [total, setTotal] = useState([]); // color 추가할 계획
+  const [data, setData] = useState<AnalysisData[]>([]); // color 추가할 계획
+  const [total, setTotal] = useState(0); // color 추가할 계획
   const schedules = useSelector(selectSchedules);
   const colorList = [
     indigo[100], indigo[200], indigo[300], indigo[400], indigo[500], indigo[600], indigo[700], indigo[800],
@@ -32,7 +33,7 @@ function AnalysisContainer() {
   useHeader(true, 'analysis');
 
   useEffect(() => {
-    const newData = [];
+    const newData: AnalysisData[] = [];
     let newTotal = 0;
     const expenditureCategories = CATEGORIES.filter((c) => c.type === '지출' || c.nestedType === '출금');
 
@@ -60,11 +61,11 @@ function AnalysisContainer() {
     setData(newData.sort((a, b) => b.value - a.value));
   }, [date]);
 
-  const clickListItem = (category) => {
+  const clickListItem = (category: AnalysisData) => {
     navigate(PATH.analysisDetail, { state: { color: category.color, category: category.label, type: category.nestedType } });
   };
 
-  const hexToRGB = (hex, alpha) => {
+  const hexToRGB = (hex: string, alpha: number) => {
     const r = parseInt(hex.slice(1, 3), 16);
     const g = parseInt(hex.slice(3, 5), 16);
     const b = parseInt(hex.slice(5, 7), 16);

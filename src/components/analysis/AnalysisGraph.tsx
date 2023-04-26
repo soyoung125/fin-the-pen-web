@@ -1,6 +1,12 @@
 import { ResponsivePie } from '@nivo/pie';
+import { AnalysisData } from '../../types/common';
 
-function AnalysisGraph({ data, total }) {
+interface AnalysisGraphProps {
+  data: AnalysisData[];
+  total: number;
+}
+
+function AnalysisGraph({ data, total }: AnalysisGraphProps) {
   return (
     <ResponsivePie
       data={data}
@@ -14,14 +20,14 @@ function AnalysisGraph({ data, total }) {
       arcLinkLabelsTextColor="#333333"
       arcLinkLabelsThickness={2}
       arcLinkLabelsColor={{ from: 'color' }}
-      arcLabel={(e) => { const percent = (parseInt(e.value, 10) / total) * 100; return `${e.id} (${percent.toFixed(1)}%)`; }}
+      arcLabel={(e) => { const percent = (e.value / total) * 100; return `${e.id} (${percent.toFixed(1)}%)`; }}
       arcLabelsSkipAngle={45}
       arcLabelsTextColor={{
         from: 'color',
         modifiers: [
           [
             'darker',
-            '3',
+            3,
           ],
         ],
       }}
