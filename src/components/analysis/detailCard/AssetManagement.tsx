@@ -1,10 +1,20 @@
 /* eslint-disable no-mixed-operators */
 import { Box, LinearProgress, Stack } from '@mui/material';
 import RoundedPaper from '../../common/RoundedPaper';
+import { Schedule } from '../../../types/schedule';
+
+interface AssetManagementProps {
+  selectedItem: Schedule[],
+  spending: number,
+  bgColor: string,
+  type: string,
+  asset: number,
+  balance: number,
+}
 
 function AssetManagement({
   selectedItem, spending, bgColor, type, asset, balance,
-}) {
+}: AssetManagementProps) {
   return (
     <RoundedPaper my={2}>
       <Stack direction="row" justifyContent="space-between">

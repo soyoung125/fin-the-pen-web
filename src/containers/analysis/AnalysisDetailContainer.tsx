@@ -1,4 +1,5 @@
 /* eslint-disable no-unused-vars */
+/* eslint-disable max-len */
 import { Box, Stack } from '@mui/material';
 import ArrowDropDownRoundedIcon from '@mui/icons-material/ArrowDropDownRounded';
 import { useLocation } from 'react-router-dom';
@@ -10,26 +11,40 @@ import { selectDate, selectSchedules } from '../../domain/redux/schedule/schedul
 import AssetManagement from '../../components/analysis/detailCard/AssetManagement';
 import { selectAssetsByCategory } from '../../utils/redux/asset/assetSlice';
 
+interface Categories {
+  title: string,
+  asset: '-' | number,
+}
+
+interface AssetsByCategory {
+  type: string,
+  categories: Categories[],
+  color: string,
+  total: string | number,
+  sum: number,
+}
+
 function AnalysisDetailContainer() {
   const { state } = useLocation();
   const { color, category, type } = state;
   const date = useSelector(selectDate);
   const schedules = useSelector(selectSchedules);
-  const assetsByCategory = useSelector(selectAssetsByCategory);
+  const assetsByCategory: AssetsByCategory[] = useSelector(selectAssetsByCategory);
   const [selectedItem, setSelectedItem] = useState(schedules.filter((s) => date.isSame(s.date, 'month') && s.category === category));
   const [spending, setSpending] = useState(0);
   const [sortByDate, setSortByDate] = useState(true);
-  const [asset, setAsset] = useState('-');
+  const [asset, setAsset] = useState<'-' | number>('-');
 
   useEffect(() => {
     const categoryType = assetsByCategory.find((c) => c.type === type);
     if (categoryType) {
-      setAsset(categoryType.categories.find((c) => c.title === category).asset);
+      const value = categoryType.categories.find((c) => c.title === category);
+      setAsset(value ? value.asset : '-');
     }
   }, []);
 
   useEffect(() => {
-    setSelectedItem([...schedules.filter((s) => date.isSame(s.date, 'month') && s.category === category).sort((a, b) => new Date(a.date) - new Date(b.date))]);
+    setSelectedItem([...schedules.filter((s) => date.isSame(s.date, 'month') && s.category === category).sort((a, b) => +new Date(a.date) - +new Date(b.date))]);
   }, [date]);
 
   useEffect(() => {
@@ -39,9 +54,9 @@ function AnalysisDetailContainer() {
 
   useEffect(() => {
     if (sortByDate) {
-      setSelectedItem([...selectedItem.sort((a, b) => new Date(a.date) - new Date(b.date))]);
+      setSelectedItem([...selectedItem.sort((a, b) => +new Date(a.date) - +new Date(b.date))]);
     } else {
-      setSelectedItem([...selectedItem.sort((a, b) => b.expected_spending - a.expected_spending)]);
+      setSelectedItem([...selectedItem.sort((a, b) => (b.expected_spending > a.expected_spending ? -1 : 1))]);
     }
   }, [sortByDate]);
 

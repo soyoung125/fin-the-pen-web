@@ -2,7 +2,13 @@ import {
   Box, Button, Stack,
 } from '@mui/material';
 
-function Title({ type, title, children }) {
+interface TitleProps {
+  type: string | null,
+  title: JSX.Element,
+  children: JSX.Element,
+}
+
+function Title({ type, title, children }: TitleProps) {
   return (
     <Stack direction="row" justifyContent="space-between" alignItems="center" mt={3} mb={1}>
       <Stack direction="row" sx={{ display: 'flex', my: 'auto' }}>

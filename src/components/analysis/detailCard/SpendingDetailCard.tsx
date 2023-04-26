@@ -4,8 +4,14 @@ import {
 } from '@mui/material';
 import AccessTimeIcon from '@mui/icons-material/AccessTime';
 import moment from 'moment';
+import { Schedule } from '../../../types/schedule';
 
-function SpendingDetailCard({ schedule, bgColor }) {
+interface SpendingDetailCardProps {
+  schedule: Schedule,
+  bgColor: string,
+}
+
+function SpendingDetailCard({ schedule, bgColor }: SpendingDetailCardProps) {
   return (
     <Paper sx={{
       marginY: 1,
