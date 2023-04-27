@@ -20,7 +20,7 @@ function ManagementLayout() {
     setManagement(assetManagements.findIndex((s) => s.path === location.pathname));
   }, []);
 
-  const handleMovement = (type) => {
+  const handleMovement = (type: '+' | '-') => {
     console.log(assetManagements[management].title);
     if (type === '-' && management !== 0) {
       setManagement(management - 1);

@@ -1,6 +1,7 @@
 import { Box } from '@mui/material';
+import { PropsWithChildren } from 'react';
 
-function CenterBox({ children }) {
+function CenterBox({ children }: PropsWithChildren) {
   return (
     <Box
       display="flex"
