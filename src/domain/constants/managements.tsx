@@ -3,7 +3,7 @@ import {
 } from '@mui/material/colors';
 import PATH from './path';
 
-interface AssetManagement {
+export interface AssetManagement {
   title: string,
   color: string,
   path: string,

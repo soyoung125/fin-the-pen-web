@@ -4,8 +4,12 @@ import {
 import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight';
 import { useNavigate } from 'react-router-dom';
 import RoundedPaper from '../../common/RoundedPaper';
+import { AssetManagement } from '../../../domain/constants/managements';
 
-function SettingCard({ setting }) {
+interface SettingCardProps {
+  setting: AssetManagement;
+}
+function SettingCard({ setting }: SettingCardProps) {
   const navigate = useNavigate();
 
   return (
