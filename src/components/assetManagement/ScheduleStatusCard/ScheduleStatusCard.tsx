@@ -2,7 +2,11 @@ import { Box, Stack } from '@mui/material';
 import RoundedBorderBox from '../../common/RoundedBorderBox';
 import StatusStack from './StatusStack';
 
-function ScheduleStatusCard({ month, numberOfSchedule }) {
+interface ScheduleStatusCardProps {
+  month: string;
+  numberOfSchedule: number;
+}
+function ScheduleStatusCard({ month, numberOfSchedule }: ScheduleStatusCardProps) {
   return (
     <>
       <Box sx={{ typography: 'h6', fontWeight: 'bold', mb: 1 }}>
