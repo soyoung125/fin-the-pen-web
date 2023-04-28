@@ -8,10 +8,10 @@ import { useEffect, useState } from 'react';
 import { selectSavingGoal, setSavingGoal } from '../../../../../../utils/redux/asset/assetSlice';
 
 interface InputModalProps {
-  setSavingGoalModalOpen: React.Dispatch<React.SetStateAction<boolean>>,
+  closeSavingGoalModal: () => void,
 }
 function InputModal({
-  setSavingGoalModalOpen,
+  closeSavingGoalModal,
 }: InputModalProps) {
   const [form, setForm] = useState({
     year: 0,
@@ -53,7 +53,7 @@ function InputModal({
           <DeleteForeverIcon />
         </IconButton>
         <Typography variant="h5" sx={{ fontWeight: 'bold' }}>저축 목표 설정</Typography>
-        <IconButton onClick={() => setSavingGoalModalOpen(false)}>
+        <IconButton onClick={() => closeSavingGoalModal()}>
           <ClearIcon />
         </IconButton>
       </Stack>
@@ -87,7 +87,7 @@ function InputModal({
         variant="contained"
         onClick={() => {
           dispatch(setSavingGoal(form));
-          setSavingGoalModalOpen(false);
+          closeSavingGoalModal();
         }}
       >
         한해 저축 목표 설정하기

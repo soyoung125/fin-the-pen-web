@@ -10,15 +10,21 @@ import RoundedBorderBox from '../../../../../../components/common/RoundedBorderB
 import { selectSavingGoal } from '../../../../../../utils/redux/asset/assetSlice';
 import InputModal from './InputModal';
 import AlertModal from '../../../../../../components/common/AlertModal';
+import useModal from '../../../../../../hooks/useModal';
 
 function Saving() {
-  const [savingGoalModalOpen, setSavingGoalModalOpen] = useState(false);
+  const {
+    modalOpen: savingGoalModalOpen,
+    openModal: openSavingGoalModal,
+    closeModal: closeSavingGoalModal
+  } = useModal();
+
   const [openAlertModal, setOpenAlertModal] = useState(false);
   const saving = useSelector(selectSavingGoal);
 
-  const openSavingGoalModal = () => {
+  const foo = () => {
     setOpenAlertModal(false);
-    setSavingGoalModalOpen(true);
+    openSavingGoalModal();
   };
 
   return (
@@ -61,14 +67,14 @@ function Saving() {
         width="xs"
         open={savingGoalModalOpen}
         component={(
-          <InputModal setSavingGoalModalOpen={setSavingGoalModalOpen} />
+          <InputModal closeSavingGoalModal={closeSavingGoalModal} />
         )}
       />
 
       <AlertModal
         open={openAlertModal}
         handleClose={() => setOpenAlertModal(false)}
-        handleClickYes={() => openSavingGoalModal()}
+        handleClickYes={() => foo()}
         mode="modify"
       />
     </>
