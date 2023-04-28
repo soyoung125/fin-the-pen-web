@@ -10,7 +10,7 @@ function SavingsGoal() {
   return (
     <>
       <Box sx={{ fontWeight: 'bold' }}>
-        {`"${user.name}"님의 한해 저축 목표입니다.`}
+        {`"${user?.name}"님의 한해 저축 목표입니다.`}
       </Box>
 
       <Saving />

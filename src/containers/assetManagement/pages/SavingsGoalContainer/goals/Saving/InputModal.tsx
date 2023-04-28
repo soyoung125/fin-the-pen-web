@@ -7,20 +7,24 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useEffect, useState } from 'react';
 import { selectSavingGoal, setSavingGoal } from '../../../../../../utils/redux/asset/assetSlice';
 
+interface InputModalProps {
+  setSavingGoalModalOpen: React.Dispatch<React.SetStateAction<boolean>>,
+}
 function InputModal({
   setSavingGoalModalOpen,
-}) {
+}: InputModalProps) {
   const [form, setForm] = useState({
     year: 0,
     month: 0,
   });
 
-  const handleChange = (event) => {
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>): void => {
     const { id, value } = event.target;
-    if (value >= 0) {
+    const newValue = parseInt(value, 10);
+    if (newValue >= 0) {
       setForm({
-        year: id === 'year' ? value : value * 12,
-        month: id === 'year' ? Math.round(value / 12) : value,
+        year: id === 'year' ? newValue : newValue * 12,
+        month: id === 'year' ? Math.round(newValue / 12) : newValue,
       });
     } else {
       alert('숫자는 0 이하일 수 없습니다.');

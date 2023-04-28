@@ -9,28 +9,44 @@ import { useDispatch, useSelector } from 'react-redux';
 import { SOMETHING_IS_WRONG } from '../../../../../../domain/constants/messages';
 import { selectPersonalGoal, setPersonalGoal } from '../../../../../../utils/redux/asset/assetSlice';
 
+interface InputModalProps {
+  setPersonalGoalModalOpen: React.Dispatch<React.SetStateAction<boolean>>,
+}
+
+interface Form {
+  name: string,
+  money: number,
+  deadline: string,
+  type: '' | 'day' | 'month',
+  autoSaving: boolean,
+}
+
+interface ChangePersonalGoal {
+  (state: { target: { id: string, value: string | number | boolean } }): void,
+}
+
 function InputModal({
   setPersonalGoalModalOpen,
-}) {
-  const [form, setForm] = useState({
+}: InputModalProps) {
+  const [form, setForm] = useState<Form>({
     name: '',
     money: 0,
     deadline: '2024-01-01',
     type: 'day', // day||month
     autoSaving: true,
   });
-  const changePersonalGoal = (state) => {
+  const changePersonalGoal: ChangePersonalGoal = (state) => {
     setForm({ ...form, [state.target.id]: state.target.value });
   };
 
-  const divisionByType = (type, money) => {
+  const divisionByType = (type: string, money: number): number | string => {
     switch (type) {
       case 'day':
         return Math.round(money / 365);
       case 'month':
         return Math.round(money / 12);
       default:
-        return Math.round(SOMETHING_IS_WRONG);
+        return SOMETHING_IS_WRONG;
     }
   };
 

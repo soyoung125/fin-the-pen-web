@@ -23,7 +23,7 @@ function Saving() {
 
   return (
     <>
-      <RoundedPaper my={2} sx={{ p: 2, mt: 1, mb: 3 }}>
+      <RoundedPaper my={2}>
         <Stack direction="row" justifyContent="space-between" alignItems="center" pb={1}>
           <Box sx={{ typography: 'h6', fontWeight: 'bold' }}>1 Year Goal</Box>
           <IconButton color="primary" onClick={() => setOpenAlertModal(true)} sx={{ p: 0 }}>
