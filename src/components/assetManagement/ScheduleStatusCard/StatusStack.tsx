@@ -1,6 +1,11 @@
 import { Box, Stack } from '@mui/material';
 
-function StatusStack({ title, content }) {
+interface StatusStackProps {
+  title: string,
+  content: string,
+}
+
+function StatusStack({ title, content }: StatusStackProps) {
   return (
     <Stack width="50%" sx={{ textAlign: 'center' }}>
       <Box>{title}</Box>
