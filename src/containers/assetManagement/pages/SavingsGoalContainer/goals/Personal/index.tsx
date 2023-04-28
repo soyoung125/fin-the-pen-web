@@ -9,14 +9,15 @@ import RoundedBorderBox from '../../../../../../components/common/RoundedBorderB
 import InputModal from './InputModal';
 import { selectPersonalGoal } from '../../../../../../utils/redux/asset/assetSlice';
 import AlertModal from '../../../../../../components/common/AlertModal';
+import useModal from '../../../../../../hooks/useModal';
 
 function Personal() {
   const [personalGoalModalOpen, setPersonalGoalModalOpen] = useState(false);
-  const [openAlertModal, setOpenAlertModal] = useState(false);
+  const { modalOpen, openModal, closeModal } = useModal();
   const personal = useSelector(selectPersonalGoal);
 
   const openPersonalGoalModal = () => {
-    setOpenAlertModal(false);
+    closeModal();
     setPersonalGoalModalOpen(true);
   };
   return (
@@ -25,7 +26,7 @@ function Personal() {
         <Box sx={{ fontWeight: 'bold' }}>
           당신의 또 다른 목표는 무엇인가요?
         </Box>
-        <IconButton color="primary" onClick={() => setOpenAlertModal(true)}>
+        <IconButton color="primary" onClick={() => openModal()}>
           <BorderColorIcon fontSize="small" />
         </IconButton>
       </Stack>
@@ -80,8 +81,8 @@ function Personal() {
       />
 
       <AlertModal
-        open={openAlertModal}
-        handleClose={() => setOpenAlertModal(false)}
+        open={modalOpen}
+        handleClose={() => closeModal()}
         handleClickYes={() => openPersonalGoalModal()}
         mode="modify"
       />
