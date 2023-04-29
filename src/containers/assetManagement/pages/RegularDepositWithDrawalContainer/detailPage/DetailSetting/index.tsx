@@ -7,20 +7,22 @@ import { REGULAR_DEPOSIT_WITHDRAWAL_TYPE } from '../../../../../../domain/consta
 import Title from '../../../../../../components/common/Title';
 import { selectSchedules } from '../../../../../../domain/redux/schedule/scheduleSlice';
 import SwipeableDetailCard from './SwipeableDetailCard';
+import { Schedule } from '../../../../../../types/schedule';
+import { makeGroupForRegularData } from '../../../../../../domain/tools';
+
+interface StateData {
+  type: '+' | '-',
+  data: Schedule[],
+}
 
 function DetailSetting() {
   const schedules = useSelector(selectSchedules);
   const { state } = useLocation();
-  const { type, data } = state;
-  const [detailData, setDetailData] = useState(data);
+  const { type, data }: StateData = state;
+  const [detailData, setDetailData] = useState({ [data[0].event_name]: data });
 
   useEffect(() => {
-    setDetailData(schedules.filter((s) => s.repeating_cycle !== '없음' && s.type === type).reduce((acc, curr) => {
-      const { event_name } = curr;
-      if (acc[event_name]) acc[event_name].push(curr);
-      else acc[event_name] = [curr];
-      return acc;
-    }, {}));
+    setDetailData(makeGroupForRegularData(schedules.filter((s) => s.repeating_cycle !== '없음' && s.type === type)));
   }, [schedules]);
 
   return (

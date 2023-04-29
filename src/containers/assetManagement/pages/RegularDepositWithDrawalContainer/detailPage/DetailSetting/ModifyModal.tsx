@@ -9,17 +9,26 @@ import { useState } from 'react';
 // import { useDispatch } from 'react-redux';
 import ModalStaticBackdrop from '../../../../../../components/layouts/ModalStaticBackdrop';
 import { REGULAR_DEPOSIT_WITHDRAWAL_TYPE } from '../../../../../../domain/constants/schedule';
+import { Schedule } from '../../../../../../types/schedule';
 // import { modifySchedule } from '../../../../../../domain/redux/schedule/scheduleSlice';
+
+interface ModifyModalProps {
+  settingModalOpen: boolean,
+  setSettingModalOpen: React.Dispatch<React.SetStateAction<boolean>>,
+  modifyData: (form: Schedule) => void,
+  data: Schedule,
+}
 
 function ModifyModal({
   settingModalOpen, setSettingModalOpen, modifyData, data
-}) {
+}: ModifyModalProps) {
   // const dispatch = useDispatch();
-  const type = REGULAR_DEPOSIT_WITHDRAWAL_TYPE[data.type];
+  const type = data.type === '+' ? '+' : '-';
+  const typeContent = REGULAR_DEPOSIT_WITHDRAWAL_TYPE[type];
   const [form, setForm] = useState(data);
   console.log(form);
 
-  const changeDetailInfo = (state) => {
+  const changeDetailInfo = (state: React.ChangeEvent<HTMLInputElement>) => {
     setForm({ ...form, [state.target.id]: state.target.value });
   };
 
@@ -41,7 +50,7 @@ function ModifyModal({
               <RestartAltIcon />
             </IconButton>
             <Typography variant="h5" sx={{ fontWeight: 'bold' }}>
-              {`정기 ${type} 내역`}
+              {`정기 ${typeContent} 내역`}
             </Typography>
             <IconButton onClick={() => setSettingModalOpen(false)}>
               <ClearIcon />
@@ -57,7 +66,7 @@ function ModifyModal({
             <FormControl fullWidth>
               <OutlinedInput
                 id="event_name"
-                startAdornment={<InputAdornment position="start">{`${type}명`}</InputAdornment>}
+                startAdornment={<InputAdornment position="start">{`${typeContent}명`}</InputAdornment>}
                 value={form.event_name}
                 onChange={changeDetailInfo}
                 size="small"
@@ -87,7 +96,7 @@ function ModifyModal({
               type="date"
               fullWidth
               InputProps={{
-                startAdornment: <InputAdornment position="start">{`${type}일`}</InputAdornment>,
+                startAdornment: <InputAdornment position="start">{`${typeContent}일`}</InputAdornment>,
               }}
               // eslint-disable-next-line react/jsx-no-duplicate-props
               inputProps={{
@@ -104,7 +113,7 @@ function ModifyModal({
               type="date"
               fullWidth
               InputProps={{
-                startAdornment: <InputAdornment position="start">{`${type}기간`}</InputAdornment>,
+                startAdornment: <InputAdornment position="start">{`${typeContent}기간`}</InputAdornment>,
               }}
               // eslint-disable-next-line react/jsx-no-duplicate-props
               inputProps={{
@@ -118,7 +127,7 @@ function ModifyModal({
             {/* 입출금액 고정 */}
             <FormControl fullWidth>
               <OutlinedInput
-                startAdornment={<InputAdornment position="start">{`${type}액 고정`}</InputAdornment>}
+                startAdornment={<InputAdornment position="start">{`${typeContent}액 고정`}</InputAdornment>}
                 endAdornment={(
                   <Switch
                     // checked={personalGoal.autoSaving}
@@ -140,7 +149,7 @@ function ModifyModal({
             <FormControl fullWidth>
               <OutlinedInput
                 id="expected_spending"
-                startAdornment={<InputAdornment position="start">{`${type}액`}</InputAdornment>}
+                startAdornment={<InputAdornment position="start">{`${typeContent}액`}</InputAdornment>}
                 value={form.expected_spending}
                 onChange={changeDetailInfo}
                 size="small"

@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/naming-convention */
 /* eslint-disable import/prefer-default-export */
 
 import { EXPENDITURE } from './constants/categories';
@@ -88,3 +89,11 @@ export const initAssetsByCategory = () => EXPENDITURE.nested
     total: '-',
     sum: 0,
   }));
+
+export const makeGroupForRegularData = (data) => data
+  .reduce((acc, curr) => {
+    const { event_name } = curr;
+    if (acc[event_name]) acc[event_name].push(curr);
+    else acc[event_name] = [curr];
+    return acc;
+  }, {});

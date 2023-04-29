@@ -11,8 +11,13 @@ import { deleteSelectedSchedule } from '../../../../../../domain/tools';
 import RoundedBorderBox from '../../../../../../components/common/RoundedBorderBox';
 import AlertModal from '../../../../../../components/common/AlertModal';
 import { modifySchedule } from '../../../../../../domain/redux/schedule/scheduleSlice';
+import { Schedule } from '../../../../../../types/schedule';
 
-function SwipeableDetailCard({ data }) {
+interface SwipeableDetailCardProps {
+  data: Schedule[],
+}
+
+function SwipeableDetailCard({ data }: SwipeableDetailCardProps) {
   const dispatch = useDispatch();
   const [settingModalOpen, setSettingModalOpen] = useState(false);
   const [openAlertModal, setOpenAlertModal] = useState(false);
@@ -26,7 +31,7 @@ function SwipeableDetailCard({ data }) {
     data.map((d) => deleteSelectedSchedule(dispatch, d, handleCloseAlert));
   };
 
-  const modifyData = (form) => {
+  const modifyData = (form: Schedule) => {
     data.map((d) => {
       if (moment().isBefore(d.date)) {
         dispatch(modifySchedule({

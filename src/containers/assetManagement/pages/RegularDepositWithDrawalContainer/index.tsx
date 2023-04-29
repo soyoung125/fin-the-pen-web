@@ -16,13 +16,14 @@ import AlertModal from '../../../../components/common/AlertModal';
 import { selectBottomDrawerOpen } from '../../../../domain/redux/common/commonSlice';
 import ArrowTooltip from '../../../../components/common/ArrowTooltip';
 import { Schedule } from '../../../../types/schedule';
+import { makeGroupForRegularData } from '../../../../domain/tools';
 
 interface DataInterface {
   [prop: string]: Schedule[],
 }
-interface MakeGroupInterface {
-  (data: Schedule[]): DataInterface,
-}
+// interface MakeGroupInterface {
+//   (data: Schedule[]): DataInterface,
+// }
 
 function RegularDepositWithdrawal() {
   const navigate = useNavigate();
@@ -34,17 +35,17 @@ function RegularDepositWithdrawal() {
   const [type, setType] = useState('+');
 
   useEffect(() => {
-    setDeposits(makeGroup(schedules.filter((s) => s.repeating_cycle !== '없음' && s.type === '+')));
-    setWithdrawals(makeGroup(schedules.filter((s) => s.repeating_cycle !== '없음' && s.type === '-')));
+    setDeposits(makeGroupForRegularData(schedules.filter((s) => s.repeating_cycle !== '없음' && s.type === '+')));
+    setWithdrawals(makeGroupForRegularData(schedules.filter((s) => s.repeating_cycle !== '없음' && s.type === '-')));
   }, [schedules]);
 
-  const makeGroup: MakeGroupInterface = (data) => data
-    .reduce((acc: DataInterface, curr: Schedule) => {
-      const { event_name } = curr;
-      if (acc[event_name]) acc[event_name].push(curr);
-      else acc[event_name] = [curr];
-      return acc;
-    }, {});
+  // const makeGroup: MakeGroupInterface = (data) => data
+  //   .reduce((acc: DataInterface, curr: Schedule) => {
+  //     const { event_name } = curr;
+  //     if (acc[event_name]) acc[event_name].push(curr);
+  //     else acc[event_name] = [curr];
+  //     return acc;
+  //   }, {});
 
   const hadleOpenAlertModal = (newType: string): void => {
     setType(newType);

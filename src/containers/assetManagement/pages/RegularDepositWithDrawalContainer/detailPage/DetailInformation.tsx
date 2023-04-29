@@ -8,6 +8,7 @@ import ArrowDropDownRoundedIcon from '@mui/icons-material/ArrowDropDownRounded';
 import { useEffect, useState } from 'react';
 import Title from '../../../../../components/common/Title';
 import RoundedBorderBox from '../../../../../components/common/RoundedBorderBox';
+import { Schedule } from '../../../../../types/schedule';
 
 function DetailInformation() {
   const { state } = useLocation();
@@ -17,9 +18,10 @@ function DetailInformation() {
 
   useEffect(() => {
     if (sortByDate) {
-      setData([...data.sort((a, b) => new Date(a.date) - new Date(b.date))]);
+      setData([...data.sort((a: Schedule, b: Schedule) => +new Date(a.date) - +new Date(b.date))]);
     } else {
-      setData([...data.sort((a, b) => b.expected_spending - a.expected_spending)]);
+      setData([...data
+        .sort((a: Schedule, b: Schedule) => (b.expected_spending > a.expected_spending ? 1 : -1))]);
     }
   }, [sortByDate]);
 
@@ -47,7 +49,7 @@ function DetailInformation() {
       </Title>
 
       <RoundedBorderBox>
-        {data.map((schedule, index) => (
+        {data.map((schedule: Schedule, index: number) => (
           <Box p={1} sx={index !== 0 ? listDividerStyle : null} key={schedule.id}>
             <Stack direction="row" justifyContent="space-between">
               <Typography sx={{ fontWeight: 'bold' }}>{moment(schedule.date).format('MM월 DD일')}</Typography>
