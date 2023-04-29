@@ -1,6 +1,12 @@
 import { Tooltip } from '@mui/material';
 
-function ArrowTooltip({ open, title, children }) {
+interface ArrowTooltipProps {
+  open: boolean,
+  title: string,
+  children: JSX.Element,
+}
+
+function ArrowTooltip({ open, title, children }: ArrowTooltipProps) {
   return (
     <Tooltip
       open={open}

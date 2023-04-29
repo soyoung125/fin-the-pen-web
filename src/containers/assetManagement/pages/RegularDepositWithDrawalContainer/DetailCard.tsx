@@ -6,8 +6,13 @@ import moment from 'moment';
 import { useNavigate } from 'react-router-dom';
 import RoundedBorderBox from '../../../../components/common/RoundedBorderBox';
 import PATH from '../../../../domain/constants/path';
+import { Schedule } from '../../../../types/schedule';
 
-function DetailCard({ data }) {
+interface DetailCardProps {
+  data: Schedule[],
+}
+
+function DetailCard({ data }: DetailCardProps) {
   const navigate = useNavigate();
   const schedule = data[0];
   // console.log(data);
