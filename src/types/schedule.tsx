@@ -1,4 +1,6 @@
 export interface Schedule {
+  id?: string;
+  user_id?: string;
   event_name: string;
   alarm: boolean;
   date: string;

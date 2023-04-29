@@ -4,7 +4,7 @@ import {
 
 interface TitleProps {
   type: string | null,
-  title: JSX.Element,
+  title: JSX.Element | string,
   children: JSX.Element,
 }
 
