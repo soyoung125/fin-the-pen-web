@@ -1,6 +1,11 @@
 /* eslint-disable no-param-reassign */
 import { createSlice } from '@reduxjs/toolkit';
 
+/**
+ *
+ * 더 늦기 전에 프로퍼티 키 값을 한국어 => 영어로 바꿔야 합니당.
+ */
+
 const initialState = {
   settings: {
     // 화면설정
