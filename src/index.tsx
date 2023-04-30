@@ -12,6 +12,7 @@ import { PersistGate } from 'redux-persist/integration/react';
 import { persistStore } from 'redux-persist';
 import { store } from './store';
 import { createTheme, responsiveFontSizes } from '@mui/material';
+import CustomThemeProvider from './components/providers/CustomThemeProvider';
 
 const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement);
 let persistor = persistStore(store);
@@ -20,9 +21,11 @@ root.render(
   <React.StrictMode>
     <Provider store={store}>
       <PersistGate loading={null} persistor={persistor}>
-        <BrowserRouter basename='fin-the-pen-web'>
-          <App />
-        </BrowserRouter>
+        <CustomThemeProvider>
+          <BrowserRouter basename='fin-the-pen-web'>
+            <App />
+          </BrowserRouter>
+        </CustomThemeProvider>
       </PersistGate>
     </Provider>
   </React.StrictMode>,
