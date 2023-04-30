@@ -16,7 +16,7 @@ import AssetPreview from './view/AssetPreview';
 import ConsumptionAlert from './layout/ConsumptionAlert';
 import { HEADER_MODE } from '../../../domain/constants/common';
 
-function HomeConatiner() {
+function HomeContainer() {
   const dispatch = useDispatch();
   const viewMode = useSelector(selectViewMode);
   const date = useSelector(selectDate);
@@ -68,4 +68,4 @@ function HomeConatiner() {
     </Box>
   );
 }
-export default HomeConatiner;
+export default HomeContainer;

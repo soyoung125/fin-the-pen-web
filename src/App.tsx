@@ -1,3 +1,6 @@
+/**
+ * @deprecated 제거해야 할 파일
+ */
 import './App.css';
 import { Route, Routes } from 'react-router-dom';
 import HomeLayout from './components/layouts/containerLayout/HomeLayout';

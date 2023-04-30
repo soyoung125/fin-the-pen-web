@@ -4,7 +4,7 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import { BrowserRouter } from 'react-router-dom';
+import { BrowserRouter, RouterProvider } from 'react-router-dom';
 
 import { Provider } from 'react-redux';
 
@@ -13,6 +13,7 @@ import { persistStore } from 'redux-persist';
 import { store } from './store';
 import { createTheme, responsiveFontSizes } from '@mui/material';
 import CustomThemeProvider from './components/providers/CustomThemeProvider';
+import router from './router';
 
 const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement);
 let persistor = persistStore(store);
@@ -22,9 +23,10 @@ root.render(
     <Provider store={store}>
       <PersistGate loading={null} persistor={persistor}>
         <CustomThemeProvider>
-          <BrowserRouter basename='fin-the-pen-web'>
+          <RouterProvider router={router} />
+          {/* <BrowserRouter basename='fin-the-pen-web'>
             <App />
-          </BrowserRouter>
+          </BrowserRouter> */}
         </CustomThemeProvider>
       </PersistGate>
     </Provider>
