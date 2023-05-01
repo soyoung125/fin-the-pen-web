@@ -33,3 +33,16 @@ export interface AnalysisData {
   value: number;
   color: string;
 }
+
+export interface AssetCategories {
+  title: string,
+  asset: '-' | number,
+}
+
+export interface AssetsByCategoryInterface {
+  type: string,
+  categories: AssetCategories[],
+  color: string,
+  total: string | number,
+  sum: number,
+}

@@ -17,6 +17,7 @@ import MonthlyGoal from './MonthlyGoal';
 import AlertModal from '../../../../components/common/AlertModal';
 import ModalStaticBackdrop from '../../../../components/layouts/ModalStaticBackdrop';
 import InputModal from './MonthlyGoal/InputModal';
+import { AssetCategories, AssetsByCategoryInterface } from '../../../../types/common';
 
 function AssetsByCategory() {
   const dispatch = useDispatch();
@@ -48,7 +49,7 @@ function AssetsByCategory() {
     }
   }, [showTooltip]);
 
-  const handleClick = (type) => {
+  const handleClick = (type: string): void => {
     if (open === type) {
       setOpen('');
     } else {
@@ -56,8 +57,8 @@ function AssetsByCategory() {
     }
   };
 
-  const modifyCategoryAsset = (type, value) => {
-    const data = assets.map((category) => (category.type === type
+  const modifyCategoryAsset = (type: string, value: number) => {
+    const data = assets.map((category: AssetsByCategoryInterface) => (category.type === type
       ? {
         ...category,
         total: (category.total === '-' && value === 0 ? '-' : value),
@@ -67,12 +68,12 @@ function AssetsByCategory() {
     dispatch(setAssetsByCategory({ assets: data, updateDate: date }));
   };
 
-  const modifySubcategoryAsset = (type, title, summary, value) => {
-    const data = assets.map((category) => (category.type === type
+  const modifySubcategoryAsset = (type: string, title: string, summary: number, value: number) => {
+    const data = assets.map((category: AssetsByCategoryInterface) => (category.type === type
       ? {
         ...category,
         categories: category.categories
-          .map((c) => (c.title === title ? { ...c, asset: value } : c)),
+          .map((c: AssetCategories) => (c.title === title ? { ...c, asset: value } : c)),
         sum: summary,
       }
       : category));

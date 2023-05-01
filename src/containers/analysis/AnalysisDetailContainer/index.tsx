@@ -10,19 +10,7 @@ import SpendingDetailCard from './detailCard/SpendingDetailCard';
 import { selectDate, selectSchedules } from '../../../domain/redux/schedule/scheduleSlice';
 import AssetManagement from './detailCard/AssetManagement';
 import { selectAssetsByCategory } from '../../../utils/redux/asset/assetSlice';
-
-interface Categories {
-  title: string,
-  asset: '-' | number,
-}
-
-interface AssetsByCategory {
-  type: string,
-  categories: Categories[],
-  color: string,
-  total: string | number,
-  sum: number,
-}
+import { AssetsByCategory } from '../../../types/common';
 
 function AnalysisDetailContainer() {
   const { state } = useLocation();
