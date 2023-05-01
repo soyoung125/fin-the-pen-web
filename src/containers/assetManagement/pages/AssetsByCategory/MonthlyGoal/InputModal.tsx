@@ -7,9 +7,13 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useEffect, useState } from 'react';
 import { selectMonthlyConsumptionGoal, setMonthlyConsumptionGoal } from '../../../../../utils/redux/asset/assetSlice';
 
+interface InputModalProps {
+  setMonthlyGoalModalOpen: React.Dispatch<React.SetStateAction<boolean>>
+}
+
 function InputModal({
   setMonthlyGoalModalOpen,
-}) {
+}: InputModalProps) {
   const [goal, setGoal] = useState(0);
 
   /**
@@ -21,9 +25,9 @@ function InputModal({
     setGoal(parseInt(saving, 10));
   }, [saving]);
 
-  const handleChange = (event) => {
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { value } = event.target;
-    if (value >= 0) {
+    if (+value >= 0) {
       setGoal(parseInt(value, 10));
     } else {
       alert('숫자는 0 이하일 수 없습니다.');
