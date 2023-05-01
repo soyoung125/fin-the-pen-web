@@ -1,3 +1,4 @@
+/* eslint-disable max-len */
 /* eslint-disable no-nested-ternary */
 import {
   Box, Collapse, InputBase, List, ListItem, ListItemButton, Stack,
@@ -6,29 +7,37 @@ import { useState } from 'react';
 import { useSelector } from 'react-redux';
 import CategoryTypeBadge from '../../../../components/common/CategoryTypeBadge';
 import { selectAssetsByCategory } from '../../../../utils/redux/asset/assetSlice';
+import { AssetsByCategoryInterface } from '../../../../types/common';
+
+interface CategoryListProps {
+  handleClick: (type: string) => void,
+  open: string,
+  modifyCategoryAsset: (type: string, value: number) => void,
+  modifySubcategoryAsset: (type: string, title: string, summary: number, value: number) => void,
+}
 
 function CategoryList({
   handleClick, open, modifyCategoryAsset, modifySubcategoryAsset,
-}) {
+}: CategoryListProps) {
   const assets = useSelector(selectAssetsByCategory);
-  const [selectedCategory, setSelectedCategory] = useState(null);
-  const [asset, setAsset] = useState(0);
+  const [selectedCategory, setSelectedCategory] = useState<'' | number>('');
+  const [asset, setAsset] = useState('0');
 
-  const modifySubcategory = (category, title, preValue) => {
+  const modifySubcategory = (category: AssetsByCategoryInterface, title: string, preValue: string | number) => {
     let sum = 0;
     const total = category.total === '-' ? 0 : category.total;
     if (asset === '') {
-      sum = category.sum - (preValue === '-' ? 0 : preValue);
+      sum = category.sum - (preValue === '-' ? 0 : +preValue);
       modifySubcategoryAsset(category.type, title, sum, 0);
     } else if (asset !== '-') {
-      sum = category.sum - (preValue === '-' ? 0 : preValue) + parseInt(asset, 10);
-      if (sum > total) {
+      sum = category.sum - (preValue === '-' ? 0 : +preValue) + parseInt(asset, 10);
+      if (sum > +total) {
         alert('합계가 설정한 카테고리 지출 목표 금액을 넘었습니다.');
         return;
       }
       modifySubcategoryAsset(category.type, title, sum, parseInt(asset, 10));
     }
-    setSelectedCategory(selectedCategory + 1);
+    setSelectedCategory(+selectedCategory + 1);
   };
 
   const modifyCategory = () => {
@@ -36,14 +45,14 @@ function CategoryList({
     setSelectedCategory(0);
   };
 
-  const clickCategory = (category) => {
+  const clickCategory = (category: string) => {
     handleClick(category);
-    setSelectedCategory(null);
+    setSelectedCategory('');
   };
 
   return (
     <List>
-      {assets.map((category) => (
+      {assets.map((category: AssetsByCategoryInterface) => (
         <Box key={category.type}>
           <ListItemButton onClick={() => clickCategory(category.type)}>
             <Stack direction="row" justifyContent="space-between" sx={{ width: '100%' }}>
@@ -51,12 +60,12 @@ function CategoryList({
                 <CategoryTypeBadge color={category.color} mr={0.5} />
                 {category.type}
               </Stack>
-              {open === category.type && selectedCategory === null
+              {open === category.type && selectedCategory === ''
                 ? (
                   <InputBase
                     onChange={(e) => setAsset(e.target.value)}
                     autoFocus
-                    onFocus={() => setAsset(category.total === '-' ? '' : category.total)}
+                    onFocus={() => setAsset(category.total === '-' ? '' : category.total.toString())}
                     type="number"
                     defaultValue={category.total === '-' ? '' : category.total}
                     sx={{
@@ -95,7 +104,7 @@ function CategoryList({
                           <InputBase
                             onChange={(e) => setAsset(e.target.value)}
                             autoFocus
-                            onFocus={() => setAsset(c.asset)}
+                            onFocus={() => setAsset(c.asset.toString())}
                             type="number"
                             defaultValue={c.asset === '-' ? '' : c.asset}
                             sx={{
