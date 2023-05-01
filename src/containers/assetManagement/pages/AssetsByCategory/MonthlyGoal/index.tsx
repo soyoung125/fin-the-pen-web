@@ -10,9 +10,16 @@ import RoundedPaper from '../../../../../components/common/RoundedPaper';
 import ArrowTooltip from '../../../../../components/common/ArrowTooltip';
 import { selectSchedules } from '../../../../../domain/redux/schedule/scheduleSlice';
 
+interface MonthlyGoalProps {
+  title: string,
+  openAlertModal: () => void,
+  open: boolean,
+  monthlyConsumptionGoal: number,
+}
+
 function MonthlyGoal({
   title, openAlertModal, open, monthlyConsumptionGoal,
-}) {
+}: MonthlyGoalProps) {
   const schedules = useSelector(selectSchedules);
   const [lastMonthSpending, setLastMonthSpending] = useState(0);
   const [ThrMonthsSpending, setThrMonthsSpending] = useState(0);
@@ -22,7 +29,7 @@ function MonthlyGoal({
     setThrMonthsSpending(calculateSpending(3));
   }, []);
 
-  const calculateSpending = (months) => {
+  const calculateSpending = (months: number) => {
     let spending = 0;
     for (let i = 1; i <= months; i += 1) {
       const compareDate = moment().subtract(i, 'months');
