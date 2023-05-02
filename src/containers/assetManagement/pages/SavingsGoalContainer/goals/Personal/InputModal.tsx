@@ -108,6 +108,7 @@ function InputModal({
             size="small"
             inputProps={{
               style: { textAlign: 'right' },
+              step: 10,
             }}
             type="number"
             onFocus={(e) => e.target.select()}
