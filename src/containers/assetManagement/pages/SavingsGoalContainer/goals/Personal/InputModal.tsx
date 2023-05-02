@@ -19,6 +19,7 @@ interface Form {
   deadline: string,
   type: '' | 'day' | 'month',
   autoSaving: boolean,
+  popUp: boolean,
 }
 
 interface ChangePersonalGoal {
@@ -34,7 +35,9 @@ function InputModal({
     deadline: '2024-01-01',
     type: 'day', // day||month
     autoSaving: true,
+    popUp: false,
   });
+
   const changePersonalGoal: ChangePersonalGoal = (state) => {
     setForm({ ...form, [state.target.id]: state.target.value });
   };
@@ -66,6 +69,7 @@ function InputModal({
             deadline: '2024-01-01',
             type: '', // day||month
             autoSaving: true,
+            popUp: false,
           })}
           color="error"
         >
@@ -190,6 +194,27 @@ function InputModal({
                   target: {
                     id: 'autoSaving',
                     value: !form.autoSaving,
+                  },
+                })}
+                inputProps={{ 'aria-label': 'controlled' }}
+              />
+            )}
+            size="small"
+            readOnly
+          />
+        </FormControl>
+
+        {/* 팝업 */}
+        <FormControl fullWidth>
+          <OutlinedInput
+            startAdornment={<InputAdornment position="start">팝업</InputAdornment>}
+            endAdornment={(
+              <Switch
+                checked={form.popUp}
+                onChange={() => changePersonalGoal({
+                  target: {
+                    id: 'popUp',
+                    value: !form.popUp,
                   },
                 })}
                 inputProps={{ 'aria-label': 'controlled' }}

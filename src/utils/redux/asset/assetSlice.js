@@ -16,6 +16,7 @@ const initialState = {
       deadline: '2024-01-01',
       type: 'day', // day||month,
       autoSaving: true,
+      popUp: false,
     },
   },
   assetByCategory: {
