@@ -7,7 +7,7 @@ import ScheduleManagement from '../containers/assetManagement/pages/ScheduleMana
 import PATH from '../domain/constants/path';
 import { RouterDOM } from '../types/common';
 
-const managementRoutes: RouterDOM[] = [
+const MANAGEMENT_ROUTES: RouterDOM[] = [
   {
     path: PATH.savingsGoal,
     element: <SavingsGoal />,
@@ -34,4 +34,4 @@ const managementRoutes: RouterDOM[] = [
   },
 ];
 
-export default managementRoutes;
+export default MANAGEMENT_ROUTES;

@@ -9,7 +9,7 @@ import TestContainer from '../containers/test/TestContainer';
 import PATH from '../domain/constants/path';
 import { RouterDOM } from '../types/common';
 
-const homeRoutes: RouterDOM[] = [
+const HOME_ROUTES: RouterDOM[] = [
   {
     path: PATH.home,
     element: <HomeContainer />,
@@ -44,4 +44,4 @@ const homeRoutes: RouterDOM[] = [
   },
 ];
 
-export default homeRoutes;
+export default HOME_ROUTES;

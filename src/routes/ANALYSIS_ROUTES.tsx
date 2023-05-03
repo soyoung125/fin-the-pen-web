@@ -3,7 +3,7 @@ import AnalysisDetailContainer from '../containers/analysis/AnalysisDetailContai
 import PATH from '../domain/constants/path';
 import { RouterDOM } from '../types/common';
 
-const analysisRoutes: RouterDOM[] = [
+const ANALYSIS_ROUTES: RouterDOM[] = [
   {
     path: PATH.analysis,
     element: <AnalysisContainer />,
@@ -14,4 +14,4 @@ const analysisRoutes: RouterDOM[] = [
   },
 ];
 
-export default analysisRoutes;
+export default ANALYSIS_ROUTES;
