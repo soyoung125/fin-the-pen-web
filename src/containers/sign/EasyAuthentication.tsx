@@ -1,9 +1,8 @@
 /* eslint-disable react/jsx-no-useless-fragment */
 import {
-  Alert,
-  Box, Button, Dialog, Grid, InputBase, Stack,
+  Alert, Box, Button, Dialog, Grid, InputBase, Stack,
 } from '@mui/material';
-import { useEffect, useRef, useState } from 'react';
+import { useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import LogoCircle from '../../components/common/LogoCircle';
 import CenterBox from '../../components/layouts/CenterBox';
@@ -15,14 +14,11 @@ function EasyAuthentication() {
   const dispatch = useDispatch();
   const isAuthenticated = useSelector(selectIsAuthenticated);
   const user = useSelector(selectUser);
-  const input = useRef();
+  const input = useRef<HTMLInputElement>();
   const [password, setPassword] = useState('');
 
-  useEffect(() => {
-    console.log(password);
-  }, [password]);
+  console.log(password);
 
-  // console.log(input.current.value);
   return (
     <>
       {user
@@ -68,7 +64,7 @@ function EasyAuthentication() {
                             borderRadius: 1,
                             backgroundColor: index < password.length ? 'rgba(115, 91, 242, 0.6)' : 'white',
                           }}
-                          onClick={() => input.current.focus()}
+                          onClick={() => input.current && input.current.focus()}
                         >
                           <Box sx={{
                             color: 'white', fontSize: '45px', textAlign: 'center',
