@@ -11,7 +11,7 @@ import { fetchSignUp } from '../../../../utils/redux/API';
 
 function SignUp() {
   const navigate = useNavigate();
-  const signUp = async (user) => {
+  const signUp = async (user: any) => {
     const result = await fetchSignUp(user);
     // 에러 핸들링
     if (result === undefined) {
@@ -26,7 +26,7 @@ function SignUp() {
     }
   };
 
-  const handleSubmit = (event) => {
+  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
     const user = {
