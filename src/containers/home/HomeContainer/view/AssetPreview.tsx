@@ -12,6 +12,7 @@ import ScheduleStatusCard from '../../../../components/assetManagement/ScheduleS
 function AssetPreview() {
   const schedules = useSelector(selectSchedules);
   const today = moment();
+  const schedulesOfMonth = schedules.filter((s) => today.isSame(s.date, 'month') && today.isSameOrBefore(moment(s.date + s.start_time, 'YYYY-MM-DDhh:mm')));
 
   const [expandAccordion, setExpandAccordion] = useState(false);
 
@@ -39,7 +40,7 @@ function AssetPreview() {
       <Box sx={{ mx: 2 }}>
         <ScheduleStatusCard
           month={today.format('M월')}
-          numberOfSchedule={schedules.filter((s) => today.isSame(s.date, 'month') && today.isSameOrBefore(s.date, 'day')).length}
+          numberOfSchedule={schedulesOfMonth.length}
         />
       </Box>
     </Box>
