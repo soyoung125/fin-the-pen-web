@@ -1,22 +1,22 @@
-import { Box, Divider } from '@mui/material';
-import moment from 'moment';
-import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import ScheduleViewMode from './layout/ScheduleViewMode';
-import useHeader from '../../../hooks/useHeader';
-import { selectGuestMode, selectIsAuthenticated, setIsAuthenticatedFalse } from '../../../domain/redux/common/commonSlice';
+import { useEffect } from 'react';
+import moment from 'moment';
+import { Box, Divider } from '@mui/material';
 import {
-  getMonthSchedules, selectDate, selectViewMode, changeViewMode,
-} from '../../../domain/redux/schedule/scheduleSlice';
-import { selectUser } from '../../../domain/redux/user/userSlice';
-import EasyAuthentication from '../../sign/EasyAuthentication';
-import Calender from './view/Calender';
-import ScheduleList from './view/ScheduleList';
-import AssetPreview from './view/AssetPreview';
-import ConsumptionAlert from './layout/ConsumptionAlert';
-import { HEADER_MODE } from '../../../domain/constants/common';
+  changeViewMode, getMonthSchedules, selectDate, selectViewMode
+} from '../../domain/redux/schedule/scheduleSlice';
+import { selectUser } from '../../domain/redux/user/userSlice';
+import { selectGuestMode, selectIsAuthenticated, setIsAuthenticatedFalse } from '../../domain/redux/common/commonSlice';
+import useHeader from '../../hooks/useHeader';
+import { HEADER_MODE } from '../../domain/constants/common';
+import ConsumptionAlert from '../../containers/home/HomeContainer/layout/ConsumptionAlert';
+import Calender from '../../containers/home/HomeContainer/view/Calender';
+import ScheduleList from '../../containers/home/HomeContainer/view/ScheduleList';
+import EasyAuthentication from '../../containers/sign/EasyAuthentication';
+import AssetPreview from '../../containers/home/HomeContainer/view/AssetPreview';
+import ScheduleViewMode from '../../containers/home/HomeContainer/layout/ScheduleViewMode';
 
-function HomeContainer() {
+function Home() {
   const dispatch = useDispatch();
   const viewMode = useSelector(selectViewMode);
   const date = useSelector(selectDate);
@@ -68,4 +68,5 @@ function HomeContainer() {
     </Box>
   );
 }
-export default HomeContainer;
+
+export default Home;
