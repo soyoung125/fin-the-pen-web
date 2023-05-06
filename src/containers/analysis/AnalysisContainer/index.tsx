@@ -5,21 +5,24 @@ import {
   blue, blueGrey, brown, green, indigo, pink, red,
 } from '@mui/material/colors';
 import { useEffect, useState } from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import AnalysisGraph from './AnalysisGraph';
 import AnalysisList from './analysisList/AnalysisList';
 import { CATEGORIES } from '../../../domain/constants/categories';
 import PATH from '../../../domain/constants/path';
 import useHeader from '../../../hooks/useHeader';
-import { selectDate, selectSchedules } from '../../../domain/redux/schedule/scheduleSlice';
+import {
+  selectAnalyzedData, selectDate, selectSchedules, updateAnalyzedData
+} from '../../../domain/redux/schedule/scheduleSlice';
 import { AnalysisData } from '../../../types/common';
 
 function AnalysisContainer() {
+  const dispatch = useDispatch();
   const navigate = useNavigate();
   const date = useSelector(selectDate);
-  const [data, setData] = useState<AnalysisData[]>([]); // color 추가할 계획
-  const [total, setTotal] = useState(0); // color 추가할 계획
+  const data = useSelector(selectAnalyzedData);
+  const [total, setTotal] = useState(0);
   const schedules = useSelector(selectSchedules);
   const colorList = [
     indigo[100], indigo[200], indigo[300], indigo[400], indigo[500], indigo[600], indigo[700], indigo[800],
@@ -58,7 +61,7 @@ function AnalysisContainer() {
     }, []);
 
     setTotal(newTotal);
-    setData(newData.sort((a, b) => b.value - a.value));
+    dispatch(updateAnalyzedData(newData.sort((a, b) => b.value - a.value)));
   }, [date]);
 
   const clickListItem = (category: AnalysisData) => {

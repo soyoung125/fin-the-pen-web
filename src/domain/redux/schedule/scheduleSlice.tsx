@@ -6,7 +6,7 @@ import { fetchCreateSchedule, fetchDeleteSchedule, fetchMonthSchedules } from '.
 import { fetchMockCreateSchedule, fetchMockDeleteSchedule } from '../../../utils/redux/mockAPI';
 import { Schedule, ViewModeValue } from '../../../types/schedule';
 import { ASYNC_THUNK_STATUS } from '../../constants/common';
-import { AsyncThunkStatusValue } from '../../../types/common';
+import { AnalysisData, AsyncThunkStatusValue } from '../../../types/common';
 
 interface InitialState {
   // 메인
@@ -17,6 +17,8 @@ interface InitialState {
   schedules: Schedule[];
   // 서랍에 표시될 일정 1개
   schedule: Schedule | null;
+  // 분석 페이지에 표시될 데이터
+  analyzedData: AnalysisData[];
   // 필터
   filtered: string[];
   filtered_date: {
@@ -31,6 +33,7 @@ const initialState: InitialState = {
   viewMode: 'asset',
   schedules: [],
   schedule: null,
+  analyzedData: [],
   filtered: [],
   filtered_date: {
     start: '',
@@ -94,6 +97,9 @@ export const scheduleSlice = createSlice({
     },
     selectedDate: (state, action) => {
       state.date = action.payload;
+    },
+    updateAnalyzedData: (state, action) => {
+      state.analyzedData = action.payload;
     },
     updateFilter: (state, action) => {
       /**
@@ -171,6 +177,7 @@ export const {
   setDrawerSchedule,
   selectedDate,
   modifySchedule,
+  updateAnalyzedData,
   updateFilter,
   updateFiltersForce,
   setFilteredDate,
@@ -185,5 +192,6 @@ export const selectFilteredDate = (state: any) => (state.schedule as InitialStat
 export const selectViewMode = (state: any) => (state.schedule as InitialState).viewMode;
 export const selectSchedule = (state: any) => (state.schedule as InitialState).schedule;
 export const selectStatus = (state: any) => (state.schedule as InitialState).status;
+export const selectAnalyzedData = (state: any) => (state.schedule as InitialState).analyzedData;
 
 export default scheduleSlice.reducer;
