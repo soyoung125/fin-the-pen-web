@@ -73,11 +73,11 @@ function FilterButton() {
             <Button onClick={() => setBottomDrawerOpen(false)}><ClearIcon /></Button>
             <Typography variant="h5" sx={{ fontWeight: 'bold' }}>필터 설정</Typography>
             <Button
-              variant="outlined"
-              color="error"
-              onClick={() => dispatch(initFilter())}
+              variant="text"
+              color="primary"
+              // onClick={() => dispatch(initFilter())}
             >
-              초기화
+              확인
             </Button>
           </Stack>
           {
@@ -153,6 +153,13 @@ function FilterButton() {
               </Stack>
             )
           }
+          <Button
+            variant="contained"
+            color="primary"
+            onClick={() => dispatch(initFilter())}
+          >
+            필터 초기화
+          </Button>
         </Stack>
       </Drawer>
     </>
