@@ -1,20 +1,19 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
 import moment from 'moment';
-import { Box, Divider } from '@mui/material';
+import { Box } from '@mui/material';
 import {
   changeViewMode, getMonthSchedules, selectDate, selectViewMode
 } from '../../domain/redux/schedule/scheduleSlice';
 import { selectUser } from '../../domain/redux/user/userSlice';
-import { selectGuestMode, selectIsAuthenticated, setIsAuthenticatedFalse } from '../../domain/redux/common/commonSlice';
+import { selectGuestMode, setIsAuthenticatedFalse } from '../../domain/redux/common/commonSlice';
 import useHeader from '../../hooks/useHeader';
 import { HEADER_MODE } from '../../domain/constants/common';
 import ConsumptionAlert from '../../containers/home/HomeContainer/layout/ConsumptionAlert';
-import Calender from '../../containers/home/HomeContainer/view/Calender';
-import ScheduleList from '../../containers/home/HomeContainer/view/ScheduleList';
-import EasyAuthentication from '../../containers/sign/EasyAuthentication';
-import AssetPreview from '../../containers/home/HomeContainer/view/AssetPreview';
 import ScheduleViewMode from '../../containers/home/HomeContainer/layout/ScheduleViewMode';
+import ScheduleView from '../../containers/home/ScheduleView';
+import AssetView from '../../containers/home/AssetView';
+import { VIEW_MODE } from '../../domain/constants/schedule';
 
 function Home() {
   const dispatch = useDispatch();
@@ -22,10 +21,9 @@ function Home() {
   const date = useSelector(selectDate);
   const user = useSelector(selectUser);
   const guestMode = useSelector(selectGuestMode);
-  const isAuthenticated = useSelector(selectIsAuthenticated);
 
   useEffect(() => {
-    dispatch(changeViewMode('schedule'));
+    dispatch(changeViewMode(VIEW_MODE.schedule));
     dispatch(setIsAuthenticatedFalse());
   }, []);
 
@@ -52,18 +50,16 @@ function Home() {
   return (
     <Box>
       <ConsumptionAlert />
-      {viewMode === 'schedule' ? (
-        <>
-          <Calender dateHeight={50} />
-          <Divider />
-          <ScheduleList />
-        </>
-      ) : (
-        <>
-          <EasyAuthentication />
-          {isAuthenticated && <AssetPreview />}
-        </>
-      )}
+      {
+        viewMode === VIEW_MODE.schedule && (
+          <ScheduleView />
+        )
+      }
+      {
+        viewMode === VIEW_MODE.asset && (
+          <AssetView />
+        )
+      }
       <ScheduleViewMode />
     </Box>
   );
