@@ -5,10 +5,10 @@ import { RouterProvider } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import { PersistGate } from 'redux-persist/integration/react';
 import { persistStore } from 'redux-persist';
-import { store } from './store';
+import { store } from './stores/store';
 import reportWebVitals from './reportWebVitals';
 import CustomThemeProvider from './components/providers/CustomThemeProvider';
-import router from './router';
+import router from './stores/router';
 
 const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement);
 const persistor = persistStore(store);
