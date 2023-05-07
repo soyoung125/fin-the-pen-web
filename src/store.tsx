@@ -9,7 +9,7 @@ import thunk from 'redux-thunk';
 import userReducer from './domain/redux/user/userSlice';
 import scheduleReducer from './domain/redux/schedule/scheduleSlice';
 import commonReducer from './domain/redux/common/commonSlice';
-import settingReducer from './utils/redux/setting/settingSlice';
+import settingReducer from './domain/redux/setting/settingSlice';
 import assetReducer from './domain/redux/asset/assetSlice';
 
 const reducers = combineReducers({

@@ -2,7 +2,7 @@
 import { PickersDay, PickersDayProps } from '@mui/x-date-pickers';
 import moment from 'moment';
 import { useSelector } from 'react-redux';
-import { selectIsDarkMode } from '../../../../../../../utils/redux/setting/settingSlice';
+import { selectIsDarkMode } from '../../../../../../../domain/redux/setting/settingSlice';
 
 interface MarkedPickersDayProps {
   color: string;

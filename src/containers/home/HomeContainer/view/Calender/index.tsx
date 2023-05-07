@@ -22,7 +22,7 @@ import IncomeExpenditureBox from './boxes/IncomeExpenditureBox';
 import { calculateIncomeExpenditure } from '../../../../../domain/tools';
 import { makeMarkerData } from './domain/calender';
 import WeeklyStatment from './boxes/WeeklyStatement';
-import { selectIsDarkMode } from '../../../../../utils/redux/setting/settingSlice';
+import { selectIsDarkMode } from '../../../../../domain/redux/setting/settingSlice';
 
 interface CalenderProps {
   dateHeight: number
