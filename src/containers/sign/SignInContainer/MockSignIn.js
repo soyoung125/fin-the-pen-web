@@ -1,6 +1,6 @@
 import { Button } from '@mui/material';
 import { useDispatch, useSelector } from 'react-redux';
-import { mockLogin, selectStatus } from '../../../../domain/redux/user/userSlice';
+import { mockLogin, selectStatus } from '../../../domain/redux/user/userSlice';
 
 function MockSignIn() {
   const dispatch = useDispatch();

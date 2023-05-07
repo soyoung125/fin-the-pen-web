@@ -2,12 +2,12 @@ import { Box, Button, TextField } from '@mui/material';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { NO_BLANKS } from '../../../../domain/constants/messages';
-import PATH from '../../../../domain/constants/path';
-import { login, selectUser } from '../../../../domain/redux/user/userSlice';
-import { isObjectValuesEmpty } from '../../../../domain/tools';
+import { NO_BLANKS } from '../../../domain/constants/messages';
+import PATH from '../../../domain/constants/path';
+import { login, selectUser } from '../../../domain/redux/user/userSlice';
+import { isObjectValuesEmpty } from '../../../domain/tools';
 
-function SignIn() {
+function SignInFields() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const user = useSelector(selectUser);
@@ -82,4 +82,4 @@ function SignIn() {
     </Box>
   );
 }
-export default SignIn;
+export default SignInFields;

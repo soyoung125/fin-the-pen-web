@@ -2,7 +2,7 @@ import AssetManagementContainer from '../containers/assetManagement/AssetManagem
 import MyPageContainer from '../containers/my-page/MyPageContainer';
 import NotificationContainer from '../containers/notification/NotificationContainer';
 import SettingsContainer from '../containers/settings/SettingsContainer';
-import SignInContainer from '../containers/sign/SignInContainer';
+import SignInContainer from '../pages/SignIn';
 import SignUpContainer from '../containers/sign/SignUpContainer';
 import TestContainer from '../containers/test/TestContainer';
 import PATH from '../domain/constants/path';
