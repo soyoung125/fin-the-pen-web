@@ -1,5 +1,5 @@
 import { Box, Button, TextField } from '@mui/material';
-import { useEffect } from 'react';
+import { FormEvent, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { NO_BLANKS } from '../../../domain/constants/messages';
@@ -12,7 +12,7 @@ function SignInFields() {
   const dispatch = useDispatch();
   const user = useSelector(selectUser);
 
-  const handleSubmit = (event) => {
+  const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
     const sign = {

@@ -5,7 +5,7 @@ function Footer() {
   return (
     <Typography color="text.secondary">
       {'Copyright © '}
-      <Link color="inherit" href="https://mui.com/">
+      <Link color="inherit" to="https://github.com/soyoung125/fin-the-pen-web">
         핀더펜
       </Link>
       {' '}
