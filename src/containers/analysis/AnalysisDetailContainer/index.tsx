@@ -7,16 +7,17 @@ import { useSelector } from 'react-redux';
 import { useEffect, useState } from 'react';
 import Title from '../../../components/common/Title';
 import SpendingDetailCard from './detailCard/SpendingDetailCard';
-import { selectDate, selectSchedules } from '../../../domain/redux/schedule/scheduleSlice';
+import { selectDate } from '../../../domain/redux/schedule/scheduleSlice';
 import AssetManagement from './detailCard/AssetManagement';
 import { selectAssetsByCategory } from '../../../domain/redux/asset/assetSlice';
 import { AssetsByCategoryInterface } from '../../../types/common';
+import useSchedule from '../../../hooks/useSchedule';
 
 function AnalysisDetailContainer() {
   const { state } = useLocation();
   const { color, category, type } = state;
   const date = useSelector(selectDate);
-  const schedules = useSelector(selectSchedules);
+  const { schedules } = useSchedule();
   const assetsByCategory: AssetsByCategoryInterface[] = useSelector(selectAssetsByCategory);
   const [selectedItem, setSelectedItem] = useState(schedules.filter((s) => date.isSame(s.date, 'month') && s.category === category));
   const [spending, setSpending] = useState(0);

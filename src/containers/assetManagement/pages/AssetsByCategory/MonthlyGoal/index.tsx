@@ -5,10 +5,9 @@ import {
 import BorderColorIcon from '@mui/icons-material/BorderColor';
 import { useEffect, useState } from 'react';
 import moment from 'moment';
-import { useSelector } from 'react-redux';
 import RoundedPaper from '../../../../../components/common/RoundedPaper';
 import ArrowTooltip from '../../../../../components/common/ArrowTooltip';
-import { selectSchedules } from '../../../../../domain/redux/schedule/scheduleSlice';
+import useSchedule from '../../../../../hooks/useSchedule';
 
 interface MonthlyGoalProps {
   title: string,
@@ -20,7 +19,7 @@ interface MonthlyGoalProps {
 function MonthlyGoal({
   title, openAlertModal, open, monthlyConsumptionGoal,
 }: MonthlyGoalProps) {
-  const schedules = useSelector(selectSchedules);
+  const { schedules } = useSchedule();
   const [lastMonthSpending, setLastMonthSpending] = useState(0);
   const [ThrMonthsSpending, setThrMonthsSpending] = useState(0);
 

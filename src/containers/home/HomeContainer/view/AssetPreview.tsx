@@ -3,14 +3,13 @@ import {
 } from '@mui/material';
 import moment from 'moment';
 import { useState } from 'react';
-import { useSelector } from 'react-redux';
-import { selectSchedules } from '../../../../domain/redux/schedule/scheduleSlice';
 import Calender from './Calender';
 import MonthlyStatement from './MonthlyStatement';
 import ScheduleStatusCard from '../../../../components/assetManagement/ScheduleStatusCard';
+import useSchedule from '../../../../hooks/useSchedule';
 
 function AssetPreview() {
-  const schedules = useSelector(selectSchedules);
+  const { schedules } = useSchedule();
   const today = moment();
   const schedulesOfMonth = schedules.filter((s) => today.isSame(s.date, 'month') && today.isSameOrBefore(moment(s.date + s.start_time, 'YYYY-MM-DDhh:mm')));
 

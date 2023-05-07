@@ -11,12 +11,12 @@ import { REGULAR_DEPOSIT_WITHDRAWAL_TYPE } from '../../../../domain/constants/sc
 import DetailCard from './DetailCard';
 import Title from '../../../../components/common/Title';
 import PATH from '../../../../domain/constants/path';
-import { selectSchedules } from '../../../../domain/redux/schedule/scheduleSlice';
 import AlertModal from '../../../../components/common/AlertModal';
 import { selectBottomDrawerOpen } from '../../../../domain/redux/common/commonSlice';
 import ArrowTooltip from '../../../../components/common/ArrowTooltip';
 import { Schedule } from '../../../../types/schedule';
 import { makeGroupForRegularData } from '../../../../domain/tools';
+import useSchedule from '../../../../hooks/useSchedule';
 
 interface DataInterface {
   [prop: string]: Schedule[],
@@ -28,7 +28,7 @@ interface DataInterface {
 function RegularDepositWithdrawal() {
   const navigate = useNavigate();
   const bottomDrawerOpen = useSelector(selectBottomDrawerOpen);
-  const schedules = useSelector(selectSchedules);
+  const { schedules } = useSchedule();
   const [deposits, setDeposits] = useState<DataInterface>({});
   const [withdrawals, setWithdrawals] = useState<DataInterface>({});
   const [openAlertModal, setOpenAlertModal] = useState(false);

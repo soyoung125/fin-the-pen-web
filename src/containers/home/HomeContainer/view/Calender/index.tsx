@@ -12,7 +12,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { grey, lightBlue, pink } from '@mui/material/colors';
 import { CATEGORIES } from '../../../../../domain/constants/categories';
 import {
-  selectDate, selectedDate, selectSchedules, selectViewMode,
+  selectDate, selectedDate, selectViewMode,
 } from '../../../../../domain/redux/schedule/scheduleSlice';
 import MarkedPickersDay from './boxes/scheduleMarker/MarkedPickersDay';
 import MarkerStack from './boxes/scheduleMarker/MarkerStack';
@@ -23,6 +23,7 @@ import { calculateIncomeExpenditure } from '../../../../../domain/tools';
 import { makeMarkerData } from './domain/calender';
 import WeeklyStatment from './boxes/WeeklyStatement';
 import { selectIsDarkMode } from '../../../../../domain/redux/setting/settingSlice';
+import useSchedule from '../../../../../hooks/useSchedule';
 
 interface CalenderProps {
   dateHeight: number
@@ -35,7 +36,7 @@ interface RenderDAyFunction {
 function Calender({ dateHeight }: CalenderProps) {
   const dispatch = useDispatch();
   const value = useSelector(selectDate);
-  const schedules = useSelector(selectSchedules);
+  const { schedules } = useSchedule();
   const viewMode = useSelector(selectViewMode);
   const today = moment(new Date());
   const isDarkMode = useSelector(selectIsDarkMode);

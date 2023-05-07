@@ -13,9 +13,10 @@ import { CATEGORIES } from '../../../domain/constants/categories';
 import PATH from '../../../domain/constants/path';
 import useHeader from '../../../hooks/useHeader';
 import {
-  selectAnalyzedData, selectDate, selectSchedules, updateAnalyzedData
+  selectAnalyzedData, selectDate, updateAnalyzedData
 } from '../../../domain/redux/schedule/scheduleSlice';
 import { AnalysisData } from '../../../types/common';
+import useSchedule from '../../../hooks/useSchedule';
 
 function AnalysisContainer() {
   const dispatch = useDispatch();
@@ -23,7 +24,7 @@ function AnalysisContainer() {
   const date = useSelector(selectDate);
   const data = useSelector(selectAnalyzedData);
   const [total, setTotal] = useState(0);
-  const schedules = useSelector(selectSchedules);
+  const { schedules } = useSchedule();
   const colorList = [
     indigo[100], indigo[200], indigo[300], indigo[400], indigo[500], indigo[600], indigo[700], indigo[800],
     green[100], green[200], green[300],

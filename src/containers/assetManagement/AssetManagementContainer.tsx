@@ -7,12 +7,12 @@ import { useDispatch, useSelector } from 'react-redux';
 import ScheduleStatusCard from '../../components/assetManagement/ScheduleStatusCard';
 import SettingsPaper from '../../components/assetManagement/SettingsPaper';
 import { setIsAuthenticatedFalse } from '../../domain/redux/common/commonSlice';
-import { selectSchedules } from '../../domain/redux/schedule/scheduleSlice';
 import { selectUser } from '../../domain/redux/user/userSlice';
+import useSchedule from '../../hooks/useSchedule';
 
 function AssetManagementContainer() {
   const dispatch = useDispatch();
-  const schedules = useSelector(selectSchedules);
+  const { schedules } = useSchedule();
   const user = useSelector(selectUser);
   const today = moment();
 

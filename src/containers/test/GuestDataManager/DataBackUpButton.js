@@ -4,13 +4,13 @@ import {
 import { useState } from 'react';
 import { useSelector } from 'react-redux';
 import ModalStaticBackdrop from '../../../components/layouts/ModalStaticBackdrop';
-import { selectSchedules } from '../../../domain/redux/schedule/scheduleSlice';
 import { selectSettings } from '../../../domain/redux/setting/settingSlice';
+import useSchedule from '../../../hooks/useSchedule';
 
 function DataBackUpButton() {
   const [open, setOpen] = useState(false);
   const [text, setText] = useState('');
-  const schedules = useSelector(selectSchedules);
+  const { schedules } = useSchedule();
   const settings = useSelector(selectSettings);
 
   const saveData = () => {
