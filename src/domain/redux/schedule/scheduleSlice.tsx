@@ -112,9 +112,11 @@ export const scheduleSlice = createSlice({
       const expenditureCategories = CATEGORIES.filter((c) => c.type === '지출' || c.nestedType === '출금');
       const startExpression = (s: Schedule) => state.filtered_date.start === '' || moment(s.date).isAfter(state.filtered_date.start);
       const endExpression = (s: Schedule) => state.filtered_date.end === '' || moment(s.date).isBefore(state.filtered_date.end);
+      const exeptionExpression = (s: Schedule) => !state.filtered.includes(s.category);
 
       expenditureCategories.map((c, index) => {
-        const schByCategory = state.schedules.filter((s) => state.date.isSame(s.date, 'month') && startExpression(s) && endExpression(s) && s.category === c.title);
+        const schByCategory = state.schedules
+          .filter((s) => state.date.isSame(s.date, 'month') && startExpression(s) && endExpression(s) && exeptionExpression(s) && s.category === c.title);
         const cnt = schByCategory.length;
         if (cnt > 0) {
           const spending = schByCategory
