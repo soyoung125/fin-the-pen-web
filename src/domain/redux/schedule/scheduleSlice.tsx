@@ -107,16 +107,24 @@ export const scheduleSlice = createSlice({
       state.date = action.payload;
     },
     updateAnalyzedData: (state) => {
+      /**
+       * 1. 선택한 월의 일정
+       * 2. 필터에서 설정한 시작일 뒤의 일정
+       * 3. 필터에서 설정한 종료일 전의 일정
+       * 4. 필터에서 선택한 카테고리 일정 제외
+       * 한 일정에서 카테고리별로 일정을 나누고 그래프를 그리기 위한 데이터 생성
+       */
       const newData: AnalysisData[] = [];
-      let newTotal = 0;
-      const expenditureCategories = CATEGORIES.filter((c) => c.type === '지출' || c.nestedType === '출금');
       const startExpression = (s: Schedule) => state.filtered_date.start === '' || moment(s.date).isAfter(state.filtered_date.start);
       const endExpression = (s: Schedule) => state.filtered_date.end === '' || moment(s.date).isBefore(state.filtered_date.end);
       const exeptionExpression = (s: Schedule) => !state.filtered.includes(s.category);
 
+      let newTotal = 0;
+      const expenditureCategories = CATEGORIES.filter((c) => c.type === '지출' || c.nestedType === '출금');
+      const schedules = state.schedules.filter((s) => state.date.isSame(s.date, 'month') && startExpression(s) && endExpression(s) && exeptionExpression(s));
+
       expenditureCategories.map((c, index) => {
-        const schByCategory = state.schedules
-          .filter((s) => state.date.isSame(s.date, 'month') && startExpression(s) && endExpression(s) && exeptionExpression(s) && s.category === c.title);
+        const schByCategory = schedules.filter((s) => s.category === c.title);
         const cnt = schByCategory.length;
         if (cnt > 0) {
           const spending = schByCategory
