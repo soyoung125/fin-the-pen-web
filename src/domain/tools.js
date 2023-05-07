@@ -1,3 +1,5 @@
+/* eslint-disable max-len */
+/* eslint-disable array-callback-return */
 /* eslint-disable @typescript-eslint/naming-convention */
 /* eslint-disable import/prefer-default-export */
 

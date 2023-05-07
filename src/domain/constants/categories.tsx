@@ -1,3 +1,8 @@
+/* eslint-disable max-len */
+import {
+  blue, blueGrey, brown, green, indigo, pink, red,
+} from '@mui/material/colors';
+
 export interface NestedCategory {
   type: string,
   categories: string[],
@@ -107,7 +112,17 @@ const CATEGORIES: ReadonlyArray<Category> = [
   ...categoryFlatter(INCOME),
   ...categoryFlatter(EXPENDITURE),
 ];
+
+const COLORLIST: string[] = [
+  indigo[100], indigo[200], indigo[300], indigo[400], indigo[500], indigo[600], indigo[700], indigo[800],
+  green[100], green[200], green[300],
+  blue[100], blue[200], blue[300], blue[400], blue[500], blue[600], blue[700],
+  blueGrey[100], blueGrey[200],
+  pink[100], red[100], pink[200], red[200], pink[300],
+  brown[100], brown[200],
+];
+
 export default null;
 export {
-  CATEGORIES, FIXED, INCOME, EXPENDITURE,
+  CATEGORIES, FIXED, INCOME, EXPENDITURE, COLORLIST,
 };

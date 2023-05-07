@@ -1,3 +1,4 @@
+/* eslint-disable array-callback-return */
 /* eslint-disable max-len */
 /* eslint-disable no-param-reassign */
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
@@ -7,6 +8,7 @@ import { fetchMockCreateSchedule, fetchMockDeleteSchedule } from '../../../api/m
 import { Schedule, ViewModeValue } from '../../../types/schedule';
 import { ASYNC_THUNK_STATUS } from '../../constants/common';
 import { AnalysisData, AsyncThunkStatusValue } from '../../../types/common';
+import { CATEGORIES, COLORLIST } from '../../constants/categories';
 
 interface InitialState {
   // 메인
@@ -104,8 +106,31 @@ export const scheduleSlice = createSlice({
     selectedDate: (state, action) => {
       state.date = action.payload;
     },
-    updateAnalyzedData: (state, action) => {
-      state.analyzedData = action.payload;
+    updateAnalyzedData: (state) => {
+      const newData: AnalysisData[] = [];
+      let newTotal = 0;
+      const expenditureCategories = CATEGORIES.filter((c) => c.type === '지출' || c.nestedType === '출금');
+
+      expenditureCategories.map((c, index) => {
+        const schByCategory = state.schedules.filter((s) => state.date.isSame(s.date, 'month') && s.category === c.title);
+        const cnt = schByCategory.length;
+        if (cnt > 0) {
+          const spending = schByCategory
+            .reduce((result, schedule) => result + parseInt(schedule.expected_spending, 10), 0);
+          if (spending > 0) {
+            newData.push({
+              id: c.title,
+              label: c.title,
+              nestedType: c.nestedType,
+              value: spending,
+              color: COLORLIST[index],
+            });
+            newTotal += spending;
+          }
+        }
+      }, []);
+
+      state.analyzedData = { data: newData.sort((a, b) => b.value - a.value), total: newTotal };
     },
     updateFilter: (state, action) => {
       /**
