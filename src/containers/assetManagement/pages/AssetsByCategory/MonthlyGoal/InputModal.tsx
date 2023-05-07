@@ -5,7 +5,7 @@ import ClearIcon from '@mui/icons-material/Clear';
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect, useState } from 'react';
-import { selectMonthlyConsumptionGoal, setMonthlyConsumptionGoal } from '../../../../../utils/redux/asset/assetSlice';
+import { selectMonthlyConsumptionGoal, setMonthlyConsumptionGoal } from '../../../../../domain/redux/asset/assetSlice';
 
 interface InputModalProps {
   setMonthlyGoalModalOpen: React.Dispatch<React.SetStateAction<boolean>>

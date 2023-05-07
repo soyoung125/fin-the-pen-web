@@ -1,14 +1,14 @@
 /* eslint-disable no-param-reassign */
 import { createSlice } from '@reduxjs/toolkit';
 import moment from 'moment';
-import { initAssetsByCategory } from '../../../domain/tools';
+import { initAssetsByCategory } from '../../tools';
 
 const initialState = {
   goal: {
     saving: {
       year: 0,
       month: 0,
-      skipRequest: false,
+      skipRequest: false, // localStorage나 sessionStorage 에서 처리해줘도 괜찮을 듯 함
     },
     personal: {
       name: 'dd',
@@ -33,9 +33,6 @@ export const assetSlice = createSlice({
     setSavingGoal: (state, action) => {
       state.goal.saving = action.payload;
     },
-    setSavingGoalSkipRequestTrue: (state) => {
-      state.goal.saving = true;
-    },
     setPersonalGoal: (state, action) => {
       state.goal.personal = action.payload;
     },
@@ -54,17 +51,16 @@ export const assetSlice = createSlice({
 });
 export const {
   setSavingGoal,
-  setSkipRequestTrue,
   setPersonalGoal,
   setAssetsByCategory,
   setInitAssetsByCategory,
   setMonthlyConsumptionGoal,
 } = assetSlice.actions;
 
-export const selectSavingGoal = (state) => state.asset.goal.saving;
-export const selectPersonalGoal = (state) => state.asset.goal.personal;
-export const selectAssetsByCategory = (state) => state.asset.assetByCategory.assets;
-export const selectUpdateDate = (state) => state.asset.assetByCategory.updateDate;
-export const selectMonthlyConsumptionGoal = (state) => state.asset.assetByCategory.goal;
+export const selectSavingGoal = (state: any) => state.asset.goal.saving;
+export const selectPersonalGoal = (state: any) => state.asset.goal.personal;
+export const selectAssetsByCategory = (state: any) => state.asset.assetByCategory.assets;
+export const selectUpdateDate = (state: any) => state.asset.assetByCategory.updateDate;
+export const selectMonthlyConsumptionGoal = (state: any) => state.asset.assetByCategory.goal;
 
 export default assetSlice.reducer;

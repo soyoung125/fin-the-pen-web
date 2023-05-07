@@ -9,7 +9,7 @@ import Title from '../../../components/common/Title';
 import SpendingDetailCard from './detailCard/SpendingDetailCard';
 import { selectDate, selectSchedules } from '../../../domain/redux/schedule/scheduleSlice';
 import AssetManagement from './detailCard/AssetManagement';
-import { selectAssetsByCategory } from '../../../utils/redux/asset/assetSlice';
+import { selectAssetsByCategory } from '../../../domain/redux/asset/assetSlice';
 import { AssetsByCategoryInterface } from '../../../types/common';
 
 function AnalysisDetailContainer() {

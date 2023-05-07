@@ -7,7 +7,7 @@ import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { SOMETHING_IS_WRONG } from '../../../../../../domain/constants/messages';
-import { selectPersonalGoal, setPersonalGoal } from '../../../../../../utils/redux/asset/assetSlice';
+import { selectPersonalGoal, setPersonalGoal } from '../../../../../../domain/redux/asset/assetSlice';
 
 interface InputModalProps {
   setPersonalGoalModalOpen: React.Dispatch<React.SetStateAction<boolean>>,

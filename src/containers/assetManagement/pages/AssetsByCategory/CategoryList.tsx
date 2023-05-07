@@ -6,7 +6,7 @@ import {
 import { useState } from 'react';
 import { useSelector } from 'react-redux';
 import CategoryTypeBadge from '../../../../components/common/CategoryTypeBadge';
-import { selectAssetsByCategory } from '../../../../utils/redux/asset/assetSlice';
+import { selectAssetsByCategory } from '../../../../domain/redux/asset/assetSlice';
 import { AssetsByCategoryInterface } from '../../../../types/common';
 
 interface CategoryListProps {
