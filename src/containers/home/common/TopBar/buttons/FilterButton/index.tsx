@@ -8,7 +8,7 @@ import ClearIcon from '@mui/icons-material/Clear';
 import moment from 'moment';
 import FilterAccordion from './inputs/FilterAccordion';
 import {
-  initFilter, selectFiltered, selectFilteredDate, setFilteredDate, updateFilter,
+  initFilter, selectFiltered, selectFilteredDate, setFilteredDate, updateAnalyzedData, updateFilter,
 } from '../../../../../../domain/redux/schedule/scheduleSlice';
 import { WRONG_TIME_ORDER } from '../../../../../../domain/constants/schedule';
 import { isTimeOrderCorrect } from '../../../../../../domain/tools';
@@ -29,6 +29,11 @@ function FilterButton() {
 
   const handleDelete = (cat: string) => {
     dispatch(updateFilter(cat));
+  };
+
+  const handleClickOk = () => {
+    dispatch(updateAnalyzedData());
+    setBottomDrawerOpen(false);
   };
 
   const changeSchedule = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -75,7 +80,7 @@ function FilterButton() {
             <Button
               variant="text"
               color="primary"
-              // onClick={() => dispatch(initFilter())}
+              onClick={() => handleClickOk()}
             >
               확인
             </Button>
