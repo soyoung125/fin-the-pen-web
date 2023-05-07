@@ -4,7 +4,7 @@ import { Alert, Box } from '@mui/material';
 import {
   blue, blueGrey, brown, green, indigo, pink, red,
 } from '@mui/material/colors';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import AnalysisGraph from './AnalysisGraph';
@@ -22,8 +22,7 @@ function AnalysisContainer() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const date = useSelector(selectDate);
-  const data = useSelector(selectAnalyzedData);
-  const [total, setTotal] = useState(0);
+  const { data, total } = useSelector(selectAnalyzedData);
   const { schedules } = useSchedule();
   const colorList = [
     indigo[100], indigo[200], indigo[300], indigo[400], indigo[500], indigo[600], indigo[700], indigo[800],
@@ -48,7 +47,6 @@ function AnalysisContainer() {
         const spending = schByCategory
           .reduce((result, schedule) => result + parseInt(schedule.expected_spending, 10), 0);
         if (spending > 0) {
-          console.log(c);
           newData.push({
             id: c.title,
             label: c.title,
@@ -61,8 +59,7 @@ function AnalysisContainer() {
       }
     }, []);
 
-    setTotal(newTotal);
-    dispatch(updateAnalyzedData(newData.sort((a, b) => b.value - a.value)));
+    dispatch(updateAnalyzedData({ data: newData.sort((a, b) => b.value - a.value), total: newTotal }));
   }, [date]);
 
   const clickListItem = (category: AnalysisData) => {

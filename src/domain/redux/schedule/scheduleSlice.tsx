@@ -18,7 +18,10 @@ interface InitialState {
   // 서랍에 표시될 일정 1개
   schedule: Schedule | null;
   // 분석 페이지에 표시될 데이터
-  analyzedData: AnalysisData[];
+  analyzedData: {
+    data: AnalysisData[],
+    total: number,
+  };
   // 필터
   filtered: string[];
   filtered_date: {
@@ -33,7 +36,10 @@ const initialState: InitialState = {
   viewMode: 'asset',
   schedules: [],
   schedule: null,
-  analyzedData: [],
+  analyzedData: {
+    data: [],
+    total: 0,
+  },
   filtered: [],
   filtered_date: {
     start: '',
