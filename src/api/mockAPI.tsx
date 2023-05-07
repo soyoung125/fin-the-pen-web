@@ -2,7 +2,7 @@
 /* eslint-disable import/prefer-default-export */
 // A mock function to mimic making an async request for data
 export function fetchMockLogin() {
-  return new Promise((resolve) => setTimeout(() => resolve({
+  return new Promise<any>((resolve) => setTimeout(() => resolve({
     data: {
       id: 0,
       user_id: 'guest@finthepen.com',
@@ -15,13 +15,13 @@ export function fetchMockLogin() {
 }
 
 export function fetchMockCreateSchedule(scheduleWithUuid: any) {
-  return new Promise((resolve) => setTimeout(() => resolve({
+  return new Promise<any>((resolve) => setTimeout(() => resolve({
     data: scheduleWithUuid,
   }), 500));
 }
 
 export function fetchMockDeleteSchedule(id: any) {
-  return new Promise((resolve) => setTimeout(() => resolve({
+  return new Promise<any>((resolve) => setTimeout(() => resolve({
     data: id,
   }), 500));
 }
