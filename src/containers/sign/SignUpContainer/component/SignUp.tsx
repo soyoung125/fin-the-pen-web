@@ -7,7 +7,7 @@ import { isObjectValuesEmpty } from '../../../../domain/tools';
 import {
   NO_BLANKS, NO_DUPLICATION_ID, NO_SIGNAL_FROM_SERVER, SIGN_UP_SUCCESS,
 } from '../../../../domain/constants/messages';
-import { fetchSignUp } from '../../../../utils/redux/API';
+import { fetchSignUp } from '../../../../api/API';
 
 function SignUp() {
   const navigate = useNavigate();

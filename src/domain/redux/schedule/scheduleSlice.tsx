@@ -2,8 +2,8 @@
 /* eslint-disable no-param-reassign */
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import moment from 'moment';
-import { fetchCreateSchedule, fetchDeleteSchedule, fetchMonthSchedules } from '../../../utils/redux/API';
-import { fetchMockCreateSchedule, fetchMockDeleteSchedule } from '../../../utils/redux/mockAPI';
+import { fetchCreateSchedule, fetchDeleteSchedule, fetchMonthSchedules } from '../../../api/API';
+import { fetchMockCreateSchedule, fetchMockDeleteSchedule } from '../../../api/mockAPI';
 import { Schedule, ViewModeValue } from '../../../types/schedule';
 import { ASYNC_THUNK_STATUS } from '../../constants/common';
 import { AnalysisData, AsyncThunkStatusValue } from '../../../types/common';

@@ -1,8 +1,8 @@
 /* eslint-disable no-param-reassign */
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { NO_SIGNAL_FROM_SERVER } from '../../constants/messages';
-import { fetchLogin } from '../../../utils/redux/API';
-import { fetchMockLogin } from '../../../utils/redux/mockAPI';
+import { fetchLogin } from '../../../api/API';
+import { fetchMockLogin } from '../../../api/mockAPI';
 import { AsyncThunkStatusValue, User } from '../../../types/common';
 import { ASYNC_THUNK_STATUS } from '../../constants/common';
 
