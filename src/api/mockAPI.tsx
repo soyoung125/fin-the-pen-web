@@ -14,13 +14,13 @@ export function fetchMockLogin() {
   }), 1000));
 }
 
-export function fetchMockCreateSchedule(scheduleWithUuid) {
+export function fetchMockCreateSchedule(scheduleWithUuid: any) {
   return new Promise((resolve) => setTimeout(() => resolve({
     data: scheduleWithUuid,
   }), 500));
 }
 
-export function fetchMockDeleteSchedule(id) {
+export function fetchMockDeleteSchedule(id: any) {
   return new Promise((resolve) => setTimeout(() => resolve({
     data: id,
   }), 500));
