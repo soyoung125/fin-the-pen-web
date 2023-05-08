@@ -18,9 +18,9 @@ function InputModal({
     month: 0,
   });
 
-  const handleChange = (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>): void => {
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement>): void => {
     const { id, value } = event.target;
-    const newValue = parseInt(value, 10);
+    const newValue = parseInt(value.replaceAll(',', ''), 10);
     if (newValue >= 0) {
       setForm({
         year: id === 'year' ? newValue : newValue * 12,
@@ -65,8 +65,8 @@ function InputModal({
         <TextField
           fullWidth
           placeholder="한해동안의 저축 목표액을 입력하세요"
-          type="number"
-          value={form.year}
+          type="text"
+          value={form.year.toLocaleString('ko-KR')}
           onFocus={(e) => e.target.select()}
           onChange={handleChange}
           id="year"
@@ -75,8 +75,8 @@ function InputModal({
         <TextField
           fullWidth
           placeholder="한해 저축 목표액을 입력하면 한달 저축 목표금액이 표시됩니다. "
-          type="number"
-          value={form.month}
+          type="text"
+          value={form.month.toLocaleString('ko-KR')}
           onFocus={(e) => e.target.select()}
           onChange={handleChange}
           id="month"

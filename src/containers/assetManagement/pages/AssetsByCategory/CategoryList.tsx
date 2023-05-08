@@ -63,11 +63,11 @@ function CategoryList({
               {open === category.type && selectedCategory === ''
                 ? (
                   <InputBase
-                    onChange={(e) => setAsset(e.target.value)}
+                    onChange={(e) => setAsset(e.target.value.replaceAll(',', ''))}
                     autoFocus
-                    onFocus={() => setAsset(category.total === '-' ? '' : category.total.toString())}
-                    type="number"
-                    defaultValue={category.total === '-' ? '' : category.total}
+                    onFocus={() => setAsset(category.total === '-' ? '' : category.total.toLocaleString('ko-KR'))}
+                    type="text"
+                    value={(+asset).toLocaleString('ko-KR')}
                     sx={{
                       border: '1px solid', borderRadius: 1, fontSize: '14px', height: '21px', width: '100px',
                     }}
@@ -102,11 +102,11 @@ function CategoryList({
                       ? (
                         <Box>
                           <InputBase
-                            onChange={(e) => setAsset(e.target.value)}
+                            onChange={(e) => setAsset(e.target.value.replaceAll(',', ''))}
                             autoFocus
-                            onFocus={() => setAsset(c.asset.toString())}
-                            type="number"
-                            defaultValue={c.asset === '-' ? '' : c.asset}
+                            onFocus={() => setAsset(c.asset === '-' ? '' : c.asset.toLocaleString('ko-KR'))}
+                            type="text"
+                            value={(+asset).toLocaleString('ko-KR')}
                             sx={{
                               border: '1px solid', borderRadius: 1, fontSize: '14px', height: '21px', width: '100px',
                             }}

@@ -26,8 +26,9 @@ function InputModal({
   }, [saving]);
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const { value } = event.target;
+    const value = event.target.value.replaceAll(',', '');
     if (+value >= 0) {
+      console.log(value);
       setGoal(parseInt(value, 10));
     } else {
       alert('숫자는 0 이하일 수 없습니다.');
@@ -55,9 +56,9 @@ function InputModal({
         <Typography variant="h5" sx={{ fontWeight: 'bold' }}>이번달 소비 목표 금액</Typography>
         <TextField
           fullWidth
-          placeholder="이달의 저축 목표액을 입력하세요"
-          type="number"
-          value={goal}
+          placeholder="이달의 소비 목표액을 입력하세요"
+          type="text"
+          value={goal.toLocaleString('ko-KR')}
           onFocus={(e) => e.target.select()}
           onChange={handleChange}
           id="monthlyGoal"

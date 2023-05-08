@@ -107,14 +107,19 @@ function InputModal({
           <OutlinedInput
             id="money"
             startAdornment={<InputAdornment position="start">금액</InputAdornment>}
-            value={form.money}
-            onChange={changePersonalGoal}
+            value={form.money.toLocaleString('ko-KR')}
+            onChange={(e) => changePersonalGoal({
+              target: {
+                id: e.target.id,
+                value: +e.target.value.replaceAll(',', ''),
+              },
+            })}
             size="small"
             inputProps={{
               style: { textAlign: 'right' },
               step: 10,
             }}
-            type="number"
+            type="text"
             onFocus={(e) => e.target.select()}
           />
         </FormControl>
@@ -175,7 +180,7 @@ function InputModal({
         <FormControl fullWidth>
           <OutlinedInput
             startAdornment={<InputAdornment position="start">필요 적금액</InputAdornment>}
-            value={divisionByType(form.type, form.money)}
+            value={divisionByType(form.type, form.money).toLocaleString('ko-KR')}
             size="small"
             inputProps={{
               style: { textAlign: 'right' },
