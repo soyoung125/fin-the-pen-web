@@ -1,5 +1,5 @@
 import { useSelector } from 'react-redux';
-import { selectUser } from '../../domain/redux/user/userSlice';
+import { selectUser } from '../../app/redux/slices/userSlice';
 import TestBox from './box/TestBox';
 
 function UserData() {

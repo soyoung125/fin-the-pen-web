@@ -7,9 +7,9 @@ import { useSelector } from 'react-redux';
 import { useEffect, useState } from 'react';
 import Title from '../../../components/common/Title';
 import SpendingDetailCard from './detailCard/SpendingDetailCard';
-import { selectDate } from '../../../domain/redux/schedule/scheduleSlice';
+import { selectDate } from '../../../app/redux/slices/scheduleSlice';
 import AssetManagement from './detailCard/AssetManagement';
-import { selectAssetsByCategory } from '../../../domain/redux/asset/assetSlice';
+import { selectAssetsByCategory } from '../../../app/redux/slices/assetSlice';
 import { AssetsByCategoryInterface } from '../../../types/common';
 import useSchedule from '../../../hooks/useSchedule';
 

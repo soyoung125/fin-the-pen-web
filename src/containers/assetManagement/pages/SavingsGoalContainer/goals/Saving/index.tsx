@@ -7,7 +7,7 @@ import { useSelector } from 'react-redux';
 import RoundedPaper from '../../../../../../components/common/RoundedPaper';
 import ModalStaticBackdrop from '../../../../../../components/layouts/ModalStaticBackdrop';
 import RoundedBorderBox from '../../../../../../components/common/RoundedBorderBox';
-import { selectSavingGoal } from '../../../../../../domain/redux/asset/assetSlice';
+import { selectSavingGoal } from '../../../../../../app/redux/slices/assetSlice';
 import InputModal from './InputModal';
 import AlertModal from '../../../../../../components/common/AlertModal';
 import useModal from '../../../../../../hooks/useModal';

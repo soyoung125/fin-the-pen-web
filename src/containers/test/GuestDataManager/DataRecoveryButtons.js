@@ -4,7 +4,7 @@ import {
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
-import { setSchedules } from '../../../domain/redux/schedule/scheduleSlice';
+import { setSchedules } from '../../../app/redux/slices/scheduleSlice';
 import ModalStaticBackdrop from '../../../components/layouts/ModalStaticBackdrop';
 
 function DataRecoveryButtons() {

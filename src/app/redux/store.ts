@@ -7,11 +7,11 @@ import storage from 'redux-persist/lib/storage/session'; // for session storage
 import { Action, combineReducers } from 'redux';
 import { persistReducer } from 'redux-persist';
 import thunk, { ThunkAction } from 'redux-thunk';
-import userReducer from '../../domain/redux/user/userSlice';
-import scheduleReducer from '../../domain/redux/schedule/scheduleSlice';
-import commonReducer from '../../domain/redux/common/commonSlice';
-import settingReducer from '../../domain/redux/setting/settingSlice';
-import assetReducer from '../../domain/redux/asset/assetSlice';
+import userReducer from './slices/userSlice';
+import scheduleReducer from './slices/scheduleSlice';
+import commonReducer from './slices/commonSlice';
+import settingReducer from './slices/settingSlice';
+import assetReducer from './slices/assetSlice';
 
 const reducers = combineReducers({
   common: commonReducer,

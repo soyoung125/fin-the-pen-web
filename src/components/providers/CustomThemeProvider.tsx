@@ -1,6 +1,6 @@
 import { ThemeProvider, createTheme } from '@mui/material';
 import { useSelector } from 'react-redux';
-import { selectIsDarkMode } from '../../domain/redux/setting/settingSlice';
+import { selectIsDarkMode } from '../../app/redux/slices/settingSlice';
 import { darkThemeOptions, lightThemeOptions } from '../../app/theme';
 
 /**

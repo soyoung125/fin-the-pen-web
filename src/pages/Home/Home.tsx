@@ -4,9 +4,9 @@ import moment from 'moment';
 import { Box } from '@mui/material';
 import {
   changeViewMode, getMonthSchedules, selectDate, selectViewMode
-} from '../../domain/redux/schedule/scheduleSlice';
-import { selectUser } from '../../domain/redux/user/userSlice';
-import { selectGuestMode, setIsAuthenticatedFalse } from '../../domain/redux/common/commonSlice';
+} from '../../app/redux/slices/scheduleSlice';
+import { selectUser } from '../../app/redux/slices/userSlice';
+import { selectGuestMode, setIsAuthenticatedFalse } from '../../app/redux/slices/commonSlice';
 import useHeader from '../../hooks/useHeader';
 import { HEADER_MODE } from '../../domain/constants/common';
 import ConsumptionAlert from '../../containers/home/HomeContainer/layout/ConsumptionAlert';

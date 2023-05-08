@@ -4,12 +4,12 @@ import { NEED_SIGN_IN, NOT_AVAILABLE } from '../../../../domain/constants/messag
 import {
   NEED_TITLE, SCHEDULE_DRAWER,
 } from '../../../../domain/constants/schedule';
-import { selectGuestMode } from '../../../../domain/redux/common/commonSlice';
+import { selectGuestMode } from '../../../../app/redux/slices/commonSlice';
 import {
   // mockCreateNewSchedule,
   modifySchedule, selectDate, selectSchedule, setDrawerSchedule,
-} from '../../../../domain/redux/schedule/scheduleSlice';
-import { selectUser } from '../../../../domain/redux/user/userSlice';
+} from '../../../../app/redux/slices/scheduleSlice';
+import { selectUser } from '../../../../app/redux/slices/userSlice';
 import { generateRandomSchedule, handleCreate } from '../domain/schedule';
 import { Schedule, ScheduleDrawerModeValue } from '../../../../types/schedule';
 

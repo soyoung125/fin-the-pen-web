@@ -1,5 +1,5 @@
 import { useSelector } from 'react-redux';
-import { selectSchedule } from '../../domain/redux/schedule/scheduleSlice';
+import { selectSchedule } from '../../app/redux/slices/scheduleSlice';
 import TestBox from './box/TestBox';
 
 function ScheduleData() {

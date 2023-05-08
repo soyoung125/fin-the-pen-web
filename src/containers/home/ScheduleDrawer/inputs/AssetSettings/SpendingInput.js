@@ -3,7 +3,7 @@ import {
 } from '@mui/material';
 import { useDispatch, useSelector } from 'react-redux';
 import { SCHEDULE_DRAWER } from '../../../../../domain/constants/schedule';
-import { selectSchedule } from '../../../../../domain/redux/schedule/scheduleSlice';
+import { selectSchedule } from '../../../../../app/redux/slices/scheduleSlice';
 import { updateSchedule, updateSpendingType } from '../../domain/schedule';
 
 function SpendingInput({ mode }) {

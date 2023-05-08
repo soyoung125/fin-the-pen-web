@@ -6,9 +6,9 @@ import moment from 'moment';
 import { fetchCreateSchedule, fetchDeleteSchedule, fetchMonthSchedules } from '../../../api/API';
 import { fetchMockCreateSchedule, fetchMockDeleteSchedule } from '../../../api/mockAPI';
 import { Schedule, ViewModeValue } from '../../../types/schedule';
-import { ASYNC_THUNK_STATUS } from '../../constants/common';
+import { ASYNC_THUNK_STATUS } from '../../../domain/constants/common';
 import { AnalysisData, AsyncThunkStatusValue } from '../../../types/common';
-import { CATEGORIES, COLORLIST } from '../../constants/categories';
+import { CATEGORIES, COLORLIST } from '../../../domain/constants/categories';
 
 interface InitialState {
   // 메인

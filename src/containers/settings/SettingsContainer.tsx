@@ -13,7 +13,7 @@ import Accordion from '../../components/common/accordions/Accordion';
 import AccordionSummary from '../../components/common/accordions/AccordionSummary';
 import AccordionDetails from '../../components/common/accordions/AccordionDetails';
 import Change from './version/Change';
-import { setIsAuthenticatedFalse } from '../../domain/redux/common/commonSlice';
+import { setIsAuthenticatedFalse } from '../../app/redux/slices/commonSlice';
 
 export default function SettingsContainer() {
   const dispatch = useDispatch();

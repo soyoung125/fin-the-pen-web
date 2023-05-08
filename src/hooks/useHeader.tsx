@@ -1,7 +1,7 @@
 /* eslint-disable consistent-return */
 import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
-import { setHeaderOpenFalse, setHeaderOpenTrue } from '../domain/redux/common/commonSlice';
+import { setHeaderOpenFalse, setHeaderOpenTrue } from '../app/redux/slices/commonSlice';
 import { HeaderModeValue } from '../types/common';
 
 /**

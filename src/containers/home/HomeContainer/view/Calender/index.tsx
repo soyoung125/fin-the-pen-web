@@ -13,7 +13,7 @@ import { grey, lightBlue, pink } from '@mui/material/colors';
 import { CATEGORIES } from '../../../../../domain/constants/categories';
 import {
   selectDate, selectedDate, selectViewMode,
-} from '../../../../../domain/redux/schedule/scheduleSlice';
+} from '../../../../../app/redux/slices/scheduleSlice';
 import MarkedPickersDay from './boxes/scheduleMarker/MarkedPickersDay';
 import MarkerStack from './boxes/scheduleMarker/MarkerStack';
 import 'moment/locale/ko';
@@ -22,7 +22,7 @@ import IncomeExpenditureBox from './boxes/IncomeExpenditureBox';
 import { calculateIncomeExpenditure } from '../../../../../domain/tools';
 import { makeMarkerData } from './domain/calender';
 import WeeklyStatment from './boxes/WeeklyStatement';
-import { selectIsDarkMode } from '../../../../../domain/redux/setting/settingSlice';
+import { selectIsDarkMode } from '../../../../../app/redux/slices/settingSlice';
 import useSchedule from '../../../../../hooks/useSchedule';
 
 interface CalenderProps {

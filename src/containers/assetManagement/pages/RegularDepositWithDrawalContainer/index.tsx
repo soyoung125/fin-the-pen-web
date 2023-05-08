@@ -12,7 +12,7 @@ import DetailCard from './DetailCard';
 import Title from '../../../../components/common/Title';
 import PATH from '../../../../domain/constants/path';
 import AlertModal from '../../../../components/common/AlertModal';
-import { selectBottomDrawerOpen } from '../../../../domain/redux/common/commonSlice';
+import { selectBottomDrawerOpen } from '../../../../app/redux/slices/commonSlice';
 import ArrowTooltip from '../../../../components/common/ArrowTooltip';
 import { Schedule } from '../../../../types/schedule';
 import { makeGroupForRegularData } from '../../../../domain/tools';

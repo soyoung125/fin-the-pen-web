@@ -2,7 +2,7 @@ import moment from 'moment';
 import { v4 as uuidv4 } from 'uuid';
 import { CATEGORIES } from '../../../../domain/constants/categories';
 import { REPEAT_CYCLE, SCHEDULE_DRAWER } from '../../../../domain/constants/schedule';
-import { createSchedule, getMonthSchedules, setDrawerSchedule } from '../../../../domain/redux/schedule/scheduleSlice';
+import { createSchedule, getMonthSchedules, setDrawerSchedule } from '../../../../app/redux/slices/scheduleSlice';
 
 /**
  * index

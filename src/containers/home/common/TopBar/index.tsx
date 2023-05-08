@@ -3,8 +3,8 @@ import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import {
   selectHeaderMode, selectHeaderOpen, setGuestModeFalse, setGuestModeTrue,
-} from '../../../../domain/redux/common/commonSlice';
-import { selectUser } from '../../../../domain/redux/user/userSlice';
+} from '../../../../app/redux/slices/commonSlice';
+import { selectUser } from '../../../../app/redux/slices/userSlice';
 import AnalysisMode from './headerMode/AnalysisMode';
 import HomeMode from './headerMode/HomeMode';
 

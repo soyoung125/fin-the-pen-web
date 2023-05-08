@@ -7,7 +7,7 @@ import { grey } from '@mui/material/colors';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { useDispatch } from 'react-redux';
 import { deleteSelectedSchedule } from '../../../../../domain/tools';
-import { setBottomDrawerOpenFalse } from '../../../../../domain/redux/common/commonSlice';
+import { setBottomDrawerOpenFalse } from '../../../../../app/redux/slices/commonSlice';
 import CategoryTypeBadge from '../../../../../components/common/CategoryTypeBadge';
 import { Schedule } from '../../../../../types/schedule';
 import { Category } from '../../../../../domain/constants/categories';

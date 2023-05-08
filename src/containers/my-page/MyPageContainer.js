@@ -9,11 +9,11 @@ import {
 } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import PATH from '../../domain/constants/path';
-import { selectGuestMode } from '../../domain/redux/common/commonSlice';
+import { selectGuestMode } from '../../app/redux/slices/commonSlice';
 import {
   // logOut,
   selectUser,
-} from '../../domain/redux/user/userSlice';
+} from '../../app/redux/slices/userSlice';
 import GuestDataManager from '../test/GuestDataManager';
 import GuestMode from '../test/GuestMode';
 import SchedulesData from '../test/SchedulesData';
