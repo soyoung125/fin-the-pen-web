@@ -1,13 +1,14 @@
 /* eslint-disable max-len */
 /* eslint-disable no-nested-ternary */
 import {
-  Box, Button, Collapse, InputBase, List, ListItem, ListItemButton, Stack,
+  Box, Button, Collapse, List, ListItem, ListItemButton, Stack,
 } from '@mui/material';
 import { useState } from 'react';
 import { useSelector } from 'react-redux';
-import CategoryTypeBadge from '../../../../components/common/CategoryTypeBadge';
-import { selectAssetsByCategory } from '../../../../app/redux/slices/assetSlice';
-import { AssetsByCategoryInterface } from '../../../../types/common';
+import CategoryTypeBadge from '../../../../../components/common/CategoryTypeBadge';
+import { selectAssetsByCategory } from '../../../../../app/redux/slices/assetSlice';
+import { AssetsByCategoryInterface } from '../../../../../types/common';
+import AssetInput from './AssetInput';
 
 interface CategoryListProps {
   handleClick: (type: string) => void,
@@ -63,23 +64,11 @@ function CategoryList({
                 </Stack>
                 {open === category.type && selectedCategory === ''
                   ? (
-                    <InputBase
-                      onChange={(e) => setAsset(e.target.value.replaceAll(',', ''))}
-                      autoFocus
-                      onFocus={() => setAsset(category.total === '-' ? '' : category.total.toLocaleString('ko-KR'))}
-                      type="text"
-                      value={(+asset).toLocaleString('ko-KR')}
-                      sx={{
-                        border: '1px solid', borderRadius: 1, fontSize: '14px', height: '21px', width: '100px',
-                      }}
-                      onKeyDown={(ev) => {
-                        if (ev.key === 'Enter') {
-                          modifyCategory();
-                        }
-                      }}
-                      inputProps={{
-                        style: { textAlign: 'right' },
-                      }}
+                    <AssetInput
+                      handleChange={(e) => setAsset(e.target.value.replaceAll(',', ''))}
+                      handleFocus={() => setAsset(category.total === '-' ? '' : category.total.toLocaleString('ko-KR'))}
+                      asset={asset}
+                      modifyFunction={() => modifyCategory()}
                     />
                   )
                   : (
@@ -101,26 +90,12 @@ function CategoryList({
 
                       {selectedCategory === index
                         ? (
-                          <Box>
-                            <InputBase
-                              onChange={(e) => setAsset(e.target.value.replaceAll(',', ''))}
-                              autoFocus
-                              onFocus={() => setAsset(c.asset === '-' ? '' : c.asset.toLocaleString('ko-KR'))}
-                              type="text"
-                              value={(+asset).toLocaleString('ko-KR')}
-                              sx={{
-                                border: '1px solid', borderRadius: 1, fontSize: '14px', height: '21px', width: '100px',
-                              }}
-                              onKeyDown={(ev) => {
-                                if (ev.key === 'Enter') {
-                                  modifySubcategory(category, c.title, c.asset);
-                                }
-                              }}
-                              inputProps={{
-                                style: { textAlign: 'right' },
-                              }}
-                            />
-                          </Box>
+                          <AssetInput
+                            handleChange={(e) => setAsset(e.target.value.replaceAll(',', ''))}
+                            handleFocus={() => setAsset(c.asset === '-' ? '' : c.asset.toLocaleString('ko-KR'))}
+                            asset={asset}
+                            modifyFunction={() => modifySubcategory(category, c.title, c.asset)}
+                          />
                         )
                         : (
                           <Box onClick={() => setSelectedCategory(index)}>
@@ -135,6 +110,7 @@ function CategoryList({
           </Box>
         ))}
       </List>
+
       <Button fullWidth variant="contained">카테고리별 자산 설정하기</Button>
     </>
   );
