@@ -5,8 +5,8 @@ import ClearIcon from '@mui/icons-material/Clear';
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect, useState } from 'react';
-import { selectSavingGoal, setSavingGoal } from '../../../../../../domain/redux/asset/assetSlice';
 import AlertModal from '../../../../../../components/common/AlertModal';
+import { selectSavingGoal, setSavingGoal } from '../../../../../../app/redux/slices/assetSlice';
 
 interface InputModalProps {
   closeSavingGoalModal: () => void,

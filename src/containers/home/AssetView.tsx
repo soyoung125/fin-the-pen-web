@@ -1,5 +1,5 @@
 import { useSelector } from 'react-redux';
-import { selectIsAuthenticated } from '../../domain/redux/common/commonSlice';
+import { selectIsAuthenticated } from '../../app/redux/slices/commonSlice';
 import EasyAuthentication from '../sign/EasyAuthentication';
 import AssetPreview from './HomeContainer/view/AssetPreview';
 

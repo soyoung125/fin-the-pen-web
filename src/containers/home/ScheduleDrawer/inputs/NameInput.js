@@ -5,7 +5,7 @@ import NotificationsNoneIcon from '@mui/icons-material/NotificationsNone';
 import { useDispatch, useSelector } from 'react-redux';
 import { SCHEDULE_DRAWER } from '../../../../domain/constants/schedule';
 import { updateSchedule } from '../domain/schedule';
-import { selectSchedule } from '../../../../domain/redux/schedule/scheduleSlice';
+import { selectSchedule } from '../../../../app/redux/slices/scheduleSlice';
 
 function NameInput() {
   const dispatch = useDispatch();

@@ -13,11 +13,11 @@ import moment from 'moment';
 import PATH from '../../../domain/constants/path';
 import ScheduleDrawer from '../ScheduleDrawer';
 import { INIT_SCHEDULE, SCHEDULE_DRAWER_MODE } from '../../../domain/constants/schedule';
-import { changeViewMode, selectDate } from '../../../domain/redux/schedule/scheduleSlice';
+import { changeViewMode, selectDate } from '../../../app/redux/slices/scheduleSlice';
 import {
   selectBottomDrawerOpen, selectBottomDrawerTabMenu,
   setBottomDrawerOpenFalse, setBottomDrawerOpenTrue, setBottomDrawerTabMenu,
-} from '../../../domain/redux/common/commonSlice';
+} from '../../../app/redux/slices/commonSlice';
 
 function BottomBar() {
   const dispatch = useDispatch();

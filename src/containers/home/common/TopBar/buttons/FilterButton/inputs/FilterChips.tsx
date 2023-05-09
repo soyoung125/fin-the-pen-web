@@ -4,7 +4,7 @@ import {
 } from '@mui/material';
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect, useState } from 'react';
-import { selectFiltered, updateFilter, updateFiltersForce } from '../../../../../../../domain/redux/schedule/scheduleSlice';
+import { selectFiltered, updateFilter, updateFiltersForce } from '../../../../../../../app/redux/slices/scheduleSlice';
 import { NestedCategory } from '../../../../../../../domain/constants/categories';
 
 interface FilterChipsProps {

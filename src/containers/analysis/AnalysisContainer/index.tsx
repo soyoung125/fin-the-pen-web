@@ -9,7 +9,7 @@ import PATH from '../../../domain/constants/path';
 import useHeader from '../../../hooks/useHeader';
 import {
   selectAnalyzedData, selectDate, updateAnalyzedData
-} from '../../../domain/redux/schedule/scheduleSlice';
+} from '../../../app/redux/slices/scheduleSlice';
 import { AnalysisData } from '../../../types/common';
 
 function AnalysisContainer() {

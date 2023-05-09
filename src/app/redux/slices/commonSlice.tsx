@@ -1,7 +1,7 @@
 /* eslint-disable max-len */
 /* eslint-disable no-param-reassign */
 import { createSlice } from '@reduxjs/toolkit';
-import { HEADER_MODE } from '../../constants/common';
+import { HEADER_MODE } from '../../../domain/constants/common';
 import { HeaderModeValue } from '../../../types/common';
 
 interface InitialState {

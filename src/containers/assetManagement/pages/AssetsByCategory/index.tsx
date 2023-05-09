@@ -12,7 +12,7 @@ import {
   selectUpdateDate,
   setAssetsByCategory,
   setInitAssetsByCategory,
-} from '../../../../domain/redux/asset/assetSlice';
+} from '../../../../app/redux/slices/assetSlice';
 import MonthlyGoal from './MonthlyGoal';
 import AlertModal from '../../../../components/common/AlertModal';
 import ModalStaticBackdrop from '../../../../components/layouts/ModalStaticBackdrop';

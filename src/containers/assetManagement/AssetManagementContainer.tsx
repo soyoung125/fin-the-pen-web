@@ -6,8 +6,8 @@ import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import ScheduleStatusCard from '../../components/assetManagement/ScheduleStatusCard';
 import SettingsPaper from '../../components/assetManagement/SettingsPaper';
-import { setIsAuthenticatedFalse } from '../../domain/redux/common/commonSlice';
-import { selectUser } from '../../domain/redux/user/userSlice';
+import { setIsAuthenticatedFalse } from '../../app/redux/slices/commonSlice';
+import { selectUser } from '../../app/redux/slices/userSlice';
 import useSchedule from '../../hooks/useSchedule';
 
 function AssetManagementContainer() {

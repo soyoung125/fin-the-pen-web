@@ -1,7 +1,7 @@
 /* eslint-disable no-param-reassign */
 import { createSlice } from '@reduxjs/toolkit';
 import moment from 'moment';
-import { initAssetsByCategory } from '../../tools';
+import { initAssetsByCategory } from '../../../domain/tools';
 
 const initialState = {
   goal: {

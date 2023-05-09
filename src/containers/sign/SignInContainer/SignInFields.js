@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { NO_BLANKS } from '../../../domain/constants/messages';
 import PATH from '../../../domain/constants/path';
-import { login, selectUser } from '../../../domain/redux/user/userSlice';
+import { login, selectUser } from '../../../app/redux/slices/userSlice';
 import { isObjectValuesEmpty } from '../../../domain/tools';
 
 function SignInFields() {

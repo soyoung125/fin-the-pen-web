@@ -12,7 +12,7 @@ import {
 } from '../../../domain/constants/schedule';
 import {
   selectSchedule, setDrawerSchedule,
-} from '../../../domain/redux/schedule/scheduleSlice';
+} from '../../../app/redux/slices/scheduleSlice';
 import CategoryInput from './inputs/CategoryInput';
 import RepeatInput from './inputs/RepeatInput';
 import AssetSettings from './inputs/AssetSettings';

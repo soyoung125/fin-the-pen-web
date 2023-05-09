@@ -7,7 +7,7 @@ import { useSelector } from 'react-redux';
 import ModalStaticBackdrop from '../../../../../../components/layouts/ModalStaticBackdrop';
 import RoundedBorderBox from '../../../../../../components/common/RoundedBorderBox';
 import InputModal from './InputModal';
-import { selectPersonalGoal } from '../../../../../../domain/redux/asset/assetSlice';
+import { selectPersonalGoal } from '../../../../../../app/redux/slices/assetSlice';
 import AlertModal from '../../../../../../components/common/AlertModal';
 import useModal from '../../../../../../hooks/useModal';
 

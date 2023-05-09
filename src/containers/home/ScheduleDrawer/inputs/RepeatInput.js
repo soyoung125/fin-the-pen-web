@@ -10,7 +10,7 @@ import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { DEADLINE, REPEAT } from '../../../../domain/constants/repeat';
 import { SCHEDULE_DRAWER } from '../../../../domain/constants/schedule';
-import { selectSchedule, setDrawerSchedule } from '../../../../domain/redux/schedule/scheduleSlice';
+import { selectSchedule, setDrawerSchedule } from '../../../../app/redux/slices/scheduleSlice';
 import { updateRepeat, updateRepeatEndDate } from '../domain/schedule';
 
 function RepeatInput() {

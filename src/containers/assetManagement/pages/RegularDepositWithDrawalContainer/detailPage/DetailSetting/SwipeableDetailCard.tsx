@@ -10,7 +10,7 @@ import ModifyModal from './ModifyModal';
 import { deleteSelectedSchedule } from '../../../../../../domain/tools';
 import RoundedBorderBox from '../../../../../../components/common/RoundedBorderBox';
 import AlertModal from '../../../../../../components/common/AlertModal';
-import { modifySchedule } from '../../../../../../domain/redux/schedule/scheduleSlice';
+import { modifySchedule } from '../../../../../../app/redux/slices/scheduleSlice';
 import { Schedule } from '../../../../../../types/schedule';
 
 interface SwipeableDetailCardProps {
