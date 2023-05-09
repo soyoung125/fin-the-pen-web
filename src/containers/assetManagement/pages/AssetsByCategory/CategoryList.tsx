@@ -54,7 +54,7 @@ function CategoryList({
     <List>
       {assets.map((category: AssetsByCategoryInterface) => (
         <Box key={category.type}>
-          <ListItemButton onClick={() => clickCategory(category.type)}>
+          <ListItemButton sx={{ px: 0 }} onClick={() => clickCategory(category.type)}>
             <Stack direction="row" justifyContent="space-between" sx={{ width: '100%' }}>
               <Stack direction="row">
                 <CategoryTypeBadge color={category.color} mr={0.5} />
