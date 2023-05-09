@@ -6,13 +6,16 @@ import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect, useState } from 'react';
 import { selectSavingGoal, setSavingGoal } from '../../../../../../domain/redux/asset/assetSlice';
+import AlertModal from '../../../../../../components/common/AlertModal';
 
 interface InputModalProps {
   closeSavingGoalModal: () => void,
 }
+
 function InputModal({
   closeSavingGoalModal,
 }: InputModalProps) {
+  const [openResetAlertModal, setOpenResetAlertModal] = useState(false);
   const [form, setForm] = useState({
     year: 0,
     month: 0,
@@ -44,10 +47,7 @@ function InputModal({
     <Stack p={2} spacing={1}>
       <Stack direction="row" alignItems="center" justifyContent="space-between">
         <IconButton
-          onClick={() => setForm({
-            year: 0,
-            month: 0,
-          })}
+          onClick={() => setOpenResetAlertModal(true)}
           color="error"
         >
           <DeleteForeverIcon />
@@ -92,6 +92,19 @@ function InputModal({
       >
         한해 저축 목표 설정하기
       </Button>
+
+      <AlertModal
+        open={openResetAlertModal}
+        handleClose={() => setOpenResetAlertModal(false)}
+        handleClickYes={() => {
+          setForm({
+            year: 0,
+            month: 0,
+          });
+          setOpenResetAlertModal(false);
+        }}
+        mode="reset"
+      />
     </Stack>
   );
 }
