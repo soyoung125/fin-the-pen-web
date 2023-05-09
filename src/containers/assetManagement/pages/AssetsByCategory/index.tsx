@@ -1,5 +1,5 @@
 import {
-  Box, IconButton, Stack,
+  Box, Button, IconButton, Stack,
 } from '@mui/material';
 import RefreshIcon from '@mui/icons-material/Refresh';
 import moment from 'moment';
@@ -97,16 +97,19 @@ function AssetsByCategory() {
       />
 
       <RoundedPaper my={0}>
+        <Box sx={{ typography: 'h6', fontWeight: 'bold' }}>카테고리별 자산 세부 설정</Box>
+
         <Stack direction="row" justifyContent="space-between">
           <Box sx={{ color: '#979797' }}>설정 가능한 카테고리별 자산</Box>
           <Box sx={{ color: 'primary.main' }}>{`${monthlyConsumptionGoal.toLocaleString('ko-KR')}원`}</Box>
         </Stack>
 
-        <Box sx={{ display: 'flex', justifyContent: 'flex-end', mt: 1 }}>
+        <Stack direction="row" justifyContent="space-between" mt={1}>
           <IconButton color="primary" onClick={() => dispatch(setInitAssetsByCategory())} sx={{ p: 0 }}>
             <RefreshIcon fontSize="small" />
           </IconButton>
-        </Box>
+          <Button variant="contained" size="small">추천 금액 불러오기</Button>
+        </Stack>
 
         <CategoryList
           handleClick={handleClick}

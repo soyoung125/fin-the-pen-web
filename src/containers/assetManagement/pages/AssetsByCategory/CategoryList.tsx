@@ -1,7 +1,7 @@
 /* eslint-disable max-len */
 /* eslint-disable no-nested-ternary */
 import {
-  Box, Collapse, InputBase, List, ListItem, ListItemButton, Stack,
+  Box, Button, Collapse, InputBase, List, ListItem, ListItemButton, Stack,
 } from '@mui/material';
 import { useState } from 'react';
 import { useSelector } from 'react-redux';
@@ -51,89 +51,92 @@ function CategoryList({
   };
 
   return (
-    <List>
-      {assets.map((category: AssetsByCategoryInterface) => (
-        <Box key={category.type}>
-          <ListItemButton sx={{ px: 0 }} onClick={() => clickCategory(category.type)}>
-            <Stack direction="row" justifyContent="space-between" sx={{ width: '100%' }}>
-              <Stack direction="row">
-                <CategoryTypeBadge color={category.color} mr={0.5} />
-                {category.type}
-              </Stack>
-              {open === category.type && selectedCategory === ''
-                ? (
-                  <InputBase
-                    onChange={(e) => setAsset(e.target.value.replaceAll(',', ''))}
-                    autoFocus
-                    onFocus={() => setAsset(category.total === '-' ? '' : category.total.toLocaleString('ko-KR'))}
-                    type="text"
-                    value={(+asset).toLocaleString('ko-KR')}
-                    sx={{
-                      border: '1px solid', borderRadius: 1, fontSize: '14px', height: '21px', width: '100px',
-                    }}
-                    onKeyDown={(ev) => {
-                      if (ev.key === 'Enter') {
-                        modifyCategory();
-                      }
-                    }}
-                    inputProps={{
-                      style: { textAlign: 'right' },
-                    }}
-                  />
-                )
-                : (
-                  <Box sx={{ color: category.total === '-' ? '#979797' : 'black' }}>
-                    {category.total === '-' ? `${category.total}원` : `${category.total.toLocaleString('kr-KO')}원`}
-                  </Box>
-                )}
-            </Stack>
-          </ListItemButton>
-
-          <Collapse in={open === category.type} timeout="auto" unmountOnExit>
-            <List component="div" disablePadding>
-              {category.categories.map((c, index) => (
-                <ListItem sx={{ py: 0 }} key={c.title}>
-                  <Stack direction="row" justifyContent="space-between" sx={{ width: '100%', color: c.asset === '-' ? '#979797' : 'primary.main', fontSize: '14px' }}>
-                    <Box sx={{ ml: 2 }}>
-                      {c.title}
+    <>
+      <List>
+        {assets.map((category: AssetsByCategoryInterface) => (
+          <Box key={category.type}>
+            <ListItemButton sx={{ px: 0 }} onClick={() => clickCategory(category.type)}>
+              <Stack direction="row" justifyContent="space-between" sx={{ width: '100%' }}>
+                <Stack direction="row">
+                  <CategoryTypeBadge color={category.color} mr={0.5} />
+                  {category.type}
+                </Stack>
+                {open === category.type && selectedCategory === ''
+                  ? (
+                    <InputBase
+                      onChange={(e) => setAsset(e.target.value.replaceAll(',', ''))}
+                      autoFocus
+                      onFocus={() => setAsset(category.total === '-' ? '' : category.total.toLocaleString('ko-KR'))}
+                      type="text"
+                      value={(+asset).toLocaleString('ko-KR')}
+                      sx={{
+                        border: '1px solid', borderRadius: 1, fontSize: '14px', height: '21px', width: '100px',
+                      }}
+                      onKeyDown={(ev) => {
+                        if (ev.key === 'Enter') {
+                          modifyCategory();
+                        }
+                      }}
+                      inputProps={{
+                        style: { textAlign: 'right' },
+                      }}
+                    />
+                  )
+                  : (
+                    <Box sx={{ color: category.total === '-' ? '#979797' : 'black' }}>
+                      {category.total === '-' ? `${category.total}원` : `${category.total.toLocaleString('kr-KO')}원`}
                     </Box>
+                  )}
+              </Stack>
+            </ListItemButton>
 
-                    {selectedCategory === index
-                      ? (
-                        <Box>
-                          <InputBase
-                            onChange={(e) => setAsset(e.target.value.replaceAll(',', ''))}
-                            autoFocus
-                            onFocus={() => setAsset(c.asset === '-' ? '' : c.asset.toLocaleString('ko-KR'))}
-                            type="text"
-                            value={(+asset).toLocaleString('ko-KR')}
-                            sx={{
-                              border: '1px solid', borderRadius: 1, fontSize: '14px', height: '21px', width: '100px',
-                            }}
-                            onKeyDown={(ev) => {
-                              if (ev.key === 'Enter') {
-                                modifySubcategory(category, c.title, c.asset);
-                              }
-                            }}
-                            inputProps={{
-                              style: { textAlign: 'right' },
-                            }}
-                          />
-                        </Box>
-                      )
-                      : (
-                        <Box onClick={() => setSelectedCategory(index)}>
-                          {c.asset === '-' ? `${c.asset}원` : `${c.asset.toLocaleString('kr-KO')}원`}
-                        </Box>
-                      )}
-                  </Stack>
-                </ListItem>
-              ))}
-            </List>
-          </Collapse>
-        </Box>
-      ))}
-    </List>
+            <Collapse in={open === category.type} timeout="auto" unmountOnExit>
+              <List component="div" disablePadding>
+                {category.categories.map((c, index) => (
+                  <ListItem sx={{ py: 0 }} key={c.title}>
+                    <Stack direction="row" justifyContent="space-between" sx={{ width: '100%', color: c.asset === '-' ? '#979797' : 'primary.main', fontSize: '14px' }}>
+                      <Box sx={{ ml: 2 }}>
+                        {c.title}
+                      </Box>
+
+                      {selectedCategory === index
+                        ? (
+                          <Box>
+                            <InputBase
+                              onChange={(e) => setAsset(e.target.value.replaceAll(',', ''))}
+                              autoFocus
+                              onFocus={() => setAsset(c.asset === '-' ? '' : c.asset.toLocaleString('ko-KR'))}
+                              type="text"
+                              value={(+asset).toLocaleString('ko-KR')}
+                              sx={{
+                                border: '1px solid', borderRadius: 1, fontSize: '14px', height: '21px', width: '100px',
+                              }}
+                              onKeyDown={(ev) => {
+                                if (ev.key === 'Enter') {
+                                  modifySubcategory(category, c.title, c.asset);
+                                }
+                              }}
+                              inputProps={{
+                                style: { textAlign: 'right' },
+                              }}
+                            />
+                          </Box>
+                        )
+                        : (
+                          <Box onClick={() => setSelectedCategory(index)}>
+                            {c.asset === '-' ? `${c.asset}원` : `${c.asset.toLocaleString('kr-KO')}원`}
+                          </Box>
+                        )}
+                    </Stack>
+                  </ListItem>
+                ))}
+              </List>
+            </Collapse>
+          </Box>
+        ))}
+      </List>
+      <Button fullWidth variant="contained">카테고리별 자산 설정하기</Button>
+    </>
   );
 }
 
