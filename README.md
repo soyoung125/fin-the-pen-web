@@ -2,6 +2,8 @@
 
 ### [웹에서 데모버전 확인하기](https://soyoung125.github.io/fin-the-pen-web/)
 
+#### [Storybook](https://645bb0d7fab3ee51343325b9-omwyqfhecn.chromatic.com/)
+
 [서버 설치하기](https://github.com/eomheeseung/fin-the-pen)
 
 ## 👤 Team Members
