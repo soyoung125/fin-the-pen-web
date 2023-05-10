@@ -4,7 +4,9 @@
  */
 
 import { Provider } from 'react-redux';
+import { BrowserRouter } from 'react-router-dom';
 import { store } from '../app/redux/store';
+import CustomThemeProvider from '../components/providers/CustomThemeProvider';
 
 interface ProvidersProps {
   children: React.ReactNode
@@ -12,7 +14,11 @@ interface ProvidersProps {
 function Providers({ children }: ProvidersProps) {
   return (
     <Provider store={store}>
-      {children}
+      <CustomThemeProvider>
+        <BrowserRouter>
+          {children}
+        </BrowserRouter>
+      </CustomThemeProvider>
     </Provider>
   );
 }
