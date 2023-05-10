@@ -19,7 +19,7 @@ import { setIsAuthenticatedFalse } from '../../app/redux/slices/commonSlice';
 export default function SettingsContainer() {
   const dispatch = useDispatch();
   const userAgent = navigator.userAgent.toLowerCase();
-  console.log(userAgent);
+
   useEffect(() => {
     dispatch(setIsAuthenticatedFalse());
   }, []);
@@ -28,14 +28,11 @@ export default function SettingsContainer() {
     if (userAgent.indexOf('android') > -1) {
       // 안드로이드
       window.location.href = 'twitter://twitter';
-      // console.log('android');
     } else if (userAgent.indexOf('iphone') > -1 || userAgent.indexOf('ipad') > -1 || userAgent.indexOf('ipod') > -1) {
       // IOS
-      console.log('ios');
     } else {
       // 아이폰, 안드로이드 외 모바일 또는 pc
       window.location.href = 'https://twitter.com/?lang=ko';
-      // console.log('pc');
     }
   };
 
