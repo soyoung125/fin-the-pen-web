@@ -24,7 +24,7 @@ function AssetsByCategory() {
   const dispatch = useDispatch();
   const [open, setOpen] = useState('');
   const [monthlyGoalModalOpen, setMonthlyGoalModalOpen] = useState(false);
-  const [alertModalOpen, setAlertModalOpen] = useState(false);
+  const [alertModalOpen, setAlertModalOpen] = useState('');
   const [showTooltip, setShowTooltip] = useState(true);
   // const [assets, setAssets] = useState([]);
   const today = moment();
@@ -83,15 +83,20 @@ function AssetsByCategory() {
   };
 
   const openMonthlyGoalModal = () => {
-    setAlertModalOpen(false);
+    setAlertModalOpen('');
     setMonthlyGoalModalOpen(true);
+  };
+
+  const resetAssetByCategory = () => {
+    setAlertModalOpen('');
+    dispatch(setInitAssetsByCategory());
   };
 
   return (
     <>
       <MonthlyGoal
         title={`${today.format('M월')} 지출 Goal`}
-        openAlertModal={() => setAlertModalOpen(true)}
+        openAlertModal={() => setAlertModalOpen('modify')}
         open={showTooltip}
         monthlyConsumptionGoal={monthlyConsumptionGoal}
       />
@@ -105,7 +110,7 @@ function AssetsByCategory() {
         </Stack>
 
         <Stack direction="row" justifyContent="space-between" mt={1}>
-          <IconButton color="primary" onClick={() => dispatch(setInitAssetsByCategory())} sx={{ p: 0 }}>
+          <IconButton color="primary" onClick={() => setAlertModalOpen('reset')} sx={{ p: 0 }}>
             <RefreshIcon fontSize="small" />
           </IconButton>
           <Button variant="contained" size="small">추천 금액 불러오기</Button>
@@ -129,10 +134,10 @@ function AssetsByCategory() {
       />
 
       <AlertModal
-        open={alertModalOpen}
-        handleClose={() => setAlertModalOpen(false)}
-        handleClickYes={() => openMonthlyGoalModal()}
-        mode="modify"
+        open={alertModalOpen !== ''}
+        handleClose={() => setAlertModalOpen('')}
+        handleClickYes={() => (alertModalOpen === 'modify' ? openMonthlyGoalModal() : resetAssetByCategory())}
+        mode={alertModalOpen}
       />
     </>
   );
