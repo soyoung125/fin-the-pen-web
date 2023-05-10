@@ -1,6 +1,6 @@
 /* eslint-disable react/jsx-props-no-spreading */
 import {
-  Box, Button, TextField, Typography,
+  Typography,
 } from '@mui/material';
 import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
@@ -20,22 +20,6 @@ export default function SettingsContainer() {
   useEffect(() => {
     dispatch(setIsAuthenticatedFalse());
   }, []);
-
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
-    const data = new FormData(event.currentTarget);
-    const requiredData = {
-      client_id: data.get('client_id'),
-      client_secret: data.get('client_secret'),
-    };
-    const tmpWindow = window.open('about:blank');
-
-    (tmpWindow as Window).location = `${'https://testapi.openbanking.or.kr/oauth/2.0/authorize?'
-      + 'response_type=code&'
-      + 'client_id='}${requiredData.client_id}&redirect_uri=http://localhost:63342/fin-the-pen/fin_the_pen.main/resource/home&`
-      + 'scope=login inquiry transfer&'
-      + 'state=12345678901234567890123456789012&'
-      + 'auth_type=0';
-  };
 
   return (
     <>
@@ -103,27 +87,6 @@ export default function SettingsContainer() {
         </AccordionSummary>
         <AccordionDetails>
           <Typography>메뉴가 올 자리</Typography>
-          <Box component="form" onSubmit={handleSubmit} noValidate>
-            <TextField
-              required
-              fullWidth
-              id="client_id"
-              label="client_id(추후 삭제 예정)"
-              name="client_id"
-              autoComplete="client_id"
-              autoFocus
-            />
-            {/* <TextField
-              required
-              fullWidth
-              id="client_secret"
-              label="client_secret(추후 삭제 예정)"
-              name="client_secret"
-              autoComplete="client_secret"
-              autoFocus
-            /> */}
-            <Button type="submit">인증하기</Button>
-          </Box>
         </AccordionDetails>
       </Accordion>
 
