@@ -1,6 +1,6 @@
 import { Box } from '@mui/material';
 
-function CategoryTypeBadge({ color, mr }) {
+function CategoryTypeBadge({ color, mr }: { color: string; mr: number; }) {
   return (
     <Box
       sx={{
