@@ -27,9 +27,14 @@ export default function SettingsContainer() {
   const clickBank = () => {
     if (userAgent.indexOf('android') > -1) {
       // 안드로이드
-      window.location.href = 'twitter://twitter';
+      window.location.href = 'intent://twitter/#Intent;scheme=twitter;package=com.twitter.android;end';
     } else if (userAgent.indexOf('iphone') > -1 || userAgent.indexOf('ipad') > -1 || userAgent.indexOf('ipod') > -1) {
       // IOS
+      const url = 'twitter://media';
+      setTimeout(() => {
+        window.open('https://itunes.apple.com/kr/app/twitter/id333903271?mt=8');
+      }, 1000);
+      window.location.href = url;
     } else {
       // 아이폰, 안드로이드 외 모바일 또는 pc
       window.location.href = 'https://twitter.com/?lang=ko';
