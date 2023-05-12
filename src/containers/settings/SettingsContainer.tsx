@@ -28,14 +28,14 @@ export default function SettingsContainer() {
     if (userAgent.indexOf('android') > -1) {
       // 안드로이드
       // kbbank://
-      window.location.href = 'intent://kbstar.com/#Intent;package=com.kbstar.kbbank;scheme=kbbank;end';
+      window.location.href = 'intent://home/#Intent;package=com.kbstar.kbbank;scheme=kbbank;end';
     } else if (userAgent.indexOf('iphone') > -1 || userAgent.indexOf('ipad') > -1 || userAgent.indexOf('ipod') > -1) {
       // IOS
-      // const url = 'kbbank://login';
-      // setTimeout(() => {
-      //   window.open('https://itunes.apple.com/kr/app/kbbank/id333903271?mt=8'); // id를 어떻게 해야할지 모르겠음
-      // }, 1000);
-      // window.location.href = url;
+      const url = 'kbbank://home';
+      setTimeout(() => {
+        window.open('https://itunes.apple.com/kr/app/kb스타뱅킹/id373742138?mt=8');
+      }, 1000);
+      window.location.href = url;
     } else {
       // 아이폰, 안드로이드 외 모바일 또는 pc
       window.location.href = 'https://www.kbstar.com/';
