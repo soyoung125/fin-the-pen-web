@@ -28,7 +28,7 @@ export default function SettingsContainer() {
     if (userAgent.indexOf('android') > -1) {
       // 안드로이드
       // kbbank://
-      window.location.href = 'intent://instagram.com/#Intent;package=com.instagram.android;scheme=https;end';
+      window.location.href = 'intent://kbstar.com/#Intent;package=com.kbstar.kbbank;scheme=kbbank;end';
     } else if (userAgent.indexOf('iphone') > -1 || userAgent.indexOf('ipad') > -1 || userAgent.indexOf('ipod') > -1) {
       // IOS
       // const url = 'kbbank://login';
