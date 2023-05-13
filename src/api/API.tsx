@@ -58,3 +58,29 @@ export const fetchMonthSchedules = async (schedule: any) => {
     console.log(err);
   }
 };
+
+/**
+ *
+ *
+ *
+typescript axios example
+
+import axios, { AxiosResponse } from 'axios';
+
+interface User {
+  id: number;
+  name: string;
+  email: string;
+}
+
+axios.get<User[]>('https://jsonplaceholder.typicode.com/users')
+  .then((response: AxiosResponse<User[]>) => {
+    const users = response.data;
+    console.log(users);
+  })
+  .catch((error) => {
+    console.error(error);
+  });
+
+ *
+ */
