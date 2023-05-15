@@ -8,6 +8,7 @@ import TestContainer from '../containers/test/TestContainer';
 import PATH from '../domain/constants/path';
 import Home from '../pages/Home';
 import { RouterDOM } from '../types/common';
+import DetailSetting from '../containers/assetManagement/pages/SavingsGoalContainer/DetailSetting';
 
 const HOME_ROUTES: RouterDOM[] = [
   {
@@ -33,6 +34,10 @@ const HOME_ROUTES: RouterDOM[] = [
   {
     path: PATH.assetManagement,
     element: <AssetManagementContainer />,
+  },
+  {
+    path: PATH.savingDetailSetting,
+    element: <DetailSetting />,
   },
   {
     path: PATH.settings,

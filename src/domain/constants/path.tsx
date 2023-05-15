@@ -10,6 +10,7 @@ interface Path {
   readonly analysis: string;
   readonly analysisDetail: string;
   readonly savingsGoal: string;
+  readonly savingDetailSetting: string;
   readonly regularDepositWithdrawal: string;
   readonly DetailSetting: string;
   readonly DetailInformation: string;
@@ -32,6 +33,7 @@ const PATH: Readonly<Path> = Object.freeze({
 
   // 자산관리의 세부 설정 페이지 (경로명 수정할 계획)
   savingsGoal: '/management/savings-goal',
+  savingDetailSetting: '/saving-detail-setting',
   regularDepositWithdrawal: '/management/regular-deposit-withdrawal',
   DetailSetting: '/management/regular-deposit-withdrawal-detail-setting',
   DetailInformation: '/management/regular-deposit-withdrawal-detail-info',
