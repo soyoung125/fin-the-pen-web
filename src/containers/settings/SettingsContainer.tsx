@@ -45,18 +45,17 @@ export default function SettingsContainer() {
   const clickInstagram = () => {
     if (userAgent.indexOf('android') > -1) {
       // 안드로이드
-      // kbbank://
       window.location.href = 'intent://instagram.com/#Intent;package=com.instagram.android;scheme=https;end';
     } else if (userAgent.indexOf('iphone') > -1 || userAgent.indexOf('ipad') > -1 || userAgent.indexOf('ipod') > -1) {
       // IOS
-      const url = 'kbbank://home';
+      const url = 'https://instagram.com';
       setTimeout(() => {
         window.open('https://itunes.apple.com/kr/app/instagram/id389801252');
       }, 1000);
       window.location.href = url;
     } else {
       // 아이폰, 안드로이드 외 모바일 또는 pc
-      window.location.href = 'https://www.kbstar.com/';
+      window.location.href = 'https://www.instagram.com/';
     }
   };
 
