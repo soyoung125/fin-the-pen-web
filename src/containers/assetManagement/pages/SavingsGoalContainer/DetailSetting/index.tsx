@@ -4,6 +4,7 @@ import {
 import PrioritySetting from './PrioritySetting';
 import RemittanceSetting from './RemittanceSetting';
 import PopupSetting from './PopupSetting';
+import NotificationSetting from './NotificationSetting';
 
 function DetailSetting() {
   return (
@@ -14,7 +15,7 @@ function DetailSetting() {
 
       <RemittanceSetting />
 
-      <RemittanceSetting />
+      <NotificationSetting />
 
       <PopupSetting />
     </Box>
