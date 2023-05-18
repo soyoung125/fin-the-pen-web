@@ -19,6 +19,29 @@ const initialState = {
       popUp: false,
     },
   },
+  savingDetailSetting: {
+    priority: 'saving', // saving(한해 저축 목표) || personal
+    remittance: {
+      isOn: true,
+      settings: {
+        bankName: '',
+        accountNumber: '',
+        date: '',
+        amount: 0,
+      },
+    },
+    notification: {
+      isOn: true,
+      time: '08:00',
+    },
+    popup: {
+      isOn: true,
+      settings: {
+        display: '', // none(아이콘) || 저축금액(퍼센트)
+        connect: '', // 저축목표설정페이지 || 계좌 앱
+      },
+    },
+  },
   assetByCategory: {
     goal: 0,
     assets: initAssetsByCategory(),
