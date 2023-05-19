@@ -1,5 +1,10 @@
 /* eslint-disable no-promise-executor-return */
 /* eslint-disable import/prefer-default-export */
+
+/**
+ * TODO: MSW로 이전하기
+ */
+
 // A mock function to mimic making an async request for data
 export function fetchMockLogin() {
   return new Promise<any>((resolve) => setTimeout(() => resolve({
