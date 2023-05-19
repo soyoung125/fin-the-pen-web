@@ -1,5 +1,5 @@
 import { Stack, Typography } from '@mui/material';
-import LogoCircle from '../../../../components/common/LogoCircle';
+import LogoCircle from '../../../components/common/LogoCircle';
 
 function Header() {
   return (

@@ -2,14 +2,14 @@ import {
   Box, Button, InputAdornment, Stack, TextField,
 } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
-import PATH from '../../../../domain/constants/path';
-import { isObjectValuesEmpty } from '../../../../domain/tools';
+import PATH from '../../../domain/constants/path';
+import { isObjectValuesEmpty } from '../../../domain/tools';
 import {
   NO_BLANKS, NO_DUPLICATION_ID, NO_SIGNAL_FROM_SERVER, SIGN_UP_SUCCESS,
-} from '../../../../domain/constants/messages';
-import { fetchSignUp } from '../../../../app/api/API';
+} from '../../../domain/constants/messages';
+import { fetchSignUp } from '../../../app/api/API';
 
-function SignUp() {
+function SignUpFields() {
   const navigate = useNavigate();
   const signUp = async (user: any) => {
     const result = await fetchSignUp(user);
@@ -140,4 +140,4 @@ function SignUp() {
   );
 }
 
-export default SignUp;
+export default SignUpFields;

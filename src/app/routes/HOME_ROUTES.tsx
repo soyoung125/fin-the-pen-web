@@ -2,8 +2,8 @@ import AssetManagementContainer from '../../containers/assetManagement/AssetMana
 import MyPageContainer from '../../containers/my-page/MyPageContainer';
 import NotificationContainer from '../../containers/notification/NotificationContainer';
 import SettingsContainer from '../../containers/settings/SettingsContainer';
-import SignInContainer from '../../pages/SignIn';
-import SignUpContainer from '../../containers/sign/SignUpContainer';
+import SignIn from '../../pages/SignIn';
+import SignUp from '../../pages/SignUp';
 import TestContainer from '../../containers/test/TestContainer';
 import PATH from '../../domain/constants/path';
 import Home from '../../pages/Home';
@@ -17,11 +17,11 @@ const HOME_ROUTES: RouterDOM[] = [
   },
   {
     path: PATH.signIn,
-    element: <SignInContainer />,
+    element: <SignIn />,
   },
   {
     path: PATH.signUp,
-    element: <SignUpContainer />,
+    element: <SignUp />,
   },
   {
     path: PATH.myPage,
