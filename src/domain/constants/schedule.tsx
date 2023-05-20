@@ -75,12 +75,12 @@ const SCHEDULE_DRAWER_MODE: Readonly<ScheduleDrawerMode> = {
 const NEED_TITLE = '제목을 입력해야 합니다.';
 const WRONG_TIME_ORDER = '종료 시각이 시작 시각보다 빠르지 않았으면 좋겠어요.';
 
-const INIT_SCHEDULE = (date: string, start_time: moment.Moment): Schedule => ({
+const INIT_SCHEDULE = (date: string, start_time: string): Schedule => ({
   event_name: '',
   alarm: false,
   date,
-  start_time: `${start_time.format('HH')}:00`,
-  end_time: `${start_time.add(2, 'hours').format('HH')}:00`,
+  start_time: `${start_time}:00`,
+  end_time: `${moment(start_time, 'HH').add(2, 'h').format('HH')}:00`,
   repeating_cycle: '없음',
   repeat_deadline: '없음',
   repeat_endDate: date,

@@ -32,10 +32,8 @@ function BottomBar() {
 
   useEffect(() => {
     if (moment().isSame(date, 'day')) {
-      // setStartTime(moment().add(1, 'hours'));
       setStartTime(moment().add(1, 'hours').format('HH'));
     } else {
-      // setStartTime(moment('09:00', 'HH:mm'));
       setStartTime(moment('09:00', 'HH:mm').format('HH'));
     }
   }, [date]);
