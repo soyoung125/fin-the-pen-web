@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
 import DataSaverOffIcon from '@mui/icons-material/DataSaverOff';
 import AddCircleIcon from '@mui/icons-material/AddCircle';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import SettingsIcon from '@mui/icons-material/Settings';
 import PaidIcon from '@mui/icons-material/Paid';
 import { useDispatch, useSelector } from 'react-redux';
@@ -28,6 +28,17 @@ function BottomBar() {
   const navigate = useNavigate();
 
   const [drawerWidth, setDrawerWidth] = useState<number>(0);
+  const [startTime, setStartTime] = useState('09');
+
+  useEffect(() => {
+    if (moment().isSame(date, 'day')) {
+      // setStartTime(moment().add(1, 'hours'));
+      setStartTime(moment().add(1, 'hours').format('HH'));
+    } else {
+      // setStartTime(moment('09:00', 'HH:mm'));
+      setStartTime(moment('09:00', 'HH:mm').format('HH'));
+    }
+  }, [date]);
 
   return (
     <>
@@ -79,7 +90,7 @@ function BottomBar() {
           setDrawerWidth={setDrawerWidth}
           handleClose={() => dispatch(setBottomDrawerOpenFalse())}
           data={{
-            ...INIT_SCHEDULE(moment(date).format('YYYY-MM-DD')),
+            ...INIT_SCHEDULE(moment(date).format('YYYY-MM-DD'), startTime),
           }}
           mode={SCHEDULE_DRAWER_MODE.create}
         />
