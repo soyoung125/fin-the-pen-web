@@ -1,16 +1,29 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import {
   Stack, Box, Switch, FormControl, OutlinedInput, InputAdornment
 } from '@mui/material';
 import RoundedPaper from '../../../../../components/common/RoundedPaper';
 
-function RemittanceSetting() {
+interface RemittanceSettingProps {
+  remittance: any,
+  handleRemittance: (value: any) => void,
+}
+
+function RemittanceSetting({ remittance, handleRemittance }: RemittanceSettingProps) {
   return (
     <RoundedPaper my={1}>
       <Stack direction="row" justifyContent="space-between">
         <Box>계좌 송금 설정</Box>
-        <Switch defaultChecked size="small" sx={{ p: 0, borderRadius: 6 }} />
+        <Switch
+          size="small"
+          sx={{ p: 0, borderRadius: 6 }}
+          checked={remittance.isOn}
+          onChange={() => handleRemittance({ ...remittance, isOn: !remittance.isOn })}
+        />
       </Stack>
 
+      {remittance.isOn
+      && (
       <Stack spacing={1} mt={1}>
         {/* 은행명 */}
         <FormControl fullWidth>
@@ -68,6 +81,7 @@ function RemittanceSetting() {
           />
         </FormControl>
       </Stack>
+      )}
     </RoundedPaper>
   );
 }

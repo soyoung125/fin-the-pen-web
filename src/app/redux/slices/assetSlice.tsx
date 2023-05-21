@@ -70,9 +70,9 @@ export const assetSlice = createSlice({
     setMonthlyConsumptionGoal: (state, action) => {
       state.assetByCategory.goal = action.payload;
     },
-    setSavingPriority: (state, action) => {
-      state.savingDetailSetting.priority = action.payload;
-    }
+    setSavingDetailSetting: (state, action) => {
+      state.savingDetailSetting = action.payload;
+    },
   },
 });
 export const {
@@ -81,7 +81,7 @@ export const {
   setAssetsByCategory,
   setInitAssetsByCategory,
   setMonthlyConsumptionGoal,
-  setSavingPriority
+  setSavingDetailSetting,
 } = assetSlice.actions;
 
 export const selectSavingGoal = (state: any) => state.asset.goal.saving;
@@ -89,6 +89,6 @@ export const selectPersonalGoal = (state: any) => state.asset.goal.personal;
 export const selectAssetsByCategory = (state: any) => state.asset.assetByCategory.assets;
 export const selectUpdateDate = (state: any) => state.asset.assetByCategory.updateDate;
 export const selectMonthlyConsumptionGoal = (state: any) => state.asset.assetByCategory.goal;
-export const selectSavingPriority = (state: any) => state.asset.savingDetailSetting.priority;
+export const selectSavingDetailSetting = (state: any) => state.asset.savingDetailSetting;
 
 export default assetSlice.reducer;
