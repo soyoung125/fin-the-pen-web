@@ -1,6 +1,6 @@
 import AssetManagementContainer from '../../containers/assetManagement/AssetManagementContainer';
-import MyPage from '../../pages/MyPage/MyPage';
-import NotificationContainer from '../../containers/notification/NotificationContainer';
+import MyPage from '../../pages/MyPage';
+import Notification from '../../pages/Notification';
 import SettingsContainer from '../../containers/settings/SettingsContainer';
 import SignIn from '../../pages/SignIn';
 import SignUp from '../../pages/SignUp';
@@ -29,7 +29,7 @@ const HOME_ROUTES: RouterDOM[] = [
   },
   {
     path: PATH.notification,
-    element: <NotificationContainer />,
+    element: <Notification />,
   },
   {
     path: PATH.assetManagement,
