@@ -1,5 +1,5 @@
 import AssetManagementContainer from '../../containers/assetManagement/AssetManagementContainer';
-import MyPageContainer from '../../containers/my-page/MyPageContainer';
+import MyPage from '../../pages/MyPage/MyPage';
 import NotificationContainer from '../../containers/notification/NotificationContainer';
 import SettingsContainer from '../../containers/settings/SettingsContainer';
 import SignIn from '../../pages/SignIn';
@@ -25,7 +25,7 @@ const HOME_ROUTES: RouterDOM[] = [
   },
   {
     path: PATH.myPage,
-    element: <MyPageContainer />,
+    element: <MyPage />,
   },
   {
     path: PATH.notification,
