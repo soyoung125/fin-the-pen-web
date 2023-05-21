@@ -10,6 +10,12 @@ interface RemittanceSettingProps {
 }
 
 function RemittanceSetting({ remittance, handleRemittance }: RemittanceSettingProps) {
+  const changeRemittance = (state: { target: { id: string; value: string; }; }) => {
+    handleRemittance({
+      ...remittance,
+      settings: { ...remittance.settings, [state.target.id]: state.target.value },
+    });
+  };
   return (
     <RoundedPaper my={1}>
       <Stack direction="row" justifyContent="space-between">
@@ -30,8 +36,8 @@ function RemittanceSetting({ remittance, handleRemittance }: RemittanceSettingPr
           <OutlinedInput
             id="bankName"
             startAdornment={<InputAdornment position="start">은행명</InputAdornment>}
-              // value={form.name}
-              // onChange={changePersonalGoal}
+            value={remittance.settings.bankName}
+            onChange={changeRemittance}
             size="small"
             inputProps={{
               style: { textAlign: 'right' },
@@ -44,8 +50,8 @@ function RemittanceSetting({ remittance, handleRemittance }: RemittanceSettingPr
           <OutlinedInput
             id="accountNumber"
             startAdornment={<InputAdornment position="start">계좌번호</InputAdornment>}
-              // value={form.name}
-              // onChange={changePersonalGoal}
+            value={remittance.settings.accountNumber}
+            onChange={changeRemittance}
             size="small"
             inputProps={{
               style: { textAlign: 'right' },
@@ -58,8 +64,8 @@ function RemittanceSetting({ remittance, handleRemittance }: RemittanceSettingPr
           <OutlinedInput
             id="date"
             startAdornment={<InputAdornment position="start">송금일</InputAdornment>}
-              // value={form.name}
-              // onChange={changePersonalGoal}
+            value={remittance.settings.date}
+            onChange={changeRemittance}
             size="small"
             inputProps={{
               style: { textAlign: 'right' },
@@ -72,8 +78,8 @@ function RemittanceSetting({ remittance, handleRemittance }: RemittanceSettingPr
           <OutlinedInput
             id="amount"
             startAdornment={<InputAdornment position="start">송금액</InputAdornment>}
-              // value={form.name}
-              // onChange={changePersonalGoal}
+            value={remittance.settings.amount}
+            onChange={changeRemittance}
             size="small"
             inputProps={{
               style: { textAlign: 'right' },
