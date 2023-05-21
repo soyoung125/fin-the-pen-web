@@ -4,7 +4,7 @@ import {
 import DeleteIcon from '@mui/icons-material/Delete';
 import FolderIcon from '@mui/icons-material/Folder';
 
-function NotificationContainer() {
+function Notification() {
   return (
     <List dense>
       {Array.from({ length: 30 }).map(() => (
@@ -30,4 +30,4 @@ function NotificationContainer() {
   );
 }
 
-export default NotificationContainer;
+export default Notification;
