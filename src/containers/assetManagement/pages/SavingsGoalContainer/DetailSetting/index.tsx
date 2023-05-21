@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import {
-  Box, Typography,
+  Box, Typography, Button,
 } from '@mui/material';
 import { useSelector } from 'react-redux';
 import { useState } from 'react';
@@ -26,7 +26,7 @@ function DetailSetting() {
   };
 
   return (
-    <Box sx={{ pt: 3, px: 2 }}>
+    <Box sx={{ pt: 3, px: 2, mb: 2 }}>
       <Typography variant="h6" sx={{ fontWeight: 'bold', textAlign: 'center' }}>저축 세부 설정</Typography>
 
       <PrioritySetting
@@ -42,6 +42,8 @@ function DetailSetting() {
       <NotificationSetting />
 
       <PopupSetting />
+
+      <Button fullWidth variant="contained">저축 세부 설정하기</Button>
     </Box>
   );
 }
