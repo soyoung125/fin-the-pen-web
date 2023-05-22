@@ -4,12 +4,12 @@ import {
 import BorderColorIcon from '@mui/icons-material/BorderColor';
 import { useState } from 'react';
 import { useSelector } from 'react-redux';
-import ModalStaticBackdrop from '../../../../../../components/layouts/ModalStaticBackdrop';
-import RoundedBorderBox from '../../../../../../components/common/RoundedBorderBox';
+import ModalStaticBackdrop from '../../../../../components/layouts/ModalStaticBackdrop';
+import RoundedBorderBox from '../../../../../components/common/RoundedBorderBox';
 import InputModal from './InputModal';
-import { selectPersonalGoal } from '../../../../../../app/redux/slices/assetSlice';
-import AlertModal from '../../../../../../components/common/AlertModal';
-import useModal from '../../../../../../hooks/useModal';
+import { selectPersonalGoal } from '../../../../../app/redux/slices/assetSlice';
+import AlertModal from '../../../../../components/common/AlertModal';
+import useModal from '../../../../../hooks/useModal';
 
 function Personal() {
   const [personalGoalModalOpen, setPersonalGoalModalOpen] = useState(false);

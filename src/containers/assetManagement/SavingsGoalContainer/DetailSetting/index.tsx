@@ -8,7 +8,7 @@ import PrioritySetting from './PrioritySetting';
 import RemittanceSetting from './RemittanceSetting';
 import PopupSetting from './PopupSetting';
 import NotificationSetting from './NotificationSetting';
-import { selectSavingDetailSetting } from '../../../../../app/redux/slices/assetSlice';
+import { selectSavingDetailSetting } from '../../../../app/redux/slices/assetSlice';
 
 function DetailSetting() {
   const savingDetailSetting = useSelector(selectSavingDetailSetting);

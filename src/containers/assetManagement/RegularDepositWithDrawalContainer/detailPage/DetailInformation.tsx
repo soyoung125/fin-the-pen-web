@@ -6,9 +6,9 @@ import { useLocation } from 'react-router-dom';
 import moment from 'moment';
 import ArrowDropDownRoundedIcon from '@mui/icons-material/ArrowDropDownRounded';
 import { useEffect, useState } from 'react';
-import Title from '../../../../../components/common/Title';
-import RoundedBorderBox from '../../../../../components/common/RoundedBorderBox';
-import { Schedule } from '../../../../../types/schedule';
+import Title from '../../../../components/common/Title';
+import RoundedBorderBox from '../../../../components/common/RoundedBorderBox';
+import { Schedule } from '../../../../types/schedule';
 
 function DetailInformation() {
   const { state } = useLocation();
@@ -43,7 +43,12 @@ function DetailInformation() {
         )}
       >
         <Stack direction="row">
-          <Box sx={{ display: 'flex', my: 'auto', color: 'primary.main' }} onClick={() => setSortByDate(!sortByDate)}>{sortByDate ? '날짜순' : '금액순'}</Box>
+          <Box
+            sx={{ display: 'flex', my: 'auto', color: 'primary.main' }}
+            onClick={() => setSortByDate(!sortByDate)}
+          >
+            {sortByDate ? '날짜순' : '금액순'}
+          </Box>
           <ArrowDropDownRoundedIcon fontSize="large" sx={{ color: 'primary.main' }} />
         </Stack>
       </Title>
@@ -76,7 +81,11 @@ function DetailInformation() {
                   >
                     {schedule.type}
                   </Button>
-                  <Box sx={{ color: 'primary.main' }}>{`${parseInt(schedule.expected_spending, 10).toLocaleString('ko-KR')}원`}</Box>
+                  <Box
+                    sx={{ color: 'primary.main' }}
+                  >
+                    {`${parseInt(schedule.expected_spending, 10).toLocaleString('ko-KR')}원`}
+                  </Box>
                 </Stack>
               </Grid>
             </Grid>

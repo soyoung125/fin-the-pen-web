@@ -2,10 +2,10 @@ import { Box, Stack, IconButton } from '@mui/material';
 import { useSelector } from 'react-redux';
 import SettingsIcon from '@mui/icons-material/Settings';
 import { useNavigate } from 'react-router-dom';
-import { selectUser } from '../../../../app/redux/slices/userSlice';
+import { selectUser } from '../../../app/redux/slices/userSlice';
 import Saving from './goals/Saving';
 import Personal from './goals/Personal';
-import PATH from '../../../../domain/constants/path';
+import PATH from '../../../domain/constants/path';
 
 function SavingsGoal() {
   const user = useSelector(selectUser);

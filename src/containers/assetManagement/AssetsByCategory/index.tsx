@@ -12,13 +12,13 @@ import {
   selectUpdateDate,
   setAssetsByCategory,
   setInitAssetsByCategory,
-} from '../../../../app/redux/slices/assetSlice';
+} from '../../../app/redux/slices/assetSlice';
 import MonthlyGoal from './MonthlyGoal';
-import AlertModal from '../../../../components/common/AlertModal';
-import ModalStaticBackdrop from '../../../../components/layouts/ModalStaticBackdrop';
+import AlertModal from '../../../components/common/AlertModal';
+import ModalStaticBackdrop from '../../../components/layouts/ModalStaticBackdrop';
 import InputModal from './MonthlyGoal/InputModal';
-import { AssetCategories, AssetsByCategoryInterface } from '../../../../types/common';
-import RoundedPaper from '../../../../components/common/RoundedPaper';
+import { AssetCategories, AssetsByCategoryInterface } from '../../../types/common';
+import RoundedPaper from '../../../components/common/RoundedPaper';
 
 function AssetsByCategory() {
   const dispatch = useDispatch();
@@ -46,7 +46,9 @@ function AssetsByCategory() {
 
   useEffect(() => {
     if (showTooltip) {
-      setTimeout(() => { setShowTooltip(false); }, 5000);
+      setTimeout(() => {
+        setShowTooltip(false);
+      }, 5000);
     }
   }, [showTooltip]);
 

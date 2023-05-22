@@ -1,7 +1,7 @@
 import {
   Stack, Box, Switch, FormControl, OutlinedInput, InputAdornment
 } from '@mui/material';
-import RoundedPaper from '../../../../../components/common/RoundedPaper';
+import RoundedPaper from '../../../../components/common/RoundedPaper';
 
 function NotificationSetting() {
   return (
@@ -17,8 +17,8 @@ function NotificationSetting() {
           <OutlinedInput
             id="time"
             startAdornment={<InputAdornment position="start">알림 시간</InputAdornment>}
-              // value={form.name}
-              // onChange={changePersonalGoal}
+            // value={form.name}
+            // onChange={changePersonalGoal}
             size="small"
             inputProps={{
               style: { textAlign: 'right' },

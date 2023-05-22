@@ -7,20 +7,21 @@ import BorderColorIcon from '@mui/icons-material/BorderColor';
 import { useNavigate } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
-import { REGULAR_DEPOSIT_WITHDRAWAL_TYPE } from '../../../../domain/constants/schedule';
+import { REGULAR_DEPOSIT_WITHDRAWAL_TYPE } from '../../../domain/constants/schedule';
 import DetailCard from './DetailCard';
-import Title from '../../../../components/common/Title';
-import PATH from '../../../../domain/constants/path';
-import AlertModal from '../../../../components/common/AlertModal';
-import { selectBottomDrawerOpen } from '../../../../app/redux/slices/commonSlice';
-import ArrowTooltip from '../../../../components/common/ArrowTooltip';
-import { Schedule } from '../../../../types/schedule';
-import { makeGroupForRegularData } from '../../../../domain/tools';
-import useSchedule from '../../../../hooks/useSchedule';
+import Title from '../../../components/common/Title';
+import PATH from '../../../domain/constants/path';
+import AlertModal from '../../../components/common/AlertModal';
+import { selectBottomDrawerOpen } from '../../../app/redux/slices/commonSlice';
+import ArrowTooltip from '../../../components/common/ArrowTooltip';
+import { Schedule } from '../../../types/schedule';
+import { makeGroupForRegularData } from '../../../domain/tools';
+import useSchedule from '../../../hooks/useSchedule';
 
 interface DataInterface {
   [prop: string]: Schedule[],
 }
+
 // interface MakeGroupInterface {
 //   (data: Schedule[]): DataInterface,
 // }

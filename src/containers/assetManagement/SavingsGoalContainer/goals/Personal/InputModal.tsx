@@ -6,8 +6,8 @@ import ClearIcon from '@mui/icons-material/Clear';
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { SOMETHING_IS_WRONG } from '../../../../../../domain/constants/messages';
-import { selectPersonalGoal, setPersonalGoal } from '../../../../../../app/redux/slices/assetSlice';
+import { SOMETHING_IS_WRONG } from '../../../../../domain/constants/messages';
+import { selectPersonalGoal, setPersonalGoal } from '../../../../../app/redux/slices/assetSlice';
 
 interface InputModalProps {
   setPersonalGoalModalOpen: React.Dispatch<React.SetStateAction<boolean>>,
@@ -244,4 +244,5 @@ function InputModal({
     </Stack>
   );
 }
+
 export default InputModal;

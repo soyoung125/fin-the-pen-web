@@ -1,7 +1,7 @@
 import {
   Stack, Box, Switch, FormControl, OutlinedInput, InputAdornment
 } from '@mui/material';
-import RoundedPaper from '../../../../../components/common/RoundedPaper';
+import RoundedPaper from '../../../../components/common/RoundedPaper';
 
 function PopupSetting() {
   return (
@@ -17,8 +17,8 @@ function PopupSetting() {
           <OutlinedInput
             id="display"
             startAdornment={<InputAdornment position="start">표시 항목</InputAdornment>}
-              // value={form.name}
-              // onChange={changePersonalGoal}
+            // value={form.name}
+            // onChange={changePersonalGoal}
             size="small"
             inputProps={{
               style: { textAlign: 'right' },
@@ -31,8 +31,8 @@ function PopupSetting() {
           <OutlinedInput
             id="connect"
             startAdornment={<InputAdornment position="start">클릭 시 연결</InputAdornment>}
-              // value={form.name}
-              // onChange={changePersonalGoal}
+            // value={form.name}
+            // onChange={changePersonalGoal}
             size="small"
             inputProps={{
               style: { textAlign: 'right' },

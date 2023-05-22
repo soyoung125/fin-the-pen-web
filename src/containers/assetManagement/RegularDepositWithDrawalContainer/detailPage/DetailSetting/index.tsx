@@ -2,12 +2,12 @@
 import { Box } from '@mui/material';
 import { useLocation } from 'react-router-dom';
 import { useEffect, useState } from 'react';
-import { REGULAR_DEPOSIT_WITHDRAWAL_TYPE } from '../../../../../../domain/constants/schedule';
-import Title from '../../../../../../components/common/Title';
+import { REGULAR_DEPOSIT_WITHDRAWAL_TYPE } from '../../../../../domain/constants/schedule';
+import Title from '../../../../../components/common/Title';
 import SwipeableDetailCard from './SwipeableDetailCard';
-import { Schedule } from '../../../../../../types/schedule';
-import { makeGroupForRegularData } from '../../../../../../domain/tools';
-import useSchedule from '../../../../../../hooks/useSchedule';
+import { Schedule } from '../../../../../types/schedule';
+import { makeGroupForRegularData } from '../../../../../domain/tools';
+import useSchedule from '../../../../../hooks/useSchedule';
 
 interface StateData {
   type: '+' | '-',

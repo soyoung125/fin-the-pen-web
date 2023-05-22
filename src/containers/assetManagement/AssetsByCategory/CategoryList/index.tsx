@@ -5,9 +5,9 @@ import {
 } from '@mui/material';
 import { useState } from 'react';
 import { useSelector } from 'react-redux';
-import CategoryTypeBadge from '../../../../../components/common/CategoryTypeBadge';
-import { selectAssetsByCategory } from '../../../../../app/redux/slices/assetSlice';
-import { AssetsByCategoryInterface } from '../../../../../types/common';
+import CategoryTypeBadge from '../../../../components/common/CategoryTypeBadge';
+import { selectAssetsByCategory } from '../../../../app/redux/slices/assetSlice';
+import { AssetsByCategoryInterface } from '../../../../types/common';
 import AssetInput from './AssetInput';
 
 interface CategoryListProps {
@@ -83,7 +83,11 @@ function CategoryList({
               <List component="div" disablePadding>
                 {category.categories.map((c, index) => (
                   <ListItem sx={{ py: 0 }} key={c.title}>
-                    <Stack direction="row" justifyContent="space-between" sx={{ width: '100%', color: c.asset === '-' ? '#979797' : 'primary.main', fontSize: '14px' }}>
+                    <Stack
+                      direction="row"
+                      justifyContent="space-between"
+                      sx={{ width: '100%', color: c.asset === '-' ? '#979797' : 'primary.main', fontSize: '14px' }}
+                    >
                       <Box sx={{ ml: 2 }}>
                         {c.title}
                       </Box>

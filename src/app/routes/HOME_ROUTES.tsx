@@ -8,7 +8,7 @@ import TestContainer from '../../containers/test/TestContainer';
 import PATH from '../../domain/constants/path';
 import Home from '../../pages/Home';
 import { RouterDOM } from '../../types/common';
-import DetailSetting from '../../containers/assetManagement/pages/SavingsGoalContainer/DetailSetting';
+import DetailSetting from '../../containers/assetManagement/SavingsGoalContainer/DetailSetting';
 
 const HOME_ROUTES: RouterDOM[] = [
   {

@@ -4,13 +4,13 @@ import {
 import BorderColorIcon from '@mui/icons-material/BorderColor';
 import { useState } from 'react';
 import { useSelector } from 'react-redux';
-import RoundedPaper from '../../../../../../components/common/RoundedPaper';
-import ModalStaticBackdrop from '../../../../../../components/layouts/ModalStaticBackdrop';
-import RoundedBorderBox from '../../../../../../components/common/RoundedBorderBox';
-import { selectSavingGoal } from '../../../../../../app/redux/slices/assetSlice';
+import RoundedPaper from '../../../../../components/common/RoundedPaper';
+import ModalStaticBackdrop from '../../../../../components/layouts/ModalStaticBackdrop';
+import RoundedBorderBox from '../../../../../components/common/RoundedBorderBox';
+import { selectSavingGoal } from '../../../../../app/redux/slices/assetSlice';
 import InputModal from './InputModal';
-import AlertModal from '../../../../../../components/common/AlertModal';
-import useModal from '../../../../../../hooks/useModal';
+import AlertModal from '../../../../../components/common/AlertModal';
+import useModal from '../../../../../hooks/useModal';
 
 function Saving() {
   const {
@@ -81,4 +81,5 @@ function Saving() {
 
   );
 }
+
 export default Saving;

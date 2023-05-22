@@ -4,9 +4,9 @@ import {
 import 'swiper/css';
 import moment from 'moment';
 import { useNavigate } from 'react-router-dom';
-import RoundedBorderBox from '../../../../components/common/RoundedBorderBox';
-import PATH from '../../../../domain/constants/path';
-import { Schedule } from '../../../../types/schedule';
+import RoundedBorderBox from '../../../components/common/RoundedBorderBox';
+import PATH from '../../../domain/constants/path';
+import { Schedule } from '../../../types/schedule';
 
 interface DetailCardProps {
   data: Schedule[],
@@ -37,7 +37,11 @@ function DetailCard({ data }: DetailCardProps) {
             >
               {schedule.event_name}
             </Box>
-            <Box sx={{ color: 'primary.main' }}>{`${parseInt(schedule.expected_spending, 10).toLocaleString('ko-kr')}원`}</Box>
+            <Box
+              sx={{ color: 'primary.main' }}
+            >
+              {`${parseInt(schedule.expected_spending, 10).toLocaleString('ko-kr')}원`}
+            </Box>
           </Box>
         </Stack>
       </RoundedBorderBox>

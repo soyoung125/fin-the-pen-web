@@ -7,9 +7,10 @@ import RestartAltIcon from '@mui/icons-material/RestartAlt';
 import 'swiper/css';
 import { useState } from 'react';
 // import { useDispatch } from 'react-redux';
-import ModalStaticBackdrop from '../../../../../../components/layouts/ModalStaticBackdrop';
-import { REGULAR_DEPOSIT_WITHDRAWAL_TYPE } from '../../../../../../domain/constants/schedule';
-import { Schedule } from '../../../../../../types/schedule';
+import ModalStaticBackdrop from '../../../../../components/layouts/ModalStaticBackdrop';
+import { REGULAR_DEPOSIT_WITHDRAWAL_TYPE } from '../../../../../domain/constants/schedule';
+import { Schedule } from '../../../../../types/schedule';
+
 // import { modifySchedule } from '../../../../../../domain/redux/schedule/scheduleSlice';
 
 interface ModifyModalProps {

@@ -1,5 +1,5 @@
 import { Box, Button, Grid } from '@mui/material';
-import RoundedPaper from '../../../../../components/common/RoundedPaper';
+import RoundedPaper from '../../../../components/common/RoundedPaper';
 
 interface PrioritySettingProps {
   priority: string,

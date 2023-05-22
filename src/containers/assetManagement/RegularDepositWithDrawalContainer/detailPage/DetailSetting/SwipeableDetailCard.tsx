@@ -7,11 +7,11 @@ import { useState } from 'react';
 import moment from 'moment';
 import { useDispatch } from 'react-redux';
 import ModifyModal from './ModifyModal';
-import { deleteSelectedSchedule } from '../../../../../../domain/tools';
-import RoundedBorderBox from '../../../../../../components/common/RoundedBorderBox';
-import AlertModal from '../../../../../../components/common/AlertModal';
-import { modifySchedule } from '../../../../../../app/redux/slices/scheduleSlice';
-import { Schedule } from '../../../../../../types/schedule';
+import { deleteSelectedSchedule } from '../../../../../domain/tools';
+import RoundedBorderBox from '../../../../../components/common/RoundedBorderBox';
+import AlertModal from '../../../../../components/common/AlertModal';
+import { modifySchedule } from '../../../../../app/redux/slices/scheduleSlice';
+import { Schedule } from '../../../../../types/schedule';
 
 interface SwipeableDetailCardProps {
   data: Schedule[],
@@ -78,7 +78,11 @@ function SwipeableDetailCard({ data }: SwipeableDetailCardProps) {
               </Box>
               <Box sx={{ textAlign: 'end' }}>
                 <Box sx={{ mb: 3 }}>{schedule.event_name}</Box>
-                <Box sx={{ color: 'primary.main' }}>{`${parseInt(schedule.expected_spending, 10).toLocaleString('ko-kr')}원`}</Box>
+                <Box
+                  sx={{ color: 'primary.main' }}
+                >
+                  {`${parseInt(schedule.expected_spending, 10).toLocaleString('ko-kr')}원`}
+                </Box>
               </Box>
             </Stack>
           </SwiperSlide>

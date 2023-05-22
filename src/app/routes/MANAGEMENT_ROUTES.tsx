@@ -1,9 +1,10 @@
-import AssetsByCategory from '../../containers/assetManagement/pages/AssetsByCategory';
-import RegularDepositWithdrawal from '../../containers/assetManagement/pages/RegularDepositWithDrawalContainer';
-import DetailInformation from '../../containers/assetManagement/pages/RegularDepositWithDrawalContainer/detailPage/DetailInformation';
-import DetailSetting from '../../containers/assetManagement/pages/RegularDepositWithDrawalContainer/detailPage/DetailSetting';
-import SavingsGoal from '../../containers/assetManagement/pages/SavingsGoalContainer';
-import ScheduleManagement from '../../containers/assetManagement/pages/ScheduleManagement';
+import AssetsByCategory from '../../containers/assetManagement/AssetsByCategory';
+import RegularDepositWithdrawal from '../../containers/assetManagement/RegularDepositWithDrawalContainer';
+import DetailInformation
+  from '../../containers/assetManagement/RegularDepositWithDrawalContainer/detailPage/DetailInformation';
+import DetailSetting from '../../containers/assetManagement/RegularDepositWithDrawalContainer/detailPage/DetailSetting';
+import SavingsGoal from '../../containers/assetManagement/SavingsGoalContainer';
+import ScheduleManagement from '../../containers/assetManagement/ScheduleManagement';
 import PATH from '../../domain/constants/path';
 import { RouterDOM } from '../../types/common';
 

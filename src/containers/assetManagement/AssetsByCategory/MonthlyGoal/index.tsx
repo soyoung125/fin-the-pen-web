@@ -5,9 +5,9 @@ import {
 import BorderColorIcon from '@mui/icons-material/BorderColor';
 import { useEffect, useState } from 'react';
 import moment from 'moment';
-import RoundedPaper from '../../../../../components/common/RoundedPaper';
-import ArrowTooltip from '../../../../../components/common/ArrowTooltip';
-import useSchedule from '../../../../../hooks/useSchedule';
+import RoundedPaper from '../../../../components/common/RoundedPaper';
+import ArrowTooltip from '../../../../components/common/ArrowTooltip';
+import useSchedule from '../../../../hooks/useSchedule';
 
 interface MonthlyGoalProps {
   title: string,
