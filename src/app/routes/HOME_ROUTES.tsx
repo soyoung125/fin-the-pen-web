@@ -1,4 +1,4 @@
-import AssetManagementContainer from '../../containers/assetManagement/AssetManagementContainer';
+import AssetManagement from '../../pages/AssetManagement';
 import MyPage from '../../pages/MyPage';
 import Notification from '../../pages/Notification';
 import SettingsContainer from '../../containers/settings/SettingsContainer';
@@ -33,7 +33,7 @@ const HOME_ROUTES: RouterDOM[] = [
   },
   {
     path: PATH.assetManagement,
-    element: <AssetManagementContainer />,
+    element: <AssetManagement />,
   },
   {
     path: PATH.savingDetailSetting,

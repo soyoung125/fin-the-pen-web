@@ -10,7 +10,7 @@ import { setIsAuthenticatedFalse } from '../../app/redux/slices/commonSlice';
 import { selectUser } from '../../app/redux/slices/userSlice';
 import useSchedule from '../../hooks/useSchedule';
 
-function AssetManagementContainer() {
+function AssetManagement() {
   const dispatch = useDispatch();
   const { schedules } = useSchedule();
   const user = useSelector(selectUser);
@@ -40,4 +40,5 @@ function AssetManagementContainer() {
     </Box>
   );
 }
-export default AssetManagementContainer;
+
+export default AssetManagement;
