@@ -1,8 +1,8 @@
 /* eslint-disable consistent-return */
 import { useEffect } from 'react';
-import { useDispatch } from 'react-redux';
 import { setHeaderOpenFalse, setHeaderOpenTrue } from '../app/redux/slices/commonSlice';
 import { HeaderModeValue } from '../types/common';
+import { useAppDispatch } from '../app/redux/hooks';
 
 /**
  * 헤더를 관리해주는 customHook.
@@ -11,7 +11,7 @@ import { HeaderModeValue } from '../types/common';
  * @param {HeaderModeValue} mode 헤더의 모드 변경
  */
 const useHeader = (open: boolean, mode?: HeaderModeValue) => {
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   useEffect(() => {
     if (open) {
       dispatch(setHeaderOpenTrue(mode));

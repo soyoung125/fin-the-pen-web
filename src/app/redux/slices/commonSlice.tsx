@@ -25,9 +25,11 @@ export const commonSlice = createSlice({
   name: 'common',
   initialState,
   reducers: {
-    setHeaderOpenTrue: (state, action: PayloadAction<HeaderModeValue>) => {
+    setHeaderOpenTrue: (state, action: PayloadAction<HeaderModeValue | undefined>) => {
       const mode = action.payload;
-      state.headerMode = mode;
+      if (mode !== undefined) {
+        state.headerMode = mode;
+      }
       state.headerOpen = true;
     },
     setHeaderOpenFalse: (state) => {
