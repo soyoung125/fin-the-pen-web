@@ -5,6 +5,7 @@ import ClearIcon from '@mui/icons-material/Clear';
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect, useState } from 'react';
+import moment from 'moment';
 import { selectMonthlyConsumptionGoal, setMonthlyConsumptionGoal } from '../../../../app/redux/slices/assetSlice';
 
 interface InputModalProps {
@@ -14,6 +15,7 @@ interface InputModalProps {
 function InputModal({
   setMonthlyGoalModalOpen,
 }: InputModalProps) {
+  const month = moment().format('M월');
   const [goal, setGoal] = useState(0);
 
   /**
@@ -44,7 +46,7 @@ function InputModal({
         >
           <DeleteForeverIcon />
         </IconButton>
-        <Typography variant="h5" sx={{ fontWeight: 'bold' }}>소비 목표 설정</Typography>
+        <Typography variant="h6" sx={{ fontWeight: 'bold' }}>{`${month} 지출 목표 설정`}</Typography>
         <IconButton onClick={() => setMonthlyGoalModalOpen(false)}>
           <ClearIcon />
         </IconButton>
@@ -53,7 +55,7 @@ function InputModal({
         <Divider />
       </Box>
       <Stack spacing={1}>
-        <Typography variant="h5" sx={{ fontWeight: 'bold' }}>이번달 소비 목표 금액</Typography>
+        <Typography variant="h6" sx={{ fontWeight: 'bold' }}>{`${month} 지출 목표 금액`}</Typography>
         <TextField
           fullWidth
           placeholder="이달의 소비 목표액을 입력하세요"
