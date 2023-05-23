@@ -4,16 +4,16 @@ import {
 } from '@mui/material';
 import { Outlet, useLocation, useNavigate } from 'react-router-dom';
 import { useEffect, useState } from 'react';
-import { useSelector } from 'react-redux';
 import assetManagements from '../../../domain/constants/managements';
 import SwitchingHeader from '../../common/SwitchingHeader';
 import EasyAuthentication from '../../../containers/sign/EasyAuthentication';
 import { selectIsAuthenticated } from '../../../app/redux/slices/commonSlice';
+import { useAppSelector } from '../../../app/redux/hooks';
 
 function ManagementLayout() {
   const location = useLocation();
   const navigate = useNavigate();
-  const isAuthenticated = useSelector(selectIsAuthenticated);
+  const isAuthenticated = useAppSelector(selectIsAuthenticated);
   const [management, setManagement] = useState(0);
 
   useEffect(() => {

@@ -6,7 +6,6 @@ import {
 import BorderColorIcon from '@mui/icons-material/BorderColor';
 import { useNavigate } from 'react-router-dom';
 import { useEffect, useState } from 'react';
-import { useSelector } from 'react-redux';
 import { REGULAR_DEPOSIT_WITHDRAWAL_TYPE } from '../../../domain/constants/schedule';
 import DetailCard from './DetailCard';
 import Title from '../../../components/common/Title';
@@ -17,6 +16,7 @@ import ArrowTooltip from '../../../components/common/ArrowTooltip';
 import { Schedule } from '../../../types/schedule';
 import { makeGroupForRegularData } from '../../../domain/tools';
 import useSchedule from '../../../hooks/useSchedule';
+import { useAppSelector } from '../../../app/redux/hooks';
 
 interface DataInterface {
   [prop: string]: Schedule[],
@@ -28,7 +28,7 @@ interface DataInterface {
 
 function RegularDepositWithdrawal() {
   const navigate = useNavigate();
-  const bottomDrawerOpen = useSelector(selectBottomDrawerOpen);
+  const bottomDrawerOpen = useAppSelector(selectBottomDrawerOpen);
   const { schedules } = useSchedule();
   const [deposits, setDeposits] = useState<DataInterface>({});
   const [withdrawals, setWithdrawals] = useState<DataInterface>({});
@@ -48,7 +48,7 @@ function RegularDepositWithdrawal() {
   //     return acc;
   //   }, {});
 
-  const hadleOpenAlertModal = (newType: string): void => {
+  const handleOpenAlertModal = (newType: string): void => {
     setType(newType);
     setOpenAlertModal(true);
   };
@@ -69,7 +69,7 @@ function RegularDepositWithdrawal() {
       >
         <Stack direction="row" alignItems="center" sx={{ color: 'primary.main' }}>
           <Box>{`총 ${Object.keys(deposits).length}건`}</Box>
-          <IconButton color="primary" onClick={() => hadleOpenAlertModal('+')}>
+          <IconButton color="primary" onClick={() => handleOpenAlertModal('+')}>
             <BorderColorIcon fontSize="small" />
           </IconButton>
         </Stack>
@@ -83,7 +83,7 @@ function RegularDepositWithdrawal() {
       >
         <Stack direction="row" alignItems="center" sx={{ color: 'primary.main' }}>
           <Box>{`총 ${Object.keys(withdrawals).length}건`}</Box>
-          <IconButton color="primary" onClick={() => hadleOpenAlertModal('-')}>
+          <IconButton color="primary" onClick={() => handleOpenAlertModal('-')}>
             <BorderColorIcon fontSize="small" />
           </IconButton>
         </Stack>

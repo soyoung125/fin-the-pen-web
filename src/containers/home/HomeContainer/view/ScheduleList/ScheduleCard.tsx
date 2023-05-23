@@ -5,20 +5,21 @@ import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 import SettingsIcon from '@mui/icons-material/Settings';
 import { grey } from '@mui/material/colors';
 import { Swiper, SwiperSlide } from 'swiper/react';
-import { useDispatch } from 'react-redux';
 import { deleteSelectedSchedule } from '../../../../../domain/tools';
 import { setBottomDrawerOpenFalse } from '../../../../../app/redux/slices/commonSlice';
 import CategoryTypeBadge from '../../../../../components/common/CategoryTypeBadge';
 import { Schedule } from '../../../../../types/schedule';
 import { Category } from '../../../../../domain/constants/categories';
+import { useAppDispatch } from '../../../../../app/redux/hooks';
 
 interface ScheduleCardProps {
   schedule: Schedule;
   handleModal: (schedule: Schedule) => void;
   category: Category;
 }
+
 function ScheduleCard({ schedule, handleModal, category }: ScheduleCardProps) {
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
 
   const handleClose = () => {
     dispatch(setBottomDrawerOpenFalse());

@@ -1,17 +1,16 @@
 import { Button, Stack, Tooltip } from '@mui/material';
-import { useDispatch, useSelector } from 'react-redux';
 import { NEED_SIGN_IN, NOT_AVAILABLE } from '../../../../domain/constants/messages';
 import {
   NEED_TITLE, SCHEDULE_DRAWER,
 } from '../../../../domain/constants/schedule';
 import { selectGuestMode } from '../../../../app/redux/slices/commonSlice';
 import {
-  // mockCreateNewSchedule,
   modifySchedule, selectDate, selectSchedule, setDrawerSchedule,
 } from '../../../../app/redux/slices/scheduleSlice';
 import { selectUser } from '../../../../app/redux/slices/userSlice';
 import { generateRandomSchedule, handleCreate } from '../domain/schedule';
 import { Schedule, ScheduleDrawerModeValue } from '../../../../types/schedule';
+import { useAppDispatch, useAppSelector } from '../../../../app/redux/hooks';
 
 /**
  * 각종 로직들 모듈로 이전 예정
@@ -23,11 +22,11 @@ interface ScheduleDrawerFooterProps {
 }
 
 function ScheduleDrawerFooter({ mode, handleClose }: ScheduleDrawerFooterProps) {
-  const date = useSelector(selectDate);
-  const user = useSelector(selectUser);
-  const guestMode = useSelector(selectGuestMode);
-  const schedule = useSelector(selectSchedule) as Schedule;
-  const dispatch = useDispatch();
+  const date = useAppSelector(selectDate);
+  const user = useAppSelector(selectUser);
+  const guestMode = useAppSelector(selectGuestMode);
+  const schedule = useAppSelector(selectSchedule) as Schedule;
+  const dispatch = useAppDispatch();
 
   const handleModify = async () => {
     /**

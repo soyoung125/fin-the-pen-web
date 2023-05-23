@@ -1,18 +1,18 @@
 import { Box, Paper, Stack } from '@mui/material';
 import { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
 import {
   selectHeaderMode, selectHeaderOpen, setGuestModeFalse, setGuestModeTrue,
 } from '../../../../app/redux/slices/commonSlice';
 import { selectUser } from '../../../../app/redux/slices/userSlice';
 import AnalysisMode from './headerMode/AnalysisMode';
 import HomeMode from './headerMode/HomeMode';
+import { useAppDispatch, useAppSelector } from '../../../../app/redux/hooks';
 
 function TopBar() {
-  const dispatch = useDispatch();
-  const user = useSelector(selectUser);
-  const headerOpen = useSelector(selectHeaderOpen);
-  const headerMode = useSelector(selectHeaderMode);
+  const dispatch = useAppDispatch();
+  const user = useAppSelector(selectUser);
+  const headerOpen = useAppSelector(selectHeaderOpen);
+  const headerMode = useAppSelector(selectHeaderMode);
 
   useEffect(() => {
     // 옵셔널 체이닝 사용하면 eslint에서 오류 발생

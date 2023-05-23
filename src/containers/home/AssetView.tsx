@@ -1,10 +1,10 @@
-import { useSelector } from 'react-redux';
 import { selectIsAuthenticated } from '../../app/redux/slices/commonSlice';
 import EasyAuthentication from '../sign/EasyAuthentication';
 import AssetPreview from './HomeContainer/view/AssetPreview';
+import { useAppSelector } from '../../app/redux/hooks';
 
 function AssetView() {
-  const isAuthenticated = useSelector(selectIsAuthenticated);
+  const isAuthenticated = useAppSelector(selectIsAuthenticated);
 
   return (
     <>

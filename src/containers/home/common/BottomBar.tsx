@@ -1,6 +1,4 @@
-import {
-  BottomNavigation, BottomNavigationAction, Drawer, Paper,
-} from '@mui/material';
+import { BottomNavigation, BottomNavigationAction, Drawer, Paper } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
 import DataSaverOffIcon from '@mui/icons-material/DataSaverOff';
@@ -8,26 +6,27 @@ import AddCircleIcon from '@mui/icons-material/AddCircle';
 import { useState, useEffect } from 'react';
 import SettingsIcon from '@mui/icons-material/Settings';
 import PaidIcon from '@mui/icons-material/Paid';
-import { useDispatch, useSelector } from 'react-redux';
 import moment from 'moment';
 import PATH from '../../../domain/constants/path';
 import ScheduleDrawer from '../ScheduleDrawer';
 import { INIT_SCHEDULE, SCHEDULE_DRAWER_MODE } from '../../../domain/constants/schedule';
 import { changeViewMode, selectDate } from '../../../app/redux/slices/scheduleSlice';
 import {
-  selectBottomDrawerOpen, selectBottomDrawerTabMenu,
-  setBottomDrawerOpenFalse, setBottomDrawerOpenTrue, setBottomDrawerTabMenu,
+  selectBottomDrawerOpen, selectBottomDrawerTabMenu, setBottomDrawerOpenFalse, setBottomDrawerOpenTrue, setBottomDrawerTabMenu,
 } from '../../../app/redux/slices/commonSlice';
+import { useAppDispatch, useAppSelector } from '../../../app/redux/hooks';
 
 function BottomBar() {
-  const dispatch = useDispatch();
-  const bottomDrawerOpen = useSelector(selectBottomDrawerOpen);
-  const bottomDrawerTabMenu = useSelector(selectBottomDrawerTabMenu);
-
-  const date = useSelector(selectDate);
   const navigate = useNavigate();
+  const dispatch = useAppDispatch();
 
-  const [drawerWidth, setDrawerWidth] = useState<number>(0);
+  const date = useAppSelector(selectDate);
+
+  const bottomDrawerOpen = useAppSelector(selectBottomDrawerOpen);
+  const bottomDrawerTabMenu = useAppSelector(selectBottomDrawerTabMenu);
+
+
+  const [drawerWidth, setDrawerWidth] = useState(0);
   const [startTime, setStartTime] = useState('09');
 
   useEffect(() => {
