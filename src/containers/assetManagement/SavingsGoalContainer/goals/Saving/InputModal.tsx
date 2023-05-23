@@ -70,6 +70,9 @@ function InputModal({
           onFocus={(e) => e.target.select()}
           onChange={handleChange}
           id="year"
+          inputProps={{
+            style: { textAlign: 'right' },
+          }}
         />
         <Typography variant="h5" sx={{ fontWeight: 'bold' }}>1 Month Goal</Typography>
         <TextField
@@ -80,6 +83,9 @@ function InputModal({
           onFocus={(e) => e.target.select()}
           onChange={handleChange}
           id="month"
+          inputProps={{
+            style: { textAlign: 'right' },
+          }}
         />
       </Stack>
       <Button
