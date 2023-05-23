@@ -7,6 +7,11 @@ import { EXPENDITURE } from './constants/categories';
 import { deleteSchedule } from '../app/redux/slices/scheduleSlice';
 
 /**
+ * 
+ * TODO: any script 제거하기
+ */
+
+/**
  * 유용한 함수들을 모아두는 곳.
  * 주석으로 부가 설명이 있으면 더 좋을 것 같아요.
  */
@@ -16,7 +21,7 @@ import { deleteSchedule } from '../app/redux/slices/scheduleSlice';
  * 어떤 객체의 value 를 전수조사하여, 빈칸 '' 이 검출되지 않으면 -1을 반환하는 함수.
  * 즉, -1이 반환되면 이 객체의 value에 빈칸이 없다는 의미이다.
  */
-export const isObjectValuesEmpty = (obj) => (
+export const isObjectValuesEmpty = (obj: any) => (
   Object.values(obj).findIndex((v) => v === '')
 );
 
@@ -26,18 +31,18 @@ export const isObjectValuesEmpty = (obj) => (
   * @param {Sting} type '-', '+' 수입/지출을 확인하기 위한 매개변수
   * @returns 일/주/월별 수입/지출 액
   */
-export const calculateIncomeExpenditure = (schedules, expression, type) => {
+export const calculateIncomeExpenditure = (schedules: any, expression: any, type: any) => {
   let result = 0;
   if (type === '-') {
-    result = schedules.filter((s) => expression(s))
-      .reduce((sum, current) => (
+    result = schedules.filter((s: any) => expression(s))
+      .reduce((sum: any, current: any) => (
         current.type === type
           ? sum - parseInt(current.expected_spending, 10)
           : sum
       ), result);
   } else {
-    result = schedules.filter((s) => expression(s))
-      .reduce((sum, current) => (
+    result = schedules.filter((s: any) => expression(s))
+      .reduce((sum: any, current: any) => (
         current.type === type
           ? sum + parseInt(current.expected_spending, 10)
           : sum
@@ -54,7 +59,7 @@ export const calculateIncomeExpenditure = (schedules, expression, type) => {
  * @param {function} func2 게스트 모드가 아닌 경우 실행할 함수
  */
 
-export const executeFunctionByGuestMode = (guestMode, func1, func2) => {
+export const executeFunctionByGuestMode = (guestMode: any, func1: any, func2: any) => {
   if (guestMode) {
     func1();
   } else {
@@ -69,14 +74,14 @@ export const executeFunctionByGuestMode = (guestMode, func1, func2) => {
  * @param {*} endTime
  * @returns
  */
-export const isTimeOrderCorrect = (startTime, endTime) => {
+export const isTimeOrderCorrect = (startTime: any, endTime: any) => {
   if (startTime > endTime) {
     return false;
   }
   return true;
 };
 
-export const deleteSelectedSchedule = (dispatch, schedule, handleClose) => {
+export const deleteSelectedSchedule = (dispatch: any, schedule: any, handleClose: any) => {
   if (window.confirm('정말로 삭제 하시겠습니까?')) {
     console.log(schedule.id);
     dispatch(deleteSchedule(schedule.id));
@@ -92,8 +97,8 @@ export const initAssetsByCategory = () => EXPENDITURE.nested
     sum: 0,
   }));
 
-export const makeGroupForRegularData = (data) => data
-  .reduce((acc, curr) => {
+export const makeGroupForRegularData = (data: any) => data
+  .reduce((acc: any, curr: any) => {
     const { event_name } = curr;
     if (acc[event_name]) acc[event_name].push(curr);
     else acc[event_name] = [curr];

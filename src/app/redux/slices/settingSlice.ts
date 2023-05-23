@@ -48,7 +48,7 @@ export const settingSlice = createSlice({
 });
 export const { updateSettings, changeThemeMode } = settingSlice.actions;
 
-export const selectSettings = (state) => state.setting.settings;
-export const selectIsDarkMode = (state) => state.setting.settings.다크모드;
+export const selectSettings = (state: any) => state.setting.settings;
+export const selectIsDarkMode = (state: any) => state.setting.settings.다크모드;
 
 export default settingSlice.reducer;

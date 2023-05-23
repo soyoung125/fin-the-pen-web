@@ -74,7 +74,7 @@ export const createSchedule = createAsyncThunk(
   },
 );
 
-export const deleteSchedule = createAsyncThunk(
+export const deleteSchedule = createAsyncThunk<any, any>(
   'schedule/deleteSchedule',
   async (id, { getState }: any) => {
     // console.log(id);
