@@ -8,11 +8,11 @@ import { EXPENDITURE, INCOME } from '../../../../../../domain/constants/categori
    * @param {Array} daySchedules 해당 일의 일정 배열
    * @returns {Array} 카테고리별 일정 마커를 표시하기 휘한 길이 7의 배열 (색상 표시를 위해 color 요소 필수)
    */
-export const makeMarkerData = (daySchedules, isDarkMode) => {
-  const emptyData = Array(6).fill().map(() => ({ color: isDarkMode ? '#121212' : '#FFFFFF' }));
+export const makeMarkerData = (daySchedules: any, isDarkMode: any) => {
+  const emptyData = Array(6).fill(undefined).map(() => ({ color: isDarkMode ? '#121212' : '#FFFFFF' }));
   const categoryForMarker = INCOME.nested.concat(EXPENDITURE.nested)
     .filter((c) => (daySchedules.findIndex(
-      (s) => s.category.nestedType === c.type,
+      (s: any) => s.category.nestedType === c.type,
     ) !== -1));
 
   switch (categoryForMarker.length) {

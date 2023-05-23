@@ -10,7 +10,7 @@ function ExclusionInput() {
   const dispatch = useDispatch();
   const schedule = useSelector(selectSchedule);
 
-  const changeExclustion = (state) => {
+  const changeExclustion = (state: any) => {
     updateExclusion(dispatch, schedule, state);
   };
 
@@ -20,8 +20,8 @@ function ExclusionInput() {
       <Stack direction="row" alignItems="center">
         <Switch
           id="exclusion"
-          checked={schedule.exclusion}
-          value={schedule.exclusion}
+          checked={schedule?.exclusion}
+          value={schedule?.exclusion}
           onChange={changeExclustion}
         />
       </Stack>

@@ -3,7 +3,7 @@ import {
   Dialog,
 } from '@mui/material';
 
-export default function ModalStaticBackdrop(props) {
+export default function ModalStaticBackdrop(props: any) {
   const {
     width, component, open, ...other
   } = props;

@@ -58,7 +58,7 @@ export const getMonthSchedules = createAsyncThunk(
   },
 );
 
-export const createSchedule = createAsyncThunk(
+export const createSchedule = createAsyncThunk<any, any>(
   'schedule/createSchedule',
   async (scheduleWithUuid, { getState }: any) => {
     const { guestMode } = getState().common;

@@ -26,7 +26,7 @@ export const mockLogin = createAsyncThunk(
   },
 );
 
-export const login = createAsyncThunk(
+export const login: any = createAsyncThunk<any, any>(
   'user/login',
   async (sign) => {
     const response = await fetchLogin(sign);

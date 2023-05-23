@@ -9,7 +9,7 @@ import { createSchedule, getMonthSchedules, setDrawerSchedule } from '../../../.
  */
 
 /* eslint-disable import/prefer-default-export */
-export const updateSchedule = (dispatch, schedule, state) => {
+export const updateSchedule = (dispatch: any, schedule: any, state: any) => {
   dispatch(setDrawerSchedule({ ...schedule, [state.target.id]: state.target.value }));
   if (state.target.id === 'start_time') {
     const endTime = moment(state.target.value, 'HH:mm').add(2, 'hours').format('HH:mm');
@@ -19,7 +19,7 @@ export const updateSchedule = (dispatch, schedule, state) => {
   }
 };
 
-export const updateRepeat = (dispatch, schedule, setOpenDatePickerModal, state) => {
+export const updateRepeat = (dispatch: any, schedule: any, setOpenDatePickerModal: any, state: any) => {
   if ((state.target.name === 'repeating_cycle') && (state.target.value === '없음')) {
     dispatch(setDrawerSchedule({
       ...schedule,
@@ -37,7 +37,7 @@ export const updateRepeat = (dispatch, schedule, setOpenDatePickerModal, state) 
   }
 };
 
-export const updateRepeatEndDate = (schedule, setRepeatEndDate, endDate) => {
+export const updateRepeatEndDate = (schedule: any, setRepeatEndDate: any, endDate: any) => {
   if (endDate.isBefore(schedule.date)) {
     alert('반복 종료일을 다시 선택해주세요.');
   } else {
@@ -45,7 +45,7 @@ export const updateRepeatEndDate = (schedule, setRepeatEndDate, endDate) => {
   }
 };
 
-export const updateSpendingType = (dispatch, schedule) => {
+export const updateSpendingType = (dispatch: any, schedule: any) => {
   if (schedule.type === SCHEDULE_DRAWER.type_plus) {
     dispatch(setDrawerSchedule({ ...schedule, type: SCHEDULE_DRAWER.type_minus }));
   } else {
@@ -53,11 +53,11 @@ export const updateSpendingType = (dispatch, schedule) => {
   }
 };
 
-export const updateExclusion = (dispatch, schedule, state) => {
+export const updateExclusion = (dispatch: any, schedule: any, state: any) => {
   dispatch(setDrawerSchedule({ ...schedule, exclusion: state.target.checked }));
 };
 
-export const switchTitle = (id) => {
+export const switchTitle = (id: any) => {
   switch (id) {
     case 'start_time':
       return '일정 시작 시각';
@@ -73,12 +73,12 @@ export const switchTitle = (id) => {
  */
 
 export const handleCreate = async (
-  dispatch,
-  schedule,
-  user,
-  guestMode,
-  date,
-  handleClose,
+  dispatch: any,
+  schedule: any,
+  user: any,
+  guestMode: any,
+  date: any,
+  handleClose: any,
 ) => {
   const scheduleWithUuid = {
     ...schedule,
@@ -114,8 +114,8 @@ export const handleCreate = async (
  * @param {*} date
  * @returns schedule
  */
-export const generateRandomSchedule = (date) => {
-  const generateRandomString = (num) => {
+export const generateRandomSchedule = (date: any) => {
+  const generateRandomString = (num: any) => {
     const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890';
     let result = '';
     const charactersLength = characters.length;

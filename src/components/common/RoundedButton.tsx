@@ -1,6 +1,6 @@
 import { ToggleButton } from '@mui/material';
 
-function RoundedButton({ children, onClick, value }) {
+function RoundedButton({ children, onClick, value }: any) {
   return (
     <ToggleButton value={value} sx={{ color: 'white', borderRadius: 30, borderWidth: 0 }} onClick={onClick}>
       {children}
