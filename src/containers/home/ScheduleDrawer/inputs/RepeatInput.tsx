@@ -18,9 +18,9 @@ function RepeatInput() {
   const schedule = useSelector(selectSchedule);
 
   const [openDatePickerModal, setOpenDatePickerModal] = useState(false);
-  const [repeatEndDate, setRepeatEndDate] = useState(moment(schedule.repeat_endDate));
+  const [repeatEndDate, setRepeatEndDate] = useState(moment(schedule?.repeat_endDate));
 
-  const changeRepeat = (state) => {
+  const changeRepeat = (state: any) => {
     updateRepeat(dispatch, schedule, setOpenDatePickerModal, state);
   };
 
@@ -32,11 +32,11 @@ function RepeatInput() {
     }));
   };
 
-  const renderDayInPicker = (day, _value, DayComponentProps) => {
-    if (moment(schedule.date).isSame(repeatEndDate)) {
+  const renderDayInPicker = (day: any, _value: any, DayComponentProps: any) => {
+    if (moment(schedule?.date).isSame(repeatEndDate)) {
       return <PickersDay {...DayComponentProps} />;
     }
-    if (moment(schedule.date).isSame(day)) {
+    if (moment(schedule?.date).isSame(day)) {
       return (
         <PickersDay
           sx={{
@@ -58,7 +58,7 @@ function RepeatInput() {
         />
       );
     }
-    if (moment(schedule.date).isBefore(day) && moment(repeatEndDate).isAfter(day)) {
+    if (moment(schedule?.date).isBefore(day) && moment(repeatEndDate).isAfter(day)) {
       return (
         <PickersDay
           sx={{
@@ -85,7 +85,7 @@ function RepeatInput() {
           <InputLabel>{SCHEDULE_DRAWER.repeating_cycle}</InputLabel>
           <Select
             name="repeating_cycle"
-            value={schedule.repeating_cycle}
+            value={schedule?.repeating_cycle}
             label={SCHEDULE_DRAWER.repeating_cycle}
             onChange={changeRepeat}
           >
@@ -96,17 +96,17 @@ function RepeatInput() {
         <FormControl
           fullWidth
           size="small"
-          disabled={schedule.repeating_cycle === '없음'}
+          disabled={schedule?.repeating_cycle === '없음'}
         >
           <InputLabel>{SCHEDULE_DRAWER.repeat_deadline}</InputLabel>
           <Select
             name="repeat_deadline"
-            value={schedule.repeat_deadline === '캘린더에 표시' ? schedule.repeat_endDate : schedule.repeat_deadline}
+            value={schedule?.repeat_deadline === '캘린더에 표시' ? schedule?.repeat_endDate : schedule?.repeat_deadline}
             label={SCHEDULE_DRAWER.repeat_deadline}
             onChange={changeRepeat}
           >
             {DEADLINE.map((d) => (<MenuItem key={Math.random()} value={d}>{d}</MenuItem>))}
-            <MenuItem disabled value={schedule.repeat_endDate}>{schedule.repeat_endDate}</MenuItem>
+            <MenuItem disabled value={schedule?.repeat_endDate}>{schedule?.repeat_endDate}</MenuItem>
           </Select>
         </FormControl>
       </Stack>

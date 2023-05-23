@@ -9,7 +9,7 @@ import { SCHEDULE_DRAWER } from '../../../../domain/constants/schedule';
 import { selectSchedule } from '../../../../app/redux/slices/scheduleSlice';
 import { updateSchedule } from '../domain/schedule';
 
-export default function CategoryInput({ selected }) {
+export default function CategoryInput({ selected }: any) {
   const dispatch = useDispatch();
   const schedule = useSelector(selectSchedule);
 

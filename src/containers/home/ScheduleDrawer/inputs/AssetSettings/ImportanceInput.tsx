@@ -10,7 +10,7 @@ function ImportanceInput() {
   const dispatch = useDispatch();
   const schedule = useSelector(selectSchedule);
 
-  const changeSchedule = (state) => {
+  const changeSchedule = (state: any) => {
     updateSchedule(dispatch, schedule, state);
   };
 
@@ -19,7 +19,7 @@ function ImportanceInput() {
       <Typography>{SCHEDULE_DRAWER.set_importance_title}</Typography>
       <Stack direction="row" alignItems="center" spacing={1}>
         <Button
-          variant={schedule.importance === SCHEDULE_DRAWER.importance_high ? 'contained' : 'outlined'}
+          variant={schedule?.importance === SCHEDULE_DRAWER.importance_high ? 'contained' : 'outlined'}
           id="importance"
           value={SCHEDULE_DRAWER.importance_high}
           onClick={changeSchedule}
@@ -28,7 +28,7 @@ function ImportanceInput() {
           {SCHEDULE_DRAWER.importance_high}
         </Button>
         <Button
-          variant={schedule.importance === SCHEDULE_DRAWER.importance_middle ? 'contained' : 'outlined'}
+          variant={schedule?.importance === SCHEDULE_DRAWER.importance_middle ? 'contained' : 'outlined'}
           id="importance"
           value={SCHEDULE_DRAWER.importance_middle}
           onClick={changeSchedule}
@@ -37,7 +37,7 @@ function ImportanceInput() {
           {SCHEDULE_DRAWER.importance_middle}
         </Button>
         <Button
-          variant={schedule.importance === SCHEDULE_DRAWER.importance_low ? 'contained' : 'outlined'}
+          variant={schedule?.importance === SCHEDULE_DRAWER.importance_low ? 'contained' : 'outlined'}
           id="importance"
           value={SCHEDULE_DRAWER.importance_low}
           onClick={changeSchedule}

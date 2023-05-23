@@ -11,7 +11,7 @@ function NameInput() {
   const dispatch = useDispatch();
   const schedule = useSelector(selectSchedule);
 
-  const changeSchedule = (state) => {
+  const changeSchedule = (state: any) => {
     updateSchedule(dispatch, schedule, state);
   };
 
@@ -19,7 +19,7 @@ function NameInput() {
     updateSchedule(dispatch, schedule, {
       target: {
         id: 'alarm',
-        value: !schedule.alarm,
+        value: !schedule?.alarm,
       },
     });
   };
@@ -35,11 +35,11 @@ function NameInput() {
               onClick={changeAlarm}
               edge="end"
             >
-              <NotificationsNoneIcon color={schedule.alarm ? 'primary' : ''} />
+              <NotificationsNoneIcon />
             </IconButton>
           </InputAdornment>
         )}
-        value={schedule.event_name}
+        value={schedule?.event_name}
         onChange={changeSchedule}
         size="small"
         inputProps={{

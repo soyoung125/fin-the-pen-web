@@ -10,7 +10,7 @@ function DateInput() {
   const dispatch = useDispatch();
   const schedule = useSelector(selectSchedule);
 
-  const changeSchedule = (state) => {
+  const changeSchedule = (state: any) => {
     updateSchedule(dispatch, schedule, state);
   };
 
@@ -24,7 +24,7 @@ function DateInput() {
         InputLabelProps={{
           shrink: true,
         }}
-        value={schedule.date}
+        value={schedule?.date}
         onChange={changeSchedule}
         size="small"
       />
@@ -46,7 +46,7 @@ function DateInput() {
             step: 300, // 5 min
           }}
           fullWidth
-          value={schedule.start_time}
+          value={schedule?.start_time}
           onChange={changeSchedule}
           size="small"
         />
@@ -61,7 +61,7 @@ function DateInput() {
             step: 300, // 5 min
           }}
           fullWidth
-          value={schedule.end_time}
+          value={schedule?.end_time}
           onChange={changeSchedule}
           size="small"
         />
