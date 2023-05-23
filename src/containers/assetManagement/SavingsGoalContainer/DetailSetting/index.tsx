@@ -25,6 +25,10 @@ function DetailSetting() {
     setRemittance(value);
   };
 
+  const handleNotification = (value: any) => {
+    setNotification(value);
+  };
+
   return (
     <Box sx={{ pt: 3, px: 2, mb: 2 }}>
       <Typography variant="h6" sx={{ fontWeight: 'bold', textAlign: 'center' }}>저축 세부 설정</Typography>
@@ -39,7 +43,10 @@ function DetailSetting() {
         handleRemittance={handleRemittance}
       />
 
-      <NotificationSetting />
+      <NotificationSetting
+        notification={notification}
+        handleNotification={handleNotification}
+      />
 
       <PopupSetting />
 
