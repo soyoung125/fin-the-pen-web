@@ -2,15 +2,18 @@
 import {
   Box, Typography, Button,
 } from '@mui/material';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import PrioritySetting from './PrioritySetting';
 import RemittanceSetting from './RemittanceSetting';
 import PopupSetting from './PopupSetting';
 import NotificationSetting from './NotificationSetting';
-import { selectSavingDetailSetting } from '../../../../app/redux/slices/assetSlice';
+import { selectSavingDetailSetting, setSavingDetailSetting } from '../../../../app/redux/slices/assetSlice';
 
 function DetailSetting() {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
   const savingDetailSetting = useSelector(selectSavingDetailSetting);
   const [priority, setPriority] = useState(savingDetailSetting.priority);
   const [remittance, setRemittance] = useState(savingDetailSetting.remittance);
@@ -31,6 +34,16 @@ function DetailSetting() {
 
   const handlePopup = (value: any) => {
     setPopup(value);
+  };
+
+  const handleSetting = () => {
+    dispatch(setSavingDetailSetting({
+      priority,
+      remittance,
+      notification,
+      popup,
+    }));
+    navigate(-1);
   };
 
   return (
@@ -57,7 +70,7 @@ function DetailSetting() {
         handlePopup={handlePopup}
       />
 
-      <Button fullWidth variant="contained">저축 세부 설정하기</Button>
+      <Button fullWidth variant="contained" onClick={() => handleSetting()}>저축 세부 설정하기</Button>
     </Box>
   );
 }
