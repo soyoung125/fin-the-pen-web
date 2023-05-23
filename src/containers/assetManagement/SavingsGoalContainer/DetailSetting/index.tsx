@@ -29,6 +29,10 @@ function DetailSetting() {
     setNotification(value);
   };
 
+  const handlePopup = (value: any) => {
+    setPopup(value);
+  };
+
   return (
     <Box sx={{ pt: 3, px: 2, mb: 2 }}>
       <Typography variant="h6" sx={{ fontWeight: 'bold', textAlign: 'center' }}>저축 세부 설정</Typography>
@@ -48,7 +52,10 @@ function DetailSetting() {
         handleNotification={handleNotification}
       />
 
-      <PopupSetting />
+      <PopupSetting
+        popup={popup}
+        handlePopup={handlePopup}
+      />
 
       <Button fullWidth variant="contained">저축 세부 설정하기</Button>
     </Box>
