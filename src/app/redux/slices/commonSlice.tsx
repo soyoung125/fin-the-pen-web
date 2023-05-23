@@ -1,10 +1,9 @@
-/* eslint-disable max-len */
-/* eslint-disable no-param-reassign */
-import { createSlice } from '@reduxjs/toolkit';
+import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 import { HEADER_MODE } from '../../../domain/constants/common';
 import { HeaderModeValue } from '../../../types/common';
+import { RootState } from '../store';
 
-interface InitialState {
+interface CommonState {
   headerOpen: boolean;
   headerMode: HeaderModeValue;
   guestMode: boolean;
@@ -13,7 +12,7 @@ interface InitialState {
   isAuthenticated: boolean;
 }
 
-const initialState: InitialState = {
+const initialState: CommonState = {
   headerOpen: true,
   headerMode: HEADER_MODE.home,
   guestMode: false,
@@ -26,11 +25,9 @@ export const commonSlice = createSlice({
   name: 'common',
   initialState,
   reducers: {
-    setHeaderOpenTrue: (state, action) => {
+    setHeaderOpenTrue: (state, action: PayloadAction<HeaderModeValue>) => {
       const mode = action.payload;
-      if (mode !== undefined) {
-        state.headerMode = mode;
-      }
+      state.headerMode = mode;
       state.headerOpen = true;
     },
     setHeaderOpenFalse: (state) => {
@@ -72,11 +69,11 @@ export const {
   setIsAuthenticatedFalse,
 } = commonSlice.actions;
 
-export const selectHeaderOpen = (state: any) => (state.common as InitialState).headerOpen;
-export const selectHeaderMode = (state: any) => (state.common as InitialState).headerMode;
-export const selectGuestMode = (state: any) => (state.common as InitialState).guestMode;
-export const selectBottomDrawerOpen = (state: any) => (state.common as InitialState).bottomDrawerOpen;
-export const selectBottomDrawerTabMenu = (state: any) => (state.common as InitialState).bottomDrawerTabMenu;
-export const selectIsAuthenticated = (state: any) => (state.common as InitialState).isAuthenticated;
+export const selectHeaderOpen = (state: RootState) => state.common.headerOpen;
+export const selectHeaderMode = (state: RootState) => state.common.headerMode;
+export const selectGuestMode = (state: RootState) => state.common.guestMode;
+export const selectBottomDrawerOpen = (state: RootState) => state.common.bottomDrawerOpen;
+export const selectBottomDrawerTabMenu = (state: RootState) => state.common.bottomDrawerTabMenu;
+export const selectIsAuthenticated = (state: RootState) => state.common.isAuthenticated;
 
 export default commonSlice.reducer;

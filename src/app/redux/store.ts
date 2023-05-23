@@ -1,4 +1,3 @@
-/* eslint-disable max-len */
 import { configureStore } from '@reduxjs/toolkit';
 
 // import storage from 'redux-persist/lib/storage'; // for local storage
@@ -29,7 +28,6 @@ const persistConfig = {
 
 const persistedReducer = persistReducer(persistConfig, reducers);
 
-// eslint-disable-next-line import/prefer-default-export
 export const store = configureStore({
   reducer: persistedReducer,
   devTools: process.env.NODE_ENV !== 'production',
