@@ -28,6 +28,7 @@ function NotificationSetting({ notification, handleNotification }: NotificationS
         <FormControl fullWidth>
           <OutlinedInput
             id="time"
+            type="time"
             startAdornment={<InputAdornment position="start">알림 시간</InputAdornment>}
             value={notification.time}
             onChange={(state) => handleNotification({ ...notification, time: state.target.value })}

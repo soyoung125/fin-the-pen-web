@@ -63,6 +63,7 @@ function RemittanceSetting({ remittance, handleRemittance }: RemittanceSettingPr
             <FormControl fullWidth>
               <OutlinedInput
                 id="date"
+                type="date"
                 startAdornment={<InputAdornment position="start">송금일</InputAdornment>}
                 value={remittance.settings.date}
                 onChange={changeRemittance}
