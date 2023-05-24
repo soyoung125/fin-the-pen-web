@@ -14,13 +14,14 @@ import ScheduleViewMode from '../../containers/home/HomeContainer/layout/Schedul
 import ScheduleView from '../../containers/home/ScheduleView';
 import AssetView from '../../containers/home/AssetView';
 import { VIEW_MODE } from '../../domain/constants/schedule';
+import { useAppDispatch, useAppSelector } from '../../app/redux/hooks';
 
 function Home() {
-  const dispatch = useDispatch();
-  const viewMode = useSelector(selectViewMode);
-  const date = useSelector(selectDate);
-  const user = useSelector(selectUser);
-  const guestMode = useSelector(selectGuestMode);
+  const dispatch = useAppDispatch();
+  const viewMode = useAppSelector(selectViewMode);
+  const date = useAppSelector(selectDate);
+  const user = useAppSelector(selectUser);
+  const guestMode = useAppSelector(selectGuestMode);
 
   useEffect(() => {
     dispatch(changeViewMode(VIEW_MODE.schedule));

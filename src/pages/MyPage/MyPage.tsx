@@ -1,9 +1,7 @@
-/* eslint-disable no-restricted-globals */
 import {
   Box, Button, Stack, Typography
 } from '@mui/material';
 import { useEffect } from 'react';
-import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import PATH from '../../domain/constants/path';
 import { selectGuestMode } from '../../app/redux/slices/commonSlice';
@@ -14,11 +12,13 @@ import SchedulesData from '../../containers/test/SchedulesData';
 import ScheduleFilterData from '../../containers/test/ScheduleFilterData';
 import UserData from '../../containers/test/UserData';
 import ScheduleData from '../../containers/test/ScheduleData';
+import { useAppSelector } from '../../app/redux/hooks';
 
 function MyPage() {
-  const user = useSelector(selectUser);
-  const guestMode = useSelector(selectGuestMode);
   const navigate = useNavigate();
+  const user = useAppSelector(selectUser);
+  const guestMode = useAppSelector(selectGuestMode);
+
   const userLogOut = () => {
     if (
       confirm(
@@ -32,6 +32,7 @@ function MyPage() {
        */
     }
   };
+
   useEffect(() => {
     // 로그인 안된 계정은 로그인 페이지로 강제연결
     if (user === null) {

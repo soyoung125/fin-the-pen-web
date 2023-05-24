@@ -3,17 +3,17 @@
 import { Alert, Box } from '@mui/material';
 import moment from 'moment/moment';
 import { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
 import ScheduleStatusCard from '../../components/assetManagement/ScheduleStatusCard';
 import SettingsPaper from '../../components/assetManagement/SettingsPaper';
 import { setIsAuthenticatedFalse } from '../../app/redux/slices/commonSlice';
 import { selectUser } from '../../app/redux/slices/userSlice';
 import useSchedule from '../../hooks/useSchedule';
+import { useAppDispatch, useAppSelector } from '../../app/redux/hooks';
 
 function AssetManagement() {
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   const { schedules } = useSchedule();
-  const user = useSelector(selectUser);
+  const user = useAppSelector(selectUser);
   const today = moment();
 
   useEffect(() => {
