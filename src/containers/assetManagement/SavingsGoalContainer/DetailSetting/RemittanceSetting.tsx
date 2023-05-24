@@ -12,7 +12,7 @@ interface RemittanceSettingProps {
 
 function RemittanceSetting({ remittance, handleRemittance }: RemittanceSettingProps) {
   const options = ['none', '매달 1일', '매달 15일', '매달 마지막날', '직접 설정'];
-  const changeRemittance = (state: { target: { id: string; value: string; }; }) => {
+  const changeRemittance = (state: { target: { id: string; value: string | number; }; }) => {
     handleRemittance({
       ...remittance,
       settings: { ...remittance.settings, [state.target.id]: state.target.value },
@@ -90,8 +90,10 @@ function RemittanceSetting({ remittance, handleRemittance }: RemittanceSettingPr
               <OutlinedInput
                 id="amount"
                 startAdornment={<InputAdornment position="start">송금액</InputAdornment>}
-                value={remittance.settings.amount}
-                onChange={changeRemittance}
+                endAdornment={<InputAdornment position="end">원</InputAdornment>}
+                value={remittance.settings.amount.toLocaleString('ko-KR')}
+                onChange={(e) => changeRemittance({ target: { id: 'amount', value: +e.target.value.replaceAll(',', '') }})}
+                onFocus={(e) => e.target.select()}
                 size="small"
                 inputProps={{
                   style: { textAlign: 'right' },
