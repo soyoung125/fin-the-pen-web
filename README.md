@@ -19,7 +19,9 @@
 
 ## ⚙️ Tech
 
-React, Redux, Axios, React Router Dom, EsLint, chart.js, Storybook
+- React, Redux Took Kit, Axios, React Router Dom, chart.js, Material UI, vite
+
+- EsLint, Storybook
 
 ## ✅ Features
 
@@ -75,7 +77,7 @@ Install dependencies
 Start the server
 
 ```bash
-  yarn start
+  yarn dev
 ```
 
 ## 📜 Documentation
