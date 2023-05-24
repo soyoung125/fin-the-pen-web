@@ -1,8 +1,9 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import {
-  Stack, Box, Switch, FormControl, OutlinedInput, InputAdornment
+  Stack, Box, Switch, FormControl, OutlinedInput, InputAdornment, Autocomplete
 } from '@mui/material';
 import RoundedPaper from '../../../../components/common/RoundedPaper';
+import CalendarTodayOutlinedIcon from '@mui/icons-material/CalendarTodayOutlined';
 
 interface RemittanceSettingProps {
   remittance: any,
@@ -10,6 +11,7 @@ interface RemittanceSettingProps {
 }
 
 function RemittanceSetting({ remittance, handleRemittance }: RemittanceSettingProps) {
+  const options = ['none', '매달 1일', '매달 15일', '매달 마지막날', '직접 설정'];
   const changeRemittance = (state: { target: { id: string; value: string; }; }) => {
     handleRemittance({
       ...remittance,
@@ -61,16 +63,25 @@ function RemittanceSetting({ remittance, handleRemittance }: RemittanceSettingPr
 
             {/* 송금일 */}
             <FormControl fullWidth>
-              <OutlinedInput
+              <Autocomplete
                 id="date"
-                type="date"
-                startAdornment={<InputAdornment position="start">송금일</InputAdornment>}
                 value={remittance.settings.date}
-                onChange={changeRemittance}
+                options={options}
                 size="small"
-                inputProps={{
-                  style: { textAlign: 'right' },
-                }}
+                onChange={(e, newValue) => changeRemittance({ target: { id: 'date', value: newValue }})}
+                renderInput={(params) =>
+                  <OutlinedInput
+                    ref={params.InputProps.ref}
+                    fullWidth
+                    startAdornment={<InputAdornment position="start">송금일</InputAdornment>}
+                    endAdornment={<InputAdornment position="end"><CalendarTodayOutlinedIcon /></InputAdornment>}
+                    inputProps={{
+                      ...params.inputProps,
+                      style: { textAlign: 'right' },
+                    }}
+                    size="small"
+                  />
+                }
               />
             </FormControl>
 

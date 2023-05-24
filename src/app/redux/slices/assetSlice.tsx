@@ -26,7 +26,7 @@ const initialState = {
       settings: {
         bankName: '',
         accountNumber: '',
-        date: '',
+        date: 'none',
         amount: 0,
       },
     },
