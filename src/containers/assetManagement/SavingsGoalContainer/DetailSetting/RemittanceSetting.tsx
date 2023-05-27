@@ -62,9 +62,15 @@ function RemittanceSetting({ remittance, handleRemittance }: RemittanceSettingPr
             </FormControl>
 
             {/* 송금일 */}
-            <FormControl fullWidth>
+            <FormControl
+              fullWidth
+              sx={{
+                '.MuiAutocomplete-hasClearIcon > .MuiOutlinedInput-root': { paddingX: '14px' },
+              }}
+            >
               <Autocomplete
                 id="date"
+                freeSolo
                 value={remittance.settings.date}
                 options={options}
                 size="small"
@@ -72,7 +78,6 @@ function RemittanceSetting({ remittance, handleRemittance }: RemittanceSettingPr
                 renderInput={(params) =>
                   <OutlinedInput
                     ref={params.InputProps.ref}
-                    fullWidth
                     startAdornment={<InputAdornment position="start">송금일</InputAdornment>}
                     endAdornment={<InputAdornment position="end"><CalendarTodayOutlinedIcon /></InputAdornment>}
                     inputProps={{
