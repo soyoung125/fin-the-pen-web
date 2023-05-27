@@ -65,15 +65,15 @@ function RemittanceSetting({ remittance, handleRemittance }: RemittanceSettingPr
             <FormControl
               fullWidth
               sx={{
-                '.MuiAutocomplete-hasClearIcon > .MuiOutlinedInput-root': { paddingX: '14px' },
+                '.MuiAutocomplete-root > .MuiOutlinedInput-root': { paddingX: '14px' },
               }}
             >
               <Autocomplete
                 id="date"
                 freeSolo
+                disableClearable
                 value={remittance.settings.date}
                 options={options}
-                size="small"
                 onChange={(e, newValue) => changeRemittance({ target: { id: 'date', value: newValue }})}
                 renderInput={(params) =>
                   <OutlinedInput

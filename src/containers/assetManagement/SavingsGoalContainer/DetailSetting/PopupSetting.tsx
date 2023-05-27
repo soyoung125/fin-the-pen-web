@@ -35,7 +35,7 @@ function PopupSetting({ popup, handlePopup }: PopupSettingProps) {
         spacing={1}
         mt={1}
         sx={{
-          '.MuiAutocomplete-hasClearIcon > .MuiOutlinedInput-root': { paddingX: '14px' },
+          '.MuiAutocomplete-root > .MuiOutlinedInput-root': { paddingX: '14px' },
         }}
       >
         {/* 표시 항목 */}
