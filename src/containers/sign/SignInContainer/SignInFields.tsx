@@ -21,7 +21,7 @@ function SignInFields() {
     };
     const invalidIndex = isObjectValuesEmpty(sign);
     if (invalidIndex === -1) {
-      dispatch(login(sign));
+      dispatch(login(sign) as any);
     } else {
       alert(NO_BLANKS);
     }

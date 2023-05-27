@@ -26,7 +26,7 @@ export const mockLogin = createAsyncThunk(
 
 export const login = createAsyncThunk(
   'user/login',
-  async (sign) => {
+  async (sign: any) => {
     const response = await fetchLogin(sign);
     if (response === undefined) {
       alert(`${NO_SIGNAL_FROM_SERVER} GUEST 계정으로 로그인을 시도합니다.`);
@@ -35,7 +35,6 @@ export const login = createAsyncThunk(
     }
     if (response === '') {
       alert('잘못된 아이디 혹은 비번입니다.');
-      return null;
     }
     return response;
   },
