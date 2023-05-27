@@ -1,5 +1,5 @@
 import {
-  Box, Button, Divider, IconButton, Stack, TextField, Typography,
+  Box, Button, Divider, IconButton, Stack, TextField, Typography, Switch, FormControl, OutlinedInput, InputAdornment,
 } from '@mui/material';
 import ClearIcon from '@mui/icons-material/Clear';
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
@@ -7,6 +7,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useEffect, useState } from 'react';
 import AlertModal from '../../../../../components/common/AlertModal';
 import { selectSavingGoal, setSavingGoal } from '../../../../../app/redux/slices/assetSlice';
+import RoundedBorderBox from '../../../../../components/common/RoundedBorderBox';
 
 interface InputModalProps {
   closeSavingGoalModal: () => void,
@@ -19,6 +20,8 @@ function InputModal({
   const [form, setForm] = useState({
     year: 0,
     month: 0,
+    autoSaving: true,
+    popUp: false,
   });
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>): void => {
@@ -26,6 +29,7 @@ function InputModal({
     const newValue = parseInt(value.replaceAll(',', ''), 10);
     if (newValue >= 0) {
       setForm({
+        ...form,
         year: id === 'year' ? newValue : newValue * 12,
         month: id === 'year' ? Math.round(newValue / 12) : newValue,
       });
@@ -33,6 +37,10 @@ function InputModal({
       alert('숫자는 0 이하일 수 없습니다.');
     }
   };
+
+  const changeSavingGoal = (id: string, value: boolean): void => {
+    setForm({ ...form, [id]: value });
+  }
 
   /**
    * redux에 이미 저장된 목표 값 불러오기
@@ -52,7 +60,7 @@ function InputModal({
         >
           <DeleteForeverIcon />
         </IconButton>
-        <Typography variant="h5" sx={{ fontWeight: 'bold' }}>저축 목표 설정</Typography>
+        <Typography variant="h6" sx={{ fontWeight: 'bold' }}>저축 목표 설정</Typography>
         <IconButton onClick={() => closeSavingGoalModal()}>
           <ClearIcon />
         </IconButton>
@@ -61,7 +69,7 @@ function InputModal({
         <Divider />
       </Box>
       <Stack spacing={1}>
-        <Typography variant="h5" sx={{ fontWeight: 'bold' }}>1 Year Goal</Typography>
+        <Typography variant="h6" sx={{ fontWeight: 'bold' }}>1 Year Goal</Typography>
         <TextField
           fullWidth
           placeholder="한해동안의 저축 목표액을 입력하세요"
@@ -74,7 +82,7 @@ function InputModal({
             style: { textAlign: 'right' },
           }}
         />
-        <Typography variant="h5" sx={{ fontWeight: 'bold' }}>1 Month Goal</Typography>
+        <Typography variant="h6" sx={{ fontWeight: 'bold' }}>1 Month Goal</Typography>
         <TextField
           fullWidth
           placeholder="한해 저축 목표액을 입력하면 한달 저축 목표금액이 표시됩니다. "
@@ -87,6 +95,42 @@ function InputModal({
             style: { textAlign: 'right' },
           }}
         />
+
+        {/* 적금액 송금 설정 */}
+        <FormControl fullWidth>
+          <OutlinedInput
+            startAdornment={<InputAdornment position="start">적금액 송금 설정</InputAdornment>}
+            endAdornment={(
+              <Switch
+                checked={form.autoSaving}
+                onChange={() => changeSavingGoal('autoSaving', !form.autoSaving)}
+                sx={{ p: 0, borderRadius: 6 }}
+                size="small"
+                inputProps={{ 'aria-label': 'controlled' }}
+              />
+            )}
+            size="small"
+            readOnly
+          />
+        </FormControl>
+
+        {/* 팝업창 */}
+        <FormControl fullWidth>
+          <OutlinedInput
+            startAdornment={<InputAdornment position="start">팝업창</InputAdornment>}
+            endAdornment={(
+              <Switch
+                checked={form.popUp}
+                onChange={() => changeSavingGoal('popUp', !form.popUp)}
+                sx={{ p: 0, borderRadius: 6 }}
+                size="small"
+                inputProps={{ 'aria-label': 'controlled' }}
+              />
+            )}
+            size="small"
+            readOnly
+          />
+        </FormControl>
       </Stack>
       <Button
         fullWidth
@@ -106,6 +150,8 @@ function InputModal({
           setForm({
             year: 0,
             month: 0,
+            autoSaving: true,
+            popUp: false,
           });
           setOpenResetAlertModal(false);
         }}

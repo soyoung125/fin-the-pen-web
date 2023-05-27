@@ -137,7 +137,6 @@ function InputModal({
           InputProps={{
             startAdornment: <InputAdornment position="start">기한</InputAdornment>,
           }}
-          // eslint-disable-next-line react/jsx-no-duplicate-props
           inputProps={{
             style: { textAlign: 'right' },
           }}
@@ -191,7 +190,7 @@ function InputModal({
         {/* 자동 적금 */}
         <FormControl fullWidth>
           <OutlinedInput
-            startAdornment={<InputAdornment position="start">자동 적금</InputAdornment>}
+            startAdornment={<InputAdornment position="start">적금액 송금 설정</InputAdornment>}
             endAdornment={(
               <Switch
                 checked={form.autoSaving}
@@ -212,7 +211,7 @@ function InputModal({
         {/* 팝업 */}
         <FormControl fullWidth>
           <OutlinedInput
-            startAdornment={<InputAdornment position="start">팝업</InputAdornment>}
+            startAdornment={<InputAdornment position="start">팝업창</InputAdornment>}
             endAdornment={(
               <Switch
                 checked={form.popUp}

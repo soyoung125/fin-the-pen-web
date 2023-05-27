@@ -9,6 +9,8 @@ const initialState = {
       year: 0,
       month: 0,
       skipRequest: false, // localStorage나 sessionStorage 에서 처리해줘도 괜찮을 듯 함
+      autoSaving: true,
+      popUp: false,
     },
     personal: {
       name: 'dd',
