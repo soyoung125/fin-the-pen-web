@@ -1,4 +1,4 @@
-import { Box, Paper, Stack } from '@mui/material';
+import { Box, Paper, Stack, Fab } from '@mui/material';
 import { useEffect } from 'react';
 import {
   selectHeaderMode, selectHeaderOpen, setGuestModeFalse, setGuestModeTrue,
@@ -7,6 +7,7 @@ import { selectUser } from '../../../../app/redux/slices/userSlice';
 import AnalysisMode from './headerMode/AnalysisMode';
 import HomeMode from './headerMode/HomeMode';
 import { useAppDispatch, useAppSelector } from '../../../../app/redux/hooks';
+import SavingsOutlinedIcon from '@mui/icons-material/SavingsOutlined';
 
 function TopBar() {
   const dispatch = useAppDispatch();
@@ -46,6 +47,9 @@ function TopBar() {
               {headerMode === 'home' && (<HomeMode />)}
               {headerMode === 'analysis' && (<AnalysisMode />)}
             </Stack>
+            <Fab color="secondary" size="small" aria-label="popup" sx={{ position: 'fixed', top: 10, left: 10 }} >
+              <SavingsOutlinedIcon />
+            </Fab>
           </Paper>
         )
       }
