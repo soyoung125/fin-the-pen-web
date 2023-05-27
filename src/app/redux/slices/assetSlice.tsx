@@ -37,8 +37,8 @@ const initialState = {
     popup: {
       isOn: true,
       settings: {
-        display: '', // none(아이콘) || 저축금액(퍼센트)
-        connect: '', // 저축목표설정페이지 || 계좌 앱
+        display: 'none(아이콘)', // none(아이콘) || 저축금액(퍼센트)
+        connect: '저축 목표 설정 페이지', // 저축목표설정페이지 || 계좌 앱
       },
     },
   },

@@ -1,5 +1,5 @@
 import {
-  Stack, Box, Switch, FormControl, OutlinedInput, InputAdornment
+  Stack, Box, Switch, OutlinedInput, InputAdornment, Autocomplete
 } from '@mui/material';
 import RoundedPaper from '../../../../components/common/RoundedPaper';
 
@@ -9,10 +9,12 @@ interface PopupSettingProps {
 }
 
 function PopupSetting({ popup, handlePopup }: PopupSettingProps) {
-  const changePopupSettings = (state: { target: { id: any; value: any; }; }) => {
+  const displayOptions = ["none(아이콘)", "저축금액(퍼센트)"];
+  const connectOptions = ["저축 목표 설정 페이지", "적금 계좌 APP"];
+  const changePopupSettings = (id: string, value: string) => {
     handlePopup({
       ...popup,
-      settings: { ...popup.settings, [state.target.id]: state.target.value }
+      settings: { ...popup.settings, [id]: value }
     });
   };
 
@@ -31,32 +33,46 @@ function PopupSetting({ popup, handlePopup }: PopupSettingProps) {
       {popup.isOn && (
       <Stack spacing={1} mt={1}>
         {/* 표시 항목 */}
-        <FormControl fullWidth>
-          <OutlinedInput
-            id="display"
-            startAdornment={<InputAdornment position="start">표시 항목</InputAdornment>}
-            value={popup.settings.display}
-            onChange={changePopupSettings}
-            size="small"
-            inputProps={{
-              style: { textAlign: 'right' },
-            }}
-          />
-        </FormControl>
+        <Autocomplete
+          id="display"
+          value={popup.settings.display}
+          options={displayOptions}
+          size="small"
+          onChange={(e, newValue) => changePopupSettings('display', newValue)}
+          renderInput={(params) =>
+            <OutlinedInput
+              ref={params.InputProps.ref}
+              fullWidth
+              startAdornment={<InputAdornment position="start">표시 항목</InputAdornment>}
+              inputProps={{
+                ...params.inputProps,
+                style: { textAlign: 'right' },
+              }}
+              size="small"
+            />
+          }
+        />
 
         {/* 클릭 시 연결 */}
-        <FormControl fullWidth>
-          <OutlinedInput
-            id="connect"
-            startAdornment={<InputAdornment position="start">클릭 시 연결</InputAdornment>}
-            value={popup.settings.connect}
-            onChange={changePopupSettings}
-            size="small"
-            inputProps={{
-              style: { textAlign: 'right' },
-            }}
-          />
-        </FormControl>
+        <Autocomplete
+          id="connect"
+          value={popup.settings.connect}
+          options={connectOptions}
+          size="small"
+          onChange={(e, newValue) => changePopupSettings('connect', newValue)}
+          renderInput={(params) =>
+            <OutlinedInput
+              ref={params.InputProps.ref}
+              fullWidth
+              startAdornment={<InputAdornment position="start">클릭 시 연결</InputAdornment>}
+              inputProps={{
+                ...params.inputProps,
+                style: { textAlign: 'right' },
+              }}
+              size="small"
+            />
+          }
+        />
       </Stack>
       )}
 
