@@ -15,6 +15,7 @@ export type AsyncThunkStatusValue = AsyncThunkStatus[keyof AsyncThunkStatus];
 export interface AsyncThunkStatus {
   pending: 'loading';
   fulfilled: 'idle';
+  failed: 'failed';
 }
 
 export interface User {
