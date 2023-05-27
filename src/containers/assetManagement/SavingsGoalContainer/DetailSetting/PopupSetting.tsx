@@ -31,10 +31,17 @@ function PopupSetting({ popup, handlePopup }: PopupSettingProps) {
       </Stack>
 
       {popup.isOn && (
-      <Stack spacing={1} mt={1}>
+      <Stack
+        spacing={1}
+        mt={1}
+        sx={{
+          '.MuiAutocomplete-hasClearIcon > .MuiOutlinedInput-root': { paddingX: '14px' },
+        }}
+      >
         {/* 표시 항목 */}
         <Autocomplete
           id="display"
+          freeSolo
           value={popup.settings.display}
           options={displayOptions}
           size="small"
@@ -56,6 +63,7 @@ function PopupSetting({ popup, handlePopup }: PopupSettingProps) {
         {/* 클릭 시 연결 */}
         <Autocomplete
           id="connect"
+          freeSolo
           value={popup.settings.connect}
           options={connectOptions}
           size="small"
