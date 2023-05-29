@@ -14,6 +14,7 @@ import { WRONG_TIME_ORDER } from '../../../../../../domain/constants/schedule';
 import { isTimeOrderCorrect } from '../../../../../../domain/tools';
 import RoundedButton from '../../../../../../components/common/RoundedButton';
 import { EXPENDITURE, FIXED, INCOME } from '../../../../../../domain/constants/categories';
+import AlertModal from '../../../../../../components/common/AlertModal';
 
 function FilterButton() {
   const dispatch = useDispatch();
@@ -21,6 +22,7 @@ function FilterButton() {
   const filtered = useSelector(selectFiltered);
   const filteredDate = useSelector(selectFilteredDate);
   const [error, setError] = useState(false);
+  const [openAlertModal, setOpenAlertModal] = useState(false);
 
   const handleClick = (event: React.MouseEvent<HTMLDivElement>) => {
     const target = event.target as HTMLDivElement;
@@ -161,12 +163,22 @@ function FilterButton() {
           <Button
             variant="contained"
             color="primary"
-            onClick={() => dispatch(initFilter())}
+            onClick={() => setOpenAlertModal(true)}
           >
             필터 초기화
           </Button>
         </Stack>
       </Drawer>
+
+      <AlertModal
+        open={openAlertModal}
+        handleClose={() => setOpenAlertModal(false)}
+        handleClickYes={() => {
+          setOpenAlertModal(false);
+          dispatch(initFilter());
+        }}
+        mode="reset"
+      />
     </>
   );
 }
