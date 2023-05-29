@@ -17,8 +17,6 @@ function EasyAuthentication() {
   const input = useRef<HTMLInputElement>();
   const [password, setPassword] = useState('');
 
-  console.log(password);
-
   return (
     <>
       {user
