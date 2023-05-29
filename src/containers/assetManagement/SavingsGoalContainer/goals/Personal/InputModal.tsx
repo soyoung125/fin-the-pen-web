@@ -8,6 +8,7 @@ import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { SOMETHING_IS_WRONG } from '../../../../../domain/constants/messages';
 import { selectPersonalGoal, setPersonalGoal } from '../../../../../app/redux/slices/assetSlice';
+import AlertModal from '../../../../../components/common/AlertModal';
 
 interface InputModalProps {
   setPersonalGoalModalOpen: React.Dispatch<React.SetStateAction<boolean>>,
@@ -29,6 +30,7 @@ interface ChangePersonalGoal {
 function InputModal({
   setPersonalGoalModalOpen,
 }: InputModalProps) {
+  const [openResetAlertModal, setOpenResetAlertModal] = useState(false);
   const [form, setForm] = useState<Form>({
     name: '',
     money: 0,
@@ -63,14 +65,7 @@ function InputModal({
     <Stack p={2} spacing={1}>
       <Stack direction="row" alignItems="center" justifyContent="space-between">
         <IconButton
-          onClick={() => setForm({
-            name: '',
-            money: 0,
-            deadline: '2024-01-01',
-            type: '', // day||month
-            autoSaving: true,
-            popUp: false,
-          })}
+          onClick={() => setOpenResetAlertModal(true)}
           color="error"
         >
           <DeleteForeverIcon />
@@ -240,6 +235,23 @@ function InputModal({
       >
         나만의 목표 설정하기
       </Button>
+
+      <AlertModal
+        open={openResetAlertModal}
+        handleClose={() => setOpenResetAlertModal(false)}
+        handleClickYes={() => {
+          setForm({
+            name: '',
+            money: 0,
+            deadline: '2024-01-01',
+            type: '', // day||month
+            autoSaving: true,
+            popUp: false,
+          });
+          setOpenResetAlertModal(false);
+        }}
+        mode="reset"
+      />
     </Stack>
   );
 }
