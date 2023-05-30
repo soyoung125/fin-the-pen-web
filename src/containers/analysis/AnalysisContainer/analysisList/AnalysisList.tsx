@@ -14,7 +14,7 @@ interface AnalysisListProps {
 function AnalysisList({ data, clickListItem, hexToRGB }: AnalysisListProps) {
   return (
     <Box mx={3}>
-      <Typography sx={{ mt: 4 }} variant="h6" component="div">
+      <Typography variant="h6" component="div">
         Your Ranking
       </Typography>
       <List>

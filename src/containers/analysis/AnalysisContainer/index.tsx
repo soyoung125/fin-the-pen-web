@@ -42,7 +42,7 @@ function AnalysisContainer() {
   return (
     total > 0 ? (
       <>
-        <Box sx={{ width: '100vw', height: '100vw', padding: 5 }}>
+        <Box sx={{ width: '100vw', height: "calc(100vw - 50px)", paddingX: 1 }}>
           <AnalysisGraph data={data} total={total} />
         </Box>
         <AnalysisList data={data} clickListItem={clickListItem} hexToRGB={hexToRGB} />

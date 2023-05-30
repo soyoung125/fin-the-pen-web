@@ -11,7 +11,7 @@ function AnalysisGraph({ data, total }: AnalysisGraphProps) {
     <ResponsivePie
       data={data}
       margin={{
-        top: 0, right: 0, bottom: 0, left: 0,
+        top: 10, right: 50, bottom: 50, left: 50
       }}
       sortByValue
       colors={data.map((d) => d.color)}
@@ -20,7 +20,7 @@ function AnalysisGraph({ data, total }: AnalysisGraphProps) {
       arcLinkLabelsTextColor="#333333"
       arcLinkLabelsThickness={2}
       arcLinkLabelsColor={{ from: 'color' }}
-      arcLabel={(e) => { const percent = (e.value / total) * 100; return `${e.id} (${percent.toFixed(1)}%)`; }}
+      arcLabel={(e) => { const percent = (e.value / total) * 100; return `${percent.toFixed(1)}%`; }}
       arcLabelsSkipAngle={45}
       arcLabelsTextColor={{
         from: 'color',
@@ -31,6 +31,7 @@ function AnalysisGraph({ data, total }: AnalysisGraphProps) {
           ],
         ],
       }}
+      arcLabelsRadiusOffset={1.15}
       legends={[]}
     />
   );
