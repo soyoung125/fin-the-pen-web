@@ -23,6 +23,10 @@ function FilterButton() {
   const filteredDate = useSelector(selectFilteredDate);
   const [error, setError] = useState(false);
   const [openAlertModal, setOpenAlertModal] = useState(false);
+  const FIXEDEXPENDITURE = {
+    ...FIXED,
+    nested: FIXED.nested.filter((c) => c.type === '출금'),
+  };
 
   const handleClick = (event: React.MouseEvent<HTMLDivElement>) => {
     const target = event.target as HTMLDivElement;
@@ -113,7 +117,7 @@ function FilterButton() {
           }
           <Stack>
             {
-              [FIXED, INCOME, EXPENDITURE].map((obj) => (
+              [FIXEDEXPENDITURE, EXPENDITURE].map((obj) => (
                 <FilterAccordion tag={obj} key={obj.type} />
               ))
             }
