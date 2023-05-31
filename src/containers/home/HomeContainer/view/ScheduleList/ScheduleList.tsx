@@ -1,34 +1,31 @@
 import {
   Box, CircularProgress, Drawer, Stack, Typography,
 } from '@mui/material';
-import moment from 'moment';
-import { useEffect, useState } from 'react';
-import { useSelector } from 'react-redux';
+import {useState} from 'react';
 import ScheduleDrawer from '../../../ScheduleDrawer';
-import { CATEGORIES, Category } from '../../../../../domain/constants/categories';
-import { SCHEDULE_DRAWER_MODE } from '../../../../../domain/constants/schedule';
-import { selectDate, selectStatus } from '../../../../../app/redux/slices/scheduleSlice';
+import {CATEGORIES, Category} from '../../../../../domain/constants/categories';
+import {SCHEDULE_DRAWER_MODE} from '../../../../../domain/constants/schedule';
 import ScheduleCard from './ScheduleCard';
-import { Schedule } from '../../../../../types/schedule';
+import {Schedule} from '../../../../../types/schedule';
 import useSchedule from '../../../../../hooks/useSchedule';
 
 function ScheduleList() {
-  const [selectedSchedule, setSelectedSchedule] = useState<Schedule | null>(null);
-  const status = useSelector(selectStatus);
-  const date = moment(useSelector(selectDate)).format('YYYY-MM-DD');
-  const [todaySchedules, setTodaySchedules] = useState<Schedule[]>([]);
+
   const [bottomDrawerOpen, setBottomDrawerOpen] = useState(false);
 
-  const { schedules } = useSchedule();
+  const {
+    status,
+    selectedSchedule,
+    setSelectedSchedule,
+    todaySchedules,
+    date
+  } = useSchedule();
 
   const handleModal = (schedule: Schedule) => {
     setSelectedSchedule(schedule);
     setBottomDrawerOpen(true);
   };
 
-  useEffect(() => {
-    setTodaySchedules(schedules.filter((schedule) => schedule.date === date));
-  }, [schedules]);
 
   const [drawerWidth, setDrawerWidth] = useState(0);
 
@@ -42,7 +39,7 @@ function ScheduleList() {
             alignItems="center"
           >
             <Box my={5}>
-              <CircularProgress />
+              <CircularProgress/>
             </Box>
           </Stack>
         )
@@ -66,7 +63,7 @@ function ScheduleList() {
         todaySchedules.map((schedule) => (
           <ScheduleCard
             schedule={schedule}
-            category={(CATEGORIES.find((c) => c.title === schedule.category) || { color: '#C8A2C8' } as Category)}
+            category={(CATEGORIES.find((c) => c.title === schedule.category) || {color: '#C8A2C8'} as Category)}
             key={Math.random()}
             handleModal={handleModal}
           />
