@@ -18,7 +18,7 @@ function DetailSetting() {
   const { schedules } = useSchedule();
   const { state } = useLocation();
   const { type, data }: StateData = state;
-  const [detailData, setDetailData] = useState({ [data[0].event_name]: data });
+  const [detailData, setDetailData] = useState<{[key: string]: Schedule[]}>({});
 
   useEffect(() => {
     setDetailData(makeGroupForRegularData(schedules.filter((s) => s.repeating_cycle !== '없음' && s.type === type)));

@@ -54,6 +54,7 @@ function RegularDepositWithdrawal() {
   };
 
   const handleMoveToDetailPage = () => {
+    setOpenAlertModal(false);
     if (type === '+') {
       navigate(PATH.DetailSetting, { state: { type: '+', data: deposits } });
     } else if (type === '-') {
