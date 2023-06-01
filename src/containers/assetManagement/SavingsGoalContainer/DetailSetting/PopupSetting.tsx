@@ -1,5 +1,5 @@
 import {
-  Stack, Box, Switch, OutlinedInput, InputAdornment, Autocomplete
+  Stack, Box, Switch, OutlinedInput, InputAdornment, Autocomplete, FormControl, Select, MenuItem
 } from '@mui/material';
 import RoundedPaper from '../../../../components/common/RoundedPaper';
 
@@ -31,15 +31,12 @@ function PopupSetting({ popup, handlePopup }: PopupSettingProps) {
       </Stack>
 
       {popup.isOn && (
-      <Stack
-        spacing={1}
-        mt={1}
-        sx={{
-          '.MuiAutocomplete-root > .MuiOutlinedInput-root': { paddingX: '14px', paddingY: 0 },
-        }}
-      >
+        <Stack
+          spacing={1}
+          mt={1}
+        >
         {/* 표시 항목 */}
-        <Autocomplete
+        {/* <Autocomplete
           id="display"
           freeSolo
           value={popup.settings.display}
@@ -57,10 +54,27 @@ function PopupSetting({ popup, handlePopup }: PopupSettingProps) {
               }}
             />
           }
-        />
+          /> */}
+          <FormControl
+            fullWidth
+            size="small"
+          >
+            <Select
+              inputProps={{
+                IconComponent: () => null,
+                style: { textAlign: 'right' },
+              }}
+              startAdornment={<InputAdornment position="start">표시 항목</InputAdornment>}
+              sx={{ '.MuiSelect-select.MuiSelect-outlined': { textAlign: 'right', paddingRight: '14px' } }}
+              value={popup.settings.display}
+              onChange={(e) => changePopupSettings('display', e.target.value)}
+            >
+              {displayOptions.map((option) => <MenuItem value={option}>{option}</MenuItem>)}
+            </Select>
+          </FormControl>
 
         {/* 클릭 시 연결 */}
-        <Autocomplete
+        {/* <Autocomplete
           id="connect"
           freeSolo
           value={popup.settings.connect}
@@ -78,10 +92,26 @@ function PopupSetting({ popup, handlePopup }: PopupSettingProps) {
               }}
             />
           }
-        />
-      </Stack>
+        /> */}
+          <FormControl
+            fullWidth
+            size="small"
+          >
+            <Select
+              inputProps={{
+                IconComponent: () => null,
+                style: { textAlign: 'right' },
+              }}
+              startAdornment={<InputAdornment position="start">클릭 시 연결</InputAdornment>}
+              sx={{ '.MuiSelect-select.MuiSelect-outlined': { textAlign: 'right', paddingRight: '14px' } }}
+              value={popup.settings.connect}
+              onChange={(e) => changePopupSettings('connect', e.target.value)}
+            >
+              {connectOptions.map((option) => <MenuItem value={option}>{option}</MenuItem>)}
+            </Select>
+          </FormControl>
+        </Stack>
       )}
-
     </RoundedPaper>
   );
 }
