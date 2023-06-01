@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import {
-  Stack, Box, Switch, FormControl, OutlinedInput, InputAdornment, Autocomplete
+  Stack, Box, Switch, FormControl, OutlinedInput, InputAdornment, Autocomplete, Select, MenuItem
 } from '@mui/material';
 import RoundedPaper from '../../../../components/common/RoundedPaper';
 import CalendarTodayOutlinedIcon from '@mui/icons-material/CalendarTodayOutlined';
@@ -64,11 +64,9 @@ function RemittanceSetting({ remittance, handleRemittance }: RemittanceSettingPr
             {/* 송금일 */}
             <FormControl
               fullWidth
-              sx={{
-                '.MuiAutocomplete-root > .MuiOutlinedInput-root': { paddingX: '14px', paddingY: 0 },
-              }}
+              size="small"
             >
-              <Autocomplete
+              {/* <Autocomplete
                 id="date"
                 freeSolo
                 disableClearable
@@ -86,7 +84,19 @@ function RemittanceSetting({ remittance, handleRemittance }: RemittanceSettingPr
                     }}
                   />
                 }
-              />
+              /> */}
+              <Select
+                // IconComponent = {CalendarTodayOutlinedIcon}
+                inputProps={{
+                  IconComponent: () => null,
+                  style: { textAlign: 'right' },
+                }}
+                startAdornment={<InputAdornment position="start">송금일</InputAdornment>}
+                endAdornment={<InputAdornment position="end"><CalendarTodayOutlinedIcon /></InputAdornment>}
+                sx={{ textAlign: 'right' }}
+              >
+                {options.map((option) => <MenuItem value={option}>{option}</MenuItem>)}
+              </Select>
             </FormControl>
 
             {/* 송금액 */}
