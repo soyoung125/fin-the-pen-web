@@ -1,5 +1,5 @@
 import {
-  Stack, Box, Switch, OutlinedInput, InputAdornment, Autocomplete, FormControl, Select, MenuItem
+  Stack, Box, Switch, InputAdornment, FormControl, Select, MenuItem
 } from '@mui/material';
 import RoundedPaper from '../../../../components/common/RoundedPaper';
 
@@ -35,26 +35,7 @@ function PopupSetting({ popup, handlePopup }: PopupSettingProps) {
           spacing={1}
           mt={1}
         >
-        {/* 표시 항목 */}
-        {/* <Autocomplete
-          id="display"
-          freeSolo
-          value={popup.settings.display}
-          options={displayOptions}
-          size="small"
-          onChange={(e, newValue) => changePopupSettings('display', newValue)}
-          renderInput={(params) =>
-            <OutlinedInput
-              ref={params.InputProps.ref}
-              fullWidth
-              startAdornment={<InputAdornment position="start">표시 항목</InputAdornment>}
-              inputProps={{
-                ...params.inputProps,
-                style: { textAlign: 'right' },
-              }}
-            />
-          }
-          /> */}
+          {/* 표시 항목 */}
           <FormControl
             fullWidth
             size="small"
@@ -73,26 +54,7 @@ function PopupSetting({ popup, handlePopup }: PopupSettingProps) {
             </Select>
           </FormControl>
 
-        {/* 클릭 시 연결 */}
-        {/* <Autocomplete
-          id="connect"
-          freeSolo
-          value={popup.settings.connect}
-          options={connectOptions}
-          size="small"
-          onChange={(e, newValue) => changePopupSettings('connect', newValue)}
-          renderInput={(params) =>
-            <OutlinedInput
-              ref={params.InputProps.ref}
-              fullWidth
-              startAdornment={<InputAdornment position="start">클릭 시 연결</InputAdornment>}
-              inputProps={{
-                ...params.inputProps,
-                style: { textAlign: 'right' },
-              }}
-            />
-          }
-        /> */}
+          {/* 클릭 시 연결 */}
           <FormControl
             fullWidth
             size="small"

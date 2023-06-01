@@ -1,6 +1,5 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
 import {
-  Stack, Box, Switch, FormControl, OutlinedInput, InputAdornment, Autocomplete, Select, MenuItem
+  Stack, Box, Switch, FormControl, OutlinedInput, InputAdornment, Select, MenuItem
 } from '@mui/material';
 import RoundedPaper from '../../../../components/common/RoundedPaper';
 import CalendarTodayOutlinedIcon from '@mui/icons-material/CalendarTodayOutlined';
