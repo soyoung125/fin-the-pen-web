@@ -66,27 +66,7 @@ function RemittanceSetting({ remittance, handleRemittance }: RemittanceSettingPr
               fullWidth
               size="small"
             >
-              {/* <Autocomplete
-                id="date"
-                freeSolo
-                disableClearable
-                value={remittance.settings.date}
-                options={options}
-                onChange={(e, newValue) => changeRemittance({ target: { id: 'date', value: newValue }})}
-                renderInput={(params) =>
-                  <OutlinedInput
-                    ref={params.InputProps.ref}
-                    startAdornment={<InputAdornment position="start">송금일</InputAdornment>}
-                    endAdornment={<InputAdornment position="end"><CalendarTodayOutlinedIcon /></InputAdornment>}
-                    inputProps={{
-                      ...params.inputProps,
-                      style: { textAlign: 'right' },
-                    }}
-                  />
-                }
-              /> */}
               <Select
-                // IconComponent = {CalendarTodayOutlinedIcon}
                 inputProps={{
                   IconComponent: () => null,
                   style: { textAlign: 'right' },
