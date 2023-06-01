@@ -93,7 +93,7 @@ function RemittanceSetting({ remittance, handleRemittance }: RemittanceSettingPr
                 }}
                 startAdornment={<InputAdornment position="start">송금일</InputAdornment>}
                 endAdornment={<InputAdornment position="end"><CalendarTodayOutlinedIcon /></InputAdornment>}
-                sx={{ textAlign: 'right' }}
+                sx={{ '.MuiSelect-select.MuiSelect-outlined': { textAlign: 'right', paddingX: 0 } }}
               >
                 {options.map((option) => <MenuItem value={option}>{option}</MenuItem>)}
               </Select>
