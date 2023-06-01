@@ -65,7 +65,7 @@ function RemittanceSetting({ remittance, handleRemittance }: RemittanceSettingPr
             <FormControl
               fullWidth
               sx={{
-                '.MuiAutocomplete-root > .MuiOutlinedInput-root': { paddingX: '14px' },
+                '.MuiAutocomplete-root > .MuiOutlinedInput-root': { paddingX: '14px', paddingY: 0 },
               }}
             >
               <Autocomplete
@@ -84,7 +84,6 @@ function RemittanceSetting({ remittance, handleRemittance }: RemittanceSettingPr
                       ...params.inputProps,
                       style: { textAlign: 'right' },
                     }}
-                    size="small"
                   />
                 }
               />

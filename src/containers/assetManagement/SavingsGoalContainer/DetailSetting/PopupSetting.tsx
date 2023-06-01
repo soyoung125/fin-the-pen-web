@@ -35,7 +35,7 @@ function PopupSetting({ popup, handlePopup }: PopupSettingProps) {
         spacing={1}
         mt={1}
         sx={{
-          '.MuiAutocomplete-root > .MuiOutlinedInput-root': { paddingX: '14px' },
+          '.MuiAutocomplete-root > .MuiOutlinedInput-root': { paddingX: '14px', paddingY: 0 },
         }}
       >
         {/* 표시 항목 */}
@@ -55,7 +55,6 @@ function PopupSetting({ popup, handlePopup }: PopupSettingProps) {
                 ...params.inputProps,
                 style: { textAlign: 'right' },
               }}
-              size="small"
             />
           }
         />
@@ -77,7 +76,6 @@ function PopupSetting({ popup, handlePopup }: PopupSettingProps) {
                 ...params.inputProps,
                 style: { textAlign: 'right' },
               }}
-              size="small"
             />
           }
         />
