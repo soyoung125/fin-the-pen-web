@@ -120,6 +120,16 @@ function RepeatInput() {
           '.MuiDialogContent-root': {
             padding: 0,
           },
+          '& > div > div, & > div > div > div, & .MuiCalendarPicker-root': {
+            width: '100%',
+          },
+          '.MuiPickerStaticWrapper-content': {
+            minWidth: '100%',
+          },
+          '.MuiCalendarOrClockPicker-root > div': {
+            width: '100%',
+            margin: '0',
+          },
         }}
       >
         <DialogTitle id="alert-dialog-title">
