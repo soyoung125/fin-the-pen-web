@@ -4,7 +4,7 @@ import { useEffect } from 'react';
 import moment from 'moment';
 import EasyAuthentication from '../../../containers/sign/EasyAuthentication';
 import { selectIsAuthenticated, setIsAuthenticatedFalse } from '../../../app/redux/slices/commonSlice';
-import AnalysisHeader from '../../analysis/AnalysisHeader';
+import AnalysisHeader from '../../../containers/analysis/AnalysisHeader';
 import { selectedDate } from '../../../app/redux/slices/scheduleSlice';
 import { useAppDispatch, useAppSelector } from '../../../app/redux/hooks';
 
