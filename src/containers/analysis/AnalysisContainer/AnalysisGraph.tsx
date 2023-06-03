@@ -4,14 +4,15 @@ import { AnalysisData } from '../../../types/common';
 interface AnalysisGraphProps {
   data: AnalysisData[];
   total: number;
+  widthRatio: number;
 }
 
-function AnalysisGraph({ data, total }: AnalysisGraphProps) {
+function AnalysisGraph({ data, total, widthRatio }: AnalysisGraphProps) {
   return (
     <ResponsivePie
       data={data}
       margin={{
-        top: 10, right: 50, bottom: 50, left: 50
+        top: 10, right: widthRatio, bottom: widthRatio, left: widthRatio
       }}
       sortByValue
       colors={data.map((d) => d.color)}
@@ -31,7 +32,7 @@ function AnalysisGraph({ data, total }: AnalysisGraphProps) {
           ],
         ],
       }}
-      arcLabelsRadiusOffset={1.15}
+      arcLabelsRadiusOffset={1.2}
       legends={[]}
     />
   );

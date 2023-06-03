@@ -1,6 +1,6 @@
 /* eslint-disable max-len */
 import { Alert, Box } from '@mui/material';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import AnalysisGraph from './AnalysisGraph';
@@ -17,11 +17,13 @@ function AnalysisContainer() {
   const navigate = useNavigate();
   const date = useSelector(selectDate);
   const { data, total } = useSelector(selectAnalyzedData);
+  const [widthRatio, setWidthRatio] = useState(1);
 
   useHeader(true, 'analysis');
 
   useEffect(() => {
     dispatch(updateAnalyzedData());
+    setWidthRatio(Math.ceil(screen.width / 450) * 50);
   }, [date]);
 
   const clickListItem = (category: AnalysisData) => {
@@ -42,8 +44,8 @@ function AnalysisContainer() {
   return (
     total > 0 ? (
       <>
-        <Box sx={{ width: '100vw', height: "calc(100vw - 50px)", paddingX: 1 }}>
-          <AnalysisGraph data={data} total={total} />
+        <Box sx={{ width: '100vw', height: `calc(100vw - ${widthRatio}px)`, paddingX: 1 }}>
+          <AnalysisGraph data={data} total={total} widthRatio={widthRatio} />
         </Box>
         <AnalysisList data={data} clickListItem={clickListItem} hexToRGB={hexToRGB} />
       </>
