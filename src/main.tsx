@@ -8,18 +8,32 @@ import { persistStore } from 'redux-persist';
 import { store } from './app/redux/store';
 import CustomThemeProvider from './components/providers/CustomThemeProvider';
 import router from './app/router';
+import { worker } from "./mocks/browser";
 
-const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement);
-const persistor = persistStore(store);
+async function main() {
+  // msw 세팅 시작
+  await worker.start({
+    serviceWorker: {
+      url: "/fin-the-pen-web/mockServiceWorker.js",
+    },
+    onUnhandledRequest: "bypass",
+  });
+  // msw 세팅 끝
 
-root.render(
-  <React.StrictMode>
-    <Provider store={store}>
-      <PersistGate loading={null} persistor={persistor}>
-        <CustomThemeProvider>
-          <RouterProvider router={router} />
-        </CustomThemeProvider>
-      </PersistGate>
-    </Provider>
-  </React.StrictMode>,
-);
+  const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement);
+  const persistor = persistStore(store);
+
+  root.render(
+    <React.StrictMode>
+      <Provider store={store}>
+        <PersistGate loading={null} persistor={persistor}>
+          <CustomThemeProvider>
+            <RouterProvider router={router} />
+          </CustomThemeProvider>
+        </PersistGate>
+      </Provider>
+    </React.StrictMode>,
+  );
+}
+
+main();
