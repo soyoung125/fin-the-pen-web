@@ -19,9 +19,9 @@
 
 ## ⚙️ Tech
 
-- React, Redux Took Kit, Axios, React Router Dom, chart.js, Material UI, vite
+- React, Redux Took Kit, Axios, React Router Dom, chart.js, Material UI, styled-components vite
 
-- EsLint, Storybook
+- EsLint, Storybook, MSW
 
 ## ✅ Features
 
@@ -52,29 +52,32 @@
 
 ## ⚙️ Run Locally
 
-실행 전, Node.js 설치를 반드시 해주세요.
+1. Node.js 설치를 확인해주세요.
+2. yarn 설치를 확인해주세요.
 
-vscode에서 실행하시면 편합니다.
+```bash
+npm i -g yarn
+```
 
-Clone the project
+3. 프로젝트를 클론 합니다.
 
 ```bash
   git clone https://github.com/soyoung125/fin-the-pen-web.git
 ```
 
-Go to the project directory
+4. 프로젝트에 진입합니다.
 
 ```bash
   cd fin-the-pen-web
 ```
 
-Install dependencies
+5. 패키지를 설치합니다.
 
 ```bash
   yarn
 ```
 
-Start the server
+6. 서버를 실행합니다.
 
 ```bash
   yarn dev
