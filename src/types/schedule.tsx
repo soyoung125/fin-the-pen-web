@@ -27,3 +27,8 @@ export interface ScheduleDrawerMode {
   modify: 'modify';
   create: 'create'
 }
+
+export interface MonthScheduleQuery {
+  user_id: string;
+  date: string;
+}

@@ -1,4 +1,5 @@
-import axios from 'axios';
+import axios, { AxiosError, AxiosResponse } from 'axios';
+import { MonthScheduleQuery, Schedule } from '../../types/schedule';
 
 /**
  * 반드시 서버로 요청할 때 객체 형식이어야 JSON 으로 변환되어 서버에 잘 들어감!
@@ -44,15 +45,15 @@ export const fetchDeleteSchedule = async (id: any) => {
   }
 };
 
-export const fetchMonthSchedules = async (schedule: any) => {
+export const fetchMonthSchedules = async (schedule: MonthScheduleQuery) => {
   try {
-    const response = await axios.post('/getMonthSchedules', schedule);
-    // alert(JSON.stringify(response));
+    const response: AxiosResponse<Schedule[]> = await axios.post<Schedule[]>('/getMonthSchedules', schedule);
+    console.log(response.data);
     return response.data;
-  } catch (err) {
-    // 나중에 alert로 복구 예정
-    // alert(err);
-    console.log(err);
+  } catch (error) {
+    if (error instanceof AxiosError) {
+      console.log(error.message);
+    }
   }
 };
 

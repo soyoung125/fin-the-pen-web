@@ -1,14 +1,15 @@
 /* eslint-disable array-callback-return */
 /* eslint-disable max-len */
 /* eslint-disable no-param-reassign */
-import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import { PayloadAction, createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import moment from 'moment';
 import { fetchCreateSchedule, fetchDeleteSchedule, fetchMonthSchedules } from '../../api/API';
 import { fetchMockCreateSchedule, fetchMockDeleteSchedule } from '../../api/mockAPI';
-import { Schedule, ViewModeValue } from '../../../types/schedule';
+import { MonthScheduleQuery, Schedule, ViewModeValue } from '../../../types/schedule';
 import { ASYNC_THUNK_STATUS } from '../../../domain/constants/common';
 import { AnalysisData, AsyncThunkStatusValue } from '../../../types/common';
 import { CATEGORIES, COLORLIST } from '../../../domain/constants/categories';
+import { RootState } from '../store';
 
 interface InitialState {
   // 메인
@@ -52,9 +53,9 @@ const initialState: InitialState = {
 // 버그 있을 수 있음
 export const getMonthSchedules = createAsyncThunk(
   'schedule/getMonthSchedules',
-  async ({ user_id, date }: { user_id: string, date: string }) => {
+  async ({ user_id, date }: MonthScheduleQuery) => {
     const response = await fetchMonthSchedules({ user_id, date });
-    return response.data;
+    return response as Schedule[];
   },
 );
 
@@ -228,13 +229,13 @@ export const {
   changeViewMode,
 } = scheduleSlice.actions;
 
-export const selectSchedules = (state: any) => [...(state.schedule as InitialState).schedules].sort((a, b) => a.start_time.localeCompare(b.start_time));
-export const selectDate = (state: any) => (state.schedule as InitialState).date;
-export const selectFiltered = (state: any): string[] => (state.schedule as InitialState).filtered;
-export const selectFilteredDate = (state: any) => (state.schedule as InitialState).filtered_date;
-export const selectViewMode = (state: any) => (state.schedule as InitialState).viewMode;
-export const selectSchedule = (state: any) => (state.schedule as InitialState).schedule;
-export const selectStatus = (state: any) => (state.schedule as InitialState).status;
-export const selectAnalyzedData = (state: any) => (state.schedule as InitialState).analyzedData;
+export const selectSchedules = (state: RootState) => [...state.schedule.schedules].sort((a, b) => a.start_time.localeCompare(b.start_time));
+export const selectDate = (state: RootState) => state.schedule.date;
+export const selectFiltered = (state: RootState): string[] => state.schedule.filtered;
+export const selectFilteredDate = (state: RootState) => state.schedule.filtered_date;
+export const selectViewMode = (state: RootState) => state.schedule.viewMode;
+export const selectSchedule = (state: RootState) => state.schedule.schedule;
+export const selectStatus = (state: RootState) => state.schedule.status;
+export const selectAnalyzedData = (state: RootState) => state.schedule.analyzedData;
 
 export default scheduleSlice.reducer;
