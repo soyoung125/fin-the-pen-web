@@ -47,3 +47,27 @@ export interface AssetsByCategoryInterface {
   total: string | number,
   sum: number,
 }
+
+// 저축 세부 설정
+export interface RemittanceInterface {
+  isOn: boolean,
+  settings: {
+    bankName: string,
+    accountNumber: string,
+    date: 'none' | '매달 1일' | '매달 15일' | '매달 마지막날' | '직접 설정',
+    amount: number,
+  },
+}
+
+export interface NotificationInterface {
+  isOn: boolean,
+  time: string,
+}
+
+export interface PopupInterface {
+  isOn: boolean,
+  settings: {
+    display: 'none(아이콘)' | '저축금액(퍼센트)',
+    connect: '저축 목표 설정 페이지' | '계좌 앱',
+  },
+}

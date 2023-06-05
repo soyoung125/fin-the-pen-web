@@ -2,10 +2,11 @@ import {
   Stack, Box, Switch, FormControl, OutlinedInput, InputAdornment
 } from '@mui/material';
 import RoundedPaper from '../../../../components/common/RoundedPaper';
+import { NotificationInterface } from '../../../../types/common';
 
 interface NotificationSettingProps {
-  notification: any,
-  handleNotification: (value: any) => void,
+  notification: NotificationInterface,
+  handleNotification: (value: NotificationInterface) => void,
 }
 
 function NotificationSetting({ notification, handleNotification }: NotificationSettingProps) {
