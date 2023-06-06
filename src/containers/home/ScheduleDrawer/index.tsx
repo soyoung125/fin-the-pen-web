@@ -22,7 +22,6 @@ import { CONSUMPTION_ALERTS } from '../../../domain/constants/alerts';
 import { Schedule, ScheduleDrawerModeValue } from '../../../types/schedule';
 
 function TransitionUp(props: SlideProps) {
-  // eslint-disable-next-line react/jsx-props-no-spreading
   return <Slide {...props} direction="right" />;
 }
 
