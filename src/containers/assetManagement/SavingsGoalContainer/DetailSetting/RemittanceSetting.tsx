@@ -3,10 +3,11 @@ import {
 } from '@mui/material';
 import RoundedPaper from '../../../../components/common/RoundedPaper';
 import CalendarTodayOutlinedIcon from '@mui/icons-material/CalendarTodayOutlined';
+import { RemittanceInterface } from '../../../../types/common';
 
 interface RemittanceSettingProps {
-  remittance: any,
-  handleRemittance: (value: any) => void,
+  remittance: RemittanceInterface,
+  handleRemittance: (value: RemittanceInterface) => void,
 }
 
 function RemittanceSetting({ remittance, handleRemittance }: RemittanceSettingProps) {

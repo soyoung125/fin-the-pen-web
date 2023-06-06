@@ -10,7 +10,7 @@ function ExclusionInput() {
   const dispatch = useDispatch();
   const schedule = useSelector(selectSchedule);
 
-  const changeExclustion = (state: any) => {
+  const changeExclustion = (state: React.ChangeEvent<HTMLInputElement>) => {
     updateExclusion(dispatch, schedule, state);
   };
 

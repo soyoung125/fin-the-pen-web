@@ -11,7 +11,7 @@ function NameInput() {
   const dispatch = useDispatch();
   const schedule = useSelector(selectSchedule);
 
-  const changeSchedule = (state: any) => {
+  const changeSchedule = (state: {target: {id: string, value: string}}) => {
     updateSchedule(dispatch, schedule, state);
   };
 

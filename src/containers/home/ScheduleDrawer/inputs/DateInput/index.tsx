@@ -10,7 +10,7 @@ function DateInput() {
   const dispatch = useDispatch();
   const schedule = useSelector(selectSchedule);
 
-  const changeSchedule = (state: any) => {
+  const changeSchedule = (state: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>) => {
     updateSchedule(dispatch, schedule, state);
   };
 

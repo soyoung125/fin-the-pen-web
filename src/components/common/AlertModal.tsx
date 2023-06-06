@@ -6,7 +6,14 @@ import {
 import ClearIcon from '@mui/icons-material/Clear';
 import { CONTROLLING_ALERT } from '../../domain/constants/alerts';
 
-function AlertModal(props: any) {
+interface AlertModalProps {
+  open: boolean,
+  handleClose: () => void,
+  handleClickYes: () => void,
+  mode: string,
+}
+
+function AlertModal(props: AlertModalProps) {
   const {
     open, handleClose, handleClickYes, mode,
   } = props;

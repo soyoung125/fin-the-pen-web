@@ -35,3 +35,8 @@ export interface GetScheduleQuery {
   user_id: string;
   date: string;
 }
+
+export interface MonthScheduleQuery {
+  user_id: string;
+  date: string;
+}

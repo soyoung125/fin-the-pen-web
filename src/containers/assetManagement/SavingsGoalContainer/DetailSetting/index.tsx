@@ -10,6 +10,7 @@ import RemittanceSetting from './RemittanceSetting';
 import PopupSetting from './PopupSetting';
 import NotificationSetting from './NotificationSetting';
 import { selectSavingDetailSetting, setSavingDetailSetting } from '../../../../app/redux/slices/assetSlice';
+import { NotificationInterface, PopupInterface, RemittanceInterface } from '../../../../types/common';
 
 function DetailSetting() {
   const dispatch = useDispatch();
@@ -24,15 +25,15 @@ function DetailSetting() {
     setPriority(value);
   };
 
-  const handleRemittance = (value: any) => {
+  const handleRemittance = (value: RemittanceInterface) => {
     setRemittance(value);
   };
 
-  const handleNotification = (value: any) => {
+  const handleNotification = (value: NotificationInterface) => {
     setNotification(value);
   };
 
-  const handlePopup = (value: any) => {
+  const handlePopup = (value: PopupInterface) => {
     setPopup(value);
   };
 

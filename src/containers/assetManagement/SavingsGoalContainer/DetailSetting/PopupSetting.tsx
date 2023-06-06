@@ -2,10 +2,11 @@ import {
   Stack, Box, Switch, InputAdornment, FormControl, Select, MenuItem
 } from '@mui/material';
 import RoundedPaper from '../../../../components/common/RoundedPaper';
+import { PopupInterface } from '../../../../types/common';
 
 interface PopupSettingProps {
-  popup: any,
-  handlePopup: (value: any) => void,
+  popup: PopupInterface,
+  handlePopup: (value: PopupInterface) => void,
 }
 
 function PopupSetting({ popup, handlePopup }: PopupSettingProps) {

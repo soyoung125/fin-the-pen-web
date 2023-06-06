@@ -1,4 +1,3 @@
-/* eslint-disable react/jsx-props-no-spreading */
 import {
   Autocomplete, TextField,
 } from '@mui/material';
@@ -9,11 +8,11 @@ import { SCHEDULE_DRAWER } from '../../../../domain/constants/schedule';
 import { selectSchedule } from '../../../../app/redux/slices/scheduleSlice';
 import { updateSchedule } from '../domain/schedule';
 
-export default function CategoryInput({ selected }: any) {
+export default function CategoryInput({ selected }: {selected: string}) {
   const dispatch = useDispatch();
   const schedule = useSelector(selectSchedule);
 
-  const [value, setValue] = useState(selected);
+  const [value, setValue] = useState<string | null>(selected);
   const [inputValue, setInputValue] = useState('');
 
   useEffect(() => {

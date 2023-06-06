@@ -10,7 +10,7 @@ function ImportanceInput() {
   const dispatch = useDispatch();
   const schedule = useSelector(selectSchedule);
 
-  const changeSchedule = (state: any) => {
+  const changeSchedule = (state: React.MouseEvent<HTMLElement>) => {
     updateSchedule(dispatch, schedule, state);
   };
 

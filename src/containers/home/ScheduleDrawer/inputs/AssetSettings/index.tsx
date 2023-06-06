@@ -3,7 +3,7 @@ import ExclusionInput from './ExclusionInput';
 import ImportanceInput from './ImportanceInput';
 import SpendingInput from './SpendingInput';
 
-function AssetSettings({ mode }: any) {
+function AssetSettings({ mode }: {mode: string}) {
   return (
     <Stack spacing={1}>
       <Card>

@@ -2,9 +2,16 @@ import { IconButton, Stack } from '@mui/material';
 import KeyboardArrowLeftIcon from '@mui/icons-material/KeyboardArrowLeft';
 import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight';
 
+interface SwitchingHeaderProps {
+  children: React.ReactNode,
+  handleClickLeftArrow: () => void,
+  handleClickRightArrow: () => void,
+  justifyContent: string,
+}
+
 function SwitchingHeader({
   children, handleClickLeftArrow, handleClickRightArrow, justifyContent,
-}: any) {
+}: SwitchingHeaderProps) {
   return (
     <Stack direction="row" alignItems="center" justifyContent={justifyContent} sx={{ height: '100%' }}>
       <IconButton
