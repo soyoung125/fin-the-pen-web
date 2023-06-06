@@ -11,19 +11,27 @@ export interface Schedule {
   repeat_endDate: string;
   category: string;
   type: string;
-  expected_spending: string,
+  expected_spending: string;
   importance: string;
   exclusion: boolean;
 }
 
 export type ViewModeValue = ViewMode[keyof ViewMode];
+
 export interface ViewMode {
-  asset: 'asset';
-  schedule: 'schedule';
+  asset: "asset";
+  schedule: "schedule";
 }
 
-export type ScheduleDrawerModeValue = ScheduleDrawerMode[keyof ScheduleDrawerMode];
+export type ScheduleDrawerModeValue =
+  ScheduleDrawerMode[keyof ScheduleDrawerMode];
+
 export interface ScheduleDrawerMode {
-  modify: 'modify';
-  create: 'create'
+  modify: "modify";
+  create: "create";
+}
+
+export interface GetScheduleQuery {
+  user_id: string;
+  date: string;
 }

@@ -1,14 +1,26 @@
 /* eslint-disable array-callback-return */
 /* eslint-disable max-len */
 /* eslint-disable no-param-reassign */
-import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import moment from 'moment';
-import { fetchCreateSchedule, fetchDeleteSchedule, fetchMonthSchedules } from '../../api/API';
-import { fetchMockCreateSchedule, fetchMockDeleteSchedule } from '../../api/mockAPI';
-import { Schedule, ViewModeValue } from '../../../types/schedule';
-import { ASYNC_THUNK_STATUS } from '../../../domain/constants/common';
-import { AnalysisData, AsyncThunkStatusValue } from '../../../types/common';
-import { CATEGORIES, COLORLIST } from '../../../domain/constants/categories';
+import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
+import moment from "moment";
+import {
+  fetchCreateSchedule,
+  fetchDeleteSchedule,
+  fetchMonthSchedules,
+} from "../../api/API";
+import {
+  fetchMockCreateSchedule,
+  fetchMockDeleteSchedule,
+} from "../../api/mockAPI";
+import {
+  GetScheduleQuery,
+  Schedule,
+  ViewModeValue,
+} from "../../../types/schedule";
+import { ASYNC_THUNK_STATUS } from "../../../domain/constants/common";
+import { AnalysisData, AsyncThunkStatusValue } from "../../../types/common";
+import { CATEGORIES, COLORLIST } from "../../../domain/constants/categories";
+import { RootState } from "../store.ts";
 
 interface InitialState {
   // 메인
@@ -21,21 +33,21 @@ interface InitialState {
   schedule: Schedule | null;
   // 분석 페이지에 표시될 데이터
   analyzedData: {
-    data: AnalysisData[],
-    total: number,
+    data: AnalysisData[];
+    total: number;
   };
   // 필터
   filtered: string[];
   filtered_date: {
     start: string;
     end: string;
-  },
+  };
 }
 
 const initialState: InitialState = {
   date: moment(new Date()),
-  status: 'idle',
-  viewMode: 'asset',
+  status: "idle",
+  viewMode: "asset",
   schedules: [],
   schedule: null,
   analyzedData: {
@@ -44,22 +56,22 @@ const initialState: InitialState = {
   },
   filtered: [],
   filtered_date: {
-    start: '',
-    end: '',
+    start: "",
+    end: "",
   },
 };
 
-// 버그 있을 수 있음
+// 06-07 typescript 적용
 export const getMonthSchedules = createAsyncThunk(
-  'schedule/getMonthSchedules',
-  async ({ user_id, date }: { user_id: string, date: string }) => {
-    const response = await fetchMonthSchedules({ user_id, date });
-    return response.data;
-  },
+  "schedule/getMonthSchedules",
+  async ({ user_id, date }: GetScheduleQuery) => {
+    const schedules = await fetchMonthSchedules({ user_id, date });
+    return schedules;
+  }
 );
 
 export const createSchedule = createAsyncThunk<any, any>(
-  'schedule/createSchedule',
+  "schedule/createSchedule",
   async (scheduleWithUuid, { getState }: any) => {
     const { guestMode } = getState().common;
     if (guestMode) {
@@ -71,11 +83,11 @@ export const createSchedule = createAsyncThunk<any, any>(
     // console.log(scheduleWithUuid);
     await fetchCreateSchedule(scheduleWithUuid);
     return null;
-  },
+  }
 );
 
 export const deleteSchedule = createAsyncThunk<any, any>(
-  'schedule/deleteSchedule',
+  "schedule/deleteSchedule",
   async (id, { getState }: any) => {
     // console.log(id);
     const { guestMode } = getState().common;
@@ -87,15 +99,17 @@ export const deleteSchedule = createAsyncThunk<any, any>(
     // console.log('일반 모드에서 제거');
     await fetchDeleteSchedule(id);
     return null;
-  },
+  }
 );
 
 export const scheduleSlice = createSlice({
-  name: 'schedule',
+  name: "schedule",
   initialState,
   reducers: {
     modifySchedule: (state: any, action) => {
-      state.schedules = state.schedules.map((s: any) => (s.id === action.payload.id ? action.payload : s));
+      state.schedules = state.schedules.map((s: any) =>
+        s.id === action.payload.id ? action.payload : s
+      );
     },
     setSchedules: (state, action) => {
       state.schedules = action.payload;
@@ -115,20 +129,36 @@ export const scheduleSlice = createSlice({
        * 한 일정에서 카테고리별로 일정을 나누고 그래프를 그리기 위한 데이터 생성
        */
       const newData: AnalysisData[] = [];
-      const startExpression = (s: Schedule) => state.filtered_date.start === '' || moment(s.date).isAfter(state.filtered_date.start);
-      const endExpression = (s: Schedule) => state.filtered_date.end === '' || moment(s.date).isBefore(state.filtered_date.end);
-      const exeptionExpression = (s: Schedule) => !state.filtered.includes(s.category);
+      const startExpression = (s: Schedule) =>
+        state.filtered_date.start === "" ||
+        moment(s.date).isAfter(state.filtered_date.start);
+      const endExpression = (s: Schedule) =>
+        state.filtered_date.end === "" ||
+        moment(s.date).isBefore(state.filtered_date.end);
+      const exeptionExpression = (s: Schedule) =>
+        !state.filtered.includes(s.category);
 
       let newTotal = 0;
-      const expenditureCategories = CATEGORIES.filter((c) => c.type === '지출' || c.nestedType === '출금');
-      const schedules = state.schedules.filter((s) => state.date.isSame(s.date, 'month') && startExpression(s) && endExpression(s) && exeptionExpression(s));
+      const expenditureCategories = CATEGORIES.filter(
+        (c) => c.type === "지출" || c.nestedType === "출금"
+      );
+      const schedules = state.schedules.filter(
+        (s) =>
+          state.date.isSame(s.date, "month") &&
+          startExpression(s) &&
+          endExpression(s) &&
+          exeptionExpression(s)
+      );
 
       expenditureCategories.map((c, index) => {
         const schByCategory = schedules.filter((s) => s.category === c.title);
         const cnt = schByCategory.length;
         if (cnt > 0) {
-          const spending = schByCategory
-            .reduce((result, schedule) => result + parseInt(schedule.expected_spending, 10), 0);
+          const spending = schByCategory.reduce(
+            (result, schedule) =>
+              result + parseInt(schedule.expected_spending, 10),
+            0
+          );
           if (spending > 0) {
             newData.push({
               id: c.title,
@@ -142,7 +172,10 @@ export const scheduleSlice = createSlice({
         }
       }, []);
 
-      state.analyzedData = { data: newData.sort((a, b) => b.value - a.value), total: newTotal };
+      state.analyzedData = {
+        data: newData.sort((a, b) => b.value - a.value),
+        total: newTotal,
+      };
     },
     updateFilter: (state, action) => {
       /**
@@ -151,9 +184,13 @@ export const scheduleSlice = createSlice({
        */
 
       if (state.filtered.includes(action.payload as string)) {
-        state.filtered = state.filtered.filter((filteredWord) => filteredWord !== action.payload);
+        state.filtered = state.filtered.filter(
+          (filteredWord) => filteredWord !== action.payload
+        );
       } else {
-        const set = new Set([...state.filtered].concat(action.payload as string));
+        const set = new Set(
+          [...state.filtered].concat(action.payload as string)
+        );
         state.filtered = Array.from(set);
       }
     },
@@ -164,16 +201,18 @@ export const scheduleSlice = createSlice({
        */
       const { mode, categories } = action.payload;
       switch (mode) {
-        case 'write':
-          state.filtered = Array.from(new Set([...state.filtered].concat(categories)));
+        case "write":
+          state.filtered = Array.from(
+            new Set([...state.filtered].concat(categories))
+          );
           break;
-        case 'remove':
+        case "remove":
           categories.forEach((cat: any) => {
             state.filtered = state.filtered.filter((f) => f !== cat);
           });
           break;
         default:
-          alert('잘못된 요청입니다.');
+          alert("잘못된 요청입니다.");
       }
     },
     setFilteredDate: (state: any, action) => {
@@ -182,8 +221,8 @@ export const scheduleSlice = createSlice({
     initFilter: (state) => {
       state.filtered = [];
       state.filtered_date = {
-        start: '',
-        end: '',
+        start: "",
+        end: "",
       };
     },
     changeViewMode: (state, action) => {
@@ -196,11 +235,14 @@ export const scheduleSlice = createSlice({
         // getMonthSchedules 가 진행중일 때
         state.status = ASYNC_THUNK_STATUS.pending;
       })
-      .addCase(getMonthSchedules.fulfilled, (state, action) => {
-        // getMonthSchedules 가 끝나면
-        state.status = ASYNC_THUNK_STATUS.fulfilled;
-        state.schedules = action.payload;
-      })
+      .addCase(
+        getMonthSchedules.fulfilled,
+        (state, action: PayloadAction<Schedule[] | undefined>) => {
+          // getMonthSchedules 가 끝나면
+          state.status = ASYNC_THUNK_STATUS.fulfilled;
+          state.schedules = action.payload ?? [];
+        }
+      )
       .addCase(createSchedule.fulfilled, (state, action: any) => {
         // createSchedule 가 끝나면
         if (action.payload !== null) {
@@ -210,7 +252,9 @@ export const scheduleSlice = createSlice({
       .addCase(deleteSchedule.fulfilled, (state, action) => {
         // deleteSchedule 가 끝나면
         if (action.payload !== null) {
-          state.schedules = state.schedules.filter((s: any) => s.id !== action.payload);
+          state.schedules = state.schedules.filter(
+            (s: any) => s.id !== action.payload
+          );
         }
       });
   },
@@ -228,13 +272,22 @@ export const {
   changeViewMode,
 } = scheduleSlice.actions;
 
-export const selectSchedules = (state: any) => [...(state.schedule as InitialState).schedules].sort((a, b) => a.start_time.localeCompare(b.start_time));
+export const selectSchedules = (state: RootState) =>
+  [...state.schedule.schedules].sort((a, b) =>
+    a.start_time.localeCompare(b.start_time)
+  );
 export const selectDate = (state: any) => (state.schedule as InitialState).date;
-export const selectFiltered = (state: any): string[] => (state.schedule as InitialState).filtered;
-export const selectFilteredDate = (state: any) => (state.schedule as InitialState).filtered_date;
-export const selectViewMode = (state: any) => (state.schedule as InitialState).viewMode;
-export const selectSchedule = (state: any) => (state.schedule as InitialState).schedule;
-export const selectStatus = (state: any) => (state.schedule as InitialState).status;
-export const selectAnalyzedData = (state: any) => (state.schedule as InitialState).analyzedData;
+export const selectFiltered = (state: any): string[] =>
+  (state.schedule as InitialState).filtered;
+export const selectFilteredDate = (state: any) =>
+  (state.schedule as InitialState).filtered_date;
+export const selectViewMode = (state: any) =>
+  (state.schedule as InitialState).viewMode;
+export const selectSchedule = (state: any) =>
+  (state.schedule as InitialState).schedule;
+export const selectStatus = (state: any) =>
+  (state.schedule as InitialState).status;
+export const selectAnalyzedData = (state: any) =>
+  (state.schedule as InitialState).analyzedData;
 
 export default scheduleSlice.reducer;

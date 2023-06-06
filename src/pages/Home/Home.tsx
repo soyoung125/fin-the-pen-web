@@ -1,20 +1,25 @@
-import { useDispatch, useSelector } from 'react-redux';
-import { useEffect } from 'react';
-import moment from 'moment';
-import { Box } from '@mui/material';
+import { useEffect } from "react";
+import moment from "moment";
+import { Box } from "@mui/material";
 import {
-  changeViewMode, getMonthSchedules, selectDate, selectViewMode
-} from '../../app/redux/slices/scheduleSlice';
-import { selectUser } from '../../app/redux/slices/userSlice';
-import { selectGuestMode, setIsAuthenticatedFalse } from '../../app/redux/slices/commonSlice';
-import useHeader from '../../hooks/useHeader';
-import { HEADER_MODE } from '../../domain/constants/common';
-import ConsumptionAlert from '../../containers/home/HomeContainer/layout/ConsumptionAlert';
-import ScheduleViewMode from '../../containers/home/HomeContainer/layout/ScheduleViewMode';
-import ScheduleView from '../../containers/home/ScheduleView';
-import AssetView from '../../containers/home/AssetView';
-import { VIEW_MODE } from '../../domain/constants/schedule';
-import { useAppDispatch, useAppSelector } from '../../app/redux/hooks';
+  changeViewMode,
+  getMonthSchedules,
+  selectDate,
+  selectViewMode,
+} from "../../app/redux/slices/scheduleSlice";
+import { selectUser } from "../../app/redux/slices/userSlice";
+import {
+  selectGuestMode,
+  setIsAuthenticatedFalse,
+} from "../../app/redux/slices/commonSlice";
+import useHeader from "../../hooks/useHeader";
+import { HEADER_MODE } from "../../domain/constants/common";
+import ConsumptionAlert from "../../containers/home/HomeContainer/layout/ConsumptionAlert";
+import ScheduleViewMode from "../../containers/home/HomeContainer/layout/ScheduleViewMode";
+import ScheduleView from "../../containers/home/ScheduleView";
+import AssetView from "../../containers/home/AssetView";
+import { VIEW_MODE } from "../../domain/constants/schedule";
+import { useAppDispatch, useAppSelector } from "../../app/redux/hooks";
 
 function Home() {
   const dispatch = useAppDispatch();
@@ -31,13 +36,14 @@ function Home() {
   useHeader(true, HEADER_MODE.home);
 
   const getSchedules = () => {
-    if (user) { // type guard
+    if (user) {
+      // type guard
       const query = {
         user_id: user.user_id,
-        date: moment(date).format('YYYY-MM'),
+        date: moment(date).format("YYYY-MM"),
       };
       // 버그 있을 수 있음
-      dispatch(getMonthSchedules(query) as any); // any를 써야 redux createAsyncThunk에 넘길 수 있다고 함
+      dispatch(getMonthSchedules(query)); // help me
     }
   };
 
@@ -51,16 +57,8 @@ function Home() {
   return (
     <Box>
       <ConsumptionAlert />
-      {
-        viewMode === VIEW_MODE.schedule && (
-          <ScheduleView />
-        )
-      }
-      {
-        viewMode === VIEW_MODE.asset && (
-          <AssetView />
-        )
-      }
+      {viewMode === VIEW_MODE.schedule && <ScheduleView />}
+      {viewMode === VIEW_MODE.asset && <AssetView />}
       <ScheduleViewMode />
     </Box>
   );

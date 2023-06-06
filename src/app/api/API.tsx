@@ -1,4 +1,5 @@
-import axios from 'axios';
+import axios, { AxiosResponse } from "axios";
+import { GetScheduleQuery, Schedule } from "../../types/schedule.tsx";
 
 /**
  * 반드시 서버로 요청할 때 객체 형식이어야 JSON 으로 변환되어 서버에 잘 들어감!
@@ -7,7 +8,7 @@ import axios from 'axios';
 
 export const fetchSignUp = async (user: any) => {
   try {
-    const response = await axios.post('/fin-the-pen-web/sign-up', user);
+    const response = await axios.post("/fin-the-pen-web/sign-up", user);
     return response.data;
   } catch (err) {
     alert(err);
@@ -16,7 +17,7 @@ export const fetchSignUp = async (user: any) => {
 
 export const fetchLogin = async (sign: any) => {
   try {
-    const response = await axios.post('/fin-the-pen-web/sign-in', sign);
+    const response = await axios.post("/fin-the-pen-web/sign-in", sign);
     return response.data;
   } catch (err) {
     alert(err);
@@ -25,7 +26,7 @@ export const fetchLogin = async (sign: any) => {
 
 export const fetchCreateSchedule = async (schedule: any) => {
   try {
-    const response = await axios.post('/createSchedule', schedule);
+    const response = await axios.post("/createSchedule", schedule);
     // alert(JSON.stringify(response));
     return response.data;
   } catch (err) {
@@ -36,7 +37,7 @@ export const fetchCreateSchedule = async (schedule: any) => {
 export const fetchDeleteSchedule = async (id: any) => {
   try {
     console.log({ id });
-    const response = await axios.post('/deleteSchedule', { id });
+    const response = await axios.post("/deleteSchedule", { id });
     // alert(JSON.stringify(response));
     return response.data;
   } catch (err) {
@@ -44,14 +45,17 @@ export const fetchDeleteSchedule = async (id: any) => {
   }
 };
 
-export const fetchMonthSchedules = async (schedule: any) => {
+export const fetchMonthSchedules = async (
+  schedule: GetScheduleQuery
+): Promise<Schedule[] | undefined> => {
   try {
-    const response = await axios.post('/getMonthSchedules', schedule);
-    // alert(JSON.stringify(response));
-    return response.data;
+    const response: AxiosResponse<Schedule[]> = await axios.post<Schedule[]>(
+      "/getMonthSchedules",
+      schedule
+    );
+    const schedules: Schedule[] = response.data;
+    return schedules;
   } catch (err) {
-    // 나중에 alert로 복구 예정
-    // alert(err);
     console.log(err);
   }
 };
@@ -60,22 +64,22 @@ export const fetchMonthSchedules = async (schedule: any) => {
  *
  *
  *
-typescript axios example
+ typescript axios example
 
-import axios, { AxiosResponse } from 'axios';
+ import axios, { AxiosResponse } from 'axios';
 
-interface User {
+ interface User {
   id: number;
   name: string;
   email: string;
 }
 
-axios.get<User[]>('https://jsonplaceholder.typicode.com/users')
-  .then((response: AxiosResponse<User[]>) => {
+ axios.get<User[]>('https://jsonplaceholder.typicode.com/users')
+ .then((response: AxiosResponse<User[]>) => {
     const users = response.data;
     console.log(users);
   })
-  .catch((error) => {
+ .catch((error) => {
     console.error(error);
   });
 
