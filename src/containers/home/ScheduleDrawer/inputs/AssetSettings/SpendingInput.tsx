@@ -6,14 +6,14 @@ import { SCHEDULE_DRAWER } from '../../../../../domain/constants/schedule';
 import { selectSchedule } from '../../../../../app/redux/slices/scheduleSlice';
 import { updateSchedule, updateSpendingType } from '../../domain/schedule';
 
-function SpendingInput({ mode }: any) {
+function SpendingInput({ mode }: { mode: string }) {
   const dispatch = useDispatch();
   const schedule = useSelector(selectSchedule);
 
   const changeSpendingType = () => {
     updateSpendingType(dispatch, schedule);
   };
-  const changeSchedule = (state: any) => {
+  const changeSchedule = (state: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement> | React.MouseEvent<HTMLElement>) => {
     updateSchedule(dispatch, schedule, state);
   };
   return (

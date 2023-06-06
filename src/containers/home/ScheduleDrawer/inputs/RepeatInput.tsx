@@ -1,17 +1,17 @@
-/* eslint-disable react/jsx-props-no-spreading */
 import {
   // eslint-disable-next-line max-len
-  Box, Button, Dialog, DialogActions, DialogContent, DialogTitle, FormControl, InputLabel, MenuItem, Select, Stack, TextField,
+  Box, Button, Dialog, DialogActions, DialogContent, DialogTitle, FormControl, InputLabel, MenuItem, Select, SelectChangeEvent, Stack, TextField,
 } from '@mui/material';
-import { LocalizationProvider, PickersDay, StaticDatePicker } from '@mui/x-date-pickers';
+import { LocalizationProvider, PickersDay, PickersDayProps, StaticDatePicker } from '@mui/x-date-pickers';
 import { AdapterMoment } from '@mui/x-date-pickers/AdapterMoment';
-import moment from 'moment';
-import { useState } from 'react';
+import moment, { Moment } from 'moment';
+import { RefAttributes, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { DEADLINE, REPEAT } from '../../../../domain/constants/repeat';
 import { SCHEDULE_DRAWER } from '../../../../domain/constants/schedule';
 import { selectSchedule, setDrawerSchedule } from '../../../../app/redux/slices/scheduleSlice';
 import { updateRepeat, updateRepeatEndDate } from '../domain/schedule';
+import { JSX } from 'react/jsx-runtime';
 
 function RepeatInput() {
   const dispatch = useDispatch();
@@ -20,7 +20,7 @@ function RepeatInput() {
   const [openDatePickerModal, setOpenDatePickerModal] = useState(false);
   const [repeatEndDate, setRepeatEndDate] = useState(moment(schedule?.repeat_endDate));
 
-  const changeRepeat = (state: any) => {
+  const changeRepeat = (state: SelectChangeEvent<string>) => {
     updateRepeat(dispatch, schedule, setOpenDatePickerModal, state);
   };
 
@@ -32,7 +32,7 @@ function RepeatInput() {
     }));
   };
 
-  const renderDayInPicker = (day: any, _value: any, DayComponentProps: any) => {
+  const renderDayInPicker = (day: Moment, _value: Moment[], DayComponentProps: PickersDayProps<Moment>) => {
     if (moment(schedule?.date).isSame(repeatEndDate)) {
       return <PickersDay {...DayComponentProps} />;
     }
