@@ -6,6 +6,10 @@ import { AsyncThunkStatusValue, User } from '../../../types/common';
 import { ASYNC_THUNK_STATUS } from '../../../domain/constants/common';
 import { RootState } from '../store';
 
+interface SignInterface {
+  user_id: FormDataEntryValue | null;
+  password: FormDataEntryValue | null;
+}
 interface UserState {
   user: User | null; // User가 null 인 경우 비로그인 상태
   status: AsyncThunkStatusValue;
@@ -26,7 +30,7 @@ export const mockLogin = createAsyncThunk(
 
 export const login = createAsyncThunk(
   'user/login',
-  async (sign: any) => {
+  async (sign: SignInterface) => {
     const response = await fetchLogin(sign);
     if (response === undefined) {
       alert(`${NO_SIGNAL_FROM_SERVER} GUEST 계정으로 로그인을 시도합니다.`);

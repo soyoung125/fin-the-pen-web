@@ -1,5 +1,6 @@
 /* eslint-disable no-param-reassign */
 import { createSlice } from '@reduxjs/toolkit';
+import { RootState } from '../store';
 
 /**
  *
@@ -48,7 +49,7 @@ export const settingSlice = createSlice({
 });
 export const { updateSettings, changeThemeMode } = settingSlice.actions;
 
-export const selectSettings = (state: any) => state.setting.settings;
-export const selectIsDarkMode = (state: any) => state.setting.settings.다크모드;
+export const selectSettings = (state: RootState) => state.setting.settings;
+export const selectIsDarkMode = (state: RootState) => state.setting.settings.다크모드;
 
 export default settingSlice.reducer;
