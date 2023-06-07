@@ -12,6 +12,7 @@ import { SCHEDULE_DRAWER } from '../../../../domain/constants/schedule';
 import { selectSchedule, setDrawerSchedule } from '../../../../app/redux/slices/scheduleSlice';
 import { updateRepeat, updateRepeatEndDate } from '../domain/schedule';
 import { JSX } from 'react/jsx-runtime';
+import { RenderDayFunction } from '../../../../types/common';
 
 function RepeatInput() {
   const dispatch = useDispatch();
@@ -32,7 +33,7 @@ function RepeatInput() {
     }));
   };
 
-  const renderDayInPicker = (day: Moment, _value: Moment[], DayComponentProps: PickersDayProps<Moment>) => {
+  const renderDayInPicker: RenderDayFunction = (day, _value, DayComponentProps) => {
     if (moment(schedule?.date).isSame(repeatEndDate)) {
       return <PickersDay {...DayComponentProps} />;
     }
