@@ -1,5 +1,4 @@
 /* eslint-disable no-underscore-dangle */
-/* eslint-disable react/jsx-props-no-spreading */
 /* eslint-disable max-len */
 import { Box, TextField } from "@mui/material";
 import { StaticDatePicker } from "@mui/x-date-pickers";
@@ -29,17 +28,10 @@ import { makeMarkerData } from "./domain/calender";
 import WeeklyStatement from "./boxes/WeeklyStatement";
 import { selectIsDarkMode } from "../../../../../app/redux/slices/settingSlice";
 import useSchedule from "../../../../../hooks/useSchedule";
+import { RenderDayFunction } from "../../../../../types/common";
 
 interface CalenderProps {
   dateHeight: number;
-}
-
-interface RenderDAyFunction {
-  (
-    day: moment.Moment,
-    _value: moment.Moment[],
-    DayComponentProps: PickersDayProps<moment.Moment>
-  ): JSX.Element;
 }
 
 function Calender({ dateHeight }: CalenderProps) {
@@ -57,7 +49,7 @@ function Calender({ dateHeight }: CalenderProps) {
     dispatch(selectedDate(moment(new Date())));
   }, []);
 
-  const renderDayInPicker: RenderDAyFunction = (
+  const renderDayInPicker: RenderDayFunction = (
     day,
     _value,
     DayComponentProps
@@ -74,6 +66,8 @@ function Calender({ dateHeight }: CalenderProps) {
         category: CATEGORIES.find((c) => c.title === s.category) || {
           type: "미분류",
           color: "#C8A2C8",
+          nestedType: "미분류",
+          title: "미분류",
         },
       }));
 
@@ -124,7 +118,7 @@ function Calender({ dateHeight }: CalenderProps) {
   };
 
   // 실제 지출 데이터를 불러오기 전이기 때문에 일정 데이터의 지출 데이터 사용중
-  const renderAssetDayPicker: RenderDAyFunction = (
+  const renderAssetDayPicker: RenderDayFunction = (
     day,
     _value,
     DayComponentProps

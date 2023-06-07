@@ -51,7 +51,7 @@ function FilterChips({ nested }: FilterChipsProps) {
     }));
   };
 
-  const isFiltered: any = (cat: any) => filtered.findIndex((word) => word === cat) === -1;
+  const isFiltered = (cat: string): boolean => filtered.findIndex((word) => word === cat) === -1;
 
   return (
     <Box key={nested.type}>

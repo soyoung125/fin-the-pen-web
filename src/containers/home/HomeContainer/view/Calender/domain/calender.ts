@@ -1,18 +1,36 @@
-/* eslint-disable import/prefer-default-export */
 /* eslint-disable max-len */
 
 import { EXPENDITURE, INCOME } from '../../../../../../domain/constants/categories';
+import { Category } from '../../../../../../domain/constants/categories';
 
+
+interface DaySchedulesInterface {
+  id?: string;
+  user_id?: string;
+  event_name: string;
+  alarm: boolean;
+  date: string;
+  start_time: string;
+  end_time: string;
+  repeating_cycle: string;
+  repeat_deadline: string;
+  repeat_endDate: string;
+  category: Category;
+  type: string;
+  expected_spending: string;
+  importance: string;
+  exclusion: boolean;
+}
 /**
    * 해당 일의 일정을 받아 카테고리 수별로 마커위치를 고정하기 위해 새로운 배열을 생성해 반환하는 함수
    * @param {Array} daySchedules 해당 일의 일정 배열
    * @returns {Array} 카테고리별 일정 마커를 표시하기 휘한 길이 7의 배열 (색상 표시를 위해 color 요소 필수)
    */
-export const makeMarkerData = (daySchedules: any, isDarkMode: any) => {
+export const makeMarkerData = (daySchedules: DaySchedulesInterface[], isDarkMode: boolean) => {
   const emptyData = Array(6).fill(undefined).map(() => ({ color: isDarkMode ? '#121212' : '#FFFFFF' }));
   const categoryForMarker = INCOME.nested.concat(EXPENDITURE.nested)
     .filter((c) => (daySchedules.findIndex(
-      (s: any) => s.category.nestedType === c.type,
+      (s: DaySchedulesInterface) => s.category?.nestedType === c.type,
     ) !== -1));
 
   switch (categoryForMarker.length) {

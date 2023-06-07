@@ -1,3 +1,4 @@
+import { PickersDayProps } from '@mui/x-date-pickers';
 import React from 'react';
 
 export type MUIColor = 'success' | 'secondary' | 'info' | 'warning' | 'error';
@@ -70,4 +71,12 @@ export interface PopupInterface {
     display: 'none(아이콘)' | '저축금액(퍼센트)',
     connect: '저축 목표 설정 페이지' | '계좌 앱',
   },
+}
+
+export interface RenderDayFunction {
+  (
+    day: moment.Moment,
+    _value: moment.Moment[],
+    DayComponentProps: PickersDayProps<moment.Moment>
+  ): JSX.Element;
 }
