@@ -97,7 +97,7 @@ interface RepeatCycle {
   months: 'months';
   years: 'years';
 }
-const REPEAT_CYCLE: any = {
+const REPEAT_CYCLE: RepeatCycle = {
   days: 'days',
   weeks: 'weeks',
   months: 'months',

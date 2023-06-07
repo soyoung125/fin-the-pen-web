@@ -28,6 +28,13 @@ export interface User {
   phone_number: string;
 }
 
+export interface SignUpUserInterface {
+  user_id: FormDataEntryValue | null,
+  password: FormDataEntryValue | null,
+  name: FormDataEntryValue | null,
+  phone_number: FormDataEntryValue | null,
+}
+
 export interface AnalysisData {
   id: string;
   label: string;

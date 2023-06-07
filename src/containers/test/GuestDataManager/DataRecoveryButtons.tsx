@@ -11,7 +11,7 @@ function DataRecoveryButtons() {
   const dispatch = useDispatch();
   const [open, setOpen] = useState(false);
   const [text, setText] = useState('');
-  const handleChange = (event: any) => {
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setText(event.target.value);
   };
   const recoverData = () => {
