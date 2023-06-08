@@ -35,6 +35,11 @@ export interface SignUpUserInterface {
   phone_number: FormDataEntryValue | null,
 }
 
+export interface SignInterface {
+  user_id: FormDataEntryValue | null;
+  password: FormDataEntryValue | null;
+}
+
 export interface AnalysisData {
   id: string;
   label: string;

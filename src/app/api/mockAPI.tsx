@@ -1,5 +1,4 @@
 /* eslint-disable no-promise-executor-return */
-/* eslint-disable import/prefer-default-export */
 
 /**
  * TODO: MSW로 이전하기

@@ -39,8 +39,9 @@ interface InitialState {
   // 필터
   filtered: string[];
   filtered_date: {
-    start: string;
-    end: string;
+    // start: string;
+    // end: string;
+    [key: string]: string;
   };
 }
 
@@ -70,9 +71,9 @@ export const getMonthSchedules = createAsyncThunk(
   }
 );
 
-export const createSchedule = createAsyncThunk<any, any>(
+export const createSchedule = createAsyncThunk<any, any, { state: { common: { guestMode: boolean } }}>(
   "schedule/createSchedule",
-  async (scheduleWithUuid, { getState }: any) => {
+  async (scheduleWithUuid, { getState }) => {
     const { guestMode } = getState().common;
     if (guestMode) {
       // console.log('게스트 모드에서 추가');/
@@ -86,9 +87,9 @@ export const createSchedule = createAsyncThunk<any, any>(
   }
 );
 
-export const deleteSchedule = createAsyncThunk<any, any>(
+export const deleteSchedule = createAsyncThunk<any, any, { state: { common: { guestMode: boolean } }}>(
   "schedule/deleteSchedule",
-  async (id, { getState }: any) => {
+  async (id, { getState }) => {
     // console.log(id);
     const { guestMode } = getState().common;
     if (guestMode) {
@@ -107,7 +108,7 @@ export const scheduleSlice = createSlice({
   initialState,
   reducers: {
     modifySchedule: (state: any, action) => {
-      state.schedules = state.schedules.map((s: any) =>
+      state.schedules = state.schedules.map((s: Schedule) =>
         s.id === action.payload.id ? action.payload : s
       );
     },
@@ -207,7 +208,7 @@ export const scheduleSlice = createSlice({
           );
           break;
         case "remove":
-          categories.forEach((cat: any) => {
+          categories.forEach((cat: string) => {
             state.filtered = state.filtered.filter((f) => f !== cat);
           });
           break;
@@ -215,7 +216,7 @@ export const scheduleSlice = createSlice({
           alert("잘못된 요청입니다.");
       }
     },
-    setFilteredDate: (state: any, action) => {
+    setFilteredDate: (state, action: PayloadAction<{type: string, date: string}>) => {
       state.filtered_date[action.payload.type] = action.payload.date;
     },
     initFilter: (state) => {
@@ -243,7 +244,7 @@ export const scheduleSlice = createSlice({
           state.schedules = action.payload ?? [];
         }
       )
-      .addCase(createSchedule.fulfilled, (state, action: any) => {
+      .addCase(createSchedule.fulfilled, (state, action: PayloadAction<Schedule>) => {
         // createSchedule 가 끝나면
         if (action.payload !== null) {
           state.schedules.push(action.payload as never); // schedules의 타입이 지정되면 never를 제거할 수 있습니다...!
@@ -253,7 +254,7 @@ export const scheduleSlice = createSlice({
         // deleteSchedule 가 끝나면
         if (action.payload !== null) {
           state.schedules = state.schedules.filter(
-            (s: any) => s.id !== action.payload
+            (s: Schedule) => s.id !== action.payload
           );
         }
       });
@@ -276,18 +277,18 @@ export const selectSchedules = (state: RootState) =>
   [...state.schedule.schedules].sort((a, b) =>
     a.start_time.localeCompare(b.start_time)
   );
-export const selectDate = (state: any) => (state.schedule as InitialState).date;
-export const selectFiltered = (state: any): string[] =>
+export const selectDate = (state: RootState) => (state.schedule as InitialState).date;
+export const selectFiltered = (state: RootState): string[] =>
   (state.schedule as InitialState).filtered;
-export const selectFilteredDate = (state: any) =>
+export const selectFilteredDate = (state: RootState) =>
   (state.schedule as InitialState).filtered_date;
-export const selectViewMode = (state: any) =>
+export const selectViewMode = (state: RootState) =>
   (state.schedule as InitialState).viewMode;
-export const selectSchedule = (state: any) =>
+export const selectSchedule = (state: RootState) =>
   (state.schedule as InitialState).schedule;
-export const selectStatus = (state: any) =>
+export const selectStatus = (state: RootState) =>
   (state.schedule as InitialState).status;
-export const selectAnalyzedData = (state: any) =>
+export const selectAnalyzedData = (state: RootState) =>
   (state.schedule as InitialState).analyzedData;
 
 export default scheduleSlice.reducer;

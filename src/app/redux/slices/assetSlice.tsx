@@ -2,6 +2,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 import moment from 'moment';
 import { initAssetsByCategory } from '../../../domain/tools';
+import { RootState } from '../store';
 
 const initialState = {
   goal: {
@@ -86,11 +87,11 @@ export const {
   setSavingDetailSetting,
 } = assetSlice.actions;
 
-export const selectSavingGoal = (state: any) => state.asset.goal.saving;
-export const selectPersonalGoal = (state: any) => state.asset.goal.personal;
-export const selectAssetsByCategory = (state: any) => state.asset.assetByCategory.assets;
-export const selectUpdateDate = (state: any) => state.asset.assetByCategory.updateDate;
-export const selectMonthlyConsumptionGoal = (state: any) => state.asset.assetByCategory.goal;
-export const selectSavingDetailSetting = (state: any) => state.asset.savingDetailSetting;
+export const selectSavingGoal = (state: RootState) => state.asset.goal.saving;
+export const selectPersonalGoal = (state: RootState) => state.asset.goal.personal;
+export const selectAssetsByCategory = (state: RootState) => state.asset.assetByCategory.assets;
+export const selectUpdateDate = (state: RootState) => state.asset.assetByCategory.updateDate;
+export const selectMonthlyConsumptionGoal = (state: RootState) => state.asset.assetByCategory.goal;
+export const selectSavingDetailSetting = (state: RootState) => state.asset.savingDetailSetting;
 
 export default assetSlice.reducer;

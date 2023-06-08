@@ -1,6 +1,6 @@
 import axios, { AxiosResponse } from "axios";
 import { GetScheduleQuery, Schedule } from "../../types/schedule.tsx";
-import { SignUpUserInterface } from "../../types/common.tsx";
+import { SignInterface, SignUpUserInterface } from "../../types/common.tsx";
 
 /**
  * 반드시 서버로 요청할 때 객체 형식이어야 JSON 으로 변환되어 서버에 잘 들어감!
@@ -16,7 +16,7 @@ export const fetchSignUp = async (user: SignUpUserInterface) => {
   }
 };
 
-export const fetchLogin = async (sign: any) => {
+export const fetchLogin = async (sign: SignInterface) => {
   try {
     const response = await axios.post("/fin-the-pen-web/sign-in", sign);
     return response.data;

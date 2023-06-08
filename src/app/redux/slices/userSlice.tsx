@@ -2,14 +2,10 @@ import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { NO_SIGNAL_FROM_SERVER } from '../../../domain/constants/messages';
 import { fetchLogin } from '../../api/API';
 import { fetchMockLogin } from '../../api/mockAPI';
-import { AsyncThunkStatusValue, User } from '../../../types/common';
+import { AsyncThunkStatusValue, SignInterface, User } from '../../../types/common';
 import { ASYNC_THUNK_STATUS } from '../../../domain/constants/common';
 import { RootState } from '../store';
 
-interface SignInterface {
-  user_id: FormDataEntryValue | null;
-  password: FormDataEntryValue | null;
-}
 interface UserState {
   user: User | null; // User가 null 인 경우 비로그인 상태
   status: AsyncThunkStatusValue;
