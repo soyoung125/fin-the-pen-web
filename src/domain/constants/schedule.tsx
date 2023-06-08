@@ -97,12 +97,12 @@ interface RepeatCycle {
   months: 'months';
   years: 'years';
 }
-const REPEAT_CYCLE: RepeatCycle = {
+const REPEAT_CYCLE = {
   days: 'days',
   weeks: 'weeks',
   months: 'months',
   years: 'years',
-};
+} as const;
 
 const VIEW_MODE: ViewMode = {
   asset: 'asset',

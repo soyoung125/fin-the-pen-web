@@ -6,7 +6,7 @@ export interface Schedule {
   date: string;
   start_time: string;
   end_time: string;
-  repeating_cycle: string;
+  repeating_cycle: 'days' | 'weeks' | 'months' | 'years' | '없음';
   repeat_deadline: string;
   repeat_endDate: string;
   category: string;

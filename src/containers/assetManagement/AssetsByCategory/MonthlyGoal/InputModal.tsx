@@ -26,7 +26,7 @@ function InputModal({
   const dispatch = useDispatch();
   const saving = useSelector(selectMonthlyConsumptionGoal);
   useEffect(() => {
-    setGoal(parseInt(saving, 10));
+    setGoal(saving);
   }, [saving]);
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {

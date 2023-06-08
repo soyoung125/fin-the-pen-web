@@ -3,12 +3,12 @@ import { v4 as uuidv4 } from 'uuid';
 import { CATEGORIES } from '../../../../domain/constants/categories';
 import { REPEAT_CYCLE, SCHEDULE_DRAWER } from '../../../../domain/constants/schedule';
 import { createSchedule, getMonthSchedules, setDrawerSchedule } from '../../../../app/redux/slices/scheduleSlice';
+import { Schedule } from '../../../../types/schedule';
 
 /**
  * index
  */
 
-/* eslint-disable import/prefer-default-export */
 export const updateSchedule = (dispatch: any, schedule: any, state: any) => {
   dispatch(setDrawerSchedule({ ...schedule, [state.target.id]: state.target.value }));
   if (state.target.id === 'start_time') {
@@ -74,7 +74,7 @@ export const switchTitle = (id: any) => {
 
 export const handleCreate = async (
   dispatch: any,
-  schedule: any,
+  schedule: Schedule,
   user: any,
   guestMode: any,
   date: any,

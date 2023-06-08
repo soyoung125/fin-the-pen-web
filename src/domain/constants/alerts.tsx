@@ -48,7 +48,7 @@ const CONSUMPTION_ALERTS: ReadonlyArray<ConsumptionAlert> = [
 ];
 
 // 설정/수정/초기화/삭제 알림
-const CONTROLLING_ALERT = { // 임시 타입
+const CONTROLLING_ALERT = {
   setting: '현재 정보로 설정하시겠습니까?',
   modify: '정보를 수정하시겠습니까?',
   reset: '모든 정보를 초기화하시겠습니까?',
