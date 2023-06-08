@@ -42,7 +42,7 @@ function Personal() {
             <Box mb={2}>나의 목표</Box>
             <Box>{personal.name}</Box>
             <Box>
-              {parseInt(personal.money, 10).toLocaleString('ko-KR')}
+              {personal.money.toLocaleString('ko-KR')}
               원
             </Box>
           </Stack>

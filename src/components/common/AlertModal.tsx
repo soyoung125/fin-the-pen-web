@@ -10,7 +10,7 @@ interface AlertModalProps {
   open: boolean,
   handleClose: () => void,
   handleClickYes: () => void,
-  mode: string,
+  mode: "setting" | "modify" | "reset" | "delete",
 }
 
 function AlertModal(props: AlertModalProps) {

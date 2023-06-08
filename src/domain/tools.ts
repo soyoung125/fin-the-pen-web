@@ -1,7 +1,6 @@
 /* eslint-disable max-len */
 /* eslint-disable array-callback-return */
 /* eslint-disable @typescript-eslint/naming-convention */
-/* eslint-disable import/prefer-default-export */
 
 import { EXPENDITURE } from './constants/categories';
 import { deleteSchedule } from '../app/redux/slices/scheduleSlice';
@@ -92,7 +91,7 @@ export const deleteSelectedSchedule = (dispatch: any, schedule: any, handleClose
 export const initAssetsByCategory = () => EXPENDITURE.nested
   .map((category) => ({
     ...category,
-    categories: category.categories.map((c) => ({ title: c, asset: '-' })),
+    categories: category.categories.map((c) => ({ title: c, asset: '-' as const })),
     total: '-',
     sum: 0,
   }));

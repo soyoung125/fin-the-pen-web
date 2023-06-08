@@ -21,7 +21,7 @@ function DetailSetting() {
   const [notification, setNotification] = useState(savingDetailSetting.notification);
   const [popup, setPopup] = useState(savingDetailSetting.popup);
 
-  const handlePriority = (value: string) => {
+  const handlePriority = (value: 'saving' | 'personal') => {
     setPriority(value);
   };
 

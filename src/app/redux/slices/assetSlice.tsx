@@ -3,8 +3,57 @@ import { createSlice } from '@reduxjs/toolkit';
 import moment from 'moment';
 import { initAssetsByCategory } from '../../../domain/tools';
 import { RootState } from '../store';
+import { AssetsByCategoryInterface } from '../../../types/common';
 
-const initialState = {
+interface InitialState {
+  goal: {
+    saving: {
+      year: number,
+      month: number,
+      skipRequest: boolean, // localStorage나 sessionStorage 에서 처리해줘도 괜찮을 듯 함
+      autoSaving: boolean,
+      popUp: boolean,
+    },
+    personal: {
+      name: string,
+      money: number,
+      deadline: string,
+      type: '' | 'day' | 'month',
+      autoSaving: boolean,
+      popUp: boolean,
+    },
+  },
+  savingDetailSetting: {
+    priority: 'saving' | 'personal';
+    remittance: {
+      isOn: boolean,
+      settings: {
+        bankName: string,
+        accountNumber: string,
+        date: 'none' | '매달 1일' | '매달 15일' | '매달 마지막날' | '직접 설정',
+        amount: number,
+      },
+    },
+    notification: {
+      isOn: boolean,
+      time: string,
+    },
+    popup: {
+      isOn: boolean,
+      settings: {
+        display: 'none(아이콘)' | '저축금액(퍼센트)',
+        connect: '저축 목표 설정 페이지' | '계좌 앱',
+      },
+    },
+  },
+  assetByCategory: {
+    goal: number,
+    assets: AssetsByCategoryInterface[],
+    updateDate: string,
+  },
+}
+
+const initialState: InitialState = {
   goal: {
     saving: {
       year: 0,

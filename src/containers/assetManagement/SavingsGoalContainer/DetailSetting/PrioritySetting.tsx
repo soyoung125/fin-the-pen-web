@@ -3,7 +3,7 @@ import RoundedPaper from '../../../../components/common/RoundedPaper';
 
 interface PrioritySettingProps {
   priority: string,
-  handlePriority: (value: string) => void,
+  handlePriority: (value: 'saving' | 'personal') => void,
 }
 
 function PrioritySetting({ priority, handlePriority }: PrioritySettingProps) {

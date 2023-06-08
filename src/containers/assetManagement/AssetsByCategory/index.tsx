@@ -24,7 +24,7 @@ function AssetsByCategory() {
   const dispatch = useDispatch();
   const [open, setOpen] = useState('');
   const [monthlyGoalModalOpen, setMonthlyGoalModalOpen] = useState(false);
-  const [alertModalOpen, setAlertModalOpen] = useState('');
+  const [alertModalOpen, setAlertModalOpen] = useState<"modify" | "reset" | "delete">('delete');
   const [showTooltip, setShowTooltip] = useState(true);
   // const [assets, setAssets] = useState([]);
   const today = moment();
@@ -85,12 +85,12 @@ function AssetsByCategory() {
   };
 
   const openMonthlyGoalModal = () => {
-    setAlertModalOpen('');
+    setAlertModalOpen('delete');
     setMonthlyGoalModalOpen(true);
   };
 
   const resetAssetByCategory = () => {
-    setAlertModalOpen('');
+    setAlertModalOpen('delete');
     dispatch(setInitAssetsByCategory());
   };
 
@@ -136,8 +136,8 @@ function AssetsByCategory() {
       />
 
       <AlertModal
-        open={alertModalOpen !== ''}
-        handleClose={() => setAlertModalOpen('')}
+        open={alertModalOpen in ["modify", "reset"]}
+        handleClose={() => setAlertModalOpen('delete')}
         handleClickYes={() => (alertModalOpen === 'modify' ? openMonthlyGoalModal() : resetAssetByCategory())}
         mode={alertModalOpen}
       />
