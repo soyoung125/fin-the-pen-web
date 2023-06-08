@@ -11,13 +11,6 @@ interface ConsumptionAlert {
   readonly icon: JSX.Element;
 }
 
-interface ControllingAlert {
-  readonly setting: string;
-  readonly modify: string;
-  readonly reset: string;
-  readonly delete: string;
-}
-
 // 소비 주의 5단계 알림
 const CONSUMPTION_ALERTS: ReadonlyArray<ConsumptionAlert> = [
   {

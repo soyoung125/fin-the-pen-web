@@ -91,12 +91,6 @@ const INIT_SCHEDULE = (date: string, start_time: string): Schedule => ({
   exclusion: false, // false면 포함
 });
 
-interface RepeatCycle {
-  days: 'days';
-  weeks: 'weeks';
-  months: 'months';
-  years: 'years';
-}
 const REPEAT_CYCLE = {
   days: 'days',
   weeks: 'weeks',
