@@ -1,10 +1,9 @@
-/* eslint-disable react/jsx-props-no-spreading */
 import styled from '@emotion/styled';
-import MuiAccordion from '@mui/material/Accordion';
+import MuiAccordion, { AccordionProps } from '@mui/material/Accordion';
 
-const Accordion = styled((props: any) => (
+const Accordion = styled((props: AccordionProps) => (
   <MuiAccordion disableGutters elevation={0} square {...props} />
-))(({ theme }) => ({
+))(({ theme }: any) => ({
   border: `1px solid ${theme.palette.divider}`,
   '&:not(:last-child)': {
     borderBottom: 0,

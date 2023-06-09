@@ -1,4 +1,3 @@
-/* eslint-disable react/jsx-props-no-spreading */
 import styled from '@emotion/styled';
 import MuiAccordionDetails from '@mui/material/AccordionDetails';
 

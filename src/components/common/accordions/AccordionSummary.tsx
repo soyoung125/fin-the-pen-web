@@ -1,9 +1,8 @@
-/* eslint-disable react/jsx-props-no-spreading */
 import styled from '@emotion/styled';
-import MuiAccordionSummary from '@mui/material/AccordionSummary';
+import MuiAccordionSummary, { AccordionSummaryProps } from '@mui/material/AccordionSummary';
 import ArrowForwardIosSharpIcon from '@mui/icons-material/ArrowForwardIosSharp';
 
-const AccordionSummary = styled((props: any) => (
+const AccordionSummary = styled((props: AccordionSummaryProps) => (
   <MuiAccordionSummary
     expandIcon={<ArrowForwardIosSharpIcon sx={{ fontSize: '0.9rem' }} />}
     {...props}
