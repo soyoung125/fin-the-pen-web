@@ -107,7 +107,7 @@ export const scheduleSlice = createSlice({
   name: "schedule",
   initialState,
   reducers: {
-    modifySchedule: (state: any, action) => {
+    modifySchedule: (state, action) => {
       state.schedules = state.schedules.map((s: Schedule) =>
         s.id === action.payload.id ? action.payload : s
       );

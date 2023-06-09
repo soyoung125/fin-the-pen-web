@@ -25,7 +25,7 @@ export const fetchLogin = async (sign: SignInterface) => {
   }
 };
 
-export const fetchCreateSchedule = async (schedule: any) => {
+export const fetchCreateSchedule = async (schedule: Schedule) => {
   try {
     const response = await axios.post("/createSchedule", schedule);
     // alert(JSON.stringify(response));
@@ -35,7 +35,7 @@ export const fetchCreateSchedule = async (schedule: any) => {
   }
 };
 
-export const fetchDeleteSchedule = async (id: any) => {
+export const fetchDeleteSchedule = async (id: string) => {
   try {
     console.log({ id });
     const response = await axios.post("/deleteSchedule", { id });
