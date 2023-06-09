@@ -1,9 +1,14 @@
-/* eslint-disable react/jsx-props-no-spreading */
 import {
-  Dialog,
+  Dialog, DialogProps,
 } from '@mui/material';
 
-export default function ModalStaticBackdrop(props: any) {
+interface ModalStaticBackdropProps extends DialogProps {
+  width: 	'xs' | 'sm' | 'md' | 'lg' | 'xl' | false,
+  component: JSX.Element,
+  open: boolean,
+}
+
+export default function ModalStaticBackdrop(props: ModalStaticBackdropProps) {
   const {
     width, component, open, ...other
   } = props;
