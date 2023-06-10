@@ -2,11 +2,11 @@
 /* eslint-disable array-callback-return */
 /* eslint-disable @typescript-eslint/naming-convention */
 
-import { EXPENDITURE } from './constants/categories';
-import { deleteSchedule } from '../app/redux/slices/scheduleSlice';
+import { EXPENDITURE } from "./constants/categories";
+import { deleteSchedule } from "../app/redux/slices/scheduleSlice";
 
 /**
- * 
+ *
  * TODO: any script 제거하기
  */
 
@@ -20,84 +20,77 @@ import { deleteSchedule } from '../app/redux/slices/scheduleSlice';
  * 어떤 객체의 value 를 전수조사하여, 빈칸 '' 이 검출되지 않으면 -1을 반환하는 함수.
  * 즉, -1이 반환되면 이 객체의 value에 빈칸이 없다는 의미이다.
  */
-export const isObjectValuesEmpty = (obj: any) => (
-  Object.values(obj).findIndex((v) => v === '')
-);
+export const isObjectValuesEmpty = (obj: any) =>
+  Object.values(obj).findIndex((v) => v === "");
 
 /**
-  * 수입, 지출액을 계산하기 위한 함수
-  * @param {function} expression 수입/지출액을 계산하는 수식
-  * @param {Sting} type '-', '+' 수입/지출을 확인하기 위한 매개변수
-  * @returns 일/주/월별 수입/지출 액
-  */
-export const calculateIncomeExpenditure = (schedules: any, expression: any, type: any) => {
-  let result = 0;
-  if (type === '-') {
-    result = schedules.filter((s: any) => expression(s))
-      .reduce((sum: any, current: any) => (
-        current.type === type
-          ? sum - parseInt(current.expected_spending, 10)
-          : sum
-      ), result);
-  } else {
-    result = schedules.filter((s: any) => expression(s))
-      .reduce((sum: any, current: any) => (
-        current.type === type
-          ? sum + parseInt(current.expected_spending, 10)
-          : sum
-      ), result);
-  }
-  return Math.abs(result).toLocaleString('ko-KR');
-};
-
-/**
- * geustMode 여부에 따라 실행할 함수를 결정하는 스위치
- *
- * @param {boolean} guestMode 게스트 모드 여부
- * @param {function} func1 게스트 모드인 경우 실행할 함수
- * @param {function} func2 게스트 모드가 아닌 경우 실행할 함수
+ * 수입, 지출액을 계산하기 위한 함수
+ * @param {function} expression 수입/지출액을 계산하는 수식
+ * @param {Sting} type '-', '+' 수입/지출을 확인하기 위한 매개변수
+ * @returns 일/주/월별 수입/지출 액
  */
-
-export const executeFunctionByGuestMode = (guestMode: any, func1: any, func2: any) => {
-  if (guestMode) {
-    func1();
+export const calculateIncomeExpenditure = (
+  schedules: any,
+  expression: any,
+  type: any
+) => {
+  let result = 0;
+  if (type === "-") {
+    result = schedules
+      .filter((s: any) => expression(s))
+      .reduce(
+        (sum: any, current: any) =>
+          current.type === type
+            ? sum - parseInt(current.expected_spending, 10)
+            : sum,
+        result
+      );
   } else {
-    func2();
+    result = schedules
+      .filter((s: any) => expression(s))
+      .reduce(
+        (sum: any, current: any) =>
+          current.type === type
+            ? sum + parseInt(current.expected_spending, 10)
+            : sum,
+        result
+      );
   }
+  return Math.abs(result).toLocaleString("ko-KR");
 };
 
 /**
  * 시작 시각이 종료 시각보다 빠른지 검사하는 함수.
  * 알파벳 순으로 검사하므로 시각('HH:MM'), 날짜('YYYY.MM.DD')를 범용 지원한다.
- * @param {*} startTime
- * @param {*} endTime
- * @returns
  */
-export const isTimeOrderCorrect = (startTime: any, endTime: any) => {
-  if (startTime > endTime) {
-    return false;
-  }
-  return true;
-};
+export const isTimeOrderCorrect = (startTime: string, endTime: string) =>
+  startTime <= endTime;
 
-export const deleteSelectedSchedule = (dispatch: any, schedule: any, handleClose: any) => {
-  if (window.confirm('정말로 삭제 하시겠습니까?')) {
+export const deleteSelectedSchedule = (
+  dispatch: any,
+  schedule: any,
+  handleClose: any
+) => {
+  if (window.confirm("정말로 삭제 하시겠습니까?")) {
     console.log(schedule.id);
     dispatch(deleteSchedule(schedule.id));
     handleClose();
   }
 };
 
-export const initAssetsByCategory = () => EXPENDITURE.nested
-  .map((category) => ({
+export const initAssetsByCategory = () =>
+  EXPENDITURE.nested.map((category) => ({
     ...category,
-    categories: category.categories.map((c) => ({ title: c, asset: '-' as const })),
-    total: '-',
+    categories: category.categories.map((c) => ({
+      title: c,
+      asset: "-" as const,
+    })),
+    total: "-",
     sum: 0,
   }));
 
-export const makeGroupForRegularData = (data: any) => data
-  .reduce((acc: any, curr: any) => {
+export const makeGroupForRegularData = (data: any) =>
+  data.reduce((acc: any, curr: any) => {
     const { event_name } = curr;
     if (acc[event_name]) acc[event_name].push(curr);
     else acc[event_name] = [curr];
