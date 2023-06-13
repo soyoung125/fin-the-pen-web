@@ -29,8 +29,18 @@ export const fetchSignUp = async (user: SignUpUserInterface) => {
 
 export const fetchLogin = async (sign: SignInterface) => {
   try {
-    const response = await axios.post("/fin-the-pen-web/sign-in", sign);
-    return response.data;
+    const response = await fetch(`${url["real"]}/fin-the-pen-web/sign-in`, {
+      headers: {
+        "Content-Type": "application/json",
+      },
+      method: "POST",
+      body: JSON.stringify(sign),
+    });
+
+    const data = await response.json();
+    console.log(data);
+
+    return data;
   } catch (err) {
     alert(err);
   }
