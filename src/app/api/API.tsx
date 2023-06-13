@@ -11,6 +11,9 @@ import { url } from "./url.ts";
 export const fetchSignUp = async (user: SignUpUserInterface) => {
   try {
     const response = await fetch(`${url["real"]}/fin-the-pen-web/sign-up`, {
+      headers: {
+        "Content-Type": "application/json",
+      },
       method: "POST",
       body: JSON.stringify(user),
     });
