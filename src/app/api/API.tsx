@@ -1,6 +1,7 @@
 import axios, { AxiosResponse } from "axios";
 import { GetScheduleQuery, Schedule } from "../../types/schedule.tsx";
 import { SignInterface, SignUpUserInterface } from "../../types/common.tsx";
+import { url } from "./url.ts";
 
 /**
  * 반드시 서버로 요청할 때 객체 형식이어야 JSON 으로 변환되어 서버에 잘 들어감!
@@ -9,7 +10,11 @@ import { SignInterface, SignUpUserInterface } from "../../types/common.tsx";
 
 export const fetchSignUp = async (user: SignUpUserInterface) => {
   try {
-    const response = await axios.post("/fin-the-pen-web/sign-up", user);
+    const response = await axios.post(
+      `${url["real"]}/fin-the-pen-web/sign-up`,
+      user
+    );
+    console.log(response);
     return response.data;
   } catch (err) {
     alert(err);
