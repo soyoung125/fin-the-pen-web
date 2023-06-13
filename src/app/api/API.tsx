@@ -10,12 +10,15 @@ import { url } from "./url.ts";
 
 export const fetchSignUp = async (user: SignUpUserInterface) => {
   try {
-    const response = await axios.post(
-      `${url["real"]}/fin-the-pen-web/sign-up`,
-      user
-    );
-    console.log(response);
-    return response.data;
+    const response = await fetch(`${url["real"]}/fin-the-pen-web/sign-up`, {
+      method: "POST",
+      body: JSON.stringify(user),
+    });
+
+    const data = await response.json();
+    console.log(data);
+
+    return data;
   } catch (err) {
     alert(err);
   }

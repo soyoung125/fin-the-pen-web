@@ -3,6 +3,6 @@
  */
 
 export const url: { [server: string]: string } = {
-  guest: "/guest",
-  real: "/real",
+  guest: "",
+  real: "/real", // vite proxy에 의해 외부 서버로 통신 시 CORS 문제가 해결됨
 };
