@@ -2,9 +2,10 @@ import { Theme } from "@mui/system";
 
 import styled from "@emotion/styled";
 import MuiAccordion, { AccordionProps } from "@mui/material/Accordion";
+import { ReactNode } from "react";
 
 interface StyledAccordionProps extends AccordionProps {
-  theme: Theme;
+  theme?: Theme;
 }
 
 const Accordion = styled((props: StyledAccordionProps) => (
