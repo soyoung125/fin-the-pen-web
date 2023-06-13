@@ -1,4 +1,4 @@
-import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import { PayloadAction, createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { NO_SIGNAL_FROM_SERVER } from '../../../domain/constants/messages';
 import { fetchLogin } from '../../api/API';
 import { fetchMockLogin } from '../../api/mockAPI';
@@ -35,8 +35,11 @@ export const login = createAsyncThunk(
     }
     if (response === '') {
       alert('잘못된 아이디 혹은 비번입니다.');
+      return null;
     }
-    return response;
+    else {
+      return response;
+    }
   },
 );
 
@@ -56,14 +59,14 @@ export const userSlice = createSlice({
       .addCase(mockLogin.pending, (state) => {
         state.status = 'loading';
       })
-      .addCase(mockLogin.fulfilled, (state, action) => {
+      .addCase(mockLogin.fulfilled, (state, action: PayloadAction<User | null>) => {
         state.status = 'idle';
         state.user = action.payload;
       })
       .addCase(login.pending, (state) => {
         state.status = 'loading';
       })
-      .addCase(login.fulfilled, (state, action) => {
+      .addCase(login.fulfilled, (state, action: PayloadAction<User | null>) => {
         state.status = 'idle';
         state.user = action.payload;
       });

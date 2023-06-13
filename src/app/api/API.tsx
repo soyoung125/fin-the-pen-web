@@ -1,6 +1,6 @@
 import axios, { AxiosResponse } from "axios";
 import { GetScheduleQuery, Schedule } from "../../types/schedule.tsx";
-import { SignInterface, SignUpUserInterface } from "../../types/common.tsx";
+import { SignInterface, SignUpUserInterface, User } from "../../types/common.tsx";
 import { url } from "./url.ts";
 
 /**
@@ -10,18 +10,8 @@ import { url } from "./url.ts";
 
 export const fetchSignUp = async (user: SignUpUserInterface) => {
   try {
-    const response = await fetch(`${url["real"]}/fin-the-pen-web/sign-up`, {
-      headers: {
-        "Content-Type": "application/json",
-      },
-      method: "POST",
-      body: JSON.stringify(user),
-    });
-
-    const data = await response.json();
-    console.log(data);
-
-    return data;
+    const response = await axios.post<boolean>(`${url["real"]}/fin-the-pen-web/sign-up`, user);
+    return response.data;
   } catch (err) {
     alert(err);
   }
@@ -29,18 +19,8 @@ export const fetchSignUp = async (user: SignUpUserInterface) => {
 
 export const fetchLogin = async (sign: SignInterface) => {
   try {
-    const response = await fetch(`${url["real"]}/fin-the-pen-web/sign-in`, {
-      headers: {
-        "Content-Type": "application/json",
-      },
-      method: "POST",
-      body: JSON.stringify(sign),
-    });
-
-    const data = await response.json();
-    console.log(data);
-
-    return data;
+    const response = await axios.post<User | "">(`${url["real"]}/fin-the-pen-web/sign-in`, sign);
+    return response.data;
   } catch (err) {
     alert(err);
   }
