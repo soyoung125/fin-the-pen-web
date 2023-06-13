@@ -1,14 +1,17 @@
+import { Box, Button, InputAdornment, Stack, TextField } from "@mui/material";
+import { useNavigate } from "react-router-dom";
+import PATH from "../../../domain/constants/path";
+import { isObjectValuesEmpty } from "../../../domain/tools";
 import {
-  Box, Button, InputAdornment, Stack, TextField,
-} from '@mui/material';
-import { useNavigate } from 'react-router-dom';
-import PATH from '../../../domain/constants/path';
-import { isObjectValuesEmpty } from '../../../domain/tools';
-import {
-  NO_BLANKS, NO_DUPLICATION_ID, NO_SIGNAL_FROM_SERVER, SIGN_UP_SUCCESS,
-} from '../../../domain/constants/messages';
-import { fetchSignUp } from '../../../app/api/API';
-import { SignUpUserInterface } from '../../../types/common';
+  NO_BLANKS,
+  NO_DUPLICATION_ID,
+  NO_SIGNAL_FROM_SERVER,
+  SIGN_UP_SUCCESS,
+} from "../../../domain/constants/messages";
+import { fetchSignUp } from "../../../app/api/API";
+import { SignUpUserInterface } from "../../../types/common";
+import { LOCAL_STORAGE_KEY_SERVER } from "../../../app/api/keys.ts";
+import { setSessionStorage } from "../../../app/utils/storage.ts";
 
 function SignUpFields() {
   const navigate = useNavigate();
@@ -17,7 +20,10 @@ function SignUpFields() {
     const result = await fetchSignUp(user);
     // 에러 핸들링
     if (result === undefined) {
-      alert(`${NO_SIGNAL_FROM_SERVER} GUEST 계정으로 로그인 하세요.`);
+      setSessionStorage(LOCAL_STORAGE_KEY_SERVER, "guest");
+      alert(
+        `${NO_SIGNAL_FROM_SERVER} GUEST 모드로 회원가입 하려면 다시 회원가입 버튼을 눌러주세요.`
+      );
       return;
     }
     if (result) {
@@ -32,10 +38,10 @@ function SignUpFields() {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
     const user = {
-      user_id: data.get('email'),
-      password: data.get('password'),
-      name: data.get('name'),
-      phone_number: data.get('phoneNumber'),
+      user_id: data.get("email"),
+      password: data.get("password"),
+      name: data.get("name"),
+      phone_number: data.get("phoneNumber"),
     };
     const invalidIndex = isObjectValuesEmpty(user);
     if (invalidIndex === -1) {
@@ -50,9 +56,8 @@ function SignUpFields() {
       component="form"
       onSubmit={handleSubmit}
       noValidate
-      sx={{ maxWidth: '400px' }}
+      sx={{ maxWidth: "400px" }}
     >
-
       <TextField
         margin="normal"
         required
@@ -86,13 +91,8 @@ function SignUpFields() {
         InputProps={{
           endAdornment: (
             <InputAdornment position="end">
-              <Button
-                variant="contained"
-                size="small"
-                color="success"
-              >
+              <Button variant="contained" size="small" color="success">
                 사용가능
-
               </Button>
             </InputAdornment>
           ),
@@ -110,11 +110,7 @@ function SignUpFields() {
         InputProps={{
           endAdornment: (
             <InputAdornment position="end">
-              <Button
-                variant="contained"
-                size="small"
-                color="success"
-              >
+              <Button variant="contained" size="small" color="success">
                 인증완료
               </Button>
             </InputAdornment>
@@ -130,11 +126,7 @@ function SignUpFields() {
         >
           뒤로가기
         </Button>
-        <Button
-          type="submit"
-          fullWidth
-          variant="contained"
-        >
+        <Button type="submit" fullWidth variant="contained">
           회원가입
         </Button>
       </Stack>

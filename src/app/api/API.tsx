@@ -1,7 +1,13 @@
 import axios, { AxiosResponse } from "axios";
 import { GetScheduleQuery, Schedule } from "../../types/schedule.tsx";
-import { SignInterface, SignUpUserInterface, User } from "../../types/common.tsx";
+import {
+  SignInterface,
+  SignUpUserInterface,
+  User,
+} from "../../types/common.tsx";
 import { url } from "./url.ts";
+import { getLocalStorage, getSessionStorage } from "../utils/storage.ts";
+import { LOCAL_STORAGE_KEY_SERVER } from "./keys.ts";
 
 /**
  * 반드시 서버로 요청할 때 객체 형식이어야 JSON 으로 변환되어 서버에 잘 들어감!
@@ -10,7 +16,11 @@ import { url } from "./url.ts";
 
 export const fetchSignUp = async (user: SignUpUserInterface) => {
   try {
-    const response = await axios.post<boolean>(`${url["real"]}/fin-the-pen-web/sign-up`, user);
+    const server = getSessionStorage(LOCAL_STORAGE_KEY_SERVER, "real");
+    const response = await axios.post<boolean>(
+      `${url[server]}/fin-the-pen-web/sign-up`,
+      user
+    );
     return response.data;
   } catch (err) {
     alert(err);
@@ -19,7 +29,10 @@ export const fetchSignUp = async (user: SignUpUserInterface) => {
 
 export const fetchLogin = async (sign: SignInterface) => {
   try {
-    const response = await axios.post<User | "">(`${url["real"]}/fin-the-pen-web/sign-in`, sign);
+    const response = await axios.post<User | "">(
+      `${url["real"]}/fin-the-pen-web/sign-in`,
+      sign
+    );
     return response.data;
   } catch (err) {
     alert(err);
