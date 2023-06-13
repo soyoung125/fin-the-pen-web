@@ -1,10 +1,6 @@
 import axios, { AxiosResponse } from "axios";
 import { GetScheduleQuery, Schedule } from "../../types/schedule.tsx";
-import {
-  SignInterface,
-  SignUpUserInterface,
-  User,
-} from "../../types/common.tsx";
+import { SignInterface, SignUp, User } from "../../types/common.tsx";
 import { url } from "./url.ts";
 import { getLocalStorage, getSessionStorage } from "../utils/storage.ts";
 import { LOCAL_STORAGE_KEY_SERVER } from "./keys.ts";
@@ -14,7 +10,7 @@ import { LOCAL_STORAGE_KEY_SERVER } from "./keys.ts";
  * 아직 타입이 미정인 코드들이 있어서 일단 any 처리
  */
 
-export const fetchSignUp = async (user: SignUpUserInterface) => {
+export const fetchSignUp = async (user: SignUp) => {
   try {
     const server = getSessionStorage(LOCAL_STORAGE_KEY_SERVER, "real");
     const response = await axios.post<boolean>(
@@ -29,8 +25,9 @@ export const fetchSignUp = async (user: SignUpUserInterface) => {
 
 export const fetchLogin = async (sign: SignInterface) => {
   try {
+    const server = getSessionStorage(LOCAL_STORAGE_KEY_SERVER, "real");
     const response = await axios.post<User | "">(
-      `${url["real"]}/fin-the-pen-web/sign-in`,
+      `${url[server]}/fin-the-pen-web/sign-in`,
       sign
     );
     return response.data;

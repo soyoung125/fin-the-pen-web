@@ -1,6 +1,6 @@
 // src/mocks/handlers.js
 import { rest } from "msw";
-import { User } from "../types/common.tsx";
+import { MockUser, SignUp, User } from "../types/common.tsx";
 import { LOCAL_STORAGE_KEY_USERS } from "../app/api/keys.ts";
 import { getLocalStorage, setLocalStorage } from "../app/utils/storage.ts";
 
@@ -10,10 +10,28 @@ export const handlers = [
   }),
 
   rest.post("/fin-the-pen-web/sign-up", (req, res, ctx) => {
-    /**
-     * TODO: 실제로 회원가입이 된 것 처럼 로컬스토리지 혹은 세션 스토리지에 무언가 등록하기
-     */
+    const prevUsers = getLocalStorage<MockUser[]>(
+      LOCAL_STORAGE_KEY_USERS,
+      []
+    ) as MockUser[];
 
+    const newSignUp = req.body as SignUp;
+    const newUser: MockUser = {
+      id: prevUsers.length,
+      user_id: newSignUp.user_id as string,
+      name: newSignUp.name as string,
+      bday: "2023-01-01",
+      registerDate: "2023-01-01",
+      phone_number: newSignUp.phone_number as string,
+      password: newSignUp.password as string,
+    };
+    const newUsers: MockUser[] = [...prevUsers, newUser];
+    setLocalStorage(LOCAL_STORAGE_KEY_USERS, newUsers);
+
+    return res(ctx.delay(1000), ctx.status(200), ctx.json(true));
+  }),
+
+  rest.post("/fin-the-pen-web/sign-in", (req, res, ctx) => {
     const newUser = req.body as User;
     const prevUsers = getLocalStorage<User[]>(
       LOCAL_STORAGE_KEY_USERS,

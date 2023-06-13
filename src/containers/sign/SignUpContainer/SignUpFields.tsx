@@ -9,13 +9,13 @@ import {
   SIGN_UP_SUCCESS,
 } from "../../../domain/constants/messages";
 import { fetchSignUp } from "../../../app/api/API";
-import { SignUpUserInterface } from "../../../types/common";
+import { SignUp } from "../../../types/common";
 import { LOCAL_STORAGE_KEY_SERVER } from "../../../app/api/keys.ts";
 import { setSessionStorage } from "../../../app/utils/storage.ts";
 
 function SignUpFields() {
   const navigate = useNavigate();
-  const signUp = async (user: SignUpUserInterface) => {
+  const signUp = async (user: SignUp) => {
     console.log(user);
     const result = await fetchSignUp(user);
     // 에러 핸들링
