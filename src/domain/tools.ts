@@ -9,11 +9,6 @@ import { SignUp, SignInterface } from "../types/common";
 import { AppDispatch } from "../app/redux/store";
 
 /**
- *
- * TODO: any script 제거하기
- */
-
-/**
  * 유용한 함수들을 모아두는 곳.
  * 주석으로 부가 설명이 있으면 더 좋을 것 같아요.
  */
@@ -93,8 +88,8 @@ export const initAssetsByCategory = () =>
     sum: 0,
   }));
 
-export const makeGroupForRegularData = (data: any) =>
-  data.reduce((acc: any, curr: any) => {
+export const makeGroupForRegularData = (data: Schedule[]) =>
+  data.reduce((acc: {[type: string]: Schedule[]}, curr: Schedule) => {
     const { event_name } = curr;
     if (acc[event_name]) acc[event_name].push(curr);
     else acc[event_name] = [curr];
