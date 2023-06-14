@@ -3,7 +3,7 @@ import MuiAccordionDetails, { AccordionDetailsProps } from '@mui/material/Accord
 import { Theme } from "@mui/system";
 
 interface StyledAccordionDetailsProps extends AccordionDetailsProps {
-  theme: Theme;
+  theme?: Theme;
 }
 
 const AccordionDetails = styled(MuiAccordionDetails)<StyledAccordionDetailsProps>(({ theme }) => ({
