@@ -1,12 +1,12 @@
 import styled from '@emotion/styled';
-import MuiAccordionDetails from '@mui/material/AccordionDetails';
+import MuiAccordionDetails, { AccordionDetailsProps } from '@mui/material/AccordionDetails';
 import { Theme } from "@mui/system";
 
-interface AccordionDetailsProps {
+interface StyledAccordionDetailsProps extends AccordionDetailsProps {
   theme: Theme;
 }
 
-const AccordionDetails = styled(MuiAccordionDetails)<AccordionDetailsProps>(({ theme }) => ({
+const AccordionDetails = styled(MuiAccordionDetails)<StyledAccordionDetailsProps>(({ theme }) => ({
   padding: theme.spacing(2),
   borderTop: '1px solid rgba(0, 0, 0, .125)',
 }));
