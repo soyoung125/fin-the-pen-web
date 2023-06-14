@@ -5,6 +5,7 @@
 import { EXPENDITURE } from "./constants/categories";
 import { deleteSchedule } from "../app/redux/slices/scheduleSlice";
 import { Schedule } from "../types/schedule";
+import { SignUp, SignInterface } from "../types/common";
 
 /**
  *
@@ -21,14 +22,7 @@ import { Schedule } from "../types/schedule";
  * 어떤 객체의 value 를 전수조사하여, 빈칸 '' 이 검출되지 않으면 -1을 반환하는 함수.
  * 즉, -1이 반환되면 이 객체의 value에 빈칸이 없다는 의미이다.
  */
-interface IsObjectValuesEmpty {
-  user_id: string,
-  password: string,
-  name?: string,
-  phone_number?: string,
-}
-
-export const isObjectValuesEmpty = (obj: IsObjectValuesEmpty) =>
+export const isObjectValuesEmpty = (obj: SignUp | SignInterface) =>
   Object.values(obj).findIndex((v) => v === "");
 
 
