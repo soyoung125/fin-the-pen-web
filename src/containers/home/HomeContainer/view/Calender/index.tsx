@@ -29,6 +29,7 @@ import WeeklyStatement from "./boxes/WeeklyStatement";
 import { selectIsDarkMode } from "../../../../../app/redux/slices/settingSlice";
 import useSchedule from "../../../../../hooks/useSchedule";
 import { RenderDayFunction } from "../../../../../types/common";
+import { Schedule } from "../../../../../types/schedule";
 
 interface CalenderProps {
   dateHeight: number;
@@ -137,14 +138,14 @@ function Calender({ dateHeight }: CalenderProps) {
         ? "0"
         : calculateIncomeExpenditure(
             schedules,
-            (s: { date: moment.Moment }) => day.isSame(s.date, "day"),
+            (s: Schedule) => day.isSame(s.date, "day"),
             "+"
           );
       const expenditure = !day.isSame(value, "month")
         ? "0"
         : calculateIncomeExpenditure(
             schedules,
-            (s: { date: moment.Moment }) => day.isSame(s.date, "day"),
+            (s: Schedule) => day.isSame(s.date, "day"),
             "-"
           );
 
@@ -167,13 +168,13 @@ function Calender({ dateHeight }: CalenderProps) {
               <WeeklyStatement
                 expenditure={calculateIncomeExpenditure(
                   schedules,
-                  (s: { date: moment.Moment }) =>
+                  (s: Schedule) =>
                     day.isSameOrBefore(s.date) && day.isSame(s.date, "week"),
                   "-"
                 )}
                 income={calculateIncomeExpenditure(
                   schedules,
-                  (s: { date: moment.Moment }) =>
+                  (s: Schedule) =>
                     day.isSameOrBefore(s.date) && day.isSame(s.date, "week"),
                   "+"
                 )}
@@ -189,12 +190,12 @@ function Calender({ dateHeight }: CalenderProps) {
               <WeeklyStatement
                 expenditure={calculateIncomeExpenditure(
                   schedules,
-                  (s: { date: moment.Moment }) => day.isSame(s.date, "week"),
+                  (s: Schedule) => day.isSame(s.date, "week"),
                   "-"
                 )}
                 income={calculateIncomeExpenditure(
                   schedules,
-                  (s: { date: moment.Moment }) => day.isSame(s.date, "week"),
+                  (s: Schedule) => day.isSame(s.date, "week"),
                   "+"
                 )}
               />
@@ -210,12 +211,12 @@ function Calender({ dateHeight }: CalenderProps) {
         key={DayComponentProps.key}
         income={calculateIncomeExpenditure(
           schedules,
-          (s: { date: moment.Moment }) => day.isSame(s.date, "day"),
+          (s: Schedule) => day.isSame(s.date, "day"),
           "+"
         )}
         expenditure={calculateIncomeExpenditure(
           schedules,
-          (s: { date: moment.Moment }) => day.isSame(s.date, "day"),
+          (s: Schedule) => day.isSame(s.date, "day"),
           "-"
         )}
         incomeColor={isSameOrBefore ? pink[100] : grey[500]}

@@ -10,6 +10,7 @@ import SwitchingHeader from '../../../../../components/common/SwitchingHeader';
 import RoundedPaper from '../../../../../components/common/RoundedPaper';
 import RoundedBorderBox from '../../../../../components/common/RoundedBorderBox';
 import useSchedule from '../../../../../hooks/useSchedule';
+import { Schedule } from '../../../../../types/schedule';
 
 function MonthlyStatement() {
   const dispatch = useDispatch();
@@ -31,12 +32,12 @@ function MonthlyStatement() {
         <Stack direction="row" spacing={2} p={2}>
           <StatusStack
             title="수입"
-            content={`+${calculateIncomeExpenditure(schedules, (s: { date: moment.Moment; }) => moment(date).isSame(s.date, 'month'), '+')}`}
+            content={`+${calculateIncomeExpenditure(schedules, (s: Schedule) => moment(date).isSame(s.date, 'month'), '+')}`}
           />
 
           <StatusStack
             title="지출"
-            content={`-${calculateIncomeExpenditure(schedules, (s: { date: moment.Moment; }) => moment(date).isSame(s.date, 'month'), '-')}`}
+            content={`-${calculateIncomeExpenditure(schedules, (s: Schedule) => moment(date).isSame(s.date, 'month'), '-')}`}
           />
         </Stack>
       </RoundedBorderBox>

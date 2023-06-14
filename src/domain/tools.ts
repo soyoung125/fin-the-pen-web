@@ -4,6 +4,7 @@
 
 import { EXPENDITURE } from "./constants/categories";
 import { deleteSchedule } from "../app/redux/slices/scheduleSlice";
+import { Schedule } from "../types/schedule";
 
 /**
  *
@@ -20,8 +21,16 @@ import { deleteSchedule } from "../app/redux/slices/scheduleSlice";
  * 어떤 객체의 value 를 전수조사하여, 빈칸 '' 이 검출되지 않으면 -1을 반환하는 함수.
  * 즉, -1이 반환되면 이 객체의 value에 빈칸이 없다는 의미이다.
  */
-export const isObjectValuesEmpty = (obj: any) =>
+interface IsObjectValuesEmpty {
+  user_id: string,
+  password: string,
+  name?: string,
+  phone_number?: string,
+}
+
+export const isObjectValuesEmpty = (obj: IsObjectValuesEmpty) =>
   Object.values(obj).findIndex((v) => v === "");
+
 
 /**
  * 수입, 지출액을 계산하기 위한 함수
@@ -30,16 +39,16 @@ export const isObjectValuesEmpty = (obj: any) =>
  * @returns 일/주/월별 수입/지출 액
  */
 export const calculateIncomeExpenditure = (
-  schedules: any,
-  expression: any,
-  type: any
+  schedules: Schedule[],
+  expression: (s: Schedule) => boolean,
+  type: '+' | '-'
 ) => {
   let result = 0;
   if (type === "-") {
     result = schedules
-      .filter((s: any) => expression(s))
+      .filter((s: Schedule) => expression(s))
       .reduce(
-        (sum: any, current: any) =>
+        (sum: number, current: Schedule) =>
           current.type === type
             ? sum - parseInt(current.expected_spending, 10)
             : sum,
@@ -47,9 +56,9 @@ export const calculateIncomeExpenditure = (
       );
   } else {
     result = schedules
-      .filter((s: any) => expression(s))
+      .filter((s: Schedule) => expression(s))
       .reduce(
-        (sum: any, current: any) =>
+        (sum: number, current: Schedule) =>
           current.type === type
             ? sum + parseInt(current.expected_spending, 10)
             : sum,
