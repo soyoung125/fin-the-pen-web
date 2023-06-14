@@ -6,6 +6,7 @@ import { EXPENDITURE } from "./constants/categories";
 import { deleteSchedule } from "../app/redux/slices/scheduleSlice";
 import { Schedule } from "../types/schedule";
 import { SignUp, SignInterface } from "../types/common";
+import { AppDispatch } from "../app/redux/store";
 
 /**
  *
@@ -70,13 +71,13 @@ export const isTimeOrderCorrect = (startTime: string, endTime: string) =>
   startTime <= endTime;
 
 export const deleteSelectedSchedule = (
-  dispatch: any,
-  schedule: any,
-  handleClose: any
+  dispatch: AppDispatch,
+  schedule: Schedule | null,
+  handleClose: () => void,
 ) => {
   if (window.confirm("정말로 삭제 하시겠습니까?")) {
-    console.log(schedule.id);
-    dispatch(deleteSchedule(schedule.id));
+    console.log(schedule?.id);
+    dispatch(deleteSchedule(schedule?.id));
     handleClose();
   }
 };
