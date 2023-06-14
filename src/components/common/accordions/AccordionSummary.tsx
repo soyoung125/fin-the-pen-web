@@ -1,13 +1,18 @@
 import styled from '@emotion/styled';
 import MuiAccordionSummary, { AccordionSummaryProps } from '@mui/material/AccordionSummary';
 import ArrowForwardIosSharpIcon from '@mui/icons-material/ArrowForwardIosSharp';
+import { Theme } from "@mui/system";
 
-const AccordionSummary = styled((props: AccordionSummaryProps) => (
+interface StyledAccordionSummaryProps extends AccordionSummaryProps {
+  theme?: Theme;
+}
+
+const AccordionSummary = styled((props: StyledAccordionSummaryProps) => (
   <MuiAccordionSummary
     expandIcon={<ArrowForwardIosSharpIcon sx={{ fontSize: '0.9rem' }} />}
     {...props}
   />
-))(({ theme }: any) => ({
+))(({ theme }) => ({
   backgroundColor:
     theme.palette.mode === 'dark'
       ? 'rgba(255, 255, 255, .05)'
