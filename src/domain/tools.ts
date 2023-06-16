@@ -18,7 +18,7 @@ import { AppDispatch } from "../app/redux/store";
  * 어떤 객체의 value 를 전수조사하여, 빈칸 '' 이 검출되지 않으면 -1을 반환하는 함수.
  * 즉, -1이 반환되면 이 객체의 value에 빈칸이 없다는 의미이다.
  */
-export const isObjectValuesEmpty = (obj: SignUp | SignInterface) =>
+export const isObjectValuesEmpty = (obj: object) =>
   Object.values(obj).findIndex((v) => v === "");
 
 
@@ -89,7 +89,7 @@ export const initAssetsByCategory = () =>
   }));
 
 export const makeGroupForRegularData = (data: Schedule[]) =>
-  data.reduce((acc: {[type: string]: Schedule[]}, curr: Schedule) => {
+  data.reduce((acc: { [type: string]: Schedule[] }, curr: Schedule) => {
     const { event_name } = curr;
     if (acc[event_name]) acc[event_name].push(curr);
     else acc[event_name] = [curr];
