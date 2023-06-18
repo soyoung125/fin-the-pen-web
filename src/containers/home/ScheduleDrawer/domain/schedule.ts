@@ -6,6 +6,7 @@ import { createSchedule, getMonthSchedules, setDrawerSchedule } from '../../../.
 import { Schedule } from '../../../../types/schedule';
 import { Dispatch } from 'redux';
 import { UpdateStateInterface } from '../../../../types/common';
+import { SelectChangeEvent } from '@mui/material/Select';
 
 /**
  * index
@@ -21,7 +22,7 @@ export const updateSchedule = (dispatch: Dispatch, schedule: Schedule | null, st
   }
 };
 
-export const updateRepeat = (dispatch: Dispatch, schedule: Schedule, setOpenDatePickerModal: any, state: any) => {
+export const updateRepeat = (dispatch: Dispatch, schedule: Schedule | null, setOpenDatePickerModal: React.Dispatch<React.SetStateAction<boolean>>, state: SelectChangeEvent<string>) => {
   if ((state.target.name === 'repeating_cycle') && (state.target.value === '없음')) {
     dispatch(setDrawerSchedule({
       ...schedule,
