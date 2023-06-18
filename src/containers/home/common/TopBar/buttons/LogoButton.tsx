@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import RoundedButton from '../../../../../components/common/RoundedButton';
 import PATH from '../../../../../domain/constants/path';
 import { selectGuestMode } from '../../../../../app/redux/slices/commonSlice';
-import logo from '../../../../../assets/logos/logo_removebg.png';
+import logo from '../../../../../assets/logos/logo_white.png';
 import { useAppSelector } from '../../../../../app/redux/hooks';
 
 function LogoButton() {

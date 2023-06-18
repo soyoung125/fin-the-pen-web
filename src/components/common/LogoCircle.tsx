@@ -1,5 +1,5 @@
 import { Avatar } from '@mui/material';
-import logo from '../../assets/logos/logo_removebg.png';
+import logo from '../../assets/logos/logo_white.png';
 
 function LogoCircle() {
   return (
