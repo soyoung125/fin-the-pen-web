@@ -1,5 +1,7 @@
 import { ResponsivePie } from '@nivo/pie';
 import { AnalysisData } from '../../../types/common';
+import { useSelector } from 'react-redux';
+import { selectIsDarkMode } from '../../../app/redux/slices/settingSlice';
 
 interface AnalysisGraphProps {
   data: AnalysisData[];
@@ -8,6 +10,7 @@ interface AnalysisGraphProps {
 }
 
 function AnalysisGraph({ data, total, widthRatio }: AnalysisGraphProps) {
+  const isDarkmode = useSelector(selectIsDarkMode);
   return (
     <ResponsivePie
       data={data}
@@ -27,7 +30,7 @@ function AnalysisGraph({ data, total, widthRatio }: AnalysisGraphProps) {
         from: 'color',
         modifiers: [
           [
-            'darker',
+            isDarkmode ? "brighter" : "darker",
             3,
           ],
         ],
