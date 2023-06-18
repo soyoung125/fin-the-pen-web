@@ -40,11 +40,11 @@ export const updateRepeat = (dispatch: Dispatch, schedule: Schedule | null, setO
   }
 };
 
-export const updateRepeatEndDate = (schedule: any, setRepeatEndDate: any, endDate: any) => {
-  if (endDate.isBefore(schedule.date)) {
+export const updateRepeatEndDate = (schedule: Schedule | null, setRepeatEndDate: React.Dispatch<React.SetStateAction<moment.Moment>>, endDate: moment.Moment | null) => {
+  if (endDate?.isBefore(schedule?.date)) {
     alert('반복 종료일을 다시 선택해주세요.');
   } else {
-    setRepeatEndDate(endDate);
+    endDate && setRepeatEndDate(endDate);
   }
 };
 
