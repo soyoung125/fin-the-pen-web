@@ -27,7 +27,7 @@ interface DaySchedulesInterface {
    * @returns {Array} 카테고리별 일정 마커를 표시하기 휘한 길이 7의 배열 (색상 표시를 위해 color 요소 필수)
    */
 export const makeMarkerData = (daySchedules: DaySchedulesInterface[], isDarkMode: boolean) => {
-  const emptyData = Array(6).fill(undefined).map(() => ({ color: isDarkMode ? '#121212' : '#FFFFFF' }));
+  const emptyData = Array(6).fill(undefined).map(() => ({ color: isDarkMode ? '#12293b' : '#FFFFFF' }));
   const categoryForMarker = INCOME.nested.concat(EXPENDITURE.nested)
     .filter((c) => (daySchedules.findIndex(
       (s: DaySchedulesInterface) => s.category?.nestedType === c.type,

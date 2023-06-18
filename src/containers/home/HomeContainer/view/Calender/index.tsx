@@ -80,13 +80,14 @@ function Calender({ dateHeight }: CalenderProps) {
     );
 
     if (fixedWithdrawal.length > 0) {
+      const borderColor = Array.from(new Set(fixedWithdrawal.map((f) => f.category.color))).sort((a, b) => a > b ? 1 : -1);
       if (nonFixedWithdrwal.length > 0) {
         const categoryForMarker = makeMarkerData(daySchedules, isDarkMode);
         return (
           <Box sx={{ width: "calc(100vw / 7)" }} key={DayComponentProps.key}>
             <Box sx={{ display: "flex", justifyContent: "center" }}>
               <MarkedPickersDay
-                color={fixedWithdrawal[0].category.color}
+                color={borderColor}
                 DayComponentProps={DayComponentProps}
               />
             </Box>
@@ -96,7 +97,7 @@ function Calender({ dateHeight }: CalenderProps) {
       }
       return (
         <MarkedPickersDay
-          color={fixedWithdrawal[0].category.color}
+          color={borderColor}
           DayComponentProps={DayComponentProps}
           key={DayComponentProps.key}
         />
