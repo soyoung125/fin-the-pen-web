@@ -82,8 +82,19 @@ function DataRecoveryButtons() {
                       event_name: '이사비', alarm: false, date: '2023-03-03', start_time: '15:00', end_time: '17:00', repeating_cycle: '없음', repeat_deadline: '없음', repeat_endDate: '2023-03-03', category: '주거', type: '-', expected_spending: '180000', importance: '상', exclusion: false, id: '4ddcd0ee-1e77-4fb9-945e-aa4ae55f04c6', user_id: 'guest@finthepen.com',
                     }, {
                       event_name: '길동이랑 저녁식사 ', alarm: false, date: '2023-01-02', start_time: '18:00', end_time: '19:00', repeating_cycle: '없음', repeat_deadline: '없음', repeat_endDate: '2023-01-02', category: '식비', type: '-', expected_spending: '15000', importance: '중', exclusion: false, id: '0063d15c-9dca-4357-8bf3-db3d0f1c65f4',
-                    }],
-                    settings: {
+                    }, {
+                      event_name:"86ALX", alarm:false, date:"2023-06-18", start_time:"01:00", end_time:"20:00", repeating_cycle:"없음", repeat_deadline:"없음", repeat_endDate:"2023-06-18", category:"급여", type:"+", expected_spending:44300, importance:"중", exclusion:true, id:"c55825e2-f78b-4110-8a4b-618f9b6c30e6", user_id:"guest@finthepen.com",
+                    }, {
+                      event_name:"EAVE2", alarm:false, date:"2023-06-18", start_time:"03:00", end_time:"21:00", repeating_cycle:"없음", repeat_deadline:"없음", repeat_endDate:"2023-06-18", category:"핸드폰요금", type:"+", expected_spending:95900, importance:"중", exclusion:false, id:"6b538c2a-2873-4d51-a60b-a479a227e025", user_id:"guest@finthepen.com",
+                    }, {
+                      event_name:"LLHDQ", alarm:true, date:"2023-06-18", start_time:"05:00", end_time:"22:00", repeating_cycle:"없음", repeat_deadline:"없음", repeat_endDate:"2023-06-18", category:"자녀/육아", type:"+", expected_spending:70500, importance:"하", exclusion:true, id:"e3355344-fe39-427e-b937-eba566974bd2", user_id:"guest@finthepen.com",
+                    }, {
+                      event_name:"R23A8", alarm:false, date:"2023-06-18", start_time:"06:00", end_time:"20:00", repeating_cycle:"없음", repeat_deadline:"없음", repeat_endDate:"2023-06-18", category:"통신", type:"-", expected_spending:22700, importance:"중", exclusion:true, id:"4e69705c-ee92-4c3e-bf5d-5595a3615972", user_id:"guest@finthepen.com",
+                    }, {
+                      event_name:"TR92A", alarm:true, date:"2023-06-18", start_time:"08:00", end_time:"23:00", repeating_cycle:"없음", repeat_deadline:"없음", repeat_endDate:"2023-06-18", category:"교육/학습", type:"-", expected_spending:48700, importance:"하", exclusion:false, id:"7a5fcf37-08de-49fc-a015-e90605f2b593", user_id:"guest@finthepen.com",
+                    }, {
+                      event_name:"5PDU3", alarm:false, date:"2023-06-18", start_time:"09:00", end_time:"20:00", repeating_cycle:"없음", repeat_deadline:"없음", repeat_endDate:"2023-06-18", category:"(주거)관리비/월세", type:"+", expected_spending:75000, importance:"중", exclusion:false, id:"619e18a4-736e-44ec-b701-9d4090b3e7de", user_id:"guest@finthepen.com",
+                    }], settings: {
                       앱비밀번호: false, 인증단계: 1, 화면테마: 'default', 예산숨김: false, 반복일정목록: [], 숨김일정: false, 숨김일정목록: false, 비밀번호인증단계: 1, 기본알림: false, 진동: false, 소리: false, 알림음: '', 잠금화면알람: false, 일정알림시간: '5분전', 소비주의알림: false, 정기입출금목록: [], 마이데이터: [], 캘린더목록: [],
                     },
                   })}
