@@ -1,7 +1,8 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable max-len */
-import { Box, Stack } from '@mui/material';
+import { Box, IconButton, Stack } from '@mui/material';
 import ArrowDropDownRoundedIcon from '@mui/icons-material/ArrowDropDownRounded';
+import ArrowDropUpRoundedIcon from '@mui/icons-material/ArrowDropUpRounded';
 import { useLocation } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { useEffect, useState } from 'react';
@@ -22,6 +23,7 @@ function AnalysisDetailContainer() {
   const [selectedItem, setSelectedItem] = useState(schedules.filter((s) => date.isSame(s.date, 'month') && s.category === category));
   const [spending, setSpending] = useState(0);
   const [sortByDate, setSortByDate] = useState(true);
+  const [isAscending, setIsAscending] = useState(true);
   const [asset, setAsset] = useState<'-' | number>('-');
 
   useEffect(() => {
@@ -43,11 +45,15 @@ function AnalysisDetailContainer() {
 
   useEffect(() => {
     if (sortByDate) {
-      setSelectedItem([...selectedItem.sort((a, b) => +new Date(a.date) - +new Date(b.date))]);
+      setSelectedItem([...selectedItem.sort((a, b) => +new Date(a.date) - +new Date(b.date) ? +!isAscending : +isAscending)]);
     } else {
-      setSelectedItem([...selectedItem.sort((a, b) => (b.expected_spending > a.expected_spending ? -1 : 1))]);
+      setSelectedItem([...selectedItem.sort((a, b) => (b.expected_spending > a.expected_spending ? +!isAscending : +isAscending))]);
     }
   }, [sortByDate]);
+
+  useEffect(() => {
+    setSelectedItem([ ...selectedItem.reverse() ]);
+  }, [isAscending]);
 
   return (
     <Box px={2}>
@@ -68,7 +74,12 @@ function AnalysisDetailContainer() {
       >
         <Stack direction="row">
           <Box sx={{ display: 'flex', my: 'auto', color: 'primary.main' }} onClick={() => setSortByDate(!sortByDate)}>{sortByDate ? '날짜순' : '금액순'}</Box>
-          <ArrowDropDownRoundedIcon fontSize="large" sx={{ color: 'primary.main' }} />
+          <IconButton onClick={() => setIsAscending(!isAscending)} color="primary" size="small" sx={{ p: 0 }}>
+            {isAscending ? 
+            <ArrowDropDownRoundedIcon fontSize='large' /> :
+            <ArrowDropUpRoundedIcon fontSize='large' />
+            }
+          </IconButton>
         </Stack>
       </Title>
       <Stack sx={{ borderRadius: 3, marginBottom: 2 }}>
