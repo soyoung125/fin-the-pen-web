@@ -4,22 +4,24 @@ import { CATEGORIES } from '../../../../domain/constants/categories';
 import { REPEAT_CYCLE, SCHEDULE_DRAWER } from '../../../../domain/constants/schedule';
 import { createSchedule, getMonthSchedules, setDrawerSchedule } from '../../../../app/redux/slices/scheduleSlice';
 import { Schedule } from '../../../../types/schedule';
+import { Dispatch } from 'redux';
+import { UpdateStateInterface } from '../../../../types/common';
 
 /**
  * index
  */
 
-export const updateSchedule = (dispatch: any, schedule: any, state: any) => {
+export const updateSchedule = (dispatch: Dispatch, schedule: Schedule | null, state: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement> | UpdateStateInterface) => {
   dispatch(setDrawerSchedule({ ...schedule, [state.target.id]: state.target.value }));
   if (state.target.id === 'start_time') {
-    const endTime = moment(state.target.value, 'HH:mm').add(2, 'hours').format('HH:mm');
+    const endTime = moment(state.target.value as string, 'HH:mm').add(2, 'hours').format('HH:mm');
     dispatch(setDrawerSchedule({
       ...schedule, [state.target.id]: state.target.value, end_time: endTime,
     }));
   }
 };
 
-export const updateRepeat = (dispatch: any, schedule: any, setOpenDatePickerModal: any, state: any) => {
+export const updateRepeat = (dispatch: Dispatch, schedule: Schedule, setOpenDatePickerModal: any, state: any) => {
   if ((state.target.name === 'repeating_cycle') && (state.target.value === '없음')) {
     dispatch(setDrawerSchedule({
       ...schedule,

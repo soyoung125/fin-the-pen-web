@@ -100,3 +100,5 @@ export interface RenderDayFunction {
     DayComponentProps: PickersDayProps<moment.Moment>
   ): JSX.Element;
 }
+
+export interface UpdateStateInterface {target: {id: string, value: string | boolean}}

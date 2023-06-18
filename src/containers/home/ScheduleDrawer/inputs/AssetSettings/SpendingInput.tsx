@@ -13,8 +13,8 @@ function SpendingInput({ mode }: { mode: string }) {
   const changeSpendingType = () => {
     updateSpendingType(dispatch, schedule);
   };
-  const changeSchedule = (state: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement> | React.MouseEvent<HTMLElement>) => {
-    updateSchedule(dispatch, schedule, state);
+  const changeSchedule = (state: React.MouseEvent<HTMLButtonElement>) => {
+    updateSchedule(dispatch, schedule, { target: { id: state.currentTarget.id, value: state.currentTarget.value }});
   };
   return (
     <Stack direction="row" justifyContent="space-between" alignItems="center" p={1}>
@@ -55,7 +55,7 @@ function SpendingInput({ mode }: { mode: string }) {
         <TextField
           id="expected_spending"
           value={schedule?.expected_spending}
-          onChange={changeSchedule}
+          onChange={(e) => updateSchedule(dispatch, schedule, e)}
           label={SCHEDULE_DRAWER.expected_spending}
           type="number"
           onFocus={(e) => e.target.select()}
