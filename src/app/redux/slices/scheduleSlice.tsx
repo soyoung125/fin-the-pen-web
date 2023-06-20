@@ -67,11 +67,11 @@ export const getMonthSchedules = createAsyncThunk(
   "schedule/getMonthSchedules",
   async ({ user_id, date }: GetScheduleQuery) => {
     const schedules = await fetchMonthSchedules({ user_id, date });
-    return schedules;
+    return schedules || [];
   }
 );
 
-export const createSchedule = createAsyncThunk<any, any, { state: { common: { guestMode: boolean } }}>(
+export const createSchedule = createAsyncThunk<Schedule, Schedule, { state: { common: { guestMode: boolean } }}>(
   "schedule/createSchedule",
   async (scheduleWithUuid, { getState }) => {
     const { guestMode } = getState().common;

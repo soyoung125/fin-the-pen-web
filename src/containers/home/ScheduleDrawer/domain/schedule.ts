@@ -3,10 +3,12 @@ import { v4 as uuidv4 } from 'uuid';
 import { CATEGORIES } from '../../../../domain/constants/categories';
 import { REPEAT_CYCLE, SCHEDULE_DRAWER } from '../../../../domain/constants/schedule';
 import { createSchedule, getMonthSchedules, setDrawerSchedule } from '../../../../app/redux/slices/scheduleSlice';
-import { Schedule } from '../../../../types/schedule';
-import { Dispatch } from 'redux';
-import { UpdateStateInterface } from '../../../../types/common';
+import { GetScheduleQuery, Schedule } from '../../../../types/schedule';
+import { AnyAction, Dispatch } from 'redux';
+import { UpdateStateInterface, User } from '../../../../types/common';
 import { SelectChangeEvent } from '@mui/material/Select';
+import { AsyncThunk, AsyncThunkAction } from '@reduxjs/toolkit';
+import { AppDispatch } from '../../../../app/redux/store';
 
 /**
  * index
@@ -60,7 +62,8 @@ export const updateExclusion = (dispatch: Dispatch, schedule: Schedule | null, s
   dispatch(setDrawerSchedule({ ...schedule, exclusion: state.target.checked }));
 };
 
-export const switchTitle = (id: any) => {
+// 안쓰는 함수 같음
+export const switchTitle = (id: string) => {
   switch (id) {
     case 'start_time':
       return '일정 시작 시각';
@@ -76,36 +79,37 @@ export const switchTitle = (id: any) => {
  */
 
 export const handleCreate = async (
-  dispatch: any,
+  dispatch: AppDispatch,
   schedule: Schedule,
-  user: any,
-  guestMode: any,
-  date: any,
-  handleClose: any,
+  user: User | null,
+  guestMode: boolean,
+  date: moment.Moment,
+  handleClose: () => void,
 ) => {
   const scheduleWithUuid = {
     ...schedule,
     id: uuidv4(),
-    user_id: user.user_id,
+    user_id: user?.user_id,
   };
   // 반복 일정 추가
   if ((schedule.repeating_cycle !== '없음') && (schedule.repeat_deadline !== '없음')) {
     let repeatDate = moment(schedule.date).add(1, REPEAT_CYCLE[schedule.repeating_cycle]);
     while (moment(schedule.repeat_endDate).isSameOrAfter(repeatDate)) {
       // eslint-disable-next-line no-await-in-loop
-      await dispatch(createSchedule({
+      const newData = {
         ...scheduleWithUuid,
         id: uuidv4(),
         date: repeatDate.format('YYYY-MM-DD'),
-      }));
+      };
+      dispatch(createSchedule(newData));
       repeatDate = moment(repeatDate).add(1, REPEAT_CYCLE[schedule.repeating_cycle]);
     }
   }
   // 원래 일정 추가
-  await dispatch(createSchedule(scheduleWithUuid));
+  dispatch(createSchedule(scheduleWithUuid));
   if (!guestMode) { // 게스트 모드가 아니라면, 현재 서버 상태를 새롭게 요청하기
     dispatch(getMonthSchedules({
-      user_id: user.user_id,
+      user_id: user?.user_id || '',
       date: moment(date).format('YYYY-MM'),
     }));
   }
