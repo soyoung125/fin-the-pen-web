@@ -47,7 +47,7 @@ function TopBar() {
               {headerMode === 'home' && (<HomeMode />)}
               {headerMode === 'analysis' && (<AnalysisMode />)}
             </Stack>
-            <Fab color="secondary" size="small" aria-label="popup" sx={{ position: 'fixed', top: 10, left: 10 }} >
+            <Fab color="secondary" size="small" aria-label="popup" sx={{ position: 'fixed', bottom: 80, right: 10 }} >
               <SavingsOutlinedIcon />
             </Fab>
           </Paper>
