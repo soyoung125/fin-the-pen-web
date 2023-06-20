@@ -3,11 +3,10 @@ import { v4 as uuidv4 } from 'uuid';
 import { CATEGORIES } from '../../../../domain/constants/categories';
 import { REPEAT_CYCLE, SCHEDULE_DRAWER } from '../../../../domain/constants/schedule';
 import { createSchedule, getMonthSchedules, setDrawerSchedule } from '../../../../app/redux/slices/scheduleSlice';
-import { GetScheduleQuery, Schedule } from '../../../../types/schedule';
-import { AnyAction, Dispatch } from 'redux';
+import { Schedule } from '../../../../types/schedule';
+import { Dispatch } from 'redux';
 import { UpdateStateInterface, User } from '../../../../types/common';
 import { SelectChangeEvent } from '@mui/material/Select';
-import { AsyncThunk, AsyncThunkAction } from '@reduxjs/toolkit';
 import { AppDispatch } from '../../../../app/redux/store';
 
 /**
