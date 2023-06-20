@@ -121,8 +121,8 @@ export const handleCreate = async (
  * @param {*} date
  * @returns schedule
  */
-export const generateRandomSchedule = (date: any) => {
-  const generateRandomString = (num: any) => {
+export const generateRandomSchedule = (date: moment.Moment) => {
+  const generateRandomString = (num: number) => {
     const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890';
     let result = '';
     const charactersLength = characters.length;
