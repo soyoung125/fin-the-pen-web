@@ -72,7 +72,7 @@ export const deleteSelectedSchedule = (
 ) => {
   if (window.confirm("정말로 삭제 하시겠습니까?")) {
     console.log(schedule?.id);
-    dispatch(deleteSchedule(schedule?.id));
+    dispatch(deleteSchedule(schedule?.id || ''));
     handleClose();
   }
 };
