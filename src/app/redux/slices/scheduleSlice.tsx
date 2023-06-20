@@ -87,7 +87,7 @@ export const createSchedule = createAsyncThunk<Schedule, Schedule, { state: { co
   }
 );
 
-export const deleteSchedule = createAsyncThunk<any, any, { state: { common: { guestMode: boolean } }}>(
+export const deleteSchedule = createAsyncThunk<string | undefined, string, { state: { common: { guestMode: boolean } }}>(
   "schedule/deleteSchedule",
   async (id, { getState }) => {
     // console.log(id);
