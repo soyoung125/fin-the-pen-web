@@ -8,12 +8,14 @@ import AnalysisMode from './headerMode/AnalysisMode';
 import HomeMode from './headerMode/HomeMode';
 import { useAppDispatch, useAppSelector } from '../../../../app/redux/hooks';
 import SavingsOutlinedIcon from '@mui/icons-material/SavingsOutlined';
+import { selectSavingPopUpSetting } from '../../../../app/redux/slices/assetSlice';
 
 function TopBar() {
   const dispatch = useAppDispatch();
   const user = useAppSelector(selectUser);
   const headerOpen = useAppSelector(selectHeaderOpen);
   const headerMode = useAppSelector(selectHeaderMode);
+  const popupSetting = useAppSelector(selectSavingPopUpSetting)
 
   useEffect(() => {
     // 옵셔널 체이닝 사용하면 eslint에서 오류 발생
@@ -47,9 +49,11 @@ function TopBar() {
               {headerMode === 'home' && (<HomeMode />)}
               {headerMode === 'analysis' && (<AnalysisMode />)}
             </Stack>
-            <Fab color="secondary" size="small" aria-label="popup" sx={{ position: 'fixed', bottom: 80, right: 10 }} >
-              <SavingsOutlinedIcon />
-            </Fab>
+            {popupSetting.isOn &&
+              <Fab color="secondary" size="small" aria-label="popup" sx={{ position: 'fixed', bottom: 80, right: 10 }} >
+                <SavingsOutlinedIcon />
+              </Fab>
+            }
           </Paper>
         )
       }

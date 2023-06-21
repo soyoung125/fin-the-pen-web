@@ -142,5 +142,6 @@ export const selectAssetsByCategory = (state: RootState) => state.asset.assetByC
 export const selectUpdateDate = (state: RootState) => state.asset.assetByCategory.updateDate;
 export const selectMonthlyConsumptionGoal = (state: RootState) => state.asset.assetByCategory.goal;
 export const selectSavingDetailSetting = (state: RootState) => state.asset.savingDetailSetting;
+export const selectSavingPopUpSetting = (state: RootState) => state.asset.savingDetailSetting.popup;
 
 export default assetSlice.reducer;
