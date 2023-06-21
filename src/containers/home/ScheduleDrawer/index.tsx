@@ -4,7 +4,7 @@ import {
 } from '@mui/material';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import { useEffect, useRef, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import NameInput from './inputs/NameInput';
 import DateInput from './inputs/DateInput';
 import {
@@ -20,6 +20,7 @@ import ScheduleDrawerHeader from './layouts/ScheduleDrawerHeader';
 import ScheduleDrawerFooter from './layouts/ScheduleDrawerFooter';
 import { CONSUMPTION_ALERTS } from '../../../domain/constants/alerts';
 import { Schedule, ScheduleDrawerModeValue } from '../../../types/schedule';
+import { useAppDispatch } from '../../../app/redux/hooks';
 
 function TransitionUp(props: SlideProps) {
   return <Slide {...props} direction="right" />;
@@ -38,7 +39,7 @@ function ScheduleDrawer({
   // 추후 삭제 예정
   const random = Math.floor((Math.random() * 4)); // 현재 CONSUMPTION_ALERTS의 길이가 4임
 
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   const schedule = useSelector(selectSchedule);
 
   const [expandAccordion, setExpandAccordion] = useState(mode !== SCHEDULE_DRAWER_MODE.create);

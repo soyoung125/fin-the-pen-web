@@ -1,15 +1,16 @@
 import { Box, Button, TextField } from '@mui/material';
 import { FormEvent, useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { NO_BLANKS } from '../../../domain/constants/messages';
 import PATH from '../../../domain/constants/path';
 import { login, selectUser } from '../../../app/redux/slices/userSlice';
 import { isObjectValuesEmpty } from '../../../domain/tools';
+import { useAppDispatch } from '../../../app/redux/hooks';
 
 function SignInFields() {
   const navigate = useNavigate();
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   const user = useSelector(selectUser);
 
   const handleSubmit = (event: FormEvent<HTMLFormElement>) => {

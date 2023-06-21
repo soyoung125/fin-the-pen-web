@@ -2,13 +2,14 @@ import {
   FormControl, IconButton, InputAdornment, OutlinedInput,
 } from '@mui/material';
 import NotificationsNoneIcon from '@mui/icons-material/NotificationsNone';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { SCHEDULE_DRAWER } from '../../../../domain/constants/schedule';
 import { updateSchedule } from '../domain/schedule';
 import { selectSchedule } from '../../../../app/redux/slices/scheduleSlice';
+import { useAppDispatch } from '../../../../app/redux/hooks';
 
 function NameInput() {
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   const schedule = useSelector(selectSchedule);
 
   const changeSchedule = (state: {target: {id: string, value: string}}) => {

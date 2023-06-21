@@ -5,10 +5,11 @@ import {
 import ClearIcon from '@mui/icons-material/Clear';
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 import { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { SOMETHING_IS_WRONG } from '../../../../../domain/constants/messages';
 import { selectPersonalGoal, setPersonalGoal } from '../../../../../app/redux/slices/assetSlice';
 import AlertModal from '../../../../../components/common/AlertModal';
+import { useAppDispatch } from '../../../../../app/redux/hooks';
 
 interface InputModalProps {
   setPersonalGoalModalOpen: React.Dispatch<React.SetStateAction<boolean>>,
@@ -55,7 +56,7 @@ function InputModal({
     }
   };
 
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   const personal = useSelector(selectPersonalGoal);
   useEffect(() => {
     setForm(personal);

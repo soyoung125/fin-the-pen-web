@@ -2,7 +2,7 @@ import {
   Stack, Typography,
 } from '@mui/material';
 import moment from 'moment';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { selectDate, selectedDate } from '../../../../../app/redux/slices/scheduleSlice';
 import { calculateIncomeExpenditure } from '../../../../../domain/tools';
 import StatusStack from '../../../../../components/assetManagement/ScheduleStatusCard/StatusStack';
@@ -11,9 +11,10 @@ import RoundedPaper from '../../../../../components/common/RoundedPaper';
 import RoundedBorderBox from '../../../../../components/common/RoundedBorderBox';
 import useSchedule from '../../../../../hooks/useSchedule';
 import { Schedule } from '../../../../../types/schedule';
+import { useAppDispatch } from '../../../../../app/redux/hooks';
 
 function MonthlyStatement() {
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   const { schedules } = useSchedule();
   const date = useSelector(selectDate);
 

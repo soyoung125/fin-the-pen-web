@@ -3,11 +3,12 @@ import {
 } from '@mui/material';
 import ClearIcon from '@mui/icons-material/Clear';
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { useEffect, useState } from 'react';
 import moment from 'moment';
 import { selectMonthlyConsumptionGoal, setMonthlyConsumptionGoal } from '../../../../app/redux/slices/assetSlice';
 import AlertModal from '../../../../components/common/AlertModal';
+import { useAppDispatch } from '../../../../app/redux/hooks';
 
 interface InputModalProps {
   setMonthlyGoalModalOpen: React.Dispatch<React.SetStateAction<boolean>>
@@ -23,7 +24,7 @@ function InputModal({
   /**
    * redux에 이미 저장된 목표 값 불러오기
    */
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   const saving = useSelector(selectMonthlyConsumptionGoal);
   useEffect(() => {
     setGoal(saving);

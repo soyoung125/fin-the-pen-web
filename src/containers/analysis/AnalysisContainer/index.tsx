@@ -1,7 +1,7 @@
 /* eslint-disable max-len */
 import { Alert, Box } from '@mui/material';
 import { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import AnalysisGraph from './AnalysisGraph';
 import AnalysisList from './analysisList/AnalysisList';
@@ -11,9 +11,10 @@ import {
   selectAnalyzedData, selectDate, updateAnalyzedData
 } from '../../../app/redux/slices/scheduleSlice';
 import { AnalysisData } from '../../../types/common';
+import { useAppDispatch } from '../../../app/redux/hooks';
 
 function AnalysisContainer() {
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   const navigate = useNavigate();
   const date = useSelector(selectDate);
   const { data, total } = useSelector(selectAnalyzedData);

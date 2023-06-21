@@ -2,7 +2,7 @@
 import {
   Box, Typography, Button,
 } from '@mui/material';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import PrioritySetting from './PrioritySetting';
@@ -11,9 +11,10 @@ import PopupSetting from './PopupSetting';
 import NotificationSetting from './NotificationSetting';
 import { selectSavingDetailSetting, setSavingDetailSetting } from '../../../../app/redux/slices/assetSlice';
 import { NotificationInterface, PopupInterface, RemittanceInterface } from '../../../../types/common';
+import { useAppDispatch } from '../../../../app/redux/hooks';
 
 function DetailSetting() {
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   const navigate = useNavigate();
   const savingDetailSetting = useSelector(selectSavingDetailSetting);
   const [priority, setPriority] = useState(savingDetailSetting.priority);

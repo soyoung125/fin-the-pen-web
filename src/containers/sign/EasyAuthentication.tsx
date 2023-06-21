@@ -1,17 +1,17 @@
-/* eslint-disable react/jsx-no-useless-fragment */
 import {
   Alert, Box, Button, Dialog, Grid, InputBase, Stack,
 } from '@mui/material';
 import { useRef, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import LogoCircle from '../../components/common/LogoCircle';
 import CenterBox from '../../components/layouts/CenterBox';
 import { selectIsAuthenticated, setIsAuthenticatedTrue } from '../../app/redux/slices/commonSlice';
 import { selectUser } from '../../app/redux/slices/userSlice';
+import { useAppDispatch } from '../../app/redux/hooks';
 
 function EasyAuthentication() {
   const CHARACTER_LIMIT = 6;
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   const isAuthenticated = useSelector(selectIsAuthenticated);
   const user = useSelector(selectUser);
   const input = useRef<HTMLInputElement>();

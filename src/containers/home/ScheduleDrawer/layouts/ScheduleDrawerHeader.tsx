@@ -2,20 +2,21 @@ import {
   Button, Stack, Tooltip, Typography,
 } from '@mui/material';
 import ClearIcon from '@mui/icons-material/Clear';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 import { SCHEDULE_DRAWER, SCHEDULE_DRAWER_MODE } from '../../../../domain/constants/schedule';
 import { selectSchedule } from '../../../../app/redux/slices/scheduleSlice';
 import { selectGuestMode } from '../../../../app/redux/slices/commonSlice';
 import { deleteSelectedSchedule } from '../../../../domain/tools';
 import { ScheduleDrawerModeValue } from '../../../../types/schedule';
+import { useAppDispatch } from '../../../../app/redux/hooks';
 
 interface ScheduleDrawerHeaderProps {
   mode: ScheduleDrawerModeValue;
   handleClose: () => void;
 }
 function ScheduleDrawerHeader({ mode, handleClose }: ScheduleDrawerHeaderProps) {
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   const schedule = useSelector(selectSchedule);
   const guestMode = useSelector(selectGuestMode);
 

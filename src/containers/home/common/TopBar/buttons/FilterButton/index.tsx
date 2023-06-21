@@ -3,7 +3,7 @@ import {
 } from '@mui/material';
 import React, { useEffect, useState } from 'react';
 import FilterAltOutlinedIcon from '@mui/icons-material/FilterAltOutlined';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import ClearIcon from '@mui/icons-material/Clear';
 import moment from 'moment';
 import FilterAccordion from './inputs/FilterAccordion';
@@ -15,9 +15,10 @@ import { isTimeOrderCorrect } from '../../../../../../domain/tools';
 import RoundedButton from '../../../../../../components/common/RoundedButton';
 import { EXPENDITURE, FIXED, INCOME } from '../../../../../../domain/constants/categories';
 import AlertModal from '../../../../../../components/common/AlertModal';
+import { useAppDispatch } from '../../../../../../app/redux/hooks';
 
 function FilterButton() {
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   const [bottomDrawerOpen, setBottomDrawerOpen] = useState(false);
   const filtered = useSelector(selectFiltered);
   const filteredDate = useSelector(selectFilteredDate);

@@ -1,14 +1,15 @@
 import { Box, Button, Dialog, DialogActions, DialogContent, DialogTitle, Stack, TextField, Typography } from '@mui/material';
 import moment from 'moment';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { selectDate, selectedDate } from '../../app/redux/slices/scheduleSlice';
 import SwitchingHeader from '../../components/common/SwitchingHeader';
 import { LocalizationProvider, StaticDatePicker } from '@mui/x-date-pickers';
 import { AdapterMoment } from '@mui/x-date-pickers/AdapterMoment';
 import { useState } from 'react';
+import { useAppDispatch } from '../../app/redux/hooks';
 
 function AnalysisHeader() {
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   const date = useSelector(selectDate);
   const [openDatePickerModal, setOpenDatePickerModal] = useState(false);
   const [newDate, setNewDate] = useState(moment(date));

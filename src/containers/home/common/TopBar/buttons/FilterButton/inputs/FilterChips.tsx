@@ -2,17 +2,18 @@ import Checkbox from '@mui/material/Checkbox';
 import {
   Box, Chip, Stack, Typography,
 } from '@mui/material';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { useEffect, useState } from 'react';
 import { selectFiltered, updateFilter, updateFiltersForce } from '../../../../../../../app/redux/slices/scheduleSlice';
 import { NestedCategory } from '../../../../../../../domain/constants/categories';
+import { useAppDispatch } from '../../../../../../../app/redux/hooks';
 
 interface FilterChipsProps {
   nested: NestedCategory
 }
 
 function FilterChips({ nested }: FilterChipsProps) {
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   const filtered = useSelector(selectFiltered);
   const [checked, setChecked] = useState(true);
   const [categories, setCategories] = useState<string[]>([]);

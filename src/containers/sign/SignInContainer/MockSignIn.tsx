@@ -1,9 +1,10 @@
 import { Button } from '@mui/material';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { mockLogin, selectStatus } from '../../../app/redux/slices/userSlice';
+import { useAppDispatch } from '../../../app/redux/hooks';
 
 function MockSignIn() {
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   const status = useSelector(selectStatus);
 
   const guestLogin = () => {

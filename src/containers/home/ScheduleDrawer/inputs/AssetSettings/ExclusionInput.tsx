@@ -1,13 +1,14 @@
 import {
   Stack, Switch, Typography,
 } from '@mui/material';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { SCHEDULE_DRAWER } from '../../../../../domain/constants/schedule';
 import { selectSchedule } from '../../../../../app/redux/slices/scheduleSlice';
 import { updateExclusion } from '../../domain/schedule';
+import { useAppDispatch } from '../../../../../app/redux/hooks';
 
 function ExclusionInput() {
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   const schedule = useSelector(selectSchedule);
 
   const changeExclustion = (state: React.ChangeEvent<HTMLInputElement>) => {

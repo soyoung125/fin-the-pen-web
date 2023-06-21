@@ -4,7 +4,7 @@ import {
 import RefreshIcon from '@mui/icons-material/Refresh';
 import moment from 'moment';
 import { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import CategoryList from './CategoryList';
 import {
   selectAssetsByCategory,
@@ -19,9 +19,10 @@ import ModalStaticBackdrop from '../../../components/layouts/ModalStaticBackdrop
 import InputModal from './MonthlyGoal/InputModal';
 import { AssetCategories, AssetsByCategoryInterface } from '../../../types/common';
 import RoundedPaper from '../../../components/common/RoundedPaper';
+import { useAppDispatch } from '../../../app/redux/hooks';
 
 function AssetsByCategory() {
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   const [open, setOpen] = useState('');
   const [monthlyGoalModalOpen, setMonthlyGoalModalOpen] = useState(false);
   const [alertModalOpen, setAlertModalOpen] = useState<"modify" | "reset" | "delete">('delete');

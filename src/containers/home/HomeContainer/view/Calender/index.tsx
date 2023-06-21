@@ -10,7 +10,7 @@ import {
 } from "@mui/x-date-pickers/PickersDay/PickersDay";
 import moment from "moment";
 import { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { grey, lightBlue, pink } from "@mui/material/colors";
 import { CATEGORIES } from "../../../../../domain/constants/categories";
 import {
@@ -30,13 +30,14 @@ import { selectIsDarkMode } from "../../../../../app/redux/slices/settingSlice";
 import useSchedule from "../../../../../hooks/useSchedule";
 import { RenderDayFunction } from "../../../../../types/common";
 import { Schedule } from "../../../../../types/schedule";
+import { useAppDispatch } from "../../../../../app/redux/hooks";
 
 interface CalenderProps {
   dateHeight: number;
 }
 
 function Calender({ dateHeight }: CalenderProps) {
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   const value = useSelector(selectDate);
   const { schedules } = useSchedule();
   const viewMode = useSelector(selectViewMode);

@@ -1,10 +1,8 @@
-/* eslint-disable react/jsx-props-no-spreading */
 import {
   Button,
   Typography,
 } from '@mui/material';
 import { useEffect } from 'react';
-import { useDispatch } from 'react-redux';
 import AppLocker from './display/AppLocker';
 import Budget from './display/Budget';
 import ThemeMode from './display/ThemeMode';
@@ -15,9 +13,10 @@ import AccordionSummary from '../../components/common/accordions/AccordionSummar
 import AccordionDetails from '../../components/common/accordions/AccordionDetails';
 import Change from './version/Change';
 import { setIsAuthenticatedFalse } from '../../app/redux/slices/commonSlice';
+import { useAppDispatch } from '../../app/redux/hooks';
 
 export default function SettingsContainer() {
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   const userAgent = navigator.userAgent.toLowerCase();
 
   useEffect(() => {

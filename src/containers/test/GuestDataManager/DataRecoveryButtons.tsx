@@ -2,13 +2,13 @@ import {
   Accordion, AccordionDetails, AccordionSummary, Box, Button, Divider, Stack, TextField, Typography,
 } from '@mui/material';
 import { useState } from 'react';
-import { useDispatch } from 'react-redux';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import { setSchedules } from '../../../app/redux/slices/scheduleSlice';
 import ModalStaticBackdrop from '../../../components/layouts/ModalStaticBackdrop';
+import { useAppDispatch } from '../../../app/redux/hooks';
 
 function DataRecoveryButtons() {
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   const [open, setOpen] = useState(false);
   const [text, setText] = useState('');
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {

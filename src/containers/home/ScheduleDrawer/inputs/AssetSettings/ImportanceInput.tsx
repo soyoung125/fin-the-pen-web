@@ -1,13 +1,14 @@
 import {
   Button, Stack, Typography,
 } from '@mui/material';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { SCHEDULE_DRAWER } from '../../../../../domain/constants/schedule';
 import { selectSchedule } from '../../../../../app/redux/slices/scheduleSlice';
 import { updateSchedule } from '../../domain/schedule';
+import { useAppDispatch } from '../../../../../app/redux/hooks';
 
 function ImportanceInput() {
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   const schedule = useSelector(selectSchedule);
 
   const changeSchedule = (state: React.MouseEvent<HTMLButtonElement>) => {
