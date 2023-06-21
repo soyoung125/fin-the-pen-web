@@ -3,11 +3,12 @@ import {
 } from '@mui/material';
 import ClearIcon from '@mui/icons-material/Clear';
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { useEffect, useState } from 'react';
 import AlertModal from '../../../../../components/common/AlertModal';
 import { selectSavingGoal, setSavingGoal } from '../../../../../app/redux/slices/assetSlice';
 import RoundedBorderBox from '../../../../../components/common/RoundedBorderBox';
+import { useAppDispatch } from '../../../../../app/redux/hooks';
 
 interface InputModalProps {
   closeSavingGoalModal: () => void,
@@ -45,7 +46,7 @@ function InputModal({
   /**
    * redux에 이미 저장된 목표 값 불러오기
    */
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   const saving = useSelector(selectSavingGoal);
   useEffect(() => {
     setForm(saving);
