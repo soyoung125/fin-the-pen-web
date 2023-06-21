@@ -8,7 +8,7 @@ function MockSignIn() {
   const status = useSelector(selectStatus);
 
   const guestLogin = () => {
-    dispatch(mockLogin() as any);
+    dispatch(mockLogin());
     // 추가로 이런 저런 설정을 여기에서 해줘야 함.
   };
   return (
