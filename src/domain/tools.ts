@@ -5,7 +5,6 @@
 import { EXPENDITURE } from "./constants/categories";
 import { deleteSchedule } from "../app/redux/slices/scheduleSlice";
 import { Schedule } from "../types/schedule";
-import { SignUp, SignInterface } from "../types/common";
 import { AppDispatch } from "../app/redux/store";
 
 /**

@@ -7,7 +7,6 @@ import { useSelector } from 'react-redux';
 import { useEffect, useState } from 'react';
 import AlertModal from '../../../../../components/common/AlertModal';
 import { selectSavingGoal, setSavingGoal } from '../../../../../app/redux/slices/assetSlice';
-import RoundedBorderBox from '../../../../../components/common/RoundedBorderBox';
 import { useAppDispatch } from '../../../../../app/redux/hooks';
 
 interface InputModalProps {

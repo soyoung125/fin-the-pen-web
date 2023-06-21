@@ -6,7 +6,6 @@ import { AdapterMoment } from "@mui/x-date-pickers/AdapterMoment";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import {
   PickersDay,
-  PickersDayProps,
 } from "@mui/x-date-pickers/PickersDay/PickersDay";
 import moment from "moment";
 import { useEffect } from "react";

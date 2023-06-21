@@ -13,7 +13,7 @@ import {
 import { WRONG_TIME_ORDER } from '../../../../../../domain/constants/schedule';
 import { isTimeOrderCorrect } from '../../../../../../domain/tools';
 import RoundedButton from '../../../../../../components/common/RoundedButton';
-import { EXPENDITURE, FIXED, INCOME } from '../../../../../../domain/constants/categories';
+import { EXPENDITURE, FIXED } from '../../../../../../domain/constants/categories';
 import AlertModal from '../../../../../../components/common/AlertModal';
 import { useAppDispatch } from '../../../../../../app/redux/hooks';
 

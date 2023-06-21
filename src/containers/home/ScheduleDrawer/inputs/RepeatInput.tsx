@@ -2,16 +2,15 @@ import {
   // eslint-disable-next-line max-len
   Box, Button, Dialog, DialogActions, DialogContent, DialogTitle, FormControl, InputLabel, MenuItem, Select, SelectChangeEvent, Stack, TextField,
 } from '@mui/material';
-import { LocalizationProvider, PickersDay, PickersDayProps, StaticDatePicker } from '@mui/x-date-pickers';
+import { LocalizationProvider, PickersDay, StaticDatePicker } from '@mui/x-date-pickers';
 import { AdapterMoment } from '@mui/x-date-pickers/AdapterMoment';
-import moment, { Moment } from 'moment';
-import { RefAttributes, useState } from 'react';
+import moment from 'moment';
+import { useState } from 'react';
 import { useSelector } from 'react-redux';
 import { DEADLINE, REPEAT } from '../../../../domain/constants/repeat';
 import { SCHEDULE_DRAWER } from '../../../../domain/constants/schedule';
 import { selectSchedule, setDrawerSchedule } from '../../../../app/redux/slices/scheduleSlice';
 import { updateRepeat, updateRepeatEndDate } from '../domain/schedule';
-import { JSX } from 'react/jsx-runtime';
 import { RenderDayFunction } from '../../../../types/common';
 import { useAppDispatch } from '../../../../app/redux/hooks';
 
