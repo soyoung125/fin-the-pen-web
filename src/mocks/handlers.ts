@@ -42,4 +42,16 @@ export const handlers = [
 
     return res(ctx.delay(1000), ctx.status(200), ctx.json(true));
   }),
+
+  rest.post("/mock/login", (req, res, ctx) => {
+    const mockUser: User = {
+      id: 0,
+      user_id: "guest@finthepen.com",
+      name: "guest by msw",
+      bday: "2000-01-01",
+      registerDate: "2023-01-25T14:57:08.023+00:00",
+      phone_number: "010-4413-5698",
+    };
+    return res(ctx.delay(1000), ctx.status(200), ctx.json(mockUser));
+  }),
 ];

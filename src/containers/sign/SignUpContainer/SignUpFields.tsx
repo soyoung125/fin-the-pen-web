@@ -9,7 +9,7 @@ import {
   SIGN_UP_SUCCESS,
 } from "../../../domain/constants/messages";
 import { fetchSignUp } from "../../../app/api/API";
-import { SignUp } from "../../../types/common";
+import { ServerState, SignUp } from "../../../types/common";
 import { LOCAL_STORAGE_KEY_SERVER } from "../../../app/api/keys.ts";
 import { setSessionStorage } from "../../../app/utils/storage.ts";
 
@@ -20,7 +20,7 @@ function SignUpFields() {
     const result = await fetchSignUp(user);
     // 에러 핸들링
     if (result === undefined) {
-      setSessionStorage(LOCAL_STORAGE_KEY_SERVER, "guest");
+      setSessionStorage<ServerState>(LOCAL_STORAGE_KEY_SERVER, "guest");
       alert(
         `${NO_SIGNAL_FROM_SERVER} GUEST 모드로 회원가입 하려면 다시 회원가입 버튼을 눌러주세요.`
       );

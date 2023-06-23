@@ -101,4 +101,8 @@ export interface RenderDayFunction {
   ): JSX.Element;
 }
 
-export interface UpdateStateInterface {target: {id: string, value: string | boolean}}
+export interface UpdateStateInterface {
+  target: { id: string; value: string | boolean };
+}
+
+export type ServerState = "real" | "guest";

@@ -1,8 +1,13 @@
 import axios, { AxiosResponse } from "axios";
 import { GetScheduleQuery, Schedule } from "../../types/schedule.tsx";
-import { SignInterface, SignUp, User } from "../../types/common.tsx";
+import {
+  ServerState,
+  SignInterface,
+  SignUp,
+  User,
+} from "../../types/common.tsx";
 import { url } from "./url.ts";
-import { getLocalStorage, getSessionStorage } from "../utils/storage.ts";
+import { getSessionStorage, setSessionStorage } from "../utils/storage.ts";
 import { LOCAL_STORAGE_KEY_SERVER } from "./keys.ts";
 
 /**
@@ -12,7 +17,10 @@ import { LOCAL_STORAGE_KEY_SERVER } from "./keys.ts";
 
 export const fetchSignUp = async (user: SignUp) => {
   try {
-    const server = getSessionStorage(LOCAL_STORAGE_KEY_SERVER, "real");
+    const server = getSessionStorage<ServerState>(
+      LOCAL_STORAGE_KEY_SERVER,
+      "real"
+    );
     const response = await axios.post<boolean>(
       `${url[server]}/fin-the-pen-web/sign-up`,
       user
@@ -25,7 +33,10 @@ export const fetchSignUp = async (user: SignUp) => {
 
 export const fetchLogin = async (sign: SignInterface) => {
   try {
-    const server = getSessionStorage(LOCAL_STORAGE_KEY_SERVER, "real");
+    const server = getSessionStorage<ServerState>(
+      LOCAL_STORAGE_KEY_SERVER,
+      "real"
+    );
     const response = await axios.post<User | "">(
       `${url[server]}/fin-the-pen-web/sign-in`,
       sign
@@ -34,6 +45,14 @@ export const fetchLogin = async (sign: SignInterface) => {
   } catch (err) {
     alert(err);
   }
+};
+
+// @mock
+export const fetchMockLogin = async () => {
+  const server = "guest";
+  setSessionStorage<ServerState>(LOCAL_STORAGE_KEY_SERVER, server);
+  const response = await axios.post<User>(`${url[server]}/mock/login`);
+  return response.data;
 };
 
 export const fetchCreateSchedule = async (schedule: Schedule) => {
@@ -71,29 +90,3 @@ export const fetchMonthSchedules = async (
     console.log(err);
   }
 };
-
-/**
- *
- *
- *
- typescript axios example
-
- import axios, { AxiosResponse } from 'axios';
-
- interface User {
-  id: number;
-  name: string;
-  email: string;
-}
-
- axios.get<User[]>('https://jsonplaceholder.typicode.com/users')
- .then((response: AxiosResponse<User[]>) => {
-    const users = response.data;
-    console.log(users);
-  })
- .catch((error) => {
-    console.error(error);
-  });
-
- *
- */
