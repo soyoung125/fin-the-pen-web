@@ -1,4 +1,4 @@
-import { Box, Paper, Stack, Fab } from '@mui/material';
+import { Box, Paper, Stack } from '@mui/material';
 import { useEffect } from 'react';
 import {
   selectHeaderMode, selectHeaderOpen, setGuestModeFalse, setGuestModeTrue,
@@ -7,15 +7,15 @@ import { selectUser } from '../../../../app/redux/slices/userSlice';
 import AnalysisMode from './headerMode/AnalysisMode';
 import HomeMode from './headerMode/HomeMode';
 import { useAppDispatch, useAppSelector } from '../../../../app/redux/hooks';
-import SavingsOutlinedIcon from '@mui/icons-material/SavingsOutlined';
 import { selectSavingPopUpSetting } from '../../../../app/redux/slices/assetSlice';
+import PopupButton from './buttons/PopupButton';
 
 function TopBar() {
   const dispatch = useAppDispatch();
   const user = useAppSelector(selectUser);
   const headerOpen = useAppSelector(selectHeaderOpen);
   const headerMode = useAppSelector(selectHeaderMode);
-  const popupSetting = useAppSelector(selectSavingPopUpSetting)
+  const popupSetting = useAppSelector(selectSavingPopUpSetting);
 
   useEffect(() => {
     // 옵셔널 체이닝 사용하면 eslint에서 오류 발생
@@ -50,9 +50,7 @@ function TopBar() {
               {headerMode === 'analysis' && (<AnalysisMode />)}
             </Stack>
             {popupSetting.isOn &&
-              <Fab color="secondary" size="small" aria-label="popup" sx={{ position: 'fixed', bottom: 80, right: 10 }} >
-                <SavingsOutlinedIcon />
-              </Fab>
+              <PopupButton />
             }
           </Paper>
         )
