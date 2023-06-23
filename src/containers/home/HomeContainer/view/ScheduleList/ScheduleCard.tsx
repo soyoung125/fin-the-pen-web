@@ -1,16 +1,21 @@
 import {
-  Box, Button, CardActionArea, Divider, Stack, Typography,
-} from '@mui/material';
-import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
-import SettingsIcon from '@mui/icons-material/Settings';
-import { grey } from '@mui/material/colors';
-import { Swiper, SwiperSlide } from 'swiper/react';
-import { deleteSelectedSchedule } from '../../../../../domain/tools';
-import { setBottomDrawerOpenFalse } from '../../../../../app/redux/slices/commonSlice';
-import CategoryTypeBadge from '../../../../../components/common/CategoryTypeBadge';
-import { Schedule } from '../../../../../types/schedule';
-import { Category } from '../../../../../domain/constants/categories';
-import { useAppDispatch } from '../../../../../app/redux/hooks';
+  Box,
+  Button,
+  CardActionArea,
+  Divider,
+  Stack,
+  Typography,
+} from "@mui/material";
+import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
+import SettingsIcon from "@mui/icons-material/Settings";
+import { grey } from "@mui/material/colors";
+import { Swiper, SwiperSlide } from "swiper/react";
+import { deleteSelectedSchedule } from "../../../../../domain/tools";
+import { setBottomDrawerOpenFalse } from "../../../../../app/redux/slices/commonSlice";
+import CategoryTypeBadge from "../../../../../components/common/CategoryTypeBadge";
+import { Schedule } from "../../../../../types/schedule";
+import { Category } from "../../../../../domain/constants/categories";
+import { useAppDispatch } from "../../../../../app/redux/hooks";
 
 interface ScheduleCardProps {
   schedule: Schedule;
@@ -27,13 +32,14 @@ function ScheduleCard({ schedule, handleModal, category }: ScheduleCardProps) {
 
   return (
     <>
-      <Swiper
-        slidesPerView="auto"
-        className="mySwiper"
-        initialSlide={1}
-      >
-        <SwiperSlide style={{ display: 'flex', width: 'auto', height: 'auto' }}>
-          <Button variant="contained" onClick={() => deleteSelectedSchedule(dispatch, schedule, handleClose)}>
+      <Swiper slidesPerView="auto" className="mySwiper" initialSlide={1}>
+        <SwiperSlide style={{ display: "flex", width: "auto", height: "auto" }}>
+          <Button
+            variant="contained"
+            onClick={() =>
+              deleteSelectedSchedule(dispatch, schedule, handleClose)
+            }
+          >
             <DeleteForeverIcon fontSize="large" />
           </Button>
         </SwiperSlide>
@@ -52,9 +58,31 @@ function ScheduleCard({ schedule, handleModal, category }: ScheduleCardProps) {
                 <Box>소비추천금액</Box>
                 <Box>8,000원</Box>
               </Stack> */}
-              <Stack direction="row">
-                <CategoryTypeBadge color={category.color} mr={2} />
-                <Typography variant="caption">{`${schedule.start_time} - ${schedule.end_time}`}</Typography>
+              <Stack
+                direction="row"
+                justifyContent="space-between"
+                alignItems="center"
+              >
+                <Stack direction="row" alignItems="center">
+                  <CategoryTypeBadge color={category.color} mr={2} />
+                  <Typography variant="caption">{`${schedule.start_time} - ${schedule.end_time}`}</Typography>
+                </Stack>
+                <Box
+                  sx={{
+                    backgroundColor: "primary.main",
+                    color: "#FFFFFF",
+                    p: 1,
+                    fontSize: "10px",
+                    borderRadius: "10px",
+                    textAlign: "end",
+                  }}
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    console.log("소비추천금액 적용하기");
+                  }}
+                >
+                  <Box>소비추천금액 8,000원</Box>
+                </Box>
               </Stack>
               <Stack
                 direction="row"
@@ -62,40 +90,22 @@ function ScheduleCard({ schedule, handleModal, category }: ScheduleCardProps) {
                 alignItems="center"
                 justifyContent="space-between"
               >
-                <Typography
-                  variant="h6"
-                  noWrap
-                >
+                <Typography variant="h6" noWrap>
                   {schedule.event_name}
                 </Typography>
 
-                <Box
-                  sx={{
-                    backgroundColor: 'primary.main',
-                    color: '#FFFFFF',
-                    p: 1,
-                    fontSize: '10px',
-                    borderRadius: '10px',
-                    textAlign: 'end',
-                  }}
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    console.log('소비추천금액 적용하기');
-                  }}
-                >
-                  <Box>소비추천금액</Box>
-                  <Box>8,000원</Box>
-                </Box>
-
                 {/* 색상은 실제 소비 내역 데이터 연동 후 바꿀 예정 */}
                 <Typography sx={{ color: grey[500] }}>
-                  {`${schedule.type}${parseInt(schedule.expected_spending, 10).toLocaleString('ko-KR')}`}
+                  {`${schedule.type}${parseInt(
+                    schedule.expected_spending,
+                    10
+                  ).toLocaleString("ko-KR")}`}
                 </Typography>
               </Stack>
             </Box>
           </CardActionArea>
         </SwiperSlide>
-        <SwiperSlide style={{ display: 'flex', width: 'auto', height: 'auto' }}>
+        <SwiperSlide style={{ display: "flex", width: "auto", height: "auto" }}>
           <Button variant="contained" onClick={() => handleModal(schedule)}>
             <SettingsIcon fontSize="large" />
           </Button>
@@ -104,7 +114,6 @@ function ScheduleCard({ schedule, handleModal, category }: ScheduleCardProps) {
 
       <Divider />
     </>
-
   );
 }
 
