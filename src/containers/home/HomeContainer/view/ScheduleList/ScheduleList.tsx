@@ -1,7 +1,7 @@
 import {
   Box, CircularProgress, Drawer, Stack, Typography,
 } from '@mui/material';
-import {useState} from 'react';
+import {useEffect, useRef, useState} from 'react';
 import ScheduleDrawer from '../../../ScheduleDrawer';
 import {CATEGORIES, Category} from '../../../../../domain/constants/categories';
 import {SCHEDULE_DRAWER_MODE} from '../../../../../domain/constants/schedule';
@@ -10,7 +10,9 @@ import {Schedule} from '../../../../../types/schedule';
 import useSchedule from '../../../../../hooks/useSchedule';
 
 function ScheduleList() {
-
+  const lastItemRef = useRef<HTMLLIElement>(null);
+  const listRef = useRef<HTMLLIElement>(null);
+  const [showButton, setShowButton] = useState(false);
   const [bottomDrawerOpen, setBottomDrawerOpen] = useState(false);
 
   const {
@@ -21,16 +23,30 @@ function ScheduleList() {
     date
   } = useSchedule();
 
+  useEffect(() => {
+
+    const observer = new IntersectionObserver(
+      entries => {
+        const isVisible = entries[0].isIntersecting;
+        setShowButton(!isVisible);
+      },
+      { threshold: 0 }
+    );
+
+    if (lastItemRef.current) {
+      observer.observe(lastItemRef.current);
+    }
+  }, [todaySchedules]);
+
   const handleModal = (schedule: Schedule) => {
     setSelectedSchedule(schedule);
     setBottomDrawerOpen(true);
   };
 
-
   const [drawerWidth, setDrawerWidth] = useState(0);
 
   return (
-    <>
+    <Box ref={listRef}>
       { // 로딩 시 Spinner
         status === 'loading' && (
           <Stack
@@ -70,6 +86,8 @@ function ScheduleList() {
         ))
       }
 
+      <Box ref={lastItemRef} />
+
       <Drawer
         open={bottomDrawerOpen}
         anchor="bottom"
@@ -90,7 +108,7 @@ function ScheduleList() {
           mode={SCHEDULE_DRAWER_MODE.modify}
         />
       </Drawer>
-    </>
+    </Box>
   );
 }
 
