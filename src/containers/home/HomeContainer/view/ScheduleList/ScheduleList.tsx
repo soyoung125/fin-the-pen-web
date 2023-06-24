@@ -1,6 +1,7 @@
 import {
-  Box, CircularProgress, Drawer, Stack, Typography,
+  Box, CircularProgress, Drawer, Stack, Typography, IconButton,
 } from '@mui/material';
+import ExpandCircleDownRoundedIcon from '@mui/icons-material/ExpandCircleDownRounded';
 import {useEffect, useRef, useState} from 'react';
 import ScheduleDrawer from '../../../ScheduleDrawer';
 import {CATEGORIES, Category} from '../../../../../domain/constants/categories';
@@ -14,6 +15,7 @@ function ScheduleList() {
   const listRef = useRef<HTMLLIElement>(null);
   const [showButton, setShowButton] = useState(false);
   const [bottomDrawerOpen, setBottomDrawerOpen] = useState(false);
+  const [drawerWidth, setDrawerWidth] = useState(0);
 
   const {
     status,
@@ -43,10 +45,24 @@ function ScheduleList() {
     setBottomDrawerOpen(true);
   };
 
-  const [drawerWidth, setDrawerWidth] = useState(0);
+  const handleScroll = (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+    event.preventDefault();
+    window.scrollTo({ top: document.documentElement.scrollHeight, behavior: 'smooth' });
+  }
 
   return (
-    <Box ref={listRef}>
+    <Box ref={listRef} sx={{ position: 'relative' }}>
+      {showButton &&
+        <Box sx={{ position: 'absolute', top: 10, left: 0, right: 0, zIndex: 1000, display: 'flex' }}>
+          <IconButton
+            sx={{ marginX: 'auto' }}
+            onClick={handleScroll}
+          >
+            <ExpandCircleDownRoundedIcon />
+          </IconButton>
+        </Box>
+      }
+
       { // 로딩 시 Spinner
         status === 'loading' && (
           <Stack
