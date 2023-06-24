@@ -12,7 +12,6 @@ import useSchedule from '../../../../../hooks/useSchedule';
 
 function ScheduleList() {
   const lastItemRef = useRef<HTMLLIElement>(null);
-  const listRef = useRef<HTMLLIElement>(null);
   const [showButton, setShowButton] = useState(false);
   const [bottomDrawerOpen, setBottomDrawerOpen] = useState(false);
   const [drawerWidth, setDrawerWidth] = useState(0);
@@ -51,7 +50,7 @@ function ScheduleList() {
   }
 
   return (
-    <Box ref={listRef} sx={{ position: 'relative' }}>
+    <Box sx={{ position: 'relative' }}>
       {showButton &&
         <Box sx={{ position: 'absolute', top: 10, left: 0, right: 0, zIndex: 1000, display: 'flex' }}>
           <IconButton
