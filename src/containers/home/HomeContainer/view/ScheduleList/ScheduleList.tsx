@@ -54,7 +54,7 @@ function ScheduleList() {
       {showButton &&
         <Box sx={{ position: 'absolute', top: 10, left: 0, right: 0, zIndex: 1000, display: 'flex' }}>
           <IconButton
-            sx={{ marginX: 'auto' }}
+            sx={{ marginX: 'auto', opacity: 0.4 }}
             onClick={handleScroll}
           >
             <ExpandCircleDownRoundedIcon />
