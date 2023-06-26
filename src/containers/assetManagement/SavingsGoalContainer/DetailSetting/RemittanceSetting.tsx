@@ -77,7 +77,7 @@ function RemittanceSetting({ remittance, handleRemittance }: RemittanceSettingPr
                 value={remittance.settings.date}
                 onChange={(e) => changeRemittance({ target: { id: 'date', value: e.target.value }})}
               >
-                {options.map((option) => <MenuItem value={option}>{option}</MenuItem>)}
+                {options.map((option) => <MenuItem key={Math.random()} value={option}>{option}</MenuItem>)}
               </Select>
             </FormControl>
 

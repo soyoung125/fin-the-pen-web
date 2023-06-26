@@ -51,7 +51,7 @@ function PopupSetting({ popup, handlePopup }: PopupSettingProps) {
               value={popup.settings.display}
               onChange={(e) => changePopupSettings('display', e.target.value)}
             >
-              {displayOptions.map((option) => <MenuItem value={option}>{option}</MenuItem>)}
+              {displayOptions.map((option) => <MenuItem key={Math.random()} value={option}>{option}</MenuItem>)}
             </Select>
           </FormControl>
 
@@ -70,7 +70,7 @@ function PopupSetting({ popup, handlePopup }: PopupSettingProps) {
               value={popup.settings.connect}
               onChange={(e) => changePopupSettings('connect', e.target.value)}
             >
-              {connectOptions.map((option) => <MenuItem value={option}>{option}</MenuItem>)}
+              {connectOptions.map((option) => <MenuItem key={Math.random()} value={option}>{option}</MenuItem>)}
             </Select>
           </FormControl>
         </Stack>
