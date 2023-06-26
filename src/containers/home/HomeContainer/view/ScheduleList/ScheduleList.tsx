@@ -25,7 +25,7 @@ function ScheduleList() {
   } = useSchedule();
 
   useEffect(() => {
-
+    setShowButton(false);
     const observer = new IntersectionObserver(
       entries => {
         const isVisible = entries[0].isIntersecting;
@@ -37,7 +37,7 @@ function ScheduleList() {
     if (lastItemRef.current) {
       observer.observe(lastItemRef.current);
     }
-  }, [todaySchedules]);
+  }, [date]);
 
   const handleModal = (schedule: Schedule) => {
     setSelectedSchedule(schedule);
