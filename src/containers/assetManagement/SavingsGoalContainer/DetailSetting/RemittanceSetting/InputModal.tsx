@@ -13,10 +13,8 @@ function InputModal({ date, handleChange, closeTransferDateModal }: InputModalPr
   return (
     <Stack p={2} spacing={1}>
       <Stack direction="row" alignItems="center" justifyContent="space-between">
-        <IconButton>
-          <ClearIcon />
-        </IconButton>
-        <Typography variant="h6" sx={{ fontWeight: 'bold' }}>저축 목표 설정</Typography>
+        <IconButton disabled sx={{ width: '40px' }} />
+        <Typography variant="h6" sx={{ fontWeight: 'bold' }}>송금일 설정</Typography>
         <IconButton onClick={() => closeTransferDateModal()}>
           <ClearIcon />
         </IconButton>
