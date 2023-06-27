@@ -18,7 +18,7 @@ function ScheduleViewMode() {
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
-        zIndex: 1000,
+        zIndex: 100,
       }}
     >
       <Box

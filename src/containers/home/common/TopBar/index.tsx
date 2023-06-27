@@ -28,7 +28,7 @@ function TopBar() {
   }, [user]);
 
   return (
-    <Box sx={{ position: 'relative', zIndex: 100 }}>
+    <Box sx={{ position: 'relative', zIndex: 1000 }}>
       {
         headerOpen
         && (
