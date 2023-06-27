@@ -30,7 +30,7 @@ interface InitialState {
       settings: {
         bankName: string,
         accountNumber: string,
-        date: 'none' | '매달 1일' | '매달 15일' | '매달 마지막날' | '직접 설정',
+        date: string, // 'none' | '매달 1일' | '매달 15일' | '매달 마지막날' | '직접 설정' | '매달 n일'
         amount: number,
       },
     },

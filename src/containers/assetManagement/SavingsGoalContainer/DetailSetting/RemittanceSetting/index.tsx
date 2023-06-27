@@ -1,9 +1,13 @@
 import {
   Stack, Box, Switch, FormControl, OutlinedInput, InputAdornment, Select, MenuItem
 } from '@mui/material';
-import RoundedPaper from '../../../../components/common/RoundedPaper';
+import RoundedPaper from '../../../../../components/common/RoundedPaper';
 import CalendarTodayOutlinedIcon from '@mui/icons-material/CalendarTodayOutlined';
-import { RemittanceInterface } from '../../../../types/common';
+import { RemittanceInterface } from '../../../../../types/common';
+import { useEffect, useState } from 'react';
+import ModalStaticBackdrop from '../../../../../components/layouts/ModalStaticBackdrop';
+import useModal from '../../../../../hooks/useModal';
+import InputModal from './InputModal';
 
 interface RemittanceSettingProps {
   remittance: RemittanceInterface,
@@ -12,12 +16,32 @@ interface RemittanceSettingProps {
 
 function RemittanceSetting({ remittance, handleRemittance }: RemittanceSettingProps) {
   const options = ['none', '매달 1일', '매달 15일', '매달 마지막날', '직접 설정'];
+  const [date, setDate] = useState(0);
+  const {
+    modalOpen: transferDateModalOpen,
+    openModal: openTransferDateModal,
+    closeModal: closeTransferDateModal
+  } = useModal();
+
+  
+  useEffect(() => {
+    if (remittance.settings.date === '직접 설정') {
+      openTransferDateModal();
+    }
+  }, [remittance])
+
   const changeRemittance = (state: { target: { id: string; value: string | number; }; }) => {
     handleRemittance({
       ...remittance,
       settings: { ...remittance.settings, [state.target.id]: state.target.value },
     });
   };
+
+  const handleChange = (d: number) => {
+    setDate(d);
+    changeRemittance({ target: { id: 'date', value: `매달 ${d}일` } })
+  }
+
   return (
     <RoundedPaper my={1}>
       <Stack direction="row" justifyContent="space-between">
@@ -78,6 +102,7 @@ function RemittanceSetting({ remittance, handleRemittance }: RemittanceSettingPr
                 onChange={(e) => changeRemittance({ target: { id: 'date', value: e.target.value }})}
               >
                 {options.map((option) => <MenuItem key={Math.random()} value={option}>{option}</MenuItem>)}
+                {!options.includes(remittance.settings.date) && <MenuItem key={Math.random()} disabled value={remittance.settings.date}>{remittance.settings.date}</MenuItem>}
               </Select>
             </FormControl>
 
@@ -98,6 +123,14 @@ function RemittanceSetting({ remittance, handleRemittance }: RemittanceSettingPr
             </FormControl>
           </Stack>
         )}
+        <ModalStaticBackdrop
+          keepMounted
+          width="xs"
+          open={transferDateModalOpen}
+          component={(
+            <InputModal date={date} handleChange={handleChange} closeTransferDateModal={closeTransferDateModal} />
+          )}
+        />
     </RoundedPaper>
   );
 }
