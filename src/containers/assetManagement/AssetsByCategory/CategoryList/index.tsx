@@ -1,30 +1,68 @@
-/* eslint-disable max-len */
-/* eslint-disable no-nested-ternary */
 import {
   Box, Button, Collapse, List, ListItem, ListItemButton, Stack,
 } from '@mui/material';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import CategoryTypeBadge from '../../../../components/common/CategoryTypeBadge';
 import { selectAssetsByCategory } from '../../../../app/redux/slices/assetSlice';
-import { AssetsByCategoryInterface } from '../../../../types/common';
+import { AssetCategories, AssetsByCategoryInterface } from '../../../../types/common';
 import AssetInput from './AssetInput';
+import AlertModal from '../../../../components/common/AlertModal';
+import useModal from '../../../../hooks/useModal';
+import { useAppDispatch } from '../../../../app/redux/hooks';
 
 interface CategoryListProps {
   handleClick: (type: string) => void,
-  assets: AssetsByCategoryInterface[],
   open: string,
-  modifyCategoryAsset: (type: string, value: number) => void,
-  modifySubcategoryAsset: (type: string, title: string, summary: number, value: number) => void,
-  handleCategoryAssets: () => void,
+  updateCategoryAssets: (newData: AssetsByCategoryInterface[]) => void,
 }
 
 function CategoryList({
-  handleClick, assets, open, modifyCategoryAsset, modifySubcategoryAsset, handleCategoryAssets,
+  handleClick, open, updateCategoryAssets,
 }: CategoryListProps) {
-  // const assets = useSelector(selectAssetsByCategory);
+  const dispatch = useAppDispatch();
+  const assets = useSelector(selectAssetsByCategory);
+  const {
+    modalOpen: modifyModalOpen,
+    openModal: openModifyModal,
+    closeModal: closeModifyModal
+  } = useModal();
+
+  const [newAssets, setNewAssets] = useState(assets);
   const [selectedCategory, setSelectedCategory] = useState<'' | number>('');
   const [asset, setAsset] = useState('0');
+
+  useEffect(() => {
+    setNewAssets(assets);
+  }, [assets]);
+
+  const handleCategoryAssets = () => {
+    closeModifyModal();
+    setSelectedCategory('');
+    updateCategoryAssets(newAssets);
+  }
+
+  const modifyCategoryAsset = (type: string, value: number) => {
+    const data = newAssets.map((category: AssetsByCategoryInterface) => (category.type === type
+      ? {
+        ...category,
+        total: (category.total === '-' && value === 0 ? '-' : value),
+      }
+      : category));
+    setNewAssets(data);
+  };
+
+  const modifySubcategoryAsset = (type: string, title: string, summary: number, value: number) => {
+    const data = newAssets.map((category: AssetsByCategoryInterface) => (category.type === type
+      ? {
+        ...category,
+        categories: category.categories
+          .map((c: AssetCategories) => (c.title === title ? { ...c, asset: value } : c)),
+        sum: summary,
+      }
+      : category));
+    setNewAssets(data);
+  };
 
   const modifySubcategory = (category: AssetsByCategoryInterface, title: string, preValue: string | number) => {
     let sum = 0;
@@ -56,7 +94,7 @@ function CategoryList({
   return (
     <>
       <List>
-        {assets.map((category: AssetsByCategoryInterface) => (
+        {newAssets.map((category: AssetsByCategoryInterface) => (
           <Box key={category.type}>
             <ListItemButton sx={{ px: 0 }} onClick={() => clickCategory(category.type)}>
               <Stack direction="row" justifyContent="space-between" sx={{ width: '100%' }}>
@@ -117,7 +155,14 @@ function CategoryList({
         ))}
       </List>
 
-      <Button fullWidth variant="contained" onClick={() => handleCategoryAssets()}>카테고리별 자산 설정하기</Button>
+      <Button fullWidth variant="contained" onClick={openModifyModal}>카테고리별 자산 설정하기</Button>
+
+      <AlertModal
+        open={modifyModalOpen}
+        handleClose={closeModifyModal}
+        handleClickYes={() => handleCategoryAssets()}
+        mode='modify'
+      />
     </>
   );
 }
