@@ -12,15 +12,17 @@ import AssetInput from './AssetInput';
 
 interface CategoryListProps {
   handleClick: (type: string) => void,
+  assets: AssetsByCategoryInterface[],
   open: string,
   modifyCategoryAsset: (type: string, value: number) => void,
   modifySubcategoryAsset: (type: string, title: string, summary: number, value: number) => void,
+  handleCategoryAssets: () => void,
 }
 
 function CategoryList({
-  handleClick, open, modifyCategoryAsset, modifySubcategoryAsset,
+  handleClick, assets, open, modifyCategoryAsset, modifySubcategoryAsset, handleCategoryAssets,
 }: CategoryListProps) {
-  const assets = useSelector(selectAssetsByCategory);
+  // const assets = useSelector(selectAssetsByCategory);
   const [selectedCategory, setSelectedCategory] = useState<'' | number>('');
   const [asset, setAsset] = useState('0');
 
@@ -115,7 +117,7 @@ function CategoryList({
         ))}
       </List>
 
-      <Button fullWidth variant="contained">카테고리별 자산 설정하기</Button>
+      <Button fullWidth variant="contained" onClick={() => handleCategoryAssets()}>카테고리별 자산 설정하기</Button>
     </>
   );
 }

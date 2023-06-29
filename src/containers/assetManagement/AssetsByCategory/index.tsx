@@ -23,21 +23,25 @@ import { useAppDispatch } from '../../../app/redux/hooks';
 
 function AssetsByCategory() {
   const dispatch = useAppDispatch();
-  const [open, setOpen] = useState('');
-  const [monthlyGoalModalOpen, setMonthlyGoalModalOpen] = useState(false);
-  const [alertModalOpen, setAlertModalOpen] = useState<"modify" | "reset" | "delete">('delete');
-  const [showTooltip, setShowTooltip] = useState(true);
-  // const [assets, setAssets] = useState([]);
   const today = moment();
   const assets = useSelector(selectAssetsByCategory);
   const updateDate = useSelector(selectUpdateDate);
   const monthlyConsumptionGoal = useSelector(selectMonthlyConsumptionGoal);
+  const [open, setOpen] = useState('');
+  const [monthlyGoalModalOpen, setMonthlyGoalModalOpen] = useState(false);
+  const [alertModalOpen, setAlertModalOpen] = useState<"modify" | "reset" | "delete">('delete');
+  const [showTooltip, setShowTooltip] = useState(true);
+  const [newAssets, setNewAssets] = useState(assets);
 
   useEffect(() => {
     if (today.isAfter(updateDate, 'month')) {
       dispatch(setInitAssetsByCategory());
     }
   }, []);
+
+  useEffect(() => {
+    setNewAssets(assets);
+  }, [assets]);
 
   useEffect(() => {
     console.log(alertModalOpen !== 'delete')
@@ -62,19 +66,25 @@ function AssetsByCategory() {
     }
   };
 
+  const handleCategoryAssets = () => {
+    const date = moment().format('YYYY-MM-DD');
+    dispatch(setAssetsByCategory({ assets: newAssets, updateDate: date }));
+  }
+
   const modifyCategoryAsset = (type: string, value: number) => {
-    const data = assets.map((category: AssetsByCategoryInterface) => (category.type === type
+    const data = newAssets.map((category: AssetsByCategoryInterface) => (category.type === type
       ? {
         ...category,
         total: (category.total === '-' && value === 0 ? '-' : value),
       }
       : category));
-    const date = moment().format('YYYY-MM-DD');
-    dispatch(setAssetsByCategory({ assets: data, updateDate: date }));
+    setNewAssets(data);
+    // const date = moment().format('YYYY-MM-DD');
+    // dispatch(setAssetsByCategory({ assets: data, updateDate: date }));
   };
 
   const modifySubcategoryAsset = (type: string, title: string, summary: number, value: number) => {
-    const data = assets.map((category: AssetsByCategoryInterface) => (category.type === type
+    const data = newAssets.map((category: AssetsByCategoryInterface) => (category.type === type
       ? {
         ...category,
         categories: category.categories
@@ -82,8 +92,9 @@ function AssetsByCategory() {
         sum: summary,
       }
       : category));
-    const date = moment().format('YYYY-MM-DD');
-    dispatch(setAssetsByCategory({ assets: data, updateDate: date }));
+    setNewAssets(data);
+    // const date = moment().format('YYYY-MM-DD');
+    // dispatch(setAssetsByCategory({ assets: data, updateDate: date }));
   };
 
   const openMonthlyGoalModal = () => {
@@ -122,9 +133,11 @@ function AssetsByCategory() {
 
         <CategoryList
           handleClick={handleClick}
+          assets={newAssets}
           open={open}
           modifyCategoryAsset={modifyCategoryAsset}
           modifySubcategoryAsset={modifySubcategoryAsset}
+          handleCategoryAssets={handleCategoryAssets}
         />
       </RoundedPaper>
 
