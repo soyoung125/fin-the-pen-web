@@ -40,6 +40,7 @@ function AssetsByCategory() {
   }, []);
 
   useEffect(() => {
+    console.log(alertModalOpen !== 'delete')
     if (showTooltip !== !(monthlyGoalModalOpen || alertModalOpen)) {
       setShowTooltip(!showTooltip);
     }
@@ -137,7 +138,7 @@ function AssetsByCategory() {
       />
 
       <AlertModal
-        open={alertModalOpen in ["modify", "reset"]}
+        open={alertModalOpen !== 'delete'}
         handleClose={() => setAlertModalOpen('delete')}
         handleClickYes={() => (alertModalOpen === 'modify' ? openMonthlyGoalModal() : resetAssetByCategory())}
         mode={alertModalOpen}
