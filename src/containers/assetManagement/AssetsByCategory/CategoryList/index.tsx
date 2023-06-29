@@ -66,7 +66,7 @@ function CategoryList({
                   ? (
                     <AssetInput
                       handleChange={(e) => setAsset(e.target.value.replaceAll(',', ''))}
-                      handleFocus={() => setAsset(category.total === '-' ? '' : category.total.toLocaleString('ko-KR'))}
+                      handleFocus={() => setAsset(category.total === '-' ? '' : category.total.toString())}
                       asset={asset}
                       modifyFunction={() => modifyCategory()}
                     />
@@ -96,7 +96,7 @@ function CategoryList({
                         ? (
                           <AssetInput
                             handleChange={(e) => setAsset(e.target.value.replaceAll(',', ''))}
-                            handleFocus={() => setAsset(c.asset === '-' ? '' : c.asset.toLocaleString('ko-KR'))}
+                            handleFocus={() => setAsset(c.asset === '-' ? '' : c.asset.toString())}
                             asset={asset}
                             modifyFunction={() => modifySubcategory(category, c.title, c.asset)}
                           />
