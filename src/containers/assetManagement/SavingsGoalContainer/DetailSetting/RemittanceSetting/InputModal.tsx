@@ -24,7 +24,7 @@ function InputModal({ date, handleChange, closeTransferDateModal }: InputModalPr
       </Box>
       <Grid container columns={14}>
         {Date.map((d) => 
-          <Grid item xs={2}>
+          <Grid item xs={2} key={Math.random()}>
             <IconButton
               onClick={() => setTransferDate(d)}
               color={transferDate === d ? 'primary' : 'inherit'}
