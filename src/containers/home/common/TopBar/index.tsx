@@ -9,8 +9,11 @@ import HomeMode from './headerMode/HomeMode';
 import { useAppDispatch, useAppSelector } from '../../../../app/redux/hooks';
 import { selectSavingPopUpSetting } from '../../../../app/redux/slices/assetSlice';
 import PopupButton from './buttons/PopupButton';
+import { useNavigate } from 'react-router-dom';
+import PATH from '../../../../domain/constants/path';
 
 function TopBar() {
+  const navigate = useNavigate();
   const dispatch = useAppDispatch();
   const user = useAppSelector(selectUser);
   const headerOpen = useAppSelector(selectHeaderOpen);
@@ -26,6 +29,14 @@ function TopBar() {
       dispatch(setGuestModeFalse());
     }
   }, [user]);
+
+  const handleClickPopup = () => {
+    if (popupSetting.settings.connect === '적금 계좌 APP') {
+      console.log('계좌 열기');
+    } else {
+      navigate(PATH.savingsGoal)
+    }
+  }
 
   return (
     <Box sx={{ position: 'relative', zIndex: 1000 }}>
@@ -50,7 +61,7 @@ function TopBar() {
               {headerMode === 'analysis' && (<AnalysisMode />)}
             </Stack>
             {popupSetting.isOn &&
-              <PopupButton />
+              <PopupButton handleClickPopup={handleClickPopup} />
             }
           </Paper>
         )

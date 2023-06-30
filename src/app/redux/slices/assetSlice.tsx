@@ -42,7 +42,7 @@ interface InitialState {
       isOn: boolean,
       settings: {
         display: 'none(아이콘)' | '저축금액(퍼센트)',
-        connect: '저축 목표 설정 페이지' | '계좌 앱',
+        connect: '저축 목표 설정 페이지' | '적금 계좌 APP',
       },
     },
   },
