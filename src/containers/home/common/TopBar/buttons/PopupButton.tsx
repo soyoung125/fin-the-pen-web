@@ -1,8 +1,10 @@
 import { Fab } from "@mui/material";
 import SavingsOutlinedIcon from '@mui/icons-material/SavingsOutlined';
 import { useRef, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 function PopupButton() {
+  const navigate = useNavigate();
   const position = 120;
   const [offset, setOffset] = useState(0);
   const [isDragging, setIsDragging] = useState(false);
@@ -11,8 +13,8 @@ function PopupButton() {
 
   const handleMouseDown = (event: React.MouseEvent<HTMLDivElement>) => {
     event.preventDefault();
-    startPositionRef.current = event.clientY - offset;
     setIsDragging(true);
+    startPositionRef.current = event.clientY - offset;
   };
 
   const handleTouchStart = (event: React.TouchEvent<HTMLDivElement>) => {
@@ -40,6 +42,9 @@ function PopupButton() {
     setIsDragging(false);
   };
 
+  const handleClick = () => {
+    navigate('/management/savings-goal');
+  }
 
   return (
     <div
@@ -56,6 +61,7 @@ function PopupButton() {
         color="secondary"
         size="small"
         aria-label="popup"
+        onClick={handleClick}
       >
         <SavingsOutlinedIcon />
       </Fab>
