@@ -9,6 +9,7 @@ import moment from 'moment';
 import { selectMonthlyConsumptionGoal, setMonthlyConsumptionGoal } from '../../../../app/redux/slices/assetSlice';
 import AlertModal from '../../../../components/common/AlertModal';
 import { useAppDispatch } from '../../../../app/redux/hooks';
+import useModal from '../../../../hooks/useModal';
 
 interface InputModalProps {
   setMonthlyGoalModalOpen: React.Dispatch<React.SetStateAction<boolean>>
@@ -17,7 +18,12 @@ interface InputModalProps {
 function InputModal({
   setMonthlyGoalModalOpen,
 }: InputModalProps) {
-  const [openAlertModal, setOpenAlertModal] = useState(false);
+  const {
+    modalOpen: alertModalOpen,
+    openModal: openAlertModal,
+    closeModal: closeAlertModal
+  } = useModal();
+
   const month = moment().format('M월');
   const [goal, setGoal] = useState(0);
 
@@ -45,7 +51,7 @@ function InputModal({
       <Stack p={2} spacing={1}>
         <Stack direction="row" alignItems="center" justifyContent="space-between">
           <IconButton
-            onClick={() => setOpenAlertModal(true)}
+            onClick={openAlertModal}
             color="error"
           >
             <DeleteForeverIcon />
@@ -81,10 +87,10 @@ function InputModal({
         </Button>
       </Stack>
       <AlertModal
-        open={openAlertModal}
-        handleClose={() => setOpenAlertModal(false)}
+        open={alertModalOpen}
+        handleClose={closeAlertModal}
         handleClickYes={() => {
-          setOpenAlertModal(false);
+          closeAlertModal();
           setGoal(0)
         } }
         mode="reset"

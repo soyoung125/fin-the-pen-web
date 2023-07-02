@@ -10,6 +10,7 @@ import { SOMETHING_IS_WRONG } from '../../../../../domain/constants/messages';
 import { selectPersonalGoal, setPersonalGoal } from '../../../../../app/redux/slices/assetSlice';
 import AlertModal from '../../../../../components/common/AlertModal';
 import { useAppDispatch } from '../../../../../app/redux/hooks';
+import useModal from '../../../../../hooks/useModal';
 
 interface InputModalProps {
   setPersonalGoalModalOpen: React.Dispatch<React.SetStateAction<boolean>>,
@@ -31,7 +32,11 @@ interface ChangePersonalGoal {
 function InputModal({
   setPersonalGoalModalOpen,
 }: InputModalProps) {
-  const [openResetAlertModal, setOpenResetAlertModal] = useState(false);
+  const {
+    modalOpen: alertModalOpen,
+    openModal: openAlertModal,
+    closeModal: closeAlertModal
+  } = useModal();
   const [form, setForm] = useState<Form>({
     name: '',
     money: 0,
@@ -66,7 +71,7 @@ function InputModal({
     <Stack p={2} spacing={1}>
       <Stack direction="row" alignItems="center" justifyContent="space-between">
         <IconButton
-          onClick={() => setOpenResetAlertModal(true)}
+          onClick={openAlertModal}
           color="error"
         >
           <DeleteForeverIcon />
@@ -238,8 +243,8 @@ function InputModal({
       </Button>
 
       <AlertModal
-        open={openResetAlertModal}
-        handleClose={() => setOpenResetAlertModal(false)}
+        open={alertModalOpen}
+        handleClose={closeAlertModal}
         handleClickYes={() => {
           setForm({
             name: '',
@@ -249,7 +254,7 @@ function InputModal({
             autoSaving: true,
             popUp: false,
           });
-          setOpenResetAlertModal(false);
+          closeAlertModal();
         }}
         mode="reset"
       />

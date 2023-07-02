@@ -18,12 +18,16 @@ function Saving() {
     openModal: openSavingGoalModal,
     closeModal: closeSavingGoalModal
   } = useModal();
+  const {
+    modalOpen: alertModalOpen,
+    openModal: openAlertModal,
+    closeModal: closeAlertModal
+  } = useModal();
 
-  const [openAlertModal, setOpenAlertModal] = useState(false);
   const saving = useSelector(selectSavingGoal);
 
   const foo = () => {
-    setOpenAlertModal(false);
+    closeAlertModal();
     openSavingGoalModal();
   };
 
@@ -32,7 +36,7 @@ function Saving() {
       <RoundedPaper my={2}>
         <Stack direction="row" justifyContent="space-between" alignItems="center" pb={1}>
           <Box sx={{ typography: 'h6', fontWeight: 'bold' }}>1 Year Goal</Box>
-          <IconButton color="primary" onClick={() => setOpenAlertModal(true)} sx={{ p: 0 }}>
+          <IconButton color="primary" onClick={openAlertModal} sx={{ p: 0 }}>
             <BorderColorIcon fontSize="small" />
           </IconButton>
         </Stack>
@@ -72,8 +76,8 @@ function Saving() {
       />
 
       <AlertModal
-        open={openAlertModal}
-        handleClose={() => setOpenAlertModal(false)}
+        open={alertModalOpen}
+        handleClose={closeAlertModal}
         handleClickYes={() => foo()}
         mode="modify"
       />

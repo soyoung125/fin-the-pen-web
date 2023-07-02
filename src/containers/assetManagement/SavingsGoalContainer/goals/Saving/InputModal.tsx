@@ -8,6 +8,7 @@ import { useEffect, useState } from 'react';
 import AlertModal from '../../../../../components/common/AlertModal';
 import { selectSavingGoal, setSavingGoal } from '../../../../../app/redux/slices/assetSlice';
 import { useAppDispatch } from '../../../../../app/redux/hooks';
+import useModal from '../../../../../hooks/useModal';
 
 interface InputModalProps {
   closeSavingGoalModal: () => void,
@@ -16,7 +17,11 @@ interface InputModalProps {
 function InputModal({
   closeSavingGoalModal,
 }: InputModalProps) {
-  const [openResetAlertModal, setOpenResetAlertModal] = useState(false);
+  const {
+    modalOpen: alertModalOpen,
+    openModal: openAlertModal,
+    closeModal: closeAlertModal
+  } = useModal();
   const [form, setForm] = useState({
     year: 0,
     month: 0,
@@ -55,7 +60,7 @@ function InputModal({
     <Stack p={2} spacing={1}>
       <Stack direction="row" alignItems="center" justifyContent="space-between">
         <IconButton
-          onClick={() => setOpenResetAlertModal(true)}
+          onClick={openAlertModal}
           color="error"
         >
           <DeleteForeverIcon />
@@ -144,8 +149,8 @@ function InputModal({
       </Button>
 
       <AlertModal
-        open={openResetAlertModal}
-        handleClose={() => setOpenResetAlertModal(false)}
+        open={alertModalOpen}
+        handleClose={closeAlertModal}
         handleClickYes={() => {
           setForm({
             year: 0,
@@ -153,7 +158,7 @@ function InputModal({
             autoSaving: true,
             popUp: false,
           });
-          setOpenResetAlertModal(false);
+          closeAlertModal();
         }}
         mode="reset"
       />

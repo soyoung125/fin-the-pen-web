@@ -16,6 +16,7 @@ import RoundedButton from '../../../../../../components/common/RoundedButton';
 import { EXPENDITURE, FIXED } from '../../../../../../domain/constants/categories';
 import AlertModal from '../../../../../../components/common/AlertModal';
 import { useAppDispatch } from '../../../../../../app/redux/hooks';
+import useModal from '../../../../../../hooks/useModal';
 
 function FilterButton() {
   const dispatch = useAppDispatch();
@@ -23,7 +24,11 @@ function FilterButton() {
   const filtered = useSelector(selectFiltered);
   const filteredDate = useSelector(selectFilteredDate);
   const [error, setError] = useState(false);
-  const [openAlertModal, setOpenAlertModal] = useState(false);
+  const {
+    modalOpen: alertModalOpen,
+    openModal: openAlertModal,
+    closeModal: closeAlertModal
+  } = useModal();
   const FIXEDEXPENDITURE = {
     ...FIXED,
     nested: FIXED.nested.filter((c) => c.type === '출금'),
@@ -168,7 +173,7 @@ function FilterButton() {
           <Button
             variant="contained"
             color="primary"
-            onClick={() => setOpenAlertModal(true)}
+            onClick={openAlertModal}
           >
             필터 초기화
           </Button>
@@ -176,10 +181,10 @@ function FilterButton() {
       </Drawer>
 
       <AlertModal
-        open={openAlertModal}
-        handleClose={() => setOpenAlertModal(false)}
+        open={alertModalOpen}
+        handleClose={closeAlertModal}
         handleClickYes={() => {
-          setOpenAlertModal(false);
+          closeAlertModal();
           dispatch(initFilter());
         }}
         mode="reset"

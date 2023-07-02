@@ -17,6 +17,7 @@ import { Schedule } from '../../../types/schedule';
 import { makeGroupForRegularData } from '../../../domain/tools';
 import useSchedule from '../../../hooks/useSchedule';
 import { useAppSelector } from '../../../app/redux/hooks';
+import useModal from '../../../hooks/useModal';
 
 interface DataInterface {
   [prop: string]: Schedule[],
@@ -29,10 +30,14 @@ interface DataInterface {
 function RegularDepositWithdrawal() {
   const navigate = useNavigate();
   const bottomDrawerOpen = useAppSelector(selectBottomDrawerOpen);
+  const {
+    modalOpen: alertModalOpen,
+    openModal: openAlertModal,
+    closeModal: closeAlertModal
+  } = useModal();
   const { schedules } = useSchedule();
   const [deposits, setDeposits] = useState<DataInterface>({});
   const [withdrawals, setWithdrawals] = useState<DataInterface>({});
-  const [openAlertModal, setOpenAlertModal] = useState(false);
   const [type, setType] = useState('+');
 
   useEffect(() => {
@@ -50,11 +55,11 @@ function RegularDepositWithdrawal() {
 
   const handleOpenAlertModal = (newType: string): void => {
     setType(newType);
-    setOpenAlertModal(true);
+    openAlertModal();
   };
 
   const handleMoveToDetailPage = () => {
-    setOpenAlertModal(false);
+    closeAlertModal();
     if (type === '+') {
       navigate(PATH.DetailSetting, { state: { type: '+', data: deposits } });
     } else if (type === '-') {
@@ -94,8 +99,8 @@ function RegularDepositWithdrawal() {
         .map((w) => <DetailCard data={withdrawals[w]} key={withdrawals[w][0].id} />)}
 
       <AlertModal
-        open={openAlertModal}
-        handleClose={() => setOpenAlertModal(false)}
+        open={alertModalOpen}
+        handleClose={closeAlertModal}
         handleClickYes={() => handleMoveToDetailPage()}
         mode="modify"
       />

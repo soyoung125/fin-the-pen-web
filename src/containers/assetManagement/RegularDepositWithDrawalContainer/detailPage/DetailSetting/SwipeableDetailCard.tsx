@@ -12,6 +12,7 @@ import AlertModal from '../../../../../components/common/AlertModal';
 import { modifySchedule } from '../../../../../app/redux/slices/scheduleSlice';
 import { Schedule } from '../../../../../types/schedule';
 import { useAppDispatch } from '../../../../../app/redux/hooks';
+import useModal from '../../../../../hooks/useModal';
 
 interface SwipeableDetailCardProps {
   data: Schedule[],
@@ -20,15 +21,19 @@ interface SwipeableDetailCardProps {
 function SwipeableDetailCard({ data }: SwipeableDetailCardProps) {
   const dispatch = useAppDispatch();
   const [settingModalOpen, setSettingModalOpen] = useState(false);
-  const [openAlertModal, setOpenAlertModal] = useState(false);
   const schedule = data[0];
+  const {
+    modalOpen: alertModalOpen,
+    openModal: openAlertModal,
+    closeModal: closeAlertModal
+  } = useModal();
 
-  const handleCloseAlert = () => {
-    setOpenAlertModal(false);
-  };
+  // const handleCloseAlert = () => {
+  //   setOpenAlertModal(false);
+  // };
 
   const deleteData = () => {
-    data.map((d) => deleteSelectedSchedule(dispatch, d, handleCloseAlert));
+    data.map((d) => deleteSelectedSchedule(dispatch, d, closeAlertModal));
   };
 
   const modifyData = (form: Schedule) => {
@@ -59,7 +64,7 @@ function SwipeableDetailCard({ data }: SwipeableDetailCardProps) {
           initialSlide={1}
         >
           <SwiperSlide style={{ display: 'flex', width: 'auto', height: 'auto' }}>
-            <Button variant="contained" onClick={() => setOpenAlertModal(true)}>
+            <Button variant="contained" onClick={openAlertModal}>
               <DeleteForeverIcon fontSize="large" />
             </Button>
           </SwiperSlide>
@@ -102,8 +107,8 @@ function SwipeableDetailCard({ data }: SwipeableDetailCardProps) {
       />
 
       <AlertModal
-        open={openAlertModal}
-        handleClose={() => setOpenAlertModal(false)}
+        open={alertModalOpen}
+        handleClose={closeAlertModal}
         handleClickYes={() => deleteData()}
         mode="delete"
       />
