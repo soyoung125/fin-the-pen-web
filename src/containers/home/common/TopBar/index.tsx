@@ -22,7 +22,7 @@ function TopBar() {
 
   useEffect(() => {
     // 옵셔널 체이닝 사용하면 eslint에서 오류 발생
-    if (user && user.name === 'guest') {
+    if (user && user.name === 'guest by msw') {
       console.warn('게스트 모드로 동작합니다. 게스트 모드에서는 데이터가 저장되지 않습니다.');
       dispatch(setGuestModeTrue());
     } else {
