@@ -23,8 +23,24 @@ function AnalysisContainer() {
   useHeader(true, 'analysis');
 
   useEffect(() => {
+    // resize 이벤트 핸들러
+    const handleResize = () => {
+      const newWidthRatio = Math.ceil(window.innerWidth / 450) * 50;
+      if (newWidthRatio === widthRatio) return;
+      setWidthRatio(Math.ceil(window.innerWidth / 450) * 50);
+    };
+
+    // 컴포넌트가 마운트될 때 resize 이벤트 리스너 등록
+    window.addEventListener('resize', handleResize);
+
+    // 컴포넌트가 언마운트될 때 resize 이벤트 리스너 제거
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []);
+
+  useEffect(() => {
     dispatch(updateAnalyzedData());
-    setWidthRatio(Math.ceil(screen.width / 450) * 50);
   }, [date]);
 
   const clickListItem = (category: AnalysisData) => {
