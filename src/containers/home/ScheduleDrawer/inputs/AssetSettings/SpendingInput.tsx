@@ -67,6 +67,7 @@ function SpendingInput({ mode }: { mode: string }) {
           size="small"
           inputProps={{
             style: { textAlign: 'right' },
+            min: 0,
           }}
         />
         <Typography>{SCHEDULE_DRAWER.won}</Typography>
