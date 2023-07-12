@@ -72,7 +72,7 @@ function CategoryList({
       modifySubcategoryAsset(category.type, title, sum, 0);
     } else if (asset !== '-') {
       sum = category.sum - (preValue === '-' ? 0 : +preValue) + parseInt(asset, 10);
-      if (sum > +total) {
+      if (category.total !== '-' && sum > +total) {
         alert('합계가 설정한 카테고리 지출 목표 금액을 넘었습니다.');
         return;
       }
