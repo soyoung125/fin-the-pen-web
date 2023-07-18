@@ -10,6 +10,7 @@ import { useAppDispatch } from '../../../../../app/redux/hooks';
 function SpendingInput({ mode }: { mode: string }) {
   const dispatch = useAppDispatch();
   const schedule = useSelector(selectSchedule);
+  const expectedSpending = schedule ? schedule?.expected_spending : '0';
 
   const changeSpendingType = () => {
     updateSpendingType(dispatch, schedule);
@@ -20,7 +21,7 @@ function SpendingInput({ mode }: { mode: string }) {
   return (
     <Stack direction="row" justifyContent="space-between" alignItems="center" p={1}>
       <Typography>{SCHEDULE_DRAWER.set_spending_title}</Typography>
-      <Stack direction="row" alignItems="center" spacing={1}>
+      <Stack direction="row" justifyContent="end" alignItems="center" spacing={1}>
         {(mode === 'create') || (schedule?.type === SCHEDULE_DRAWER.type_plus)
           ? (
             <Button
@@ -55,10 +56,10 @@ function SpendingInput({ mode }: { mode: string }) {
           : null}
         <TextField
           id="expected_spending"
-          value={schedule?.expected_spending}
-          onChange={(e) => updateSchedule(dispatch, schedule, e)}
+          value={expectedSpending === '' ? '0' : parseInt(expectedSpending, 10).toLocaleString('ko-KR')}
+          onChange={(e) => updateSchedule(dispatch, schedule, {target: { id: 'expected_spending', value: e.target.value.replaceAll(',', '') }})}
           label={SCHEDULE_DRAWER.expected_spending}
-          type="number"
+          type="text"
           onFocus={(e) => e.target.select()}
           InputLabelProps={{
             shrink: true,
