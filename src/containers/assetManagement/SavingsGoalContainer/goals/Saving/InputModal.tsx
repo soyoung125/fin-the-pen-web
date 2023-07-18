@@ -1,5 +1,5 @@
 import {
-  Box, Button, Divider, IconButton, Stack, TextField, Typography, Switch, FormControl, OutlinedInput, InputAdornment,
+  Box, Button, Divider, IconButton, Stack, TextField, Typography, FormControl, OutlinedInput, InputAdornment,
 } from '@mui/material';
 import ClearIcon from '@mui/icons-material/Clear';
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
@@ -9,6 +9,7 @@ import AlertModal from '../../../../../components/common/AlertModal';
 import { selectSavingGoal, setSavingGoal } from '../../../../../app/redux/slices/assetSlice';
 import { useAppDispatch } from '../../../../../app/redux/hooks';
 import useModal from '../../../../../hooks/useModal';
+import SwitchButton from '../../../../../components/common/SwitchButton';
 
 interface InputModalProps {
   closeSavingGoalModal: () => void,
@@ -106,12 +107,9 @@ function InputModal({
           <OutlinedInput
             startAdornment={<InputAdornment position="start">적금액 송금 설정</InputAdornment>}
             endAdornment={(
-              <Switch
+              <SwitchButton
                 checked={form.autoSaving}
-                onChange={() => changeSavingGoal('autoSaving', !form.autoSaving)}
-                sx={{ p: 0, borderRadius: 6 }}
-                size="small"
-                inputProps={{ 'aria-label': 'controlled' }}
+                handleChange={() => changeSavingGoal('autoSaving', !form.autoSaving)}
               />
             )}
             size="small"
@@ -124,12 +122,9 @@ function InputModal({
           <OutlinedInput
             startAdornment={<InputAdornment position="start">팝업창</InputAdornment>}
             endAdornment={(
-              <Switch
+              <SwitchButton
                 checked={form.popUp}
-                onChange={() => changeSavingGoal('popUp', !form.popUp)}
-                sx={{ p: 0, borderRadius: 6 }}
-                size="small"
-                inputProps={{ 'aria-label': 'controlled' }}
+                handleChange={() => changeSavingGoal('popUp', !form.popUp)}
               />
             )}
             size="small"

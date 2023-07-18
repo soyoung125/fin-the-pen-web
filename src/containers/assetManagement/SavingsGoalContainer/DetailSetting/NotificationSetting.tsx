@@ -1,8 +1,9 @@
 import {
-  Stack, Box, Switch, FormControl, OutlinedInput, InputAdornment
+  Stack, Box, FormControl, OutlinedInput, InputAdornment
 } from '@mui/material';
 import RoundedPaper from '../../../../components/common/RoundedPaper';
 import { NotificationInterface } from '../../../../types/common';
+import SwitchButton from '../../../../components/common/SwitchButton';
 
 interface NotificationSettingProps {
   notification: NotificationInterface,
@@ -14,11 +15,9 @@ function NotificationSetting({ notification, handleNotification }: NotificationS
     <RoundedPaper my={1}>
       <Stack direction="row" justifyContent="space-between">
         <Box>저축 알림 설정</Box>
-        <Switch
-          size="small"
-          sx={{ p: 0, borderRadius: 6 }}
+        <SwitchButton
           checked={notification.isOn}
-          onChange={() => handleNotification({ ...notification, isOn: !notification.isOn })}
+          handleChange={() => handleNotification({ ...notification, isOn: !notification.isOn })}
         />
       </Stack>
 

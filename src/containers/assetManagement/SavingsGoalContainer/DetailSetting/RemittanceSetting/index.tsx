@@ -1,5 +1,5 @@
 import {
-  Stack, Box, Switch, FormControl, OutlinedInput, InputAdornment, Select, MenuItem
+  Stack, Box, FormControl, OutlinedInput, InputAdornment, Select, MenuItem
 } from '@mui/material';
 import RoundedPaper from '../../../../../components/common/RoundedPaper';
 import CalendarTodayOutlinedIcon from '@mui/icons-material/CalendarTodayOutlined';
@@ -8,6 +8,7 @@ import { useEffect, useState } from 'react';
 import ModalStaticBackdrop from '../../../../../components/layouts/ModalStaticBackdrop';
 import useModal from '../../../../../hooks/useModal';
 import InputModal from './InputModal';
+import SwitchButton from '../../../../../components/common/SwitchButton';
 
 interface RemittanceSettingProps {
   remittance: RemittanceInterface,
@@ -46,11 +47,9 @@ function RemittanceSetting({ remittance, handleRemittance }: RemittanceSettingPr
     <RoundedPaper my={1}>
       <Stack direction="row" justifyContent="space-between">
         <Box>계좌 송금 설정</Box>
-        <Switch
-          size="small"
-          sx={{ p: 0, borderRadius: 6 }}
+        <SwitchButton
           checked={remittance.isOn}
-          onChange={() => handleRemittance({ ...remittance, isOn: !remittance.isOn })}
+          handleChange={() => handleRemittance({ ...remittance, isOn: !remittance.isOn })}
         />
       </Stack>
 

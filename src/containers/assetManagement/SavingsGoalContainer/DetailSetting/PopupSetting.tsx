@@ -1,8 +1,9 @@
 import {
-  Stack, Box, Switch, InputAdornment, FormControl, Select, MenuItem
+  Stack, Box, InputAdornment, FormControl, Select, MenuItem
 } from '@mui/material';
 import RoundedPaper from '../../../../components/common/RoundedPaper';
 import { PopupInterface } from '../../../../types/common';
+import SwitchButton from '../../../../components/common/SwitchButton';
 
 interface PopupSettingProps {
   popup: PopupInterface,
@@ -23,11 +24,9 @@ function PopupSetting({ popup, handlePopup }: PopupSettingProps) {
     <RoundedPaper my={1}>
       <Stack direction="row" justifyContent="space-between">
         <Box>팝업창 설정</Box>
-        <Switch
-          size="small"
-          sx={{ p: 0, borderRadius: 6 }}
+        <SwitchButton
           checked={popup.isOn}
-          onChange={() => handlePopup({ ...popup, isOn: !popup.isOn })}
+          handleChange={() => handlePopup({ ...popup, isOn: !popup.isOn })}
         />
       </Stack>
 

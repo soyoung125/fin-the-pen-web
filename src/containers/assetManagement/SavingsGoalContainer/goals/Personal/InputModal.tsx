@@ -1,6 +1,6 @@
 import {
   Box, Button, Divider, FormControl, IconButton,
-  InputAdornment, OutlinedInput, Stack, Switch, TextField, Typography,
+  InputAdornment, OutlinedInput, Stack, TextField, Typography,
 } from '@mui/material';
 import ClearIcon from '@mui/icons-material/Clear';
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
@@ -11,6 +11,7 @@ import { selectPersonalGoal, setPersonalGoal } from '../../../../../app/redux/sl
 import AlertModal from '../../../../../components/common/AlertModal';
 import { useAppDispatch } from '../../../../../app/redux/hooks';
 import useModal from '../../../../../hooks/useModal';
+import SwitchButton from '../../../../../components/common/SwitchButton';
 
 interface InputModalProps {
   setPersonalGoalModalOpen: React.Dispatch<React.SetStateAction<boolean>>,
@@ -193,15 +194,14 @@ function InputModal({
           <OutlinedInput
             startAdornment={<InputAdornment position="start">적금액 송금 설정</InputAdornment>}
             endAdornment={(
-              <Switch
+              <SwitchButton
                 checked={form.autoSaving}
-                onChange={() => changePersonalGoal({
+                handleChange={() => changePersonalGoal({
                   target: {
                     id: 'autoSaving',
                     value: !form.autoSaving,
                   },
                 })}
-                inputProps={{ 'aria-label': 'controlled' }}
               />
             )}
             size="small"
@@ -214,15 +214,14 @@ function InputModal({
           <OutlinedInput
             startAdornment={<InputAdornment position="start">팝업창</InputAdornment>}
             endAdornment={(
-              <Switch
+              <SwitchButton
                 checked={form.popUp}
-                onChange={() => changePersonalGoal({
+                handleChange={() => changePersonalGoal({
                   target: {
                     id: 'popUp',
                     value: !form.popUp,
                   },
                 })}
-                inputProps={{ 'aria-label': 'controlled' }}
               />
             )}
             size="small"
