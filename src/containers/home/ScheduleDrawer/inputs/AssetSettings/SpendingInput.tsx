@@ -20,7 +20,7 @@ function SpendingInput({ mode }: { mode: string }) {
   };
   return (
     <Stack direction="row" justifyContent="space-between" alignItems="center" p={1}>
-      <Typography>{SCHEDULE_DRAWER.set_spending_title}</Typography>
+      <Typography sx={{ width: '80px'}}>{SCHEDULE_DRAWER.set_spending_title}</Typography>
       <Stack direction="row" justifyContent="end" alignItems="center" spacing={1}>
         {(mode === 'create') || (schedule?.type === SCHEDULE_DRAWER.type_plus)
           ? (
@@ -64,7 +64,7 @@ function SpendingInput({ mode }: { mode: string }) {
           InputLabelProps={{
             shrink: true,
           }}
-          sx={{ width: '20vw' }}
+          sx={{ width: '50%' }}
           size="small"
           inputProps={{
             style: { textAlign: 'right' },
