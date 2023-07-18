@@ -16,6 +16,7 @@ import CategoryTypeBadge from "../../../../../components/common/CategoryTypeBadg
 import { Schedule } from "../../../../../types/schedule";
 import { Category } from "../../../../../domain/constants/categories";
 import { useAppDispatch } from "../../../../../app/redux/hooks";
+import { useState } from "react";
 
 interface ScheduleCardProps {
   schedule: Schedule;
@@ -25,6 +26,7 @@ interface ScheduleCardProps {
 
 function ScheduleCard({ schedule, handleModal, category }: ScheduleCardProps) {
   const dispatch = useAppDispatch();
+  const [recommendedSpendingAmount, setRecommendedSpendingAmount] = useState((Math.floor(Math.random() * 100) + 1) *  100);
 
   const handleClose = () => {
     dispatch(setBottomDrawerOpenFalse());
@@ -81,7 +83,7 @@ function ScheduleCard({ schedule, handleModal, category }: ScheduleCardProps) {
                     console.log("소비추천금액 적용하기");
                   }}
                 >
-                  <Box>소비추천금액 8,000원</Box>
+                  <Box>소비추천금액 {recommendedSpendingAmount.toLocaleString('ko-KR')}원</Box>
                 </Box>
               </Stack>
               <Stack
