@@ -11,12 +11,15 @@ import SettingsIcon from "@mui/icons-material/Settings";
 import { grey } from "@mui/material/colors";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { deleteSelectedSchedule } from "../../../../../domain/tools";
-import { setBottomDrawerOpenFalse } from "../../../../../app/redux/slices/commonSlice";
+import { selectGuestMode, setBottomDrawerOpenFalse } from "../../../../../app/redux/slices/commonSlice";
 import CategoryTypeBadge from "../../../../../components/common/CategoryTypeBadge";
 import { Schedule } from "../../../../../types/schedule";
 import { Category } from "../../../../../domain/constants/categories";
-import { useAppDispatch } from "../../../../../app/redux/hooks";
+import { useAppDispatch, useAppSelector } from "../../../../../app/redux/hooks";
 import { useState } from "react";
+import { updateSchedule } from "../../../ScheduleDrawer/domain/schedule";
+import { modifySchedule } from "../../../../../app/redux/slices/scheduleSlice";
+import { NOT_AVAILABLE } from "../../../../../domain/constants/messages";
 
 interface ScheduleCardProps {
   schedule: Schedule;
@@ -26,10 +29,25 @@ interface ScheduleCardProps {
 
 function ScheduleCard({ schedule, handleModal, category }: ScheduleCardProps) {
   const dispatch = useAppDispatch();
-  const [recommendedSpendingAmount, setRecommendedSpendingAmount] = useState((Math.floor(Math.random() * 100) + 1) *  100);
+  const guestMode = useAppSelector(selectGuestMode);
+  const [recommendedSpendingAmount, setRecommendedSpendingAmount] = useState(50000);
 
+  console.log(+schedule.expected_spending === recommendedSpendingAmount)
+  console.log(recommendedSpendingAmount)
   const handleClose = () => {
     dispatch(setBottomDrawerOpenFalse());
+  };
+
+  const handleModify = async () => {
+    /**
+     * 함수 완성되면 그 때 외부 모듈로 분리하겠습니다.
+     */
+    if (guestMode) {
+      dispatch(modifySchedule({ ...schedule, expected_spending: recommendedSpendingAmount }));
+      handleClose();
+    } else {
+      alert(NOT_AVAILABLE);
+    }
   };
 
   return (
@@ -57,7 +75,7 @@ function ScheduleCard({ schedule, handleModal, category }: ScheduleCardProps) {
                   <CategoryTypeBadge color={category.color} mr={2} />
                   <Typography variant="caption">{`${schedule.start_time} - ${schedule.end_time}`}</Typography>
                 </Stack>
-                <Box
+                {+schedule.expected_spending !== recommendedSpendingAmount && <Box
                   sx={{
                     backgroundColor: "primary.main",
                     color: "#FFFFFF",
@@ -69,10 +87,11 @@ function ScheduleCard({ schedule, handleModal, category }: ScheduleCardProps) {
                   onClick={(e) => {
                     e.stopPropagation();
                     console.log("소비추천금액 적용하기");
+                    handleModify();
                   }}
                 >
                   <Box>소비추천금액 {recommendedSpendingAmount.toLocaleString('ko-KR')}원</Box>
-                </Box>
+                </Box>}
               </Stack>
               <Stack
                 direction="row"
@@ -85,7 +104,7 @@ function ScheduleCard({ schedule, handleModal, category }: ScheduleCardProps) {
                 </Typography>
 
                 {/* 색상은 실제 소비 내역 데이터 연동 후 바꿀 예정 */}
-                <Typography sx={{ color: grey[500] }}>
+                <Typography sx={{ color: +schedule.expected_spending === recommendedSpendingAmount ? '#5AC8FA' : grey[500] }}>
                   {`${schedule.type}${parseInt(
                     schedule.expected_spending,
                     10
