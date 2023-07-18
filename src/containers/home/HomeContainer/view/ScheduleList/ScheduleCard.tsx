@@ -48,18 +48,6 @@ function ScheduleCard({ schedule, handleModal, category }: ScheduleCardProps) {
         <SwiperSlide>
           <CardActionArea onClick={() => handleModal(schedule)}>
             <Box px={3} py={2}>
-              {/* <Stack
-                sx={{
-                  backgroundColor: 'primary.main',
-                  color: '#FFFFFF',
-                  p: 1,
-                  fontSize: 'smaller',
-                  borderRadius: '10px',
-                }}
-              >
-                <Box>소비추천금액</Box>
-                <Box>8,000원</Box>
-              </Stack> */}
               <Stack
                 direction="row"
                 justifyContent="space-between"
