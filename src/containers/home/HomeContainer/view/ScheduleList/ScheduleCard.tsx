@@ -17,7 +17,6 @@ import { Schedule } from "../../../../../types/schedule";
 import { Category } from "../../../../../domain/constants/categories";
 import { useAppDispatch, useAppSelector } from "../../../../../app/redux/hooks";
 import { useState } from "react";
-import { updateSchedule } from "../../../ScheduleDrawer/domain/schedule";
 import { modifySchedule } from "../../../../../app/redux/slices/scheduleSlice";
 import { NOT_AVAILABLE } from "../../../../../domain/constants/messages";
 
@@ -30,10 +29,8 @@ interface ScheduleCardProps {
 function ScheduleCard({ schedule, handleModal, category }: ScheduleCardProps) {
   const dispatch = useAppDispatch();
   const guestMode = useAppSelector(selectGuestMode);
-  const [recommendedSpendingAmount, setRecommendedSpendingAmount] = useState(50000);
+  const recommendedSpendingAmount = 50000;
 
-  console.log(+schedule.expected_spending === recommendedSpendingAmount)
-  console.log(recommendedSpendingAmount)
   const handleClose = () => {
     dispatch(setBottomDrawerOpenFalse());
   };
