@@ -6,6 +6,7 @@ import LogoButton from '../buttons/LogoButton';
 import RoundedButton from '../../../../../components/common/RoundedButton';
 import PATH from '../../../../../domain/constants/path';
 import PersonalButton from '../buttons/PersonalButton';
+import FilterButton from '../buttons/FilterButton';
 
 function HomeMode() {
   const navigate = useNavigate();
@@ -18,6 +19,7 @@ function HomeMode() {
         alignItems="center"
       >
         <LogoButton />
+        <FilterButton />
       </Stack>
 
       {/* 헤더 중앙 메뉴 */}
