@@ -1,5 +1,4 @@
 import { Stack } from '@mui/material';
-import SearchIcon from '@mui/icons-material/Search';
 import NotificationsOutlinedIcon from '@mui/icons-material/NotificationsOutlined';
 import { useNavigate } from 'react-router-dom';
 import LogoButton from '../buttons/LogoButton';
@@ -7,6 +6,7 @@ import RoundedButton from '../../../../../components/common/RoundedButton';
 import PATH from '../../../../../domain/constants/path';
 import PersonalButton from '../buttons/PersonalButton';
 import FilterButton from '../buttons/FilterButton';
+import SearchButton from '../buttons/SearchButton';
 
 function HomeMode() {
   const navigate = useNavigate();
@@ -35,9 +35,7 @@ function HomeMode() {
         justifyContent="space-between"
         alignItems="center"
       >
-        <RoundedButton value="user" onClick={() => alert('준비 중인 메뉴')}>
-          <SearchIcon />
-        </RoundedButton>
+        <SearchButton />
         <RoundedButton value="notification" onClick={() => navigate(PATH.notification)}>
           <NotificationsOutlinedIcon />
         </RoundedButton>
