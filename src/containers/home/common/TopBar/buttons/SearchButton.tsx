@@ -1,6 +1,8 @@
-import { Box, Popover, Typography } from "@mui/material";
+import { Box, Popover, Typography, Stack } from "@mui/material";
 import RoundedButton from "../../../../../components/common/RoundedButton";
 import SearchIcon from '@mui/icons-material/Search';
+import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
+import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight';
 import { useRef, useState } from "react";
 
 function SearchButton() {
@@ -40,7 +42,16 @@ function SearchButton() {
                     horizontal: 'left',
                 }}
             >
-                <Typography sx={{ p: 2 }}>The content of the Popover.</Typography>
+                <Stack p={1} spacing={1}>
+                    <Stack direction="row" justifyContent="space-between">
+                        <Typography variant="caption">My 일정 검색하기</Typography>
+                        <KeyboardArrowRightIcon fontSize="small" />
+                    </Stack>
+                    <Stack direction="row" spacing={2}>
+                        <Typography variant="caption">My 결제 내역 불러오기</Typography>
+                        <KeyboardArrowRightIcon fontSize="small" />
+                    </Stack>
+                </Stack>
             </Popover>
         </>
     );
