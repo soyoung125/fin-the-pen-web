@@ -15,11 +15,15 @@ import Change from './version/Change';
 import { setIsAuthenticatedFalse } from '../../app/redux/slices/commonSlice';
 import { useAppDispatch, useAppSelector } from '../../app/redux/hooks';
 import { selectIsBudgetHidden } from '../../app/redux/slices/settingSlice';
+import useHeader from '../../hooks/useHeader';
+import { HEADER_MODE } from '../../domain/constants/common';
 
 export default function SettingsContainer() {
   const dispatch = useAppDispatch();
   const isHideBudgetMode = useAppSelector(selectIsBudgetHidden);
   const userAgent = navigator.userAgent.toLowerCase();
+
+  useHeader(true, HEADER_MODE.settings);
 
   useEffect(() => {
     if (isHideBudgetMode) {

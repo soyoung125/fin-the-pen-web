@@ -13,6 +13,7 @@ export type HeaderModeValue = HeaderMode[keyof HeaderMode];
 export interface HeaderMode {
   analysis: "analysis";
   home: "home";
+  settings: "settings";
 }
 
 export type AsyncThunkStatusValue = AsyncThunkStatus[keyof AsyncThunkStatus];

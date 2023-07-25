@@ -9,12 +9,16 @@ import SwitchingHeader from '../../common/SwitchingHeader';
 import EasyAuthentication from '../../../containers/sign/EasyAuthentication';
 import { selectIsAuthenticated } from '../../../app/redux/slices/commonSlice';
 import { useAppSelector } from '../../../app/redux/hooks';
+import useHeader from '../../../hooks/useHeader';
+import { HEADER_MODE } from '../../../domain/constants/common';
 
 function ManagementLayout() {
   const location = useLocation();
   const navigate = useNavigate();
   const isAuthenticated = useAppSelector(selectIsAuthenticated);
   const [management, setManagement] = useState(0);
+
+  useHeader(true, HEADER_MODE.settings);
 
   useEffect(() => {
     setManagement(assetManagements.findIndex((s) => s.path === location.pathname));

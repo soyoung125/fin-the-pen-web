@@ -11,6 +11,7 @@ import { selectSavingPopUpSetting } from '../../../../app/redux/slices/assetSlic
 import PopupButton from './buttons/PopupButton';
 import { useNavigate } from 'react-router-dom';
 import PATH from '../../../../domain/constants/path';
+import SettingsMode from './headerMode/SettingsMode';
 
 function TopBar() {
   const navigate = useNavigate();
@@ -59,6 +60,7 @@ function TopBar() {
             >
               {headerMode === 'home' && (<HomeMode />)}
               {headerMode === 'analysis' && (<AnalysisMode />)}
+              {headerMode === 'settings' && (<SettingsMode />)}
             </Stack>
             {popupSetting.isOn &&
               <PopupButton handleClickPopup={handleClickPopup} />

@@ -12,6 +12,7 @@ import {
 } from '../../../app/redux/slices/scheduleSlice';
 import { AnalysisData } from '../../../types/common';
 import { useAppDispatch } from '../../../app/redux/hooks';
+import { HEADER_MODE } from '../../../domain/constants/common';
 
 function AnalysisContainer() {
   const dispatch = useAppDispatch();
@@ -20,7 +21,7 @@ function AnalysisContainer() {
   const { data, total } = useSelector(selectAnalyzedData);
   const [widthRatio, setWidthRatio] = useState(1);
 
-  useHeader(true, 'analysis');
+  useHeader(true, HEADER_MODE.analysis);
 
   useEffect(() => {
     // resize 이벤트 핸들러

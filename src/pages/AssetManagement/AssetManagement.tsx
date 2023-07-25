@@ -9,12 +9,16 @@ import { setIsAuthenticatedFalse } from '../../app/redux/slices/commonSlice';
 import { selectUser } from '../../app/redux/slices/userSlice';
 import useSchedule from '../../hooks/useSchedule';
 import { useAppDispatch, useAppSelector } from '../../app/redux/hooks';
+import useHeader from '../../hooks/useHeader';
+import { HEADER_MODE } from '../../domain/constants/common';
 
 function AssetManagement() {
   const dispatch = useAppDispatch();
   const { schedules } = useSchedule();
   const user = useAppSelector(selectUser);
   const today = moment();
+
+  useHeader(true, HEADER_MODE.settings);
 
   useEffect(() => {
     dispatch(setIsAuthenticatedFalse());

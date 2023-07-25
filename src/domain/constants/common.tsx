@@ -9,6 +9,7 @@ export const ASYNC_THUNK_STATUS: AsyncThunkStatus = {
 export const HEADER_MODE: HeaderMode = {
   analysis: 'analysis',
   home: 'home',
+  settings: 'settings',
 };
 
 export default null;
