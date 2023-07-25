@@ -7,13 +7,17 @@ import { selectIsAuthenticated, setIsAuthenticatedFalse } from '../../../app/red
 import AnalysisHeader from '../../../containers/analysis/AnalysisHeader';
 import { selectedDate } from '../../../app/redux/slices/scheduleSlice';
 import { useAppDispatch, useAppSelector } from '../../../app/redux/hooks';
+import { selectIsBudgetHidden } from '../../../app/redux/slices/settingSlice';
 
 function AnalysisLayout() {
   const isAuthenticated = useAppSelector(selectIsAuthenticated);
+  const isHideBudgetMode = useAppSelector(selectIsBudgetHidden);
   const dispatch = useAppDispatch();
 
   useEffect(() => {
-    dispatch(setIsAuthenticatedFalse());
+    if (isHideBudgetMode) {
+      dispatch(setIsAuthenticatedFalse());
+    }
     dispatch(selectedDate(moment(new Date())));
   }, []);
 

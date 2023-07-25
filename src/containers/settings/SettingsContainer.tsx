@@ -13,14 +13,18 @@ import AccordionSummary from '../../components/common/accordions/AccordionSummar
 import AccordionDetails from '../../components/common/accordions/AccordionDetails';
 import Change from './version/Change';
 import { setIsAuthenticatedFalse } from '../../app/redux/slices/commonSlice';
-import { useAppDispatch } from '../../app/redux/hooks';
+import { useAppDispatch, useAppSelector } from '../../app/redux/hooks';
+import { selectIsBudgetHidden } from '../../app/redux/slices/settingSlice';
 
 export default function SettingsContainer() {
   const dispatch = useAppDispatch();
+  const isHideBudgetMode = useAppSelector(selectIsBudgetHidden);
   const userAgent = navigator.userAgent.toLowerCase();
 
   useEffect(() => {
-    dispatch(setIsAuthenticatedFalse());
+    if (isHideBudgetMode) {
+      dispatch(setIsAuthenticatedFalse());
+    }
   }, []);
 
   const clickBank = () => {

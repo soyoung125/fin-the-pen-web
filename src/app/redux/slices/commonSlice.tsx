@@ -18,7 +18,7 @@ const initialState: CommonState = {
   guestMode: false,
   bottomDrawerOpen: false,
   bottomDrawerTabMenu: 0,
-  isAuthenticated: false,
+  isAuthenticated: true,
 };
 
 export const commonSlice = createSlice({

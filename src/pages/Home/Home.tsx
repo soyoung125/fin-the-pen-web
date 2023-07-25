@@ -20,6 +20,7 @@ import ScheduleView from "../../containers/home/ScheduleView";
 import AssetView from "../../containers/home/AssetView";
 import { VIEW_MODE } from "../../domain/constants/schedule";
 import { useAppDispatch, useAppSelector } from "../../app/redux/hooks";
+import { selectIsBudgetHidden } from "../../app/redux/slices/settingSlice";
 
 function Home() {
   const dispatch = useAppDispatch();
@@ -27,10 +28,13 @@ function Home() {
   const date = useAppSelector(selectDate);
   const user = useAppSelector(selectUser);
   const guestMode = useAppSelector(selectGuestMode);
+  const isHideBudgetMode = useAppSelector(selectIsBudgetHidden);
 
   useEffect(() => {
     dispatch(changeViewMode(VIEW_MODE.schedule));
-    dispatch(setIsAuthenticatedFalse());
+    if (isHideBudgetMode) {
+      dispatch(setIsAuthenticatedFalse());
+    }
   }, []);
 
   useHeader(true, HEADER_MODE.home);
