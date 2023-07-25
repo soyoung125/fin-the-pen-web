@@ -104,8 +104,29 @@ function ScheduleCard({ schedule, handleModal, category }: ScheduleCardProps) {
                 </Typography>
 
                 {/* 색상은 실제 소비 내역 데이터 연동 후 바꿀 예정 */}
-                {isHideBudgetMode ?  <LockIcon/> : 
-                <Typography sx={{ color: +schedule.expected_spending === recommendedSpendingAmount ? '#5AC8FA' : grey[500] }}>
+                {isHideBudgetMode ?
+                  <Box
+                    sx={{
+                      p: 0.5,
+                      position: 'relative',
+                      overflow: 'visible',
+                      borderRadius: 5,
+                    }}
+                  >
+                    <Box
+                      sx={{
+                        width: '100%',
+                        height: '100%',
+                        position: 'absolute',
+                        top: 0,
+                        left: 0,
+                        zIndex: -1,
+                        filter: 'blur(10px)',
+                        backgroundColor: 'primary.main',
+                      }} />
+                      <LockIcon />
+                  </Box>
+                  : <Typography sx={{ color: +schedule.expected_spending === recommendedSpendingAmount ? '#5AC8FA' : grey[500] }}>
                   {`${schedule.type}${parseInt(
                     schedule.expected_spending,
                     10
