@@ -38,6 +38,12 @@ function ScheduleCard({ schedule, handleModal, category }: ScheduleCardProps) {
     dispatch(setBottomDrawerOpenFalse());
   };
 
+  const handleModifyModal = () => {
+    if(!isHideBudgetMode) {
+      handleModal(schedule)
+    }
+  }
+
   const handleModify = async () => {
     /**
      * 함수 완성되면 그 때 외부 모듈로 분리하겠습니다.
@@ -64,7 +70,7 @@ function ScheduleCard({ schedule, handleModal, category }: ScheduleCardProps) {
           </Button>
         </SwiperSlide>
         <SwiperSlide>
-          <CardActionArea onClick={() => handleModal(schedule)}>
+          <CardActionArea onClick={() => handleModifyModal()}>
             <Box px={3} py={2}>
               <Stack
                 direction="row"
@@ -137,7 +143,7 @@ function ScheduleCard({ schedule, handleModal, category }: ScheduleCardProps) {
           </CardActionArea>
         </SwiperSlide>
         <SwiperSlide style={{ display: "flex", width: "auto", height: "auto" }}>
-          <Button variant="contained" onClick={() => handleModal(schedule)}>
+          <Button variant="contained" onClick={() => handleModifyModal()}>
             <SettingsIcon fontSize="large" />
           </Button>
         </SwiperSlide>
