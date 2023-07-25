@@ -8,6 +8,7 @@ import {
 } from "@mui/material";
 import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
 import SettingsIcon from "@mui/icons-material/Settings";
+import LockIcon from '@mui/icons-material/Lock';
 import { grey } from "@mui/material/colors";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { deleteSelectedSchedule } from "../../../../../domain/tools";
@@ -19,6 +20,7 @@ import { useAppDispatch, useAppSelector } from "../../../../../app/redux/hooks";
 import { useState } from "react";
 import { modifySchedule } from "../../../../../app/redux/slices/scheduleSlice";
 import { NOT_AVAILABLE } from "../../../../../domain/constants/messages";
+import { selectIsBudgetHidden } from "../../../../../app/redux/slices/settingSlice";
 
 interface ScheduleCardProps {
   schedule: Schedule;
@@ -29,6 +31,7 @@ interface ScheduleCardProps {
 function ScheduleCard({ schedule, handleModal, category }: ScheduleCardProps) {
   const dispatch = useAppDispatch();
   const guestMode = useAppSelector(selectGuestMode);
+  const isHideBudgetMode = useAppSelector(selectIsBudgetHidden);
   const recommendedSpendingAmount = 50000;
 
   const handleClose = () => {
@@ -72,7 +75,7 @@ function ScheduleCard({ schedule, handleModal, category }: ScheduleCardProps) {
                   <CategoryTypeBadge color={category.color} mr={2} />
                   <Typography variant="caption">{`${schedule.start_time} - ${schedule.end_time}`}</Typography>
                 </Stack>
-                {+schedule.expected_spending !== recommendedSpendingAmount && <Box
+                {!isHideBudgetMode && (+schedule.expected_spending !== recommendedSpendingAmount) && <Box
                   sx={{
                     backgroundColor: "primary.main",
                     color: "#FFFFFF",
@@ -101,12 +104,13 @@ function ScheduleCard({ schedule, handleModal, category }: ScheduleCardProps) {
                 </Typography>
 
                 {/* 색상은 실제 소비 내역 데이터 연동 후 바꿀 예정 */}
+                {isHideBudgetMode ?  <LockIcon/> : 
                 <Typography sx={{ color: +schedule.expected_spending === recommendedSpendingAmount ? '#5AC8FA' : grey[500] }}>
                   {`${schedule.type}${parseInt(
                     schedule.expected_spending,
                     10
                   ).toLocaleString("ko-KR")}`}
-                </Typography>
+                </Typography>}
               </Stack>
             </Box>
           </CardActionArea>
