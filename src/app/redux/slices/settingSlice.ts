@@ -45,11 +45,15 @@ export const settingSlice = createSlice({
     changeThemeMode: (state, action) => {
       state.settings.다크모드 = action.payload;
     },
+    changeHideBudgetMode: (state, action) => {
+      state.settings.예산숨김 = action.payload;
+    },
   },
 });
-export const { updateSettings, changeThemeMode } = settingSlice.actions;
+export const { updateSettings, changeThemeMode, changeHideBudgetMode } = settingSlice.actions;
 
 export const selectSettings = (state: RootState) => state.setting.settings;
 export const selectIsDarkMode = (state: RootState) => state.setting.settings.다크모드;
+export const selectIsBudgetHidden = (state: RootState) => state.setting.settings.예산숨김;
 
 export default settingSlice.reducer;
