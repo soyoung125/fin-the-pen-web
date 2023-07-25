@@ -1,4 +1,4 @@
-import { Box, Popover, Typography, Stack } from "@mui/material";
+import { Box, Popover, Typography, Stack, ButtonBase, List, ListItem, IconButton, ListItemText, ListItemButton } from "@mui/material";
 import RoundedButton from "../../../../../components/common/RoundedButton";
 import SearchIcon from '@mui/icons-material/Search';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
@@ -42,16 +42,39 @@ function SearchButton() {
                     horizontal: 'left',
                 }}
             >
-                <Stack p={1} spacing={1}>
-                    <Stack direction="row" justifyContent="space-between">
-                        <Typography variant="caption">My 일정 검색하기</Typography>
-                        <KeyboardArrowRightIcon fontSize="small" />
-                    </Stack>
-                    <Stack direction="row" spacing={2}>
-                        <Typography variant="caption">My 결제 내역 불러오기</Typography>
-                        <KeyboardArrowRightIcon fontSize="small" />
-                    </Stack>
-                </Stack>
+                <List dense>
+                    <ListItem
+                        secondaryAction={
+                            <IconButton edge="end">
+                                <KeyboardArrowRightIcon />
+                            </IconButton>
+                        }
+                        disablePadding
+                        onClick={() => alert('일정 검색')}
+                    >
+                        <ListItemButton>
+                            <ListItemText
+                                primary="My 일정 검색하기"
+                            />
+                        </ListItemButton>
+                    </ListItem>
+
+                    <ListItem
+                        secondaryAction={
+                            <IconButton edge="end">
+                                <KeyboardArrowRightIcon />
+                            </IconButton>
+                        }
+                        disablePadding
+                        onClick={() => alert('결제 내역 불러오기')}
+                    >
+                        <ListItemButton>
+                            <ListItemText
+                                primary="My 결제 내역 불러오기"
+                            />
+                        </ListItemButton>
+                    </ListItem>
+                </List>
             </Popover>
         </>
     );
