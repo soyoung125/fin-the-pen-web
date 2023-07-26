@@ -1,6 +1,7 @@
 import {
   Box,
   Button,
+  ButtonBase,
   CardActionArea,
   Divider,
   Stack,
@@ -21,6 +22,8 @@ import { useState } from "react";
 import { modifySchedule } from "../../../../../app/redux/slices/scheduleSlice";
 import { NOT_AVAILABLE } from "../../../../../domain/constants/messages";
 import { selectIsBudgetHidden } from "../../../../../app/redux/slices/settingSlice";
+import useModal from "../../../../../hooks/useModal";
+import AlertModal from "../../../../../components/common/AlertModal";
 
 interface ScheduleCardProps {
   schedule: Schedule;
@@ -36,6 +39,12 @@ function ScheduleCard({ schedule, handleModal, category }: ScheduleCardProps) {
   const isSpend = schedule.type === '-';
   const isSameWithRecomend = +schedule.expected_spending === recommendedSpendingAmount;
   const color = isSpend ? '#5AC8FA' : '#FA5A5A';
+
+  const {
+    modalOpen: alertModalOpen,
+    openModal: openAlertModal,
+    closeModal: closeAlertModal
+  } = useModal();
 
   const handleClose = () => {
     dispatch(setBottomDrawerOpenFalse());
@@ -121,6 +130,10 @@ function ScheduleCard({ schedule, handleModal, category }: ScheduleCardProps) {
                       overflow: 'visible',
                       borderRadius: 5,
                     }}
+                    onClick={(e) => {
+                      e.preventDefault();
+                      openAlertModal();
+                    }}
                   >
                     <Box
                       sx={{
@@ -153,6 +166,15 @@ function ScheduleCard({ schedule, handleModal, category }: ScheduleCardProps) {
       </Swiper>
 
       <Divider />
+
+      <AlertModal
+        open={alertModalOpen}
+        handleClose={closeAlertModal}
+        handleClickYes={() => {
+          closeAlertModal();
+        } }
+        mode="hideBudget"
+      />
     </>
   );
 }

@@ -46,6 +46,7 @@ const CONTROLLING_ALERT = {
   modify: '정보를 수정하시겠습니까?',
   reset: '모든 정보를 초기화하시겠습니까?',
   delete: '정보를 삭제하시겠습니까?',
+  hideBudget: '예산숨기기 기능을 해제하시겠습니까?',
 } as const;
 
 export { CONSUMPTION_ALERTS, CONTROLLING_ALERT };

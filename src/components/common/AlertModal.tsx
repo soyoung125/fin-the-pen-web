@@ -10,7 +10,7 @@ interface AlertModalProps {
   open: boolean,
   handleClose: () => void,
   handleClickYes: () => void,
-  mode: "setting" | "modify" | "reset" | "delete",
+  mode: "setting" | "modify" | "reset" | "delete" | 'hideBudget',
 }
 
 function AlertModal(props: AlertModalProps) {
