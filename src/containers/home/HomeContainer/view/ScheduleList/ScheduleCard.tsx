@@ -35,6 +35,7 @@ function ScheduleCard({ schedule, handleModal, category }: ScheduleCardProps) {
   const isHideBudgetMode = useAppSelector(selectIsBudgetHidden);
   const isSpend = schedule.type === '-';
   const isSameWithRecomend = +schedule.expected_spending === recommendedSpendingAmount;
+  const color = isSpend ? '#5AC8FA' : '#FA5A5A';
 
   const handleClose = () => {
     dispatch(setBottomDrawerOpenFalse());
@@ -134,7 +135,7 @@ function ScheduleCard({ schedule, handleModal, category }: ScheduleCardProps) {
                       }} />
                       <LockIcon />
                   </Box>
-                  : <Typography sx={{ color: isSameWithRecomend ? '#5AC8FA' : grey[500] }}>
+                  : <Typography sx={{ color: isSameWithRecomend ? color : grey[500] }}>
                   {`${schedule.type}${parseInt(
                     schedule.expected_spending,
                     10
