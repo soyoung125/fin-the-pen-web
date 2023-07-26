@@ -31,8 +31,10 @@ interface ScheduleCardProps {
 function ScheduleCard({ schedule, handleModal, category }: ScheduleCardProps) {
   const dispatch = useAppDispatch();
   const guestMode = useAppSelector(selectGuestMode);
-  const isHideBudgetMode = useAppSelector(selectIsBudgetHidden);
   const recommendedSpendingAmount = 50000;
+  const isHideBudgetMode = useAppSelector(selectIsBudgetHidden);
+  const isSpend = schedule.type === '-';
+  const isSameWithRecomend = +schedule.expected_spending === recommendedSpendingAmount;
 
   const handleClose = () => {
     dispatch(setBottomDrawerOpenFalse());
@@ -81,7 +83,7 @@ function ScheduleCard({ schedule, handleModal, category }: ScheduleCardProps) {
                   <CategoryTypeBadge color={category.color} mr={2} />
                   <Typography variant="caption">{`${schedule.start_time} - ${schedule.end_time}`}</Typography>
                 </Stack>
-                {!isHideBudgetMode && (+schedule.expected_spending !== recommendedSpendingAmount) && <Box
+                {!isHideBudgetMode && isSpend && !isSameWithRecomend && <Box
                   sx={{
                     backgroundColor: "primary.main",
                     color: "#FFFFFF",
@@ -132,7 +134,7 @@ function ScheduleCard({ schedule, handleModal, category }: ScheduleCardProps) {
                       }} />
                       <LockIcon />
                   </Box>
-                  : <Typography sx={{ color: +schedule.expected_spending === recommendedSpendingAmount ? '#5AC8FA' : grey[500] }}>
+                  : <Typography sx={{ color: isSameWithRecomend ? '#5AC8FA' : grey[500] }}>
                   {`${schedule.type}${parseInt(
                     schedule.expected_spending,
                     10
