@@ -22,7 +22,7 @@ function SearchButton() {
         connectedId: '',
         startDate: '',
         endDate: '',
-        orderBy: 0,
+        orderBy: '0',
     })
     const searchBtn = useRef(null);
 
@@ -71,6 +71,16 @@ function SearchButton() {
 
     const changeDetailInfo = (e: { target: { id: string; value: string | number; }; }) => {
         setForm({ ...form, [e.target.id]: e.target.value })
+    }
+
+    const handleSubmit = () => {
+        if (selected === 'card') {
+            alert('카드로 거래 내역 조회')
+        } else if(selected === 'account') {
+            console.log({...form, endDate: form.endDate.replaceAll('-', ''), startDate: form.startDate.replaceAll('-', '')});
+        }
+        setSelected(null);
+        closePaymentHistoryModal();
     }
 
     const open = Boolean(anchorEl);
@@ -190,8 +200,8 @@ function SearchButton() {
                                         value={form.orderBy}
                                         onChange={(e) => changeDetailInfo({target: {id: 'orderBy', value: e.target.value}})}
                                     >
-                                        <MenuItem value={0}>오름차순</MenuItem>
-                                        <MenuItem value={1}>내림차순</MenuItem>
+                                        <MenuItem value={'0'}>오름차순</MenuItem>
+                                        <MenuItem value={'1'}>내림차순</MenuItem>
                                     </Select>
                                 </Stack>
                                 : <Grid container spacing={1} sx={{ textAlign: 'center', wordBreak: 'keep-all' }}>
@@ -215,7 +225,7 @@ function SearchButton() {
                                     </Grid>
                                 </Grid>
                             }
-                            <Button variant="contained" fullWidth sx={{ marginTop: 2 }}>조회하기</Button>
+                            <Button variant="contained" fullWidth sx={{ marginTop: 2 }} onClick={handleSubmit}>조회하기</Button>
                         </RoundedPaper>
                     </Stack>
                 )}
