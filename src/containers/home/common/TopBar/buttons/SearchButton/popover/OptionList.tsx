@@ -3,9 +3,10 @@ import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight';
 
 interface OptionListProps {
     openSearchInput: () => void;
+    handleOpenModal: () => void;
 }
 
-function OptionList({ openSearchInput }: OptionListProps) {
+function OptionList({ openSearchInput, handleOpenModal }: OptionListProps) {
     return (
         <List dense>
             <ListItem
@@ -31,7 +32,7 @@ function OptionList({ openSearchInput }: OptionListProps) {
                     </IconButton>
                 }
                 disablePadding
-                onClick={() => alert('결제 내역 불러오기')}
+                onClick={handleOpenModal}
             >
                 <ListItemButton>
                     <ListItemText
