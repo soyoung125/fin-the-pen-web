@@ -90,3 +90,16 @@ export const fetchMonthSchedules = async (
     console.log(err);
   }
 };
+
+export const fetchGetTransavrionList =async (data: any) => {
+  try {
+    const response: AxiosResponse<any[]> = await axios.post<any[]>(
+      "/codef/occasionalAccount",
+      data
+    );
+    const result = response.data;
+    return result;
+  } catch (err) {
+    console.log(err);
+  }
+}

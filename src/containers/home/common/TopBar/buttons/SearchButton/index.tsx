@@ -11,6 +11,9 @@ import ModalStaticBackdrop from "../../../../../../components/layouts/ModalStati
 import useModal from "../../../../../../hooks/useModal";
 import RoundedPaper from "../../../../../../components/common/RoundedPaper";
 import RoundedBorderBox from "../../../../../../components/common/RoundedBorderBox";
+import { useAppSelector } from "../../../../../../app/redux/hooks";
+import { selectGuestMode } from "../../../../../../app/redux/slices/commonSlice";
+import { fetchGetTransavrionList } from "../../../../../../app/api/API";
 
 function SearchButton() {
     const [anchorEl, setAnchorEl] = useState<HTMLButtonElement | null>(null);
@@ -25,6 +28,7 @@ function SearchButton() {
         orderBy: '0',
     })
     const searchBtn = useRef(null);
+    const guestMode = useAppSelector(selectGuestMode);
 
     const organizations = [
         {name: '산업은행', value: '0002'},
@@ -73,11 +77,15 @@ function SearchButton() {
         setForm({ ...form, [e.target.id]: e.target.value })
     }
 
-    const handleSubmit = () => {
+    const handleSubmit = async () => {
         if (selected === 'card') {
             alert('카드로 거래 내역 조회')
         } else if(selected === 'account') {
-            console.log({...form, endDate: form.endDate.replaceAll('-', ''), startDate: form.startDate.replaceAll('-', '')});
+            if (!guestMode) {
+                const result = await fetchGetTransavrionList({...form, endDate: form.endDate.replaceAll('-', ''), startDate: form.startDate.replaceAll('-', '')});
+            } else {
+                console.log({...form, endDate: form.endDate.replaceAll('-', ''), startDate: form.startDate.replaceAll('-', '')});
+            }
         }
         setSelected(null);
         closePaymentHistoryModal();
