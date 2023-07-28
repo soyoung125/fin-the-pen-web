@@ -83,6 +83,7 @@ function SearchButton() {
         } else if(selected === 'account') {
             if (!guestMode) {
                 const result = await fetchGetTransavrionList({...form, endDate: form.endDate.replaceAll('-', ''), startDate: form.startDate.replaceAll('-', '')});
+                console.log(result);
             } else {
                 console.log({...form, endDate: form.endDate.replaceAll('-', ''), startDate: form.startDate.replaceAll('-', '')});
             }
