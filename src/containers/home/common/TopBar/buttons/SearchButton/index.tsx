@@ -77,6 +77,17 @@ function SearchButton() {
         setForm({ ...form, [e.target.id]: e.target.value })
     }
 
+    const resetForm = () => {
+        setForm({
+            organization: '0002',
+            account: '',
+            connectedId: '',
+            startDate: '',
+            endDate: '',
+            orderBy: '0',
+        });
+    }
+
     const handleSubmit = async () => {
         if (selected === 'card') {
             alert('카드로 거래 내역 조회')
@@ -88,8 +99,12 @@ function SearchButton() {
                 console.log({...form, endDate: form.endDate.replaceAll('-', ''), startDate: form.startDate.replaceAll('-', '')});
             }
         }
-        setSelected(null);
+        handleCloseModal();
+    }
+
+    const handleCloseModal = () => {
         closePaymentHistoryModal();
+        setTimeout(() => { setSelected(null); resetForm(); }, 300);
     }
 
     const open = Boolean(anchorEl);
@@ -132,7 +147,7 @@ function SearchButton() {
                         <Stack direction="row" alignItems="center" justifyContent="space-between">
                             <IconButton disabled sx={{ width: '40px' }} />
                             <Typography variant="h6" sx={{ fontWeight: 'bold' }}>My 결제 내역 조회</Typography>
-                            <IconButton onClick={closePaymentHistoryModal}>
+                            <IconButton onClick={handleCloseModal}>
                                 <ClearIcon />
                             </IconButton>
                         </Stack>
