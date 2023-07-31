@@ -1,9 +1,9 @@
-import { Box, Button, Divider, Grid, IconButton, InputAdornment, MenuItem, OutlinedInput, Popover, Select, Stack, Typography } from "@mui/material";
+import { Box, Button, Divider, Grid, IconButton, InputAdornment, MenuItem, OutlinedInput, Popover, Select, Stack, TextField, TextFieldProps, Typography } from "@mui/material";
 import SearchIcon from '@mui/icons-material/Search';
 import ClearIcon from '@mui/icons-material/Clear';
 import AccountBalanceWalletIcon from '@mui/icons-material/AccountBalanceWallet';
 import CreditCardIcon from '@mui/icons-material/CreditCard';
-import { useRef, useState } from "react";
+import { JSXElementConstructor, ReactElement, useRef, useState } from "react";
 import RoundedButton from "../../../../../../components/common/RoundedButton";
 import SearchInput from "./popover/SearchInput";
 import OptionList from "./popover/OptionList";
@@ -14,6 +14,9 @@ import RoundedBorderBox from "../../../../../../components/common/RoundedBorderB
 import { useAppSelector } from "../../../../../../app/redux/hooks";
 import { selectGuestMode } from "../../../../../../app/redux/slices/commonSlice";
 import { fetchGetTransavrionList } from "../../../../../../app/api/API";
+import { DatePicker, LocalizationProvider, MobileDatePicker } from "@mui/x-date-pickers";
+import moment from "moment";
+import { AdapterMoment } from "@mui/x-date-pickers/AdapterMoment";
 
 function SearchButton() {
     const [anchorEl, setAnchorEl] = useState<HTMLButtonElement | null>(null);
@@ -82,7 +85,7 @@ function SearchButton() {
             organization: '0002',
             account: '',
             connectedId: '',
-            startDate: '',
+            startDate: moment().format('YYYY-MM-DD'),
             endDate: '',
             orderBy: '0',
         });
@@ -189,6 +192,27 @@ function SearchButton() {
                                         }}
                                     />
 
+                                    <LocalizationProvider dateAdapter={AdapterMoment}>
+                                        <MobileDatePicker
+                                            value={moment(form.startDate)}
+                                            onChange={(newValue) => {
+                                                newValue && changeDetailInfo({ target: { id: 'startDate', value: newValue.format('YYYY-MM-DD') } });
+                                            }}
+                                            renderInput={(params) => 
+                                                <TextField
+                                                    {...params}
+                                                    InputProps={{
+                                                        startAdornment: <InputAdornment position="start">시작일</InputAdornment>,
+                                                    }}
+                                                    inputProps={{
+                                                        style: { textAlign: 'right' },
+                                                    }}
+                                                    size="small"
+                                                    value={form.startDate}
+                                                />
+                                            }
+                                        />
+                                    </LocalizationProvider>
                                     <OutlinedInput
                                         id="startDate"
                                         startAdornment={<InputAdornment position="start">시작일</InputAdornment>}
