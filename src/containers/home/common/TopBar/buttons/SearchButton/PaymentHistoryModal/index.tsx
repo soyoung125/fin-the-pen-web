@@ -29,6 +29,10 @@ function PaymentHistoryModal({ closePaymentHistoryModal }: PaymentHistoryModalPr
         setForm({ ...form, [e.target.id]: e.target.value })
     }
 
+    const changeStartAndEndDate = (date: string) => {
+        setForm({ ...form, startDate: date, endDate: date })
+    }
+
     const resetForm = () => {
         setForm({
             organization: '0002',
@@ -70,7 +74,7 @@ function PaymentHistoryModal({ closePaymentHistoryModal }: PaymentHistoryModalPr
             </Stack>
             <RoundedPaper my={1}>
                 {selected === 'account' ?
-                    <InputForm form={form} changeDetailInfo={changeDetailInfo} />
+                    <InputForm form={form} changeDetailInfo={changeDetailInfo} changeStartAndEndDate={changeStartAndEndDate} />
                     : <OptionSelector selected={selected} changeOption={(option) => setSelected(option)} />
                 }
                 <Button variant="contained" fullWidth sx={{ marginTop: 2 }} onClick={handleSubmit}>조회하기</Button>
