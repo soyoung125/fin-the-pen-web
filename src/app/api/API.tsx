@@ -57,7 +57,11 @@ export const fetchMockLogin = async () => {
 
 export const fetchCreateSchedule = async (schedule: Schedule) => {
   try {
-    const response = await axios.post("/createSchedule", schedule);
+    const server = getSessionStorage<ServerState>(
+      LOCAL_STORAGE_KEY_SERVER,
+      "real"
+    );
+    const response = await axios.post(`${url[server]}/createSchedule`, schedule);
     // alert(JSON.stringify(response));
     return response.data;
   } catch (err) {
