@@ -1,5 +1,7 @@
 import { List, ListItem, IconButton, ListItemText, ListItemButton } from "@mui/material";
 import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight';
+import { useSelector } from "react-redux";
+import { selectUser } from "../../../../../../../app/redux/slices/userSlice";
 
 interface OptionListProps {
     openSearchInput: () => void;
@@ -7,18 +9,19 @@ interface OptionListProps {
 }
 
 function OptionList({ openSearchInput, handleOpenModal }: OptionListProps) {
+    const user = useSelector(selectUser);
     return (
         <List dense>
             <ListItem
                 secondaryAction={
-                    <IconButton edge="end">
+                    <IconButton edge="end" disabled={!user}>
                         <KeyboardArrowRightIcon />
                     </IconButton>
                 }
                 disablePadding
                 onClick={openSearchInput}
             >
-                <ListItemButton>
+                <ListItemButton disabled={!user}>
                     <ListItemText
                         primary="My 일정 검색하기"
                     />
@@ -27,14 +30,14 @@ function OptionList({ openSearchInput, handleOpenModal }: OptionListProps) {
 
             <ListItem
                 secondaryAction={
-                    <IconButton edge="end">
+                    <IconButton edge="end" disabled={!user}>
                         <KeyboardArrowRightIcon />
                     </IconButton>
                 }
                 disablePadding
                 onClick={handleOpenModal}
             >
-                <ListItemButton>
+                <ListItemButton disabled={!user}>
                     <ListItemText
                         primary="My 결제 내역 불러오기"
                     />

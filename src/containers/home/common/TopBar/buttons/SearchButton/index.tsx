@@ -7,8 +7,11 @@ import OptionList from "./popover/OptionList";
 import ModalStaticBackdrop from "../../../../../../components/layouts/ModalStaticBackdrop";
 import useModal from "../../../../../../hooks/useModal";
 import PaymentHistoryModal from "./PaymentHistoryModal";
+import { useSelector } from "react-redux";
+import { selectUser } from "../../../../../../app/redux/slices/userSlice";
 
 function SearchButton() {
+    const user = useSelector(selectUser);
     const [anchorEl, setAnchorEl] = useState<HTMLButtonElement | null>(null);
     const [isSearchMode, setIsSearchMode] = useState<Boolean>(false);
     const searchBtn = useRef(null);
@@ -60,7 +63,7 @@ function SearchButton() {
             >
                 {isSearchMode ?
                     <SearchInput />
-                    : <OptionList openSearchInput={() => setIsSearchMode(true)} handleOpenModal={() => handleOpenModal()} />
+                    : <OptionList openSearchInput={() => user && setIsSearchMode(true)} handleOpenModal={() => user && handleOpenModal()} />
                 }
             </Popover>
 
