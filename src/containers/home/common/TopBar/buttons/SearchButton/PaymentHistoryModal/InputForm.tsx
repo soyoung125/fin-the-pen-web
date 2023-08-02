@@ -148,7 +148,7 @@ function InputForm({ form, changeDetailInfo, changeStartAndEndDate }: InputFormP
                         <TextField
                             {...params}
                             InputProps={{
-                                startAdornment: <InputAdornment position="start">시작일</InputAdornment>,
+                                startAdornment: <InputAdornment position="start">조회일자</InputAdornment>,
                             }}
                             inputProps={{
                                 style: { textAlign: 'right' },
@@ -159,30 +159,7 @@ function InputForm({ form, changeDetailInfo, changeStartAndEndDate }: InputFormP
                     }
                 />
             </LocalizationProvider>
-            {/* <OutlinedInput
-                id="startDate"
-                startAdornment={<InputAdornment position="start">시작일</InputAdornment>}
-                type="date"
-                value={form.startDate}
-                onChange={changeDetailInfo}
-                size="small"
-                inputProps={{
-                    style: { textAlign: 'right' },
-                }}
-            />
-
-            <OutlinedInput
-                id="endDate"
-                startAdornment={<InputAdornment position="start">종료일</InputAdornment>}
-                type="date"
-                value={form.endDate}
-                onChange={changeDetailInfo}
-                size="small"
-                inputProps={{
-                    style: { textAlign: 'right' },
-                }}
-            /> */}
-
+            
             <Select
                 inputProps={{
                     IconComponent: () => null,
