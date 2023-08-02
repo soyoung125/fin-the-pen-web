@@ -1,9 +1,10 @@
-import { Stack, Select, InputAdornment, MenuItem, OutlinedInput, TextField } from "@mui/material";
+import { Stack, Select, InputAdornment, MenuItem, OutlinedInput, TextField, Box } from "@mui/material";
 import { LocalizationProvider, MobileDatePicker, PickersDay } from "@mui/x-date-pickers";
 import { AdapterMoment } from "@mui/x-date-pickers/AdapterMoment";
 import moment from "moment";
 import { RenderDayFunction } from "../../../../../../../types/common";
 import { useState } from "react";
+import { DatePickerToolbar } from "@mui/x-date-pickers/DatePicker/DatePickerToolbar";
 
 interface InputFormProps {
     form: {
@@ -143,7 +144,18 @@ function InputForm({ form, changeDetailInfo, changeStartAndEndDate }: InputFormP
                     onChange={(newValue) => {
                         newValue && changeDate(newValue.format('YYYY-MM-DD'));
                     }}
+                    ToolbarComponent={() =>
+                    <Stack direction='row' spacing={1} justifyContent="center" p={2}>
+                        <Box sx={{color: isSelectStartDate ? 'grey' : 'black' }}>{form.startDate}</Box>
+                        <Box>~</Box>
+                        <Box sx={{color: isSelectStartDate ? 'black' : 'grey' }}>{form.endDate}</Box>
+                    </Stack>}
                     renderDay={renderDayInPicker}
+                    componentsProps={{
+                        actionBar: {
+                            actions: ["accept"]
+                        }
+                    }}
                     renderInput={(params) =>
                         <TextField
                             {...params}
