@@ -29,9 +29,10 @@ interface ScheduleCardProps {
   schedule: Schedule;
   handleModal: (schedule: Schedule) => void;
   category: Category;
+  openAuthenticationPage: () => void;
 }
 
-function ScheduleCard({ schedule, handleModal, category }: ScheduleCardProps) {
+function ScheduleCard({ schedule, handleModal, category, openAuthenticationPage }: ScheduleCardProps) {
   const dispatch = useAppDispatch();
   const guestMode = useAppSelector(selectGuestMode);
   const recommendedSpendingAmount = 50000;
@@ -171,6 +172,7 @@ function ScheduleCard({ schedule, handleModal, category }: ScheduleCardProps) {
         open={alertModalOpen}
         handleClose={closeAlertModal}
         handleClickYes={() => {
+          openAuthenticationPage();
           closeAlertModal();
         } }
         mode="hideBudget"
