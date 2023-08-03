@@ -16,7 +16,6 @@ function SearchButton() {
     const navigate = useNavigate();
     const user = useSelector(selectUser);
     const [anchorEl, setAnchorEl] = useState<HTMLButtonElement | null>(null);
-    const [isSearchMode, setIsSearchMode] = useState<Boolean>(false);
     const searchBtn = useRef(null);
 
     const {
@@ -31,12 +30,15 @@ function SearchButton() {
 
     const handleClose = () => {
         setAnchorEl(null);
-        setTimeout(() => setIsSearchMode(false), 300);
     };
+
+    const openSearchPage = () => {
+        setAnchorEl(null);
+        navigate(PATH.searchSchedule)
+    }
 
     const openFetchPage = () => {
         setAnchorEl(null);
-        console.log(PATH.fetchPaymentHistory)
         navigate(PATH.fetchPaymentHistory)
     }
 
@@ -65,10 +67,11 @@ function SearchButton() {
                     horizontal: 'center',
                 }}
             >
-                {isSearchMode ?
+                {/* {isSearchMode ?
                     <SearchInput />
                     : <OptionList openSearchInput={() => user && setIsSearchMode(true)} openFetchPage={openFetchPage} />
-                }
+                } */}
+                <OptionList openSearchPage={openSearchPage} openFetchPage={openFetchPage} />
             </Popover>
 
             <ModalStaticBackdrop

@@ -5,6 +5,7 @@ interface Path {
   readonly myPage: string;
   readonly notification: string;
   readonly fetchPaymentHistory: string;
+  readonly searchSchedule: string;
   readonly assetManagement: string;
   readonly settings: string;
   readonly test: string;
@@ -26,6 +27,7 @@ const PATH: Readonly<Path> = Object.freeze({
   myPage: '/myPage',
   notification: '/notification',
   fetchPaymentHistory: '/fetch-payment-history',
+  searchSchedule: '/search=schedule',
   assetManagement: '/asset-management',
   settings: '/settings',
   test: '/test',

@@ -10,6 +10,7 @@ import Home from '../../pages/Home';
 import { RouterDOM } from '../../types/common';
 import DetailSetting from '../../containers/assetManagement/SavingsGoalContainer/DetailSetting';
 import FetchPaymentHistory from '../../containers/home/HomeContainer/view/FetchPaymentHistory';
+import SearchSchedule from '../../containers/home/HomeContainer/view/SearchSchedule';
 
 const HOME_ROUTES: RouterDOM[] = [
   {
@@ -39,6 +40,10 @@ const HOME_ROUTES: RouterDOM[] = [
   {
     path: PATH.fetchPaymentHistory,
     element: <FetchPaymentHistory />,
+  },
+  {
+    path: PATH.searchSchedule,
+    element: <SearchSchedule />,
   },
   {
     path: PATH.savingDetailSetting,
