@@ -9,8 +9,11 @@ import useModal from "../../../../../../hooks/useModal";
 import PaymentHistoryModal from "./PaymentHistoryModal";
 import { useSelector } from "react-redux";
 import { selectUser } from "../../../../../../app/redux/slices/userSlice";
+import { useNavigate } from "react-router-dom";
+import PATH from "../../../../../../domain/constants/path";
 
 function SearchButton() {
+    const navigate = useNavigate();
     const user = useSelector(selectUser);
     const [anchorEl, setAnchorEl] = useState<HTMLButtonElement | null>(null);
     const [isSearchMode, setIsSearchMode] = useState<Boolean>(false);
@@ -31,9 +34,10 @@ function SearchButton() {
         setTimeout(() => setIsSearchMode(false), 300);
     };
 
-    const handleOpenModal = () => {
+    const openFetchPage = () => {
         setAnchorEl(null);
-        openPaymentHistoryModal();
+        console.log(PATH.fetchPaymentHistory)
+        navigate(PATH.fetchPaymentHistory)
     }
 
     const open = Boolean(anchorEl);
@@ -63,7 +67,7 @@ function SearchButton() {
             >
                 {isSearchMode ?
                     <SearchInput />
-                    : <OptionList openSearchInput={() => user && setIsSearchMode(true)} handleOpenModal={() => user && handleOpenModal()} />
+                    : <OptionList openSearchInput={() => user && setIsSearchMode(true)} openFetchPage={openFetchPage} />
                 }
             </Popover>
 

@@ -5,10 +5,10 @@ import { selectUser } from "../../../../../../../app/redux/slices/userSlice";
 
 interface OptionListProps {
     openSearchInput: () => void;
-    handleOpenModal: () => void;
+    openFetchPage: () => void;
 }
 
-function OptionList({ openSearchInput, handleOpenModal }: OptionListProps) {
+function OptionList({ openSearchInput, openFetchPage }: OptionListProps) {
     const user = useSelector(selectUser);
     return (
         <List dense>
@@ -35,7 +35,7 @@ function OptionList({ openSearchInput, handleOpenModal }: OptionListProps) {
                     </IconButton>
                 }
                 disablePadding
-                onClick={handleOpenModal}
+                onClick={openFetchPage}
             >
                 <ListItemButton disabled={!user}>
                     <ListItemText

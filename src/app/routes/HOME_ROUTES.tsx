@@ -9,6 +9,7 @@ import PATH from '../../domain/constants/path';
 import Home from '../../pages/Home';
 import { RouterDOM } from '../../types/common';
 import DetailSetting from '../../containers/assetManagement/SavingsGoalContainer/DetailSetting';
+import FetchPaymentHistory from '../../containers/home/HomeContainer/view/FetchPaymentHistory';
 
 const HOME_ROUTES: RouterDOM[] = [
   {
@@ -34,6 +35,10 @@ const HOME_ROUTES: RouterDOM[] = [
   {
     path: PATH.assetManagement,
     element: <AssetManagement />,
+  },
+  {
+    path: PATH.fetchPaymentHistory,
+    element: <FetchPaymentHistory />,
   },
   {
     path: PATH.savingDetailSetting,
