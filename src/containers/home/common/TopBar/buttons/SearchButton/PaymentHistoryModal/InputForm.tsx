@@ -108,6 +108,7 @@ function InputForm({ form, changeDetailInfo, changeStartAndEndDate }: InputFormP
                     IconComponent: () => null,
                     style: { textAlign: 'right' },
                 }}
+                size="small"
                 startAdornment={<InputAdornment position="start">거래 은행</InputAdornment>}
                 sx={{ '.MuiSelect-select.MuiSelect-outlined': { textAlign: 'right', paddingRight: '14px' } }}
                 value={form.organization}
@@ -177,6 +178,7 @@ function InputForm({ form, changeDetailInfo, changeStartAndEndDate }: InputFormP
                     IconComponent: () => null,
                     style: { textAlign: 'right' },
                 }}
+                size="small"
                 startAdornment={<InputAdornment position="start">표시 항목</InputAdornment>}
                 sx={{ '.MuiSelect-select.MuiSelect-outlined': { textAlign: 'right', paddingRight: '14px' } }}
                 id="orderBy"
