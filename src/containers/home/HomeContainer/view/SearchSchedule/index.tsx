@@ -1,10 +1,16 @@
-import { FormControl, IconButton, InputAdornment, OutlinedInput, Stack, Typography } from "@mui/material";
+import { Box, Checkbox, FormControl, IconButton, InputAdornment, OutlinedInput, Stack, Typography } from "@mui/material";
 import RoundedPaper from "../../../../../components/common/RoundedPaper";
 import SearchIcon from '@mui/icons-material/Search';
 import { useRef } from "react";
+import { useAppSelector } from "../../../../../app/redux/hooks";
+import { selectSchedules } from "../../../../../app/redux/slices/scheduleSlice";
+import RoundedBorderBox from "../../../../../components/common/RoundedBorderBox";
+import moment from "moment";
+import 'moment/locale/ko'
 
 function SearchSchedule() {
     const inputRef = useRef<HTMLInputElement | null>(null);
+    const schedules = useAppSelector(selectSchedules);
     
     const handleKeyPress = (event: React.KeyboardEvent<HTMLInputElement>) => {
         if (event.key === 'Enter') {
@@ -33,6 +39,26 @@ function SearchSchedule() {
                         inputRef={inputRef}
                     />
                 </FormControl>
+                {schedules.map((schedule, index) => (
+                    <>
+                        <Box pb={1} />
+                        <RoundedBorderBox greyBorder={true}>
+                            <Stack direction="row" justifyContent="space-between" sx={{ paddingRight: 1, py: 2 }}>
+                                <Stack direction="row">
+                                    <Checkbox />
+                                    <Stack>
+                                        <Box>{moment(schedule.date).format('YYYY/MM/DD')}</Box>
+                                        <Box>{`${schedule.start_time}~${schedule.end_time}`}</Box>
+                                    </Stack>
+                                </Stack>
+                                <Stack alignItems="flex-end">
+                                    <Box>{schedule.event_name}</Box>
+                                    <Box>{`${schedule.type}${schedule.expected_spending}`}</Box>
+                                </Stack>
+                            </Stack>
+                        </RoundedBorderBox>
+                    </>
+                ))}
             </RoundedPaper>
         </Stack>
     );
