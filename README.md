@@ -6,6 +6,8 @@
 
 [서버 설치하기](https://github.com/eomheeseung/fin-the-pen)
 
+[핀더펜 v2](https://github.com/soyoung125/fin-the-pen-web-v2)
+
 ## 👤 Team Members
 
 | role         | name                                                                            |
@@ -19,7 +21,7 @@
 
 ## ⚙️ Tech
 
-- React, Redux Took Kit, Axios, React Router Dom, chart.js, Material UI, styled-components vite
+- React, Redux Took Kit, Axios, React Router Dom, chart.js, Material UI, styled-components, vite
 
 - EsLint, Storybook, MSW
 
