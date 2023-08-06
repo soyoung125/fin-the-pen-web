@@ -1,4 +1,4 @@
-import { Box, Checkbox, FormControl, IconButton, InputAdornment, OutlinedInput, Stack, Typography } from "@mui/material";
+import { Box, Button, Checkbox, FormControl, IconButton, InputAdornment, OutlinedInput, Stack, Typography } from "@mui/material";
 import RoundedPaper from "../../../../../components/common/RoundedPaper";
 import SearchIcon from '@mui/icons-material/Search';
 import { useRef } from "react";
@@ -59,6 +59,8 @@ function SearchSchedule() {
                         </RoundedBorderBox>
                     </>
                 ))}
+
+                {schedules.length > 0 && <Button fullWidth variant="contained" sx={{mt: 1}}>선택 일정 삭제</Button>}
             </RoundedPaper>
         </Stack>
     );
