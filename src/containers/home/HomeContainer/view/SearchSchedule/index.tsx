@@ -1,4 +1,4 @@
-import { Box, Button, Checkbox, FormControl, IconButton, InputAdornment, OutlinedInput, Stack, Typography } from "@mui/material";
+import { Box, Button, ButtonBase, Checkbox, FormControl, IconButton, InputAdornment, OutlinedInput, Stack, Typography } from "@mui/material";
 import RoundedPaper from "../../../../../components/common/RoundedPaper";
 import SearchIcon from '@mui/icons-material/Search';
 import { useRef } from "react";
@@ -43,9 +43,11 @@ function SearchSchedule() {
                     <>
                         <Box pb={1} />
                         <RoundedBorderBox greyBorder={true}>
-                            <Stack direction="row" justifyContent="space-between" sx={{ paddingRight: 1, py: 2 }}>
-                                <Stack direction="row">
-                                    <Checkbox />
+                            <Stack direction="row" justifyContent="space-between" sx={{ px: 1, py: 2 }}>
+                                <Stack direction="row" spacing={1}>
+                                    <RoundedBorderBox greyBorder={true}>
+                                        <ButtonBase sx={{ width: '30px', height: '100%', display: 'grid', placeItems: 'center' }}>{index+1}</ButtonBase>
+                                    </RoundedBorderBox>
                                     <Stack>
                                         <Box>{moment(schedule.date).format('YYYY/MM/DD')}</Box>
                                         <Box>{`${schedule.start_time}~${schedule.end_time}`}</Box>
