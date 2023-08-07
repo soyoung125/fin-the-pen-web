@@ -1,7 +1,7 @@
 import { Box, Button, ButtonBase, Checkbox, FormControl, IconButton, InputAdornment, OutlinedInput, Stack, Typography } from "@mui/material";
 import RoundedPaper from "../../../../../components/common/RoundedPaper";
 import SearchIcon from '@mui/icons-material/Search';
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import { useAppSelector } from "../../../../../app/redux/hooks";
 import { selectSchedules } from "../../../../../app/redux/slices/scheduleSlice";
 import RoundedBorderBox from "../../../../../components/common/RoundedBorderBox";
@@ -11,6 +11,7 @@ import 'moment/locale/ko'
 function SearchSchedule() {
     const inputRef = useRef<HTMLInputElement | null>(null);
     const schedules = useAppSelector(selectSchedules);
+    const [checkedSchedules, setCheckedSchedules] = useState<string[]>([]);
     
     const handleKeyPress = (event: React.KeyboardEvent<HTMLInputElement>) => {
         if (event.key === 'Enter') {
@@ -23,6 +24,15 @@ function SearchSchedule() {
             console.log(inputRef.current.value);
         }
     };
+
+    const handleClick = (id: string) => {
+        const idx = checkedSchedules.indexOf(id);
+        if (idx < 0) {
+            setCheckedSchedules(checkedSchedules.concat(id));
+        } else {
+            setCheckedSchedules(checkedSchedules.filter(s => s !== id));
+        }
+    }
 
     return (
         <Stack p={2} spacing={1}>
@@ -46,7 +56,16 @@ function SearchSchedule() {
                             <Stack direction="row" justifyContent="space-between" sx={{ px: 1, py: 2 }}>
                                 <Stack direction="row" spacing={1}>
                                     <RoundedBorderBox greyBorder={true}>
-                                        <ButtonBase sx={{ width: '30px', height: '100%', display: 'grid', placeItems: 'center' }}>{index+1}</ButtonBase>
+                                        <ButtonBase
+                                            onClick={() => handleClick(schedule.id as string)}
+                                            sx={{
+                                                width: '30px', height: '100%', display: 'grid', placeItems: 'center',
+                                                color: checkedSchedules.includes(schedule.id as string) ? 'white' : '#979797',
+                                                backgroundColor: checkedSchedules.includes(schedule.id as string) ? 'primary.main' : 'null',
+                                            }}
+                                        >
+                                            {index+1}
+                                        </ButtonBase>
                                     </RoundedBorderBox>
                                     <Stack>
                                         <Box>{moment(schedule.date).format('YYYY/MM/DD')}</Box>
@@ -55,7 +74,7 @@ function SearchSchedule() {
                                 </Stack>
                                 <Stack alignItems="flex-end">
                                     <Box>{schedule.event_name}</Box>
-                                    <Box>{`${schedule.type}${schedule.expected_spending}`}</Box>
+                                    <Box>{`${schedule.type} ${schedule.expected_spending}`}</Box>
                                 </Stack>
                             </Stack>
                         </RoundedBorderBox>

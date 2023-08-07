@@ -8,7 +8,7 @@ interface ProundedBorderBoxProps {
 function RoundedBorderBox({ children, greyBorder }: ProundedBorderBoxProps) {
   return (
     <Box sx={{
-      border: '2px solid', borderRadius: 2, borderColor: greyBorder ? '#EDF1F7' : 'primary.main',
+      border: '2px solid', borderRadius: 2, borderColor: greyBorder ? '#EDF1F7' : 'primary.main', overflow: 'hidden',
     }}
     >
       {children}
