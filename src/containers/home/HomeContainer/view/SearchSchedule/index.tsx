@@ -50,7 +50,7 @@ function SearchSchedule() {
                     />
                 </FormControl>
                 {schedules.map((schedule, index) => (
-                    <>
+                    <Box key={Math.random()}>
                         <Box pb={1} />
                         <RoundedBorderBox greyBorder={true}>
                             <Stack direction="row" justifyContent="space-between" sx={{ px: 1, py: 2 }}>
@@ -78,7 +78,7 @@ function SearchSchedule() {
                                 </Stack>
                             </Stack>
                         </RoundedBorderBox>
-                    </>
+                    </Box>
                 ))}
 
                 {schedules.length > 0 && <Button fullWidth variant="contained" sx={{mt: 1}}>선택 일정 삭제</Button>}
