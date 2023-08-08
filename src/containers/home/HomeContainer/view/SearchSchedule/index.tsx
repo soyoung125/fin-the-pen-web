@@ -2,16 +2,18 @@ import { Box, Button, ButtonBase, Checkbox, FormControl, IconButton, InputAdornm
 import RoundedPaper from "../../../../../components/common/RoundedPaper";
 import SearchIcon from '@mui/icons-material/Search';
 import { useRef, useState } from "react";
-import { useAppSelector } from "../../../../../app/redux/hooks";
-import { selectSchedules } from "../../../../../app/redux/slices/scheduleSlice";
+import { useAppDispatch, useAppSelector } from "../../../../../app/redux/hooks";
+import { deleteSchedule, selectSchedules } from "../../../../../app/redux/slices/scheduleSlice";
 import RoundedBorderBox from "../../../../../components/common/RoundedBorderBox";
 import moment from "moment";
 import 'moment/locale/ko'
+import { Schedule } from "../../../../../types/schedule";
 
 function SearchSchedule() {
+    const dispatch = useAppDispatch();
     const inputRef = useRef<HTMLInputElement | null>(null);
     const schedules = useAppSelector(selectSchedules);
-    const [checkedSchedules, setCheckedSchedules] = useState<string[]>([]);
+    const [checkedSchedules, setCheckedSchedules] = useState<Schedule[]>([]);
     
     const handleKeyPress = (event: React.KeyboardEvent<HTMLInputElement>) => {
         if (event.key === 'Enter') {
@@ -25,12 +27,18 @@ function SearchSchedule() {
         }
     };
 
-    const handleClick = (id: string) => {
-        const idx = checkedSchedules.indexOf(id);
+    const handleClick = (schedule: Schedule) => {
+        const idx = checkedSchedules.indexOf(schedule);
         if (idx < 0) {
-            setCheckedSchedules(checkedSchedules.concat(id));
+            setCheckedSchedules(checkedSchedules.concat(schedule));
         } else {
-            setCheckedSchedules(checkedSchedules.filter(s => s !== id));
+            setCheckedSchedules(checkedSchedules.filter(s => s !== schedule));
+        }
+    }
+
+    const handleDelete = () => {
+        if (window.confirm("정말로 삭제 하시겠습니까?")) {
+            checkedSchedules.map((s) => dispatch(deleteSchedule(s?.id || '')))
         }
     }
 
@@ -57,11 +65,11 @@ function SearchSchedule() {
                                 <Stack direction="row" spacing={1}>
                                     <RoundedBorderBox greyBorder={true}>
                                         <ButtonBase
-                                            onClick={() => handleClick(schedule.id as string)}
+                                            onClick={() => handleClick(schedule)}
                                             sx={{
                                                 width: '30px', height: '100%', display: 'grid', placeItems: 'center',
-                                                color: checkedSchedules.includes(schedule.id as string) ? 'white' : '#979797',
-                                                backgroundColor: checkedSchedules.includes(schedule.id as string) ? 'primary.main' : 'null',
+                                                color: checkedSchedules.includes(schedule) ? 'white' : '#979797',
+                                                backgroundColor: checkedSchedules.includes(schedule) ? 'primary.main' : 'null',
                                             }}
                                         >
                                             {index+1}
@@ -81,7 +89,7 @@ function SearchSchedule() {
                     </Box>
                 ))}
 
-                {schedules.length > 0 && <Button fullWidth variant="contained" sx={{mt: 1}}>선택 일정 삭제</Button>}
+                <Button fullWidth variant="contained" sx={{mt: 1}} disabled={checkedSchedules.length === 0} onClick={handleDelete}>선택 일정 삭제</Button>
             </RoundedPaper>
         </Stack>
     );
