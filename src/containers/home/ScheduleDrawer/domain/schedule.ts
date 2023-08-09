@@ -1,6 +1,6 @@
 import moment from 'moment';
 import { v4 as uuidv4 } from 'uuid';
-import { CATEGORIES } from '../../../../domain/constants/categories';
+import { CATEGORIES, Category } from '../../../../domain/constants/categories';
 import { REPEAT_CYCLE, SCHEDULE_DRAWER } from '../../../../domain/constants/schedule';
 import { createSchedule, getMonthSchedules, setDrawerSchedule } from '../../../../app/redux/slices/scheduleSlice';
 import { Schedule } from '../../../../types/schedule';
@@ -131,6 +131,7 @@ export const generateRandomSchedule = (date: moment.Moment) => {
     return result;
   };
   const importances = ['상', '중', '하'];
+  const category = CATEGORIES[Math.floor(Math.random() * CATEGORIES.length)]
   return {
     event_name: generateRandomString(5),
     alarm: Math.floor(Math.random() * 2) === 0,
@@ -140,10 +141,20 @@ export const generateRandomSchedule = (date: moment.Moment) => {
     repeating_cycle: '없음',
     repeat_deadline: '없음',
     repeat_endDate: date.format('YYYY-MM-DD'),
-    category: CATEGORIES[Math.floor(Math.random() * CATEGORIES.length)].title,
-    type: (Math.floor(Math.random() * 2)) % 2 === 0 ? '-' : '+',
+    category: category.title,
+    type: getType(category),
     expected_spending: Math.floor(Math.random() * 1000) * 100,
     importance: importances[Math.floor(Math.random() * 3)],
     exclusion: Math.floor(Math.random() * 2) === 0,
   };
 };
+
+export const getType = (category: Category) => {
+  const type = category.type;
+  const nestedType = category.nestedType;
+  if(type === '수입' || nestedType === '입금') {
+    return '+';
+  } else {
+    return '-';
+  }
+}

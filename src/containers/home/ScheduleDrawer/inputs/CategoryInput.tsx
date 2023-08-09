@@ -6,7 +6,7 @@ import { useSelector } from 'react-redux';
 import { CATEGORIES, Category } from '../../../../domain/constants/categories';
 import { SCHEDULE_DRAWER } from '../../../../domain/constants/schedule';
 import { selectSchedule } from '../../../../app/redux/slices/scheduleSlice';
-import { updateSchedule } from '../domain/schedule';
+import { getType, updateSchedule } from '../domain/schedule';
 import { useAppDispatch } from '../../../../app/redux/hooks';
 
 export default function CategoryInput({ selected }: {selected: string}) {
@@ -32,28 +32,17 @@ export default function CategoryInput({ selected }: {selected: string}) {
   }, [value]);
 
   const changeType = (category: Category) => {
-    const type = category.type;
-    const nestedType = category.nestedType;
-    if(type === '수입' || nestedType === '입금') {
-      if(schedule?.type === '-') {
-        updateSchedule(dispatch, schedule, {
-          target: {
-            id: 'type',
-            value: '+',
-          },
-        });
-      }
-    } else {
-      if(schedule?.type === '+') {
-        updateSchedule(dispatch, schedule, {
-          target: {
-            id: 'type',
-            value: '-',
-          },
-        });
-      }
+    const type = getType(category);
+    if(schedule?.type !== type) {
+      updateSchedule(dispatch, schedule, {
+        target: {
+          id: 'type',
+          value: type,
+        },
+      });
     }
   }
+
   return (
     <div>
       <Autocomplete
