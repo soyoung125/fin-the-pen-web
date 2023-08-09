@@ -35,13 +35,10 @@ function AnalysisDetailContainer() {
   }, []);
 
   useEffect(() => {
-    setSelectedItem([...schedules.filter((s) => date.isSame(s.date, 'month') && s.category === category).sort((a, b) => +new Date(a.date) - +new Date(b.date))]);
+    const newData = schedules.filter((s) => date.isSame(s.date, 'month') && s.category === category).sort((a, b) => +new Date(a.date) - +new Date(b.date));
+    setSelectedItem(newData);
+    setSpending(newData.reduce((result, schedule) => result + parseInt(schedule.expected_spending, 10), 0));
   }, [date]);
-
-  useEffect(() => {
-    setSpending(selectedItem
-      .reduce((result, schedule) => result + parseInt(schedule.expected_spending, 10), 0));
-  }, [selectedItem]);
 
   useEffect(() => {
     if (sortByDate) {
