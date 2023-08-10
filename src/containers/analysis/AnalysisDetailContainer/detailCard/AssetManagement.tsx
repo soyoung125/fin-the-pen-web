@@ -20,7 +20,7 @@ function AssetManagement({
       <Stack direction="row" justifyContent="space-between">
         <Box sx={{ fontSize: '17px', fontWeight: 'bolder' }}>{`${type}/${selectedItem[0].category} 예산`}</Box>
         <Box>
-          {`${balance.toLocaleString('ko-KR')}원 `}
+          {`${Math.abs(balance).toLocaleString('ko-KR')}원 `}
           {balance > 0 ? '남음' : '초과'}
         </Box>
       </Stack>
