@@ -2,23 +2,24 @@
 import { Box, LinearProgress, Stack } from '@mui/material';
 import RoundedPaper from '../../../../components/common/RoundedPaper';
 import { Schedule } from '../../../../types/schedule';
+import { useLocation } from 'react-router-dom';
 
 interface AssetManagementProps {
-  selectedItem: Schedule[],
   spending: number,
-  bgColor: string,
-  type: string,
   asset: number,
   balance: number,
+  title: string,
 }
 
 function AssetManagement({
-  selectedItem, spending, bgColor, type, asset, balance,
+  spending, asset, balance, title,
 }: AssetManagementProps) {
+  const { state } = useLocation();
+  const { color } = state;
   return (
     <RoundedPaper my={2}>
       <Stack direction="row" justifyContent="space-between">
-        <Box sx={{ fontSize: '17px', fontWeight: 'bolder' }}>{`${type}/${selectedItem[0].category} 예산`}</Box>
+        <Box sx={{ fontSize: '17px', fontWeight: 'bolder' }}>{title}</Box>
         <Box>
           {`${Math.abs(balance).toLocaleString('ko-KR')}원 `}
           {balance > 0 ? '남음' : '초과'}
@@ -35,7 +36,7 @@ function AssetManagement({
           my: 1,
           '.MuiLinearProgress-bar1Determinate': {
             borderRadius: '10px',
-            backgroundColor: bgColor,
+            backgroundColor: color,
           },
         }}
       />

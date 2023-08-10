@@ -66,7 +66,7 @@ export interface AssetsByCategoryInterface {
   type: string;
   categories: AssetCategories[];
   color: string;
-  total: string | number;
+  total: '-' | number;
   sum: number;
 }
 

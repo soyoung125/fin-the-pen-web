@@ -17,20 +17,23 @@ import useSchedule from '../../../hooks/useSchedule';
 function AnalysisDetailContainer() {
   const { state } = useLocation();
   const { color, category, type } = state;
-  const date = useSelector(selectDate);
   const { schedules } = useSchedule();
+  const date = useSelector(selectDate);
   const assetsByCategory: AssetsByCategoryInterface[] = useSelector(selectAssetsByCategory);
   const [selectedItem, setSelectedItem] = useState(schedules.filter((s) => date.isSame(s.date, 'month') && s.category === category));
   const [spending, setSpending] = useState(0);
   const [sortByDate, setSortByDate] = useState(true);
   const [isAscending, setIsAscending] = useState(true);
   const [asset, setAsset] = useState<'-' | number>('-');
+  const [title, setTitle] = useState<string>(`${type} 예산`)
 
   useEffect(() => {
     const categoryType = assetsByCategory.find((c) => c.type === type);
     if (categoryType) {
       const value = categoryType.categories.find((c) => c.title === category);
-      setAsset(value ? value.asset : '-');
+      const newAsset = value ? value.asset : '-';
+      setAsset(newAsset === '-' ? categoryType.total : newAsset);
+      setTitle(newAsset === '-' ? `${type} 예산` : `${type}/${category} 예산`)
     }
   }, []);
 
@@ -88,12 +91,10 @@ function AnalysisDetailContainer() {
       {asset !== '-'
         && (
           <AssetManagement
-            selectedItem={selectedItem}
             spending={spending}
-            bgColor={color}
-            type={type}
             asset={asset}
             balance={asset - spending}
+            title={title}
           />
         )}
     </Box>
