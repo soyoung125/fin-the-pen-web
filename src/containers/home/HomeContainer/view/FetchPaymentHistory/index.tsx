@@ -29,17 +29,6 @@ function FetchPaymentHistory() {
         setForm({ ...form, startDate: date, endDate: date })
     }
 
-    const resetForm = () => {
-        setForm({
-            organization: '0002',
-            account: '',
-            connectedId: '',
-            startDate: moment().format('YYYY-MM-DD'),
-            endDate: '',
-            orderBy: '0',
-        });
-    }
-
     const handleSubmit = async () => {
         if (selected === 'card') {
             alert('카드로 거래 내역 조회')
