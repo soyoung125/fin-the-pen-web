@@ -14,15 +14,8 @@ import PATH from "../../../../../../domain/constants/path";
 
 function SearchButton() {
     const navigate = useNavigate();
-    const user = useSelector(selectUser);
     const [anchorEl, setAnchorEl] = useState<HTMLButtonElement | null>(null);
     const searchBtn = useRef(null);
-
-    const {
-        modalOpen: paymentHistoryModalOpen,
-        openModal: openPaymentHistoryModal,
-        closeModal: closePaymentHistoryModal
-    } = useModal();
 
     const handleClick = () => {
         setAnchorEl(searchBtn.current);
@@ -67,21 +60,8 @@ function SearchButton() {
                     horizontal: 'center',
                 }}
             >
-                {/* {isSearchMode ?
-                    <SearchInput />
-                    : <OptionList openSearchInput={() => user && setIsSearchMode(true)} openFetchPage={openFetchPage} />
-                } */}
                 <OptionList openSearchPage={openSearchPage} openFetchPage={openFetchPage} />
             </Popover>
-
-            <ModalStaticBackdrop
-                keepMounted
-                width="xs"
-                open={paymentHistoryModalOpen}
-                component={(
-                    <PaymentHistoryModal closePaymentHistoryModal={closePaymentHistoryModal} />
-                )}
-            />
         </>
     );
 }
