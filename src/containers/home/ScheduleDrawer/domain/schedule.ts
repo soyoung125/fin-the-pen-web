@@ -105,6 +105,7 @@ export const handleCreate = async (
     }
   }
   // 원래 일정 추가
+  console.log(scheduleWithUuid);
   dispatch(createSchedule(scheduleWithUuid));
   if (!guestMode) { // 게스트 모드가 아니라면, 현재 서버 상태를 새롭게 요청하기
     dispatch(getMonthSchedules({

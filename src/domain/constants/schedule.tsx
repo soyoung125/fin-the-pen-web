@@ -92,10 +92,10 @@ const INIT_SCHEDULE = (date: string, start_time: string): Schedule => ({
 });
 
 const REPEAT_CYCLE = {
-  days: 'days',
-  weeks: 'weeks',
-  months: 'months',
-  years: 'years',
+  일간: 'days',
+  주간: 'weeks',
+  월간: 'months',
+  연간: 'years',
 } as const;
 
 const VIEW_MODE: ViewMode = {
