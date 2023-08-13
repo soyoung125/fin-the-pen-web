@@ -2,13 +2,7 @@ import { Box, Popover } from "@mui/material";
 import SearchIcon from '@mui/icons-material/Search';
 import { useRef, useState } from "react";
 import RoundedButton from "../../../../../../components/common/RoundedButton";
-import SearchInput from "./popover/SearchInput";
 import OptionList from "./popover/OptionList";
-import ModalStaticBackdrop from "../../../../../../components/layouts/ModalStaticBackdrop";
-import useModal from "../../../../../../hooks/useModal";
-import PaymentHistoryModal from "./PaymentHistoryModal";
-import { useSelector } from "react-redux";
-import { selectUser } from "../../../../../../app/redux/slices/userSlice";
 import { useNavigate } from "react-router-dom";
 import PATH from "../../../../../../domain/constants/path";
 
