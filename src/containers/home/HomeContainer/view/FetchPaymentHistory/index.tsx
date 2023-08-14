@@ -8,8 +8,16 @@ import { fetchGetTransavrionList } from "../../../../../app/api/API";
 import RoundedPaper from "../../../../../components/common/RoundedPaper";
 import InputForm from "../../../common/TopBar/buttons/SearchButton/PaymentHistoryModal/InputForm";
 import OptionSelector from "../../../common/TopBar/buttons/SearchButton/PaymentHistoryModal/OptionSelector";
+//@ts-ignore
+import SwiperCore, { Navigation } from 'swiper';
+import { Swiper, SwiperSlide } from 'swiper/react';
+import 'swiper/swiper-bundle.min.css';
+import { useNavigate } from "react-router-dom";
+
+SwiperCore.use([Navigation]);
 
 function FetchPaymentHistory() {
+    const navigate = useNavigate();
     const [selected, setSelected] = useState<string>('card');
     const [showInput, setShowInput] = useState(false);
     const [form, setForm] = useState({
@@ -49,17 +57,32 @@ function FetchPaymentHistory() {
         }
     }
 
+    const handleSlideChange = (swiper: SwiperCore): void => {
+        const activeIndex: number = swiper.activeIndex || 0;
+        console.log(activeIndex);
+    
+        if (activeIndex === 1) {
+          // 뒤로 가기 동작을 수행할 코드 작성
+          navigate(-1);
+        }
+      };
+
     return (
-        <Stack p={2} spacing={1}>
-            <Typography variant="h6" sx={{ fontWeight: 'bold', textAlign: 'center', marginTop: 3, marginBottom: 1 }}>My 결제 내역 조회</Typography>
-            <RoundedPaper my={1}>
-                {showInput ?
-                    <InputForm selected={selected} form={form} changeDetailInfo={changeDetailInfo} changeStartAndEndDate={changeStartAndEndDate} />
-                    : <OptionSelector selected={selected} changeOption={(option) => setSelected(option)} />
-                }
-                <Button variant="contained" fullWidth sx={{ marginTop: 2 }} onClick={showInput ? handleSubmit : changeShowInput}>{showInput ? '조회하기' : '다음'}</Button>
-            </RoundedPaper>
-        </Stack>
+        <Swiper onSlideChange={handleSlideChange}>
+            <SwiperSlide>
+                <Stack p={2} spacing={1}>
+                    <Typography variant="h6" sx={{ fontWeight: 'bold', textAlign: 'center', marginTop: 3, marginBottom: 1 }}>My 결제 내역 조회</Typography>
+                    <RoundedPaper my={1}>
+                        {showInput ?
+                            <InputForm selected={selected} form={form} changeDetailInfo={changeDetailInfo} changeStartAndEndDate={changeStartAndEndDate} />
+                            : <OptionSelector selected={selected} changeOption={(option) => setSelected(option)} />
+                        }
+                        <Button variant="contained" fullWidth sx={{ marginTop: 2 }} onClick={showInput ? handleSubmit : changeShowInput}>{showInput ? '조회하기' : '다음'}</Button>
+                    </RoundedPaper>
+                </Stack>
+            </SwiperSlide>
+            <SwiperSlide></SwiperSlide>
+        </Swiper>
     );
 }
 
