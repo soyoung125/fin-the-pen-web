@@ -5,8 +5,11 @@ import RoundedButton from "../../../../../../components/common/RoundedButton";
 import OptionList from "./popover/OptionList";
 import { useNavigate } from "react-router-dom";
 import PATH from "../../../../../../domain/constants/path";
+import { useAppSelector } from "../../../../../../app/redux/hooks";
+import { selectUser } from "../../../../../../app/redux/slices/userSlice";
 
 function SearchButton() {
+    const user = useAppSelector(selectUser);
     const navigate = useNavigate();
     const [anchorEl, setAnchorEl] = useState<HTMLButtonElement | null>(null);
     const searchBtn = useRef(null);
@@ -20,13 +23,17 @@ function SearchButton() {
     };
 
     const openSearchPage = () => {
-        setAnchorEl(null);
-        navigate(PATH.searchSchedule)
+        if (user) {
+            setAnchorEl(null);
+            navigate(PATH.searchSchedule)
+        }
     }
 
     const openFetchPage = () => {
-        setAnchorEl(null);
-        navigate(PATH.fetchPaymentHistory)
+        if (user) {
+            setAnchorEl(null);
+            navigate(PATH.fetchPaymentHistory)
+        }
     }
 
     const open = Boolean(anchorEl);
