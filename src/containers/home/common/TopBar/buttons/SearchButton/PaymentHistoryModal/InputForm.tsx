@@ -1,10 +1,10 @@
 import { Stack, Select, InputAdornment, MenuItem, OutlinedInput, TextField, Box } from "@mui/material";
 import { LocalizationProvider, MobileDatePicker, PickersDay } from "@mui/x-date-pickers";
+import CalendarTodayOutlinedIcon from '@mui/icons-material/CalendarTodayOutlined';
 import { AdapterMoment } from "@mui/x-date-pickers/AdapterMoment";
 import moment from "moment";
 import { RenderDayFunction } from "../../../../../../../types/common";
 import { useState } from "react";
-import { DatePickerToolbar } from "@mui/x-date-pickers/DatePicker/DatePickerToolbar";
 
 interface InputFormProps {
     selected: string,
@@ -184,6 +184,7 @@ function InputForm({ selected, form, changeDetailInfo, changeStartAndEndDate }: 
                             {...params}
                             InputProps={{
                                 startAdornment: <InputAdornment position="start">조회일자</InputAdornment>,
+                                endAdornment: <InputAdornment position="end"><CalendarTodayOutlinedIcon fontSize="small" color={form.endDate === '' ? 'secondary' : 'primary'} /></InputAdornment>
                             }}
                             inputProps={{
                                 style: { textAlign: 'right' },
