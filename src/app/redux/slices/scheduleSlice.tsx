@@ -75,8 +75,6 @@ export const createSchedule = createAsyncThunk<Schedule, Schedule, { state: { co
   "schedule/createSchedule",
   async (scheduleWithUuid, { getState }) => {
     const { guestMode } = getState().common;
-    console.log(scheduleWithUuid);
-    await fetchCreateSchedule(scheduleWithUuid);
     if (guestMode) {
       // console.log('게스트 모드에서 추가');/
       const response = await fetchMockCreateSchedule(scheduleWithUuid);
