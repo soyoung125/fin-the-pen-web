@@ -11,6 +11,7 @@ import { Schedule } from "../../../../../types/schedule";
 import ScheduleDrawer from "../../../ScheduleDrawer";
 import { SCHEDULE_DRAWER_MODE } from "../../../../../domain/constants/schedule";
 import useSchedule from "../../../../../hooks/useSchedule";
+import { findSchedules } from "../../../../../app/api/API";
 
 function SearchSchedule() {
     const dispatch = useAppDispatch();
@@ -18,9 +19,9 @@ function SearchSchedule() {
     const [checkedSchedules, setCheckedSchedules] = useState<Schedule[]>([]);
     const [bottomDrawerOpen, setBottomDrawerOpen] = useState(false);
     const [drawerWidth, setDrawerWidth] = useState(0);
+    const [schedules, setSchedules] = useState<Schedule[]>([])
 
     const {
-        schedules,
         selectedSchedule,
         setSelectedSchedule,
       } = useSchedule();
@@ -31,9 +32,10 @@ function SearchSchedule() {
         }
     };
 
-    const handleSearch = () => {
+    const handleSearch = async () => {
         if (inputRef.current) {
-            console.log(inputRef.current.value);
+            const result = await findSchedules(inputRef.current.value);
+            setSchedules(result ? result : []);
         }
     };
 

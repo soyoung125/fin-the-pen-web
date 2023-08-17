@@ -119,3 +119,20 @@ export const fetchGetTransavrionList = async (data: any) => {
     console.log(err);
   }
 }
+
+export const findSchedules = async (keyword: string) => {
+  try {
+    const server = getSessionStorage<ServerState>(
+      LOCAL_STORAGE_KEY_SERVER,
+      "real"
+    );
+    const response = await axios.post<Schedule[]>(
+      `real/find/contains/name`,
+      keyword
+    );
+    const result = response.data;
+    return result;
+  } catch (err) {
+    console.log(err);
+  }
+}
