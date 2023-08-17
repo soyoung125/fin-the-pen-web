@@ -82,7 +82,7 @@ export const createSchedule = createAsyncThunk<Schedule, Schedule, { state: { co
     }
     // console.log('일반 모드에서 추가');
     // console.log(scheduleWithUuid);
-    await fetchCreateSchedule(scheduleWithUuid);
+    const response = await fetchCreateSchedule(scheduleWithUuid);
     return null;
   }
 );
