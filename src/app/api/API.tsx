@@ -57,7 +57,11 @@ export const fetchMockLogin = async () => {
 
 export const fetchCreateSchedule = async (schedule: Schedule) => {
   try {
-    const response = await axios.post("/createSchedule", schedule);
+    const server = getSessionStorage<ServerState>(
+      LOCAL_STORAGE_KEY_SERVER,
+      "real"
+    );
+    const response = await axios.post(`${url[server]}/createSchedule`, schedule);
     // alert(JSON.stringify(response));
     return response.data;
   } catch (err) {
@@ -68,7 +72,11 @@ export const fetchCreateSchedule = async (schedule: Schedule) => {
 export const fetchDeleteSchedule = async (id: string) => {
   try {
     console.log({ id });
-    const response = await axios.post("/deleteSchedule", { id });
+    const server = getSessionStorage<ServerState>(
+      LOCAL_STORAGE_KEY_SERVER,
+      "real"
+    );
+    const response = await axios.post(`${url[server]}/deleteSchedule`, { id });
     // alert(JSON.stringify(response));
     return response.data;
   } catch (err) {
@@ -80,8 +88,12 @@ export const fetchMonthSchedules = async (
   schedule: GetScheduleQuery
 ): Promise<Schedule[] | undefined> => {
   try {
+    const server = getSessionStorage<ServerState>(
+      LOCAL_STORAGE_KEY_SERVER,
+      "real"
+    );
     const response: AxiosResponse<Schedule[]> = await axios.post<Schedule[]>(
-      "/getMonthSchedules",
+      `${url[server]}/getMonthSchedules`,
       schedule
     );
     const schedules: Schedule[] = response.data;

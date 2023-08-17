@@ -4,11 +4,11 @@ import { useSelector } from "react-redux";
 import { selectUser } from "../../../../../../../app/redux/slices/userSlice";
 
 interface OptionListProps {
-    openSearchInput: () => void;
-    handleOpenModal: () => void;
+    openSearchPage: () => void;
+    openFetchPage: () => void;
 }
 
-function OptionList({ openSearchInput, handleOpenModal }: OptionListProps) {
+function OptionList({ openSearchPage, openFetchPage }: OptionListProps) {
     const user = useSelector(selectUser);
     return (
         <List dense>
@@ -19,7 +19,7 @@ function OptionList({ openSearchInput, handleOpenModal }: OptionListProps) {
                     </IconButton>
                 }
                 disablePadding
-                onClick={openSearchInput}
+                onClick={openSearchPage}
             >
                 <ListItemButton disabled={!user}>
                     <ListItemText
@@ -35,7 +35,7 @@ function OptionList({ openSearchInput, handleOpenModal }: OptionListProps) {
                     </IconButton>
                 }
                 disablePadding
-                onClick={handleOpenModal}
+                onClick={openFetchPage}
             >
                 <ListItemButton disabled={!user}>
                     <ListItemText

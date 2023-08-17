@@ -1,27 +1,30 @@
 import { Stack, Select, InputAdornment, MenuItem, OutlinedInput, TextField, Box } from "@mui/material";
 import { LocalizationProvider, MobileDatePicker, PickersDay } from "@mui/x-date-pickers";
+import CalendarTodayOutlinedIcon from '@mui/icons-material/CalendarTodayOutlined';
 import { AdapterMoment } from "@mui/x-date-pickers/AdapterMoment";
 import moment from "moment";
 import { RenderDayFunction } from "../../../../../../../types/common";
 import { useState } from "react";
-import { DatePickerToolbar } from "@mui/x-date-pickers/DatePicker/DatePickerToolbar";
 
 interface InputFormProps {
+    selected: string,
     form: {
         organization: string,
+        cardNo: string,
         account: string,
         connectedId: string,
         startDate: string,
         endDate: string,
         orderBy: string,
+        inquiryType: string,
     },
     changeDetailInfo: (e: { target: { id: string; value: string | number; }; }) => void,
     changeStartAndEndDate: (date: string) => void,
 }
 
-function InputForm({ form, changeDetailInfo, changeStartAndEndDate }: InputFormProps) {
+function InputForm({ selected, form, changeDetailInfo, changeStartAndEndDate }: InputFormProps) {
     const [isSelectStartDate, setIsSelectStartDate] = useState(false);
-    const organizations = [
+    const bankOrganizations = [
         { name: '산업은행', value: '0002' },
         { name: '기업은행', value: '0003' },
         { name: '국민은행', value: '0004' },
@@ -43,6 +46,25 @@ function InputForm({ form, changeDetailInfo, changeStartAndEndDate }: InputFormP
         { name: '신한은행', value: '0088' },
         { name: 'K뱅크', value: '0089' },
     ]
+    const cardOrganizations = [
+        { name: 'KB카드', value: '0301' },
+        { name: '우리카드', value: '0309' },
+        { name: '현대카드', value: '0302' },
+        { name: '롯데카드', value: '0311' },
+        { name: '삼성카드', value: '0303' },
+        { name: '하나카드', value: '0313' },
+        { name: 'NH카드', value: '0304' },
+        { name: '전북카드', value: '0315' },
+        { name: 'BC카드', value: '0305' },
+        { name: '광주카드', value: '0316' },
+        { name: '신한카드', value: '0306' },
+        { name: '수협카드', value: '0320' },
+        { name: '씨티카드', value: '0307' },
+        { name: '제주카드', value: '03032120' },
+        { name: '산업은행카드', value: '0002' },
+    ]
+
+    const organizations = selected === 'card' ? cardOrganizations : bankOrganizations;
 
     const changeDate = (date: string) => {
         if (isSelectStartDate) {
@@ -108,18 +130,19 @@ function InputForm({ form, changeDetailInfo, changeStartAndEndDate }: InputFormP
                     IconComponent: () => null,
                     style: { textAlign: 'right' },
                 }}
-                startAdornment={<InputAdornment position="start">거래 은행</InputAdornment>}
+                size="small"
+                startAdornment={<InputAdornment position="start">{selected === 'card' ? '카드사' : '거래은행'}</InputAdornment>}
                 sx={{ '.MuiSelect-select.MuiSelect-outlined': { textAlign: 'right', paddingRight: '14px' } }}
                 value={form.organization}
                 onChange={(e) => changeDetailInfo({ target: { id: 'organization', value: e.target.value } })}
-            >
+            >   
                 {organizations.map((organization) => <MenuItem key={Math.random()} value={organization.value}>{organization.name}</MenuItem>)}
             </Select>
 
             <OutlinedInput
-                id="account"
-                startAdornment={<InputAdornment position="start">계좌 번호</InputAdornment>}
-                value={form.account}
+                id={selected === 'card' ? 'cardNo' : 'account'}
+                startAdornment={<InputAdornment position="start">{selected === 'card' ? '카드번호' : '계좌번호'}</InputAdornment>}
+                value={selected === 'card' ? form.cardNo : form.account}
                 onChange={changeDetailInfo}
                 size="small"
                 inputProps={{
@@ -161,6 +184,7 @@ function InputForm({ form, changeDetailInfo, changeStartAndEndDate }: InputFormP
                             {...params}
                             InputProps={{
                                 startAdornment: <InputAdornment position="start">조회일자</InputAdornment>,
+                                endAdornment: <InputAdornment position="end"><CalendarTodayOutlinedIcon fontSize="small" color={form.endDate === '' ? 'secondary' : 'primary'} /></InputAdornment>
                             }}
                             inputProps={{
                                 style: { textAlign: 'right' },
@@ -177,7 +201,8 @@ function InputForm({ form, changeDetailInfo, changeStartAndEndDate }: InputFormP
                     IconComponent: () => null,
                     style: { textAlign: 'right' },
                 }}
-                startAdornment={<InputAdornment position="start">표시 항목</InputAdornment>}
+                size="small"
+                startAdornment={<InputAdornment position="start">조회정렬기준</InputAdornment>}
                 sx={{ '.MuiSelect-select.MuiSelect-outlined': { textAlign: 'right', paddingRight: '14px' } }}
                 id="orderBy"
                 value={form.orderBy}
@@ -186,6 +211,24 @@ function InputForm({ form, changeDetailInfo, changeStartAndEndDate }: InputFormP
                 <MenuItem value={'0'}>오름차순</MenuItem>
                 <MenuItem value={'1'}>내림차순</MenuItem>
             </Select>
+
+            {selected === 'card' &&
+                <Select
+                    inputProps={{
+                        IconComponent: () => null,
+                        style: { textAlign: 'right' },
+                    }}
+                    size="small"
+                    startAdornment={<InputAdornment position="start">조회구분</InputAdornment>}
+                    sx={{ '.MuiSelect-select.MuiSelect-outlined': { textAlign: 'right', paddingRight: '14px' } }}
+                    id="inquiryType"
+                    value={form.inquiryType}
+                    onChange={(e) => changeDetailInfo({ target: { id: 'inquiryType', value: e.target.value } })}
+                >
+                    <MenuItem value={'0'}>카드별조회</MenuItem>
+                    <MenuItem value={'1'}>전체조회</MenuItem>
+                </Select>
+            }
         </Stack>
     )
 }

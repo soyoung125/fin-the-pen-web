@@ -46,7 +46,7 @@ function CategoryList({
     const data = newAssets.map((category: AssetsByCategoryInterface) => (category.type === type
       ? {
         ...category,
-        total: (category.total === '-' && value === 0 ? '-' : value),
+        total: (category.total === '-' && value === 0 ? '-' as const : value),
       }
       : category));
     setNewAssets(data);

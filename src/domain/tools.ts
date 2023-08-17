@@ -83,7 +83,7 @@ export const initAssetsByCategory = () =>
       title: c,
       asset: "-" as const,
     })),
-    total: "-",
+    total: "-" as const,
     sum: 0,
   }));
 

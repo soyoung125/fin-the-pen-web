@@ -3,10 +3,10 @@ import {
 } from '@mui/material';
 import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
-import { CATEGORIES } from '../../../../domain/constants/categories';
+import { CATEGORIES, Category } from '../../../../domain/constants/categories';
 import { SCHEDULE_DRAWER } from '../../../../domain/constants/schedule';
 import { selectSchedule } from '../../../../app/redux/slices/scheduleSlice';
-import { updateSchedule } from '../domain/schedule';
+import { getType, updateSchedule } from '../domain/schedule';
 import { useAppDispatch } from '../../../../app/redux/hooks';
 
 export default function CategoryInput({ selected }: {selected: string}) {
@@ -26,9 +26,22 @@ export default function CategoryInput({ selected }: {selected: string}) {
             value: category[0].title,
           },
         });
+        changeType(category[0]);
       }
     }
   }, [value]);
+
+  const changeType = (category: Category) => {
+    const type = getType(category);
+    if(schedule?.type !== type) {
+      updateSchedule(dispatch, schedule, {
+        target: {
+          id: 'type',
+          value: type,
+        },
+      });
+    }
+  }
 
   return (
     <div>

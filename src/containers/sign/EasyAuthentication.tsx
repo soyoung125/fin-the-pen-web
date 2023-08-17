@@ -9,13 +9,22 @@ import { selectIsAuthenticated, setIsAuthenticatedTrue } from '../../app/redux/s
 import { selectUser } from '../../app/redux/slices/userSlice';
 import { useAppDispatch } from '../../app/redux/hooks';
 
-function EasyAuthentication() {
+interface EasyAuthenticationProps {
+  handleAuthenticate?: () => void;
+}
+
+function EasyAuthentication({ handleAuthenticate }: EasyAuthenticationProps) {
   const CHARACTER_LIMIT = 6;
   const dispatch = useAppDispatch();
   const isAuthenticated = useSelector(selectIsAuthenticated);
   const user = useSelector(selectUser);
   const input = useRef<HTMLInputElement>();
   const [password, setPassword] = useState('');
+
+  const handleClick = () => {
+    dispatch(setIsAuthenticatedTrue());
+    handleAuthenticate && handleAuthenticate();
+  }
 
   return (
     <>
@@ -75,7 +84,7 @@ function EasyAuthentication() {
                     ))}
                   </Grid>
 
-                  <Button fullWidth variant="contained" onClick={() => dispatch(setIsAuthenticatedTrue())}>인증</Button>
+                  <Button fullWidth variant="contained" onClick={() => handleClick()}>인증</Button>
                 </Box>
               </Stack>
             </CenterBox>

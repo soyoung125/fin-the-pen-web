@@ -6,12 +6,14 @@
 
 [서버 설치하기](https://github.com/eomheeseung/fin-the-pen)
 
+[핀더펜 v2](https://github.com/soyoung125/fin-the-pen-web-v2)
+
 ## 👤 Team Members
 
 | role         | name                                                                            |
 | ------------ | ------------------------------------------------------------------------------- |
 | `기획/팀장`  | [@5minha (오민하)](https://github.com/5minha)                                   |
-| `기획`       | [김상우]()                                                                      |
+| `데이터분석`       | [김상우]() 김가람                                                     |
 | `프론트엔드` | [@soyoung125 (박소영)](https://github.com/soyoung125)                           |
 | `프론트엔드` | [@gabrielyoon7 (윤주현, Gabriel Ju Hyun Yoon)](https://github.com/gabrielyoon7) |
 | `백엔드`     | [이태양]()                                                                      |
@@ -19,7 +21,7 @@
 
 ## ⚙️ Tech
 
-- React, Redux Took Kit, Axios, React Router Dom, chart.js, Material UI, styled-components vite
+- React, Redux Took Kit, Axios, React Router Dom, chart.js, Material UI, styled-components, vite
 
 - EsLint, Storybook, MSW
 

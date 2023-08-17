@@ -9,12 +9,17 @@ import {SCHEDULE_DRAWER_MODE} from '../../../../../domain/constants/schedule';
 import ScheduleCard from './ScheduleCard';
 import {Schedule} from '../../../../../types/schedule';
 import useSchedule from '../../../../../hooks/useSchedule';
+import EasyAuthentication from '../../../../sign/EasyAuthentication';
+import { useAppDispatch } from '../../../../../app/redux/hooks';
+import { changeHideBudgetMode } from '../../../../../app/redux/slices/settingSlice';
 
 function ScheduleList() {
+  const dispatch = useAppDispatch();
   const lastItemRef = useRef<HTMLLIElement>(null);
   const [showButton, setShowButton] = useState(false);
   const [bottomDrawerOpen, setBottomDrawerOpen] = useState(false);
   const [drawerWidth, setDrawerWidth] = useState(0);
+  const [authenticationPageopen, steAuthenticationPageOpen] = useState(false);
 
   const {
     status,
@@ -97,8 +102,13 @@ function ScheduleList() {
             category={(CATEGORIES.find((c) => c.title === schedule.category) || {color: '#C8A2C8'} as Category)}
             key={Math.random()}
             handleModal={handleModal}
+            openAuthenticationPage={() => steAuthenticationPageOpen(true)}
           />
         ))
+      }
+
+      { // 예산 숨김 off를 위한 화면
+        authenticationPageopen && <EasyAuthentication handleAuthenticate={() => dispatch(changeHideBudgetMode(false))} />
       }
 
       <Box ref={lastItemRef} />

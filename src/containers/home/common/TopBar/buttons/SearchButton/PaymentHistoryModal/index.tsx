@@ -16,12 +16,14 @@ interface PaymentHistoryModalProps {
 function PaymentHistoryModal({ closePaymentHistoryModal }: PaymentHistoryModalProps) {
     const [selected, setSelected] = useState<string | null>(null);
     const [form, setForm] = useState({
-        organization: '0002',
+        organization: '',
         account: '',
+        cardNo: '',
         connectedId: '',
-        startDate: '',
+        startDate: moment().format('YYYY-MM-DD'),
         endDate: '',
         orderBy: '0',
+        inquiryType: '0',
     })
     const guestMode = useAppSelector(selectGuestMode);
 
@@ -35,12 +37,14 @@ function PaymentHistoryModal({ closePaymentHistoryModal }: PaymentHistoryModalPr
 
     const resetForm = () => {
         setForm({
-            organization: '0002',
-            account: '',
-            connectedId: '',
-            startDate: moment().format('YYYY-MM-DD'),
-            endDate: '',
-            orderBy: '0',
+            organization: '',
+        account: '',
+        cardNo: '',
+        connectedId: '',
+        startDate: moment().format('YYYY-MM-DD'),
+        endDate: '',
+        orderBy: '0',
+        inquiryType: '0',
         });
     }
 
@@ -73,10 +77,11 @@ function PaymentHistoryModal({ closePaymentHistoryModal }: PaymentHistoryModalPr
                 </IconButton>
             </Stack>
             <RoundedPaper my={1}>
-                {selected === 'account' ?
+                {/* {selected === 'account' ?
                     <InputForm form={form} changeDetailInfo={changeDetailInfo} changeStartAndEndDate={changeStartAndEndDate} />
                     : <OptionSelector selected={selected} changeOption={(option) => setSelected(option)} />
-                }
+                } */}
+                <OptionSelector selected={selected} changeOption={(option) => setSelected(option)} />
                 <Button variant="contained" fullWidth sx={{ marginTop: 2 }} onClick={handleSubmit}>조회하기</Button>
             </RoundedPaper>
         </Stack>

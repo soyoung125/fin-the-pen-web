@@ -1,12 +1,13 @@
-import { Grid, Stack, Typography } from "@mui/material";
-import AccountBalanceWalletIcon from '@mui/icons-material/AccountBalanceWallet';
-import CreditCardIcon from '@mui/icons-material/CreditCard';
+import { Box, Grid, Stack, Typography } from "@mui/material";
+import cashBook from '../../../../../../../assets/icons/cashbook.png';
+import card from '../../../../../../../assets/icons/card.png';
 import RoundedBorderBox from "../../../../../../../components/common/RoundedBorderBox";
 
 interface OptionSelectorProps {
     selected: string | null,
     changeOption: (option: string) => void;
 }
+
 function OptionSelector({ changeOption, selected }: OptionSelectorProps) {
     return (
         <Grid container spacing={1} sx={{ textAlign: 'center', wordBreak: 'keep-all' }}>
@@ -15,7 +16,9 @@ function OptionSelector({ changeOption, selected }: OptionSelectorProps) {
             <Grid item xs={6} onClick={() => changeOption('card')}>
                 <RoundedBorderBox greyBorder={!(selected === 'card')}>
                     <Stack alignItems="center" pb={1}>
-                        <CreditCardIcon sx={{ fontSize: 60, my: 2 }} />
+                        <Box my={2}>
+                            <img src={card} alt="" width="80px" height="80px" />
+                        </Box>
                         <Typography variant="caption">보유하신 카드 결제 내역을 조회합니다.</Typography>
                     </Stack>
                 </RoundedBorderBox>
@@ -23,7 +26,9 @@ function OptionSelector({ changeOption, selected }: OptionSelectorProps) {
             <Grid item xs={6} onClick={() => changeOption('account')}>
                 <RoundedBorderBox greyBorder={!(selected === 'account')}>
                     <Stack alignItems="center" pb={1}>
-                        <AccountBalanceWalletIcon sx={{ fontSize: 60, my: 2 }} />
+                        <Box my={3}>
+                            <img src={cashBook} alt="" width="64px" height="64px" />
+                        </Box>
                         <Typography variant="caption">보유하신 계좌 결재 내역을 조회합니다.</Typography>
                     </Stack>
                 </RoundedBorderBox>
