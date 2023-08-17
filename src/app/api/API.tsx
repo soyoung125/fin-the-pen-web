@@ -61,7 +61,7 @@ export const fetchCreateSchedule = async (schedule: Schedule) => {
       LOCAL_STORAGE_KEY_SERVER,
       "real"
     );
-    const response = await axios.post(`${url[server]}/createSchedule`, schedule);
+    const response = await axios.post(`real/createSchedule`, schedule);
     // alert(JSON.stringify(response));
     return response.data;
   } catch (err) {
@@ -76,7 +76,7 @@ export const fetchDeleteSchedule = async (id: string) => {
       LOCAL_STORAGE_KEY_SERVER,
       "real"
     );
-    const response = await axios.post(`${url[server]}/deleteSchedule`, { id });
+    const response = await axios.post(`real/deleteSchedule`, { id });
     // alert(JSON.stringify(response));
     return response.data;
   } catch (err) {
@@ -93,7 +93,7 @@ export const fetchMonthSchedules = async (
       "real"
     );
     const response: AxiosResponse<Schedule[]> = await axios.post<Schedule[]>(
-      `${url[server]}/getMonthSchedules`,
+      `real/getMonthSchedules`,
       schedule
     );
     const schedules: Schedule[] = response.data;
@@ -110,7 +110,7 @@ export const fetchGetTransavrionList = async (data: any) => {
       "real"
     );
     const response: AxiosResponse<any[]> = await axios.post<any[]>(
-      `${url[server]}/codef/occasionalAccount`,
+      `real/codef/occasionalAccount`,
       data
     );
     const result = response.data;
