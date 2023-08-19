@@ -11,7 +11,7 @@ import { Schedule } from "../../../../../types/schedule";
 import ScheduleDrawer from "../../../ScheduleDrawer";
 import { SCHEDULE_DRAWER_MODE } from "../../../../../domain/constants/schedule";
 import useSchedule from "../../../../../hooks/useSchedule";
-import { findSchedules } from "../../../../../app/api/API";
+import { fetchFindSchedules } from "../../../../../app/api/API";
 
 function SearchSchedule() {
     const dispatch = useAppDispatch();
@@ -34,8 +34,13 @@ function SearchSchedule() {
 
     const handleSearch = async () => {
         if (inputRef.current) {
-            const result = await findSchedules(inputRef.current.value);
-            setSchedules(result ? result : []);
+            const result = await fetchFindSchedules(inputRef.current.value);
+            if(result) {
+                setSchedules(result);
+            } else {
+                console.log('게스트 모드로 스케줄 검색');
+            }
+            
         }
     };
 

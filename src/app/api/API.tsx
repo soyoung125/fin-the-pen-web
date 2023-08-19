@@ -121,7 +121,7 @@ export const fetchGetTransavrionList = async (data: any) => {
   }
 }
 
-export const findSchedules = async (name: string) => {
+export const fetchFindSchedules = async (name: string) => {
   try {
     const server = getSessionStorage<ServerState>(
       LOCAL_STORAGE_KEY_SERVER,
