@@ -19,9 +19,10 @@ function SearchSchedule() {
     const [checkedSchedules, setCheckedSchedules] = useState<Schedule[]>([]);
     const [bottomDrawerOpen, setBottomDrawerOpen] = useState(false);
     const [drawerWidth, setDrawerWidth] = useState(0);
-    const [schedules, setSchedules] = useState<Schedule[]>([])
+    const [resultSchedules, setResultSchedules] = useState<Schedule[]>([])
 
     const {
+        schedules,
         selectedSchedule,
         setSelectedSchedule,
       } = useSchedule();
@@ -34,11 +35,13 @@ function SearchSchedule() {
 
     const handleSearch = async () => {
         if (inputRef.current) {
-            const result = await fetchFindSchedules(inputRef.current.value);
-            if(result) {
-                setSchedules(result);
+            const keyword = inputRef.current.value;
+            const result = await fetchFindSchedules(keyword);
+            if(result === undefined) {
+                setResultSchedules(result);
             } else {
                 console.log('게스트 모드로 스케줄 검색');
+                setResultSchedules([ ...schedules.filter(s => s.event_name.toLowerCase().includes(keyword.toLowerCase())) ])
             }
             
         }
@@ -79,7 +82,7 @@ function SearchSchedule() {
                             size="small"
                             inputRef={inputRef} />
                     </FormControl>
-                    {schedules.map((schedule, index) => (
+                    {resultSchedules.map((schedule, index) => (
                         <CardActionArea key={Math.random()} onClick={() => handleModify(schedule)}>
                             <Box pb={1} />
                             <RoundedBorderBox greyBorder={true}>
