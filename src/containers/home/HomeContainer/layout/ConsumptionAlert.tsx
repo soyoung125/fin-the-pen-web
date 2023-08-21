@@ -21,6 +21,7 @@ function ConsumptionAlert() {
       autoHideDuration={5000}
       open={snackbarOpen}
       onClose={handleClose}
+      sx={{ mt: 2 }}
     >
       <Alert color={CONSUMPTION_ALERTS[random].color} sx={{ width: '100%' }} icon={CONSUMPTION_ALERTS[random].icon}>
         {CONSUMPTION_ALERTS[random].message}

@@ -48,7 +48,7 @@ function TopBar() {
             // elevation={10} // shadow 해제함
             sx={{
               backgroundColor: 'primary.main',
-              height: 100,
+              height: 70,
               borderRadius: 0,
             }}
           >
@@ -56,7 +56,7 @@ function TopBar() {
               direction="row"
               justifyContent="space-between"
               alignItems="flex-end"
-              sx={{ height: 100 }}
+              sx={{ height: 70 }}
             >
               {headerMode === 'home' && (<HomeMode />)}
               {headerMode === 'analysis' && (<AnalysisMode />)}
