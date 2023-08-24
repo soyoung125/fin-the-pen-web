@@ -32,6 +32,7 @@ function TopBar() {
   }, [user]);
 
   const handleClickPopup = () => {
+    console.log(2);
     if (popupSetting.settings.connect === '적금 계좌 APP') {
       console.log('계좌 열기');
     } else {

@@ -1,6 +1,6 @@
 import { Fab } from "@mui/material";
 import SavingsOutlinedIcon from '@mui/icons-material/SavingsOutlined';
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import PATH from "../../../../../domain/constants/path";
 
@@ -8,20 +8,28 @@ interface PopupButtonProps {
   handleClickPopup: () => void,
 }
 function PopupButton({handleClickPopup}: PopupButtonProps) {
-  const navigate = useNavigate();
   const position = 120;
   const [offset, setOffset] = useState(0);
   const [isDragging, setIsDragging] = useState(false);
   const fabRef = useRef<HTMLDivElement>(null);
   const startPositionRef = useRef<number>(120);
 
-  const handleMouseDown = (event: React.MouseEvent<HTMLDivElement>) => {
+  useEffect(() => {
+    const div = fabRef.current;
+    if (div) {
+      div.addEventListener('touchstart', handleTouchStart, { passive: false });
+    }
+  }, [])
+
+  const handleMouseDown = (event: React.MouseEvent) => {
     event.preventDefault();
     setIsDragging(true);
     startPositionRef.current = event.clientY - offset;
   };
 
-  const handleTouchStart = (event: React.TouchEvent<HTMLDivElement>) => {
+  const handleTouchStart = (event: TouchEvent) => {
+    event.stopPropagation();
+    event.preventDefault();
     startPositionRef.current = event.touches[0].clientY - offset;
     setIsDragging(true);
   };
@@ -34,7 +42,7 @@ function PopupButton({handleClickPopup}: PopupButtonProps) {
     setOffset(offsetY);
   };
 
-  const handleTouchMove = (event: React.TouchEvent<HTMLDivElement>) => {
+  const handleTouchMove = (event: React.TouchEvent) => {
     if (!isDragging) return;
 
     const offsetY = event.touches[0].clientY - startPositionRef.current;
@@ -42,8 +50,17 @@ function PopupButton({handleClickPopup}: PopupButtonProps) {
     setOffset(offsetY);
   };
 
-  const handleMouseUp = () => {
+  const handleMouseUp = (event: React.TouchEvent | React.MouseEvent) => {
+    console.log(3);
     setIsDragging(false);
+  };
+
+  const handleClick = () => {
+    if (!isDragging) {
+      console.log('Click event occurred!');
+    } else {
+      console.log('nonclick');
+    }
   };
 
   return (
@@ -51,7 +68,6 @@ function PopupButton({handleClickPopup}: PopupButtonProps) {
       ref={fabRef}
       style={{ position: 'fixed', top: `calc(100vh - ${position - offset}px)`, right: 10 }}
       onMouseDown={handleMouseDown}
-      onTouchStart={handleTouchStart}
       onMouseUp={handleMouseUp}
       onTouchEnd={handleMouseUp}
       onMouseMove={handleMouseMove}
@@ -61,7 +77,7 @@ function PopupButton({handleClickPopup}: PopupButtonProps) {
         color="secondary"
         size="small"
         aria-label="popup"
-        onClick={handleClickPopup}
+        onClick={handleClick}
       >
         <SavingsOutlinedIcon />
       </Fab>
