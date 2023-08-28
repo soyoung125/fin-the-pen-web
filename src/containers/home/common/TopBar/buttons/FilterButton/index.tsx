@@ -87,7 +87,7 @@ function FilterButton() {
           pb={2}
         >
           <Stack direction="row" alignItems="center" justifyContent="space-between">
-            <Button onClick={() => setBottomDrawerOpen(false)}><ClearIcon /></Button>
+            <Button onClick={openAlertModal}>초기화</Button>
             <Typography variant="h5" sx={{ fontWeight: 'bold' }}>필터 설정</Typography>
             <Button
               variant="text"
@@ -173,9 +173,9 @@ function FilterButton() {
           <Button
             variant="contained"
             color="primary"
-            onClick={openAlertModal}
+            onClick={handleClickOk}
           >
-            필터 초기화
+            저장
           </Button>
         </Stack>
       </Drawer>
