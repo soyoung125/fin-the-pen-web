@@ -20,10 +20,12 @@ import useModal from '../../../../../../hooks/useModal';
 
 function FilterButton() {
   const dispatch = useAppDispatch();
-  const [bottomDrawerOpen, setBottomDrawerOpen] = useState(false);
   const filtered = useSelector(selectFiltered);
   const filteredDate = useSelector(selectFilteredDate);
+  const [oldFiltered, setOldFiltered] = useState([...filtered]);
+  const [oldFilteredDate, setOldFilteredDate] = useState({...filteredDate});
   const [error, setError] = useState(false);
+  const [bottomDrawerOpen, setBottomDrawerOpen] = useState(false);
   const {
     modalOpen: alertModalOpen,
     openModal: openAlertModal,
@@ -43,10 +45,20 @@ function FilterButton() {
     dispatch(updateFilter(cat));
   };
 
-  const handleClickOk = () => {
+  const handleClickSave = () => {
     dispatch(updateAnalyzedData());
+    setOldFiltered([...filtered]);
+    setOldFilteredDate({...filteredDate});
     setBottomDrawerOpen(false);
   };
+
+  const handleClickOk = () => {
+    if(isSame(filtered, oldFiltered) && isSame(filteredDate, oldFilteredDate)) {
+      setBottomDrawerOpen(false);
+    } else {
+      alert('필터가 수정되었습니다.')
+    }
+  }
 
   const changeSchedule = (event: React.ChangeEvent<HTMLInputElement>) => {
     const date = event.target.value;
@@ -59,6 +71,10 @@ function FilterButton() {
       }));
     }
   };
+
+  const isSame = (data1: string[] | {[key: string]: string}, data2: string[] | {[key: string]: string}) => {
+    return JSON.stringify(data1) === JSON.stringify(data2)
+  }
 
   useEffect(() => {
     if (isTimeOrderCorrect(filteredDate.start, filteredDate.end)) {
@@ -173,7 +189,7 @@ function FilterButton() {
           <Button
             variant="contained"
             color="primary"
-            onClick={handleClickOk}
+            onClick={handleClickSave}
           >
             저장
           </Button>
