@@ -1,9 +1,8 @@
 name: Deploy static content to Pages
 
 on:
-  # 원하는 브랜치 명으로 바꿔주시면 됩니다.
   push:
-    branches: ['main']
+    branches: [ 'develop' ]
 
   workflow_dispatch:
 
