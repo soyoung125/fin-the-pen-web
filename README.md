@@ -21,9 +21,22 @@
 
 ## ⚙️ Tech
 
-- React, Redux Took Kit, Axios, React Router Dom, chart.js, Material UI, styled-components, vite, TanStack Query
-
-- EsLint, Storybook, MSW
+- 상태관리
+    - React
+    - Redux Took Kit
+    - Recoil (예정)
+    - TanStack Query
+- 스타일링 라이브러리
+    - Material UI
+    - styled-components
+    - chart.js
+- Axios
+- React Router Dom
+- vite
+- 테스트
+    - EsLint
+    - Storybook
+    - MSW
 
 ## ✅ Features
 
@@ -37,7 +50,8 @@
     │  │  ├─예상 수입/지출 금액
     │  │  ├─일정 중요도
     │  │  └─예산 제외 기능
-    │  ├─달력으로 일정 표시
+    │  ├─달력으로 일정 표시git pull origin
+
     │  │  ├─달력 월별 페이지 전환
     │  │  └─달력에 일정 요약 표시
     │  └─리스트로 일정 표시
