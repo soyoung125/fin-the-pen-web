@@ -26,6 +26,7 @@ function FilterButton() {
   const [oldFilteredDate, setOldFilteredDate] = useState({...filteredDate});
   const [error, setError] = useState(false);
   const [bottomDrawerOpen, setBottomDrawerOpen] = useState(false);
+  const [alertMode, setAlertMode] = useState<'reset' | 'saveFilter' | 'confirmCloseFilter'>('reset');
   const {
     modalOpen: alertModalOpen,
     openModal: openAlertModal,
@@ -45,19 +46,41 @@ function FilterButton() {
     dispatch(updateFilter(cat));
   };
 
-  const handleClickSave = () => {
-    dispatch(updateAnalyzedData());
-    setOldFiltered([...filtered]);
-    setOldFilteredDate({...filteredDate});
-    setBottomDrawerOpen(false);
-  };
+  const changeAlertMode = (mode: 'reset' | 'saveFilter') => {
+    setAlertMode(mode);
+    openAlertModal();
+  }
 
   const handleClickOk = () => {
     if(isSame(filtered, oldFiltered) && isSame(filteredDate, oldFilteredDate)) {
       setBottomDrawerOpen(false);
     } else {
-      alert('필터가 수정되었습니다.')
+      setAlertMode('confirmCloseFilter');
+      openAlertModal();
     }
+  }
+
+  const handleClickYes = () => {
+    closeAlertModal();
+    switch (alertMode) {
+      case 'reset':
+        dispatch(initFilter());
+        break;
+      case 'saveFilter':
+        saveFilter();
+        break;
+      case 'confirmCloseFilter':
+        //필터 데이터 되돌리기
+        setBottomDrawerOpen(false);
+        break;
+    }
+  }
+
+  const saveFilter = () => {
+    dispatch(updateAnalyzedData());
+    setOldFiltered([...filtered]);
+    setOldFilteredDate({ ...filteredDate });
+    setBottomDrawerOpen(false);
   }
 
   const changeSchedule = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -103,7 +126,7 @@ function FilterButton() {
           pb={2}
         >
           <Stack direction="row" alignItems="center" justifyContent="space-between">
-            <Button onClick={openAlertModal}>초기화</Button>
+            <Button onClick={() => changeAlertMode('reset')}>초기화</Button>
             <Typography variant="h5" sx={{ fontWeight: 'bold' }}>필터 설정</Typography>
             <Button
               variant="text"
@@ -189,7 +212,7 @@ function FilterButton() {
           <Button
             variant="contained"
             color="primary"
-            onClick={handleClickSave}
+            onClick={() => changeAlertMode('saveFilter')}
           >
             저장
           </Button>
@@ -199,11 +222,8 @@ function FilterButton() {
       <AlertModal
         open={alertModalOpen}
         handleClose={closeAlertModal}
-        handleClickYes={() => {
-          closeAlertModal();
-          dispatch(initFilter());
-        }}
-        mode="reset"
+        handleClickYes={handleClickYes}
+        mode={alertMode}
       />
     </>
   );
