@@ -8,7 +8,7 @@ import ClearIcon from '@mui/icons-material/Clear';
 import moment from 'moment';
 import FilterAccordion from './inputs/FilterAccordion';
 import {
-  initFilter, selectFiltered, selectFilteredDate, setFilteredDate, updateAnalyzedData, updateFilter,
+  initFilter, revertFilter, selectFiltered, selectFilteredDate, setFilteredDate, updateAnalyzedData, updateFilter,
 } from '../../../../../../app/redux/slices/scheduleSlice';
 import { WRONG_TIME_ORDER } from '../../../../../../domain/constants/schedule';
 import { isTimeOrderCorrect } from '../../../../../../domain/tools';
@@ -20,10 +20,13 @@ import useModal from '../../../../../../hooks/useModal';
 
 function FilterButton() {
   const dispatch = useAppDispatch();
-  const [bottomDrawerOpen, setBottomDrawerOpen] = useState(false);
   const filtered = useSelector(selectFiltered);
   const filteredDate = useSelector(selectFilteredDate);
+  const [oldFiltered, setOldFiltered] = useState([...filtered]);
+  const [oldFilteredDate, setOldFilteredDate] = useState({...filteredDate});
   const [error, setError] = useState(false);
+  const [bottomDrawerOpen, setBottomDrawerOpen] = useState(false);
+  const [alertMode, setAlertMode] = useState<'reset' | 'saveFilter' | 'confirmCloseFilter'>('reset');
   const {
     modalOpen: alertModalOpen,
     openModal: openAlertModal,
@@ -43,10 +46,43 @@ function FilterButton() {
     dispatch(updateFilter(cat));
   };
 
+  const changeAlertMode = (mode: 'reset' | 'saveFilter') => {
+    setAlertMode(mode);
+    openAlertModal();
+  }
+
   const handleClickOk = () => {
+    if(isSame(filtered, oldFiltered) && isSame(filteredDate, oldFilteredDate)) {
+      setBottomDrawerOpen(false);
+    } else {
+      setAlertMode('confirmCloseFilter');
+      openAlertModal();
+    }
+  }
+
+  const handleClickYes = () => {
+    closeAlertModal();
+    switch (alertMode) {
+      case 'reset':
+        dispatch(initFilter());
+        break;
+      case 'saveFilter':
+        saveFilter();
+        break;
+      case 'confirmCloseFilter':
+        //필터 데이터 되돌리기
+        dispatch(revertFilter({filtered: oldFiltered, filtered_date: oldFilteredDate}))
+        setBottomDrawerOpen(false);
+        break;
+    }
+  }
+
+  const saveFilter = () => {
     dispatch(updateAnalyzedData());
+    setOldFiltered([...filtered]);
+    setOldFilteredDate({ ...filteredDate });
     setBottomDrawerOpen(false);
-  };
+  }
 
   const changeSchedule = (event: React.ChangeEvent<HTMLInputElement>) => {
     const date = event.target.value;
@@ -59,6 +95,10 @@ function FilterButton() {
       }));
     }
   };
+
+  const isSame = (data1: string[] | {[key: string]: string}, data2: string[] | {[key: string]: string}) => {
+    return JSON.stringify(data1) === JSON.stringify(data2)
+  }
 
   useEffect(() => {
     if (isTimeOrderCorrect(filteredDate.start, filteredDate.end)) {
@@ -87,7 +127,7 @@ function FilterButton() {
           pb={2}
         >
           <Stack direction="row" alignItems="center" justifyContent="space-between">
-            <Button onClick={() => setBottomDrawerOpen(false)}><ClearIcon /></Button>
+            <Button onClick={() => changeAlertMode('reset')}>초기화</Button>
             <Typography variant="h5" sx={{ fontWeight: 'bold' }}>필터 설정</Typography>
             <Button
               variant="text"
@@ -173,9 +213,9 @@ function FilterButton() {
           <Button
             variant="contained"
             color="primary"
-            onClick={openAlertModal}
+            onClick={() => changeAlertMode('saveFilter')}
           >
-            필터 초기화
+            저장
           </Button>
         </Stack>
       </Drawer>
@@ -183,11 +223,8 @@ function FilterButton() {
       <AlertModal
         open={alertModalOpen}
         handleClose={closeAlertModal}
-        handleClickYes={() => {
-          closeAlertModal();
-          dispatch(initFilter());
-        }}
-        mode="reset"
+        handleClickYes={handleClickYes}
+        mode={alertMode}
       />
     </>
   );
