@@ -37,7 +37,7 @@ function SearchSchedule() {
         if (inputRef.current) {
             const keyword = inputRef.current.value;
             const result = await fetchFindSchedules(keyword);
-            if(result === undefined) {
+            if(result !== undefined) {
                 setResultSchedules(result);
             } else {
                 console.log('게스트 모드로 스케줄 검색');
