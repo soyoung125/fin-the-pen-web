@@ -219,6 +219,10 @@ export const scheduleSlice = createSlice({
     setFilteredDate: (state, action: PayloadAction<{type: string, date: string}>) => {
       state.filtered_date[action.payload.type] = action.payload.date;
     },
+    revertFilter: (state, action) => {
+      state.filtered = action.payload.filtered;
+      state.filtered_date = action.payload.filtered_date;
+    },
     initFilter: (state) => {
       state.filtered = [];
       state.filtered_date = {
@@ -269,6 +273,7 @@ export const {
   updateFilter,
   updateFiltersForce,
   setFilteredDate,
+  revertFilter,
   initFilter,
   changeViewMode,
 } = scheduleSlice.actions;

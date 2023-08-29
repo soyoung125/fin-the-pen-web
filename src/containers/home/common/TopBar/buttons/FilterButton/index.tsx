@@ -8,7 +8,7 @@ import ClearIcon from '@mui/icons-material/Clear';
 import moment from 'moment';
 import FilterAccordion from './inputs/FilterAccordion';
 import {
-  initFilter, selectFiltered, selectFilteredDate, setFilteredDate, updateAnalyzedData, updateFilter,
+  initFilter, revertFilter, selectFiltered, selectFilteredDate, setFilteredDate, updateAnalyzedData, updateFilter,
 } from '../../../../../../app/redux/slices/scheduleSlice';
 import { WRONG_TIME_ORDER } from '../../../../../../domain/constants/schedule';
 import { isTimeOrderCorrect } from '../../../../../../domain/tools';
@@ -71,6 +71,7 @@ function FilterButton() {
         break;
       case 'confirmCloseFilter':
         //필터 데이터 되돌리기
+        dispatch(revertFilter({filtered: oldFiltered, filtered_date: oldFilteredDate}))
         setBottomDrawerOpen(false);
         break;
     }
