@@ -21,7 +21,7 @@
 
 ## ⚙️ Tech
 
-- React, Redux Took Kit, Axios, React Router Dom, chart.js, Material UI, styled-components, vite
+- React, Redux Took Kit, Axios, React Router Dom, chart.js, Material UI, styled-components, vite, TanStack Query
 
 - EsLint, Storybook, MSW
 
