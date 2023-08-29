@@ -26,11 +26,12 @@
     - Redux Took Kit
     - Recoil (예정)
     - TanStack Query
+- 스타일링 라이브러리
+    - Material UI
+    - styled-components
+    - chart.js
 - Axios
 - React Router Dom
-- chart.js
-- Material UI
-- styled-components
 - vite
 - 테스트
     - EsLint
