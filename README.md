@@ -13,7 +13,7 @@
 | role    | name                                                                         |
 |---------|------------------------------------------------------------------------------|
 | `기획/팀장` | [@5minha (오민하)](https://github.com/5minha)                                   |
-| `데이터분석` | [김상우]() 김가람                                                                  |
+| `데이터분석` | [김상우]()[김가람]                                                                 |
 | `프론트엔드` | [@soyoung125 (박소영)](https://github.com/soyoung125)                           |
 | `프론트엔드` | [@gabrielyoon7 (윤주현, Gabriel Ju Hyun Yoon)](https://github.com/gabrielyoon7) |
 | `백엔드`   | [이태양]()                                                                      |
