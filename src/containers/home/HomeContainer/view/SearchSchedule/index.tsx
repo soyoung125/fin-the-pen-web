@@ -2,8 +2,8 @@ import { Box, Button, ButtonBase, CardActionArea, Checkbox, Drawer, FormControl,
 import RoundedPaper from "../../../../../components/common/RoundedPaper";
 import SearchIcon from '@mui/icons-material/Search';
 import { useRef, useState } from "react";
-import { useAppDispatch, useAppSelector } from "../../../../../app/redux/hooks";
-import { deleteSchedule, selectSchedules } from "../../../../../app/redux/slices/scheduleSlice";
+import { useAppDispatch } from "../../../../../app/redux/hooks";
+import { deleteSchedule } from "../../../../../app/redux/slices/scheduleSlice";
 import RoundedBorderBox from "../../../../../components/common/RoundedBorderBox";
 import moment from "moment";
 import 'moment/locale/ko'
