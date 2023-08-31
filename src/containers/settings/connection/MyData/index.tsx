@@ -1,20 +1,26 @@
 import {
-    Box, Button, IconButton, List, ListItem, ListItemButton, ListItemText, Paper, Stack, Tab, Tabs,
+    Box, Button, FormControl, IconButton, InputAdornment, List, ListItem, ListItemButton, ListItemText, OutlinedInput, Paper, Stack, Tab, Tabs,
 } from '@mui/material';
 import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight';
 import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import { useState } from 'react';
 import { BANK_ORGANIZATION, CARD_ORGANIZATION } from '../../../../domain/constants/organizations';
+import RoundedBorderBox from '../../../../components/common/RoundedBorderBox';
 
 function MyData() {
     const [step, setStep] = useState(0);
     const [value, setValue] = useState(0);
-    const [selected, setSelected] = useState('');
+    const [selected, setSelected] = useState({name: '', value: ''});
+    const [form, setForm] = useState({id: '', password: ''});
 
     const handleChange = (event: React.SyntheticEvent, newValue: number) => {
         setValue(newValue);
-        setSelected('');
+        setSelected({name: '', value: ''});
+    };
+
+    const changeDetailInfo = (state: React.ChangeEvent<HTMLInputElement>) => {
+        setForm({ ...form, [state.target.id]: state.target.value });
     };
 
     const steps = [
@@ -35,10 +41,10 @@ function MyData() {
                     ? BANK_ORGANIZATION.map((b) =>
                         <ListItem
                             button
-                            onClick={() => setSelected(b.value)}
+                            onClick={() => setSelected(b)}
                             secondaryAction={
                                 <IconButton aria-label="comment">
-                                    {selected === b.value ? <CheckCircleIcon /> : <CheckCircleOutlineIcon />}
+                                    {selected === b ? <CheckCircleIcon /> : <CheckCircleOutlineIcon />}
                                 </IconButton>
                             }>
                             <ListItemText primary={b.name} />
@@ -46,18 +52,48 @@ function MyData() {
                     : CARD_ORGANIZATION.map((c) =>
                         <ListItem
                             button
-                            onClick={() => setSelected(c.value)}
+                            onClick={() => setSelected(c)}
                             secondaryAction={
                                 <IconButton aria-label="comment">
-                                    {selected === c.value ? <CheckCircleIcon /> : <CheckCircleOutlineIcon />}
+                                    {selected === c ? <CheckCircleIcon /> : <CheckCircleOutlineIcon />}
                                 </IconButton>
                             }>
                             <ListItemText primary={c.name} />
                         </ListItem>)
                 }
-                <Button>연결하기</Button>
+                <Button onClick={() => selected.name !== '' && setStep(step + 1)}>연결하기</Button>
             </List>
         </>,
+        <RoundedBorderBox>
+            <Stack alignItems="center" p={1} spacing={1}>
+                <Box>{selected.name}</Box>
+                <FormControl fullWidth>
+                    <OutlinedInput
+                        id="id"
+                        startAdornment={<InputAdornment position="start">ID</InputAdornment>}
+                        value={form.id}
+                        onChange={changeDetailInfo}
+                        size="small"
+                        inputProps={{
+                            style: { textAlign: 'right' },
+                        }}
+                    />
+                </FormControl>
+                <FormControl fullWidth>
+                    <OutlinedInput
+                        id="password"
+                        type='password'
+                        startAdornment={<InputAdornment position="start">PW</InputAdornment>}
+                        value={form.password}
+                        onChange={changeDetailInfo}
+                        size="small"
+                        inputProps={{
+                            style: { textAlign: 'right' },
+                        }}
+                    />
+                </FormControl>
+            </Stack>
+        </RoundedBorderBox>,
     ];
 
     return (
