@@ -9,7 +9,7 @@ import HomeMode from './headerMode/HomeMode';
 import { useAppDispatch, useAppSelector } from '../../../../app/redux/hooks';
 import { selectSavingPopUpSetting } from '../../../../app/redux/slices/assetSlice';
 import PopupButton from './buttons/PopupButton';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import PATH from '../../../../domain/constants/path';
 import SettingsMode from './headerMode/SettingsMode';
 
