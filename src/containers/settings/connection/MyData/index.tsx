@@ -1,17 +1,12 @@
 import {
-    Box, Button, FormControl, IconButton, InputAdornment, List, ListItem, ListItemButton, ListItemText, OutlinedInput, Paper, Stack, Tab, Tabs,
+    Box, Paper, Stack,
 } from '@mui/material';
 import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight';
-import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
-import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import { useState } from 'react';
-import { BANK_ORGANIZATION, CARD_ORGANIZATION } from '../../../../domain/constants/organizations';
-import RoundedBorderBox from '../../../../components/common/RoundedBorderBox';
 import { useAppSelector } from '../../../../app/redux/hooks';
 import { selectGuestMode } from '../../../../app/redux/slices/commonSlice';
 import { fetchCreateAccount } from '../../../../app/api/API';
 import OrganizationSelect from './OrganizationSelect';
-import RoundedPaper from '../../../../components/common/RoundedPaper';
 import AccountInput from './AccountInput';
 
 function MyData() {
