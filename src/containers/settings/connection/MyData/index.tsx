@@ -7,8 +7,13 @@ import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import { useState } from 'react';
 import { BANK_ORGANIZATION, CARD_ORGANIZATION } from '../../../../domain/constants/organizations';
 import RoundedBorderBox from '../../../../components/common/RoundedBorderBox';
+import { useAppSelector } from '../../../../app/redux/hooks';
+import { selectGuestMode } from '../../../../app/redux/slices/commonSlice';
+import { fetchCreateAccount } from '../../../../app/api/API';
 
 function MyData() {
+    const businessType = ['BK', 'CD', 'ST', 'IS'];
+    const guestMode = useAppSelector(selectGuestMode);
     const [step, setStep] = useState(0);
     const [value, setValue] = useState(0);
     const [selected, setSelected] = useState({name: '', value: ''});
@@ -22,6 +27,26 @@ function MyData() {
     const changeDetailInfo = (state: React.ChangeEvent<HTMLInputElement>) => {
         setForm({ ...form, [state.target.id]: state.target.value });
     };
+
+    const handleClickOk = async () => {
+        // if (guestMode) {
+        //     alert('게스트 모드입니다.')
+        // } else {
+        //     const result = await fetchCreateAccount([{
+        //         businessType: businessType[value],
+        //         organization: selected.value,
+        //         ...form,
+        //     }]);
+        //     console.log(result);
+        // }
+        const result = await fetchCreateAccount([{
+            businessType: businessType[value],
+            organization: selected.value,
+            // loginType: 1,
+            ...form,
+        }]);
+        console.log(result);
+    }
 
     const steps = [
         <Paper sx={{ padding: 2 }} onClick={() => setStep(step + 1)}>
@@ -61,7 +86,7 @@ function MyData() {
                             <ListItemText primary={c.name} />
                         </ListItem>)
                 }
-                <Button onClick={() => selected.name !== '' && setStep(step + 1)}>연결하기</Button>
+                <Button fullWidth variant='contained' onClick={() => selected.name !== '' && setStep(step + 1)}>연결하기</Button>
             </List>
         </>,
         <RoundedBorderBox>
@@ -92,6 +117,7 @@ function MyData() {
                         }}
                     />
                 </FormControl>
+                <Button fullWidth variant='contained' onClick={handleClickOk}>확인</Button>
             </Stack>
         </RoundedBorderBox>,
     ];
