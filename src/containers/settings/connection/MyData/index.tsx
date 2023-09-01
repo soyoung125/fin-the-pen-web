@@ -10,6 +10,7 @@ import RoundedBorderBox from '../../../../components/common/RoundedBorderBox';
 import { useAppSelector } from '../../../../app/redux/hooks';
 import { selectGuestMode } from '../../../../app/redux/slices/commonSlice';
 import { fetchCreateAccount } from '../../../../app/api/API';
+import OrganizationSelect from './OrganizationSelect';
 
 function MyData() {
     const businessType = ['BK', 'CD', 'ST', 'IS'];
@@ -19,14 +20,20 @@ function MyData() {
     const [selected, setSelected] = useState({name: '', value: ''});
     const [form, setForm] = useState({id: '', password: ''});
 
-    const handleChange = (event: React.SyntheticEvent, newValue: number) => {
+    const handleChangeType = (event: React.SyntheticEvent, newValue: number) => {
         setValue(newValue);
         setSelected({name: '', value: ''});
     };
 
+    const handleSelectOrganization = (org: {name: string, value: string}) => {
+        setSelected(org);
+    }
+
     const changeDetailInfo = (state: React.ChangeEvent<HTMLInputElement>) => {
         setForm({ ...form, [state.target.id]: state.target.value });
     };
+
+    const changeStep = () => setStep(step + 1);
 
     const handleClickOk = async () => {
         // if (guestMode) {
@@ -49,48 +56,19 @@ function MyData() {
     }
 
     const steps = [
-        <Paper sx={{ padding: 2 }} onClick={() => setStep(step + 1)}>
+        <Paper sx={{ padding: 2 }} onClick={changeStep}>
             <Stack direction="row" justifyContent="space-between">
                 <Box>My 자산 연결하기</Box>
                 <KeyboardArrowRightIcon />
             </Stack>
         </Paper>,
-        <>
-            <Box>어떤 자산을 연결할까요?</Box>
-            <Tabs value={value} onChange={handleChange} aria-label="basic tabs example">
-                <Tab label="은행" />
-                <Tab label="카드" />
-            </Tabs>
-            <List dense>
-                {value === 0
-                    ? BANK_ORGANIZATION.map((b) =>
-                        <ListItem
-                            key={Math.random()}
-                            button
-                            onClick={() => setSelected(b)}
-                            secondaryAction={
-                                <IconButton aria-label="comment">
-                                    {selected === b ? <CheckCircleIcon /> : <CheckCircleOutlineIcon />}
-                                </IconButton>
-                            }>
-                            <ListItemText primary={b.name} />
-                        </ListItem>)
-                    : CARD_ORGANIZATION.map((c) =>
-                        <ListItem
-                            key={Math.random()}
-                            button
-                            onClick={() => setSelected(c)}
-                            secondaryAction={
-                                <IconButton aria-label="comment">
-                                    {selected === c ? <CheckCircleIcon /> : <CheckCircleOutlineIcon />}
-                                </IconButton>
-                            }>
-                            <ListItemText primary={c.name} />
-                        </ListItem>)
-                }
-                <Button fullWidth variant='contained' onClick={() => selected.name !== '' && setStep(step + 1)}>연결하기</Button>
-            </List>
-        </>,
+        <OrganizationSelect
+            value={value}
+            selected={selected}
+            handleChangeType={handleChangeType}
+            handleSelectOrganization={handleSelectOrganization}
+            changeStep={changeStep}
+        />,
         <RoundedBorderBox>
             <Stack alignItems="center" p={1} spacing={1}>
                 <Box>{selected.name}</Box>
