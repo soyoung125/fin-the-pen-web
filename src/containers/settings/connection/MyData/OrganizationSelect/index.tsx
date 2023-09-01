@@ -2,6 +2,7 @@ import { Box, Button, IconButton, List, ListItem, ListItemText, Tab, Tabs } from
 import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import { BANK_ORGANIZATION, CARD_ORGANIZATION } from "../../../../../domain/constants/organizations";
+import CustomListItem from "./CustomListItem";
 
 interface OrganizationSelectProps {
     value: number,
@@ -22,29 +23,19 @@ function OrganizationSelect({ value, selected,  handleChangeType, handleSelectOr
             <List dense>
                 {value === 0
                     ? BANK_ORGANIZATION.map((b) =>
-                        <ListItem
+                        <CustomListItem
                             key={Math.random()}
-                            button
-                            onClick={() => handleSelectOrganization(b)}
-                            secondaryAction={
-                                <IconButton aria-label="comment">
-                                    {selected === b ? <CheckCircleIcon /> : <CheckCircleOutlineIcon />}
-                                </IconButton>
-                            }>
-                            <ListItemText primary={b.name} />
-                        </ListItem>)
+                            item={b}
+                            isChecked={selected === b}
+                            handleSelectOrganization={handleSelectOrganization}
+                        />)
                     : CARD_ORGANIZATION.map((c) =>
-                        <ListItem
+                        <CustomListItem
                             key={Math.random()}
-                            button
-                            onClick={() => handleSelectOrganization(c)}
-                            secondaryAction={
-                                <IconButton aria-label="comment">
-                                    {selected === c ? <CheckCircleIcon /> : <CheckCircleOutlineIcon />}
-                                </IconButton>
-                            }>
-                            <ListItemText primary={c.name} />
-                        </ListItem>)
+                            item={c}
+                            isChecked={selected === c}
+                            handleSelectOrganization={handleSelectOrganization}
+                        />)
                 }
                 <Button fullWidth variant='contained' onClick={() => selected.name !== '' && changeStep()}>연결하기</Button>
             </List>
