@@ -65,6 +65,7 @@ function MyData() {
                 {value === 0
                     ? BANK_ORGANIZATION.map((b) =>
                         <ListItem
+                            key={Math.random()}
                             button
                             onClick={() => setSelected(b)}
                             secondaryAction={
@@ -76,6 +77,7 @@ function MyData() {
                         </ListItem>)
                     : CARD_ORGANIZATION.map((c) =>
                         <ListItem
+                            key={Math.random()}
                             button
                             onClick={() => setSelected(c)}
                             secondaryAction={
