@@ -11,6 +11,7 @@ import { useAppSelector } from '../../../../app/redux/hooks';
 import { selectGuestMode } from '../../../../app/redux/slices/commonSlice';
 import { fetchCreateAccount } from '../../../../app/api/API';
 import OrganizationSelect from './OrganizationSelect';
+import RoundedPaper from '../../../../components/common/RoundedPaper';
 
 function MyData() {
     const businessType = ['BK', 'CD', 'ST', 'IS'];
@@ -69,8 +70,8 @@ function MyData() {
             handleSelectOrganization={handleSelectOrganization}
             changeStep={changeStep}
         />,
-        <RoundedBorderBox>
-            <Stack alignItems="center" p={1} spacing={1}>
+        <RoundedPaper my={1}>
+            <Stack alignItems="center" spacing={1}>
                 <Box>{selected.name}</Box>
                 <FormControl fullWidth>
                     <OutlinedInput
@@ -99,7 +100,7 @@ function MyData() {
                 </FormControl>
                 <Button fullWidth variant='contained' onClick={handleClickOk}>확인</Button>
             </Stack>
-        </RoundedBorderBox>,
+        </RoundedPaper>,
     ];
 
     return (
