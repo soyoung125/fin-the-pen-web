@@ -12,6 +12,7 @@ import { selectGuestMode } from '../../../../app/redux/slices/commonSlice';
 import { fetchCreateAccount } from '../../../../app/api/API';
 import OrganizationSelect from './OrganizationSelect';
 import RoundedPaper from '../../../../components/common/RoundedPaper';
+import AccountInput from './AccountInput';
 
 function MyData() {
     const businessType = ['BK', 'CD', 'ST', 'IS'];
@@ -70,37 +71,12 @@ function MyData() {
             handleSelectOrganization={handleSelectOrganization}
             changeStep={changeStep}
         />,
-        <RoundedPaper my={1}>
-            <Stack alignItems="center" spacing={1}>
-                <Box>{selected.name}</Box>
-                <FormControl fullWidth>
-                    <OutlinedInput
-                        id="id"
-                        startAdornment={<InputAdornment position="start">ID</InputAdornment>}
-                        value={form.id}
-                        onChange={changeDetailInfo}
-                        size="small"
-                        inputProps={{
-                            style: { textAlign: 'right' },
-                        }}
-                    />
-                </FormControl>
-                <FormControl fullWidth>
-                    <OutlinedInput
-                        id="password"
-                        type='password'
-                        startAdornment={<InputAdornment position="start">PW</InputAdornment>}
-                        value={form.password}
-                        onChange={changeDetailInfo}
-                        size="small"
-                        inputProps={{
-                            style: { textAlign: 'right' },
-                        }}
-                    />
-                </FormControl>
-                <Button fullWidth variant='contained' onClick={handleClickOk}>확인</Button>
-            </Stack>
-        </RoundedPaper>,
+        <AccountInput
+            selected={selected}
+            form={form}
+            changeDetailInfo={changeDetailInfo}
+            handleClickOk={handleClickOk}
+        />,
     ];
 
     return (
