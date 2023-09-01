@@ -18,6 +18,7 @@ interface Path {
   readonly DetailInformation: string;
   readonly assetsByCategory: string;
   readonly scheduleManagement: string;
+  readonly myData: string;
 }
 
 const PATH: Readonly<Path> = Object.freeze({
@@ -43,6 +44,9 @@ const PATH: Readonly<Path> = Object.freeze({
   DetailInformation: '/management/regular-deposit-withdrawal-detail-info',
   assetsByCategory: '/management/assets-by-category',
   scheduleManagement: '/management/schedule-management',
+
+  // setting pages
+  myData: '/settings/my-data',
 });
 
 export default PATH;

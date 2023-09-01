@@ -11,6 +11,7 @@ import { RouterDOM } from '../../types/common';
 import DetailSetting from '../../containers/assetManagement/SavingsGoalContainer/DetailSetting';
 import FetchPaymentHistory from '../../containers/home/HomeContainer/view/FetchPaymentHistory';
 import SearchSchedule from '../../containers/home/HomeContainer/view/SearchSchedule';
+import MyData from '../../containers/settings/connection/MyData';
 
 const HOME_ROUTES: RouterDOM[] = [
   {
@@ -52,6 +53,10 @@ const HOME_ROUTES: RouterDOM[] = [
   {
     path: PATH.settings,
     element: <SettingsContainer />,
+  },
+  {
+    path: PATH.myData,
+    element: <MyData />,
   },
   {
     path: PATH.test,
