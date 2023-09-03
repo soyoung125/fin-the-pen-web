@@ -1,9 +1,9 @@
 {
  "theme_color": "#f69435",
- "background_color": "#ffffff",
+ "background_color": "#f69435",
  "display": "standalone",
- "scope": "/",
- "start_url": "/",
+ "scope": "/fin-the-pen-web/",
+ "start_url": "/fin-the-pen-web/",
  "app_name": "핀더펜",
  "short_name": "핀더펜",
  "description": "내 계획에 맞는 자산을 설계해주는 나만의 Financial Planner 앱",
