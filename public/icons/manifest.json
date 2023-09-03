@@ -1,5 +1,12 @@
 {
- "name": "App",
+ "theme_color": "#f69435",
+ "background_color": "#ffffff",
+ "display": "standalone",
+ "scope": "/",
+ "start_url": "/",
+ "app_name": "핀더펜",
+ "short_name": "핀더펜",
+ "description": "내 계획에 맞는 자산을 설계해주는 나만의 Financial Planner 앱",
  "icons": [
   {
    "src": "\/android-icon-36x36.png",
