@@ -127,13 +127,31 @@ export const fetchFindSchedules = async (name: string) => {
       LOCAL_STORAGE_KEY_SERVER,
       "real"
     );
-    const response = await axios.post<any>(
-      `${url[server]}/find/contains/name`,
+    const response = await axios.post<Schedule[]>(
+      `/${url[server]}/find/contains/name`,
       { name }
     );
     const result = response.data;
     return result;
   } catch (err) {
     console.log(err);
+  }
+}
+
+export const fetchCreateAccount = async (data: any) => {
+  try {
+    console.log(data);
+    const server = getSessionStorage<ServerState>(
+      LOCAL_STORAGE_KEY_SERVER,
+      "real"
+    );
+    const response = await axios.post<any>(
+      `/real/codef/accountCreate`,
+      { data }
+    );
+    const result = response.data;
+    return result;
+  } catch (error) {
+    console.log(error);
   }
 }

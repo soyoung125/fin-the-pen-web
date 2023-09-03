@@ -17,9 +17,12 @@ import { useAppDispatch, useAppSelector } from '../../app/redux/hooks';
 import { selectIsBudgetHidden } from '../../app/redux/slices/settingSlice';
 import useHeader from '../../hooks/useHeader';
 import { HEADER_MODE } from '../../domain/constants/common';
+import { useNavigate } from 'react-router-dom';
+import PATH from '../../domain/constants/path';
 
 export default function SettingsContainer() {
   const dispatch = useAppDispatch();
+  const navigate = useNavigate();
   const isHideBudgetMode = useAppSelector(selectIsBudgetHidden);
   const userAgent = navigator.userAgent.toLowerCase();
 
@@ -131,7 +134,7 @@ export default function SettingsContainer() {
           <Typography>연결 관리</Typography>
         </AccordionSummary>
         <AccordionDetails>
-          <Typography>메뉴가 올 자리</Typography>
+          <Typography onClick={() => navigate(PATH.myData)}>마이데이터[은행/카드]</Typography>
           <Button onClick={() => clickBank()}>국민은행</Button>
           <Button onClick={() => clickInstagram()}>instagram</Button>
         </AccordionDetails>
