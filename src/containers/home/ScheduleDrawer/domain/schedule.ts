@@ -91,7 +91,11 @@ export const handleCreate = async (
     user_id: user?.user_id,
   };
   // 반복 일정 추가
-  if ((schedule.repeating_cycle !== '없음') && (schedule.repeat_deadline !== '없음')) {
+  if (schedule.repeating_cycle !== '없음') {
+    if (schedule.repeat_deadline === '없음') {
+      alert('반복 종료일을 설정해 주시길 바랍니다.');
+      return;
+    }
     let repeatDate = moment(schedule.date).add(1, REPEAT_CYCLE[schedule.repeating_cycle]);
     while (moment(schedule.repeat_endDate).isSameOrAfter(repeatDate)) {
       // eslint-disable-next-line no-await-in-loop
