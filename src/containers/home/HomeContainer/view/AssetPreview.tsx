@@ -2,18 +2,23 @@ import {
   Accordion, AccordionDetails, AccordionSummary, Box, Button, Stack, Typography,
 } from '@mui/material';
 import moment from 'moment';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Calender from './Calender';
 import MonthlyStatement from './MonthlyStatement';
 import ScheduleStatusCard from '../../../../components/assetManagement/ScheduleStatusCard';
 import useSchedule from '../../../../hooks/useSchedule';
+import { Schedule } from '../../../../types/schedule';
 
 function AssetPreview() {
-  const { schedules } = useSchedule();
+  const { schedules, date } = useSchedule();
   const today = moment();
-  const schedulesOfMonth = schedules.filter((s) => today.isSame(s.date, 'month') && today.isSameOrBefore(moment(s.date + s.start_time, 'YYYY-MM-DDhh:mm')));
-
+  const [schedulesOfMonth, setSchedulesOfMonth] = useState<Schedule[]>([]);
+  // const schedulesOfMonth = schedules.filter((s) => today.isSame(s.date, 'month') && today.isSameOrBefore(moment(s.date + s.start_time, 'YYYY-MM-DDhh:mm')));
   const [expandAccordion, setExpandAccordion] = useState(false);
+
+  useEffect(() => {
+    setSchedulesOfMonth([...schedules.filter((s) => moment(date).isSame(s.date, 'month') && today.isSameOrBefore(moment(s.date + s.start_time, 'YYYY-MM-DDhh:mm')))])
+  }, [date])
 
   const handleExpand = () => {
     setExpandAccordion(!expandAccordion);
@@ -38,7 +43,7 @@ function AssetPreview() {
 
       <Box sx={{ mx: 2 }}>
         <ScheduleStatusCard
-          month={today.format('M월')}
+          month={moment(date).format('M월')}
           numberOfSchedule={schedulesOfMonth.length}
         />
       </Box>
