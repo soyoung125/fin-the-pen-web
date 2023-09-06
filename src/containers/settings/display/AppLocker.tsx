@@ -1,6 +1,4 @@
 import { useState } from 'react';
-import HttpsIcon from '@mui/icons-material/Https';
-
 import ToggleListItem from '../../../components/settings/ToggleListItem';
 import ClickableListItem from '../../../components/settings/ClickableListItem';
 

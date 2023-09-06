@@ -1,6 +1,5 @@
 import {
-  CardActionArea,
-  ListItem, ListItemButton, ListItemIcon, ListItemText, Typography,
+  ListItem, ListItemButton, ListItemText, Typography,
 } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 

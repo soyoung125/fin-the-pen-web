@@ -1,5 +1,3 @@
-import { useState } from 'react';
-import RequestQuoteIcon from '@mui/icons-material/RequestQuote';
 import ToggleListItem from '../../../components/settings/ToggleListItem';
 import { useAppDispatch } from '../../../app/redux/hooks';
 import { useSelector } from 'react-redux';

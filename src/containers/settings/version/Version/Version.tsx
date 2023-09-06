@@ -1,4 +1,3 @@
-import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import { Box } from '@mui/material';
 import ClickableListItem from '../../../../components/settings/ClickableListItem';
 

@@ -1,5 +1,5 @@
 import {
-  CardActionArea, ListItem, ListItemButton, ListItemIcon, ListItemText, Switch,
+  ListItem, ListItemButton, ListItemText,
 } from '@mui/material';
 import SwitchButton from '../../common/SwitchButton';
 

@@ -1,4 +1,3 @@
-import DarkModeIcon from '@mui/icons-material/DarkMode';
 import { useSelector } from 'react-redux';
 import ToggleListItem from '../../../components/settings/ToggleListItem';
 import { changeThemeMode, selectIsDarkMode } from '../../../app/redux/slices/settingSlice';

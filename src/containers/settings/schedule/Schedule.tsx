@@ -1,4 +1,3 @@
-import EventAvailableIcon from '@mui/icons-material/EventAvailable';
 import ClickableListItem from '../../../components/settings/ClickableListItem';
 
 function Schedule() {
