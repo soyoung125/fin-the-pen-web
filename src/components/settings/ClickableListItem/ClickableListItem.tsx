@@ -1,24 +1,20 @@
 import {
-  ListItem, ListItemButton, ListItemIcon, ListItemText, Typography,
+  ListItem, ListItemButton, ListItemText, Typography,
 } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 
 interface ClickableListItemProps {
-  icon: React.ReactNode
   to?: string;
   title: string;
   subTitle: string;
 }
 function ClickableListItem({
-  icon, to, title, subTitle,
+  to, title, subTitle,
 }: ClickableListItemProps) {
   const navigate = useNavigate();
   return (
-    <ListItemButton onClick={() => to && navigate(to)}>
+    <ListItemButton onClick={() => to && navigate(to)} sx={{ px: 0 }}>
       <ListItem>
-        <ListItemIcon>
-          {icon}
-        </ListItemIcon>
         <ListItemText id={title} primary={title} />
         <Typography sx={{ color: 'gray' }}>{subTitle}</Typography>
       </ListItem>

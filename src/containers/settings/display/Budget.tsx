@@ -1,5 +1,3 @@
-import { useState } from 'react';
-import RequestQuoteIcon from '@mui/icons-material/RequestQuote';
 import ToggleListItem from '../../../components/settings/ToggleListItem';
 import { useAppDispatch } from '../../../app/redux/hooks';
 import { useSelector } from 'react-redux';
@@ -15,8 +13,7 @@ function Budget() {
   };
   return (
     <ToggleListItem
-      icon={<RequestQuoteIcon />}
-      title="예산 숨기기"
+      title="금액 숨기기"
       checked={isBudgetHidden}
       setChecked={handleToggle}
     />

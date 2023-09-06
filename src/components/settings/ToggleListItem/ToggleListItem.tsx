@@ -1,33 +1,29 @@
 import {
-  CardActionArea, ListItem, ListItemIcon, ListItemText, Switch,
+  ListItem, ListItemButton, ListItemText,
 } from '@mui/material';
+import SwitchButton from '../../common/SwitchButton';
 
 interface ToggleListItemProps {
-  icon: React.ReactNode;
   title: string;
   checked: boolean;
   setChecked: () => void;
 }
 function ToggleListItem({
-  icon, title, checked, setChecked,
+  title, checked, setChecked,
 }: ToggleListItemProps) {
   return (
-    <CardActionArea onClick={setChecked}>
+    <ListItemButton onClick={setChecked} sx={{ px: 0 }}>
       <ListItem>
-        <ListItemIcon>
-          {icon}
-        </ListItemIcon>
         <ListItemText id={title} primary={title} />
-        <Switch
-          edge="end"
-          onChange={setChecked}
+        <SwitchButton
+          handleChange={setChecked}
           checked={checked}
-          inputProps={{
-            'aria-labelledby': title,
-          }}
+          // inputProps={{
+          //   'aria-labelledby': title,
+          // }}
         />
       </ListItem>
-    </CardActionArea>
+    </ListItemButton>
   );
 }
 export default ToggleListItem;

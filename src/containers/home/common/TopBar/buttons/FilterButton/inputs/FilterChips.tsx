@@ -55,7 +55,7 @@ function FilterChips({ nested }: FilterChipsProps) {
   const isFiltered = (cat: string): boolean => filtered.findIndex((word) => word === cat) === -1;
 
   return (
-    <Box key={nested.type}>
+    <Box key={nested.type} mx={1}>
       <Stack direction="row" alignItems="center">
         <Checkbox
           checked={checked}

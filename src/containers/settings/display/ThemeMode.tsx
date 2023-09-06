@@ -1,4 +1,3 @@
-import DarkModeIcon from '@mui/icons-material/DarkMode';
 import { useSelector } from 'react-redux';
 import ToggleListItem from '../../../components/settings/ToggleListItem';
 import { changeThemeMode, selectIsDarkMode } from '../../../app/redux/slices/settingSlice';
@@ -14,7 +13,6 @@ function ThemeMode() {
   };
   return (
     <ToggleListItem
-      icon={<DarkModeIcon />}
       title="다크모드 켜기"
       checked={isDarkMode}
       setChecked={handleToggle}
