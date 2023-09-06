@@ -15,7 +15,7 @@ function Budget() {
   };
   return (
     <ToggleListItem
-      title="예산 숨기기"
+      title="금액 숨기기"
       checked={isBudgetHidden}
       setChecked={handleToggle}
     />

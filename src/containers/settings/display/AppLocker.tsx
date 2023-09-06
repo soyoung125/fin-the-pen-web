@@ -13,7 +13,7 @@ function AppLocker() {
   return (
     <>
       <ToggleListItem
-        title="앱 비밀번호 설정"
+        title="어플 비밀번호 설정"
         checked={checked}
         setChecked={handleToggle}
       />

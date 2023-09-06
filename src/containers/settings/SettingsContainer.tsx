@@ -20,6 +20,7 @@ import useHeader from '../../hooks/useHeader';
 import { HEADER_MODE } from '../../domain/constants/common';
 import { useNavigate } from 'react-router-dom';
 import PATH from '../../domain/constants/path';
+import ClickableListItem from '../../components/settings/ClickableListItem';
 
 export default function SettingsContainer() {
   const dispatch = useAppDispatch();
@@ -80,15 +81,15 @@ export default function SettingsContainer() {
           <Typography>화면 설정</Typography>
         </AccordionSummary>
         <AccordionDetails>
-          <AppLocker />
-          <Divider />
           <ThemeMode />
+          <Divider />
+          <AppLocker />
           <Divider />
           <Budget />
         </AccordionDetails>
       </Accordion>
 
-      <Accordion>
+      {/* <Accordion>
         <AccordionSummary
           // expandIcon={<ExpandMoreIcon />}
           aria-controls="panel1a-content"
@@ -99,63 +100,69 @@ export default function SettingsContainer() {
         <AccordionDetails>
           <Schedule />
         </AccordionDetails>
-      </Accordion>
+      </Accordion> */}
 
       <Accordion>
         <AccordionSummary
-          // expandIcon={<ExpandMoreIcon />}
           aria-controls="panel1a-content"
           id="panel1a-header"
         >
-          <Typography>보안 / 인증서</Typography>
+          <Typography>보안</Typography>
         </AccordionSummary>
         <AccordionDetails>
-          <Typography>메뉴가 올 자리</Typography>
+          <ClickableListItem to="/test" title="비밀번호 설정" subTitle="" />
+          <Divider />
+          <ClickableListItem to="/test" title="비밀번호 변경" subTitle="" />
         </AccordionDetails>
       </Accordion>
 
       <Accordion>
         <AccordionSummary
-          // expandIcon={<ExpandMoreIcon />}
           aria-controls="panel1a-content"
           id="panel1a-header"
         >
           <Typography>알림</Typography>
         </AccordionSummary>
         <AccordionDetails>
-          <Typography>메뉴가 올 자리</Typography>
+          <ClickableListItem to="/test" title="알림 데이터" subTitle="" />
         </AccordionDetails>
       </Accordion>
 
       <Accordion>
         <AccordionSummary
-          // expandIcon={<ExpandMoreIcon />}
           aria-controls="panel1a-content"
           id="panel1a-header"
         >
-          <Typography>연결 관리</Typography>
+          <Typography>연결관리</Typography>
         </AccordionSummary>
         <AccordionDetails>
-          <Typography onClick={() => navigate(PATH.myData)}>마이데이터[은행/카드]</Typography>
-          <Button onClick={() => clickBank()}>국민은행</Button>
-          <Button onClick={() => clickInstagram()}>instagram</Button>
+          {/* <Button onClick={() => clickBank()}>국민은행</Button>
+          <Button onClick={() => clickInstagram()}>instagram</Button> */}
+          <ClickableListItem to={PATH.myData} title="마이데이터[은행/카드]" subTitle="" />
+          <Divider />
+          <ClickableListItem to="/test" title="캘린더 연동" subTitle="" />
         </AccordionDetails>
       </Accordion>
 
       <Accordion>
         <AccordionSummary
-          // expandIcon={<ExpandMoreIcon />}
           aria-controls="panel1a-content"
           id="panel1a-header"
         >
-          <Typography>약관 및 정책</Typography>
+          <Typography>핀더팬 정보</Typography>
         </AccordionSummary>
         <AccordionDetails>
-          <Typography>메뉴가 올 자리</Typography>
+          <ClickableListItem to="/test" title="공지사항" subTitle="" />
+          <Divider />
+          <ClickableListItem to="/test" title="인증서" subTitle="" />
+          <Divider />
+          <ClickableListItem to="/test" title="약관 및 졍책" subTitle="" />
+          <Divider />
+          <Version />
         </AccordionDetails>
       </Accordion>
 
-      <Accordion>
+      {/* <Accordion>
         <AccordionSummary
           // expandIcon={<ExpandMoreIcon />}
           aria-controls="panel1a-content"
@@ -167,20 +174,7 @@ export default function SettingsContainer() {
           <Version />
           <Change />
         </AccordionDetails>
-      </Accordion>
-
-      <Accordion>
-        <AccordionSummary
-          // expandIcon={<ExpandMoreIcon />}
-          aria-controls="panel1a-content"
-          id="panel1a-header"
-        >
-          <Typography>서비스 초기화 및 탈퇴</Typography>
-        </AccordionSummary>
-        <AccordionDetails>
-          <Typography>메뉴가 올 자리</Typography>
-        </AccordionDetails>
-      </Accordion>
+      </Accordion> */}
     </>
   );
 }
