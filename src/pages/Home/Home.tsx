@@ -8,10 +8,7 @@ import {
   selectViewMode,
 } from "../../app/redux/slices/scheduleSlice";
 import { selectUser } from "../../app/redux/slices/userSlice";
-import {
-  selectGuestMode,
-  setIsAuthenticatedFalse,
-} from "../../app/redux/slices/commonSlice";
+import { selectGuestMode } from "../../app/redux/slices/commonSlice";
 import useHeader from "../../hooks/useHeader";
 import { HEADER_MODE } from "../../domain/constants/common";
 import ConsumptionAlert from "../../containers/home/HomeContainer/layout/ConsumptionAlert";
@@ -21,6 +18,8 @@ import AssetView from "../../containers/home/AssetView";
 import { VIEW_MODE } from "../../domain/constants/schedule";
 import { useAppDispatch, useAppSelector } from "../../app/redux/hooks";
 import { selectIsBudgetHidden } from "../../app/redux/slices/settingSlice";
+import { useRecoilValue } from "recoil";
+import { isAuthenticatedRepository } from "../../app/recoil/isAuthenticated.ts";
 
 function Home() {
   const dispatch = useAppDispatch();
@@ -29,11 +28,12 @@ function Home() {
   const user = useAppSelector(selectUser);
   const guestMode = useAppSelector(selectGuestMode);
   const isHideBudgetMode = useAppSelector(selectIsBudgetHidden);
+  const { setIsAuthenticatedFalse } = useRecoilValue(isAuthenticatedRepository);
 
   useEffect(() => {
     dispatch(changeViewMode(VIEW_MODE.schedule));
     if (isHideBudgetMode) {
-      dispatch(setIsAuthenticatedFalse());
+      setIsAuthenticatedFalse();
     }
   }, []);
 

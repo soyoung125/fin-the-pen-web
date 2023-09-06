@@ -1,10 +1,10 @@
-import { selectIsAuthenticated } from '../../app/redux/slices/commonSlice';
-import EasyAuthentication from '../sign/EasyAuthentication';
-import AssetPreview from './HomeContainer/view/AssetPreview';
-import { useAppSelector } from '../../app/redux/hooks';
+import EasyAuthentication from "../sign/EasyAuthentication";
+import AssetPreview from "./HomeContainer/view/AssetPreview";
+import { useRecoilValue } from "recoil";
+import { isAuthenticatedState } from "../../app/recoil/isAuthenticated.ts";
 
 function AssetView() {
-  const isAuthenticated = useAppSelector(selectIsAuthenticated);
+  const isAuthenticated = useRecoilValue(isAuthenticatedState);
 
   return (
     <>

@@ -10,6 +10,7 @@ import CustomThemeProvider from "./components/providers/CustomThemeProvider";
 import router from "./app/router";
 import { worker } from "./mocks/browser";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { RecoilRoot } from "recoil";
 
 const queryClient = new QueryClient();
 
@@ -33,9 +34,11 @@ async function main() {
       <QueryClientProvider client={queryClient}>
         <Provider store={store}>
           <PersistGate loading={null} persistor={persistor}>
-            <CustomThemeProvider>
-              <RouterProvider router={router} />
-            </CustomThemeProvider>
+            <RecoilRoot>
+              <CustomThemeProvider>
+                <RouterProvider router={router} />
+              </CustomThemeProvider>
+            </RecoilRoot>
           </PersistGate>
         </Provider>
       </QueryClientProvider>
