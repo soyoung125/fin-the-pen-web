@@ -9,7 +9,6 @@ interface CommonState {
   guestMode: boolean;
   bottomDrawerOpen: boolean;
   bottomDrawerTabMenu: number;
-  isAuthenticated: boolean;
 }
 
 const initialState: CommonState = {
@@ -18,7 +17,6 @@ const initialState: CommonState = {
   guestMode: false,
   bottomDrawerOpen: false,
   bottomDrawerTabMenu: 0,
-  isAuthenticated: true,
 };
 
 export const commonSlice = createSlice({
@@ -53,13 +51,6 @@ export const commonSlice = createSlice({
     setBottomDrawerTabMenu: (state, action) => {
       state.bottomDrawerTabMenu = action.payload;
     },
-    // 간편 인증 페이지 on/off
-    // setIsAuthenticatedTrue: (state) => {
-    //   state.isAuthenticated = true;
-    // },
-    // setIsAuthenticatedFalse: (state) => {
-    //   state.isAuthenticated = false;
-    // },
   },
 });
 export const {
@@ -70,8 +61,6 @@ export const {
   setBottomDrawerOpenTrue,
   setBottomDrawerOpenFalse,
   setBottomDrawerTabMenu,
-  // setIsAuthenticatedTrue,
-  // setIsAuthenticatedFalse,
 } = commonSlice.actions;
 
 export const selectHeaderOpen = (state: RootState) => state.common.headerOpen;
@@ -81,6 +70,5 @@ export const selectBottomDrawerOpen = (state: RootState) =>
   state.common.bottomDrawerOpen;
 export const selectBottomDrawerTabMenu = (state: RootState) =>
   state.common.bottomDrawerTabMenu;
-// export const selectIsAuthenticated = (state: RootState) => state.common.isAuthenticated;
 
 export default commonSlice.reducer;
