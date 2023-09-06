@@ -15,7 +15,6 @@ function Budget() {
   };
   return (
     <ToggleListItem
-      icon={<RequestQuoteIcon />}
       title="예산 숨기기"
       checked={isBudgetHidden}
       setChecked={handleToggle}

@@ -3,20 +3,16 @@ import {
 } from '@mui/material';
 
 interface ToggleListItemProps {
-  icon: React.ReactNode;
   title: string;
   checked: boolean;
   setChecked: () => void;
 }
 function ToggleListItem({
-  icon, title, checked, setChecked,
+  title, checked, setChecked,
 }: ToggleListItemProps) {
   return (
     <CardActionArea onClick={setChecked}>
       <ListItem>
-        <ListItemIcon>
-          {icon}
-        </ListItemIcon>
         <ListItemText id={title} primary={title} />
         <Switch
           edge="end"

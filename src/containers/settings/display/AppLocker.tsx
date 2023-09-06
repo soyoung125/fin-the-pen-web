@@ -13,14 +13,13 @@ function AppLocker() {
   return (
     <>
       <ToggleListItem
-        icon={<HttpsIcon />}
         title="앱 비밀번호 설정"
         checked={checked}
         setChecked={handleToggle}
       />
       {
         checked && (
-          <ClickableListItem icon="" to="/test" title="비밀번호 인증 단계" subTitle="1단계" />
+          <ClickableListItem to="/test" title="비밀번호 인증 단계" subTitle="1단계" />
         )
       }
     </>

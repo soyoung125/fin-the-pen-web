@@ -1,28 +1,27 @@
 import {
+  CardActionArea,
   ListItem, ListItemButton, ListItemIcon, ListItemText, Typography,
 } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 
 interface ClickableListItemProps {
-  icon: React.ReactNode
   to?: string;
   title: string;
   subTitle: string;
 }
 function ClickableListItem({
-  icon, to, title, subTitle,
+  to, title, subTitle,
 }: ClickableListItemProps) {
   const navigate = useNavigate();
   return (
-    <ListItemButton onClick={() => to && navigate(to)}>
+    // <ListItemButton onClick={() => to && navigate(to)}>
+      <CardActionArea onClick={() => to && navigate(to)}>
       <ListItem>
-        <ListItemIcon>
-          {icon}
-        </ListItemIcon>
         <ListItemText id={title} primary={title} />
         <Typography sx={{ color: 'gray' }}>{subTitle}</Typography>
       </ListItem>
-    </ListItemButton>
+      </CardActionArea>
+    // </ListItemButton>
   );
 }
 export default ClickableListItem;

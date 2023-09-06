@@ -14,7 +14,6 @@ function ThemeMode() {
   };
   return (
     <ToggleListItem
-      icon={<DarkModeIcon />}
       title="다크모드 켜기"
       checked={isDarkMode}
       setChecked={handleToggle}

@@ -1,5 +1,6 @@
 import {
   Button,
+  Divider,
   Typography,
 } from '@mui/material';
 import { useEffect } from 'react';
@@ -80,7 +81,9 @@ export default function SettingsContainer() {
         </AccordionSummary>
         <AccordionDetails>
           <AppLocker />
+          <Divider />
           <ThemeMode />
+          <Divider />
           <Budget />
         </AccordionDetails>
       </Accordion>
