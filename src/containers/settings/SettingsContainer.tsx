@@ -73,7 +73,6 @@ export default function SettingsContainer() {
     <>
       <Accordion>
         <AccordionSummary
-          // expandIcon={<ExpandMoreIcon />}
           aria-controls="panel1a-content"
           id="panel1a-header"
         >
