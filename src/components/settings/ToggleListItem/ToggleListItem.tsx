@@ -1,5 +1,5 @@
 import {
-  CardActionArea, ListItem, ListItemIcon, ListItemText, Switch,
+  CardActionArea, ListItem, ListItemButton, ListItemIcon, ListItemText, Switch,
 } from '@mui/material';
 import SwitchButton from '../../common/SwitchButton';
 
@@ -12,7 +12,7 @@ function ToggleListItem({
   title, checked, setChecked,
 }: ToggleListItemProps) {
   return (
-    <CardActionArea onClick={setChecked}>
+    <ListItemButton onClick={setChecked} sx={{ px: 0 }}>
       <ListItem>
         <ListItemText id={title} primary={title} />
         <SwitchButton
@@ -23,7 +23,7 @@ function ToggleListItem({
           // }}
         />
       </ListItem>
-    </CardActionArea>
+    </ListItemButton>
   );
 }
 export default ToggleListItem;

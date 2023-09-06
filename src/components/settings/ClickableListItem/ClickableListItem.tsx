@@ -14,14 +14,12 @@ function ClickableListItem({
 }: ClickableListItemProps) {
   const navigate = useNavigate();
   return (
-    // <ListItemButton onClick={() => to && navigate(to)}>
-      <CardActionArea onClick={() => to && navigate(to)}>
+    <ListItemButton onClick={() => to && navigate(to)} sx={{ px: 0 }}>
       <ListItem>
         <ListItemText id={title} primary={title} />
         <Typography sx={{ color: 'gray' }}>{subTitle}</Typography>
       </ListItem>
-      </CardActionArea>
-    // </ListItemButton>
+    </ListItemButton>
   );
 }
 export default ClickableListItem;

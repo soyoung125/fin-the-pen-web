@@ -20,8 +20,8 @@ const AccordionSummary = styled((props: StyledAccordionSummaryProps) => (
   '& .MuiAccordionSummary-expandIconWrapper.Mui-expanded': {
     transform: 'rotate(90deg)',
   },
-  // '& .MuiAccordionSummary-content': {
-  //   marginLeft: theme.spacing(1),
-  // },
+  '& .MuiAccordionSummary-content > .MuiTypography-root': {
+    fontWeight: 500,
+  },
 }));
 export default AccordionSummary;
