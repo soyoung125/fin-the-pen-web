@@ -17,7 +17,27 @@
     "strict": true,
     "noUnusedLocals": false,
     "noUnusedParameters": false,
-    "noFallthroughCasesInSwitch": true
+    "noFallthroughCasesInSwitch": true,
+
+    /* 절대 경로 관련 설정 */
+    "baseUrl": "./src",
+    "paths": {
+      "@api/*": ["app/api/*"],
+      "@app/*": ["app/*"],
+      "@assets/*": ["assets/*"],
+      "@components/*": ["components/*"],
+      "@constants/*": ["domain/constants/*"],
+      "@containers/*": ["containers/*"],
+      "@domain/*": ["domain/*"],
+      "@hooks/*": ["hooks/*"],
+      "@mocks/*": ["mocks/*"],
+      "@pages/*": ["pages/*"],
+      "@recoil/*": ["app/recoil/*"],
+      "@redux/*": ["app/redux/*"], // 삭제 예정
+      "@routes/*": ["app/routes/*"],
+      "@type/*": ["types/*"],
+      "@utils/*": ["app/utils/*"]
+    },
   },
   "include": ["src"],
   "references": [{ "path": "./tsconfig.node.json" }]
