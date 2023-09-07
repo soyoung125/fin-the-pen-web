@@ -3,15 +3,15 @@ import { Outlet } from "react-router-dom";
 import { useEffect } from "react";
 import moment from "moment";
 import EasyAuthentication from "../../../containers/sign/EasyAuthentication";
-import AnalysisHeader from "../../../containers/analysis/AnalysisHeader";
-import { selectedDate } from "../../../app/redux/slices/scheduleSlice";
-import { useAppDispatch, useAppSelector } from "../../../app/redux/hooks";
-import { selectIsBudgetHidden } from "../../../app/redux/slices/settingSlice";
+import { selectedDate } from "@redux/slices/scheduleSlice.tsx";
+import { useAppDispatch, useAppSelector } from "@redux/hooks.ts";
+import { selectIsBudgetHidden } from "@redux/slices/settingSlice.ts";
 import { useRecoilValue } from "recoil";
 import {
   isAuthenticatedRepository,
   isAuthenticatedState,
-} from "../../../app/recoil/isAuthenticated.ts";
+} from "@recoil/isAuthenticated.ts";
+import AnalysisHeader from "@containers/analysis/AnalysisHeader.tsx";
 
 function AnalysisLayout() {
   const isAuthenticated = useRecoilValue(isAuthenticatedState);

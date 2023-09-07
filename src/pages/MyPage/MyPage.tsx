@@ -1,18 +1,16 @@
-import {
-  Box, Button, Stack, Typography
-} from '@mui/material';
-import { useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
-import PATH from '../../domain/constants/path';
-import { selectGuestMode } from '../../app/redux/slices/commonSlice';
-import { selectUser } from '../../app/redux/slices/userSlice';
-import GuestDataManager from '../../containers/test/GuestDataManager';
-import GuestMode from '../../containers/test/GuestMode';
-import SchedulesData from '../../containers/test/SchedulesData';
-import ScheduleFilterData from '../../containers/test/ScheduleFilterData';
-import UserData from '../../containers/test/UserData';
-import ScheduleData from '../../containers/test/ScheduleData';
-import { useAppSelector } from '../../app/redux/hooks';
+import { Box, Button, Stack, Typography } from "@mui/material";
+import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import PATH from "../../domain/constants/path";
+import { selectUser } from "@redux/slices/userSlice.tsx";
+import GuestMode from "../../containers/test/GuestMode";
+import ScheduleFilterData from "../../containers/test/ScheduleFilterData";
+import { useAppSelector } from "@redux/hooks.ts";
+import ScheduleData from "@containers/test/ScheduleData.tsx";
+import UserData from "@containers/test/UserData.tsx";
+import { selectGuestMode } from "@redux/slices/commonSlice.tsx";
+import SchedulesData from "@containers/test/SchedulesData.tsx";
+import GuestDataManager from "@containers/test/GuestDataManager";
 
 function MyPage() {
   const navigate = useNavigate();
@@ -22,11 +20,11 @@ function MyPage() {
   const userLogOut = () => {
     if (
       confirm(
-        '게스트 계정은 로그아웃 하는 경우 지금까지 작업한 내용이 저장되지 않습니다. 중요한 자료는 미리 백업해주세요. (확인 시 모든 정보 날라감)'
+        "게스트 계정은 로그아웃 하는 경우 지금까지 작업한 내용이 저장되지 않습니다. 중요한 자료는 미리 백업해주세요. (확인 시 모든 정보 날라감)"
       )
     ) {
       sessionStorage.clear();
-      window.location.href = '';
+      window.location.href = "";
       /**
        * logOut을 dispatch하지 않고, redux 스토어를 강제로 비워서 초기화 처리해버리는 중
        */

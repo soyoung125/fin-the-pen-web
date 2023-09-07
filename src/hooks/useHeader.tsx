@@ -1,8 +1,11 @@
 /* eslint-disable consistent-return */
-import { useEffect } from 'react';
-import { setHeaderOpenFalse, setHeaderOpenTrue } from '../app/redux/slices/commonSlice';
-import { HeaderModeValue } from '../types/common';
-import { useAppDispatch } from '../app/redux/hooks';
+import { useEffect } from "react";
+import {
+  setHeaderOpenFalse,
+  setHeaderOpenTrue,
+} from "@redux/slices/commonSlice.tsx";
+import { useAppDispatch } from "@redux/hooks.ts";
+import { HeaderModeValue } from "@type/common.tsx";
 
 /**
  * 헤더를 관리해주는 customHook.

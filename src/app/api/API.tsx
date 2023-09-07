@@ -1,11 +1,6 @@
 import axios, { AxiosResponse } from "axios";
-import { GetScheduleQuery, Schedule } from "../../types/schedule.tsx";
-import {
-  ServerState,
-  SignInterface,
-  SignUp,
-  User,
-} from "../../types/common.tsx";
+import { GetScheduleQuery, Schedule } from "@type/schedule.tsx";
+import { ServerState, SignInterface, SignUp, User } from "@type/common.tsx";
 import { url } from "./url.ts";
 import { getSessionStorage, setSessionStorage } from "../utils/storage.ts";
 import { LOCAL_STORAGE_KEY_SERVER } from "./keys.ts";
@@ -62,7 +57,10 @@ export const fetchCreateSchedule = async (schedule: Schedule) => {
       "real"
     );
     console.log(url[server]);
-    const response = await axios.post(`${url[server]}/createSchedule`, schedule);
+    const response = await axios.post(
+      `${url[server]}/createSchedule`,
+      schedule
+    );
     // alert(JSON.stringify(response));
     return response.data;
   } catch (err) {
@@ -119,7 +117,7 @@ export const fetchGetTransavrionList = async (data: any) => {
   } catch (err) {
     console.log(err);
   }
-}
+};
 
 export const fetchFindSchedules = async (name: string) => {
   try {
@@ -136,7 +134,7 @@ export const fetchFindSchedules = async (name: string) => {
   } catch (err) {
     console.log(err);
   }
-}
+};
 
 export const fetchCreateAccount = async (data: any) => {
   try {
@@ -145,13 +143,12 @@ export const fetchCreateAccount = async (data: any) => {
       LOCAL_STORAGE_KEY_SERVER,
       "real"
     );
-    const response = await axios.post<any>(
-      `/real/codef/accountCreate`,
-      { data }
-    );
+    const response = await axios.post<any>(`/real/codef/accountCreate`, {
+      data,
+    });
     const result = response.data;
     return result;
   } catch (error) {
     console.log(error);
   }
-}
+};
