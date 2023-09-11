@@ -11,20 +11,19 @@ import PATH from '../../../domain/constants/path';
 import ScheduleDrawer from '../ScheduleDrawer';
 import { INIT_SCHEDULE, SCHEDULE_DRAWER_MODE } from '@constants/schedule.tsx';
 import { changeViewMode, selectDate } from '@redux/slices/scheduleSlice.tsx';
-import {
-  selectBottomDrawerTabMenu, setBottomDrawerTabMenu,
-} from '@redux/slices/commonSlice.tsx';
 import { useAppDispatch, useAppSelector } from '@redux/hooks.ts';
 import {useRecoilValue} from "recoil";
 import {bottomDrawerOpenRepository, bottomDrawerOpenState} from "@recoil/bottomDrawer.ts";
+import {bottomTabMenuRepository, bottomTabMenuState} from "@recoil/bottomTabMenu.ts";
 
 function BottomBar() {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
 
   const date = useAppSelector(selectDate);
+  const bottomTabMenu= useRecoilValue(bottomTabMenuState);
+  const {openBottomTabMenu} = useRecoilValue(bottomTabMenuRepository);
 
-  const bottomDrawerTabMenu = useAppSelector(selectBottomDrawerTabMenu);
   const isBottomDrawerOpen = useRecoilValue(bottomDrawerOpenState);
   const {openBottomDrawer,closeBottomDrawer} = useRecoilValue(bottomDrawerOpenRepository);
 
@@ -53,9 +52,9 @@ function BottomBar() {
         elevation={3}
       >
         <BottomNavigation
-          value={bottomDrawerTabMenu}
+          value={bottomTabMenu}
           onChange={(event, newValue) => {
-            dispatch(setBottomDrawerTabMenu(newValue));
+            openBottomTabMenu(newValue);
           }}
         >
           <BottomNavigationAction
@@ -67,7 +66,7 @@ function BottomBar() {
             }}
           />
           <BottomNavigationAction label="리포트" icon={<DataSaverOffIcon />} onClick={() => navigate(PATH.analysis)} />
-          <BottomNavigationAction label="" icon={<AddCircleIcon />} onClick={() => dispatch(openBottomDrawer)} />
+          <BottomNavigationAction label="" icon={<AddCircleIcon />} onClick={openBottomDrawer} />
           <BottomNavigationAction label="자산관리" icon={<PaidIcon />} onClick={() => navigate(PATH.assetManagement)} />
           <BottomNavigationAction label="설정" icon={<SettingsIcon />} onClick={() => navigate(PATH.settings)} />
         </BottomNavigation>

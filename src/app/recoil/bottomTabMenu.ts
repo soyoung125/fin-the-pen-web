@@ -9,14 +9,14 @@ export const bottomTabMenuState = atom<number>({
 });
 
 export const bottomTabMenuRepository = selector({
-  key: "bottomDrawerOpenRepository",
+  key: "bottomTabMenuRepository",
   get: ({ getCallback }) => {
-    const openBottomTab = getCallback(({ set }) => (newTabNumber:number) => {
+    const openBottomTabMenu = getCallback(({ set }) => (newTabNumber:number) => {
       set(bottomTabMenuState, newTabNumber);
     });
 
     return {
-      openBottomTab,
+      openBottomTabMenu,
     };
   },
 });
