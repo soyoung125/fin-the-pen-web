@@ -157,22 +157,6 @@ function InputForm({ selected, form, changeDetailInfo, changeStartAndEndDate }: 
                     }
                 />
             </LocalizationProvider>
-            
-            <Select
-                inputProps={{
-                    IconComponent: () => null,
-                    style: { textAlign: 'right' },
-                }}
-                size="small"
-                startAdornment={<InputAdornment position="start">조회정렬기준</InputAdornment>}
-                sx={{ '.MuiSelect-select.MuiSelect-outlined': { textAlign: 'right', paddingRight: '14px' } }}
-                id="orderBy"
-                value={form.orderBy}
-                onChange={(e) => changeDetailInfo({ target: { id: 'orderBy', value: e.target.value } })}
-            >
-                <MenuItem value={'0'}>오름차순</MenuItem>
-                <MenuItem value={'1'}>내림차순</MenuItem>
-            </Select>
 
             {selected === 'card' &&
                 <Select
