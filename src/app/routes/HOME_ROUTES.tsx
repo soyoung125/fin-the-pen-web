@@ -12,11 +12,12 @@ import DetailSetting from '../../containers/assetManagement/SavingsGoalContainer
 import FetchPaymentHistory from '../../containers/home/HomeContainer/view/FetchPaymentHistory';
 import SearchSchedule from '../../containers/home/HomeContainer/view/SearchSchedule';
 import MyData from '../../containers/settings/connection/MyData';
+import Main from '@pages/Main';
 
 const HOME_ROUTES: RouterDOM[] = [
   {
     path: PATH.home,
-    element: <Home />,
+    element: <Main />,
   },
   {
     path: PATH.signIn,
