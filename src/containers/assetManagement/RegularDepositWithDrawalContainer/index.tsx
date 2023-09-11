@@ -6,18 +6,18 @@ import {
 import BorderColorIcon from '@mui/icons-material/BorderColor';
 import { useNavigate } from 'react-router-dom';
 import { useEffect, useState } from 'react';
-import { REGULAR_DEPOSIT_WITHDRAWAL_TYPE } from '../../../domain/constants/schedule';
+import { REGULAR_DEPOSIT_WITHDRAWAL_TYPE } from '@constants/schedule.tsx';
 import DetailCard from './DetailCard';
 import Title from '../../../components/common/Title';
 import PATH from '../../../domain/constants/path';
 import AlertModal from '../../../components/common/AlertModal';
-import { selectBottomDrawerOpen } from '../../../app/redux/slices/commonSlice';
 import ArrowTooltip from '../../../components/common/ArrowTooltip';
-import { Schedule } from '../../../types/schedule';
-import { makeGroupForRegularData } from '../../../domain/tools';
+import { Schedule } from '@type/schedule.tsx';
+import { makeGroupForRegularData } from '@domain/tools.ts';
 import useSchedule from '../../../hooks/useSchedule';
-import { useAppSelector } from '../../../app/redux/hooks';
 import useModal from '../../../hooks/useModal';
+import {useRecoilValue} from "recoil";
+import {bottomDrawerOpenState} from "@recoil/bottomDrawer.ts";
 
 interface DataInterface {
   [prop: string]: Schedule[],
@@ -29,7 +29,7 @@ interface DataInterface {
 
 function RegularDepositWithdrawal() {
   const navigate = useNavigate();
-  const bottomDrawerOpen = useAppSelector(selectBottomDrawerOpen);
+  const isBottomDrawerOpen = useRecoilValue(bottomDrawerOpenState);
   const {
     modalOpen: alertModalOpen,
     openModal: openAlertModal,
@@ -116,7 +116,7 @@ function RegularDepositWithdrawal() {
           justifyContent: 'center',
         }}
       >
-        <ArrowTooltip open={!bottomDrawerOpen} title="정기 입출금 일정 추가하기">
+        <ArrowTooltip open={!isBottomDrawerOpen} title="정기 입출금 일정 추가하기">
           <Button />
         </ArrowTooltip>
       </Box>

@@ -1,7 +1,6 @@
 import {
   Box,
   Button,
-  ButtonBase,
   CardActionArea,
   Divider,
   Stack,
@@ -12,18 +11,19 @@ import SettingsIcon from "@mui/icons-material/Settings";
 import LockIcon from '@mui/icons-material/Lock';
 import { grey } from "@mui/material/colors";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { deleteSelectedSchedule } from "../../../../../domain/tools";
-import { selectGuestMode, setBottomDrawerOpenFalse } from "../../../../../app/redux/slices/commonSlice";
+import { deleteSelectedSchedule } from "@domain/tools.ts";
+import { selectGuestMode,  } from "@redux/slices/commonSlice.tsx";
 import CategoryTypeBadge from "../../../../../components/common/CategoryTypeBadge";
-import { Schedule } from "../../../../../types/schedule";
-import { Category } from "../../../../../domain/constants/categories";
-import { useAppDispatch, useAppSelector } from "../../../../../app/redux/hooks";
-import { useState } from "react";
-import { modifySchedule } from "../../../../../app/redux/slices/scheduleSlice";
-import { NOT_AVAILABLE } from "../../../../../domain/constants/messages";
-import { selectIsBudgetHidden } from "../../../../../app/redux/slices/settingSlice";
+import { Schedule } from "@type/schedule.tsx";
+import { Category } from "@constants/categories.tsx";
+import { useAppDispatch, useAppSelector } from "@redux/hooks.ts";
+import { modifySchedule } from "@redux/slices/scheduleSlice.tsx";
+import { NOT_AVAILABLE } from "@constants/messages.tsx";
+import { selectIsBudgetHidden } from "@redux/slices/settingSlice.ts";
 import useModal from "../../../../../hooks/useModal";
 import AlertModal from "../../../../../components/common/AlertModal";
+import {useRecoilValue} from "recoil";
+import {bottomDrawerOpenRepository} from "@recoil/bottomDrawer.ts";
 
 interface ScheduleCardProps {
   schedule: Schedule;
@@ -38,8 +38,9 @@ function ScheduleCard({ schedule, handleModal, category, openAuthenticationPage 
   const recommendedSpendingAmount = 50000;
   const isHideBudgetMode = useAppSelector(selectIsBudgetHidden);
   const isSpend = schedule.type === '-';
-  const isSameWithRecomend = +schedule.expected_spending === recommendedSpendingAmount;
+  const isSameWithRecommend = +schedule.expected_spending === recommendedSpendingAmount;
   const color = isSpend ? '#5AC8FA' : '#FA5A5A';
+  const {closeBottomDrawer} = useRecoilValue(bottomDrawerOpenRepository);
 
   const {
     modalOpen: alertModalOpen,
@@ -48,7 +49,7 @@ function ScheduleCard({ schedule, handleModal, category, openAuthenticationPage 
   } = useModal();
 
   const handleClose = () => {
-    dispatch(setBottomDrawerOpenFalse());
+    closeBottomDrawer();
   };
 
   const handleModifyModal = () => {
@@ -94,7 +95,7 @@ function ScheduleCard({ schedule, handleModal, category, openAuthenticationPage 
                   <CategoryTypeBadge color={category.color} mr={2} />
                   <Typography variant="caption">{`${schedule.start_time} - ${schedule.end_time}`}</Typography>
                 </Stack>
-                {!isHideBudgetMode && isSpend && !isSameWithRecomend && <Box
+                {!isHideBudgetMode && isSpend && !isSameWithRecommend && <Box
                   sx={{
                     backgroundColor: "primary.main",
                     color: "#FFFFFF",
@@ -149,7 +150,7 @@ function ScheduleCard({ schedule, handleModal, category, openAuthenticationPage 
                       }} />
                       <LockIcon />
                   </Box>
-                  : <Typography sx={{ color: isSameWithRecomend ? color : grey[500] }}>
+                  : <Typography sx={{ color: isSameWithRecommend ? color : grey[500] }}>
                   {`${schedule.type}${parseInt(
                     schedule.expected_spending,
                     10
