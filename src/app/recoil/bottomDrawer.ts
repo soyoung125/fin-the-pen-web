@@ -1,7 +1,7 @@
 import { atom, selector } from "recoil";
 
 /**
- *  하단 바
+ *  하단 일정 등록 서랍 on/off
  */
 export const bottomDrawerOpenState = atom<boolean>({
   key: "bottomDrawerOpen",

@@ -7,14 +7,12 @@ interface CommonState {
   headerOpen: boolean;
   headerMode: HeaderModeValue;
   guestMode: boolean;
-  bottomDrawerTabMenu: number;
 }
 
 const initialState: CommonState = {
   headerOpen: true,
   headerMode: HEADER_MODE.home,
   guestMode: false,
-  bottomDrawerTabMenu: 0,
 };
 
 export const commonSlice = createSlice({
@@ -40,9 +38,7 @@ export const commonSlice = createSlice({
     setGuestModeFalse: (state) => {
       state.guestMode = false;
     },
-    setBottomDrawerTabMenu: (state, action) => {
-      state.bottomDrawerTabMenu = action.payload;
-    },
+
   },
 });
 export const {
@@ -50,13 +46,11 @@ export const {
   setHeaderOpenFalse,
   setGuestModeTrue,
   setGuestModeFalse,
-  setBottomDrawerTabMenu,
 } = commonSlice.actions;
 
 export const selectHeaderOpen = (state: RootState) => state.common.headerOpen;
 export const selectHeaderMode = (state: RootState) => state.common.headerMode;
 export const selectGuestMode = (state: RootState) => state.common.guestMode;
-export const selectBottomDrawerTabMenu = (state: RootState) =>
-  state.common.bottomDrawerTabMenu;
+
 
 export default commonSlice.reducer;
