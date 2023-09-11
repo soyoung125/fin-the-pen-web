@@ -77,20 +77,6 @@ function ModifyModal({
               />
             </FormControl>
 
-            {/* 별명 */}
-            <FormControl fullWidth>
-              <OutlinedInput
-                id="nickName"
-                startAdornment={<InputAdornment position="start">별명</InputAdornment>}
-                value={form.event_name}
-                // onChange={changeDetailInfo}
-                size="small"
-                inputProps={{
-                  style: { textAlign: 'right' },
-                }}
-              />
-            </FormControl>
-
             {/* 입출금일 */}
             <TextField
               id="date"
