@@ -17,7 +17,7 @@ import Main from '@pages/Main';
 const HOME_ROUTES: RouterDOM[] = [
   {
     path: PATH.home,
-    element: <Main />,
+    element: <Home />, // <Main />
   },
   {
     path: PATH.signIn,
