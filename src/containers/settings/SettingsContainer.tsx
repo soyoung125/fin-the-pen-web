@@ -1,30 +1,28 @@
-import { Button, Divider, Typography } from "@mui/material";
-import { useEffect } from "react";
+import {Divider, Typography} from "@mui/material";
+import {useEffect} from "react";
 import AppLocker from "./display/AppLocker";
 import Budget from "./display/Budget";
 import ThemeMode from "./display/ThemeMode";
-import Schedule from "./schedule/Schedule";
 import Version from "./version/Version";
 import Accordion from "../../components/common/accordions/Accordion";
 import AccordionSummary from "../../components/common/accordions/AccordionSummary";
 import AccordionDetails from "../../components/common/accordions/AccordionDetails";
-import Change from "./version/Change";
-import { useAppDispatch, useAppSelector } from "../../app/redux/hooks";
-import { selectIsBudgetHidden } from "../../app/redux/slices/settingSlice";
+import {useAppSelector} from "../../app/redux/hooks";
+import {selectIsBudgetHidden} from "../../app/redux/slices/settingSlice";
 import useHeader from "../../hooks/useHeader";
-import { HEADER_MODE } from "../../domain/constants/common";
-import { useNavigate } from "react-router-dom";
+import {useNavigate} from "react-router-dom";
 import PATH from "../../domain/constants/path";
 import ClickableListItem from "../../components/settings/ClickableListItem";
-import { useRecoilValue } from "recoil";
-import { isAuthenticatedRepository } from "../../app/recoil/isAuthenticated.ts";
+import {useRecoilValue} from "recoil";
+import {isAuthenticatedRepository} from "../../app/recoil/isAuthenticated.ts";
+import {HEADER_MODE} from "@recoil/header.ts";
 
 export default function SettingsContainer() {
   const navigate = useNavigate();
   const isHideBudgetMode = useAppSelector(selectIsBudgetHidden);
   const userAgent = navigator.userAgent.toLowerCase();
 
-  const { setIsAuthenticatedFalse } = useRecoilValue(isAuthenticatedRepository);
+  const {setIsAuthenticatedFalse} = useRecoilValue(isAuthenticatedRepository);
 
   useHeader(true, HEADER_MODE.settings);
 
@@ -88,11 +86,11 @@ export default function SettingsContainer() {
           <Typography>화면 설정</Typography>
         </AccordionSummary>
         <AccordionDetails>
-          <ThemeMode />
-          <Divider />
-          <AppLocker />
-          <Divider />
-          <Budget />
+          <ThemeMode/>
+          <Divider/>
+          <AppLocker/>
+          <Divider/>
+          <Budget/>
         </AccordionDetails>
       </Accordion>
 
@@ -114,9 +112,9 @@ export default function SettingsContainer() {
           <Typography>보안</Typography>
         </AccordionSummary>
         <AccordionDetails>
-          <ClickableListItem to="/test" title="비밀번호 설정" subTitle="" />
-          <Divider />
-          <ClickableListItem to="/test" title="비밀번호 변경" subTitle="" />
+          <ClickableListItem to="/test" title="비밀번호 설정" subTitle=""/>
+          <Divider/>
+          <ClickableListItem to="/test" title="비밀번호 변경" subTitle=""/>
         </AccordionDetails>
       </Accordion>
 
@@ -125,7 +123,7 @@ export default function SettingsContainer() {
           <Typography>알림</Typography>
         </AccordionSummary>
         <AccordionDetails>
-          <ClickableListItem to="/test" title="알림 데이터" subTitle="" />
+          <ClickableListItem to="/test" title="알림 데이터" subTitle=""/>
         </AccordionDetails>
       </Accordion>
 
@@ -141,8 +139,8 @@ export default function SettingsContainer() {
             title="마이데이터[은행/카드]"
             subTitle=""
           />
-          <Divider />
-          <ClickableListItem to="/test" title="캘린더 연동" subTitle="" />
+          <Divider/>
+          <ClickableListItem to="/test" title="캘린더 연동" subTitle=""/>
         </AccordionDetails>
       </Accordion>
 
@@ -151,13 +149,13 @@ export default function SettingsContainer() {
           <Typography>핀더팬 정보</Typography>
         </AccordionSummary>
         <AccordionDetails>
-          <ClickableListItem to="/test" title="공지사항" subTitle="" />
-          <Divider />
-          <ClickableListItem to="/test" title="인증서" subTitle="" />
-          <Divider />
-          <ClickableListItem to="/test" title="약관 및 졍책" subTitle="" />
-          <Divider />
-          <Version />
+          <ClickableListItem to="/test" title="공지사항" subTitle=""/>
+          <Divider/>
+          <ClickableListItem to="/test" title="인증서" subTitle=""/>
+          <Divider/>
+          <ClickableListItem to="/test" title="약관 및 졍책" subTitle=""/>
+          <Divider/>
+          <Version/>
         </AccordionDetails>
       </Accordion>
 

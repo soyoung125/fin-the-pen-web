@@ -1,24 +1,24 @@
-import { Box, Paper, Stack } from '@mui/material';
-import { useEffect } from 'react';
-import {
-  selectHeaderMode, selectHeaderOpen, setGuestModeFalse, setGuestModeTrue,
-} from '../../../../app/redux/slices/commonSlice';
-import { selectUser } from '../../../../app/redux/slices/userSlice';
+import {Box, Paper, Stack} from '@mui/material';
+import {useEffect} from 'react';
+import {setGuestModeFalse, setGuestModeTrue,} from '../../../../app/redux/slices/commonSlice';
+import {selectUser} from '../../../../app/redux/slices/userSlice';
 import AnalysisMode from './headerMode/AnalysisMode';
 import HomeMode from './headerMode/HomeMode';
-import { useAppDispatch, useAppSelector } from '../../../../app/redux/hooks';
-import { selectSavingPopUpSetting } from '../../../../app/redux/slices/assetSlice';
+import {useAppDispatch, useAppSelector} from '../../../../app/redux/hooks';
+import {selectSavingPopUpSetting} from '../../../../app/redux/slices/assetSlice';
 import PopupButton from './buttons/PopupButton';
-import { useNavigate, useParams } from 'react-router-dom';
+import {useNavigate} from 'react-router-dom';
 import PATH from '../../../../domain/constants/path';
 import SettingsMode from './headerMode/SettingsMode';
+import {useRecoilValue} from "recoil";
+import {headerModeState, headerOpenState} from "@recoil/header.ts";
 
 function TopBar() {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
   const user = useAppSelector(selectUser);
-  const headerOpen = useAppSelector(selectHeaderOpen);
-  const headerMode = useAppSelector(selectHeaderMode);
+  const isHeaderOpen = useRecoilValue(headerOpenState);
+  const headerMode = useRecoilValue(headerModeState);
   const popupSetting = useAppSelector(selectSavingPopUpSetting);
 
   useEffect(() => {
@@ -41,9 +41,9 @@ function TopBar() {
   }
 
   return (
-    <Box sx={{ position: 'relative', zIndex: 1000 }}>
+    <Box sx={{position: 'relative', zIndex: 1000}}>
       {
-        headerOpen
+        isHeaderOpen
         && (
           <Paper
             // elevation={10} // shadow 해제함
@@ -57,14 +57,14 @@ function TopBar() {
               direction="row"
               justifyContent="space-between"
               alignItems="flex-end"
-              sx={{ height: 70 }}
+              sx={{height: 70}}
             >
-              {headerMode === 'home' && (<HomeMode />)}
-              {headerMode === 'analysis' && (<AnalysisMode />)}
-              {headerMode === 'settings' && (<SettingsMode />)}
+              {headerMode === 'home' && (<HomeMode/>)}
+              {headerMode === 'analysis' && (<AnalysisMode/>)}
+              {headerMode === 'settings' && (<SettingsMode/>)}
             </Stack>
             {popupSetting.isOn &&
-              <PopupButton handleClickPopup={handleClickPopup} />
+                <PopupButton handleClickPopup={handleClickPopup}/>
             }
           </Paper>
         )
@@ -73,6 +73,7 @@ function TopBar() {
 
   );
 }
+
 export default TopBar;
 /**
  * 상단 바

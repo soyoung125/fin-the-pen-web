@@ -1,23 +1,23 @@
 /* eslint-disable max-len */
 /* eslint-disable no-unused-vars */
-import { Alert, Box } from "@mui/material";
+import {Alert, Box} from "@mui/material";
 import moment from "moment/moment";
-import { useEffect } from "react";
+import {useEffect} from "react";
 import ScheduleStatusCard from "../../components/assetManagement/ScheduleStatusCard";
 import SettingsPaper from "../../components/assetManagement/SettingsPaper";
-import { selectUser } from "../../app/redux/slices/userSlice";
+import {selectUser} from "../../app/redux/slices/userSlice";
 import useSchedule from "../../hooks/useSchedule";
-import { useAppSelector } from "../../app/redux/hooks";
+import {useAppSelector} from "../../app/redux/hooks";
 import useHeader from "../../hooks/useHeader";
-import { HEADER_MODE } from "../../domain/constants/common";
-import { useRecoilValue } from "recoil";
-import { isAuthenticatedRepository } from "../../app/recoil/isAuthenticated.ts";
+import {useRecoilValue} from "recoil";
+import {isAuthenticatedRepository} from "../../app/recoil/isAuthenticated.ts";
+import {HEADER_MODE} from "@recoil/header.ts";
 
 function AssetManagement() {
-  const { schedules } = useSchedule();
+  const {schedules} = useSchedule();
   const user = useAppSelector(selectUser);
   const today = moment();
-  const { setIsAuthenticatedFalse } = useRecoilValue(isAuthenticatedRepository);
+  const {setIsAuthenticatedFalse} = useRecoilValue(isAuthenticatedRepository);
 
   useHeader(true, HEADER_MODE.settings);
 
@@ -26,13 +26,13 @@ function AssetManagement() {
   }, []);
 
   return (
-    <Box sx={{ m: 3, wordBreak: "keep-all" }}>
+    <Box sx={{m: 3, wordBreak: "keep-all"}}>
       {user ? (
         <>
-          <Box sx={{ typography: "h5", fontWeight: "bold" }}>
+          <Box sx={{typography: "h5", fontWeight: "bold"}}>
             {`핀더팬과 함께 "${user.name}" 님의 자산과 일정을 관리하세요`}
           </Box>
-          <SettingsPaper />
+          <SettingsPaper/>
 
           <ScheduleStatusCard
             month={today.format("M월")}
