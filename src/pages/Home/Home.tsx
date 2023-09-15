@@ -1,25 +1,20 @@
-import { useEffect } from "react";
+import {useEffect} from "react";
 import moment from "moment";
-import { Box } from "@mui/material";
-import {
-  changeViewMode,
-  getMonthSchedules,
-  selectDate,
-  selectViewMode,
-} from "../../app/redux/slices/scheduleSlice";
-import { selectUser } from "../../app/redux/slices/userSlice";
-import { selectGuestMode } from "../../app/redux/slices/commonSlice";
+import {Box} from "@mui/material";
+import {changeViewMode, getMonthSchedules, selectDate, selectViewMode,} from "../../app/redux/slices/scheduleSlice";
+import {selectUser} from "../../app/redux/slices/userSlice";
+import {selectGuestMode} from "../../app/redux/slices/commonSlice";
 import useHeader from "../../hooks/useHeader";
-import { HEADER_MODE } from "../../domain/constants/common";
 import ConsumptionAlert from "../../containers/home/HomeContainer/layout/ConsumptionAlert";
 import ScheduleViewMode from "../../containers/home/HomeContainer/layout/ScheduleViewMode";
 import ScheduleView from "../../containers/home/ScheduleView";
 import AssetView from "../../containers/home/AssetView";
-import { VIEW_MODE } from "../../domain/constants/schedule";
-import { useAppDispatch, useAppSelector } from "../../app/redux/hooks";
-import { selectIsBudgetHidden } from "../../app/redux/slices/settingSlice";
-import { useRecoilValue } from "recoil";
-import { isAuthenticatedRepository } from "../../app/recoil/isAuthenticated.ts";
+import {VIEW_MODE} from "../../domain/constants/schedule";
+import {useAppDispatch, useAppSelector} from "../../app/redux/hooks";
+import {selectIsBudgetHidden} from "../../app/redux/slices/settingSlice";
+import {useRecoilValue} from "recoil";
+import {isAuthenticatedRepository} from "../../app/recoil/isAuthenticated.ts";
+import {HEADER_MODE} from "@recoil/header.ts";
 
 function Home() {
   const dispatch = useAppDispatch();
@@ -28,7 +23,7 @@ function Home() {
   const user = useAppSelector(selectUser);
   const guestMode = useAppSelector(selectGuestMode);
   const isHideBudgetMode = useAppSelector(selectIsBudgetHidden);
-  const { setIsAuthenticatedFalse } = useRecoilValue(isAuthenticatedRepository);
+  const {setIsAuthenticatedFalse} = useRecoilValue(isAuthenticatedRepository);
 
   useEffect(() => {
     dispatch(changeViewMode(VIEW_MODE.schedule));
@@ -60,10 +55,10 @@ function Home() {
 
   return (
     <Box>
-      <ConsumptionAlert />
-      {viewMode === VIEW_MODE.schedule && <ScheduleView />}
-      {viewMode === VIEW_MODE.asset && <AssetView />}
-      <ScheduleViewMode />
+      <ConsumptionAlert/>
+      {viewMode === VIEW_MODE.schedule && <ScheduleView/>}
+      {viewMode === VIEW_MODE.asset && <AssetView/>}
+      <ScheduleViewMode/>
     </Box>
   );
 }
