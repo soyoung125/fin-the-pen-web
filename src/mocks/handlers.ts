@@ -9,29 +9,25 @@ import {
   setSessionStorage,
 } from "../app/utils/storage.ts";
 import { Todo } from "../temp/type.ts";
+import { DOMAIN } from "@api/url.ts";
 
 export const handlers = [
   rest.get("/hello", (req, res, ctx) => {
     return res(ctx.delay(1000), ctx.status(200), ctx.json(true));
   }),
 
-  rest.post("/fin-the-pen-web/sign-up", (req, res, ctx) => {
-    const prevUsers = getLocalStorage<MockUser[]>(
-      LOCAL_STORAGE_KEY_USERS,
-      []
-    ) as MockUser[];
+  rest.post(`${DOMAIN}/fin-the-pen-web/sign-up`, async (req, res, ctx) => {
+    type MockUser = User & { password: string };
 
-    const newSignUp = req.body as SignUp;
-    const newUser: MockUser = {
-      id: prevUsers.length,
-      user_id: newSignUp.user_id as string,
-      name: newSignUp.name as string,
-      bday: "2023-01-01",
-      registerDate: "2023-01-01",
-      phone_number: newSignUp.phone_number as string,
-      password: newSignUp.password as string,
-    };
+    const newUser: MockUser = await req.json();
+    const prevUsers = getLocalStorage<MockUser[]>(LOCAL_STORAGE_KEY_USERS, []);
+
+    if (prevUsers.find((user) => user.user_id === newUser.user_id)) {
+      return res(ctx.delay(1000), ctx.status(200), ctx.json(false));
+    }
+
     const newUsers: MockUser[] = [...prevUsers, newUser];
+
     setLocalStorage(LOCAL_STORAGE_KEY_USERS, newUsers);
 
     return res(ctx.delay(1000), ctx.status(200), ctx.json(true));
