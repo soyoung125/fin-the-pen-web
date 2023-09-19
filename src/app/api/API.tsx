@@ -152,3 +152,35 @@ export const fetchCreateAccount = async (data: any) => {
     console.log(error);
   }
 };
+
+export const fetchGetAccountList = async (organization: string) => {
+  try {
+    const server = getSessionStorage<ServerState>(
+      LOCAL_STORAGE_KEY_SERVER,
+      "real"
+    );
+    const response = await axios.get<any>(`/${url[server]}/codef/company-account-list`, {
+      params: { organization },
+    });
+    const result = response.data;
+    return result;
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+export const fetchGetCardList = async (organization: string) => {
+  try {
+    const server = getSessionStorage<ServerState>(
+      LOCAL_STORAGE_KEY_SERVER,
+      "real"
+    );
+    const response = await axios.get<any>(`/${url[server]}/codef/card/account/card-list`, {
+      params: { organization },
+    });
+    const result = response.data;
+    return result;
+  } catch (error) {
+    console.log(error);
+  }
+}

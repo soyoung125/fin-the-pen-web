@@ -5,7 +5,7 @@ import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight';
 import { useState } from 'react';
 import { useAppSelector } from '../../../../app/redux/hooks';
 import { selectGuestMode } from '../../../../app/redux/slices/commonSlice';
-import { fetchCreateAccount } from '../../../../app/api/API';
+import { fetchCreateAccount, fetchGetAccountList, fetchGetCardList } from '../../../../app/api/API';
 import OrganizationSelect from './OrganizationSelect';
 import AccountInput from './AccountInput';
 
@@ -33,23 +33,36 @@ function MyData() {
     const changeStep = () => setStep(step + 1);
 
     const handleClickOk = async () => {
-        // if (guestMode) {
-        //     alert('게스트 모드입니다.')
-        // } else {
-        //     const result = await fetchCreateAccount([{
-        //         businessType: businessType[value],
-        //         organization: selected.value,
-        //         ...form,
-        //     }]);
-        //     console.log(result);
-        // }
-        const result = await fetchCreateAccount([{
-            businessType: businessType[value],
-            organization: selected.value,
-            // loginType: 1,
-            ...form,
-        }]);
-        console.log(result);
+        if (guestMode) {
+            alert('게스트 모드입니다.')
+        } else {
+            const result = await fetchCreateAccount([{
+                businessType: businessType[value],
+                organization: selected.value,
+                // loginType: 1,
+                ...form,
+            }]);
+            if (result.data) {
+                const list = await getList();
+                console.log(list);
+            }
+        }
+    }
+
+    const getList = async () => {
+        let result = [];
+        switch (businessType[value]) {
+            case 'BK':
+                result = await fetchGetAccountList(selected.value);
+                break;
+            case 'CD':
+                result = await fetchGetCardList(selected.value);
+                break;
+            case 'ST':
+                break;
+            case 'IS':
+                break;
+        }
     }
 
     const steps = [
