@@ -1,6 +1,7 @@
 import {
-    Box, Paper, Stack,
+    Box, Button, Stack,
 } from '@mui/material';
+import AddRoundedIcon from '@mui/icons-material/AddRounded';
 import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight';
 import { useState } from 'react';
 import { useAppSelector } from '../../../../app/redux/hooks';
@@ -8,6 +9,7 @@ import { selectGuestMode } from '../../../../app/redux/slices/commonSlice';
 import { fetchCreateAccount, fetchGetAccountList, fetchGetCardList } from '../../../../app/api/API';
 import OrganizationSelect from './OrganizationSelect';
 import AccountInput from './AccountInput';
+import RoundedPaper from '@components/common/RoundedPaper';
 
 function MyData() {
     const businessType = ['BK', 'CD', 'ST', 'IS'];
@@ -66,12 +68,22 @@ function MyData() {
     }
 
     const steps = [
-        <Paper sx={{ padding: 2 }} onClick={changeStep}>
-            <Stack direction="row" justifyContent="space-between">
+        <RoundedPaper my={0}>
+            <Stack sx={{height: '320px'}} alignItems="center" justifyContent="center" spacing={1}>
+                <Box>연결된 자산이 없어요.</Box>
+                <Button
+                    sx={{ borderRadius: '50px' }}
+                    size="large"
+                    variant="contained"
+                    endIcon={<AddRoundedIcon />}
+                    onClick={changeStep}
+                >MY 자산 연결하기</Button>
+            </Stack>
+            {/* <Stack direction="row" justifyContent="space-between">
                 <Box>My 자산 연결하기</Box>
                 <KeyboardArrowRightIcon />
-            </Stack>
-        </Paper>,
+            </Stack> */}
+        </RoundedPaper>,
         <OrganizationSelect
             value={value}
             selected={selected}
