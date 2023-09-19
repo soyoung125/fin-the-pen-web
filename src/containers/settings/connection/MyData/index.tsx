@@ -14,15 +14,15 @@ function MyData() {
     const guestMode = useAppSelector(selectGuestMode);
     const [step, setStep] = useState(0);
     const [value, setValue] = useState(0);
-    const [selected, setSelected] = useState({name: '', value: ''});
+    const [selected, setSelected] = useState({name: '', value: '', icon: ''});
     const [form, setForm] = useState({id: '', password: ''});
 
     const handleChangeType = (event: React.SyntheticEvent, newValue: number) => {
         setValue(newValue);
-        setSelected({name: '', value: ''});
+        setSelected({name: '', value: '', icon: ''});
     };
 
-    const handleSelectOrganization = (org: {name: string, value: string}) => {
+    const handleSelectOrganization = (org: {name: string, value: string, icon: string}) => {
         setSelected(org);
     }
 

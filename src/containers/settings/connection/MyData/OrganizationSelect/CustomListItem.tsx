@@ -1,26 +1,31 @@
-import { IconButton, ListItem, ListItemText } from "@mui/material";
-import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
-import CheckCircleIcon from '@mui/icons-material/CheckCircle';
+import { Grid, Stack, Box } from "@mui/material";
+import styled from "styled-components";
 
 interface CustomListItemProps {
-    item: {name: string, value: string},
+    item: {name: string, value: string, icon: string},
     isChecked: boolean,
-    handleSelectOrganization: (org: {name: string, value: string}) => void,
+    opacity: number,
+    handleSelectOrganization: (org: {name: string, value: string, icon: string}) => void,
 }
 
-function CustomListItem({ item, isChecked, handleSelectOrganization }: CustomListItemProps) {
+const Img = styled('img')({
+    display: 'block',
+    width: '28px',
+    height: '28px',
+});
+
+function CustomListItem({ item, isChecked, opacity, handleSelectOrganization }: CustomListItemProps) {
     return (
-        <ListItem
-            key={Math.random()}
-            button
+        <Grid
+            item xs={6} key={Math.random()}
             onClick={() => handleSelectOrganization(item)}
-            secondaryAction={
-                <IconButton aria-label="comment">
-                    {isChecked ? <CheckCircleIcon /> : <CheckCircleOutlineIcon />}
-                </IconButton>
-            }>
-            <ListItemText primary={item.name} />
-        </ListItem>
+            sx={{ color: isChecked ? '#735BF2' : '#43464C' , opacity: isChecked ? 1 : opacity }}
+        >
+            <Stack direction="row" spacing={2}>
+                <Img alt={item.name} src={item.icon} />
+                <Box>{item.name}</Box>
+            </Stack>
+        </Grid>
     );
 }
 
