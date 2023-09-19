@@ -1,22 +1,21 @@
 import { Box, Button, InputAdornment, Stack, TextField } from "@mui/material";
 import { useNavigate } from "react-router-dom";
-import PATH from "../../../domain/constants/path";
-import { isObjectValuesEmpty } from "../../../domain/tools";
+import PATH from "@constants/path.tsx";
+import { isObjectValuesEmpty } from "@domain/tools.ts";
 import {
   NO_BLANKS,
   NO_DUPLICATION_ID,
   NO_SIGNAL_FROM_SERVER,
   SIGN_UP_SUCCESS,
-} from "../../../domain/constants/messages";
-import { fetchSignUp } from "../../../app/api/API";
-import { ServerState, SignUp } from "../../../types/common";
-import { LOCAL_STORAGE_KEY_SERVER } from "../../../app/api/keys.ts";
-import { setSessionStorage } from "../../../app/utils/storage.ts";
+} from "@constants/messages.tsx";
+import { ServerState, SignUp } from "@type/common.tsx";
+import { LOCAL_STORAGE_KEY_SERVER } from "@api/keys.ts";
+import { setSessionStorage } from "@utils/storage.ts";
+import { fetchSignUp } from "./fetchSignUp.ts";
 
 function SignUpFields() {
   const navigate = useNavigate();
   const signUp = async (user: SignUp) => {
-    console.log(user);
     const result = await fetchSignUp(user);
     // 에러 핸들링
     if (result === undefined) {
