@@ -1,40 +1,40 @@
 import { Box, Button, InputAdornment, Stack, TextField } from "@mui/material";
 import { useNavigate } from "react-router-dom";
-import PATH from "../../../domain/constants/path";
-import { isObjectValuesEmpty } from "../../../domain/tools";
+import PATH from "@constants/path.tsx";
+import { isObjectValuesEmpty } from "@domain/tools.ts";
 import {
   NO_BLANKS,
   NO_DUPLICATION_ID,
   NO_SIGNAL_FROM_SERVER,
   SIGN_UP_SUCCESS,
-} from "../../../domain/constants/messages";
-import { fetchSignUp } from "../../../app/api/API";
-import { ServerState, SignUp } from "../../../types/common";
-import { LOCAL_STORAGE_KEY_SERVER } from "../../../app/api/keys.ts";
-import { setSessionStorage } from "../../../app/utils/storage.ts";
+} from "@constants/messages.tsx";
+import { SignUp } from "@type/common.tsx";
+import { DOMAIN } from "@api/url.ts";
+import { FormEvent } from "react";
 
 function SignUpFields() {
   const navigate = useNavigate();
   const signUp = async (user: SignUp) => {
-    console.log(user);
-    const result = await fetchSignUp(user);
-    // 에러 핸들링
-    if (result === undefined) {
-      setSessionStorage<ServerState>(LOCAL_STORAGE_KEY_SERVER, "guest");
-      alert(
-        `${NO_SIGNAL_FROM_SERVER} GUEST 모드로 회원가입 하려면 다시 회원가입 버튼을 눌러주세요.`
-      );
-      return;
-    }
-    if (result) {
-      alert(SIGN_UP_SUCCESS);
-      navigate(PATH.signIn);
-    } else {
-      alert(NO_DUPLICATION_ID);
-    }
+    await fetch(`${DOMAIN}/fin-the-pen-web/sign-up`, {
+      method: "POST",
+      body: JSON.stringify(user),
+    })
+      .then(async (res) => {
+        const data = await res.json();
+        if (data === true) {
+          alert(SIGN_UP_SUCCESS);
+          navigate(PATH.signIn);
+        } else {
+          alert(NO_DUPLICATION_ID);
+        }
+      })
+      .catch((err) => {
+        alert(NO_SIGNAL_FROM_SERVER);
+        console.error(err);
+      });
   };
 
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
     const user = {
