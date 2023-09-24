@@ -4,7 +4,7 @@ import Notification from "../../pages/Notification";
 import SettingsContainer from "../../containers/settings/SettingsContainer";
 import SignIn from "../../pages/SignIn";
 import SignUp from "../../pages/SignUp";
-import TestContainer from "../../containers/test/TestContainer";
+import TestContainer from "@pages/MyPage/TestContainer.tsx";
 import PATH from "../../constants/path";
 import Home from "../../pages/Home";
 import { RouterDOM } from "../../types/common";
