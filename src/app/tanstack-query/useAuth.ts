@@ -5,7 +5,6 @@ import { useSetRecoilState } from "recoil";
 import { userState } from "@recoil/user.ts";
 import { useNavigate } from "react-router-dom";
 import PATH from "../../constants/path.tsx";
-import { useState } from "react";
 
 const fetchSignIn = async (credentials: SignIn) => {
   return fetch(`${DOMAIN}/fin-the-pen-web/sign-in`, {
@@ -36,6 +35,10 @@ export const useAuth = () => {
     mutate(credentials);
   };
 
+  const signOut = () => {
+    setUser(undefined);
+  };
+
   const mockSignIn = () => {
     alert("게스트 모드로 로그인 합니다.");
     setUser({
@@ -49,5 +52,5 @@ export const useAuth = () => {
     navigate(PATH.home);
   };
 
-  return { signIn, isLoading, mockSignIn };
+  return { signIn, signOut, isLoading, mockSignIn };
 };
