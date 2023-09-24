@@ -33,16 +33,18 @@ export const handlers = [
     return res(ctx.delay(1000), ctx.status(200), ctx.json(true));
   }),
 
-  rest.post("/fin-the-pen-web/sign-in", (req, res, ctx) => {
-    const newUser = req.body as User;
-    const prevUsers = getLocalStorage<User[]>(
-      LOCAL_STORAGE_KEY_USERS,
-      []
-    ) as User[];
-    const newUsers: User[] = [...prevUsers, newUser];
-    setLocalStorage(LOCAL_STORAGE_KEY_USERS, newUsers);
-
-    return res(ctx.delay(1000), ctx.status(200), ctx.json(true));
+  rest.post(`${DOMAIN}/fin-the-pen-web/sign-in`, async (req, res, ctx) => {
+    const credentials: SignUp = await req.json();
+    const users = getLocalStorage<MockUser[]>(LOCAL_STORAGE_KEY_USERS, []);
+    const user = users.find(
+      (user) =>
+        user.user_id === credentials.user_id &&
+        user.password === credentials.password
+    );
+    if (user === undefined) {
+      return res(ctx.delay(1000), ctx.status(200), ctx.json(""));
+    }
+    return res(ctx.delay(1000), ctx.status(200), ctx.json(user));
   }),
 
   rest.post("/mock/login", (req, res, ctx) => {
