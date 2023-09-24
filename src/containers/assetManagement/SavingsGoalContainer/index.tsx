@@ -1,14 +1,14 @@
 import { Box, Stack, IconButton } from "@mui/material";
-import { useSelector } from "react-redux";
 import SettingsIcon from "@mui/icons-material/Settings";
 import { useNavigate } from "react-router-dom";
-import { selectUser } from "../../../app/redux/slices/userSlice";
 import Saving from "./goals/Saving";
 import Personal from "./goals/Personal";
 import PATH from "../../../constants/path";
+import { useRecoilValue } from "recoil";
+import { userState } from "@recoil/user.ts";
 
 function SavingsGoal() {
-  const user = useSelector(selectUser);
+  const user = useRecoilValue(userState);
   const navigate = useNavigate();
 
   return (

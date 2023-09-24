@@ -4,7 +4,6 @@ import {
   setGuestModeFalse,
   setGuestModeTrue,
 } from "../../../../app/redux/slices/commonSlice";
-import { selectUser } from "../../../../app/redux/slices/userSlice";
 import AnalysisMode from "./headerMode/AnalysisMode";
 import HomeMode from "./headerMode/HomeMode";
 import { useAppDispatch, useAppSelector } from "../../../../app/redux/hooks";
@@ -15,11 +14,12 @@ import PATH from "../../../../constants/path";
 import SettingsMode from "./headerMode/SettingsMode";
 import { useRecoilValue } from "recoil";
 import { headerModeState, headerOpenState } from "@recoil/header.ts";
+import { userState } from "@recoil/user.ts";
 
 function TopBar() {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
-  const user = useAppSelector(selectUser);
+  const user = useRecoilValue(userState);
   const isHeaderOpen = useRecoilValue(headerOpenState);
   const headerMode = useRecoilValue(headerModeState);
   const popupSetting = useAppSelector(selectSavingPopUpSetting);

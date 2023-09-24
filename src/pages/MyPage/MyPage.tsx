@@ -2,7 +2,6 @@ import { Box, Button, Stack, Typography } from "@mui/material";
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import PATH from "../../constants/path";
-import { selectUser } from "@redux/slices/userSlice.tsx";
 import GuestMode from "../../containers/test/GuestMode";
 import ScheduleFilterData from "../../containers/test/ScheduleFilterData";
 import { useAppSelector } from "@redux/hooks.ts";
@@ -11,10 +10,12 @@ import UserData from "@containers/test/UserData.tsx";
 import { selectGuestMode } from "@redux/slices/commonSlice.tsx";
 import SchedulesData from "@containers/test/SchedulesData.tsx";
 import GuestDataManager from "@containers/test/GuestDataManager";
+import { useRecoilValue } from "recoil";
+import { userState } from "@recoil/user.ts";
 
 function MyPage() {
   const navigate = useNavigate();
-  const user = useAppSelector(selectUser);
+  const user = useRecoilValue(userState);
   const guestMode = useAppSelector(selectGuestMode);
 
   const userLogOut = () => {
@@ -25,15 +26,12 @@ function MyPage() {
     ) {
       sessionStorage.clear();
       window.location.href = "";
-      /**
-       * logOut을 dispatch하지 않고, redux 스토어를 강제로 비워서 초기화 처리해버리는 중
-       */
     }
   };
 
   useEffect(() => {
     // 로그인 안된 계정은 로그인 페이지로 강제연결
-    if (user === null) {
+    if (user === undefined) {
       navigate(PATH.signIn);
     }
   }, [user]);

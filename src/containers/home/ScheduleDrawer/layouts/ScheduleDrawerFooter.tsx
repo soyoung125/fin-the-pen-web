@@ -8,10 +8,12 @@ import {
   selectSchedule,
   setDrawerSchedule,
 } from "../../../../app/redux/slices/scheduleSlice";
-import { selectUser } from "../../../../app/redux/slices/userSlice";
 import { generateRandomSchedule, handleCreate } from "../domain/schedule";
 import { Schedule, ScheduleDrawerModeValue } from "../../../../types/schedule";
 import { useAppDispatch, useAppSelector } from "../../../../app/redux/hooks";
+import { useRecoilValue } from "recoil";
+import { userState } from "@recoil/user.ts";
+import { User } from "@type/auth.tsx";
 
 /**
  * 각종 로직들 모듈로 이전 예정
@@ -27,7 +29,7 @@ function ScheduleDrawerFooter({
   handleClose,
 }: ScheduleDrawerFooterProps) {
   const date = useAppSelector(selectDate);
-  const user = useAppSelector(selectUser);
+  const user = useRecoilValue(userState);
   const guestMode = useAppSelector(selectGuestMode);
   const schedule = useAppSelector(selectSchedule) as Schedule;
   const dispatch = useAppDispatch();
@@ -47,7 +49,15 @@ function ScheduleDrawerFooter({
   const handleMode = () => {
     switch (mode) {
       case "create":
-        handleCreate(dispatch, schedule, user, guestMode, date, handleClose);
+        // TODO: as 제거 예정
+        handleCreate(
+          dispatch,
+          schedule,
+          user as User,
+          guestMode,
+          date,
+          handleClose
+        );
         break;
       case "modify":
         handleModify();
@@ -86,10 +96,10 @@ function ScheduleDrawerFooter({
         <Button
           variant="contained"
           fullWidth
-          disabled={user === null}
+          disabled={user === undefined}
           onClick={() => handleSubmit()}
         >
-          {user === null
+          {user === undefined
             ? NEED_SIGN_IN
             : `${SCHEDULE_DRAWER.add_schedule[mode]}`}
         </Button>

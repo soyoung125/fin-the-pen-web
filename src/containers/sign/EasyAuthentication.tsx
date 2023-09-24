@@ -8,16 +8,14 @@ import {
   Stack,
 } from "@mui/material";
 import { useRef, useState } from "react";
-import { useSelector } from "react-redux";
 import LogoCircle from "../../components/common/LogoCircle";
 import CenterBox from "../../components/layouts/CenterBox";
-import { selectUser } from "../../app/redux/slices/userSlice";
-import { useAppDispatch } from "../../app/redux/hooks";
 import { useRecoilValue } from "recoil";
 import {
   isAuthenticatedRepository,
   isAuthenticatedState,
 } from "../../app/recoil/isAuthenticated.ts";
+import { userState } from "@recoil/user.ts";
 
 interface EasyAuthenticationProps {
   handleAuthenticate?: () => void;
@@ -27,7 +25,7 @@ function EasyAuthentication({ handleAuthenticate }: EasyAuthenticationProps) {
   const CHARACTER_LIMIT = 6;
   const isAuthenticated = useRecoilValue(isAuthenticatedState);
   const { setIsAuthenticatedTrue } = useRecoilValue(isAuthenticatedRepository);
-  const user = useSelector(selectUser);
+  const user = useRecoilValue(userState);
   const input = useRef<HTMLInputElement>();
   const [password, setPassword] = useState("");
 

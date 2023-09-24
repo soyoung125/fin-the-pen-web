@@ -5,11 +5,11 @@ import RoundedButton from "../../../../../../components/common/RoundedButton";
 import OptionList from "./popover/OptionList";
 import { useNavigate } from "react-router-dom";
 import PATH from "../../../../../../constants/path";
-import { useAppSelector } from "../../../../../../app/redux/hooks";
-import { selectUser } from "../../../../../../app/redux/slices/userSlice";
+import { useRecoilValue } from "recoil";
+import { userState } from "@recoil/user.ts";
 
 function SearchButton() {
-  const user = useAppSelector(selectUser);
+  const user = useRecoilValue(userState);
   const navigate = useNavigate();
   const [anchorEl, setAnchorEl] = useState<HTMLButtonElement | null>(null);
   const searchBtn = useRef(null);
