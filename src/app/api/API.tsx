@@ -2,25 +2,8 @@ import axios, { AxiosResponse } from "axios";
 import { GetScheduleQuery, Schedule } from "@type/schedule.tsx";
 import { ServerState } from "@type/common.tsx";
 import { url } from "./url.ts";
-import { getSessionStorage, setSessionStorage } from "../utils/storage.ts";
+import { getSessionStorage } from "../utils/storage.ts";
 import { LOCAL_STORAGE_KEY_SERVER } from "./keys.ts";
-import { SignIn, User } from "@type/auth.tsx";
-
-export const fetchLogin = async (sign: SignIn) => {
-  try {
-    const server = getSessionStorage<ServerState>(
-      LOCAL_STORAGE_KEY_SERVER,
-      "real"
-    );
-    const response = await axios.post<User | "">(
-      `${url[server]}/fin-the-pen-web/sign-in`,
-      sign
-    );
-    return response.data;
-  } catch (err) {
-    alert(err);
-  }
-};
 
 export const fetchCreateSchedule = async (schedule: Schedule) => {
   try {
