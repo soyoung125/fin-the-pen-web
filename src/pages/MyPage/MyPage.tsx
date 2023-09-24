@@ -1,7 +1,7 @@
 import { Box, Button, Stack, Typography } from "@mui/material";
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import PATH from "../../domain/constants/path";
+import PATH from "../../constants/path";
 import { selectUser } from "@redux/slices/userSlice.tsx";
 import GuestMode from "../../containers/test/GuestMode";
 import ScheduleFilterData from "../../containers/test/ScheduleFilterData";

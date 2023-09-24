@@ -1,21 +1,18 @@
-import { Typography } from '@mui/material';
-import Accordion from '../../../../../../../components/common/accordions/Accordion';
-import AccordionDetails from '../../../../../../../components/common/accordions/AccordionDetails';
-import AccordionSummary from '../../../../../../../components/common/accordions/AccordionSummary';
-import FilterChips from './FilterChips';
-import { CategoryType } from '../../../../../../../domain/constants/categories';
+import { Typography } from "@mui/material";
+import Accordion from "../../../../../../../components/common/accordions/Accordion";
+import AccordionDetails from "../../../../../../../components/common/accordions/AccordionDetails";
+import AccordionSummary from "../../../../../../../components/common/accordions/AccordionSummary";
+import FilterChips from "./FilterChips";
+import { CategoryType } from "../../../../../../../constants/categories";
 
 interface FilterAccordionProps {
-  tag: CategoryType
+  tag: CategoryType;
 }
 
 function FilterAccordion({ tag }: FilterAccordionProps) {
   return (
     <Accordion>
-      <AccordionSummary
-        aria-controls="panel1a-content"
-        id="panel1a-header"
-      >
+      <AccordionSummary aria-controls="panel1a-content" id="panel1a-header">
         <Typography>{tag.type}</Typography>
       </AccordionSummary>
       <AccordionDetails>

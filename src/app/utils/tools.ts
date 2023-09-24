@@ -2,10 +2,10 @@
 /* eslint-disable array-callback-return */
 /* eslint-disable @typescript-eslint/naming-convention */
 
-import { EXPENDITURE } from "./constants/categories";
-import { deleteSchedule } from "../app/redux/slices/scheduleSlice";
-import { Schedule } from "../types/schedule";
-import { AppDispatch } from "../app/redux/store";
+import { EXPENDITURE } from "../../constants/categories.tsx";
+import { deleteSchedule } from "@redux/slices/scheduleSlice.tsx";
+import { Schedule } from "@type/schedule.tsx";
+import { AppDispatch } from "@redux/store.ts";
 
 /**
  * 유용한 함수들을 모아두는 곳.
@@ -20,7 +20,6 @@ import { AppDispatch } from "../app/redux/store";
 export const isObjectValuesEmpty = (obj: object) =>
   Object.values(obj).findIndex((v) => v === "");
 
-
 /**
  * 수입, 지출액을 계산하기 위한 함수
  * @param {function} expression 수입/지출액을 계산하는 수식
@@ -30,7 +29,7 @@ export const isObjectValuesEmpty = (obj: object) =>
 export const calculateIncomeExpenditure = (
   schedules: Schedule[],
   expression: (s: Schedule) => boolean,
-  type: '+' | '-'
+  type: "+" | "-"
 ) => {
   let result = 0;
   if (type === "-") {
@@ -67,11 +66,11 @@ export const isTimeOrderCorrect = (startTime: string, endTime: string) =>
 export const deleteSelectedSchedule = (
   dispatch: AppDispatch,
   schedule: Schedule | null,
-  handleClose: () => void,
+  handleClose: () => void
 ) => {
   if (window.confirm("정말로 삭제 하시겠습니까?")) {
     console.log(schedule?.id);
-    dispatch(deleteSchedule(schedule?.id || ''));
+    dispatch(deleteSchedule(schedule?.id || ""));
     handleClose();
   }
 };

@@ -1,6 +1,8 @@
-import { Stack } from '@mui/material';
-import assetManagements, { AssetManagement } from '../../../domain/constants/managements';
-import SettingCard from './SettingCard';
+import { Stack } from "@mui/material";
+import assetManagements, {
+  AssetManagement,
+} from "../../../constants/managements";
+import SettingCard from "./SettingCard";
 
 function SettingsPaper() {
   return (

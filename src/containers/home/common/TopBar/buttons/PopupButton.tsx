@@ -1,13 +1,13 @@
 import { Fab } from "@mui/material";
-import SavingsOutlinedIcon from '@mui/icons-material/SavingsOutlined';
+import SavingsOutlinedIcon from "@mui/icons-material/SavingsOutlined";
 import { useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import PATH from "../../../../../domain/constants/path";
+import PATH from "../../../../../constants/path";
 
 interface PopupButtonProps {
-  handleClickPopup: () => void,
+  handleClickPopup: () => void;
 }
-function PopupButton({handleClickPopup}: PopupButtonProps) {
+function PopupButton({ handleClickPopup }: PopupButtonProps) {
   const position = 120;
   const [offset, setOffset] = useState(0);
   const [isDragging, setIsDragging] = useState(false);
@@ -17,9 +17,9 @@ function PopupButton({handleClickPopup}: PopupButtonProps) {
   useEffect(() => {
     const div = fabRef.current;
     if (div) {
-      div.addEventListener('touchstart', handleTouchStart, { passive: false });
+      div.addEventListener("touchstart", handleTouchStart, { passive: false });
     }
-  }, [])
+  }, []);
 
   const handleMouseDown = (event: React.MouseEvent) => {
     event.preventDefault();
@@ -57,16 +57,20 @@ function PopupButton({handleClickPopup}: PopupButtonProps) {
 
   const handleClick = () => {
     if (!isDragging) {
-      console.log('Click event occurred!');
+      console.log("Click event occurred!");
     } else {
-      console.log('nonclick');
+      console.log("nonclick");
     }
   };
 
   return (
     <div
       ref={fabRef}
-      style={{ position: 'fixed', top: `calc(100vh - ${position - offset}px)`, right: 10 }}
+      style={{
+        position: "fixed",
+        top: `calc(100vh - ${position - offset}px)`,
+        right: 10,
+      }}
       onMouseDown={handleMouseDown}
       onMouseUp={handleMouseUp}
       onTouchEnd={handleMouseUp}

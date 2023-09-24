@@ -1,12 +1,12 @@
-import { Box, Button, TextField } from '@mui/material';
-import { FormEvent, useEffect } from 'react';
-import { useSelector } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
-import { NO_BLANKS } from '../../../domain/constants/messages';
-import PATH from '../../../domain/constants/path';
-import { login, selectUser } from '../../../app/redux/slices/userSlice';
-import { isObjectValuesEmpty } from '../../../domain/tools';
-import { useAppDispatch } from '../../../app/redux/hooks';
+import { Box, Button, TextField } from "@mui/material";
+import { FormEvent, useEffect } from "react";
+import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { NO_BLANKS } from "../../../constants/messages";
+import PATH from "../../../constants/path";
+import { login, selectUser } from "../../../app/redux/slices/userSlice";
+import { isObjectValuesEmpty } from "@utils/tools.ts";
+import { useAppDispatch } from "../../../app/redux/hooks";
 
 function SignInFields() {
   const navigate = useNavigate();
@@ -17,8 +17,8 @@ function SignInFields() {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
     const sign = {
-      user_id: data.get('email'),
-      password: data.get('password'),
+      user_id: data.get("email"),
+      password: data.get("password"),
     };
     const invalidIndex = isObjectValuesEmpty(sign);
     if (invalidIndex === -1) {
@@ -40,9 +40,8 @@ function SignInFields() {
       component="form"
       onSubmit={handleSubmit}
       noValidate
-      sx={{ maxWidth: '400px' }}
+      sx={{ maxWidth: "400px" }}
     >
-
       <TextField
         margin="normal"
         required
@@ -64,22 +63,21 @@ function SignInFields() {
         autoComplete="current-password"
       />
 
-      <Button onClick={() => alert('You forget a thousand things every day. Make sure this is one of them :)')}>
+      <Button
+        onClick={() =>
+          alert(
+            "You forget a thousand things every day. Make sure this is one of them :)"
+          )
+        }
+      >
         비밀번호를 잊으셨나요?
       </Button>
 
-      <Button
-        type="submit"
-        fullWidth
-        variant="contained"
-        sx={{ mt: 3, mb: 2 }}
-      >
+      <Button type="submit" fullWidth variant="contained" sx={{ mt: 3, mb: 2 }}>
         로그인
       </Button>
 
-      <Button onClick={() => navigate(PATH.signUp)}>
-        계정이 없으신가요?
-      </Button>
+      <Button onClick={() => navigate(PATH.signUp)}>계정이 없으신가요?</Button>
     </Box>
   );
 }

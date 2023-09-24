@@ -1,48 +1,57 @@
 import {
-  Box, Button, Divider, FormControl, IconButton,
-  InputAdornment, OutlinedInput, Stack, TextField, Typography,
-} from '@mui/material';
-import ClearIcon from '@mui/icons-material/Clear';
-import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
-import { useEffect, useState } from 'react';
-import { useSelector } from 'react-redux';
-import { SOMETHING_IS_WRONG } from '../../../../../domain/constants/messages';
-import { selectPersonalGoal, setPersonalGoal } from '../../../../../app/redux/slices/assetSlice';
-import AlertModal from '../../../../../components/common/AlertModal';
-import { useAppDispatch } from '../../../../../app/redux/hooks';
-import useModal from '../../../../../hooks/useModal';
-import SwitchButton from '../../../../../components/common/SwitchButton';
+  Box,
+  Button,
+  Divider,
+  FormControl,
+  IconButton,
+  InputAdornment,
+  OutlinedInput,
+  Stack,
+  TextField,
+  Typography,
+} from "@mui/material";
+import ClearIcon from "@mui/icons-material/Clear";
+import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
+import { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
+import { SOMETHING_IS_WRONG } from "../../../../../constants/messages";
+import {
+  selectPersonalGoal,
+  setPersonalGoal,
+} from "../../../../../app/redux/slices/assetSlice";
+import AlertModal from "../../../../../components/common/AlertModal";
+import { useAppDispatch } from "../../../../../app/redux/hooks";
+import useModal from "../../../../../hooks/useModal";
+import SwitchButton from "../../../../../components/common/SwitchButton";
 
 interface InputModalProps {
-  setPersonalGoalModalOpen: React.Dispatch<React.SetStateAction<boolean>>,
+  setPersonalGoalModalOpen: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 interface Form {
-  name: string,
-  money: number,
-  deadline: string,
-  type: '' | 'day' | 'month',
-  autoSaving: boolean,
-  popUp: boolean,
+  name: string;
+  money: number;
+  deadline: string;
+  type: "" | "day" | "month";
+  autoSaving: boolean;
+  popUp: boolean;
 }
 
 interface ChangePersonalGoal {
-  (state: { target: { id: string, value: string | number | boolean } }): void,
+  (state: { target: { id: string; value: string | number | boolean } }): void;
 }
 
-function InputModal({
-  setPersonalGoalModalOpen,
-}: InputModalProps) {
+function InputModal({ setPersonalGoalModalOpen }: InputModalProps) {
   const {
     modalOpen: alertModalOpen,
     openModal: openAlertModal,
-    closeModal: closeAlertModal
+    closeModal: closeAlertModal,
   } = useModal();
   const [form, setForm] = useState<Form>({
-    name: '',
+    name: "",
     money: 0,
-    deadline: '2024-01-01',
-    type: 'day', // day||month
+    deadline: "2024-01-01",
+    type: "day", // day||month
     autoSaving: true,
     popUp: false,
   });
@@ -53,9 +62,9 @@ function InputModal({
 
   const divisionByType = (type: string, money: number): number | string => {
     switch (type) {
-      case 'day':
+      case "day":
         return Math.round(money / 365);
-      case 'month':
+      case "month":
         return Math.round(money / 12);
       default:
         return SOMETHING_IS_WRONG;
@@ -71,13 +80,10 @@ function InputModal({
   return (
     <Stack p={2} spacing={1}>
       <Stack direction="row" alignItems="center" justifyContent="space-between">
-        <IconButton
-          onClick={openAlertModal}
-          color="error"
-        >
+        <IconButton onClick={openAlertModal} color="error">
           <DeleteForeverIcon />
         </IconButton>
-        <Typography variant="h5" sx={{ fontWeight: 'bold' }}>
+        <Typography variant="h5" sx={{ fontWeight: "bold" }}>
           Personal Goal
         </Typography>
         <IconButton onClick={() => setPersonalGoalModalOpen(false)}>
@@ -89,17 +95,18 @@ function InputModal({
       </Box>
 
       <Stack spacing={1}>
-
         {/* 목표 */}
         <FormControl fullWidth>
           <OutlinedInput
             id="name"
-            startAdornment={<InputAdornment position="start">목표</InputAdornment>}
+            startAdornment={
+              <InputAdornment position="start">목표</InputAdornment>
+            }
             value={form.name}
             onChange={changePersonalGoal}
             size="small"
             inputProps={{
-              style: { textAlign: 'right' },
+              style: { textAlign: "right" },
             }}
           />
         </FormControl>
@@ -108,17 +115,21 @@ function InputModal({
         <FormControl fullWidth>
           <OutlinedInput
             id="money"
-            startAdornment={<InputAdornment position="start">금액</InputAdornment>}
-            value={form.money.toLocaleString('ko-KR')}
-            onChange={(e) => changePersonalGoal({
-              target: {
-                id: e.target.id,
-                value: +e.target.value.replaceAll(',', ''),
-              },
-            })}
+            startAdornment={
+              <InputAdornment position="start">금액</InputAdornment>
+            }
+            value={form.money.toLocaleString("ko-KR")}
+            onChange={(e) =>
+              changePersonalGoal({
+                target: {
+                  id: e.target.id,
+                  value: +e.target.value.replaceAll(",", ""),
+                },
+              })
+            }
             size="small"
             inputProps={{
-              style: { textAlign: 'right' },
+              style: { textAlign: "right" },
               step: 10,
             }}
             type="text"
@@ -137,10 +148,12 @@ function InputModal({
            * https://mui.com/material-ui/api/text-field/
            */
           InputProps={{
-            startAdornment: <InputAdornment position="start">기한</InputAdornment>,
+            startAdornment: (
+              <InputAdornment position="start">기한</InputAdornment>
+            ),
           }}
           inputProps={{
-            style: { textAlign: 'right' },
+            style: { textAlign: "right" },
           }}
           value={form.deadline}
           onChange={changePersonalGoal}
@@ -152,26 +165,30 @@ function InputModal({
           <Button
             fullWidth
             id="type"
-            variant={form.type === 'day' ? 'contained' : 'outlined'}
-            onClick={() => changePersonalGoal({
-              target: {
-                id: 'type',
-                value: 'day',
-              },
-            })}
+            variant={form.type === "day" ? "contained" : "outlined"}
+            onClick={() =>
+              changePersonalGoal({
+                target: {
+                  id: "type",
+                  value: "day",
+                },
+              })
+            }
           >
             하루 기준
           </Button>
           <Button
             fullWidth
             id="type"
-            variant={form.type === 'month' ? 'contained' : 'outlined'}
-            onClick={() => changePersonalGoal({
-              target: {
-                id: 'type',
-                value: 'month',
-              },
-            })}
+            variant={form.type === "month" ? "contained" : "outlined"}
+            onClick={() =>
+              changePersonalGoal({
+                target: {
+                  id: "type",
+                  value: "month",
+                },
+              })
+            }
           >
             한달 기준
           </Button>
@@ -180,11 +197,15 @@ function InputModal({
         {/* 필요 적금 액 */}
         <FormControl fullWidth>
           <OutlinedInput
-            startAdornment={<InputAdornment position="start">필요 적금액</InputAdornment>}
-            value={divisionByType(form.type, form.money).toLocaleString('ko-KR')}
+            startAdornment={
+              <InputAdornment position="start">필요 적금액</InputAdornment>
+            }
+            value={divisionByType(form.type, form.money).toLocaleString(
+              "ko-KR"
+            )}
             size="small"
             inputProps={{
-              style: { textAlign: 'right' },
+              style: { textAlign: "right" },
             }}
           />
         </FormControl>
@@ -192,18 +213,22 @@ function InputModal({
         {/* 자동 적금 */}
         <FormControl fullWidth>
           <OutlinedInput
-            startAdornment={<InputAdornment position="start">적금액 송금 설정</InputAdornment>}
-            endAdornment={(
+            startAdornment={
+              <InputAdornment position="start">적금액 송금 설정</InputAdornment>
+            }
+            endAdornment={
               <SwitchButton
                 checked={form.autoSaving}
-                handleChange={() => changePersonalGoal({
-                  target: {
-                    id: 'autoSaving',
-                    value: !form.autoSaving,
-                  },
-                })}
+                handleChange={() =>
+                  changePersonalGoal({
+                    target: {
+                      id: "autoSaving",
+                      value: !form.autoSaving,
+                    },
+                  })
+                }
               />
-            )}
+            }
             size="small"
             readOnly
           />
@@ -212,23 +237,26 @@ function InputModal({
         {/* 팝업 */}
         <FormControl fullWidth>
           <OutlinedInput
-            startAdornment={<InputAdornment position="start">팝업창</InputAdornment>}
-            endAdornment={(
+            startAdornment={
+              <InputAdornment position="start">팝업창</InputAdornment>
+            }
+            endAdornment={
               <SwitchButton
                 checked={form.popUp}
-                handleChange={() => changePersonalGoal({
-                  target: {
-                    id: 'popUp',
-                    value: !form.popUp,
-                  },
-                })}
+                handleChange={() =>
+                  changePersonalGoal({
+                    target: {
+                      id: "popUp",
+                      value: !form.popUp,
+                    },
+                  })
+                }
               />
-            )}
+            }
             size="small"
             readOnly
           />
         </FormControl>
-
       </Stack>
       <Button
         fullWidth
@@ -246,10 +274,10 @@ function InputModal({
         handleClose={closeAlertModal}
         handleClickYes={() => {
           setForm({
-            name: '',
+            name: "",
             money: 0,
-            deadline: '2024-01-01',
-            type: '', // day||month
+            deadline: "2024-01-01",
+            type: "", // day||month
             autoSaving: true,
             popUp: false,
           });

@@ -1,9 +1,12 @@
-import { Box, Button } from '@mui/material';
-import { grey } from '@mui/material/colors';
-import { useSelector } from 'react-redux';
-import { VIEW_MODE } from '../../../../../domain/constants/schedule';
-import { changeViewMode, selectViewMode } from '../../../../../app/redux/slices/scheduleSlice';
-import { useAppDispatch } from '../../../../../app/redux/hooks';
+import { Box, Button } from "@mui/material";
+import { grey } from "@mui/material/colors";
+import { useSelector } from "react-redux";
+import { VIEW_MODE } from "../../../../../constants/schedule";
+import {
+  changeViewMode,
+  selectViewMode,
+} from "../../../../../app/redux/slices/scheduleSlice";
+import { useAppDispatch } from "../../../../../app/redux/hooks";
 
 function ScheduleViewMode() {
   const dispatch = useAppDispatch();
@@ -12,25 +15,25 @@ function ScheduleViewMode() {
   return (
     <Box
       sx={{
-        width: '100vw',
-        position: 'fixed',
-        bottom: '80px',
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
+        width: "100vw",
+        position: "fixed",
+        bottom: "80px",
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
         zIndex: 100,
       }}
     >
       <Box
         sx={{
-          display: 'inline-flex',
+          display: "inline-flex",
           borderRadius: 4,
           backgroundColor: grey[200],
         }}
       >
         <Button
           sx={{ borderRadius: 4 }}
-          variant={viewMode === VIEW_MODE.asset ? 'contained' : 'text'}
+          variant={viewMode === VIEW_MODE.asset ? "contained" : "text"}
           onClick={() => {
             dispatch(changeViewMode(VIEW_MODE.asset));
           }}
@@ -39,7 +42,7 @@ function ScheduleViewMode() {
         </Button>
         <Button
           sx={{ borderRadius: 4 }}
-          variant={viewMode === VIEW_MODE.schedule ? 'contained' : 'text'}
+          variant={viewMode === VIEW_MODE.schedule ? "contained" : "text"}
           onClick={() => dispatch(changeViewMode(VIEW_MODE.schedule))}
         >
           일정

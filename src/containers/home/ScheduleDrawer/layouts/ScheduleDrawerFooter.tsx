@@ -1,16 +1,17 @@
-import { Button, Stack, Tooltip } from '@mui/material';
-import { NEED_SIGN_IN, NOT_AVAILABLE } from '../../../../domain/constants/messages';
+import { Button, Stack, Tooltip } from "@mui/material";
+import { NEED_SIGN_IN, NOT_AVAILABLE } from "../../../../constants/messages";
+import { NEED_TITLE, SCHEDULE_DRAWER } from "../../../../constants/schedule";
+import { selectGuestMode } from "../../../../app/redux/slices/commonSlice";
 import {
-  NEED_TITLE, SCHEDULE_DRAWER,
-} from '../../../../domain/constants/schedule';
-import { selectGuestMode } from '../../../../app/redux/slices/commonSlice';
-import {
-  modifySchedule, selectDate, selectSchedule, setDrawerSchedule,
-} from '../../../../app/redux/slices/scheduleSlice';
-import { selectUser } from '../../../../app/redux/slices/userSlice';
-import { generateRandomSchedule, handleCreate } from '../domain/schedule';
-import { Schedule, ScheduleDrawerModeValue } from '../../../../types/schedule';
-import { useAppDispatch, useAppSelector } from '../../../../app/redux/hooks';
+  modifySchedule,
+  selectDate,
+  selectSchedule,
+  setDrawerSchedule,
+} from "../../../../app/redux/slices/scheduleSlice";
+import { selectUser } from "../../../../app/redux/slices/userSlice";
+import { generateRandomSchedule, handleCreate } from "../domain/schedule";
+import { Schedule, ScheduleDrawerModeValue } from "../../../../types/schedule";
+import { useAppDispatch, useAppSelector } from "../../../../app/redux/hooks";
 
 /**
  * 각종 로직들 모듈로 이전 예정
@@ -21,7 +22,10 @@ interface ScheduleDrawerFooterProps {
   handleClose: () => void;
 }
 
-function ScheduleDrawerFooter({ mode, handleClose }: ScheduleDrawerFooterProps) {
+function ScheduleDrawerFooter({
+  mode,
+  handleClose,
+}: ScheduleDrawerFooterProps) {
   const date = useAppSelector(selectDate);
   const user = useAppSelector(selectUser);
   const guestMode = useAppSelector(selectGuestMode);
@@ -42,14 +46,14 @@ function ScheduleDrawerFooter({ mode, handleClose }: ScheduleDrawerFooterProps) 
 
   const handleMode = () => {
     switch (mode) {
-      case 'create':
+      case "create":
         handleCreate(dispatch, schedule, user, guestMode, date, handleClose);
         break;
-      case 'modify':
+      case "modify":
         handleModify();
         break;
       default:
-        alert('잘못 된 요청입니다.');
+        alert("잘못 된 요청입니다.");
     }
   };
 
@@ -62,25 +66,21 @@ function ScheduleDrawerFooter({ mode, handleClose }: ScheduleDrawerFooterProps) 
   };
 
   return (
-    <Stack
-      direction="row"
-      spacing={1}
-    >
-      {
-        mode === 'create' && (
-          <Button
-            fullWidth
-            variant="contained"
-            color="warning"
-            onClick={() => dispatch(setDrawerSchedule(generateRandomSchedule(date)))}
-          >
-            랜덤 데이터 채우기
-          </Button>
-
-        )
-      }
+    <Stack direction="row" spacing={1}>
+      {mode === "create" && (
+        <Button
+          fullWidth
+          variant="contained"
+          color="warning"
+          onClick={() =>
+            dispatch(setDrawerSchedule(generateRandomSchedule(date)))
+          }
+        >
+          랜덤 데이터 채우기
+        </Button>
+      )}
       <Tooltip
-        title={!guestMode && '아직 일반 모드에서는 동작하지 않습니다.'}
+        title={!guestMode && "아직 일반 모드에서는 동작하지 않습니다."}
         placement="top"
       >
         <Button

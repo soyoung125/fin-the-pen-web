@@ -1,15 +1,17 @@
-import Checkbox from '@mui/material/Checkbox';
+import Checkbox from "@mui/material/Checkbox";
+import { Box, Chip, Stack, Typography } from "@mui/material";
+import { useSelector } from "react-redux";
+import { useEffect, useState } from "react";
 import {
-  Box, Chip, Stack, Typography,
-} from '@mui/material';
-import { useSelector } from 'react-redux';
-import { useEffect, useState } from 'react';
-import { selectFiltered, updateFilter, updateFiltersForce } from '../../../../../../../app/redux/slices/scheduleSlice';
-import { NestedCategory } from '../../../../../../../domain/constants/categories';
-import { useAppDispatch } from '../../../../../../../app/redux/hooks';
+  selectFiltered,
+  updateFilter,
+  updateFiltersForce,
+} from "../../../../../../../app/redux/slices/scheduleSlice";
+import { NestedCategory } from "../../../../../../../constants/categories";
+import { useAppDispatch } from "../../../../../../../app/redux/hooks";
 
 interface FilterChipsProps {
-  nested: NestedCategory
+  nested: NestedCategory;
 }
 
 function FilterChips({ nested }: FilterChipsProps) {
@@ -46,13 +48,16 @@ function FilterChips({ nested }: FilterChipsProps) {
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setChecked(event.target.checked);
-    dispatch(updateFiltersForce({
-      mode: checked ? 'write' : 'remove', // ts 적용 필요
-      categories,
-    }));
+    dispatch(
+      updateFiltersForce({
+        mode: checked ? "write" : "remove", // ts 적용 필요
+        categories,
+      })
+    );
   };
 
-  const isFiltered = (cat: string): boolean => filtered.findIndex((word) => word === cat) === -1;
+  const isFiltered = (cat: string): boolean =>
+    filtered.findIndex((word) => word === cat) === -1;
 
   return (
     <Box key={nested.type} mx={1}>
@@ -60,7 +65,7 @@ function FilterChips({ nested }: FilterChipsProps) {
         <Checkbox
           checked={checked}
           onChange={handleChange}
-          inputProps={{ 'aria-label': 'controlled' }}
+          inputProps={{ "aria-label": "controlled" }}
         />
         <Typography>{nested.type}</Typography>
       </Stack>
@@ -68,12 +73,12 @@ function FilterChips({ nested }: FilterChipsProps) {
         <Chip
           key={cat}
           label={cat}
-          variant={isFiltered(cat) ? 'outlined' : 'filled'} // outlined에서 filled로 바꿨는데 TS 오류로 추정중
+          variant={isFiltered(cat) ? "outlined" : "filled"} // outlined에서 filled로 바꿨는데 TS 오류로 추정중
           onClick={handleClick}
           sx={{
             mr: 1,
             mb: 1,
-            color: isFiltered(cat) ? nested.color : 'white',
+            color: isFiltered(cat) ? nested.color : "white",
           }}
         />
       ))}

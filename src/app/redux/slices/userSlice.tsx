@@ -1,12 +1,12 @@
 import { PayloadAction, createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { NO_SIGNAL_FROM_SERVER } from "../../../domain/constants/messages";
+import { NO_SIGNAL_FROM_SERVER } from "../../../constants/messages";
 import { fetchLogin, fetchMockLogin } from "../../api/API";
 import {
   AsyncThunkStatusValue,
   SignInterface,
   User,
 } from "../../../types/common";
-import { ASYNC_THUNK_STATUS } from "../../../domain/constants/common";
+import { ASYNC_THUNK_STATUS } from "../../../constants/common";
 import { RootState } from "../store";
 
 interface UserState {
