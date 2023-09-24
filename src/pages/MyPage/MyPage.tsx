@@ -10,11 +10,14 @@ import { selectGuestMode } from "@redux/slices/commonSlice.tsx";
 import SchedulesData from "@containers/test/SchedulesData.tsx";
 import GuestDataManager from "@containers/test/GuestDataManager";
 import { useAuth } from "@app/tanstack-query/useAuth.ts";
+import { useRecoilValue } from "recoil";
+import { userState } from "@recoil/user.ts";
 
 function MyPage() {
   const navigate = useNavigate();
   const guestMode = useAppSelector(selectGuestMode);
   const { signOut } = useAuth();
+  const user = useRecoilValue(userState);
 
   const userLogOut = () => {
     if (
@@ -28,26 +31,38 @@ function MyPage() {
   };
 
   return (
-    <Box>
-      {guestMode ? (
-        <GuestDataManager />
+    <>
+      {user === undefined ? (
+        <div>로그인이 되어있지 않습니다.</div>
       ) : (
-        <Stack spacing={2} m={2} border={1} p={2}>
-          <Typography>현재 작업한 내용은 모두 서버에 저장중입니다.</Typography>
-        </Stack>
-      )}
-      <Box m={2}>
-        <Button variant="contained" color="error" onClick={() => userLogOut()}>
-          로그아웃
-        </Button>
-      </Box>
+        <Box>
+          {guestMode ? (
+            <GuestDataManager />
+          ) : (
+            <Stack spacing={2} m={2} border={1} p={2}>
+              <Typography>
+                현재 작업한 내용은 모두 서버에 저장중입니다.
+              </Typography>
+            </Stack>
+          )}
+          <Box m={2}>
+            <Button
+              variant="contained"
+              color="error"
+              onClick={() => userLogOut()}
+            >
+              로그아웃
+            </Button>
+          </Box>
 
-      <GuestMode />
-      <UserData />
-      <ScheduleData />
-      <SchedulesData />
-      <ScheduleFilterData />
-    </Box>
+          <GuestMode />
+          <UserData />
+          <ScheduleData />
+          <SchedulesData />
+          <ScheduleFilterData />
+        </Box>
+      )}
+    </>
   );
 }
 
