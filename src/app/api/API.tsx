@@ -1,11 +1,12 @@
 import axios, { AxiosResponse } from "axios";
 import { GetScheduleQuery, Schedule } from "@type/schedule.tsx";
-import { ServerState, SignInterface, User } from "@type/common.tsx";
+import { ServerState } from "@type/common.tsx";
 import { url } from "./url.ts";
 import { getSessionStorage, setSessionStorage } from "../utils/storage.ts";
 import { LOCAL_STORAGE_KEY_SERVER } from "./keys.ts";
+import { SignIn, User } from "@type/auth.tsx";
 
-export const fetchLogin = async (sign: SignInterface) => {
+export const fetchLogin = async (sign: SignIn) => {
   try {
     const server = getSessionStorage<ServerState>(
       LOCAL_STORAGE_KEY_SERVER,

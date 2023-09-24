@@ -1,13 +1,10 @@
 import { PayloadAction, createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { NO_SIGNAL_FROM_SERVER } from "../../../constants/messages";
 import { fetchLogin, fetchMockLogin } from "../../api/API";
-import {
-  AsyncThunkStatusValue,
-  SignInterface,
-  User,
-} from "../../../types/common";
+import { AsyncThunkStatusValue } from "../../../types/common";
 import { ASYNC_THUNK_STATUS } from "../../../constants/common";
 import { RootState } from "../store";
+import { SignIn, User } from "@type/auth.tsx";
 
 interface UserState {
   user: User | null; // User가 null 인 경우 비로그인 상태
@@ -24,23 +21,20 @@ export const mockLogin = createAsyncThunk("user/mockLogin", async () => {
   return user;
 });
 
-export const login = createAsyncThunk(
-  "user/login",
-  async (sign: SignInterface) => {
-    const response = await fetchLogin(sign);
-    if (response === undefined) {
-      alert(`${NO_SIGNAL_FROM_SERVER} GUEST 계정으로 로그인을 시도합니다.`);
-      const user = await fetchMockLogin();
-      return user;
-    }
-    if (response === "") {
-      alert("잘못된 아이디 혹은 비번입니다.");
-      return null;
-    } else {
-      return response;
-    }
+export const login = createAsyncThunk("user/login", async (sign: SignIn) => {
+  const response = await fetchLogin(sign);
+  if (response === undefined) {
+    alert(`${NO_SIGNAL_FROM_SERVER} GUEST 계정으로 로그인을 시도합니다.`);
+    const user = await fetchMockLogin();
+    return user;
   }
-);
+  if (response === "") {
+    alert("잘못된 아이디 혹은 비번입니다.");
+    return null;
+  } else {
+    return response;
+  }
+});
 
 export const userSlice = createSlice({
   name: "user",

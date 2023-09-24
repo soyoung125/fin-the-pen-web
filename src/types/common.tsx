@@ -24,31 +24,6 @@ export interface AsyncThunkStatus {
   failed: "failed";
 }
 
-export interface User {
-  id: number;
-  user_id: string;
-  name: string;
-  bday: string;
-  registerDate: string;
-  phone_number: string;
-}
-
-export interface MockUser extends User {
-  password: string;
-}
-
-export interface SignUp {
-  user_id: FormDataEntryValue | null;
-  password: FormDataEntryValue | null;
-  name: FormDataEntryValue | null;
-  phone_number: FormDataEntryValue | null;
-}
-
-export interface SignInterface {
-  user_id: FormDataEntryValue | null;
-  password: FormDataEntryValue | null;
-}
-
 export interface AnalysisData {
   id: string;
   label: string;
@@ -66,7 +41,7 @@ export interface AssetsByCategoryInterface {
   type: string;
   categories: AssetCategories[];
   color: string;
-  total: '-' | number;
+  total: "-" | number;
   sum: number;
 }
 

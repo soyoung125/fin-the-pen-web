@@ -1,6 +1,5 @@
 // src/mocks/handlers.js
 import { rest } from "msw";
-import { MockUser, SignUp, User } from "../types/common.tsx";
 import { LOCAL_STORAGE_KEY_USERS } from "../app/api/keys.ts";
 import {
   getLocalStorage,
@@ -10,6 +9,7 @@ import {
 } from "../app/utils/storage.ts";
 import { Todo } from "../temp/type.ts";
 import { DOMAIN } from "@api/url.ts";
+import { MockUser, SignUp, User } from "@type/auth.tsx";
 
 export const handlers = [
   rest.get("/hello", (req, res, ctx) => {

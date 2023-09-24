@@ -8,9 +8,9 @@ import {
   NO_SIGNAL_FROM_SERVER,
   SIGN_UP_SUCCESS,
 } from "../../constants/messages.tsx";
-import { SignUp } from "@type/common.tsx";
 import { DOMAIN } from "@api/url.ts";
 import { FormEvent } from "react";
+import { SignUp } from "@type/auth.tsx";
 
 function SignUpFields() {
   const navigate = useNavigate();

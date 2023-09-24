@@ -9,9 +9,10 @@ import {
 } from "../../../../app/redux/slices/scheduleSlice";
 import { Schedule } from "../../../../types/schedule";
 import { Dispatch } from "redux";
-import { UpdateStateInterface, User } from "../../../../types/common";
+import { UpdateStateInterface } from "../../../../types/common";
 import { SelectChangeEvent } from "@mui/material/Select";
 import { AppDispatch } from "../../../../app/redux/store";
+import { User } from "@type/auth.tsx";
 
 /**
  * index
