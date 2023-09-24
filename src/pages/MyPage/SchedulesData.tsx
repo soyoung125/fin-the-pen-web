@@ -1,5 +1,5 @@
-import TestBox from './box/TestBox';
-import useSchedule from '../../hooks/useSchedule';
+import TestBox from "./box/TestBox";
+import useSchedule from "@hooks/useSchedule.tsx";
 
 function SchedulesData() {
   const { schedules } = useSchedule();

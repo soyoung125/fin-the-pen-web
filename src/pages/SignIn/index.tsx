@@ -1,3 +1,3 @@
-import SignInFields from './SignIn';
+import SignIn from "./SignIn";
 
-export default SignInFields;
+export default SignIn;

@@ -6,16 +6,13 @@ import storage from "redux-persist/lib/storage/session"; // for session storage
 import { Action, combineReducers } from "redux";
 import { persistReducer } from "redux-persist";
 import thunk, { ThunkAction } from "redux-thunk";
-import userReducer from "./slices/userSlice";
 import scheduleReducer from "./slices/scheduleSlice";
 import commonReducer from "./slices/commonSlice";
 import settingReducer from "./slices/settingSlice";
 import assetReducer from "./slices/assetSlice";
-import { ToolkitStore } from "@reduxjs/toolkit/dist/configureStore";
 
 const reducers = {
   common: commonReducer,
-  user: userReducer,
   schedule: scheduleReducer,
   setting: settingReducer,
   asset: assetReducer,

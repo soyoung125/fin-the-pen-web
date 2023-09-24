@@ -1,40 +1,56 @@
-import { BottomNavigation, BottomNavigationAction, Drawer, Paper } from '@mui/material';
-import { useNavigate } from 'react-router-dom';
-import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
-import DataSaverOffIcon from '@mui/icons-material/DataSaverOff';
-import AddCircleIcon from '@mui/icons-material/AddCircle';
-import { useState, useEffect } from 'react';
-import SettingsIcon from '@mui/icons-material/Settings';
-import PaidIcon from '@mui/icons-material/Paid';
-import moment from 'moment';
-import PATH from '../../../domain/constants/path';
-import ScheduleDrawer from '../ScheduleDrawer';
-import { INIT_SCHEDULE, SCHEDULE_DRAWER_MODE } from '@constants/schedule.tsx';
-import { changeViewMode, selectDate } from '@redux/slices/scheduleSlice.tsx';
-import { useAppDispatch, useAppSelector } from '@redux/hooks.ts';
-import {useRecoilValue} from "recoil";
-import {bottomDrawerOpenRepository, bottomDrawerOpenState} from "@recoil/bottomDrawer.ts";
-import {bottomTabMenuRepository, bottomTabMenuState} from "@recoil/bottomTabMenu.ts";
+import {
+  BottomNavigation,
+  BottomNavigationAction,
+  Drawer,
+  Paper,
+} from "@mui/material";
+import { useNavigate } from "react-router-dom";
+import CalendarMonthIcon from "@mui/icons-material/CalendarMonth";
+import DataSaverOffIcon from "@mui/icons-material/DataSaverOff";
+import AddCircleIcon from "@mui/icons-material/AddCircle";
+import { useState, useEffect } from "react";
+import SettingsIcon from "@mui/icons-material/Settings";
+import PaidIcon from "@mui/icons-material/Paid";
+import moment from "moment";
+import PATH from "../../../constants/path";
+import ScheduleDrawer from "../ScheduleDrawer";
+import {
+  INIT_SCHEDULE,
+  SCHEDULE_DRAWER_MODE,
+} from "../../../constants/schedule.tsx";
+import { changeViewMode, selectDate } from "@redux/slices/scheduleSlice.tsx";
+import { useAppDispatch, useAppSelector } from "@redux/hooks.ts";
+import { useRecoilValue } from "recoil";
+import {
+  bottomDrawerOpenRepository,
+  bottomDrawerOpenState,
+} from "@recoil/bottomDrawer.ts";
+import {
+  bottomTabMenuRepository,
+  bottomTabMenuState,
+} from "@recoil/bottomTabMenu.ts";
 
 function BottomBar() {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
 
   const date = useAppSelector(selectDate);
-  const bottomTabMenu= useRecoilValue(bottomTabMenuState);
-  const {openBottomTabMenu} = useRecoilValue(bottomTabMenuRepository);
+  const bottomTabMenu = useRecoilValue(bottomTabMenuState);
+  const { openBottomTabMenu } = useRecoilValue(bottomTabMenuRepository);
 
   const isBottomDrawerOpen = useRecoilValue(bottomDrawerOpenState);
-  const {openBottomDrawer,closeBottomDrawer} = useRecoilValue(bottomDrawerOpenRepository);
+  const { openBottomDrawer, closeBottomDrawer } = useRecoilValue(
+    bottomDrawerOpenRepository
+  );
 
   const [drawerWidth, setDrawerWidth] = useState(0);
-  const [startTime, setStartTime] = useState('09');
+  const [startTime, setStartTime] = useState("09");
 
   useEffect(() => {
-    if (moment().isSame(date, 'day')) {
-      setStartTime(moment().add(1, 'hours').format('HH'));
+    if (moment().isSame(date, "day")) {
+      setStartTime(moment().add(1, "hours").format("HH"));
     } else {
-      setStartTime(moment('09:00', 'HH:mm').format('HH'));
+      setStartTime(moment("09:00", "HH:mm").format("HH"));
     }
   }, [date]);
 
@@ -42,7 +58,7 @@ function BottomBar() {
     <>
       <Paper
         sx={{
-          position: 'fixed',
+          position: "fixed",
           bottom: 0,
           left: 0,
           right: 0,
@@ -61,14 +77,30 @@ function BottomBar() {
             label="홈"
             icon={<CalendarMonthIcon />}
             onClick={() => {
-              dispatch(changeViewMode('schedule'));
+              dispatch(changeViewMode("schedule"));
               navigate(PATH.home);
             }}
           />
-          <BottomNavigationAction label="리포트" icon={<DataSaverOffIcon />} onClick={() => navigate(PATH.analysis)} />
-          <BottomNavigationAction label="" icon={<AddCircleIcon />} onClick={openBottomDrawer} />
-          <BottomNavigationAction label="자산관리" icon={<PaidIcon />} onClick={() => navigate(PATH.assetManagement)} />
-          <BottomNavigationAction label="설정" icon={<SettingsIcon />} onClick={() => navigate(PATH.settings)} />
+          <BottomNavigationAction
+            label="리포트"
+            icon={<DataSaverOffIcon />}
+            onClick={() => navigate(PATH.analysis)}
+          />
+          <BottomNavigationAction
+            label=""
+            icon={<AddCircleIcon />}
+            onClick={openBottomDrawer}
+          />
+          <BottomNavigationAction
+            label="자산관리"
+            icon={<PaidIcon />}
+            onClick={() => navigate(PATH.assetManagement)}
+          />
+          <BottomNavigationAction
+            label="설정"
+            icon={<SettingsIcon />}
+            onClick={() => navigate(PATH.settings)}
+          />
         </BottomNavigation>
       </Paper>
       <Drawer
@@ -78,8 +110,9 @@ function BottomBar() {
         // Drawer를 가운데로 위치할 수 있도록 도와줌. resize는 이후 업데이트 예정
         PaperProps={{
           sx: {
-            maxWidth: '400px',
-            marginX: drawerWidth === 400 ? `calc((100% - ${drawerWidth}px)/2)` : null,
+            maxWidth: "400px",
+            marginX:
+              drawerWidth === 400 ? `calc((100% - ${drawerWidth}px)/2)` : null,
           },
         }}
       >
@@ -88,12 +121,11 @@ function BottomBar() {
           setDrawerWidth={setDrawerWidth}
           handleClose={closeBottomDrawer}
           data={{
-            ...INIT_SCHEDULE(moment(date).format('YYYY-MM-DD'), startTime),
+            ...INIT_SCHEDULE(moment(date).format("YYYY-MM-DD"), startTime),
           }}
           mode={SCHEDULE_DRAWER_MODE.create}
         />
       </Drawer>
-
     </>
   );
 }

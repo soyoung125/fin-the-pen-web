@@ -1,7 +1,7 @@
 import AnalysisContainer from "../../containers/analysis/AnalysisContainer";
 import AnalysisDetailContainer from "../../containers/analysis/AnalysisDetailContainer";
 import { RouterDOM } from "@type/common.tsx";
-import PATH from "@constants/path.tsx";
+import PATH from "../../constants/path.tsx";
 
 const ANALYSIS_ROUTES: RouterDOM[] = [
   {

@@ -1,16 +1,16 @@
 import { Box, Button, InputAdornment, Stack, TextField } from "@mui/material";
 import { useNavigate } from "react-router-dom";
-import PATH from "@constants/path.tsx";
-import { isObjectValuesEmpty } from "@domain/tools.ts";
+import PATH from "../../constants/path.tsx";
+import { isObjectValuesEmpty } from "@utils/tools.ts";
 import {
   NO_BLANKS,
   NO_DUPLICATION_ID,
   NO_SIGNAL_FROM_SERVER,
   SIGN_UP_SUCCESS,
-} from "@constants/messages.tsx";
-import { SignUp } from "@type/common.tsx";
+} from "../../constants/messages.tsx";
 import { DOMAIN } from "@api/url.ts";
 import { FormEvent } from "react";
+import { SignUp } from "@type/auth.tsx";
 
 function SignUpFields() {
   const navigate = useNavigate();
