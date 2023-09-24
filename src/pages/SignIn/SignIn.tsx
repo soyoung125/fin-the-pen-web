@@ -2,7 +2,6 @@ import { Stack } from "@mui/material";
 import CenterBox from "../../components/layouts/CenterBox";
 import Header from "./Header.tsx";
 import SignInFields from "./SignInFields.tsx";
-import MockSignIn from "./MockSignIn.tsx";
 import Footer from "./Footer.tsx";
 import useHeader from "../../hooks/useHeader";
 import { useRecoilValue } from "recoil";
