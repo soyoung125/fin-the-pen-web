@@ -22,14 +22,6 @@ export const fetchLogin = async (sign: SignIn) => {
   }
 };
 
-// @mock
-export const fetchMockLogin = async () => {
-  const server = "guest";
-  setSessionStorage<ServerState>(LOCAL_STORAGE_KEY_SERVER, server);
-  const response = await axios.post<User>(`${url[server]}/mock/login`);
-  return response.data;
-};
-
 export const fetchCreateSchedule = async (schedule: Schedule) => {
   try {
     const server = getSessionStorage<ServerState>(
