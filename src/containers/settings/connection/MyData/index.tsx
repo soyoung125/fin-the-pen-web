@@ -2,7 +2,6 @@ import {
     Box, Button, Stack,
 } from '@mui/material';
 import AddRoundedIcon from '@mui/icons-material/AddRounded';
-import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight';
 import { useState } from 'react';
 import { useAppSelector } from '../../../../app/redux/hooks';
 import { selectGuestMode } from '../../../../app/redux/slices/commonSlice';
@@ -19,16 +18,16 @@ function MyData() {
     const guestMode = useAppSelector(selectGuestMode);
     const [step, setStep] = useState(0);
     const [value, setValue] = useState(0);
-    const [selected, setSelected] = useState({name: '', value: '', icon: ''});
-    const [form, setForm] = useState({id: '', password: ''});
+    const [selected, setSelected] = useState({ name: '', value: '', icon: '' });
+    const [form, setForm] = useState({ id: '', password: '' });
     const [selectedAccount, setSelectedAccount] = useState({ name: '', account: '', startDate: moment().format('YYYY/MM/DD'), endDate: '', orderBy: "0" })
 
     const handleChangeType = (event: React.SyntheticEvent, newValue: number) => {
         setValue(newValue);
-        setSelected({name: '', value: '', icon: ''});
+        setSelected({ name: '', value: '', icon: '' });
     };
 
-    const handleSelectOrganization = (org: {name: string, value: string, icon: string}) => {
+    const handleSelectOrganization = (org: { name: string, value: string, icon: string }) => {
         setSelected(org);
     }
 
@@ -39,7 +38,7 @@ function MyData() {
     const changeStep = () => setStep(step + 1);
 
     const handleSelectAccount = (name: string, account: string) => {
-        setSelectedAccount({...selectedAccount, name: name, account: account});
+        setSelectedAccount({ ...selectedAccount, name: name, account: account });
         changeStep()
     }
 
@@ -95,7 +94,7 @@ function MyData() {
 
     const steps = [
         <RoundedPaper my={0}>
-            <Stack sx={{height: '320px'}} alignItems="center" justifyContent="center" spacing={1}>
+            <Stack sx={{ height: '320px' }} alignItems="center" justifyContent="center" spacing={1}>
                 <Box>연결된 자산이 없어요.</Box>
                 <Button
                     sx={{ borderRadius: '50px' }}
@@ -105,10 +104,6 @@ function MyData() {
                     onClick={changeStep}
                 >MY 자산 연결하기</Button>
             </Stack>
-            {/* <Stack direction="row" justifyContent="space-between">
-                <Box>My 자산 연결하기</Box>
-                <KeyboardArrowRightIcon />
-            </Stack> */}
         </RoundedPaper>,
         <OrganizationSelect
             value={value}
