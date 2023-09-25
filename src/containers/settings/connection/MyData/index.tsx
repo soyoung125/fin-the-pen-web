@@ -10,6 +10,7 @@ import { fetchCreateAccount, fetchGetAccountList, fetchGetCardList } from '../..
 import OrganizationSelect from './OrganizationSelect';
 import AccountInput from './AccountInput';
 import RoundedPaper from '@components/common/RoundedPaper';
+import AssetSelect from './AssetSelect';
 
 function MyData() {
     const businessType = ['BK', 'CD', 'ST', 'IS'];
@@ -35,20 +36,31 @@ function MyData() {
     const changeStep = () => setStep(step + 1);
 
     const handleClickOk = async () => {
-        if (guestMode) {
-            alert('게스트 모드입니다.')
-        } else {
-            const result = await fetchCreateAccount([{
-                businessType: businessType[value],
-                organization: selected.value,
-                // loginType: 1,
-                ...form,
-            }]);
-            if (result.data) {
-                const list = await getList();
-                console.log(list);
-            }
-        }
+        // if (guestMode) {
+        //     alert('게스트 모드입니다.')
+        // } else {
+        //     const result = await fetchCreateAccount([{
+        //         businessType: businessType[value],
+        //         organization: selected.value,
+        //         // loginType: 1,
+        //         ...form,
+        //     }]);
+        //     if (result.data) {
+        //         const list = await getList();
+        //         console.log(list);
+        //     }
+        // }
+        // const result = await fetchCreateAccount([{
+        //     businessType: businessType[value],
+        //     organization: selected.value,
+        //     // loginType: 1,
+        //     ...form,
+        // }]);
+        // if (result) {
+        //     const list = await getList();
+        //     console.log(list);
+        // }
+        changeStep();
     }
 
     const getList = async () => {
@@ -97,6 +109,7 @@ function MyData() {
             changeDetailInfo={changeDetailInfo}
             handleClickOk={handleClickOk}
         />,
+        <AssetSelect selected={selected} />
     ];
 
     return (

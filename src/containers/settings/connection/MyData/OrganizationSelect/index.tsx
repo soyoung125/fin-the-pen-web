@@ -1,12 +1,13 @@
 import { Box, Button, Tab, Tabs, Grid } from "@mui/material";
 import { BANK_ORGANIZATION, CARD_ORGANIZATION } from "../../../../../domain/constants/organizations";
 import CustomListItem from "./CustomListItem";
+import { OrganizationInterface } from "@type/common";
 
 interface OrganizationSelectProps {
     value: number,
-    selected: { name: string, value: string, icon: string },
+    selected: OrganizationInterface,
     handleChangeType: (event: React.SyntheticEvent, newValue: number) => void,
-    handleSelectOrganization: (org: { name: string, value: string, icon: string }) => void,
+    handleSelectOrganization: (org: OrganizationInterface) => void,
     changeStep: () => void,
 }
 

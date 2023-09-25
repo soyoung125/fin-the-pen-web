@@ -3,9 +3,10 @@ import {
 } from '@mui/material';
 import RoundedPaper from "../../../../components/common/RoundedPaper";
 import styled from 'styled-components';
+import { OrganizationInterface } from '@type/common';
 
 interface AccountInputProps {
-    selected: { name: string, value: string, icon: string },
+    selected: OrganizationInterface,
     form: { id: string, password: string },
     changeDetailInfo: (state: React.ChangeEvent<HTMLInputElement>) => void,
     handleClickOk: () => void,
