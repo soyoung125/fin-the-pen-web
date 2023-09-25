@@ -159,8 +159,8 @@ export const fetchGetAccountList = async (organization: string) => {
       LOCAL_STORAGE_KEY_SERVER,
       "real"
     );
-    const response = await axios.get<any>(`/${url[server]}/codef/company-account-list`, {
-      params: { organization },
+    const response = await axios.post<any>(`${url[server]}/codef/accountList`, {
+      organization,
     });
     const result = response.data;
     return result;
@@ -175,7 +175,7 @@ export const fetchGetCardList = async (organization: string) => {
       LOCAL_STORAGE_KEY_SERVER,
       "real"
     );
-    const response = await axios.get<any>(`/${url[server]}/codef/card/account/card-list`, {
+    const response = await axios.get<any>(`${url[server]}/codef/card/account/card-list`, {
       params: { organization },
     });
     const result = response.data;

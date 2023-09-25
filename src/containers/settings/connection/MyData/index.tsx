@@ -50,16 +50,16 @@ function MyData() {
         //         console.log(list);
         //     }
         // }
-        // const result = await fetchCreateAccount([{
-        //     businessType: businessType[value],
-        //     organization: selected.value,
-        //     // loginType: 1,
-        //     ...form,
-        // }]);
-        // if (result) {
-        //     const list = await getList();
-        //     console.log(list);
-        // }
+        const result = await fetchCreateAccount([{
+            businessType: businessType[value],
+            organization: selected.value,
+            // loginType: 1,
+            ...form,
+        }]);
+        if (result) {
+            const list = await getList();
+            console.log(list);
+        }
         changeStep();
     }
 
@@ -68,10 +68,10 @@ function MyData() {
         switch (businessType[value]) {
             case 'BK':
                 result = await fetchGetAccountList(selected.value);
-                break;
+                return result.data;
             case 'CD':
                 result = await fetchGetCardList(selected.value);
-                break;
+                return result.data;
             case 'ST':
                 break;
             case 'IS':
