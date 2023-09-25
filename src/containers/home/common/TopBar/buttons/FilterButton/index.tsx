@@ -12,7 +12,6 @@ import {
 import React, { useEffect, useState } from "react";
 import FilterAltOutlinedIcon from "@mui/icons-material/FilterAltOutlined";
 import { useSelector } from "react-redux";
-import ClearIcon from "@mui/icons-material/Clear";
 import moment from "moment";
 import FilterAccordion from "./inputs/FilterAccordion";
 import {
@@ -31,6 +30,7 @@ import { EXPENDITURE, FIXED } from "../../../../../../constants/categories";
 import AlertModal from "../../../../../../components/common/AlertModal";
 import { useAppDispatch } from "../../../../../../app/redux/hooks";
 import useModal from "../../../../../../hooks/useModal";
+import ResetButton from "@components/common/ResetButton";
 
 function FilterButton() {
   const dispatch = useAppDispatch();
@@ -157,7 +157,7 @@ function FilterButton() {
             alignItems="center"
             justifyContent="space-between"
           >
-            <Button onClick={() => changeAlertMode("reset")}>초기화</Button>
+            <ResetButton handleClick={() => changeAlertMode("reset")} />
             <Typography variant="h5" sx={{ fontWeight: "bold" }}>
               필터 설정
             </Typography>

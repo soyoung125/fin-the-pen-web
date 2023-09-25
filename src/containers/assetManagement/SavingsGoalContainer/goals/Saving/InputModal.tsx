@@ -2,7 +2,6 @@ import {
   Box, Button, Divider, IconButton, Stack, TextField, Typography, FormControl, OutlinedInput, InputAdornment,
 } from '@mui/material';
 import ClearIcon from '@mui/icons-material/Clear';
-import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 import { useSelector } from 'react-redux';
 import { useEffect, useState } from 'react';
 import AlertModal from '../../../../../components/common/AlertModal';
@@ -10,6 +9,7 @@ import { selectSavingGoal, setSavingGoal } from '../../../../../app/redux/slices
 import { useAppDispatch } from '../../../../../app/redux/hooks';
 import useModal from '../../../../../hooks/useModal';
 import SwitchButton from '../../../../../components/common/SwitchButton';
+import ResetButton from '@components/common/ResetButton';
 
 interface InputModalProps {
   closeSavingGoalModal: () => void,
@@ -60,12 +60,7 @@ function InputModal({
   return (
     <Stack p={2} spacing={1}>
       <Stack direction="row" alignItems="center" justifyContent="space-between">
-        <IconButton
-          onClick={openAlertModal}
-          color="error"
-        >
-          <DeleteForeverIcon />
-        </IconButton>
+        <ResetButton handleClick={openAlertModal} />
         <Typography variant="h6" sx={{ fontWeight: 'bold' }}>저축 목표 설정</Typography>
         <IconButton onClick={() => closeSavingGoalModal()}>
           <ClearIcon />
