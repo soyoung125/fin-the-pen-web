@@ -11,7 +11,6 @@ import {
   Typography,
 } from "@mui/material";
 import ClearIcon from "@mui/icons-material/Clear";
-import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { SOMETHING_IS_WRONG } from "../../../../../constants/messages";
@@ -23,6 +22,7 @@ import AlertModal from "../../../../../components/common/AlertModal";
 import { useAppDispatch } from "../../../../../app/redux/hooks";
 import useModal from "../../../../../hooks/useModal";
 import SwitchButton from "../../../../../components/common/SwitchButton";
+import ResetButton from "@components/common/ResetButton";
 
 interface InputModalProps {
   setPersonalGoalModalOpen: React.Dispatch<React.SetStateAction<boolean>>;
@@ -80,10 +80,8 @@ function InputModal({ setPersonalGoalModalOpen }: InputModalProps) {
   return (
     <Stack p={2} spacing={1}>
       <Stack direction="row" alignItems="center" justifyContent="space-between">
-        <IconButton onClick={openAlertModal} color="error">
-          <DeleteForeverIcon />
-        </IconButton>
-        <Typography variant="h5" sx={{ fontWeight: "bold" }}>
+        <ResetButton handleClick={openAlertModal} />
+        <Typography variant="h6" sx={{ fontWeight: "bold" }}>
           Personal Goal
         </Typography>
         <IconButton onClick={() => setPersonalGoalModalOpen(false)}>

@@ -1,7 +1,6 @@
 import {
-  Box, Button, IconButton, Stack,
+  Box, Button, Stack,
 } from '@mui/material';
-import RefreshIcon from '@mui/icons-material/Refresh';
 import moment from 'moment';
 import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
@@ -19,6 +18,7 @@ import InputModal from './MonthlyGoal/InputModal';
 import RoundedPaper from '../../../components/common/RoundedPaper';
 import { useAppDispatch } from '../../../app/redux/hooks';
 import { AssetsByCategoryInterface } from '../../../types/common';
+import ResetButton from '@components/common/ResetButton';
 
 function AssetsByCategory() {
   const dispatch = useAppDispatch();
@@ -93,9 +93,7 @@ function AssetsByCategory() {
         </Stack>
 
         <Stack direction="row" justifyContent="space-between" mt={1}>
-          <IconButton color="primary" onClick={() => setAlertModalOpen('reset')} sx={{ p: 0 }}>
-            <RefreshIcon fontSize="small" />
-          </IconButton>
+          <ResetButton handleClick={() => setAlertModalOpen("reset")} />
           <Button variant="contained" size="small">추천 금액 불러오기</Button>
         </Stack>
 
