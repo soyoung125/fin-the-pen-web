@@ -16,7 +16,7 @@ import MyData from "../../containers/settings/connection/MyData";
 const HOME_ROUTES: RouterDOM[] = [
   {
     path: PATH.home,
-    element: <Home />,
+    element: <Home />, // <Main />
   },
   {
     path: PATH.signIn,

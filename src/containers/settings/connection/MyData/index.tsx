@@ -1,28 +1,33 @@
 import {
-    Box, Paper, Stack,
+    Box, Button, Stack,
 } from '@mui/material';
-import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight';
+import AddRoundedIcon from '@mui/icons-material/AddRounded';
 import { useState } from 'react';
 import { useAppSelector } from '../../../../app/redux/hooks';
 import { selectGuestMode } from '../../../../app/redux/slices/commonSlice';
-import { fetchCreateAccount } from '../../../../app/api/API';
+import { fetchCreateAccount, fetchGetAccountList, fetchGetCardList, fetchGetTransavrionList } from '../../../../app/api/API';
 import OrganizationSelect from './OrganizationSelect';
 import AccountInput from './AccountInput';
+import RoundedPaper from '@components/common/RoundedPaper';
+import AssetSelect from './AssetSelect';
+import AssetFilter from './AssetFilter';
+import moment from 'moment';
 
 function MyData() {
     const businessType = ['BK', 'CD', 'ST', 'IS'];
     const guestMode = useAppSelector(selectGuestMode);
     const [step, setStep] = useState(0);
     const [value, setValue] = useState(0);
-    const [selected, setSelected] = useState({name: '', value: ''});
-    const [form, setForm] = useState({id: '', password: ''});
+    const [selected, setSelected] = useState({ name: '', value: '', icon: '' });
+    const [form, setForm] = useState({ id: '', password: '' });
+    const [selectedAccount, setSelectedAccount] = useState({ name: '', account: '', startDate: moment().format('YYYY/MM/DD'), endDate: '', orderBy: "0" })
 
     const handleChangeType = (event: React.SyntheticEvent, newValue: number) => {
         setValue(newValue);
-        setSelected({name: '', value: ''});
+        setSelected({ name: '', value: '', icon: '' });
     };
 
-    const handleSelectOrganization = (org: {name: string, value: string}) => {
+    const handleSelectOrganization = (org: { name: string, value: string, icon: string }) => {
         setSelected(org);
     }
 
@@ -32,6 +37,17 @@ function MyData() {
 
     const changeStep = () => setStep(step + 1);
 
+    const handleSelectAccount = (name: string, account: string) => {
+        setSelectedAccount({ ...selectedAccount, name: name, account: account });
+        changeStep()
+    }
+
+    const handleClickSerch = async () => {
+        // const result = await fetchGetTransavrionList(selectedAccount);
+        console.log('ok');
+        setStep(0);
+    }
+
     const handleClickOk = async () => {
         // if (guestMode) {
         //     alert('게스트 모드입니다.')
@@ -39,9 +55,13 @@ function MyData() {
         //     const result = await fetchCreateAccount([{
         //         businessType: businessType[value],
         //         organization: selected.value,
+        //         // loginType: 1,
         //         ...form,
         //     }]);
-        //     console.log(result);
+        //     if (result.data) {
+        //         const list = await getList();
+        //         console.log(list);
+        //     }
         // }
         const result = await fetchCreateAccount([{
             businessType: businessType[value],
@@ -49,16 +69,42 @@ function MyData() {
             // loginType: 1,
             ...form,
         }]);
-        console.log(result);
+        if (result) {
+            const list = await getList();
+            console.log(list);
+        }
+        changeStep();
+    }
+
+    const getList = async () => {
+        let result = [];
+        switch (businessType[value]) {
+            case 'BK':
+                result = await fetchGetAccountList(selected.value);
+                return result.data;
+            case 'CD':
+                result = await fetchGetCardList(selected.value);
+                return result.data;
+            case 'ST':
+                break;
+            case 'IS':
+                break;
+        }
     }
 
     const steps = [
-        <Paper sx={{ padding: 2 }} onClick={changeStep}>
-            <Stack direction="row" justifyContent="space-between">
-                <Box>My 자산 연결하기</Box>
-                <KeyboardArrowRightIcon />
+        <RoundedPaper my={0}>
+            <Stack sx={{ height: '320px' }} alignItems="center" justifyContent="center" spacing={1}>
+                <Box>연결된 자산이 없어요.</Box>
+                <Button
+                    sx={{ borderRadius: '50px' }}
+                    size="large"
+                    variant="contained"
+                    endIcon={<AddRoundedIcon />}
+                    onClick={changeStep}
+                >MY 자산 연결하기</Button>
             </Stack>
-        </Paper>,
+        </RoundedPaper>,
         <OrganizationSelect
             value={value}
             selected={selected}
@@ -72,6 +118,8 @@ function MyData() {
             changeDetailInfo={changeDetailInfo}
             handleClickOk={handleClickOk}
         />,
+        <AssetSelect selected={selected} handleSelectAccount={handleSelectAccount} />,
+        <AssetFilter selected={selected} selectedAccount={selectedAccount} handleClickSerch={handleClickSerch} />
     ];
 
     return (
