@@ -9,7 +9,8 @@ import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import AddRoundedIcon from '@mui/icons-material/AddRounded';
 
 interface AssetSelectProps {
-    selected: OrganizationInterface
+    selected: OrganizationInterface;
+    handleSelectAccount: (name: string, account: string) => void;
 }
 
 const Img = styled('img')({
@@ -21,7 +22,7 @@ const Img = styled('img')({
     height: '60px',
 });
 
-function AssetSelect({ selected }: AssetSelectProps) {
+function AssetSelect({ selected, handleSelectAccount }: AssetSelectProps) {
 
     return (
         <>
@@ -41,10 +42,11 @@ function AssetSelect({ selected }: AssetSelectProps) {
                 <ListItem
                     sx={{ borderBottom: '1px solid var(--gray-scale-005, #F7F7F8)' }}
                     secondaryAction={
-                        <IconButton edge="end" aria-label="delete">
+                        <IconButton edge="end" aria-label="delete" onClick={(e) => e.preventDefault()}>
                           <ArrowForwardIosIcon />
                         </IconButton>
                       }
+                    onClick={() => handleSelectAccount('name1', 'account1')}
                 >
                     <ListItemText
                         primary="account name"
@@ -55,10 +57,11 @@ function AssetSelect({ selected }: AssetSelectProps) {
                 <ListItem
                     sx={{ borderBottom: '1px solid var(--gray-scale-005, #F7F7F8)' }}
                     secondaryAction={
-                        <IconButton edge="end" aria-label="delete">
+                        <IconButton edge="end" aria-label="delete" onClick={(e) => e.preventDefault()}>
                           <ArrowForwardIosIcon />
                         </IconButton>
                       }
+                    onClick={() => handleSelectAccount('name2', 'account2')}
                 >
                     <ListItemText
                         primary="account name"

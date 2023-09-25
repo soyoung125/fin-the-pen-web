@@ -6,11 +6,13 @@ import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight';
 import { useState } from 'react';
 import { useAppSelector } from '../../../../app/redux/hooks';
 import { selectGuestMode } from '../../../../app/redux/slices/commonSlice';
-import { fetchCreateAccount, fetchGetAccountList, fetchGetCardList } from '../../../../app/api/API';
+import { fetchCreateAccount, fetchGetAccountList, fetchGetCardList, fetchGetTransavrionList } from '../../../../app/api/API';
 import OrganizationSelect from './OrganizationSelect';
 import AccountInput from './AccountInput';
 import RoundedPaper from '@components/common/RoundedPaper';
 import AssetSelect from './AssetSelect';
+import AssetFilter from './AssetFilter';
+import moment from 'moment';
 
 function MyData() {
     const businessType = ['BK', 'CD', 'ST', 'IS'];
@@ -19,6 +21,7 @@ function MyData() {
     const [value, setValue] = useState(0);
     const [selected, setSelected] = useState({name: '', value: '', icon: ''});
     const [form, setForm] = useState({id: '', password: ''});
+    const [selectedAccount, setSelectedAccount] = useState({ name: '', account: '', startDate: moment().format('YYYY/MM/DD'), endDate: '', orderBy: "0" })
 
     const handleChangeType = (event: React.SyntheticEvent, newValue: number) => {
         setValue(newValue);
@@ -34,6 +37,17 @@ function MyData() {
     };
 
     const changeStep = () => setStep(step + 1);
+
+    const handleSelectAccount = (name: string, account: string) => {
+        setSelectedAccount({...selectedAccount, name: name, account: account});
+        changeStep()
+    }
+
+    const handleClickSerch = async () => {
+        // const result = await fetchGetTransavrionList(selectedAccount);
+        console.log('ok');
+        setStep(0);
+    }
 
     const handleClickOk = async () => {
         // if (guestMode) {
@@ -109,7 +123,8 @@ function MyData() {
             changeDetailInfo={changeDetailInfo}
             handleClickOk={handleClickOk}
         />,
-        <AssetSelect selected={selected} />
+        <AssetSelect selected={selected} handleSelectAccount={handleSelectAccount} />,
+        <AssetFilter selected={selected} selectedAccount={selectedAccount} handleClickSerch={handleClickSerch} />
     ];
 
     return (
