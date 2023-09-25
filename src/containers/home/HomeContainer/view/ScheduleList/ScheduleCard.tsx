@@ -1,7 +1,6 @@
 import {
   Box,
   Button,
-  ButtonBase,
   CardActionArea,
   Divider,
   Stack,
@@ -9,21 +8,22 @@ import {
 } from "@mui/material";
 import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
 import SettingsIcon from "@mui/icons-material/Settings";
-import LockIcon from '@mui/icons-material/Lock';
+import LockIcon from "@mui/icons-material/Lock";
 import { grey } from "@mui/material/colors";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { deleteSelectedSchedule } from "../../../../../domain/tools";
-import { selectGuestMode, setBottomDrawerOpenFalse } from "../../../../../app/redux/slices/commonSlice";
+import { deleteSelectedSchedule } from "@utils/tools.ts";
+import { selectGuestMode } from "@redux/slices/commonSlice.tsx";
 import CategoryTypeBadge from "../../../../../components/common/CategoryTypeBadge";
-import { Schedule } from "../../../../../types/schedule";
-import { Category } from "../../../../../domain/constants/categories";
-import { useAppDispatch, useAppSelector } from "../../../../../app/redux/hooks";
-import { useState } from "react";
-import { modifySchedule } from "../../../../../app/redux/slices/scheduleSlice";
-import { NOT_AVAILABLE } from "../../../../../domain/constants/messages";
-import { selectIsBudgetHidden } from "../../../../../app/redux/slices/settingSlice";
+import { Schedule } from "@type/schedule.tsx";
+import { Category } from "../../../../../constants/categories.tsx";
+import { useAppDispatch, useAppSelector } from "@redux/hooks.ts";
+import { modifySchedule } from "@redux/slices/scheduleSlice.tsx";
+import { NOT_AVAILABLE } from "../../../../../constants/messages.tsx";
+import { selectIsBudgetHidden } from "@redux/slices/settingSlice.ts";
 import useModal from "../../../../../hooks/useModal";
 import AlertModal from "../../../../../components/common/AlertModal";
+import { useRecoilValue } from "recoil";
+import { bottomDrawerOpenRepository } from "@recoil/bottomDrawer.ts";
 
 interface ScheduleCardProps {
   schedule: Schedule;
@@ -32,37 +32,49 @@ interface ScheduleCardProps {
   openAuthenticationPage: () => void;
 }
 
-function ScheduleCard({ schedule, handleModal, category, openAuthenticationPage }: ScheduleCardProps) {
+function ScheduleCard({
+  schedule,
+  handleModal,
+  category,
+  openAuthenticationPage,
+}: ScheduleCardProps) {
   const dispatch = useAppDispatch();
   const guestMode = useAppSelector(selectGuestMode);
   const recommendedSpendingAmount = 50000;
   const isHideBudgetMode = useAppSelector(selectIsBudgetHidden);
-  const isSpend = schedule.type === '-';
-  const isSameWithRecomend = +schedule.expected_spending === recommendedSpendingAmount;
-  const color = isSpend ? '#5AC8FA' : '#FA5A5A';
+  const isSpend = schedule.type === "-";
+  const isSameWithRecommend =
+    +schedule.expected_spending === recommendedSpendingAmount;
+  const color = isSpend ? "#5AC8FA" : "#FA5A5A";
+  const { closeBottomDrawer } = useRecoilValue(bottomDrawerOpenRepository);
 
   const {
     modalOpen: alertModalOpen,
     openModal: openAlertModal,
-    closeModal: closeAlertModal
+    closeModal: closeAlertModal,
   } = useModal();
 
   const handleClose = () => {
-    dispatch(setBottomDrawerOpenFalse());
+    closeBottomDrawer();
   };
 
   const handleModifyModal = () => {
-    if(!isHideBudgetMode) {
-      handleModal(schedule)
+    if (!isHideBudgetMode) {
+      handleModal(schedule);
     }
-  }
+  };
 
   const handleModify = async () => {
     /**
      * 함수 완성되면 그 때 외부 모듈로 분리하겠습니다.
      */
     if (guestMode) {
-      dispatch(modifySchedule({ ...schedule, expected_spending: recommendedSpendingAmount }));
+      dispatch(
+        modifySchedule({
+          ...schedule,
+          expected_spending: recommendedSpendingAmount,
+        })
+      );
       handleClose();
     } else {
       alert(NOT_AVAILABLE);
@@ -94,23 +106,28 @@ function ScheduleCard({ schedule, handleModal, category, openAuthenticationPage 
                   <CategoryTypeBadge color={category.color} mr={2} />
                   <Typography variant="caption">{`${schedule.start_time} - ${schedule.end_time}`}</Typography>
                 </Stack>
-                {!isHideBudgetMode && isSpend && !isSameWithRecomend && <Box
-                  sx={{
-                    backgroundColor: "primary.main",
-                    color: "#FFFFFF",
-                    p: 1,
-                    fontSize: "10px",
-                    borderRadius: "10px",
-                    textAlign: "end",
-                  }}
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    console.log("소비추천금액 적용하기");
-                    handleModify();
-                  }}
-                >
-                  <Box>소비추천금액 {recommendedSpendingAmount.toLocaleString('ko-KR')}원</Box>
-                </Box>}
+                {!isHideBudgetMode && isSpend && !isSameWithRecommend && (
+                  <Box
+                    sx={{
+                      backgroundColor: "primary.main",
+                      color: "#FFFFFF",
+                      p: 1,
+                      fontSize: "10px",
+                      borderRadius: "10px",
+                      textAlign: "end",
+                    }}
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      console.log("소비추천금액 적용하기");
+                      handleModify();
+                    }}
+                  >
+                    <Box>
+                      소비추천금액{" "}
+                      {recommendedSpendingAmount.toLocaleString("ko-KR")}원
+                    </Box>
+                  </Box>
+                )}
               </Stack>
               <Stack
                 direction="row"
@@ -123,12 +140,12 @@ function ScheduleCard({ schedule, handleModal, category, openAuthenticationPage 
                 </Typography>
 
                 {/* 색상은 실제 소비 내역 데이터 연동 후 바꿀 예정 */}
-                {isHideBudgetMode ?
+                {isHideBudgetMode ? (
                   <Box
                     sx={{
                       p: 0.5,
-                      position: 'relative',
-                      overflow: 'visible',
+                      position: "relative",
+                      overflow: "visible",
                       borderRadius: 5,
                     }}
                     onClick={(e) => {
@@ -138,23 +155,28 @@ function ScheduleCard({ schedule, handleModal, category, openAuthenticationPage 
                   >
                     <Box
                       sx={{
-                        width: '100%',
-                        height: '100%',
-                        position: 'absolute',
+                        width: "100%",
+                        height: "100%",
+                        position: "absolute",
                         top: 0,
                         left: 0,
                         zIndex: -1,
-                        filter: 'blur(10px)',
-                        backgroundColor: 'primary.main',
-                      }} />
-                      <LockIcon />
+                        filter: "blur(10px)",
+                        backgroundColor: "primary.main",
+                      }}
+                    />
+                    <LockIcon />
                   </Box>
-                  : <Typography sx={{ color: isSameWithRecomend ? color : grey[500] }}>
-                  {`${schedule.type}${parseInt(
-                    schedule.expected_spending,
-                    10
-                  ).toLocaleString("ko-KR")}`}
-                </Typography>}
+                ) : (
+                  <Typography
+                    sx={{ color: isSameWithRecommend ? color : grey[500] }}
+                  >
+                    {`${schedule.type}${parseInt(
+                      schedule.expected_spending,
+                      10
+                    ).toLocaleString("ko-KR")}`}
+                  </Typography>
+                )}
               </Stack>
             </Box>
           </CardActionArea>
@@ -174,7 +196,7 @@ function ScheduleCard({ schedule, handleModal, category, openAuthenticationPage 
         handleClickYes={() => {
           openAuthenticationPage();
           closeAlertModal();
-        } }
+        }}
         mode="hideBudget"
       />
     </>

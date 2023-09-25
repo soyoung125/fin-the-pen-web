@@ -1,18 +1,20 @@
 /* eslint-disable max-len */
-import { Alert, Box } from '@mui/material';
-import { useEffect, useState } from 'react';
-import { useSelector } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
-import AnalysisGraph from './AnalysisGraph';
-import AnalysisList from './analysisList/AnalysisList';
-import PATH from '../../../domain/constants/path';
-import useHeader from '../../../hooks/useHeader';
+import { Alert, Box } from "@mui/material";
+import { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import AnalysisGraph from "./AnalysisGraph";
+import AnalysisList from "./analysisList/AnalysisList";
+import PATH from "../../../constants/path";
+import useHeader from "../../../hooks/useHeader";
 import {
-  selectAnalyzedData, selectDate, updateAnalyzedData
-} from '../../../app/redux/slices/scheduleSlice';
-import { AnalysisData } from '../../../types/common';
-import { useAppDispatch } from '../../../app/redux/hooks';
-import { HEADER_MODE } from '../../../domain/constants/common';
+  selectAnalyzedData,
+  selectDate,
+  updateAnalyzedData,
+} from "../../../app/redux/slices/scheduleSlice";
+import { AnalysisData } from "../../../types/common";
+import { useAppDispatch } from "../../../app/redux/hooks";
+import { HEADER_MODE } from "@recoil/header.ts";
 
 function AnalysisContainer() {
   const dispatch = useAppDispatch();
@@ -32,11 +34,11 @@ function AnalysisContainer() {
     };
 
     // 컴포넌트가 마운트될 때 resize 이벤트 리스너 등록
-    window.addEventListener('resize', handleResize);
+    window.addEventListener("resize", handleResize);
 
     // 컴포넌트가 언마운트될 때 resize 이벤트 리스너 제거
     return () => {
-      window.removeEventListener('resize', handleResize);
+      window.removeEventListener("resize", handleResize);
     };
   }, []);
 
@@ -45,7 +47,13 @@ function AnalysisContainer() {
   }, [date]);
 
   const clickListItem = (category: AnalysisData) => {
-    navigate(PATH.analysisDetail, { state: { color: category.color, category: category.label, type: category.nestedType } });
+    navigate(PATH.analysisDetail, {
+      state: {
+        color: category.color,
+        category: category.label,
+        type: category.nestedType,
+      },
+    });
   };
 
   const hexToRGB = (hex: string, alpha: number) => {
@@ -59,17 +67,30 @@ function AnalysisContainer() {
     return `rgb(${r}, ${g}, ${b})`;
   };
 
-  return (
-    total > 0 ? (
-      <>
-        <Box sx={{ width: '100vw', height: `calc(100vw - ${widthRatio}px)`, paddingX: 1 }}>
-          <AnalysisGraph data={data} total={total} widthRatio={widthRatio} />
-        </Box>
-        <AnalysisList data={data} clickListItem={clickListItem} hexToRGB={hexToRGB} />
-      </>
-    ) : <Alert sx={{ margin: 2 }} severity="info">이체/지출 데이터가 존재하지 않습니다.</Alert>
+  return total > 0 ? (
+    <>
+      <Box
+        sx={{
+          width: "100vw",
+          height: `calc(100vw - ${widthRatio}px)`,
+          paddingX: 1,
+        }}
+      >
+        <AnalysisGraph data={data} total={total} widthRatio={widthRatio} />
+      </Box>
+      <AnalysisList
+        data={data}
+        clickListItem={clickListItem}
+        hexToRGB={hexToRGB}
+      />
+    </>
+  ) : (
+    <Alert sx={{ margin: 2 }} severity="info">
+      이체/지출 데이터가 존재하지 않습니다.
+    </Alert>
   );
 }
+
 export default AnalysisContainer;
 /**
  * 분석 페이지

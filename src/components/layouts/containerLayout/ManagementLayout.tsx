@@ -2,13 +2,13 @@
 import { Box, Typography } from "@mui/material";
 import { Outlet, useLocation, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
-import assetManagements from "../../../domain/constants/managements";
+import assetManagements from "../../../constants/managements";
 import SwitchingHeader from "../../common/SwitchingHeader";
 import EasyAuthentication from "../../../containers/sign/EasyAuthentication";
-import useHeader from "../../../hooks/useHeader";
-import { HEADER_MODE } from "../../../domain/constants/common";
 import { useRecoilValue } from "recoil";
-import { isAuthenticatedState } from "../../../app/recoil/isAuthenticated.ts";
+import { isAuthenticatedState } from "@recoil/isAuthenticated.ts";
+import { HEADER_MODE } from "@recoil/header.ts";
+import useHeader from "@hooks/useHeader.tsx";
 
 function ManagementLayout() {
   const location = useLocation();

@@ -7,25 +7,25 @@ import {
   selectDate,
   selectViewMode,
 } from "../../app/redux/slices/scheduleSlice";
-import { selectUser } from "../../app/redux/slices/userSlice";
 import { selectGuestMode } from "../../app/redux/slices/commonSlice";
 import useHeader from "../../hooks/useHeader";
-import { HEADER_MODE } from "../../domain/constants/common";
 import ConsumptionAlert from "../../containers/home/HomeContainer/layout/ConsumptionAlert";
 import ScheduleViewMode from "../../containers/home/HomeContainer/layout/ScheduleViewMode";
 import ScheduleView from "../../containers/home/ScheduleView";
 import AssetView from "../../containers/home/AssetView";
-import { VIEW_MODE } from "../../domain/constants/schedule";
+import { VIEW_MODE } from "../../constants/schedule";
 import { useAppDispatch, useAppSelector } from "../../app/redux/hooks";
 import { selectIsBudgetHidden } from "../../app/redux/slices/settingSlice";
 import { useRecoilValue } from "recoil";
 import { isAuthenticatedRepository } from "../../app/recoil/isAuthenticated.ts";
+import { HEADER_MODE } from "@recoil/header.ts";
+import { userState } from "@recoil/user.ts";
 
 function Home() {
   const dispatch = useAppDispatch();
   const viewMode = useAppSelector(selectViewMode);
   const date = useAppSelector(selectDate);
-  const user = useAppSelector(selectUser);
+  const user = useRecoilValue(userState);
   const guestMode = useAppSelector(selectGuestMode);
   const isHideBudgetMode = useAppSelector(selectIsBudgetHidden);
   const { setIsAuthenticatedFalse } = useRecoilValue(isAuthenticatedRepository);
@@ -53,6 +53,7 @@ function Home() {
 
   useEffect(() => {
     // 게스트 모드가 아닌 경우에만 서버에 데이터를 요청
+    // TODO: 게스트 모드에서도 서버에 데이터를 요청하도록 수정예정
     if (user && !guestMode) {
       getSchedules();
     }

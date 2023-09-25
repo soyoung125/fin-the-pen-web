@@ -4,14 +4,12 @@ import { Box, TextField } from "@mui/material";
 import { StaticDatePicker } from "@mui/x-date-pickers";
 import { AdapterMoment } from "@mui/x-date-pickers/AdapterMoment";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
-import {
-  PickersDay,
-} from "@mui/x-date-pickers/PickersDay/PickersDay";
+import { PickersDay } from "@mui/x-date-pickers/PickersDay/PickersDay";
 import moment from "moment";
 import { useEffect } from "react";
 import { useSelector } from "react-redux";
 import { grey, lightBlue, pink } from "@mui/material/colors";
-import { CATEGORIES } from "../../../../../domain/constants/categories";
+import { CATEGORIES } from "../../../../../constants/categories";
 import {
   selectDate,
   selectedDate,
@@ -22,7 +20,7 @@ import MarkerStack from "./boxes/scheduleMarker/MarkerStack";
 import "moment/locale/ko";
 import CalenderBox from "./boxes/CalenderBox";
 import IncomeExpenditureBox from "./boxes/IncomeExpenditureBox";
-import { calculateIncomeExpenditure } from "../../../../../domain/tools";
+import { calculateIncomeExpenditure } from "@utils/tools.ts";
 import { makeMarkerData } from "./domain/calender";
 import WeeklyStatement from "./boxes/WeeklyStatement";
 import { selectIsDarkMode } from "../../../../../app/redux/slices/settingSlice";
@@ -80,7 +78,9 @@ function Calender({ dateHeight }: CalenderProps) {
     );
 
     if (fixedWithdrawal.length > 0) {
-      const borderColor = Array.from(new Set(fixedWithdrawal.map((f) => f.category.color))).sort((a, b) => a > b ? 1 : -1);
+      const borderColor = Array.from(
+        new Set(fixedWithdrawal.map((f) => f.category.color))
+      ).sort((a, b) => (a > b ? 1 : -1));
       if (nonFixedWithdrwal.length > 0) {
         const categoryForMarker = makeMarkerData(daySchedules, isDarkMode);
         return (

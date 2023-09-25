@@ -5,17 +5,16 @@ import moment from "moment/moment";
 import { useEffect } from "react";
 import ScheduleStatusCard from "../../components/assetManagement/ScheduleStatusCard";
 import SettingsPaper from "../../components/assetManagement/SettingsPaper";
-import { selectUser } from "../../app/redux/slices/userSlice";
 import useSchedule from "../../hooks/useSchedule";
-import { useAppSelector } from "../../app/redux/hooks";
 import useHeader from "../../hooks/useHeader";
-import { HEADER_MODE } from "../../domain/constants/common";
 import { useRecoilValue } from "recoil";
 import { isAuthenticatedRepository } from "../../app/recoil/isAuthenticated.ts";
+import { HEADER_MODE } from "@recoil/header.ts";
+import { userState } from "@recoil/user.ts";
 
 function AssetManagement() {
   const { schedules } = useSchedule();
-  const user = useAppSelector(selectUser);
+  const user = useRecoilValue(userState);
   const today = moment();
   const { setIsAuthenticatedFalse } = useRecoilValue(isAuthenticatedRepository);
 

@@ -5,12 +5,13 @@ import { RouterProvider } from "react-router-dom";
 import { Provider } from "react-redux";
 import { PersistGate } from "redux-persist/integration/react";
 import { persistStore } from "redux-persist";
-import { store } from "./app/redux/store";
+import { store } from "@redux/store.ts";
 import CustomThemeProvider from "./components/providers/CustomThemeProvider";
 import router from "./app/router";
 import { worker } from "./mocks/browser";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { RecoilRoot } from "recoil";
+import './configs/recoil';
 
 const queryClient = new QueryClient();
 

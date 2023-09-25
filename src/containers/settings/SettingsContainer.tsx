@@ -1,23 +1,21 @@
-import { Button, Divider, Typography } from "@mui/material";
+import { Divider, Typography } from "@mui/material";
 import { useEffect } from "react";
 import AppLocker from "./display/AppLocker";
 import Budget from "./display/Budget";
 import ThemeMode from "./display/ThemeMode";
-import Schedule from "./schedule/Schedule";
 import Version from "./version/Version";
 import Accordion from "../../components/common/accordions/Accordion";
 import AccordionSummary from "../../components/common/accordions/AccordionSummary";
 import AccordionDetails from "../../components/common/accordions/AccordionDetails";
-import Change from "./version/Change";
-import { useAppDispatch, useAppSelector } from "../../app/redux/hooks";
+import { useAppSelector } from "../../app/redux/hooks";
 import { selectIsBudgetHidden } from "../../app/redux/slices/settingSlice";
 import useHeader from "../../hooks/useHeader";
-import { HEADER_MODE } from "../../domain/constants/common";
 import { useNavigate } from "react-router-dom";
-import PATH from "../../domain/constants/path";
+import PATH from "../../constants/path";
 import ClickableListItem from "../../components/settings/ClickableListItem";
 import { useRecoilValue } from "recoil";
 import { isAuthenticatedRepository } from "../../app/recoil/isAuthenticated.ts";
+import { HEADER_MODE } from "@recoil/header.ts";
 
 export default function SettingsContainer() {
   const navigate = useNavigate();

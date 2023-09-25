@@ -1,23 +1,19 @@
-import { Stack } from '@mui/material';
-import NotificationsOutlinedIcon from '@mui/icons-material/NotificationsOutlined';
-import { useNavigate } from 'react-router-dom';
-import LogoButton from '../buttons/LogoButton';
-import RoundedButton from '../../../../../components/common/RoundedButton';
-import PATH from '../../../../../domain/constants/path';
-import PersonalButton from '../buttons/PersonalButton';
-import FilterButton from '../buttons/FilterButton';
-import SearchButton from '../buttons/SearchButton';
+import { Stack } from "@mui/material";
+import NotificationsOutlinedIcon from "@mui/icons-material/NotificationsOutlined";
+import { useNavigate } from "react-router-dom";
+import LogoButton from "../buttons/LogoButton";
+import RoundedButton from "../../../../../components/common/RoundedButton";
+import PATH from "../../../../../constants/path";
+import PersonalButton from "../buttons/PersonalButton";
+import FilterButton from "../buttons/FilterButton";
+import SearchButton from "../buttons/SearchButton";
 
 function HomeMode() {
   const navigate = useNavigate();
   return (
     <>
       {/* 헤더 좌측 메뉴 */}
-      <Stack
-        direction="row"
-        justifyContent="space-between"
-        alignItems="center"
-      >
+      <Stack direction="row" justifyContent="space-between" alignItems="center">
         <LogoButton />
         <FilterButton />
       </Stack>
@@ -30,13 +26,12 @@ function HomeMode() {
       />
 
       {/* 헤더 우측 메뉴 */}
-      <Stack
-        direction="row"
-        justifyContent="space-between"
-        alignItems="center"
-      >
+      <Stack direction="row" justifyContent="space-between" alignItems="center">
         <SearchButton />
-        <RoundedButton value="notification" onClick={() => navigate(PATH.notification)}>
+        <RoundedButton
+          value="notification"
+          onClick={() => navigate(PATH.notification)}
+        >
           <NotificationsOutlinedIcon />
         </RoundedButton>
         <PersonalButton />
