@@ -8,7 +8,7 @@ interface RoundedButtonProps {
 
 function RoundedButton({ children, onClick, value }: RoundedButtonProps) {
   return (
-    <ToggleButton value={value} sx={{ color: 'white', borderRadius: 30, borderWidth: 0 }} onClick={onClick}>
+    <ToggleButton value={value} sx={{ color: 'primary.main', borderRadius: 30, borderWidth: 0 }} onClick={onClick}>
       {children}
     </ToggleButton>
   );

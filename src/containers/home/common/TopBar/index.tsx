@@ -51,7 +51,6 @@ function TopBar() {
         <Paper
           // elevation={10} // shadow 해제함
           sx={{
-            backgroundColor: "primary.main",
             height: 70,
             borderRadius: 0,
           }}
