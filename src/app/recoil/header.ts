@@ -24,6 +24,11 @@ export const headerModeState = atom<HeaderModeType>({
   default: HEADER_MODE.home
 });
 
+export const headerBackActionState = atom<() => void>({
+  key: "headerBackActionState",
+  default: () => {},
+});
+
 export const headerRepository = selector({
   key: "headerRepository",
   get: ({getCallback}) => {
@@ -38,9 +43,14 @@ export const headerRepository = selector({
       set(headerOpenState, false);
     });
 
+    const changeBackAction = getCallback(({set}) => (action: () => void) => {
+      set(headerBackActionState, action);
+    });
+
     return {
       openHeader,
-      closeHeader
+      closeHeader,
+      changeBackAction
     }
   }
 })

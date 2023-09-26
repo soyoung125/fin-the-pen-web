@@ -4,7 +4,7 @@ import BackButton from '../buttons/BackButton';
 import SearchButton from '../buttons/SearchButton';
 import NotificationButton from '../buttons/NotificationButton';
 
-function SearchMode() {
+function SearchMode() {  
   return (
     <>
       {/* 헤더 좌측 메뉴 */}
