@@ -59,7 +59,7 @@ function TopBar() {
             direction="row"
             justifyContent="space-between"
             alignItems="flex-end"
-            sx={{ height: 70 }}
+            sx={{ height: 70, paddingX: '12px' }}
           >
             {headerMode === "home" && <HomeMode />}
             {headerMode === "analysis" && <AnalysisMode />}
