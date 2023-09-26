@@ -1,12 +1,10 @@
 import { Stack } from "@mui/material";
-import NotificationsOutlinedIcon from "@mui/icons-material/NotificationsOutlined";
 import { useNavigate } from "react-router-dom";
 import LogoButton from "../buttons/LogoButton";
-import RoundedButton from "../../../../../components/common/RoundedButton";
-import PATH from "../../../../../constants/path";
 import PersonalButton from "../buttons/PersonalButton";
 import FilterButton from "../buttons/FilterButton";
 import SearchButton from "../buttons/SearchButton";
+import NotificationButton from "../buttons/NotificationButton";
 
 function HomeMode() {
   const navigate = useNavigate();
@@ -27,12 +25,7 @@ function HomeMode() {
 
       {/* 헤더 우측 메뉴 */}
       <Stack direction="row" justifyContent="space-between" alignItems="center">
-        <RoundedButton
-          value="notification"
-          onClick={() => navigate(PATH.notification)}
-        >
-          <NotificationsOutlinedIcon />
-        </RoundedButton>
+        <NotificationButton />
         <PersonalButton />
         <SearchButton />
       </Stack>

@@ -27,6 +27,8 @@ import useSchedule from "../../../../../hooks/useSchedule";
 import { fetchFindSchedules } from "../../../../../app/api/API";
 import { useRecoilValue } from "recoil";
 import { bottomTabMenuRepository } from "@app/recoil/bottomTabMenu";
+import useHeader from "@hooks/useHeader";
+import { HEADER_MODE } from "@app/recoil/header";
 
 function SearchSchedule() {
   const dispatch = useAppDispatch();
@@ -38,6 +40,8 @@ function SearchSchedule() {
 
   const { schedules, selectedSchedule, setSelectedSchedule } = useSchedule();
   const { openBottomBar, closeBottomBar } = useRecoilValue(bottomTabMenuRepository);
+
+  useHeader(true, HEADER_MODE.search);
 
   useEffect(() => {
     closeBottomBar();

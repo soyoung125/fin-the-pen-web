@@ -23,6 +23,8 @@ import {
 } from "../../../../../../../constants/organizations";
 import { useRecoilValue } from "recoil";
 import { bottomTabMenuRepository } from "@app/recoil/bottomTabMenu";
+import useHeader from "@hooks/useHeader";
+import { HEADER_MODE } from "@app/recoil/header";
 
 interface InputFormProps {
   selected: string;
@@ -50,6 +52,8 @@ function InputForm({
 }: InputFormProps) {
   const [isSelectStartDate, setIsSelectStartDate] = useState(false);
   const { openBottomBar, closeBottomBar } = useRecoilValue(bottomTabMenuRepository);
+
+  useHeader(true, HEADER_MODE.search);
 
   useEffect(() => {
     closeBottomBar();
