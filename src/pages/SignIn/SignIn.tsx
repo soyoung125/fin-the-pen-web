@@ -8,12 +8,14 @@ import { useRecoilValue } from "recoil";
 import { userState } from "@recoil/user.ts";
 import { bottomTabMenuRepository } from "@app/recoil/bottomTabMenu.ts";
 import { useEffect } from "react";
+import { HEADER_MODE } from "@app/recoil/header.ts";
 
 function SignIn() {
   const { openBottomBar, closeBottomBar } = useRecoilValue(bottomTabMenuRepository);
   const user = useRecoilValue(userState);
   
   // useHeader(false);
+  useHeader(true, HEADER_MODE.sign);
   
   useEffect(() => {
     closeBottomBar();

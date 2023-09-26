@@ -7,6 +7,9 @@ export const HEADER_MODE = {
   analysis: 'analysis',
   home: 'home',
   settings: 'settings',
+  sign: 'sign',
+  search: 'search',
+  assetManagement: 'assetManagement',
 } as const;
 
 export type HeaderModeType = typeof HEADER_MODE[keyof typeof HEADER_MODE];

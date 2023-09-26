@@ -15,6 +15,7 @@ import SettingsMode from "./headerMode/SettingsMode";
 import { useRecoilValue } from "recoil";
 import { headerModeState, headerOpenState } from "@recoil/header.ts";
 import { userState } from "@recoil/user.ts";
+import SignMode from "./headerMode/SignMode";
 
 function TopBar() {
   const navigate = useNavigate();
@@ -58,6 +59,7 @@ function TopBar() {
             {headerMode === "home" && <HomeMode />}
             {headerMode === "analysis" && <AnalysisMode />}
             {headerMode === "settings" && <SettingsMode />}
+            {headerMode === "sign" && <SignMode />}
           </Stack>
           {popupSetting.isOn && (
             <PopupButton handleClickPopup={handleClickPopup} />
