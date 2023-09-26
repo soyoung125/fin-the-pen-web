@@ -2,7 +2,7 @@ import {
   BottomNavigation,
   BottomNavigationAction,
   Drawer,
-  Paper,
+  Box,
 } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import CalendarMonthIcon from "@mui/icons-material/CalendarMonth";
@@ -56,7 +56,7 @@ function BottomBar() {
 
   return (
     <>
-      <Paper
+      <Box
         sx={{
           position: "fixed",
           bottom: 0,
@@ -65,7 +65,6 @@ function BottomBar() {
           paddingBottom: 1,
           zIndex: 1000,
         }}
-        elevation={3}
       >
         <BottomNavigation
           value={bottomTabMenu}
@@ -102,7 +101,7 @@ function BottomBar() {
             onClick={() => navigate(PATH.settings)}
           />
         </BottomNavigation>
-      </Paper>
+      </Box>
       <Drawer
         open={isBottomDrawerOpen}
         anchor="bottom"
