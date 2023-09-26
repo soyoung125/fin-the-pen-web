@@ -9,8 +9,8 @@ import { useEffect } from "react";
 
 function SignUp() {
   const { openBottomBar, closeBottomBar } = useRecoilValue(bottomTabMenuRepository);
-  
-  useHeader(false);
+
+  // useHeader(false);
   
   useEffect(() => {
     closeBottomBar();
