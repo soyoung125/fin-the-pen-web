@@ -1,4 +1,4 @@
-import { Box, Paper, Stack } from "@mui/material";
+import { Box, Stack } from "@mui/material";
 import { useEffect } from "react";
 import {
   setGuestModeFalse,
@@ -46,15 +46,9 @@ function TopBar() {
   };
 
   return (
-    <Box sx={{ position: "relative", zIndex: 1000 }}>
+    <Box sx={{ position: "relative", height: 70, zIndex: 1000 }}>
       {isHeaderOpen && (
-        <Paper
-          // elevation={10} // shadow 해제함
-          sx={{
-            height: 70,
-            borderRadius: 0,
-          }}
-        >
+        <>
           <Stack
             direction="row"
             justifyContent="space-between"
@@ -68,7 +62,7 @@ function TopBar() {
           {popupSetting.isOn && (
             <PopupButton handleClickPopup={handleClickPopup} />
           )}
-        </Paper>
+        </>
       )}
     </Box>
   );
