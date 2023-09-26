@@ -27,7 +27,6 @@ function HomeMode() {
 
       {/* 헤더 우측 메뉴 */}
       <Stack direction="row" justifyContent="space-between" alignItems="center">
-        <SearchButton />
         <RoundedButton
           value="notification"
           onClick={() => navigate(PATH.notification)}
@@ -35,6 +34,7 @@ function HomeMode() {
           <NotificationsOutlinedIcon />
         </RoundedButton>
         <PersonalButton />
+        <SearchButton />
       </Stack>
     </>
   );
