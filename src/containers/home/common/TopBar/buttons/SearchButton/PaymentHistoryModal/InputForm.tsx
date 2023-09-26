@@ -16,11 +16,13 @@ import CalendarTodayOutlinedIcon from "@mui/icons-material/CalendarTodayOutlined
 import { AdapterMoment } from "@mui/x-date-pickers/AdapterMoment";
 import moment from "moment";
 import { RenderDayFunction } from "../../../../../../../types/common";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {
   BANK_ORGANIZATION,
   CARD_ORGANIZATION,
 } from "../../../../../../../constants/organizations";
+import { useRecoilValue } from "recoil";
+import { bottomTabMenuRepository } from "@app/recoil/bottomTabMenu";
 
 interface InputFormProps {
   selected: string;
@@ -47,6 +49,12 @@ function InputForm({
   changeStartAndEndDate,
 }: InputFormProps) {
   const [isSelectStartDate, setIsSelectStartDate] = useState(false);
+  const { openBottomBar, closeBottomBar } = useRecoilValue(bottomTabMenuRepository);
+
+  useEffect(() => {
+    closeBottomBar();
+    return (() => openBottomBar());
+  }, [])
 
   const organizations =
     selected === "card" ? CARD_ORGANIZATION : BANK_ORGANIZATION;

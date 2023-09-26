@@ -2,7 +2,7 @@ import {
     Box, Button, Stack,
 } from '@mui/material';
 import AddRoundedIcon from '@mui/icons-material/AddRounded';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useAppSelector } from '../../../../app/redux/hooks';
 import { selectGuestMode } from '../../../../app/redux/slices/commonSlice';
 import { fetchCreateAccount, fetchGetAccountList, fetchGetCardList, fetchGetTransavrionList } from '../../../../app/api/API';
@@ -12,6 +12,8 @@ import RoundedPaper from '@components/common/RoundedPaper';
 import AssetSelect from './AssetSelect';
 import AssetFilter from './AssetFilter';
 import moment from 'moment';
+import { useRecoilValue } from 'recoil';
+import { bottomTabMenuRepository } from '@app/recoil/bottomTabMenu';
 
 function MyData() {
     const businessType = ['BK', 'CD', 'ST', 'IS'];
@@ -21,6 +23,12 @@ function MyData() {
     const [selected, setSelected] = useState({ name: '', value: '', icon: '' });
     const [form, setForm] = useState({ id: '', password: '' });
     const [selectedAccount, setSelectedAccount] = useState({ name: '', account: '', startDate: moment().format('YYYY/MM/DD'), endDate: '', orderBy: "0" })
+    const { openBottomBar, closeBottomBar } = useRecoilValue(bottomTabMenuRepository);
+
+    useEffect(() => {
+        closeBottomBar();
+        return (() => openBottomBar());
+    }, [])
 
     const handleChangeType = (event: React.SyntheticEvent, newValue: number) => {
         setValue(newValue);
