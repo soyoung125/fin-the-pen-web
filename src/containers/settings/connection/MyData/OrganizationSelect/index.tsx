@@ -11,6 +11,9 @@ import {
 } from "../../../../../constants/organizations";
 import CustomListItem from "./CustomListItem";
 import { OrganizationInterface } from "@type/common";
+import { useRecoilValue } from "recoil";
+import { headerRepository } from "@app/recoil/header";
+import { useEffect } from "react";
 
 interface OrganizationSelectProps {
   value: number;
@@ -21,6 +24,12 @@ interface OrganizationSelectProps {
 }
 
 function OrganizationSelect({ value, selected, handleChangeType, handleSelectOrganization, changeStep }: OrganizationSelectProps) {
+  const { changeHeaderTitle } = useRecoilValue(headerRepository);
+
+  useEffect(() => {
+    changeHeaderTitle('자산연결');
+  }, [])
+  
   return (
     <>
       <Box sx={{ fontSize: '22px', fontWeight: 700 }}>어떤 자산을 연결하세요?</Box>

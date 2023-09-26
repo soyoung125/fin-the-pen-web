@@ -27,13 +27,14 @@ function MyData() {
     const [form, setForm] = useState({ id: '', password: '' });
     const [selectedAccount, setSelectedAccount] = useState({ name: '', account: '', startDate: moment().format('YYYY/MM/DD'), endDate: '', orderBy: "0" })
     const { openBottomBar, closeBottomBar } = useRecoilValue(bottomTabMenuRepository);
-    const { changeBackAction } = useRecoilValue(headerRepository);
+    const { changeBackAction, changeHeaderTitle } = useRecoilValue(headerRepository);
 
     useEffect(() => {
         if (step === 0) {
-            changeBackAction(() => () => navigation(-1))
+            changeBackAction(() => () => navigation(-1));
+            changeHeaderTitle("마이데이터");
         } else {
-            changeBackAction(() => () => setStep(step - 1))
+            changeBackAction(() => () => setStep(step - 1));
         }
     }, [step])
 

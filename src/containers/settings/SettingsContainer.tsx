@@ -15,7 +15,7 @@ import PATH from "../../constants/path";
 import ClickableListItem from "../../components/settings/ClickableListItem";
 import { useRecoilValue } from "recoil";
 import { isAuthenticatedRepository } from "../../app/recoil/isAuthenticated.ts";
-import { HEADER_MODE } from "@recoil/header.ts";
+import { HEADER_MODE, headerRepository } from "@recoil/header.ts";
 
 export default function SettingsContainer() {
   const navigate = useNavigate();
@@ -23,6 +23,7 @@ export default function SettingsContainer() {
   const userAgent = navigator.userAgent.toLowerCase();
 
   const { setIsAuthenticatedFalse } = useRecoilValue(isAuthenticatedRepository);
+  const { changeHeaderTitle } = useRecoilValue(headerRepository);
 
   useHeader(true, HEADER_MODE.settings);
 
@@ -30,6 +31,7 @@ export default function SettingsContainer() {
     if (isHideBudgetMode) {
       setIsAuthenticatedFalse();
     }
+    changeHeaderTitle('설정');
   }, []);
 
   const clickBank = () => {

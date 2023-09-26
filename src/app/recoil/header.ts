@@ -29,6 +29,11 @@ export const headerBackActionState = atom<() => void>({
   default: () => {},
 });
 
+export const headerTitleState = atom<string>({
+  key: "headerTitleState",
+  default: "",
+});
+
 export const headerRepository = selector({
   key: "headerRepository",
   get: ({getCallback}) => {
@@ -47,10 +52,15 @@ export const headerRepository = selector({
       set(headerBackActionState, action);
     });
 
+    const changeHeaderTitle = getCallback(({set}) => (title: string) => {
+      set(headerTitleState, title);
+    });
+
     return {
       openHeader,
       closeHeader,
-      changeBackAction
+      changeBackAction,
+      changeHeaderTitle
     }
   }
 })
