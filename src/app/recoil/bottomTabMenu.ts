@@ -8,6 +8,11 @@ export const bottomTabMenuState = atom<number>({
   default: 0,
 });
 
+export const bottomBarOpenState = atom<boolean>({
+  key: "bottomBarOpenState",
+  default: true
+});
+
 export const bottomTabMenuRepository = selector({
   key: "bottomTabMenuRepository",
   get: ({ getCallback }) => {
@@ -15,8 +20,18 @@ export const bottomTabMenuRepository = selector({
       set(bottomTabMenuState, newTabNumber);
     });
 
+    const openBottomBar = getCallback(({set}) => () => {
+      set(bottomBarOpenState, true);
+    });
+
+    const closeBottomBar = getCallback(({set}) => () => {
+      set(bottomBarOpenState, false);
+    });
+
     return {
       openBottomTabMenu,
+      openBottomBar,
+      closeBottomBar,
     };
   },
 });

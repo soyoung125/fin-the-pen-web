@@ -7,7 +7,8 @@ function CenterBox({ children }: PropsWithChildren) {
       display="flex"
       justifyContent="center"
       alignItems="center"
-      minHeight="100vh"
+      minHeight="100dvh"
+      zIndex="1000"
     >
       {children}
     </Box>

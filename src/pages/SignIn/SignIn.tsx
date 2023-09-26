@@ -6,11 +6,19 @@ import Footer from "./Footer.tsx";
 import useHeader from "../../hooks/useHeader";
 import { useRecoilValue } from "recoil";
 import { userState } from "@recoil/user.ts";
+import { bottomTabMenuRepository } from "@app/recoil/bottomTabMenu.ts";
+import { useEffect } from "react";
 
 function SignIn() {
-  useHeader(false);
-
+  const { openBottomBar, closeBottomBar } = useRecoilValue(bottomTabMenuRepository);
   const user = useRecoilValue(userState);
+  
+  useHeader(false);
+  
+  useEffect(() => {
+    closeBottomBar();
+    return (() => openBottomBar());
+  }, [])
 
   return (
     <CenterBox>
