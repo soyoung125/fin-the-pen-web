@@ -14,8 +14,11 @@ import AssetFilter from './AssetFilter';
 import moment from 'moment';
 import { useRecoilValue } from 'recoil';
 import { bottomTabMenuRepository } from '@app/recoil/bottomTabMenu';
+import { headerRepository } from '@app/recoil/header';
+import { useNavigate } from 'react-router-dom';
 
 function MyData() {
+    const navigation = useNavigate();
     const businessType = ['BK', 'CD', 'ST', 'IS'];
     const guestMode = useAppSelector(selectGuestMode);
     const [step, setStep] = useState(0);
@@ -24,6 +27,15 @@ function MyData() {
     const [form, setForm] = useState({ id: '', password: '' });
     const [selectedAccount, setSelectedAccount] = useState({ name: '', account: '', startDate: moment().format('YYYY/MM/DD'), endDate: '', orderBy: "0" })
     const { openBottomBar, closeBottomBar } = useRecoilValue(bottomTabMenuRepository);
+    const { changeBackAction } = useRecoilValue(headerRepository);
+
+    useEffect(() => {
+        if (step === 0) {
+            changeBackAction(() => () => navigation(-1))
+        } else {
+            changeBackAction(() => () => setStep(step - 1))
+        }
+    }, [step])
 
     useEffect(() => {
         closeBottomBar();
