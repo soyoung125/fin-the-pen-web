@@ -1,21 +1,11 @@
 // src/mocks/handlers.js
 import { rest } from "msw";
-import { LOCAL_STORAGE_KEY_USERS } from "../app/api/keys.ts";
-import {
-  getLocalStorage,
-  getSessionStorage,
-  setLocalStorage,
-  setSessionStorage,
-} from "../app/utils/storage.ts";
-import { Todo } from "../temp/type.ts";
+import { LOCAL_STORAGE_KEY_USERS } from "@api/keys.ts";
+import { getLocalStorage, setLocalStorage } from "@utils/storage.ts";
 import { DOMAIN } from "@api/url.ts";
 import { MockUser, SignUp, User } from "@type/auth.tsx";
 
 export const handlers = [
-  rest.get("/hello", (req, res, ctx) => {
-    return res(ctx.delay(1000), ctx.status(200), ctx.json(true));
-  }),
-
   rest.post(`${DOMAIN}/fin-the-pen-web/sign-up`, async (req, res, ctx) => {
     type MockUser = User & { password: string };
 
@@ -45,30 +35,5 @@ export const handlers = [
       return res(ctx.delay(1000), ctx.status(200), ctx.json(""));
     }
     return res(ctx.delay(1000), ctx.status(200), ctx.json(user));
-  }),
-
-  // test
-  rest.get("/temp/todo", (req, res, ctx) => {
-    const todoList = getSessionStorage<Todo[]>("todo", []);
-    return res(ctx.delay(200), ctx.json(todoList));
-  }),
-
-  rest.post("/temp/todo/create", async (req, res, ctx) => {
-    const body: {
-      text: string;
-    } = await req.json();
-
-    const { text } = body;
-
-    const prevTodoList = getSessionStorage<Todo[]>("todo", []);
-    setSessionStorage<Todo[]>("todo", [
-      ...prevTodoList,
-      {
-        id: prevTodoList.length,
-        text: text,
-      },
-    ]);
-
-    return res(ctx.delay(200), ctx.json(true));
   }),
 ];

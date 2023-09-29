@@ -5,7 +5,6 @@ import AnalysisLayout from "../components/layouts/containerLayout/AnalysisLayout
 import HOME_ROUTES from "./routes/HOME_ROUTES";
 import MANAGEMENT_ROUTES from "./routes/MANAGEMENT_ROUTES";
 import ANALYSIS_ROUTES from "./routes/ANALYSIS_ROUTES";
-import TodoRoot from "../temp/TodoRoot.tsx";
 
 const router = createBrowserRouter(
   [
@@ -28,10 +27,6 @@ const router = createBrowserRouter(
           children: ANALYSIS_ROUTES,
         },
       ],
-    },
-    {
-      path: "/todo-example",
-      element: <TodoRoot />,
     },
   ],
   {
