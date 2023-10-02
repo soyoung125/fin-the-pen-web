@@ -1,9 +1,7 @@
 import {
   Box,
   Button,
-  ButtonBase,
   CardActionArea,
-  Checkbox,
   Drawer,
   FormControl,
   IconButton,
@@ -14,7 +12,7 @@ import {
 } from "@mui/material";
 import RoundedPaper from "../../../../../components/common/RoundedPaper";
 import SearchIcon from "@mui/icons-material/Search";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useAppDispatch } from "../../../../../app/redux/hooks";
 import { deleteSchedule } from "../../../../../app/redux/slices/scheduleSlice";
 import RoundedBorderBox from "../../../../../components/common/RoundedBorderBox";
@@ -25,6 +23,10 @@ import ScheduleDrawer from "../../../ScheduleDrawer";
 import { SCHEDULE_DRAWER_MODE } from "../../../../../constants/schedule";
 import useSchedule from "../../../../../hooks/useSchedule";
 import { fetchFindSchedules } from "../../../../../app/api/API";
+import { useRecoilValue } from "recoil";
+import { bottomTabMenuRepository } from "@app/recoil/bottomTabMenu";
+import useHeader from "@hooks/useHeader";
+import { HEADER_MODE } from "@app/recoil/header";
 
 function SearchSchedule() {
   const dispatch = useAppDispatch();
@@ -35,6 +37,14 @@ function SearchSchedule() {
   const [resultSchedules, setResultSchedules] = useState<Schedule[]>([]);
 
   const { schedules, selectedSchedule, setSelectedSchedule } = useSchedule();
+  const { openBottomBar, closeBottomBar } = useRecoilValue(bottomTabMenuRepository);
+
+  useHeader(true, HEADER_MODE.search);
+
+  useEffect(() => {
+    closeBottomBar();
+    return (() => openBottomBar());
+  }, [])
 
   const handleKeyPress = (event: React.KeyboardEvent<HTMLInputElement>) => {
     if (event.key === "Enter") {

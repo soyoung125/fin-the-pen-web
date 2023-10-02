@@ -18,7 +18,7 @@ function AssetManagement() {
   const today = moment();
   const { setIsAuthenticatedFalse } = useRecoilValue(isAuthenticatedRepository);
 
-  useHeader(true, HEADER_MODE.settings);
+  useHeader(true, HEADER_MODE.home);
 
   useEffect(() => {
     setIsAuthenticatedFalse();

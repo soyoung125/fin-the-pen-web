@@ -2,7 +2,7 @@ import {
     Box, Button, Stack,
 } from '@mui/material';
 import AddRoundedIcon from '@mui/icons-material/AddRounded';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useAppSelector } from '../../../../app/redux/hooks';
 import { selectGuestMode } from '../../../../app/redux/slices/commonSlice';
 import { fetchCreateAccount, fetchGetAccountList, fetchGetCardList, fetchGetTransavrionList } from '../../../../app/api/API';
@@ -12,8 +12,13 @@ import RoundedPaper from '@components/common/RoundedPaper';
 import AssetSelect from './AssetSelect';
 import AssetFilter from './AssetFilter';
 import moment from 'moment';
+import { useRecoilValue } from 'recoil';
+import { bottomTabMenuRepository } from '@app/recoil/bottomTabMenu';
+import { headerRepository } from '@app/recoil/header';
+import { useNavigate } from 'react-router-dom';
 
 function MyData() {
+    const navigate = useNavigate();
     const businessType = ['BK', 'CD', 'ST', 'IS'];
     const guestMode = useAppSelector(selectGuestMode);
     const [step, setStep] = useState(0);
@@ -21,6 +26,22 @@ function MyData() {
     const [selected, setSelected] = useState({ name: '', value: '', icon: '' });
     const [form, setForm] = useState({ id: '', password: '' });
     const [selectedAccount, setSelectedAccount] = useState({ name: '', account: '', startDate: moment().format('YYYY/MM/DD'), endDate: '', orderBy: "0" })
+    const { openBottomBar, closeBottomBar } = useRecoilValue(bottomTabMenuRepository);
+    const { changeBackAction, changeHeaderTitle } = useRecoilValue(headerRepository);
+
+    useEffect(() => {
+        if (step === 0) {
+            changeBackAction(() => () => navigate(-1));
+            changeHeaderTitle("마이데이터");
+        } else {
+            changeBackAction(() => () => setStep(step - 1));
+        }
+    }, [step])
+
+    useEffect(() => {
+        closeBottomBar();
+        return (() => openBottomBar());
+    }, [])
 
     const handleChangeType = (event: React.SyntheticEvent, newValue: number) => {
         setValue(newValue);

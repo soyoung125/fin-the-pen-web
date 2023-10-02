@@ -2,6 +2,8 @@ import { Box, Grid, Stack, Typography } from "@mui/material";
 import cashBook from '../../../../../../../assets/icons/cashbook.png';
 import card from '../../../../../../../assets/icons/card.png';
 import RoundedBorderBox from "../../../../../../../components/common/RoundedBorderBox";
+import useHeader from "@hooks/useHeader";
+import { HEADER_MODE } from "@app/recoil/header";
 
 interface OptionSelectorProps {
     selected: string | null,
@@ -9,6 +11,8 @@ interface OptionSelectorProps {
 }
 
 function OptionSelector({ changeOption, selected }: OptionSelectorProps) {
+    useHeader(true, HEADER_MODE.home);
+
     return (
         <Grid container spacing={1} sx={{ textAlign: 'center', wordBreak: 'keep-all' }}>
             <Grid item xs={6}><Typography variant="button">카드</Typography></Grid>

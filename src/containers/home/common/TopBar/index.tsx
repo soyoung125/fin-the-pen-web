@@ -1,4 +1,4 @@
-import { Box, Paper, Stack } from "@mui/material";
+import { Box, Stack } from "@mui/material";
 import { useEffect } from "react";
 import {
   setGuestModeFalse,
@@ -15,6 +15,9 @@ import SettingsMode from "./headerMode/SettingsMode";
 import { useRecoilValue } from "recoil";
 import { headerModeState, headerOpenState } from "@recoil/header.ts";
 import { userState } from "@recoil/user.ts";
+import SignMode from "./headerMode/SignMode";
+import SearchMode from "./headerMode/SearchMode";
+import AssetMode from "./headerMode/AssetMode";
 
 function TopBar() {
   const navigate = useNavigate();
@@ -46,30 +49,26 @@ function TopBar() {
   };
 
   return (
-    <Box sx={{ position: "relative", zIndex: 1000 }}>
+    <Box sx={{ position: "relative", height: 70, zIndex: 1000 }}>
       {isHeaderOpen && (
-        <Paper
-          // elevation={10} // shadow 해제함
-          sx={{
-            backgroundColor: "primary.main",
-            height: 70,
-            borderRadius: 0,
-          }}
-        >
+        <>
           <Stack
             direction="row"
             justifyContent="space-between"
             alignItems="flex-end"
-            sx={{ height: 70 }}
+            sx={{ height: 70, paddingX: '12px' }}
           >
             {headerMode === "home" && <HomeMode />}
             {headerMode === "analysis" && <AnalysisMode />}
             {headerMode === "settings" && <SettingsMode />}
+            {headerMode === "sign" && <SignMode />}
+            {headerMode === "search" && <SearchMode />}
+            {headerMode === "assetManagement" && <AssetMode />}
           </Stack>
           {popupSetting.isOn && (
             <PopupButton handleClickPopup={handleClickPopup} />
           )}
-        </Paper>
+        </>
       )}
     </Box>
   );

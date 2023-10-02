@@ -10,7 +10,7 @@ import {
   Typography,
 } from "@mui/material";
 import React, { useEffect, useState } from "react";
-import FilterAltOutlinedIcon from "@mui/icons-material/FilterAltOutlined";
+import FilterAltIcon from '@mui/icons-material/FilterAlt';
 import { useSelector } from "react-redux";
 import moment from "moment";
 import FilterAccordion from "./inputs/FilterAccordion";
@@ -143,8 +143,7 @@ function FilterButton() {
   return (
     <>
       <RoundedButton value="user" onClick={() => setBottomDrawerOpen(true)}>
-        {/* <FilterAltIcon /> */}
-        <FilterAltOutlinedIcon />
+        <FilterAltIcon />
       </RoundedButton>
       <Drawer
         open={bottomDrawerOpen}

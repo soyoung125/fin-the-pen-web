@@ -2,7 +2,7 @@ import {
   BottomNavigation,
   BottomNavigationAction,
   Drawer,
-  Paper,
+  Box,
 } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import CalendarMonthIcon from "@mui/icons-material/CalendarMonth";
@@ -26,6 +26,7 @@ import {
   bottomDrawerOpenState,
 } from "@recoil/bottomDrawer.ts";
 import {
+  bottomBarOpenState,
   bottomTabMenuRepository,
   bottomTabMenuState,
 } from "@recoil/bottomTabMenu.ts";
@@ -36,6 +37,7 @@ function BottomBar() {
 
   const date = useAppSelector(selectDate);
   const bottomTabMenu = useRecoilValue(bottomTabMenuState);
+  const bottomBarOpen = useRecoilValue(bottomBarOpenState)
   const { openBottomTabMenu } = useRecoilValue(bottomTabMenuRepository);
 
   const isBottomDrawerOpen = useRecoilValue(bottomDrawerOpenState);
@@ -56,53 +58,51 @@ function BottomBar() {
 
   return (
     <>
-      <Paper
+      <BottomNavigation
+        value={bottomTabMenu}
+        onChange={(event, newValue) => {
+          openBottomTabMenu(newValue);
+        }}
         sx={{
           position: "fixed",
           bottom: 0,
           left: 0,
           right: 0,
-          paddingBottom: 1,
-          zIndex: 1000,
+          paddingBottom: 2,
+          zIndex: 10,
+          display: bottomBarOpen? 'flex' : 'none',
         }}
-        elevation={3}
       >
-        <BottomNavigation
-          value={bottomTabMenu}
-          onChange={(event, newValue) => {
-            openBottomTabMenu(newValue);
+        <BottomNavigationAction
+          label="홈"
+          icon={<CalendarMonthIcon />}
+          onClick={() => {
+            dispatch(changeViewMode("schedule"));
+            navigate(PATH.home);
           }}
-        >
-          <BottomNavigationAction
-            label="홈"
-            icon={<CalendarMonthIcon />}
-            onClick={() => {
-              dispatch(changeViewMode("schedule"));
-              navigate(PATH.home);
-            }}
-          />
-          <BottomNavigationAction
-            label="리포트"
-            icon={<DataSaverOffIcon />}
-            onClick={() => navigate(PATH.analysis)}
-          />
-          <BottomNavigationAction
-            label=""
-            icon={<AddCircleIcon />}
-            onClick={openBottomDrawer}
-          />
-          <BottomNavigationAction
-            label="자산관리"
-            icon={<PaidIcon />}
-            onClick={() => navigate(PATH.assetManagement)}
-          />
-          <BottomNavigationAction
-            label="설정"
-            icon={<SettingsIcon />}
-            onClick={() => navigate(PATH.settings)}
-          />
-        </BottomNavigation>
-      </Paper>
+        />
+        <BottomNavigationAction
+          label="리포트"
+          icon={<DataSaverOffIcon />}
+          onClick={() => navigate(PATH.analysis)}
+        />
+        <BottomNavigationAction
+          label=""
+          icon={<AddCircleIcon />}
+          onClick={openBottomDrawer}
+        />
+        <BottomNavigationAction
+          label="자산관리"
+          icon={<PaidIcon />}
+          onClick={() => navigate(PATH.assetManagement)}
+        />
+        <BottomNavigationAction
+          label="설정"
+          icon={<SettingsIcon />}
+          onClick={() => navigate(PATH.settings)}
+        />
+      </BottomNavigation>
+
       <Drawer
         open={isBottomDrawerOpen}
         anchor="bottom"

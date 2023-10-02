@@ -1,14 +1,18 @@
 import { Button, Stack, Typography } from "@mui/material";
 import moment from "moment";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useAppSelector } from "../../../../../app/redux/hooks";
 import { selectGuestMode } from "../../../../../app/redux/slices/commonSlice";
 import { fetchGetTransavrionList } from "@api/API.tsx";
 import RoundedPaper from "../../../../../components/common/RoundedPaper";
 import InputForm from "../../../common/TopBar/buttons/SearchButton/PaymentHistoryModal/InputForm";
 import OptionSelector from "../../../common/TopBar/buttons/SearchButton/PaymentHistoryModal/OptionSelector";
+import { useRecoilValue } from "recoil";
+import { headerRepository } from "@app/recoil/header";
+import { useNavigate } from "react-router-dom";
 
 function FetchPaymentHistory() {
+  const navigation = useNavigate();
   const [selected, setSelected] = useState<string>("card");
   const [showInput, setShowInput] = useState(false);
   const [form, setForm] = useState({
@@ -26,6 +30,16 @@ function FetchPaymentHistory() {
     card: "카드 승인내역 조회",
     account: "은행/계좌 거래내역 조회",
   };
+  const { changeBackAction } = useRecoilValue(headerRepository);
+
+  useEffect(() => {
+    if (showInput) {
+      changeBackAction(() => () => setShowInput(false))
+    } else {
+      changeBackAction(() => () => navigation(-1))
+    }
+  }, [showInput])
+
 
   const changeDetailInfo = (e: {
     target: { id: string; value: string | number };
