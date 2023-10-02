@@ -18,7 +18,7 @@ import { headerRepository } from '@app/recoil/header';
 import { useNavigate } from 'react-router-dom';
 
 function MyData() {
-    const navigation = useNavigate();
+    const navigate = useNavigate();
     const businessType = ['BK', 'CD', 'ST', 'IS'];
     const guestMode = useAppSelector(selectGuestMode);
     const [step, setStep] = useState(0);
@@ -31,7 +31,7 @@ function MyData() {
 
     useEffect(() => {
         if (step === 0) {
-            changeBackAction(() => () => navigation(-1));
+            changeBackAction(() => () => navigate(-1));
             changeHeaderTitle("마이데이터");
         } else {
             changeBackAction(() => () => setStep(step - 1));

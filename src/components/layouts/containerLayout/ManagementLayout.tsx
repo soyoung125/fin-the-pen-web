@@ -7,21 +7,24 @@ import SwitchingHeader from "../../common/SwitchingHeader";
 import EasyAuthentication from "../../../containers/sign/EasyAuthentication";
 import { useRecoilValue } from "recoil";
 import { isAuthenticatedState } from "@recoil/isAuthenticated.ts";
-import { HEADER_MODE } from "@recoil/header.ts";
+import { HEADER_MODE, headerRepository } from "@recoil/header.ts";
 import useHeader from "@hooks/useHeader.tsx";
 
 function ManagementLayout() {
   const location = useLocation();
   const navigate = useNavigate();
   const isAuthenticated = useRecoilValue(isAuthenticatedState);
+  const { changeBackAction, changeHeaderTitle } = useRecoilValue(headerRepository);
   const [management, setManagement] = useState(0);
 
-  useHeader(true, HEADER_MODE.settings);
+  useHeader(true, HEADER_MODE.assetManagement);
 
   useEffect(() => {
     setManagement(
       assetManagements.findIndex((s) => s.path === location.pathname)
     );
+    changeBackAction(() => () => navigate(-1));
+    changeHeaderTitle("");
   }, []);
 
   const handleMovement = (type: "+" | "-") => {

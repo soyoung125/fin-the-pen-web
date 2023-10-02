@@ -17,6 +17,7 @@ import { headerModeState, headerOpenState } from "@recoil/header.ts";
 import { userState } from "@recoil/user.ts";
 import SignMode from "./headerMode/SignMode";
 import SearchMode from "./headerMode/SearchMode";
+import AssetMode from "./headerMode/AssetMode";
 
 function TopBar() {
   const navigate = useNavigate();
@@ -62,6 +63,7 @@ function TopBar() {
             {headerMode === "settings" && <SettingsMode />}
             {headerMode === "sign" && <SignMode />}
             {headerMode === "search" && <SearchMode />}
+            {headerMode === "assetManagement" && <AssetMode />}
           </Stack>
           {popupSetting.isOn && (
             <PopupButton handleClickPopup={handleClickPopup} />
