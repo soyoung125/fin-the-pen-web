@@ -1,5 +1,5 @@
 import RoundedPaper from "@components/common/RoundedPaper";
-import { Box, Button, FormControl, InputAdornment, OutlinedInput, Stack, TextField } from "@mui/material";
+import { Box, Button, FormControl, InputAdornment, OutlinedInput, Stack, TextField, Grid } from "@mui/material";
 import { OrganizationInterface } from "@type/common";
 import styled from "styled-components";
 import CalendarTodayOutlinedIcon from '@mui/icons-material/CalendarTodayOutlined';
@@ -22,7 +22,7 @@ const Img = styled('img')({
 function AssetFilter({ selected, selectedAccount, handleClickSerch }: AssetFilter) {
     return (
         <RoundedPaper my={0}>
-            <Stack alignItems="center" spacing={1}>
+            <Stack alignItems="center" spacing={1.5}>
                 <Img alt={selected.name} src={selected.icon} />
                 <Box sx={{ fontSize: '20px', fontWeight: 500 }}>{selected.name}</Box>
                 <FormControl fullWidth>
@@ -36,32 +36,38 @@ function AssetFilter({ selected, selectedAccount, handleClickSerch }: AssetFilte
                             style: { textAlign: 'right' },
                         }} />
                 </FormControl>
-                <Stack direction="row" spacing={1} sx={{ width: '100%'}}>
-                    <Box sx={{ width: '100px', textAlign: 'center', padding: '8px 12px', border: '1.4px solid var(--main-01, #735BF2)', borderRadius: '4px', fontSize: '14px' }}>조회기간</Box>
-                    <TextField
-                        fullWidth
-                        InputProps={{
-                            endAdornment: <InputAdornment position="end"><CalendarTodayOutlinedIcon fontSize="small" color={selectedAccount.endDate === '' ? 'secondary' : 'primary'} /></InputAdornment>
-                        }}
-                        inputProps={{
-                            style: { textAlign: 'right' },
-                        }}
-                        size="small"
-                        value={`${selectedAccount.startDate}~${selectedAccount.endDate}`}
-                    />
-                </Stack>
 
-                <Stack direction="row" spacing={1} sx={{ width: '100%'}}>
-                    <Box sx={{ width: '100px', textAlign: 'center', padding: '8px 12px', border: '1.4px solid var(--main-01, #735BF2)', borderRadius: '4px', fontSize: '14px' }}>정렬기준</Box>
-                    <TextField
-                        fullWidth
-                        inputProps={{
-                            style: { textAlign: 'right' },
-                        }}
-                        size="small"
-                        value={selectedAccount.orderBy === '0' ? '최신순' : '과거순'}
-                    />
-                </Stack>
+                <Grid container>
+                    <Grid xs="auto" item sx={{ paddingRight: "8px"}}>
+                        <Box sx={{ textAlign: 'center', padding: '8px 12px', border: '1.4px solid var(--main-01, #735BF2)', borderRadius: '4px', fontSize: '14px' }}>조회기간</Box>
+                    </Grid>
+                    <Grid xs item>
+                        <TextField
+                            fullWidth
+                            InputProps={{
+                                endAdornment: <InputAdornment position="end"><CalendarTodayOutlinedIcon fontSize="small" color={selectedAccount.endDate === '' ? 'secondary' : 'primary'} /></InputAdornment>
+                            }}
+                            inputProps={{
+                                style: { textAlign: 'right' },
+                            }}
+                            size="small"
+                            value={`${selectedAccount.startDate}~${selectedAccount.endDate}`}
+                        />
+                    </Grid>
+                </Grid>
+
+                <Grid container>
+                    <Grid xs="auto" item sx={{ paddingRight: "8px"}}>
+                        <Box sx={{ textAlign: 'center', padding: '8px 12px', border: '1.4px solid var(--main-01, #735BF2)', borderRadius: '4px', fontSize: '14px' }}>정렬기준</Box>
+                    </Grid>
+                    <Grid xs item sx={{ paddingRight: "8px"}}>
+                        <Button fullWidth variant="contained" sx={{ borderRadius: "4px 4px 0px 0px" }}>최신순</Button>
+                    </Grid>
+                    <Grid xs item>
+                        <Button fullWidth variant="outlined" sx={{ borderRadius: "4px 4px 0px 0px", borderColor: "#A9ACB2", color: "#5B5F67" }}>과거순</Button>
+                    </Grid>
+                </Grid>
+
                 <Button fullWidth variant='contained' onClick={handleClickSerch}>확인</Button>
             </Stack>
         </RoundedPaper>
