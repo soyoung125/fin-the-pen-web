@@ -1,7 +1,7 @@
 import { Box, Grid, Stack, Typography } from "@mui/material";
 import cashBook from '../../../../../../../assets/icons/cashbook.png';
 import card from '../../../../../../../assets/icons/card.png';
-import RoundedBorderBox from "../../../../../../../components/common/RoundedBorderBox";
+import RoundedBorderBox from "../../../../../components/common/RoundedBorderBox";
 import useHeader from "@hooks/useHeader";
 import { HEADER_MODE } from "@app/recoil/header";
 

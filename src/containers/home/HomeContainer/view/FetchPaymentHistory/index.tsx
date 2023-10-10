@@ -1,12 +1,12 @@
-import { Box, Button, Stack, Typography } from "@mui/material";
+import { Box, Button } from "@mui/material";
 import moment from "moment";
 import { useEffect, useState } from "react";
 import { useAppSelector } from "../../../../../app/redux/hooks";
 import { selectGuestMode } from "../../../../../app/redux/slices/commonSlice";
 import { fetchGetTransavrionList } from "@api/API.tsx";
 import RoundedPaper from "../../../../../components/common/RoundedPaper";
-import InputForm from "../../../common/TopBar/buttons/SearchButton/PaymentHistoryModal/InputForm";
-import OptionSelector from "../../../common/TopBar/buttons/SearchButton/PaymentHistoryModal/OptionSelector";
+import InputForm from "./InputForm";
+import OptionSelector from "./OptionSelector";
 import { useRecoilValue } from "recoil";
 import { headerRepository } from "@app/recoil/header";
 import { useNavigate } from "react-router-dom";
