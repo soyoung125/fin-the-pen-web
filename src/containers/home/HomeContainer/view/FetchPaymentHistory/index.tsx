@@ -1,4 +1,4 @@
-import { Button, Stack, Typography } from "@mui/material";
+import { Box, Button, Stack, Typography } from "@mui/material";
 import moment from "moment";
 import { useEffect, useState } from "react";
 import { useAppSelector } from "../../../../../app/redux/hooks";
@@ -77,20 +77,20 @@ function FetchPaymentHistory() {
   };
 
   return (
-    <Stack p={2} spacing={1}>
-      <Typography
-        variant="h6"
+    <Box px={2.5} py={3}>
+      <RoundedPaper my={1}>
+      <Box
         sx={{
           fontWeight: "bold",
+          fontSize: "20px",
           textAlign: "center",
-          marginTop: 3,
-          marginBottom: 1,
+          marginTop: 1,
+          marginBottom: "40px",
         }}
       >
         {showInput ? title[selected] : "My 결제 내역 조회"}
-      </Typography>
+      </Box>
 
-      <RoundedPaper my={1}>
         {showInput ? (
           <InputForm
             selected={selected}
@@ -113,7 +113,7 @@ function FetchPaymentHistory() {
           {showInput ? "확인" : "조회하기"}
         </Button>
       </RoundedPaper>
-    </Stack>
+    </Box>
   );
 }
 
