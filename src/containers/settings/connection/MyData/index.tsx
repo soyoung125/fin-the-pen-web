@@ -73,6 +73,7 @@ function MyData() {
 
     const handleSelectOrganization = (org: OrganizationInterface) => {
         setSelected(org);
+        setPwdCount(1);
     }
 
     const changeDetailInfo = (state: React.ChangeEvent<HTMLInputElement>) => {
