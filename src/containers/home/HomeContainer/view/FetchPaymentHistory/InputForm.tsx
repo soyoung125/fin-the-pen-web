@@ -4,20 +4,8 @@ import {
   InputAdornment,
   MenuItem,
   OutlinedInput,
-  TextField,
-  Box,
-  Grid,
-  Button,
 } from "@mui/material";
-import {
-  LocalizationProvider,
-  MobileDatePicker,
-  PickersDay,
-} from "@mui/x-date-pickers";
-import CalendarTodayOutlinedIcon from "@mui/icons-material/CalendarTodayOutlined";
-import { AdapterMoment } from "@mui/x-date-pickers/AdapterMoment";
 import moment from "moment";
-import { RenderDayFunction } from "../../../../../types/common";
 import { useEffect, useState } from "react";
 import {
   BANK_ORGANIZATION,
@@ -82,61 +70,6 @@ function InputForm({
       }
     }
     setIsSelectStartDate(!isSelectStartDate);
-  };
-
-  const renderDayInPicker: RenderDayFunction = (
-    day,
-    _value,
-    DayComponentProps
-  ) => {
-    if (moment(form.startDate).isSame(form.endDate)) {
-      return <PickersDay {...DayComponentProps} />;
-    }
-    if (moment(form.startDate).isSame(day)) {
-      return (
-        <PickersDay
-          sx={{
-            borderTopRightRadius: 0,
-            borderBottomRightRadius: 0,
-            marginX: 0,
-            width: "40px",
-          }}
-          className="Mui-selected"
-          {...DayComponentProps}
-        />
-      );
-    }
-    if (moment(form.endDate).isSame(day)) {
-      return (
-        <PickersDay
-          sx={{
-            borderTopLeftRadius: 0,
-            borderBottomLeftRadius: 0,
-            marginX: 0,
-            width: "40px",
-          }}
-          className="Mui-selected"
-          {...DayComponentProps}
-        />
-      );
-    }
-    if (
-      moment(form.startDate).isBefore(day) &&
-      moment(form.endDate).isAfter(day)
-    ) {
-      return (
-        <PickersDay
-          sx={{
-            borderRadius: 0,
-            marginX: 0,
-            width: "40px",
-          }}
-          className="Mui-selected"
-          {...DayComponentProps}
-        />
-      );
-    }
-    return <PickersDay {...DayComponentProps} />;
   };
 
   return (

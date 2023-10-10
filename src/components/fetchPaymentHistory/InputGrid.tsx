@@ -1,5 +1,4 @@
 import { Box, Grid } from "@mui/material";
-import { JSXElementConstructor } from "react";
 
 interface InputGridProps{
     children: JSX.Element;
