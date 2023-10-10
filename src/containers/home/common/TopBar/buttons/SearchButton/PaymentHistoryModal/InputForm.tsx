@@ -6,6 +6,8 @@ import {
   OutlinedInput,
   TextField,
   Box,
+  Grid,
+  Button,
 } from "@mui/material";
 import {
   LocalizationProvider,
@@ -196,7 +198,7 @@ function InputForm({
         }}
       />
 
-      <LocalizationProvider dateAdapter={AdapterMoment}>
+      {/* <LocalizationProvider dateAdapter={AdapterMoment}>
         <MobileDatePicker
           value={moment(form.startDate)}
           onChange={(newValue) => {
@@ -243,9 +245,9 @@ function InputForm({
             />
           )}
         />
-      </LocalizationProvider>
+      </LocalizationProvider> */}
 
-      {selected === "card" && (
+      {/* {selected === "card" && (
         <Select
           inputProps={{
             IconComponent: () => null,
@@ -272,7 +274,80 @@ function InputForm({
           <MenuItem value={"0"}>카드별조회</MenuItem>
           <MenuItem value={"1"}>전체조회</MenuItem>
         </Select>
-      )}
+      )} */}
+      <Grid container>
+        <Grid xs="auto" item sx={{ paddingRight: "8px" }}>
+          <Box sx={{ textAlign: 'center', padding: '8px 12px', border: '1.4px solid var(--main-01, #735BF2)', borderRadius: '4px', fontSize: '14px' }}>조회기간</Box>
+        </Grid>
+        <Grid xs item>
+          <LocalizationProvider dateAdapter={AdapterMoment}>
+            <MobileDatePicker
+              value={moment(form.startDate)}
+              onChange={(newValue) => {
+                newValue && changeDate(newValue.format("YYYY-MM-DD"));
+              }}
+              ToolbarComponent={() => (
+                <Stack direction="row" spacing={1} justifyContent="center" p={2}>
+                  <Box sx={{ color: isSelectStartDate ? "grey" : "black" }}>
+                    {form.startDate}
+                  </Box>
+                  <Box>~</Box>
+                  <Box sx={{ color: isSelectStartDate ? "black" : "grey" }}>
+                    {form.endDate}
+                  </Box>
+                </Stack>
+              )}
+              renderDay={renderDayInPicker}
+              componentsProps={{
+                actionBar: {
+                  actions: ["accept"],
+                },
+              }}
+              renderInput={(params) => (
+                <TextField
+                  {...params}
+                  fullWidth
+                  InputProps={{
+                    endAdornment: (
+                      <InputAdornment position="end">
+                        <CalendarTodayOutlinedIcon
+                          fontSize="small"
+                          color={form.endDate === "" ? "secondary" : "primary"}
+                        />
+                      </InputAdornment>
+                    ),
+                  }}
+                  inputProps={{
+                    style: { textAlign: "right" },
+                  }}
+                  size="small"
+                  value={`${form.startDate}~${form.endDate}`}
+                />
+              )}
+            />
+          </LocalizationProvider>
+        </Grid>
+      </Grid>
+
+      <Grid container>
+        <Grid xs="auto" item sx={{ paddingRight: "8px" }}>
+          <Box sx={{ textAlign: 'center', padding: '8px 12px', border: '1.4px solid var(--main-01, #735BF2)', borderRadius: '4px', fontSize: '14px' }}>정렬기준</Box>
+        </Grid>
+        <Grid xs item sx={{ paddingRight: "8px" }}>
+          <Button fullWidth variant="contained" sx={{ borderRadius: "4px 4px 0px 0px" }} onChange={(e) =>
+            changeDetailInfo({
+              target: { id: "inquiryType", value: "0" },
+            })
+          }>최신순</Button>
+        </Grid>
+        <Grid xs item>
+          <Button fullWidth variant="outlined" sx={{ borderRadius: "4px 4px 0px 0px", borderColor: "#A9ACB2", color: "#5B5F67" }} onChange={(e) =>
+            changeDetailInfo({
+              target: { id: "inquiryType", value: "1" },
+            })
+          }>과거순</Button>
+        </Grid>
+      </Grid>
     </Stack>
   );
 }
