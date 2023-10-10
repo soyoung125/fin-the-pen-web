@@ -202,7 +202,7 @@ function InputForm({
 
       <PeriodInput startDate={form.startDate} endDate={form.endDate} isSelectStartDate={isSelectStartDate} changeDate={changeDate} />
 
-      <OrderByInput changeDetailInfo={changeDetailInfo} />
+      <OrderByInput selected={form.orderBy} changeDetailInfo={changeDetailInfo} />
     </Stack>
   );
 }
