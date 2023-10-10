@@ -65,13 +65,13 @@ function AlertModal(props: AlertModalProps) {
                 sx={{ backgroundColor: "#D8D8D8" }}
                 onClick={handleClose}
               >
-                아니오
+                취소
               </Button>
             </Grid>
           }
           <Grid item xs>
             <Button fullWidth variant="contained" onClick={handleClickYes}>
-              네
+              확인
             </Button>
           </Grid>
         </Grid>
