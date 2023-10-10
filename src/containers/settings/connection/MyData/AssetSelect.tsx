@@ -7,11 +7,6 @@ import 'moment/locale/ko';
 import styled from 'styled-components';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import AddRoundedIcon from '@mui/icons-material/AddRounded';
-import { useRecoilValue } from 'recoil';
-import { headerRepository } from '@app/recoil/header';
-import { useEffect } from 'react';
-import AlertModal from '@components/common/AlertModal';
-import useModal from '@hooks/useModal';
 
 interface AssetSelectProps {
     selected: OrganizationInterface;
@@ -29,11 +24,6 @@ const Img = styled('img')({
 });
 
 function AssetSelect({ selected, handleSelectAccount, openAlertModal }: AssetSelectProps) {
-    const { changeHeaderTitle } = useRecoilValue(headerRepository);
-
-    useEffect(() => {
-        changeHeaderTitle('자산조회');
-    }, [])
 
     return (
         <>

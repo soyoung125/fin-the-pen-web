@@ -5,7 +5,7 @@ import AddRoundedIcon from '@mui/icons-material/AddRounded';
 import { useEffect, useState } from 'react';
 import { useAppSelector } from '../../../../app/redux/hooks';
 import { selectGuestMode } from '../../../../app/redux/slices/commonSlice';
-import { fetchCreateAccount, fetchGetAccountList, fetchGetCardList, fetchGetTransavrionList } from '../../../../app/api/API';
+import { fetchCreateAccount, fetchGetAccountList, fetchGetCardList } from '../../../../app/api/API';
 import OrganizationSelect from './OrganizationSelect';
 import AccountInput from './AccountInput';
 import RoundedPaper from '@components/common/RoundedPaper';
@@ -36,7 +36,7 @@ function MyData() {
     const [value, setValue] = useState(0);
     const [selected, setSelected] = useState<OrganizationInterface>({ name: '', value: '', icon: '', limit: 0 });
     const [form, setForm] = useState({ id: '', password: '' });
-    const [selectedAccount, setSelectedAccount] = useState({ name: '', account: '', startDate: moment().format('YYYY/MM/DD'), endDate: '', orderBy: "0" })
+    const [selectedAccount, setSelectedAccount] = useState({ name: '', account: '', startDate: moment().format('YYYY/MM/DD'), endDate: '', orderBy: "0" });
     const [content, setContent] = useState("");
     const [pwdCount, setPwdCount] = useState(1);
 
@@ -50,10 +50,14 @@ function MyData() {
         }
         switch (step) {
             case 1:
+                changeHeaderTitle('자산연결');
                 setContent("거래내역을 조회하시겠습니까?");
+                setForm({ id: '', password: '' });
                 break;
             case 3:
+                changeHeaderTitle('자산조회');
                 setContent("모든 계좌 연결을 해제하시겠습니까?\n조회된 거래내역은 삭제되지 않습니다.");
+                setSelectedAccount({ name: '', account: '', startDate: moment().format('YYYY/MM/DD'), endDate: '', orderBy: "0" });
                 break;
             case 4:
                 setContent("조회에 성공했습니다.\n홈 화면에 내역을 추가하시겠습니까?")
