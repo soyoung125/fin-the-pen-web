@@ -14,7 +14,7 @@ function SettingsMode() {
         alignItems="center"
       >
         <BackButton />
-        <Box>{title}</Box>
+        <Box sx={{ fontSize: "18px", fontWeight: "500" }}>{title}</Box>
       </Stack>
 
       {/* 헤더 중앙 메뉴 */}
