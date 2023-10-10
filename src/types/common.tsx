@@ -87,4 +87,5 @@ export interface OrganizationInterface {
   name: string;
   value: string;
   icon: string;
+  limit: number | string;
 }

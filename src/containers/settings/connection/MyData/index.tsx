@@ -18,6 +18,7 @@ import { headerRepository } from '@app/recoil/header';
 import { useNavigate } from 'react-router-dom';
 import useModal from '@hooks/useModal';
 import AlertModal from '@components/common/AlertModal';
+import { OrganizationInterface } from '@type/common';
 
 function MyData() {
     const navigate = useNavigate();
@@ -33,7 +34,7 @@ function MyData() {
 
     const [step, setStep] = useState(0);
     const [value, setValue] = useState(0);
-    const [selected, setSelected] = useState({ name: '', value: '', icon: '' });
+    const [selected, setSelected] = useState<OrganizationInterface>({ name: '', value: '', icon: '', limit: 0 });
     const [form, setForm] = useState({ id: '', password: '' });
     const [selectedAccount, setSelectedAccount] = useState({ name: '', account: '', startDate: moment().format('YYYY/MM/DD'), endDate: '', orderBy: "0" })
     const [content, setContent] = useState("");
@@ -43,7 +44,7 @@ function MyData() {
         if (step === 0) {
             changeBackAction(() => () => navigate(-1));
             changeHeaderTitle("마이데이터");
-            setSelected({ name: '', value: '', icon: '' });
+            setSelected({ name: '', value: '', icon: '', limit: 0 });
         } else {
             changeBackAction(() => () => setStep(step - 1));
         }
@@ -67,10 +68,10 @@ function MyData() {
 
     const handleChangeType = (event: React.SyntheticEvent, newValue: number) => {
         setValue(newValue);
-        setSelected({ name: '', value: '', icon: '' });
+        setSelected({ name: '', value: '', icon: '', limit: 0 });
     };
 
-    const handleSelectOrganization = (org: { name: string, value: string, icon: string }) => {
+    const handleSelectOrganization = (org: OrganizationInterface) => {
         setSelected(org);
     }
 
@@ -139,8 +140,10 @@ function MyData() {
             setContent("자산 연결에 성공했습니다.")
             const list = await getList();
             console.log(list);
+        } else if (selected.limit === "-") {
+            setContent(`로그인 정보가 일치하지 않습니다.`)
         } else {
-            setContent(`로그인 정보가 일치하지 않습니다.\n(${pwdCount}/5)`)
+            setContent(`로그인 정보가 일치하지 않습니다.\n(${pwdCount}/${selected.limit})`)
             setPwdCount(pwdCount + 1)
         }
 
