@@ -107,10 +107,10 @@ function FetchPaymentHistory() {
         <Button
           variant="contained"
           fullWidth
-          sx={{ marginTop: 2 }}
+          sx={{ marginTop: "40px" }}
           onClick={showInput ? handleSubmit : changeShowInput}
         >
-          {showInput ? "조회하기" : "다음"}
+          {showInput ? "확인" : "조회하기"}
         </Button>
       </RoundedPaper>
     </Stack>
