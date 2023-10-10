@@ -11,25 +11,17 @@ import {
 } from "../../../../../constants/organizations";
 import CustomListItem from "./CustomListItem";
 import { OrganizationInterface } from "@type/common";
-import { useRecoilValue } from "recoil";
-import { headerRepository } from "@app/recoil/header";
-import { useEffect } from "react";
 
 interface OrganizationSelectProps {
   value: number;
   selected: OrganizationInterface;
   handleChangeType: (event: React.SyntheticEvent, newValue: number) => void;
   handleSelectOrganization: (org: OrganizationInterface) => void;
-  changeStep: () => void;
+  openAlertModal: () => void;
 }
 
-function OrganizationSelect({ value, selected, handleChangeType, handleSelectOrganization, changeStep }: OrganizationSelectProps) {
-  const { changeHeaderTitle } = useRecoilValue(headerRepository);
+function OrganizationSelect({ value, selected, handleChangeType, handleSelectOrganization, openAlertModal }: OrganizationSelectProps) {
 
-  useEffect(() => {
-    changeHeaderTitle('자산연결');
-  }, [])
-  
   return (
     <>
       <Box sx={{ fontSize: '22px', fontWeight: 700 }}>어떤 자산을 연결하세요?</Box>
@@ -58,7 +50,15 @@ function OrganizationSelect({ value, selected, handleChangeType, handleSelectOrg
             />)
         }
       </Grid>
-      <Button fullWidth variant='contained' onClick={() => selected.name !== '' && changeStep()}>연결하기</Button>
+
+      {selected.name !== "" &&
+        <Button
+          fullWidth variant='contained'
+          sx={{ position: 'fixed', bottom: "30px", width: "calc(100vw - 32px)" }}
+          onClick={openAlertModal}>
+          연결하기
+        </Button>
+      }
     </>
   )
 }

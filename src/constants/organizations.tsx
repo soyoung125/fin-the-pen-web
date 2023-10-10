@@ -16,8 +16,9 @@ import 현대 from '@assets/banks/현대카드.png'
 import 롯데 from '@assets/banks/롯데카드.png'
 import BC from '@assets/banks/BC카드.png'
 import 삼성 from '@assets/banks/삼성카드.png'
+import { OrganizationInterface } from '@type/common';
 
-export const BANK_ORGANIZATION = [
+export const BANK_ORGANIZATION: OrganizationInterface[] = [
     { name: '기업은행', value: '0003', icon: 기업, limit: 5 },
     { name: '국민은행', value: '0004', icon: 국민, limit: 5 },
     { name: '농협은행', value: '0011', icon: 농협, limit: 5 },
@@ -34,7 +35,7 @@ export const BANK_ORGANIZATION = [
     { name: 'K뱅크', value: '0089', icon: Kbank, limit: "-" },
 ];
 
-export const CARD_ORGANIZATION = [
+export const CARD_ORGANIZATION: OrganizationInterface[] = [
     { name: 'KB카드', value: '0301', icon: 국민, limit: "-" },
     { name: '우리카드', value: '0309', icon: 우리, limit: 5 },
     { name: '현대카드', value: '0302', icon: 현대, limit: "-" },

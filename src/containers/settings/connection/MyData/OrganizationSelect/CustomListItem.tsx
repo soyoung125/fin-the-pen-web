@@ -1,11 +1,12 @@
 import { Grid, Stack, Box } from "@mui/material";
+import { OrganizationInterface } from "@type/common";
 import styled from "styled-components";
 
 interface CustomListItemProps {
-    item: {name: string, value: string, icon: string},
+    item: OrganizationInterface,
     isChecked: boolean,
     opacity: number,
-    handleSelectOrganization: (org: {name: string, value: string, icon: string}) => void,
+    handleSelectOrganization: (org: OrganizationInterface) => void,
 }
 
 const Img = styled('img')({

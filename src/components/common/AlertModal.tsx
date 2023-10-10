@@ -12,20 +12,21 @@ import { CONTROLLING_ALERT } from "../../constants/alerts";
 
 interface AlertModalProps {
   open: boolean;
-  handleClose: () => void;
+  handleClose?: () => void;
   handleClickYes: () => void;
   mode:
-    | "setting"
-    | "modify"
-    | "reset"
-    | "delete"
-    | "hideBudget"
-    | "saveFilter"
-    | "confirmCloseFilter";
+  | "setting"
+  | "modify"
+  | "reset"
+  | "delete"
+  | "hideBudget"
+  | "saveFilter"
+  | "confirmCloseFilter";
+  content?: string;
 }
 
 function AlertModal(props: AlertModalProps) {
-  const { open, handleClose, handleClickYes, mode } = props;
+  const { open, handleClose, handleClickYes, mode, content } = props;
 
   return (
     <Dialog
@@ -52,23 +53,25 @@ function AlertModal(props: AlertModalProps) {
       </Box>
 
       <Box mx={3} my={2}>
-        <Box sx={{ textAlign: "center", fontWeight: "bold", my: 2 }}>
-          {CONTROLLING_ALERT[mode]}
+        <Box sx={{ textAlign: "center", fontWeight: "bold", my: 2, whiteSpace: 'pre-wrap' }}>
+          {content ? content : CONTROLLING_ALERT[mode]}
         </Box>
         <Grid container spacing={1}>
-          <Grid item xs={6}>
-            <Button
-              fullWidth
-              variant="contained"
-              sx={{ backgroundColor: "#D8D8D8" }}
-              onClick={handleClose}
-            >
-              아니오
-            </Button>
-          </Grid>
-          <Grid item xs={6}>
+          {handleClose &&
+            <Grid item xs={6}>
+              <Button
+                fullWidth
+                variant="contained"
+                sx={{ backgroundColor: "#D8D8D8" }}
+                onClick={handleClose}
+              >
+                취소
+              </Button>
+            </Grid>
+          }
+          <Grid item xs>
             <Button fullWidth variant="contained" onClick={handleClickYes}>
-              네
+              확인
             </Button>
           </Grid>
         </Grid>
