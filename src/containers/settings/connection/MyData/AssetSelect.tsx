@@ -10,10 +10,13 @@ import AddRoundedIcon from '@mui/icons-material/AddRounded';
 import { useRecoilValue } from 'recoil';
 import { headerRepository } from '@app/recoil/header';
 import { useEffect } from 'react';
+import AlertModal from '@components/common/AlertModal';
+import useModal from '@hooks/useModal';
 
 interface AssetSelectProps {
     selected: OrganizationInterface;
     handleSelectAccount: (name: string, account: string) => void;
+    openAlertModal: () => void;
 }
 
 const Img = styled('img')({
@@ -25,11 +28,11 @@ const Img = styled('img')({
     height: '60px',
 });
 
-function AssetSelect({ selected, handleSelectAccount }: AssetSelectProps) {
+function AssetSelect({ selected, handleSelectAccount, openAlertModal }: AssetSelectProps) {
     const { changeHeaderTitle } = useRecoilValue(headerRepository);
 
     useEffect(() => {
-      changeHeaderTitle('자산조회');
+        changeHeaderTitle('자산조회');
     }, [])
 
     return (
@@ -51,9 +54,9 @@ function AssetSelect({ selected, handleSelectAccount }: AssetSelectProps) {
                     sx={{ borderBottom: '1px solid var(--gray-scale-005, #F7F7F8)' }}
                     secondaryAction={
                         <IconButton edge="end" aria-label="delete" onClick={(e) => e.preventDefault()}>
-                          <ArrowForwardIosIcon />
+                            <ArrowForwardIosIcon />
                         </IconButton>
-                      }
+                    }
                     onClick={() => handleSelectAccount('name1', 'account1')}
                 >
                     <ListItemText
@@ -66,9 +69,9 @@ function AssetSelect({ selected, handleSelectAccount }: AssetSelectProps) {
                     sx={{ borderBottom: '1px solid var(--gray-scale-005, #F7F7F8)' }}
                     secondaryAction={
                         <IconButton edge="end" aria-label="delete" onClick={(e) => e.preventDefault()}>
-                          <ArrowForwardIosIcon />
+                            <ArrowForwardIosIcon />
                         </IconButton>
-                      }
+                    }
                     onClick={() => handleSelectAccount('name2', 'account2')}
                 >
                     <ListItemText
@@ -88,6 +91,13 @@ function AssetSelect({ selected, handleSelectAccount }: AssetSelectProps) {
                     />
                 </ListItem>
             </List>
+
+            <Button
+                fullWidth variant='outlined'
+                sx={{ position: 'fixed', bottom: "30px", width: "calc(100vw - 32px)" }}
+                onClick={openAlertModal}>
+                연결 해제
+            </Button>
         </>
     );
 }

@@ -20,10 +20,10 @@ interface OrganizationSelectProps {
   selected: OrganizationInterface;
   handleChangeType: (event: React.SyntheticEvent, newValue: number) => void;
   handleSelectOrganization: (org: OrganizationInterface) => void;
-  changeStep: () => void;
+  openAlertModal: () => void;
 }
 
-function OrganizationSelect({ value, selected, handleChangeType, handleSelectOrganization, changeStep }: OrganizationSelectProps) {
+function OrganizationSelect({ value, selected, handleChangeType, handleSelectOrganization, openAlertModal }: OrganizationSelectProps) {
   const { changeHeaderTitle } = useRecoilValue(headerRepository);
 
   useEffect(() => {
@@ -63,7 +63,7 @@ function OrganizationSelect({ value, selected, handleChangeType, handleSelectOrg
         <Button
           fullWidth variant='contained'
           sx={{ position: 'fixed', bottom: "30px", width: "calc(100vw - 32px)" }}
-          onClick={() => selected.name !== '' && changeStep()}>
+          onClick={openAlertModal}>
           연결하기
         </Button>
       }
