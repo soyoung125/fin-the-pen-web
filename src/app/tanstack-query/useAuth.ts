@@ -35,7 +35,7 @@ export const useAuth = () => {
       if (user !== "") {
         setUser(user);
         generateRandomToken();
-        navigate(PATH.home);
+        navigate("//");
       } else {
         alert("로그인에 실패했습니다.");
       }
@@ -47,7 +47,8 @@ export const useAuth = () => {
   };
 
   const signOut = () => {
-    setUser(undefined);
+    window.location.href = "/";
+    sessionStorage.clear();
   };
 
   const mockSignIn = () => {

@@ -11,21 +11,23 @@ import { useEffect } from "react";
 import { HEADER_MODE } from "@app/recoil/header.ts";
 
 function SignIn() {
-  const { openBottomBar, closeBottomBar } = useRecoilValue(bottomTabMenuRepository);
+  const { openBottomBar, closeBottomBar } = useRecoilValue(
+    bottomTabMenuRepository
+  );
   const user = useRecoilValue(userState);
-  
+
   // useHeader(false);
   useHeader(true, HEADER_MODE.sign);
-  
+
   useEffect(() => {
     closeBottomBar();
-    return (() => openBottomBar());
-  }, [])
+    return () => openBottomBar();
+  }, []);
 
   return (
     <CenterBox>
       <Stack justifyContent="center" alignItems="center" px={1}>
-        {user === undefined ? (
+        {user === undefined ? ( // 버그 수정 필요
           <>
             <Header />
             <SignInFields />
