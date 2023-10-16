@@ -36,6 +36,7 @@ export const headerBackActionState = atom<() => void>({
 export const headerTitleState = atom<string>({
   key: "headerTitleState",
   default: "",
+  effects: [sessionStorageEffect<string>("")],
 });
 
 export const headerRepository = selector({
