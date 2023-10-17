@@ -1,12 +1,12 @@
-import { Button, Stack, Typography } from "@mui/material";
+import { Box, Button } from "@mui/material";
 import moment from "moment";
 import { useEffect, useState } from "react";
 import { useAppSelector } from "../../../../../app/redux/hooks";
 import { selectGuestMode } from "../../../../../app/redux/slices/commonSlice";
 import { fetchGetTransavrionList } from "@api/API.tsx";
 import RoundedPaper from "../../../../../components/common/RoundedPaper";
-import InputForm from "../../../common/TopBar/buttons/SearchButton/PaymentHistoryModal/InputForm";
-import OptionSelector from "../../../common/TopBar/buttons/SearchButton/PaymentHistoryModal/OptionSelector";
+import InputForm from "./InputForm";
+import OptionSelector from "./OptionSelector";
 import { useRecoilValue } from "recoil";
 import { headerRepository } from "@app/recoil/header";
 import { useNavigate } from "react-router-dom";
@@ -77,20 +77,20 @@ function FetchPaymentHistory() {
   };
 
   return (
-    <Stack p={2} spacing={1}>
-      <Typography
-        variant="h6"
+    <Box px={2.5} py={3}>
+      <RoundedPaper my={1}>
+      <Box
         sx={{
           fontWeight: "bold",
+          fontSize: "20px",
           textAlign: "center",
-          marginTop: 3,
-          marginBottom: 1,
+          marginTop: 1,
+          marginBottom: "40px",
         }}
       >
         {showInput ? title[selected] : "My 결제 내역 조회"}
-      </Typography>
+      </Box>
 
-      <RoundedPaper my={1}>
         {showInput ? (
           <InputForm
             selected={selected}
@@ -107,13 +107,13 @@ function FetchPaymentHistory() {
         <Button
           variant="contained"
           fullWidth
-          sx={{ marginTop: 2 }}
+          sx={{ marginTop: "40px" }}
           onClick={showInput ? handleSubmit : changeShowInput}
         >
-          {showInput ? "조회하기" : "다음"}
+          {showInput ? "확인" : "조회하기"}
         </Button>
       </RoundedPaper>
-    </Stack>
+    </Box>
   );
 }
 
