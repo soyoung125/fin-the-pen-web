@@ -11,18 +11,20 @@ import router from "./app/router";
 import { worker } from "./mocks/browser";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { RecoilRoot } from "recoil";
-import './configs/recoil';
+import "./configs/recoil";
 
 const queryClient = new QueryClient();
 
 async function main() {
   // msw 세팅 시작
-  await worker.start({
-    serviceWorker: {
-      url: "/fin-the-pen-web/mockServiceWorker.js",
-    },
-    onUnhandledRequest: "bypass",
-  });
+  if (import.meta.env.VITE_LOCAL_MODE !== "true") {
+    await worker.start({
+      serviceWorker: {
+        url: "/fin-the-pen-web/mockServiceWorker.js",
+      },
+      onUnhandledRequest: "bypass",
+    });
+  }
   // msw 세팅 끝
 
   const root = ReactDOM.createRoot(
