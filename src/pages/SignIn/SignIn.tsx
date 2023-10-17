@@ -27,7 +27,7 @@ function SignIn() {
   return (
     <CenterBox>
       <Stack justifyContent="center" alignItems="center" px={1}>
-        {user === undefined ? ( // 버그 수정 필요
+        {user === null ? ( // 버그 수정 필요
           <>
             <Header />
             <SignInFields />

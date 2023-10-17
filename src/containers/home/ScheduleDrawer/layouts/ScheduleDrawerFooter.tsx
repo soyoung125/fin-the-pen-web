@@ -100,7 +100,7 @@ function ScheduleDrawerFooter({
           disabled={user === undefined}
           onClick={() => handleSubmit()}
         >
-          {user === undefined
+          {user === null
             ? NEED_SIGN_IN
             : `${SCHEDULE_DRAWER.add_schedule[mode]}`}
         </Button>
