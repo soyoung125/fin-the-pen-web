@@ -36,7 +36,7 @@ function MyData() {
     const [value, setValue] = useState(0);
     const [selected, setSelected] = useState<OrganizationInterface>({ name: '', value: '', icon: '', limit: 0 });
     const [form, setForm] = useState({ id: '', password: '' });
-    const [selectedAccount, setSelectedAccount] = useState({ name: '', account: '', startDate: moment().format('YYYY/MM/DD'), endDate: '', orderBy: "0" });
+    const [selectedAccount, setSelectedAccount] = useState({ name: '', account: ''});
     const [content, setContent] = useState("");
     const [pwdCount, setPwdCount] = useState(1);
 
@@ -57,7 +57,7 @@ function MyData() {
             case 3:
                 changeHeaderTitle('자산조회');
                 setContent("모든 계좌 연결을 해제하시겠습니까?\n조회된 거래내역은 삭제되지 않습니다.");
-                setSelectedAccount({ name: '', account: '', startDate: moment().format('YYYY/MM/DD'), endDate: '', orderBy: "0" });
+                setSelectedAccount({ name: '', account: '' });
                 break;
             case 4:
                 setContent("조회에 성공했습니다.\n홈 화면에 내역을 추가하시겠습니까?")
@@ -85,15 +85,15 @@ function MyData() {
     };
 
     const handleSelectAccount = (name: string, account: string) => {
-        setSelectedAccount({ ...selectedAccount, name: name, account: account });
+        setSelectedAccount({ name: name, account: account });
         changeStep();
     }
 
     const changeStep = () => setStep(step + 1);
 
-    const handleClickSerch = async () => {
+    const handleClickSerch = async (value: {startDate: string, endDate: string, orderBy: string}) => {
         // const result = await fetchGetTransavrionList(selectedAccount);
-        console.log('ok');
+        console.log({...value, ...selectedAccount});
         openAlertModal();
     }
 
@@ -141,17 +141,16 @@ function MyData() {
             ...form,
         }]);
 
-        // if (result) {
-        //     setContent("자산 연결에 성공했습니다.")
-        //     const list = await getList();
-        //     console.log(list);
-        // } else if (selected.limit === "-") {
-        //     setContent(`로그인 정보가 일치하지 않습니다.`)
-        // } else {
-        //     setContent(`로그인 정보가 일치하지 않습니다.\n(${pwdCount}/${selected.limit})`)
-        //     setPwdCount(pwdCount + 1)
-        // }
-        setContent("자산 연결에 성공했습니다.")
+        if (result) {
+            setContent("자산 연결에 성공했습니다.")
+            const list = await getList();
+            console.log(list);
+        } else if (selected.limit === "-") {
+            setContent(`로그인 정보가 일치하지 않습니다.`)
+        } else {
+            setContent(`로그인 정보가 일치하지 않습니다.\n(${pwdCount}/${selected.limit})`)
+            setPwdCount(pwdCount + 1)
+        }
 
         openAlertModal();
     }
