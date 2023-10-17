@@ -5,11 +5,12 @@ import PersonOutlineOutlinedIcon from "@mui/icons-material/PersonOutlineOutlined
 import RoundedButton from "../../../../../components/common/RoundedButton";
 import PATH from "../../../../../constants/path";
 import { useRecoilValue } from "recoil";
-import { userState } from "@recoil/user.ts";
+import { useSelector } from "react-redux";
+import { selectUser } from "@redux/slices/userSlice.tsx";
 
 function PersonalButton() {
   const navigate = useNavigate();
-  const user = useRecoilValue(userState);
+  const user = useSelector(selectUser);
 
   if (user === undefined) {
     return (

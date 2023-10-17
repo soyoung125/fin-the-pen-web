@@ -7,7 +7,8 @@ import {
 } from "@mui/material";
 import KeyboardArrowRightIcon from "@mui/icons-material/KeyboardArrowRight";
 import { useRecoilValue } from "recoil";
-import { userState } from "@recoil/user.ts";
+import { useSelector } from "react-redux";
+import { selectUser } from "@redux/slices/userSlice.tsx";
 
 interface OptionListProps {
   openSearchPage: () => void;
@@ -15,7 +16,7 @@ interface OptionListProps {
 }
 
 function OptionList({ openSearchPage, openFetchPage }: OptionListProps) {
-  const user = useRecoilValue(userState);
+  const user = useSelector(selectUser);
   return (
     <List dense>
       <ListItem

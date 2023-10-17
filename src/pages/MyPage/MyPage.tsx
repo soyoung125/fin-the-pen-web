@@ -9,15 +9,14 @@ import UserData from "@pages/MyPage/UserData.tsx";
 import { selectGuestMode } from "@redux/slices/commonSlice.tsx";
 import SchedulesData from "@pages/MyPage/SchedulesData.tsx";
 import GuestDataManager from "pages/MyPage/GuestDataManager";
-import { useAuth } from "@app/tanstack-query/useAuth.ts";
 import { useRecoilValue } from "recoil";
-import { userState } from "@recoil/user.ts";
+import { useSelector } from "react-redux";
+import { selectUser } from "@redux/slices/userSlice.tsx";
 
 function MyPage() {
   const navigate = useNavigate();
   const guestMode = useAppSelector(selectGuestMode);
-  const { signOut } = useAuth();
-  const user = useRecoilValue(userState);
+  const user = useSelector(selectUser);
 
   const userLogOut = () => {
     if (
@@ -25,7 +24,7 @@ function MyPage() {
         "게스트 계정은 로그아웃 하는 경우 지금까지 작업한 내용이 저장되지 않습니다. 중요한 자료는 미리 백업해주세요. (확인 시 모든 정보 날라감)"
       )
     ) {
-      signOut();
+      alert("로그아웃 기능 구현 예정");
       navigate(PATH.signIn);
     }
   };

@@ -6,10 +6,11 @@ import OptionList from "./popover/OptionList";
 import { useNavigate } from "react-router-dom";
 import PATH from "../../../../../../constants/path";
 import { useRecoilValue } from "recoil";
-import { userState } from "@recoil/user.ts";
+import { useSelector } from "react-redux";
+import { selectUser } from "@redux/slices/userSlice.tsx";
 
 function SearchButton() {
-  const user = useRecoilValue(userState);
+  const user = useSelector(selectUser);
   const navigate = useNavigate();
   const [anchorEl, setAnchorEl] = useState<HTMLButtonElement | null>(null);
   const searchBtn = useRef(null);
