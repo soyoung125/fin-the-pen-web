@@ -3,11 +3,15 @@ import { Box, Button, FormControl, InputAdornment, OutlinedInput, Stack, TextFie
 import { OrganizationInterface } from "@type/common";
 import styled from "styled-components";
 import CalendarTodayOutlinedIcon from '@mui/icons-material/CalendarTodayOutlined';
+import PeriodInput from "@components/fetchPaymentHistory/PeriodInput";
+import OrderByInput from "@components/fetchPaymentHistory/OrderByInput";
+import { useState } from "react";
+import moment from "moment";
 
 interface AssetFilter {
     selected: OrganizationInterface;
-    selectedAccount: { name: string, account: string, startDate: string, endDate: string, orderBy: string };
-    handleClickSerch: () => void;
+    selectedAccount: { name: string, account: string };
+    handleClickSerch: (value: {startDate: string, endDate: string, orderBy: string}) => void;
 }
 
 const Img = styled('img')({
@@ -20,6 +24,34 @@ const Img = styled('img')({
 });
 
 function AssetFilter({ selected, selectedAccount, handleClickSerch }: AssetFilter) {
+    const [isSelectStartDate, setIsSelectStartDate] = useState(false);
+    const [form, setForm] = useState({ startDate: moment().format('YYYY/MM/DD'), endDate: '', orderBy: "0" });
+
+    const handleChangeForm = (state: { target: { id: string, value: string } }) => {
+        setForm({ ...form, [state.target.id]: state.target.value });
+    }
+
+    const changeStartAndEndDate = (date: string) => {
+        setForm({ ...form, startDate: date, endDate: date });
+    };
+
+    const changeDate = (date: string) => {
+        if (isSelectStartDate) {
+            if (moment(date).isAfter(form.endDate)) {
+                changeStartAndEndDate(date);
+            } else {
+                handleChangeForm({ target: { id: "startDate", value: date } });
+            }
+        } else {
+            if (moment(date).isBefore(form.startDate)) {
+                changeStartAndEndDate(date);
+            } else {
+                handleChangeForm({ target: { id: "endDate", value: date } });
+            }
+        }
+        setIsSelectStartDate(!isSelectStartDate);
+    };
+
     return (
         <RoundedPaper my={0}>
             <Stack alignItems="center" spacing={1.5}>
@@ -37,38 +69,11 @@ function AssetFilter({ selected, selectedAccount, handleClickSerch }: AssetFilte
                         }} />
                 </FormControl>
 
-                <Grid container>
-                    <Grid xs="auto" item sx={{ paddingRight: "8px"}}>
-                        <Box sx={{ textAlign: 'center', padding: '8px 12px', border: '1.4px solid var(--main-01, #735BF2)', borderRadius: '4px', fontSize: '14px' }}>조회기간</Box>
-                    </Grid>
-                    <Grid xs item>
-                        <TextField
-                            fullWidth
-                            InputProps={{
-                                endAdornment: <InputAdornment position="end"><CalendarTodayOutlinedIcon fontSize="small" color={selectedAccount.endDate === '' ? 'secondary' : 'primary'} /></InputAdornment>
-                            }}
-                            inputProps={{
-                                style: { textAlign: 'right' },
-                            }}
-                            size="small"
-                            value={`${selectedAccount.startDate}~${selectedAccount.endDate}`}
-                        />
-                    </Grid>
-                </Grid>
+                <PeriodInput startDate={form.startDate} endDate={form.endDate} isSelectStartDate={isSelectStartDate} changeDate={changeDate} />
 
-                <Grid container>
-                    <Grid xs="auto" item sx={{ paddingRight: "8px"}}>
-                        <Box sx={{ textAlign: 'center', padding: '8px 12px', border: '1.4px solid var(--main-01, #735BF2)', borderRadius: '4px', fontSize: '14px' }}>정렬기준</Box>
-                    </Grid>
-                    <Grid xs item sx={{ paddingRight: "8px"}}>
-                        <Button fullWidth variant="contained" sx={{ borderRadius: "4px 4px 0px 0px" }}>최신순</Button>
-                    </Grid>
-                    <Grid xs item>
-                        <Button fullWidth variant="outlined" sx={{ borderRadius: "4px 4px 0px 0px", borderColor: "#A9ACB2", color: "#5B5F67" }}>과거순</Button>
-                    </Grid>
-                </Grid>
+                <OrderByInput selected={form.orderBy} changeDetailInfo={handleChangeForm} />
 
-                <Button fullWidth variant='contained' onClick={handleClickSerch}>확인</Button>
+                <Button fullWidth variant='contained' onClick={() => handleClickSerch(form)}>확인</Button>
             </Stack>
         </RoundedPaper>
     );

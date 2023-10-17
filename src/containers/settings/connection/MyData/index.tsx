@@ -84,12 +84,12 @@ function MyData() {
         setForm({ ...form, [state.target.id]: state.target.value });
     };
 
-    const changeStep = () => setStep(step + 1);
-
     const handleSelectAccount = (name: string, account: string) => {
         setSelectedAccount({ ...selectedAccount, name: name, account: account });
-        changeStep()
+        changeStep();
     }
+
+    const changeStep = () => setStep(step + 1);
 
     const handleClickSerch = async () => {
         // const result = await fetchGetTransavrionList(selectedAccount);
@@ -141,16 +141,17 @@ function MyData() {
             ...form,
         }]);
 
-        if (result) {
-            setContent("자산 연결에 성공했습니다.")
-            const list = await getList();
-            console.log(list);
-        } else if (selected.limit === "-") {
-            setContent(`로그인 정보가 일치하지 않습니다.`)
-        } else {
-            setContent(`로그인 정보가 일치하지 않습니다.\n(${pwdCount}/${selected.limit})`)
-            setPwdCount(pwdCount + 1)
-        }
+        // if (result) {
+        //     setContent("자산 연결에 성공했습니다.")
+        //     const list = await getList();
+        //     console.log(list);
+        // } else if (selected.limit === "-") {
+        //     setContent(`로그인 정보가 일치하지 않습니다.`)
+        // } else {
+        //     setContent(`로그인 정보가 일치하지 않습니다.\n(${pwdCount}/${selected.limit})`)
+        //     setPwdCount(pwdCount + 1)
+        // }
+        setContent("자산 연결에 성공했습니다.")
 
         openAlertModal();
     }
