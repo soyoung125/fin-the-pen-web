@@ -5,7 +5,7 @@ function MockSignIn() {
   const { mockSignIn } = useAuth();
 
   const guestLogin = () => {
-    mockSignIn();
+    alert("미구현 ");
   };
 
   return (

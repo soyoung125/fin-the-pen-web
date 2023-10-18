@@ -3,21 +3,21 @@ import { useNavigate } from "react-router-dom";
 import PATH from "../../constants/path";
 import GuestMode from "./GuestMode.tsx";
 import ScheduleFilterData from "./ScheduleFilterData.tsx";
-import { useAppSelector } from "@redux/hooks.ts";
+import { useAppDispatch, useAppSelector } from "@redux/hooks.ts";
 import ScheduleData from "@pages/MyPage/ScheduleData.tsx";
 import UserData from "@pages/MyPage/UserData.tsx";
 import { selectGuestMode } from "@redux/slices/commonSlice.tsx";
 import SchedulesData from "@pages/MyPage/SchedulesData.tsx";
 import GuestDataManager from "pages/MyPage/GuestDataManager";
-import { useAuth } from "@app/tanstack-query/useAuth.ts";
 import { useRecoilValue } from "recoil";
-import { userState } from "@recoil/user.ts";
+import { useSelector } from "react-redux";
+import { logOut, selectUser } from "@redux/slices/userSlice.tsx";
 
 function MyPage() {
   const navigate = useNavigate();
   const guestMode = useAppSelector(selectGuestMode);
-  const { signOut } = useAuth();
-  const user = useRecoilValue(userState);
+  const user = useSelector(selectUser);
+  const dispatch = useAppDispatch();
 
   const userLogOut = () => {
     if (
@@ -25,14 +25,14 @@ function MyPage() {
         "게스트 계정은 로그아웃 하는 경우 지금까지 작업한 내용이 저장되지 않습니다. 중요한 자료는 미리 백업해주세요. (확인 시 모든 정보 날라감)"
       )
     ) {
-      signOut();
+      dispatch(logOut());
       navigate(PATH.signIn);
     }
   };
 
   return (
     <>
-      {user === undefined ? (
+      {user === null ? (
         <div>로그인이 되어있지 않습니다.</div>
       ) : (
         <Box>

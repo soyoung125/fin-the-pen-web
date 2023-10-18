@@ -5,10 +5,11 @@ import Saving from "./goals/Saving";
 import Personal from "./goals/Personal";
 import PATH from "../../../constants/path";
 import { useRecoilValue } from "recoil";
-import { userState } from "@recoil/user.ts";
+import { useSelector } from "react-redux";
+import { selectUser } from "@redux/slices/userSlice.tsx";
 
 function SavingsGoal() {
-  const user = useRecoilValue(userState);
+  const user = useSelector(selectUser);
   const navigate = useNavigate();
 
   return (

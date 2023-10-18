@@ -1,12 +1,12 @@
 import { SignIn, User } from "@type/auth.tsx";
 import { DOMAIN } from "@api/url.ts";
 import { useMutation } from "@tanstack/react-query";
-import { useSetRecoilState } from "recoil";
-import { userState } from "@recoil/user.ts";
 import { useNavigate } from "react-router-dom";
 import PATH from "../../constants/path.tsx";
 import { setSessionStorage } from "@utils/storage.ts";
 import { SESSION_STORAGE_KEY_TOKEN } from "@api/keys.ts";
+import { useDispatch } from "react-redux";
+import { setUser } from "@redux/slices/userSlice.tsx";
 
 const fetchSignIn = async (credentials: SignIn) => {
   return fetch(`${DOMAIN}/fin-the-pen-web/sign-in`, {
@@ -25,15 +25,15 @@ const generateRandomToken = () => {
 
 export const useAuth = () => {
   // 추후에 토큰 방식으로 수정 예정입니다. 지금은 기존 구조로 진행합니다.
-  const setUser = useSetRecoilState(userState);
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const { mutate, isLoading } = useMutation({
     mutationFn: fetchSignIn,
     onSuccess: async (data) => {
       const user: User | "" = await data.json();
       if (user !== "") {
-        setUser(user);
+        dispatch(setUser(user)); // 수정예정
         generateRandomToken();
         navigate("//");
       } else {

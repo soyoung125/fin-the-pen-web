@@ -12,8 +12,9 @@ import { generateRandomSchedule, handleCreate } from "../domain/schedule";
 import { Schedule, ScheduleDrawerModeValue } from "../../../../types/schedule";
 import { useAppDispatch, useAppSelector } from "../../../../app/redux/hooks";
 import { useRecoilValue } from "recoil";
-import { userState } from "@recoil/user.ts";
 import { User } from "@type/auth.tsx";
+import { useSelector } from "react-redux";
+import { selectUser } from "@redux/slices/userSlice.tsx";
 
 /**
  * 각종 로직들 모듈로 이전 예정
@@ -29,7 +30,7 @@ function ScheduleDrawerFooter({
   handleClose,
 }: ScheduleDrawerFooterProps) {
   const date = useAppSelector(selectDate);
-  const user = useRecoilValue(userState);
+  const user = useSelector(selectUser);
   const guestMode = useAppSelector(selectGuestMode);
   const schedule = useAppSelector(selectSchedule) as Schedule;
   const dispatch = useAppDispatch();
@@ -99,7 +100,7 @@ function ScheduleDrawerFooter({
           disabled={user === undefined}
           onClick={() => handleSubmit()}
         >
-          {user === undefined
+          {user === null
             ? NEED_SIGN_IN
             : `${SCHEDULE_DRAWER.add_schedule[mode]}`}
         </Button>

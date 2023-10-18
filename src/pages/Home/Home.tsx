@@ -19,13 +19,14 @@ import { selectIsBudgetHidden } from "../../app/redux/slices/settingSlice";
 import { useRecoilValue } from "recoil";
 import { isAuthenticatedRepository } from "../../app/recoil/isAuthenticated.ts";
 import { HEADER_MODE } from "@recoil/header.ts";
-import { userState } from "@recoil/user.ts";
+import { useSelector } from "react-redux";
+import { selectUser } from "@redux/slices/userSlice.tsx";
 
 function Home() {
   const dispatch = useAppDispatch();
   const viewMode = useAppSelector(selectViewMode);
   const date = useAppSelector(selectDate);
-  const user = useRecoilValue(userState);
+  const user = useSelector(selectUser);
   const guestMode = useAppSelector(selectGuestMode);
   const isHideBudgetMode = useAppSelector(selectIsBudgetHidden);
   const { setIsAuthenticatedFalse } = useRecoilValue(isAuthenticatedRepository);

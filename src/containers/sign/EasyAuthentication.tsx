@@ -15,7 +15,8 @@ import {
   isAuthenticatedRepository,
   isAuthenticatedState,
 } from "../../app/recoil/isAuthenticated.ts";
-import { userState } from "@recoil/user.ts";
+import { useSelector } from "react-redux";
+import { selectUser } from "@redux/slices/userSlice.tsx";
 
 interface EasyAuthenticationProps {
   handleAuthenticate?: () => void;
@@ -25,7 +26,7 @@ function EasyAuthentication({ handleAuthenticate }: EasyAuthenticationProps) {
   const CHARACTER_LIMIT = 6;
   const isAuthenticated = useRecoilValue(isAuthenticatedState);
   const { setIsAuthenticatedTrue } = useRecoilValue(isAuthenticatedRepository);
-  const user = useRecoilValue(userState);
+  const user = useSelector(selectUser);
   const input = useRef<HTMLInputElement>();
   const [password, setPassword] = useState("");
 

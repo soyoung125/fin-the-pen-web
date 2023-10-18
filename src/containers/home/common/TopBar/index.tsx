@@ -14,15 +14,16 @@ import PATH from "../../../../constants/path";
 import SettingsMode from "./headerMode/SettingsMode";
 import { useRecoilValue } from "recoil";
 import { headerModeState, headerOpenState } from "@recoil/header.ts";
-import { userState } from "@recoil/user.ts";
 import SignMode from "./headerMode/SignMode";
 import SearchMode from "./headerMode/SearchMode";
 import AssetMode from "./headerMode/AssetMode";
+import { useSelector } from "react-redux";
+import { selectUser } from "@redux/slices/userSlice.tsx";
 
 function TopBar() {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
-  const user = useRecoilValue(userState);
+  const user = useSelector(selectUser);
   const isHeaderOpen = useRecoilValue(headerOpenState);
   const headerMode = useRecoilValue(headerModeState);
   const popupSetting = useAppSelector(selectSavingPopUpSetting);
@@ -56,7 +57,7 @@ function TopBar() {
             direction="row"
             justifyContent="space-between"
             alignItems="flex-end"
-            sx={{ height: 70, paddingX: '12px' }}
+            sx={{ height: 70, paddingX: "12px" }}
           >
             {headerMode === "home" && <HomeMode />}
             {headerMode === "analysis" && <AnalysisMode />}

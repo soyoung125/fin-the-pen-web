@@ -10,11 +10,12 @@ import useHeader from "../../hooks/useHeader";
 import { useRecoilValue } from "recoil";
 import { isAuthenticatedRepository } from "../../app/recoil/isAuthenticated.ts";
 import { HEADER_MODE } from "@recoil/header.ts";
-import { userState } from "@recoil/user.ts";
+import { useSelector } from "react-redux";
+import { selectUser } from "@redux/slices/userSlice.tsx";
 
 function AssetManagement() {
   const { schedules } = useSchedule();
-  const user = useRecoilValue(userState);
+  const user = useSelector(selectUser);
   const today = moment();
   const { setIsAuthenticatedFalse } = useRecoilValue(isAuthenticatedRepository);
 
