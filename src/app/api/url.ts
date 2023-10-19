@@ -11,4 +11,4 @@ export const url: { [server: string]: string } = {
 export const DOMAIN =
   process.env.NODE_ENV === "production"
     ? "https://api.foo.com"
-    : "http://localhost:8080";
+    : "/real";
