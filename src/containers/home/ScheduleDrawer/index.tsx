@@ -123,25 +123,7 @@ function ScheduleDrawer({
                 }
               />
               </>
-              : mode === SCHEDULE_DRAWER_MODE.modify ? (
-                <AssetSettings mode={mode} />
-              ) : (
-                <Accordion sx={{ width: "100%" }} expanded={expandAccordion}>
-                  <AccordionSummary
-                    expandIcon={<ExpandMoreIcon />}
-                    onClick={() => handleExpand()}
-                    aria-controls="panel1a-content"
-                    id="panel1a-header"
-                  >
-                    <Typography sx={{ fontWeight: "bold" }}>
-                      {SCHEDULE_DRAWER.set_finance_title}
-                    </Typography>
-                  </AccordionSummary>
-                  <AccordionDetails sx={{ backgroundColor: "#F6F6F6" }}>
-                    <AssetSettings mode={mode} />
-                  </AccordionDetails>
-                </Accordion>
-              )
+              : <AssetSettings mode={mode} />
             }
 
               {/* 자산 설정하기 */}
