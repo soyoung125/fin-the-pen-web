@@ -8,9 +8,7 @@ function AssetSettings({ mode }: {mode: string}) {
     <Stack spacing={2}>
       <SpendingInput mode={mode} />
 
-      <Card>
-        <ImportanceInput />
-      </Card>
+      <ImportanceInput />
 
       <ExclusionInput />
     </Stack>
