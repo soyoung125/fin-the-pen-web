@@ -59,10 +59,13 @@ function ScheduleDrawer({
     mode !== SCHEDULE_DRAWER_MODE.create
   );
   const [snackbarOpen, setSnackbarOpen] = useState(true);
+  const [viewMode, setViewMode] = useState("schedule");
 
   const handleExpand = () => {
     setExpandAccordion(!expandAccordion);
   };
+
+  const changeViewMode = (mode: string) => setViewMode(mode);
 
   useEffect(() => {
     if (data) {
@@ -102,6 +105,8 @@ function ScheduleDrawer({
             <Stack justifyContent="space-between" spacing={2} m={1}>
               <ScheduleDrawerHeader mode={mode} handleClose={handleClose} />
 
+              {viewMode === "schedule"
+              ? <>
               {/* 이벤트 제목 */}
               <NameInput />
 
@@ -117,9 +122,8 @@ function ScheduleDrawer({
                   mode === SCHEDULE_DRAWER_MODE.create ? "" : schedule.category
                 }
               />
-
-              {/* 자산 설정하기 */}
-              {mode === SCHEDULE_DRAWER_MODE.modify ? (
+              </>
+              : mode === SCHEDULE_DRAWER_MODE.modify ? (
                 <AssetSettings mode={mode} />
               ) : (
                 <Accordion sx={{ width: "100%" }} expanded={expandAccordion}>
@@ -137,10 +141,32 @@ function ScheduleDrawer({
                     <AssetSettings mode={mode} />
                   </AccordionDetails>
                 </Accordion>
-              )}
+              )
+            }
+
+              {/* 자산 설정하기 */}
+              {/* {mode === SCHEDULE_DRAWER_MODE.modify ? (
+                <AssetSettings mode={mode} />
+              ) : (
+                <Accordion sx={{ width: "100%" }} expanded={expandAccordion}>
+                  <AccordionSummary
+                    expandIcon={<ExpandMoreIcon />}
+                    onClick={() => handleExpand()}
+                    aria-controls="panel1a-content"
+                    id="panel1a-header"
+                  >
+                    <Typography sx={{ fontWeight: "bold" }}>
+                      {SCHEDULE_DRAWER.set_finance_title}
+                    </Typography>
+                  </AccordionSummary>
+                  <AccordionDetails sx={{ backgroundColor: "#F6F6F6" }}>
+                    <AssetSettings mode={mode} />
+                  </AccordionDetails>
+                </Accordion>
+              )} */}
 
               {/* 제출 버튼 */}
-              <ScheduleDrawerFooter mode={mode} handleClose={handleClose} />
+              <ScheduleDrawerFooter mode={mode} viewMode={viewMode} changeViewMode={changeViewMode} handleClose={handleClose} />
             </Stack>
           </Box>
         )}
