@@ -6,9 +6,7 @@ import SpendingInput from './SpendingInput';
 function AssetSettings({ mode }: {mode: string}) {
   return (
     <Stack spacing={1}>
-      <Card>
-        <SpendingInput mode={mode} />
-      </Card>
+      <SpendingInput mode={mode} />
       <Card>
         <ImportanceInput />
       </Card>
