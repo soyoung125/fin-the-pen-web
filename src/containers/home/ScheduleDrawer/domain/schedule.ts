@@ -105,9 +105,9 @@ export const updateSpendingType = (
 export const updateExclusion = (
   dispatch: Dispatch,
   schedule: Schedule | null,
-  state: React.ChangeEvent<HTMLInputElement>
+  state: boolean,
 ) => {
-  dispatch(setDrawerSchedule({ ...schedule, exclusion: state.target.checked }));
+  dispatch(setDrawerSchedule({ ...schedule, exclusion: state }));
 };
 
 // 안쓰는 함수 같음
