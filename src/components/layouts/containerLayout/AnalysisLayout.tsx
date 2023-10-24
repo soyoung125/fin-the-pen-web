@@ -6,23 +6,21 @@ import EasyAuthentication from "../../../containers/sign/EasyAuthentication";
 import { selectedDate } from "@redux/slices/scheduleSlice.tsx";
 import { useAppDispatch, useAppSelector } from "@redux/hooks.ts";
 import { selectIsBudgetHidden } from "@redux/slices/settingSlice.ts";
-import { useRecoilValue } from "recoil";
-import {
-  isAuthenticatedRepository,
-  isAuthenticatedState,
-} from "@recoil/isAuthenticated.ts";
+
 import AnalysisHeader from "@containers/analysis/AnalysisHeader.tsx";
+import {
+  selectIsAuthenticated,
+  setIsAuthenticatedFalse,
+} from "@redux/slices/commonSlice.tsx";
 
 function AnalysisLayout() {
-  const isAuthenticated = useRecoilValue(isAuthenticatedState);
-  const { setIsAuthenticatedFalse } = useRecoilValue(isAuthenticatedRepository);
-
+  const isAuthenticated = useAppSelector(selectIsAuthenticated);
   const isHideBudgetMode = useAppSelector(selectIsBudgetHidden);
   const dispatch = useAppDispatch();
 
   useEffect(() => {
     if (isHideBudgetMode) {
-      setIsAuthenticatedFalse();
+      dispatch(setIsAuthenticatedFalse());
     }
     dispatch(selectedDate(moment(new Date())));
   }, []);

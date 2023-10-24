@@ -20,30 +20,20 @@ import {
 } from "../../../constants/schedule.tsx";
 import { changeViewMode, selectDate } from "@redux/slices/scheduleSlice.tsx";
 import { useAppDispatch, useAppSelector } from "@redux/hooks.ts";
-import { useRecoilValue } from "recoil";
 import {
-  bottomDrawerOpenRepository,
-  bottomDrawerOpenState,
-} from "@recoil/bottomDrawer.ts";
-import {
-  bottomBarOpenState,
-  bottomTabMenuRepository,
-  bottomTabMenuState,
-} from "@recoil/bottomTabMenu.ts";
+  selectBottomBarOpen,
+  selectBottomDrawerTabMenu,
+  setBottomDrawerTabMenu,
+} from "@redux/slices/commonSlice.tsx";
 
 function BottomBar() {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
 
   const date = useAppSelector(selectDate);
-  const bottomTabMenu = useRecoilValue(bottomTabMenuState);
-  const bottomBarOpen = useRecoilValue(bottomBarOpenState)
-  const { openBottomTabMenu } = useRecoilValue(bottomTabMenuRepository);
-
-  const isBottomDrawerOpen = useRecoilValue(bottomDrawerOpenState);
-  const { openBottomDrawer, closeBottomDrawer } = useRecoilValue(
-    bottomDrawerOpenRepository
-  );
+  const bottomTabMenu = useAppSelector(selectBottomDrawerTabMenu);
+  const bottomBarOpen = useAppSelector(selectBottomBarOpen);
+  const [isBottomDrawerOpen, setIsBottomDrawerOpen] = useState(false);
 
   const [drawerWidth, setDrawerWidth] = useState(0);
   const [startTime, setStartTime] = useState("09");
@@ -61,7 +51,7 @@ function BottomBar() {
       <BottomNavigation
         value={bottomTabMenu}
         onChange={(event, newValue) => {
-          openBottomTabMenu(newValue);
+          dispatch(setBottomDrawerTabMenu(newValue));
         }}
         sx={{
           position: "fixed",
@@ -70,7 +60,7 @@ function BottomBar() {
           right: 0,
           paddingBottom: 2,
           zIndex: 10,
-          display: bottomBarOpen? 'flex' : 'none',
+          display: bottomBarOpen ? "flex" : "none",
         }}
       >
         <BottomNavigationAction
@@ -89,7 +79,7 @@ function BottomBar() {
         <BottomNavigationAction
           label=""
           icon={<AddCircleIcon />}
-          onClick={openBottomDrawer}
+          onClick={() => setIsBottomDrawerOpen(true)}
         />
         <BottomNavigationAction
           label="자산관리"
@@ -106,7 +96,7 @@ function BottomBar() {
       <Drawer
         open={isBottomDrawerOpen}
         anchor="bottom"
-        onClose={closeBottomDrawer}
+        onClose={() => setIsBottomDrawerOpen(false)}
         // Drawer를 가운데로 위치할 수 있도록 도와줌. resize는 이후 업데이트 예정
         PaperProps={{
           sx: {
@@ -119,7 +109,7 @@ function BottomBar() {
         {/* 이 부분을 범용적으로 사용할 수 있게 만드는 건 어떨까? */}
         <ScheduleDrawer
           setDrawerWidth={setDrawerWidth}
-          handleClose={closeBottomDrawer}
+          handleClose={() => setIsBottomDrawerOpen(false)}
           data={{
             ...INIT_SCHEDULE(moment(date).format("YYYY-MM-DD"), startTime),
           }}

@@ -7,22 +7,22 @@ import ScheduleStatusCard from "../../components/assetManagement/ScheduleStatusC
 import SettingsPaper from "../../components/assetManagement/SettingsPaper";
 import useSchedule from "../../hooks/useSchedule";
 import useHeader from "../../hooks/useHeader";
-import { useRecoilValue } from "recoil";
-import { isAuthenticatedRepository } from "../../app/recoil/isAuthenticated.ts";
-import { HEADER_MODE } from "@recoil/header.ts";
 import { useSelector } from "react-redux";
 import { selectUser } from "@redux/slices/userSlice.tsx";
+import { HEADER_MODE } from "@type/common.tsx";
+import { useAppDispatch } from "@redux/hooks.ts";
+import { setIsAuthenticatedFalse } from "@redux/slices/commonSlice.tsx";
 
 function AssetManagement() {
+  const dispatch = useAppDispatch();
   const { schedules } = useSchedule();
   const user = useSelector(selectUser);
   const today = moment();
-  const { setIsAuthenticatedFalse } = useRecoilValue(isAuthenticatedRepository);
 
   useHeader(true, HEADER_MODE.home);
 
   useEffect(() => {
-    setIsAuthenticatedFalse();
+    dispatch(setIsAuthenticatedFalse());
   }, []);
 
   return (

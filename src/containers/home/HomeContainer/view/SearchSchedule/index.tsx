@@ -23,10 +23,12 @@ import ScheduleDrawer from "../../../ScheduleDrawer";
 import { SCHEDULE_DRAWER_MODE } from "../../../../../constants/schedule";
 import useSchedule from "../../../../../hooks/useSchedule";
 import { fetchFindSchedules } from "../../../../../app/api/API";
-import { useRecoilValue } from "recoil";
-import { bottomTabMenuRepository } from "@app/recoil/bottomTabMenu";
 import useHeader from "@hooks/useHeader";
-import { HEADER_MODE } from "@app/recoil/header";
+import { HEADER_MODE } from "@type/common.tsx";
+import {
+  setBottomBarOpenFalse,
+  setBottomBarOpenTrue,
+} from "@redux/slices/commonSlice.tsx";
 
 function SearchSchedule() {
   const dispatch = useAppDispatch();
@@ -37,14 +39,13 @@ function SearchSchedule() {
   const [resultSchedules, setResultSchedules] = useState<Schedule[]>([]);
 
   const { schedules, selectedSchedule, setSelectedSchedule } = useSchedule();
-  const { openBottomBar, closeBottomBar } = useRecoilValue(bottomTabMenuRepository);
 
   useHeader(true, HEADER_MODE.search);
 
   useEffect(() => {
-    closeBottomBar();
-    return (() => openBottomBar());
-  }, [])
+    dispatch(setBottomBarOpenFalse());
+    return () => dispatch(setBottomBarOpenTrue()) as unknown as void;
+  }, []);
 
   const handleKeyPress = (event: React.KeyboardEvent<HTMLInputElement>) => {
     if (event.key === "Enter") {

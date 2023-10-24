@@ -5,17 +5,20 @@ import { useEffect, useState } from "react";
 import assetManagements from "../../../constants/managements";
 import SwitchingHeader from "../../common/SwitchingHeader";
 import EasyAuthentication from "../../../containers/sign/EasyAuthentication";
-import { useRecoilValue } from "recoil";
-import { isAuthenticatedState } from "@recoil/isAuthenticated.ts";
-import { HEADER_MODE, headerRepository } from "@recoil/header.ts";
 import useHeader from "@hooks/useHeader.tsx";
+import { HEADER_MODE } from "@type/common.tsx";
+import { useAppDispatch, useAppSelector } from "@redux/hooks.ts";
+import {
+  changeHeaderTitle,
+  selectIsAuthenticated,
+} from "@redux/slices/commonSlice.tsx";
 
 function ManagementLayout() {
   const location = useLocation();
   const navigate = useNavigate();
-  const isAuthenticated = useRecoilValue(isAuthenticatedState);
-  const { changeBackAction, changeHeaderTitle } = useRecoilValue(headerRepository);
+  const isAuthenticated = useAppSelector(selectIsAuthenticated);
   const [management, setManagement] = useState(0);
+  const dispatch = useAppDispatch();
 
   useHeader(true, HEADER_MODE.assetManagement);
 
@@ -23,8 +26,9 @@ function ManagementLayout() {
     setManagement(
       assetManagements.findIndex((s) => s.path === location.pathname)
     );
-    changeBackAction(() => () => navigate(-1));
-    changeHeaderTitle("");
+    // changeBackAction(() => () => navigate(-1));
+    navigate(-1);
+    dispatch(changeHeaderTitle(""));
   }, []);
 
   const handleMovement = (type: "+" | "-") => {

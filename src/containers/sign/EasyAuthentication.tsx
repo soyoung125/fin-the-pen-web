@@ -10,13 +10,13 @@ import {
 import { useRef, useState } from "react";
 import LogoCircle from "../../components/common/LogoCircle";
 import CenterBox from "../../components/layouts/CenterBox";
-import { useRecoilValue } from "recoil";
-import {
-  isAuthenticatedRepository,
-  isAuthenticatedState,
-} from "../../app/recoil/isAuthenticated.ts";
 import { useSelector } from "react-redux";
 import { selectUser } from "@redux/slices/userSlice.tsx";
+import { useAppDispatch, useAppSelector } from "@redux/hooks.ts";
+import {
+  selectIsAuthenticated,
+  setIsAuthenticatedTrue,
+} from "@redux/slices/commonSlice.tsx";
 
 interface EasyAuthenticationProps {
   handleAuthenticate?: () => void;
@@ -24,14 +24,14 @@ interface EasyAuthenticationProps {
 
 function EasyAuthentication({ handleAuthenticate }: EasyAuthenticationProps) {
   const CHARACTER_LIMIT = 6;
-  const isAuthenticated = useRecoilValue(isAuthenticatedState);
-  const { setIsAuthenticatedTrue } = useRecoilValue(isAuthenticatedRepository);
+  const dispatch = useAppDispatch();
+  const isAuthenticated = useAppSelector(selectIsAuthenticated);
   const user = useSelector(selectUser);
   const input = useRef<HTMLInputElement>();
   const [password, setPassword] = useState("");
 
   const handleClick = () => {
-    setIsAuthenticatedTrue();
+    dispatch(setIsAuthenticatedTrue());
     handleAuthenticate && handleAuthenticate();
   };
 

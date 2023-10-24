@@ -12,9 +12,8 @@ import {
   selectDate,
   updateAnalyzedData,
 } from "../../../app/redux/slices/scheduleSlice";
-import { AnalysisData } from "../../../types/common";
+import { AnalysisData, HEADER_MODE } from "../../../types/common";
 import { useAppDispatch } from "../../../app/redux/hooks";
-import { HEADER_MODE } from "@recoil/header.ts";
 
 function AnalysisContainer() {
   const dispatch = useAppDispatch();

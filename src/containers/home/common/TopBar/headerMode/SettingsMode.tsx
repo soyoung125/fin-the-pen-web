@@ -1,18 +1,14 @@
-import { Stack, Box } from '@mui/material';
-import BackButton from '../buttons/BackButton';
-import { useRecoilValue } from 'recoil';
-import { headerTitleState } from '@app/recoil/header';
+import { Stack, Box } from "@mui/material";
+import BackButton from "../buttons/BackButton";
+import { useAppSelector } from "@redux/hooks.ts";
+import { selectHeaderTitle } from "@redux/slices/commonSlice.tsx";
 
 function SettingsMode() {
-  const title = useRecoilValue(headerTitleState);
+  const title = useAppSelector(selectHeaderTitle);
   return (
     <>
       {/* 헤더 좌측 메뉴 */}
-      <Stack
-        direction="row"
-        justifyContent="space-between"
-        alignItems="center"
-      >
+      <Stack direction="row" justifyContent="space-between" alignItems="center">
         <BackButton />
         <Box sx={{ fontSize: "18px", fontWeight: "500" }}>{title}</Box>
       </Stack>

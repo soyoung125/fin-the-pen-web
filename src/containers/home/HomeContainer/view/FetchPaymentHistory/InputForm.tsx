@@ -11,12 +11,15 @@ import {
   BANK_ORGANIZATION,
   CARD_ORGANIZATION,
 } from "../../../../../constants/organizations";
-import { useRecoilValue } from "recoil";
-import { bottomTabMenuRepository } from "@app/recoil/bottomTabMenu";
 import useHeader from "@hooks/useHeader";
-import { HEADER_MODE } from "@app/recoil/header";
 import OrderByInput from "@components/fetchPaymentHistory/OrderByInput";
 import PeriodInput from "@components/fetchPaymentHistory/PeriodInput";
+import { HEADER_MODE } from "@type/common.tsx";
+import {
+  setBottomBarOpenFalse,
+  setBottomBarOpenTrue,
+} from "@redux/slices/commonSlice.tsx";
+import { useAppDispatch } from "@redux/hooks.ts";
 
 interface InputFormProps {
   selected: string;
@@ -43,14 +46,14 @@ function InputForm({
   changeStartAndEndDate,
 }: InputFormProps) {
   const [isSelectStartDate, setIsSelectStartDate] = useState(false);
-  const { openBottomBar, closeBottomBar } = useRecoilValue(bottomTabMenuRepository);
+  const dispatch = useAppDispatch();
 
   useHeader(true, HEADER_MODE.search);
 
   useEffect(() => {
-    closeBottomBar();
-    return (() => openBottomBar());
-  }, [])
+    dispatch(setBottomBarOpenFalse());
+    return () => dispatch(setBottomBarOpenTrue()) as unknown as void;
+  }, []);
 
   const organizations =
     selected === "card" ? CARD_ORGANIZATION : BANK_ORGANIZATION;
@@ -133,9 +136,17 @@ function InputForm({
         }}
       />
 
-      <PeriodInput startDate={form.startDate} endDate={form.endDate} isSelectStartDate={isSelectStartDate} changeDate={changeDate} />
+      <PeriodInput
+        startDate={form.startDate}
+        endDate={form.endDate}
+        isSelectStartDate={isSelectStartDate}
+        changeDate={changeDate}
+      />
 
-      <OrderByInput selected={form.orderBy} changeDetailInfo={changeDetailInfo} />
+      <OrderByInput
+        selected={form.orderBy}
+        changeDetailInfo={changeDetailInfo}
+      />
     </Stack>
   );
 }

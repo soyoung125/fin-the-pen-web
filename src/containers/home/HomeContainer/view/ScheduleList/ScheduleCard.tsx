@@ -12,7 +12,10 @@ import LockIcon from "@mui/icons-material/Lock";
 import { grey } from "@mui/material/colors";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { deleteSelectedSchedule } from "@utils/tools.ts";
-import { selectGuestMode } from "@redux/slices/commonSlice.tsx";
+import {
+  selectGuestMode,
+  setBottomBarOpenFalse,
+} from "@redux/slices/commonSlice.tsx";
 import CategoryTypeBadge from "../../../../../components/common/CategoryTypeBadge";
 import { Schedule } from "@type/schedule.tsx";
 import { Category } from "../../../../../constants/categories.tsx";
@@ -22,8 +25,6 @@ import { NOT_AVAILABLE } from "../../../../../constants/messages.tsx";
 import { selectIsBudgetHidden } from "@redux/slices/settingSlice.ts";
 import useModal from "../../../../../hooks/useModal";
 import AlertModal from "../../../../../components/common/AlertModal";
-import { useRecoilValue } from "recoil";
-import { bottomDrawerOpenRepository } from "@recoil/bottomDrawer.ts";
 
 interface ScheduleCardProps {
   schedule: Schedule;
@@ -46,7 +47,6 @@ function ScheduleCard({
   const isSameWithRecommend =
     +schedule.expected_spending === recommendedSpendingAmount;
   const color = isSpend ? "#5AC8FA" : "#FA5A5A";
-  const { closeBottomDrawer } = useRecoilValue(bottomDrawerOpenRepository);
 
   const {
     modalOpen: alertModalOpen,
@@ -54,9 +54,7 @@ function ScheduleCard({
     closeModal: closeAlertModal,
   } = useModal();
 
-  const handleClose = () => {
-    closeBottomDrawer();
-  };
+  const handleClose = () => dispatch(setBottomBarOpenFalse());
 
   const handleModifyModal = () => {
     if (!isHideBudgetMode) {
