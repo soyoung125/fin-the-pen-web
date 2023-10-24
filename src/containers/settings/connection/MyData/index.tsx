@@ -5,8 +5,8 @@ import { useAppDispatch, useAppSelector } from "../../../../app/redux/hooks";
 import {
   changeHeaderTitle,
   selectGuestMode,
-  setBottomDrawerOpenFalse,
-  setBottomDrawerOpenTrue,
+  setBottomBarOpenFalse,
+  setBottomBarOpenTrue,
 } from "../../../../app/redux/slices/commonSlice";
 import {
   fetchCreateAccount,
@@ -81,8 +81,8 @@ function MyData() {
   }, [step]);
 
   useEffect(() => {
-    dispatch(setBottomDrawerOpenFalse());
-    return () => dispatch(setBottomDrawerOpenTrue()) as unknown as void;
+    dispatch(setBottomBarOpenFalse());
+    return () => dispatch(setBottomBarOpenTrue()) as unknown as void;
   }, []);
 
   const handleChangeType = (event: React.SyntheticEvent, newValue: number) => {

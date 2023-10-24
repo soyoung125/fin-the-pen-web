@@ -16,8 +16,8 @@ import OrderByInput from "@components/fetchPaymentHistory/OrderByInput";
 import PeriodInput from "@components/fetchPaymentHistory/PeriodInput";
 import { HEADER_MODE } from "@type/common.tsx";
 import {
-  setBottomDrawerOpenFalse,
-  setBottomDrawerOpenTrue,
+  setBottomBarOpenFalse,
+  setBottomBarOpenTrue,
 } from "@redux/slices/commonSlice.tsx";
 import { useAppDispatch } from "@redux/hooks.ts";
 
@@ -51,8 +51,8 @@ function InputForm({
   useHeader(true, HEADER_MODE.search);
 
   useEffect(() => {
-    dispatch(setBottomDrawerOpenFalse());
-    return () => dispatch(setBottomDrawerOpenTrue()) as unknown as void;
+    dispatch(setBottomBarOpenFalse());
+    return () => dispatch(setBottomBarOpenTrue()) as unknown as void;
   }, []);
 
   const organizations =

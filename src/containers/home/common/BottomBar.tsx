@@ -21,7 +21,7 @@ import {
 import { changeViewMode, selectDate } from "@redux/slices/scheduleSlice.tsx";
 import { useAppDispatch, useAppSelector } from "@redux/hooks.ts";
 import {
-  selectBottomDrawerOpen,
+  selectBottomBarOpen,
   selectBottomDrawerTabMenu,
   setBottomDrawerTabMenu,
 } from "@redux/slices/commonSlice.tsx";
@@ -32,7 +32,7 @@ function BottomBar() {
 
   const date = useAppSelector(selectDate);
   const bottomTabMenu = useAppSelector(selectBottomDrawerTabMenu);
-  const bottomBarOpen = useAppSelector(selectBottomDrawerOpen);
+  const bottomBarOpen = useAppSelector(selectBottomBarOpen);
   const [isBottomDrawerOpen, setIsBottomDrawerOpen] = useState(false);
 
   const [drawerWidth, setDrawerWidth] = useState(0);

@@ -26,8 +26,8 @@ import { fetchFindSchedules } from "../../../../../app/api/API";
 import useHeader from "@hooks/useHeader";
 import { HEADER_MODE } from "@type/common.tsx";
 import {
-  setBottomDrawerOpenFalse,
-  setBottomDrawerOpenTrue,
+  setBottomBarOpenFalse,
+  setBottomBarOpenTrue,
 } from "@redux/slices/commonSlice.tsx";
 
 function SearchSchedule() {
@@ -43,8 +43,8 @@ function SearchSchedule() {
   useHeader(true, HEADER_MODE.search);
 
   useEffect(() => {
-    dispatch(setBottomDrawerOpenFalse());
-    return () => dispatch(setBottomDrawerOpenTrue()) as unknown as void;
+    dispatch(setBottomBarOpenFalse());
+    return () => dispatch(setBottomBarOpenTrue()) as unknown as void;
   }, []);
 
   const handleKeyPress = (event: React.KeyboardEvent<HTMLInputElement>) => {

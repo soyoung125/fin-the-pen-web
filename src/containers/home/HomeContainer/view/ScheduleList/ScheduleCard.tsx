@@ -14,7 +14,7 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import { deleteSelectedSchedule } from "@utils/tools.ts";
 import {
   selectGuestMode,
-  setBottomDrawerOpenFalse,
+  setBottomBarOpenFalse,
 } from "@redux/slices/commonSlice.tsx";
 import CategoryTypeBadge from "../../../../../components/common/CategoryTypeBadge";
 import { Schedule } from "@type/schedule.tsx";
@@ -54,7 +54,7 @@ function ScheduleCard({
     closeModal: closeAlertModal,
   } = useModal();
 
-  const handleClose = () => dispatch(setBottomDrawerOpenFalse());
+  const handleClose = () => dispatch(setBottomBarOpenFalse());
 
   const handleModifyModal = () => {
     if (!isHideBudgetMode) {

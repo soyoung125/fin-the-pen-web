@@ -7,7 +7,7 @@ interface CommonState {
   headerMode: HeaderModeType;
   guestMode: boolean;
   headerTitle: HeaderTitleType;
-  bottomDrawerOpen: boolean;
+  bottomBarOpen: boolean;
   bottomDrawerTabMenu: number;
   isAuthenticated: boolean;
 }
@@ -17,7 +17,7 @@ const initialState: CommonState = {
   headerMode: HEADER_MODE.home,
   guestMode: false,
   headerTitle: "",
-  bottomDrawerOpen: true,
+  bottomBarOpen: true,
   bottomDrawerTabMenu: 0,
   isAuthenticated: false,
 };
@@ -48,11 +48,11 @@ export const commonSlice = createSlice({
     changeHeaderTitle: (state, action: PayloadAction<HeaderTitleType>) => {
       state.headerTitle = action.payload;
     },
-    setBottomDrawerOpenTrue: (state) => {
-      state.bottomDrawerOpen = true;
+    setBottomBarOpenTrue: (state) => {
+      state.bottomBarOpen = true;
     },
-    setBottomDrawerOpenFalse: (state) => {
-      state.bottomDrawerOpen = false;
+    setBottomBarOpenFalse: (state) => {
+      state.bottomBarOpen = false;
     },
     setBottomDrawerTabMenu: (state, action) => {
       state.bottomDrawerTabMenu = action.payload;
@@ -72,8 +72,8 @@ export const {
   setGuestModeTrue,
   setGuestModeFalse,
   changeHeaderTitle,
-  setBottomDrawerOpenTrue,
-  setBottomDrawerOpenFalse,
+  setBottomBarOpenTrue,
+  setBottomBarOpenFalse,
   setBottomDrawerTabMenu,
   setIsAuthenticatedTrue,
   setIsAuthenticatedFalse,
@@ -83,8 +83,8 @@ export const selectHeaderOpen = (state: RootState) => state.common.headerOpen;
 export const selectHeaderMode = (state: RootState) => state.common.headerMode;
 export const selectGuestMode = (state: RootState) => state.common.guestMode;
 export const selectHeaderTitle = (state: RootState) => state.common.headerTitle;
-export const selectBottomDrawerOpen = (state: RootState) =>
-  state.common.bottomDrawerOpen;
+export const selectBottomBarOpen = (state: RootState) =>
+  state.common.bottomBarOpen;
 export const selectBottomDrawerTabMenu = (state: RootState) =>
   state.common.bottomDrawerTabMenu;
 export const selectIsAuthenticated = (state: RootState) =>

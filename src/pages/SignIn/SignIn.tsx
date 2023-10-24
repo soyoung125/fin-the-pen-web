@@ -10,8 +10,8 @@ import { selectUser } from "@redux/slices/userSlice.tsx";
 import { HEADER_MODE } from "@type/common.tsx";
 import { useAppDispatch } from "@redux/hooks.ts";
 import {
-  setBottomDrawerOpenFalse,
-  setBottomDrawerOpenTrue,
+  setBottomBarOpenFalse,
+  setBottomBarOpenTrue,
 } from "@redux/slices/commonSlice.tsx";
 
 function SignIn() {
@@ -21,8 +21,8 @@ function SignIn() {
   useHeader(true, HEADER_MODE.sign);
 
   useEffect(() => {
-    dispatch(setBottomDrawerOpenFalse());
-    return () => dispatch(setBottomDrawerOpenTrue()) as unknown as void;
+    dispatch(setBottomBarOpenFalse());
+    return () => dispatch(setBottomBarOpenTrue()) as unknown as void;
   }, []);
 
   return (
