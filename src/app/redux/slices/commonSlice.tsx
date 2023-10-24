@@ -17,7 +17,7 @@ const initialState: CommonState = {
   headerMode: HEADER_MODE.home,
   guestMode: false,
   headerTitle: "",
-  bottomDrawerOpen: false,
+  bottomDrawerOpen: true,
   bottomDrawerTabMenu: 0,
   isAuthenticated: false,
 };

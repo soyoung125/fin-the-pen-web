@@ -23,8 +23,6 @@ import { useAppDispatch, useAppSelector } from "@redux/hooks.ts";
 import {
   selectBottomDrawerOpen,
   selectBottomDrawerTabMenu,
-  setBottomDrawerOpenFalse,
-  setBottomDrawerOpenTrue,
   setBottomDrawerTabMenu,
 } from "@redux/slices/commonSlice.tsx";
 
@@ -35,8 +33,7 @@ function BottomBar() {
   const date = useAppSelector(selectDate);
   const bottomTabMenu = useAppSelector(selectBottomDrawerTabMenu);
   const bottomBarOpen = useAppSelector(selectBottomDrawerOpen);
-
-  const isBottomDrawerOpen = useAppSelector(selectBottomDrawerOpen);
+  const [isBottomDrawerOpen, setIsBottomDrawerOpen] = useState(false);
 
   const [drawerWidth, setDrawerWidth] = useState(0);
   const [startTime, setStartTime] = useState("09");
@@ -82,7 +79,7 @@ function BottomBar() {
         <BottomNavigationAction
           label=""
           icon={<AddCircleIcon />}
-          onClick={() => dispatch(setBottomDrawerOpenTrue())}
+          onClick={() => setIsBottomDrawerOpen(true)}
         />
         <BottomNavigationAction
           label="자산관리"
@@ -99,7 +96,7 @@ function BottomBar() {
       <Drawer
         open={isBottomDrawerOpen}
         anchor="bottom"
-        onClose={() => dispatch(setBottomDrawerOpenFalse())}
+        onClose={() => setIsBottomDrawerOpen(false)}
         // Drawer를 가운데로 위치할 수 있도록 도와줌. resize는 이후 업데이트 예정
         PaperProps={{
           sx: {
@@ -112,7 +109,7 @@ function BottomBar() {
         {/* 이 부분을 범용적으로 사용할 수 있게 만드는 건 어떨까? */}
         <ScheduleDrawer
           setDrawerWidth={setDrawerWidth}
-          handleClose={() => dispatch(setBottomDrawerOpenFalse())}
+          handleClose={() => setIsBottomDrawerOpen(false)}
           data={{
             ...INIT_SCHEDULE(moment(date).format("YYYY-MM-DD"), startTime),
           }}
