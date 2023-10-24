@@ -216,8 +216,8 @@ export const getType = (category: Category) => {
   const type = category.type;
   const nestedType = category.nestedType;
   if (type === "수입" || nestedType === "입금") {
-    return "+";
+    return SCHEDULE_DRAWER.type_plus;
   } else {
-    return "-";
+    return SCHEDULE_DRAWER.type_minus;
   }
 };
