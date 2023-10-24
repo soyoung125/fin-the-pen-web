@@ -26,19 +26,18 @@ import {
   bottomDrawerOpenState,
 } from "@recoil/bottomDrawer.ts";
 import {
-  bottomBarOpenState,
-  bottomTabMenuRepository,
-  bottomTabMenuState,
-} from "@recoil/bottomTabMenu.ts";
+  selectBottomDrawerOpen,
+  selectBottomDrawerTabMenu,
+  setBottomDrawerTabMenu,
+} from "@redux/slices/commonSlice.tsx";
 
 function BottomBar() {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
 
   const date = useAppSelector(selectDate);
-  const bottomTabMenu = useRecoilValue(bottomTabMenuState);
-  const bottomBarOpen = useRecoilValue(bottomBarOpenState)
-  const { openBottomTabMenu } = useRecoilValue(bottomTabMenuRepository);
+  const bottomTabMenu = useAppSelector(selectBottomDrawerTabMenu);
+  const bottomBarOpen = useAppSelector(selectBottomDrawerOpen);
 
   const isBottomDrawerOpen = useRecoilValue(bottomDrawerOpenState);
   const { openBottomDrawer, closeBottomDrawer } = useRecoilValue(
@@ -61,7 +60,7 @@ function BottomBar() {
       <BottomNavigation
         value={bottomTabMenu}
         onChange={(event, newValue) => {
-          openBottomTabMenu(newValue);
+          dispatch(setBottomDrawerTabMenu(newValue));
         }}
         sx={{
           position: "fixed",
@@ -70,7 +69,7 @@ function BottomBar() {
           right: 0,
           paddingBottom: 2,
           zIndex: 10,
-          display: bottomBarOpen? 'flex' : 'none',
+          display: bottomBarOpen ? "flex" : "none",
         }}
       >
         <BottomNavigationAction

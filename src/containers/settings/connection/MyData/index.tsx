@@ -5,6 +5,8 @@ import { useAppDispatch, useAppSelector } from "../../../../app/redux/hooks";
 import {
   changeHeaderTitle,
   selectGuestMode,
+  setBottomDrawerOpenFalse,
+  setBottomDrawerOpenTrue,
 } from "../../../../app/redux/slices/commonSlice";
 import {
   fetchCreateAccount,
@@ -16,8 +18,6 @@ import AccountInput from "./AccountInput";
 import RoundedPaper from "@components/common/RoundedPaper";
 import AssetSelect from "./AssetSelect";
 import AssetFilter from "./AssetFilter";
-import { useRecoilValue } from "recoil";
-import { bottomTabMenuRepository } from "@app/recoil/bottomTabMenu";
 import { useNavigate } from "react-router-dom";
 import useModal from "@hooks/useModal";
 import AlertModal from "@components/common/AlertModal";
@@ -28,9 +28,7 @@ function MyData() {
   const businessType = ["BK", "CD", "ST", "IS"];
   const dispatch = useAppDispatch();
   const guestMode = useAppSelector(selectGuestMode);
-  const { openBottomBar, closeBottomBar } = useRecoilValue(
-    bottomTabMenuRepository
-  );
+
   const {
     modalOpen: alertModalOpen,
     openModal: openAlertModal,
@@ -83,8 +81,8 @@ function MyData() {
   }, [step]);
 
   useEffect(() => {
-    closeBottomBar();
-    return () => openBottomBar();
+    dispatch(setBottomDrawerOpenFalse());
+    return () => dispatch(setBottomDrawerOpenTrue()) as unknown as void;
   }, []);
 
   const handleChangeType = (event: React.SyntheticEvent, newValue: number) => {
