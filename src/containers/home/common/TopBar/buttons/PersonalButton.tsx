@@ -4,7 +4,6 @@ import LoginIcon from "@mui/icons-material/Login";
 import PersonOutlineOutlinedIcon from "@mui/icons-material/PersonOutlineOutlined";
 import RoundedButton from "../../../../../components/common/RoundedButton";
 import PATH from "../../../../../constants/path";
-import { useRecoilValue } from "recoil";
 import { useSelector } from "react-redux";
 import { selectUser } from "@redux/slices/userSlice.tsx";
 

@@ -23,20 +23,16 @@
 
 - 상태관리
     - React
-    - Redux Took Kit (deprecated)
-    - Recoil
-    - TanStack Query
+    - Redux Took Kit
+    - TanStack Query (적용중)
 - 스타일링 라이브러리
     - Material UI
-    - styled-components
     - chart.js
 - Axios
 - React Router Dom
 - vite
-- 테스트
-    - EsLint
-    - Storybook
-    - MSW
+
+- MSW
 
 ## ✅ Features
 

@@ -1,6 +1,10 @@
 import { Box, Button, Stack, Tooltip } from "@mui/material";
 import { NEED_SIGN_IN, NOT_AVAILABLE } from "../../../../constants/messages";
-import { NEED_TITLE, SCHEDULE_DRAWER, VIEW_MODE } from "../../../../constants/schedule";
+import {
+  NEED_TITLE,
+  SCHEDULE_DRAWER,
+  VIEW_MODE,
+} from "../../../../constants/schedule";
 import { selectGuestMode } from "../../../../app/redux/slices/commonSlice";
 import {
   modifySchedule,
@@ -11,7 +15,6 @@ import {
 import { generateRandomSchedule, handleCreate } from "../domain/schedule";
 import { Schedule, ScheduleDrawerModeValue } from "../../../../types/schedule";
 import { useAppDispatch, useAppSelector } from "../../../../app/redux/hooks";
-import { useRecoilValue } from "recoil";
 import { User } from "@type/auth.tsx";
 import { useSelector } from "react-redux";
 import { selectUser } from "@redux/slices/userSlice.tsx";
@@ -113,7 +116,9 @@ function ScheduleDrawerFooter({
             fullWidth
             variant="contained"
             color="warning"
-            onClick={() => dispatch(setDrawerSchedule(generateRandomSchedule(date)))}
+            onClick={() =>
+              dispatch(setDrawerSchedule(generateRandomSchedule(date)))
+            }
           >
             랜덤 데이터 채우기
           </Button>

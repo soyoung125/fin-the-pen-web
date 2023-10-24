@@ -5,7 +5,6 @@ import RoundedButton from "../../../../../../components/common/RoundedButton";
 import OptionList from "./popover/OptionList";
 import { useNavigate } from "react-router-dom";
 import PATH from "../../../../../../constants/path";
-import { useRecoilValue } from "recoil";
 import { useSelector } from "react-redux";
 import { selectUser } from "@redux/slices/userSlice.tsx";
 

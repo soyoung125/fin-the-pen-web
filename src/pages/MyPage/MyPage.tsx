@@ -9,7 +9,6 @@ import UserData from "@pages/MyPage/UserData.tsx";
 import { selectGuestMode } from "@redux/slices/commonSlice.tsx";
 import SchedulesData from "@pages/MyPage/SchedulesData.tsx";
 import GuestDataManager from "pages/MyPage/GuestDataManager";
-import { useRecoilValue } from "recoil";
 import { useSelector } from "react-redux";
 import { logOut, selectUser } from "@redux/slices/userSlice.tsx";
 

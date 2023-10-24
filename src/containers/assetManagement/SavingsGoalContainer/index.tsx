@@ -4,7 +4,6 @@ import { useNavigate } from "react-router-dom";
 import Saving from "./goals/Saving";
 import Personal from "./goals/Personal";
 import PATH from "../../../constants/path";
-import { useRecoilValue } from "recoil";
 import { useSelector } from "react-redux";
 import { selectUser } from "@redux/slices/userSlice.tsx";
 
