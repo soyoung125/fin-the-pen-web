@@ -5,17 +5,18 @@ import { useEffect, useState } from "react";
 import assetManagements from "../../../constants/managements";
 import SwitchingHeader from "../../common/SwitchingHeader";
 import EasyAuthentication from "../../../containers/sign/EasyAuthentication";
-import { useRecoilValue } from "recoil";
-import { isAuthenticatedState } from "@recoil/isAuthenticated.ts";
 import useHeader from "@hooks/useHeader.tsx";
 import { HEADER_MODE } from "@type/common.tsx";
-import { useAppDispatch } from "@redux/hooks.ts";
-import { changeHeaderTitle } from "@redux/slices/commonSlice.tsx";
+import { useAppDispatch, useAppSelector } from "@redux/hooks.ts";
+import {
+  changeHeaderTitle,
+  selectIsAuthenticated,
+} from "@redux/slices/commonSlice.tsx";
 
 function ManagementLayout() {
   const location = useLocation();
   const navigate = useNavigate();
-  const isAuthenticated = useRecoilValue(isAuthenticatedState);
+  const isAuthenticated = useAppSelector(selectIsAuthenticated);
   const [management, setManagement] = useState(0);
   const dispatch = useAppDispatch();
 

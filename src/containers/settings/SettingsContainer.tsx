@@ -13,9 +13,10 @@ import useHeader from "../../hooks/useHeader";
 import { useNavigate } from "react-router-dom";
 import PATH from "../../constants/path";
 import ClickableListItem from "../../components/settings/ClickableListItem";
-import { useRecoilValue } from "recoil";
-import { isAuthenticatedRepository } from "../../app/recoil/isAuthenticated.ts";
-import { changeHeaderTitle } from "@redux/slices/commonSlice.tsx";
+import {
+  changeHeaderTitle,
+  setIsAuthenticatedFalse,
+} from "@redux/slices/commonSlice.tsx";
 import { HEADER_MODE } from "@type/common.tsx";
 
 export default function SettingsContainer() {
@@ -23,14 +24,13 @@ export default function SettingsContainer() {
   const isHideBudgetMode = useAppSelector(selectIsBudgetHidden);
   const userAgent = navigator.userAgent.toLowerCase();
 
-  const { setIsAuthenticatedFalse } = useRecoilValue(isAuthenticatedRepository);
   const dispatch = useAppDispatch();
 
   useHeader(true, HEADER_MODE.settings);
 
   useEffect(() => {
     if (isHideBudgetMode) {
-      setIsAuthenticatedFalse();
+      dispatch(setIsAuthenticatedFalse());
     }
     dispatch(changeHeaderTitle("설정"));
   }, []);
