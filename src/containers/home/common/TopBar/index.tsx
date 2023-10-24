@@ -1,6 +1,8 @@
 import { Box, Stack } from "@mui/material";
 import { useEffect } from "react";
 import {
+  selectHeaderMode,
+  selectHeaderOpen,
   setGuestModeFalse,
   setGuestModeTrue,
 } from "../../../../app/redux/slices/commonSlice";
@@ -12,8 +14,6 @@ import PopupButton from "./buttons/PopupButton";
 import { useNavigate } from "react-router-dom";
 import PATH from "../../../../constants/path";
 import SettingsMode from "./headerMode/SettingsMode";
-import { useRecoilValue } from "recoil";
-import { headerModeState, headerOpenState } from "@recoil/header.ts";
 import SignMode from "./headerMode/SignMode";
 import SearchMode from "./headerMode/SearchMode";
 import AssetMode from "./headerMode/AssetMode";
@@ -24,8 +24,8 @@ function TopBar() {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
   const user = useSelector(selectUser);
-  const isHeaderOpen = useRecoilValue(headerOpenState);
-  const headerMode = useRecoilValue(headerModeState);
+  const isHeaderOpen = useAppSelector(selectHeaderOpen);
+  const headerMode = useAppSelector(selectHeaderMode);
   const popupSetting = useAppSelector(selectSavingPopUpSetting);
 
   useEffect(() => {

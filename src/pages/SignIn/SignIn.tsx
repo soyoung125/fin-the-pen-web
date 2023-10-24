@@ -7,9 +7,9 @@ import useHeader from "../../hooks/useHeader";
 import { useRecoilValue } from "recoil";
 import { bottomTabMenuRepository } from "@app/recoil/bottomTabMenu.ts";
 import { useEffect } from "react";
-import { HEADER_MODE } from "@app/recoil/header.ts";
 import { useSelector } from "react-redux";
 import { selectUser } from "@redux/slices/userSlice.tsx";
+import { HEADER_MODE } from "@type/common.tsx";
 
 function SignIn() {
   const { openBottomBar, closeBottomBar } = useRecoilValue(

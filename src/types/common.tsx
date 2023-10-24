@@ -8,13 +8,16 @@ export interface RouterDOM {
   element: React.ReactNode;
 }
 
-export type HeaderModeValue = HeaderMode[keyof HeaderMode];
+export const HEADER_MODE = {
+  analysis: "analysis",
+  home: "home",
+  settings: "settings",
+  sign: "sign",
+  search: "search",
+  assetManagement: "assetManagement",
+} as const;
 
-export interface HeaderMode {
-  analysis: "analysis";
-  home: "home";
-  settings: "settings";
-}
+export type HeaderModeType = (typeof HEADER_MODE)[keyof typeof HEADER_MODE];
 
 export type AsyncThunkStatusValue = AsyncThunkStatus[keyof AsyncThunkStatus];
 
@@ -89,3 +92,10 @@ export interface OrganizationInterface {
   icon: string;
   limit: number | string;
 }
+
+export type HeaderTitleType =
+  | ""
+  | "설정"
+  | "마이데이터"
+  | "자산연결"
+  | "자산조회";

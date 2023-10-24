@@ -7,7 +7,7 @@ import Version from "./version/Version";
 import Accordion from "../../components/common/accordions/Accordion";
 import AccordionSummary from "../../components/common/accordions/AccordionSummary";
 import AccordionDetails from "../../components/common/accordions/AccordionDetails";
-import { useAppSelector } from "../../app/redux/hooks";
+import { useAppDispatch, useAppSelector } from "../../app/redux/hooks";
 import { selectIsBudgetHidden } from "../../app/redux/slices/settingSlice";
 import useHeader from "../../hooks/useHeader";
 import { useNavigate } from "react-router-dom";
@@ -15,7 +15,8 @@ import PATH from "../../constants/path";
 import ClickableListItem from "../../components/settings/ClickableListItem";
 import { useRecoilValue } from "recoil";
 import { isAuthenticatedRepository } from "../../app/recoil/isAuthenticated.ts";
-import { HEADER_MODE, headerRepository } from "@recoil/header.ts";
+import { changeHeaderTitle } from "@redux/slices/commonSlice.tsx";
+import { HEADER_MODE } from "@type/common.tsx";
 
 export default function SettingsContainer() {
   const navigate = useNavigate();
@@ -23,7 +24,7 @@ export default function SettingsContainer() {
   const userAgent = navigator.userAgent.toLowerCase();
 
   const { setIsAuthenticatedFalse } = useRecoilValue(isAuthenticatedRepository);
-  const { changeHeaderTitle } = useRecoilValue(headerRepository);
+  const dispatch = useAppDispatch();
 
   useHeader(true, HEADER_MODE.settings);
 
@@ -31,7 +32,7 @@ export default function SettingsContainer() {
     if (isHideBudgetMode) {
       setIsAuthenticatedFalse();
     }
-    changeHeaderTitle('설정');
+    dispatch(changeHeaderTitle("설정"));
   }, []);
 
   const clickBank = () => {

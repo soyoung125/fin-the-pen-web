@@ -7,8 +7,6 @@ import { fetchGetTransavrionList } from "@api/API.tsx";
 import RoundedPaper from "../../../../../components/common/RoundedPaper";
 import InputForm from "./InputForm";
 import OptionSelector from "./OptionSelector";
-import { useRecoilValue } from "recoil";
-import { headerRepository } from "@app/recoil/header";
 import { useNavigate } from "react-router-dom";
 
 function FetchPaymentHistory() {
@@ -30,16 +28,16 @@ function FetchPaymentHistory() {
     card: "카드 승인내역 조회",
     account: "은행/계좌 거래내역 조회",
   };
-  const { changeBackAction } = useRecoilValue(headerRepository);
 
   useEffect(() => {
     if (showInput) {
-      changeBackAction(() => () => setShowInput(false))
+      // changeBackAction(() => () => setShowInput(false));
+      setShowInput(false);
     } else {
-      changeBackAction(() => () => navigation(-1))
+      // changeBackAction(() => () => navigation(-1));
+      navigation(-1);
     }
-  }, [showInput])
-
+  }, [showInput]);
 
   const changeDetailInfo = (e: {
     target: { id: string; value: string | number };
@@ -79,17 +77,17 @@ function FetchPaymentHistory() {
   return (
     <Box px={2.5} py={3}>
       <RoundedPaper my={1}>
-      <Box
-        sx={{
-          fontWeight: "bold",
-          fontSize: "20px",
-          textAlign: "center",
-          marginTop: 1,
-          marginBottom: "40px",
-        }}
-      >
-        {showInput ? title[selected] : "My 결제 내역 조회"}
-      </Box>
+        <Box
+          sx={{
+            fontWeight: "bold",
+            fontSize: "20px",
+            textAlign: "center",
+            marginTop: 1,
+            marginBottom: "40px",
+          }}
+        >
+          {showInput ? title[selected] : "My 결제 내역 조회"}
+        </Box>
 
         {showInput ? (
           <InputForm

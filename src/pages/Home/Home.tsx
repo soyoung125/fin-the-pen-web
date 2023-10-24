@@ -18,9 +18,9 @@ import { useAppDispatch, useAppSelector } from "../../app/redux/hooks";
 import { selectIsBudgetHidden } from "../../app/redux/slices/settingSlice";
 import { useRecoilValue } from "recoil";
 import { isAuthenticatedRepository } from "../../app/recoil/isAuthenticated.ts";
-import { HEADER_MODE } from "@recoil/header.ts";
 import { useSelector } from "react-redux";
 import { selectUser } from "@redux/slices/userSlice.tsx";
+import { HEADER_MODE } from "@type/common.tsx";
 
 function Home() {
   const dispatch = useAppDispatch();

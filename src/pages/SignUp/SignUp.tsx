@@ -6,18 +6,20 @@ import SignUpFields from "./SignUpFields.tsx";
 import { useRecoilValue } from "recoil";
 import { bottomTabMenuRepository } from "@app/recoil/bottomTabMenu.ts";
 import { useEffect } from "react";
-import { HEADER_MODE } from "@app/recoil/header.ts";
+import { HEADER_MODE } from "@type/common.tsx";
 
 function SignUp() {
-  const { openBottomBar, closeBottomBar } = useRecoilValue(bottomTabMenuRepository);
+  const { openBottomBar, closeBottomBar } = useRecoilValue(
+    bottomTabMenuRepository
+  );
 
   // useHeader(false);
   useHeader(true, HEADER_MODE.sign);
-  
+
   useEffect(() => {
     closeBottomBar();
-    return (() => openBottomBar());
-  }, [])
+    return () => openBottomBar();
+  }, []);
 
   return (
     <CenterBox>

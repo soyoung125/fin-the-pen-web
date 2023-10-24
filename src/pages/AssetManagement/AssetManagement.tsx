@@ -9,9 +9,9 @@ import useSchedule from "../../hooks/useSchedule";
 import useHeader from "../../hooks/useHeader";
 import { useRecoilValue } from "recoil";
 import { isAuthenticatedRepository } from "../../app/recoil/isAuthenticated.ts";
-import { HEADER_MODE } from "@recoil/header.ts";
 import { useSelector } from "react-redux";
 import { selectUser } from "@redux/slices/userSlice.tsx";
+import { HEADER_MODE } from "@type/common.tsx";
 
 function AssetManagement() {
   const { schedules } = useSchedule();
