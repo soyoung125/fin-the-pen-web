@@ -82,11 +82,12 @@ function ScheduleDrawerFooter({
   };
 
   return (
-    <Stack spacing={3} alignItems="center">
+    <Stack spacing={3}>
       <Box
         sx={{
           borderRadius: "8px",
           backgroundColor: grey[200],
+          marginX: "auto",
         }}
       >
         <Button
@@ -105,7 +106,8 @@ function ScheduleDrawerFooter({
         >
           자산
         </Button>
-      </Box><Stack direction="row" spacing={1}>
+      </Box>
+      <Stack direction="row" spacing={1}>
         {mode === "create" && (
           <Button
             fullWidth
