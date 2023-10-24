@@ -20,14 +20,11 @@ import {
 } from "../../../constants/schedule.tsx";
 import { changeViewMode, selectDate } from "@redux/slices/scheduleSlice.tsx";
 import { useAppDispatch, useAppSelector } from "@redux/hooks.ts";
-import { useRecoilValue } from "recoil";
-import {
-  bottomDrawerOpenRepository,
-  bottomDrawerOpenState,
-} from "@recoil/bottomDrawer.ts";
 import {
   selectBottomDrawerOpen,
   selectBottomDrawerTabMenu,
+  setBottomDrawerOpenFalse,
+  setBottomDrawerOpenTrue,
   setBottomDrawerTabMenu,
 } from "@redux/slices/commonSlice.tsx";
 
@@ -39,10 +36,7 @@ function BottomBar() {
   const bottomTabMenu = useAppSelector(selectBottomDrawerTabMenu);
   const bottomBarOpen = useAppSelector(selectBottomDrawerOpen);
 
-  const isBottomDrawerOpen = useRecoilValue(bottomDrawerOpenState);
-  const { openBottomDrawer, closeBottomDrawer } = useRecoilValue(
-    bottomDrawerOpenRepository
-  );
+  const isBottomDrawerOpen = useAppSelector(selectBottomDrawerOpen);
 
   const [drawerWidth, setDrawerWidth] = useState(0);
   const [startTime, setStartTime] = useState("09");
@@ -88,7 +82,7 @@ function BottomBar() {
         <BottomNavigationAction
           label=""
           icon={<AddCircleIcon />}
-          onClick={openBottomDrawer}
+          onClick={() => dispatch(setBottomDrawerOpenTrue())}
         />
         <BottomNavigationAction
           label="자산관리"
@@ -105,7 +99,7 @@ function BottomBar() {
       <Drawer
         open={isBottomDrawerOpen}
         anchor="bottom"
-        onClose={closeBottomDrawer}
+        onClose={() => dispatch(setBottomDrawerOpenFalse())}
         // Drawer를 가운데로 위치할 수 있도록 도와줌. resize는 이후 업데이트 예정
         PaperProps={{
           sx: {
@@ -118,7 +112,7 @@ function BottomBar() {
         {/* 이 부분을 범용적으로 사용할 수 있게 만드는 건 어떨까? */}
         <ScheduleDrawer
           setDrawerWidth={setDrawerWidth}
-          handleClose={closeBottomDrawer}
+          handleClose={() => dispatch(setBottomDrawerOpenFalse())}
           data={{
             ...INIT_SCHEDULE(moment(date).format("YYYY-MM-DD"), startTime),
           }}

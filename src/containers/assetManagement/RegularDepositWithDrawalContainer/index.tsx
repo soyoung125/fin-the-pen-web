@@ -14,8 +14,8 @@ import { Schedule } from "@type/schedule.tsx";
 import { makeGroupForRegularData } from "@utils/tools.ts";
 import useSchedule from "../../../hooks/useSchedule";
 import useModal from "../../../hooks/useModal";
-import { useRecoilValue } from "recoil";
-import { bottomDrawerOpenState } from "@recoil/bottomDrawer.ts";
+import { useAppSelector } from "@redux/hooks.ts";
+import { selectBottomDrawerOpen } from "@redux/slices/commonSlice.tsx";
 
 interface DataInterface {
   [prop: string]: Schedule[];
@@ -27,7 +27,7 @@ interface DataInterface {
 
 function RegularDepositWithdrawal() {
   const navigate = useNavigate();
-  const isBottomDrawerOpen = useRecoilValue(bottomDrawerOpenState);
+  const isBottomDrawerOpen = useAppSelector(selectBottomDrawerOpen);
   const {
     modalOpen: alertModalOpen,
     openModal: openAlertModal,
