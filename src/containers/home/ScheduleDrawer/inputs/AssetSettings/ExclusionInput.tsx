@@ -4,13 +4,15 @@ import { SCHEDULE_DRAWER } from "../../../../../constants/schedule";
 import { selectSchedule } from "../../../../../app/redux/slices/scheduleSlice";
 import { updateExclusion } from "../../domain/schedule";
 import { useAppDispatch } from "../../../../../app/redux/hooks";
+import SwitchButton from "@components/common/SwitchButton";
 
 function ExclusionInput() {
   const dispatch = useAppDispatch();
   const schedule = useSelector(selectSchedule);
+  const exclusion = schedule?.exclusion ? true : false;
 
-  const changeExclustion = (state: React.ChangeEvent<HTMLInputElement>) => {
-    updateExclusion(dispatch, schedule, state);
+  const changeExclustion = () => {
+    updateExclusion(dispatch, schedule, !exclusion);
   };
 
   return (
@@ -18,15 +20,12 @@ function ExclusionInput() {
       direction="row"
       justifyContent="space-between"
       alignItems="center"
-      p={1}
     >
-      <Typography>{SCHEDULE_DRAWER.exclusion_title}</Typography>
+      <Typography sx={{ fontWeight: 500 }}>{SCHEDULE_DRAWER.exclusion_title}</Typography>
       <Stack direction="row" alignItems="center">
-        <Switch
-          id="exclusion"
-          checked={schedule?.exclusion}
-          value={schedule?.exclusion}
-          onChange={changeExclustion}
+        <SwitchButton
+          checked={exclusion}
+          handleChange={changeExclustion}
         />
       </Stack>
     </Stack>

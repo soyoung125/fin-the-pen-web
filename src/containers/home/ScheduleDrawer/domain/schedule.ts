@@ -105,9 +105,9 @@ export const updateSpendingType = (
 export const updateExclusion = (
   dispatch: Dispatch,
   schedule: Schedule | null,
-  state: React.ChangeEvent<HTMLInputElement>
+  state: boolean,
 ) => {
-  dispatch(setDrawerSchedule({ ...schedule, exclusion: state.target.checked }));
+  dispatch(setDrawerSchedule({ ...schedule, exclusion: state }));
 };
 
 // 안쓰는 함수 같음
@@ -216,8 +216,8 @@ export const getType = (category: Category) => {
   const type = category.type;
   const nestedType = category.nestedType;
   if (type === "수입" || nestedType === "입금") {
-    return "+";
+    return SCHEDULE_DRAWER.type_plus;
   } else {
-    return "-";
+    return SCHEDULE_DRAWER.type_minus;
   }
 };

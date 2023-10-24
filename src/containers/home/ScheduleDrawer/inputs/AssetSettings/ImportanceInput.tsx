@@ -17,12 +17,10 @@ function ImportanceInput() {
 
   return (
     <Stack
-      direction="row"
-      justifyContent="space-between"
-      alignItems="center"
-      p={1}
+      spacing={2}
     >
-      <Typography>{SCHEDULE_DRAWER.set_importance_title}</Typography>
+      <Typography sx={{ fontWeight: 500 }}>{SCHEDULE_DRAWER.set_importance_title}</Typography>
+
       <Stack direction="row" alignItems="center" spacing={1}>
         <Button
           variant={
@@ -33,7 +31,11 @@ function ImportanceInput() {
           id="importance"
           value={SCHEDULE_DRAWER.importance_high}
           onClick={changeSchedule}
+          fullWidth
           size="small"
+          sx={{
+            borderRadius: "17px",
+          }}
         >
           {SCHEDULE_DRAWER.importance_high}
         </Button>
@@ -46,7 +48,11 @@ function ImportanceInput() {
           id="importance"
           value={SCHEDULE_DRAWER.importance_middle}
           onClick={changeSchedule}
+          fullWidth
           size="small"
+          sx={{
+            borderRadius: "17px",
+          }}
         >
           {SCHEDULE_DRAWER.importance_middle}
         </Button>
@@ -59,7 +65,11 @@ function ImportanceInput() {
           id="importance"
           value={SCHEDULE_DRAWER.importance_low}
           onClick={changeSchedule}
+          fullWidth
           size="small"
+          sx={{
+            borderRadius: "17px",
+          }}
         >
           {SCHEDULE_DRAWER.importance_low}
         </Button>

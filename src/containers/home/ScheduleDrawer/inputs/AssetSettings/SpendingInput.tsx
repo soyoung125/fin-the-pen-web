@@ -1,4 +1,4 @@
-import { Button, Stack, TextField, Typography } from "@mui/material";
+import { Button, Grid, InputAdornment, OutlinedInput, Stack, TextField, Typography } from "@mui/material";
 import { useSelector } from "react-redux";
 import { SCHEDULE_DRAWER } from "../../../../../constants/schedule";
 import { selectSchedule } from "../../../../../app/redux/slices/scheduleSlice";
@@ -19,64 +19,48 @@ function SpendingInput({ mode }: { mode: string }) {
     });
   };
   return (
-    <Stack
-      direction="row"
-      justifyContent="space-between"
-      alignItems="center"
-      p={1}
+    <Grid
+      container
+      spacing={2}
     >
-      <Typography sx={{ width: "80px" }}>
+      <Grid item xs={12} sx={{ fontWeight: 500 }}>
         {SCHEDULE_DRAWER.set_spending_title}
-      </Typography>
-      <Stack
-        direction="row"
-        justifyContent="end"
-        alignItems="center"
-        spacing={1}
-      >
-        {mode === "create" || schedule?.type === SCHEDULE_DRAWER.type_plus ? (
+      </Grid>
+
+      <Grid item container spacing={1.5}>
+        <Grid item xs={6}>
           <Button
-            variant={
-              schedule?.type === SCHEDULE_DRAWER.type_plus
-                ? "contained"
-                : "outlined"
-            }
-            id="type"
-            value={SCHEDULE_DRAWER.type_plus}
-            onClick={mode === "create" ? changeSchedule : changeSpendingType}
-            size="small"
-            sx={{
-              borderRadius: 5,
-              minWidth: 0,
-              width: "30px",
-              height: "30px",
-            }}
-          >
-            {SCHEDULE_DRAWER.type_plus}
-          </Button>
-        ) : null}
-        {mode === "create" || schedule?.type === SCHEDULE_DRAWER.type_minus ? (
-          <Button
-            variant={
-              schedule?.type === SCHEDULE_DRAWER.type_minus
-                ? "contained"
-                : "outlined"
-            }
+            variant={schedule?.type === SCHEDULE_DRAWER.type_minus ? "contained" : "outlined"}
+            fullWidth
             id="type"
             value={SCHEDULE_DRAWER.type_minus}
             onClick={mode === "create" ? changeSchedule : changeSpendingType}
-            size="small"
             sx={{
-              borderRadius: 5,
-              minWidth: 0,
-              width: "30px",
-              height: "30px",
+              borderRadius: "17px",
             }}
           >
-            {SCHEDULE_DRAWER.type_minus}
+            출금
           </Button>
-        ) : null}
-        <TextField
+        </Grid>
+
+        <Grid item xs={6}>
+          <Button
+            variant={schedule?.type === SCHEDULE_DRAWER.type_plus ? "contained" : "outlined"}
+            fullWidth
+            id="type"
+            value={SCHEDULE_DRAWER.type_plus}
+            onClick={mode === "create" ? changeSchedule : changeSpendingType}
+            sx={{
+              borderRadius: "17px",
+            }}
+          >
+            입금
+          </Button>
+        </Grid>
+      </Grid>
+
+      <Grid item xs={12}>
+        <OutlinedInput
           id="expected_spending"
           value={
             expectedSpending === ""
@@ -91,22 +75,37 @@ function SpendingInput({ mode }: { mode: string }) {
               },
             })
           }
-          label={SCHEDULE_DRAWER.expected_spending}
+          fullWidth
           type="text"
-          onFocus={(e) => e.target.select()}
-          InputLabelProps={{
-            shrink: true,
-          }}
-          sx={{ width: "50%" }}
           size="small"
           inputProps={{
             style: { textAlign: "right" },
             min: 0,
           }}
+          startAdornment={
+            <InputAdornment position="start">
+              <Button
+                variant="contained"
+                size="small"
+                sx={{
+                  borderRadius: "100px",
+                  minWidth: 0,
+                  width: "30px",
+                  height: "30px",
+                }}
+              >
+                {schedule?.type}
+              </Button>
+            </InputAdornment>
+          }
+          endAdornment={
+            <InputAdornment position="end">
+              {SCHEDULE_DRAWER.won}
+            </InputAdornment>
+          }
         />
-        <Typography>{SCHEDULE_DRAWER.won}</Typography>
-      </Stack>
-    </Stack>
+      </Grid>
+    </Grid>
   );
 }
 export default SpendingInput;

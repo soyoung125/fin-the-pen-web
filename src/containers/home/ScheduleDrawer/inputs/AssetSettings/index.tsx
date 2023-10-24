@@ -5,16 +5,12 @@ import SpendingInput from './SpendingInput';
 
 function AssetSettings({ mode }: {mode: string}) {
   return (
-    <Stack spacing={1}>
-      <Card>
-        <SpendingInput mode={mode} />
-      </Card>
-      <Card>
-        <ImportanceInput />
-      </Card>
-      <Card>
-        <ExclusionInput />
-      </Card>
+    <Stack spacing={2}>
+      <SpendingInput mode={mode} />
+
+      <ImportanceInput />
+
+      <ExclusionInput />
     </Stack>
   );
 }
