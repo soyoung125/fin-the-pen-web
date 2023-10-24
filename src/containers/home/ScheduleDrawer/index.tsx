@@ -106,46 +106,25 @@ function ScheduleDrawer({
               <ScheduleDrawerHeader mode={mode} handleClose={handleClose} />
 
               {viewMode === "schedule"
-              ? <>
-              {/* 이벤트 제목 */}
-              <NameInput />
+                ? <>
+                  {/* 이벤트 제목 */}
+                  <NameInput />
 
-              {/* 이벤트 일정 */}
-              <DateInput />
+                  {/* 이벤트 일정 */}
+                  <DateInput />
 
-              {/* 이벤트 반복 설정 */}
-              <RepeatInput />
+                  {/* 이벤트 반복 설정 */}
+                  <RepeatInput />
 
-              {/* 이벤트 카테고리 */}
-              <CategoryInput
-                selected={
-                  mode === SCHEDULE_DRAWER_MODE.create ? "" : schedule.category
-                }
-              />
-              </>
-              : <AssetSettings mode={mode} />
-            }
-
-              {/* 자산 설정하기 */}
-              {/* {mode === SCHEDULE_DRAWER_MODE.modify ? (
-                <AssetSettings mode={mode} />
-              ) : (
-                <Accordion sx={{ width: "100%" }} expanded={expandAccordion}>
-                  <AccordionSummary
-                    expandIcon={<ExpandMoreIcon />}
-                    onClick={() => handleExpand()}
-                    aria-controls="panel1a-content"
-                    id="panel1a-header"
-                  >
-                    <Typography sx={{ fontWeight: "bold" }}>
-                      {SCHEDULE_DRAWER.set_finance_title}
-                    </Typography>
-                  </AccordionSummary>
-                  <AccordionDetails sx={{ backgroundColor: "#F6F6F6" }}>
-                    <AssetSettings mode={mode} />
-                  </AccordionDetails>
-                </Accordion>
-              )} */}
+                  {/* 이벤트 카테고리 */}
+                  <CategoryInput
+                    selected={
+                      mode === SCHEDULE_DRAWER_MODE.create ? "" : schedule.category
+                    }
+                  />
+                </>
+                : <AssetSettings mode={mode} />
+              }
 
               {/* 제출 버튼 */}
               <ScheduleDrawerFooter mode={mode} viewMode={viewMode} changeViewMode={changeViewMode} handleClose={handleClose} />
