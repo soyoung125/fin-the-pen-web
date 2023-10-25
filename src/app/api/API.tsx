@@ -16,7 +16,6 @@ export const fetchCreateSchedule = async (schedule: Schedule) => {
       `${url[server]}/createSchedule`,
       schedule
     );
-    // alert(JSON.stringify(response));
     return response.data;
   } catch (err) {
     alert(err);
@@ -31,7 +30,6 @@ export const fetchDeleteSchedule = async (id: string) => {
       "real"
     );
     const response = await axios.post(`${url[server]}/deleteSchedule`, { id });
-    // alert(JSON.stringify(response));
     return response.data;
   } catch (err) {
     alert(err);
@@ -81,7 +79,7 @@ export const fetchFindSchedules = async (name: string) => {
       "real"
     );
     const response = await axios.post<Schedule[]>(
-      `/${url[server]}/find/contains/name`,
+      `${url[server]}/find/contains/name`,
       { name }
     );
     const result = response.data;
@@ -98,7 +96,7 @@ export const fetchCreateAccount = async (data: any) => {
       LOCAL_STORAGE_KEY_SERVER,
       "real"
     );
-    const response = await axios.post<any>(`/real/codef/accountCreate`, {
+    const response = await axios.post<any>(`${url[server]}/codef/accountCreate`, {
       data,
     });
     const result = response.data;
@@ -130,8 +128,8 @@ export const fetchGetCardList = async (organization: string) => {
       LOCAL_STORAGE_KEY_SERVER,
       "real"
     );
-    const response = await axios.get<any>(`${url[server]}/codef/card/account/card-list`, {
-      params: { organization },
+    const response = await axios.post<any>(`${url[server]}/codef/card/account/card-list`, {
+      organization,
     });
     const result = response.data;
     return result;
