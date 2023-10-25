@@ -54,12 +54,12 @@ function MyData() {
   useEffect(() => {
     if (step === 0) {
       // changeBackAction(() => () => navigate(-1));
-      navigate(-1);
+      // navigate(-1);
       dispatch(changeHeaderTitle("마이데이터"));
       setSelected({ name: "", value: "", icon: "", limit: 0 });
     } else {
       // changeBackAction(() => () => setStep(step - 1));
-      setStep(step - 1);
+      // setStep(step - 1);
     }
     switch (step) {
       case 1:

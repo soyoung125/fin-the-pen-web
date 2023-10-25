@@ -89,7 +89,7 @@ export type ServerState = "real" | "guest";
 export interface OrganizationInterface {
   name: string;
   value: string;
-  icon: string;
+  icon: any;
   limit: number | string;
 }
 
