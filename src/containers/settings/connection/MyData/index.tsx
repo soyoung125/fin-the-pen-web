@@ -28,6 +28,7 @@ function MyData() {
   const businessType = ["BK", "CD", "ST", "IS"];
   const dispatch = useAppDispatch();
   const guestMode = useAppSelector(selectGuestMode);
+  const backButton = document.querySelector("#back_button");
 
   const {
     modalOpen: alertModalOpen,
@@ -52,15 +53,13 @@ function MyData() {
   const [pwdCount, setPwdCount] = useState(1);
 
   useEffect(() => {
+    backButton?.addEventListener("click", handleClickBack);
+
     if (step === 0) {
-      // changeBackAction(() => () => navigate(-1));
-      // navigate(-1);
       dispatch(changeHeaderTitle("마이데이터"));
       setSelected({ name: "", value: "", icon: "", limit: 0 });
-    } else {
-      // changeBackAction(() => () => setStep(step - 1));
-      // setStep(step - 1);
-    }
+    } 
+
     switch (step) {
       case 1:
         dispatch(changeHeaderTitle("자산연결"));
@@ -78,12 +77,27 @@ function MyData() {
         setContent("조회에 성공했습니다.\n홈 화면에 내역을 추가하시겠습니까?");
         break;
     }
+
+    return () => {
+      backButton?.removeEventListener("click", handleClickBack);
+    }
   }, [step]);
 
   useEffect(() => {
     dispatch(setBottomBarOpenFalse());
-    return () => dispatch(setBottomBarOpenTrue()) as unknown as void;
+
+    return () => {
+      dispatch(setBottomBarOpenTrue()) as unknown as void;
+    }
   }, []);
+
+  const handleClickBack = () => {
+    if (step === 0) {
+      navigate(-1);
+    } else {
+      setStep(step - 1);
+    }
+  };
 
   const handleChangeType = (event: React.SyntheticEvent, newValue: number) => {
     setValue(newValue);
@@ -105,6 +119,7 @@ function MyData() {
   };
 
   const changeStep = () => setStep(step + 1);
+  const goFirstStep = () => setStep(0);
 
   const handleClickSerch = async (value: {
     startDate: string;
@@ -115,8 +130,6 @@ function MyData() {
     console.log({ ...value, ...selectedAccount });
     openAlertModal();
   };
-
-  const goFirstStep = () => setStep(0);
 
   const handleClickYes = () => {
     switch (step) {

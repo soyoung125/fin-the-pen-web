@@ -6,7 +6,7 @@ function BackButton() {
   const navigate = useNavigate();
   // 임시로 이렇게 처리해둠
   return (
-    <RoundedButton value="login" onClick={() => navigate(-1)}>
+    <RoundedButton value="back_button" onClick={() => {}}>
       <ArrowBackIosIcon sx={{ color: "#000000" }} />
     </RoundedButton>
   );
