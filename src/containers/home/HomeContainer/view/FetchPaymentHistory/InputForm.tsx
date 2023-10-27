@@ -16,11 +16,10 @@ import OrderByInput from "@components/fetchPaymentHistory/OrderByInput";
 import PeriodInput from "@components/fetchPaymentHistory/PeriodInput";
 import { HEADER_MODE } from "@type/common.tsx";
 import {
-  selectHeaderOpen,
   setBottomBarOpenFalse,
   setBottomBarOpenTrue,
 } from "@redux/slices/commonSlice.tsx";
-import { useAppDispatch, useAppSelector } from "@redux/hooks.ts";
+import { useAppDispatch } from "@redux/hooks.ts";
 
 interface InputFormProps {
   selected: string;
@@ -49,7 +48,6 @@ function InputForm({
   changeShowInput,
 }: InputFormProps) {
   const [isSelectStartDate, setIsSelectStartDate] = useState(false);
-  const headerMode = useAppSelector(selectHeaderOpen)
   const dispatch = useAppDispatch();
 
   useHeader(true, HEADER_MODE.search);

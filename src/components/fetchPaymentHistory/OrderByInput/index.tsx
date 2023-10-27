@@ -7,7 +7,6 @@ interface OrderByInputProps {
     selected: string;
 }
 function OrderByInput({ changeDetailInfo, selected }: OrderByInputProps) {
-    console.log(selected);
     return (
         <InputGrid title="정렬기준">
             <>

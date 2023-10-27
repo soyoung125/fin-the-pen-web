@@ -18,13 +18,11 @@ import AccountInput from "./AccountInput";
 import RoundedPaper from "@components/common/RoundedPaper";
 import AssetSelect from "./AssetSelect";
 import AssetFilter from "./AssetFilter";
-import { useNavigate } from "react-router-dom";
 import useModal from "@hooks/useModal";
 import AlertModal from "@components/common/AlertModal";
 import { OrganizationInterface } from "@type/common";
 
 function MyData() {
-  const navigate = useNavigate();
   const businessType = ["BK", "CD", "ST", "IS"];
   const dispatch = useAppDispatch();
   const guestMode = useAppSelector(selectGuestMode);

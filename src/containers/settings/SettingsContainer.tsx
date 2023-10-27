@@ -10,7 +10,6 @@ import AccordionDetails from "../../components/common/accordions/AccordionDetail
 import { useAppDispatch, useAppSelector } from "../../app/redux/hooks";
 import { selectIsBudgetHidden } from "../../app/redux/slices/settingSlice";
 import useHeader from "../../hooks/useHeader";
-import { useNavigate } from "react-router-dom";
 import PATH from "../../constants/path";
 import ClickableListItem from "../../components/settings/ClickableListItem";
 import {
@@ -20,7 +19,6 @@ import {
 import { HEADER_MODE } from "@type/common.tsx";
 
 export default function SettingsContainer() {
-  const navigate = useNavigate();
   const isHideBudgetMode = useAppSelector(selectIsBudgetHidden);
   const userAgent = navigator.userAgent.toLowerCase();
 
