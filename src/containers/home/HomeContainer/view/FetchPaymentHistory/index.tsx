@@ -1,16 +1,14 @@
 import { Box, Button } from "@mui/material";
 import moment from "moment";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useAppSelector } from "../../../../../app/redux/hooks";
 import { selectGuestMode } from "../../../../../app/redux/slices/commonSlice";
 import { fetchGetTransavrionList } from "@api/API.tsx";
 import RoundedPaper from "../../../../../components/common/RoundedPaper";
 import InputForm from "./InputForm";
 import OptionSelector from "./OptionSelector";
-import { useNavigate } from "react-router-dom";
 
 function FetchPaymentHistory() {
-  const navigation = useNavigate();
   const [selected, setSelected] = useState<string>("card");
   const [showInput, setShowInput] = useState(false);
   const [form, setForm] = useState({
@@ -29,16 +27,6 @@ function FetchPaymentHistory() {
     account: "은행/계좌 거래내역 조회",
   };
 
-  useEffect(() => {
-    if (showInput) {
-      // changeBackAction(() => () => setShowInput(false));
-      setShowInput(false);
-    } else {
-      // changeBackAction(() => () => navigation(-1));
-      navigation(-1);
-    }
-  }, [showInput]);
-
   const changeDetailInfo = (e: {
     target: { id: string; value: string | number };
   }) => {
@@ -50,7 +38,7 @@ function FetchPaymentHistory() {
   };
 
   const changeShowInput = () => {
-    setShowInput(true);
+    setShowInput(!showInput);
   };
 
   const handleSubmit = async () => {
@@ -95,6 +83,7 @@ function FetchPaymentHistory() {
             form={form}
             changeDetailInfo={changeDetailInfo}
             changeStartAndEndDate={changeStartAndEndDate}
+            changeShowInput={changeShowInput}
           />
         ) : (
           <OptionSelector

@@ -37,6 +37,7 @@ interface InputFormProps {
     target: { id: string; value: string | number };
   }) => void;
   changeStartAndEndDate: (date: string) => void;
+  changeShowInput: () => void;
 }
 
 function InputForm({
@@ -44,6 +45,7 @@ function InputForm({
   form,
   changeDetailInfo,
   changeStartAndEndDate,
+  changeShowInput,
 }: InputFormProps) {
   const [isSelectStartDate, setIsSelectStartDate] = useState(false);
   const dispatch = useAppDispatch();
@@ -51,9 +53,25 @@ function InputForm({
   useHeader(true, HEADER_MODE.search);
 
   useEffect(() => {
+    let back_button: Element | null = null;
+
     dispatch(setBottomBarOpenFalse());
-    return () => dispatch(setBottomBarOpenTrue()) as unknown as void;
+
+    (setTimeout(() => {
+      back_button = document.querySelector("#back_button")
+      back_button?.addEventListener("click", handleClickBack);
+    }, 1))
+
+    return () => {
+      dispatch(setBottomBarOpenTrue()) as unknown as void;
+      back_button?.removeEventListener("click", handleClickBack);
+    }
   }, []);
+
+  const handleClickBack = (e: Event) => {
+    e.stopPropagation();
+    changeShowInput();
+  }
 
   const organizations =
     selected === "card" ? CARD_ORGANIZATION : BANK_ORGANIZATION;
