@@ -91,10 +91,9 @@ function MyData() {
     }
   }, []);
 
-  const handleClickBack = () => {
-    if (step === 0) {
-      navigate(-1);
-    } else {
+  const handleClickBack = (e: Event) => {
+    if (step !== 0) {
+      e.stopPropagation();
       setStep(step - 1);
     }
   };
