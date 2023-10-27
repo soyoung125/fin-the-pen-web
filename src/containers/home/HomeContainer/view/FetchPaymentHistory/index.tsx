@@ -29,16 +29,6 @@ function FetchPaymentHistory() {
     account: "은행/계좌 거래내역 조회",
   };
 
-  useEffect(() => {
-    if (showInput) {
-      // changeBackAction(() => () => setShowInput(false));
-      setShowInput(false);
-    } else {
-      // changeBackAction(() => () => navigation(-1));
-      navigation(-1);
-    }
-  }, [showInput]);
-
   const changeDetailInfo = (e: {
     target: { id: string; value: string | number };
   }) => {
@@ -50,7 +40,7 @@ function FetchPaymentHistory() {
   };
 
   const changeShowInput = () => {
-    setShowInput(true);
+    setShowInput(!showInput);
   };
 
   const handleSubmit = async () => {
@@ -95,6 +85,7 @@ function FetchPaymentHistory() {
             form={form}
             changeDetailInfo={changeDetailInfo}
             changeStartAndEndDate={changeStartAndEndDate}
+            changeShowInput={changeShowInput}
           />
         ) : (
           <OptionSelector

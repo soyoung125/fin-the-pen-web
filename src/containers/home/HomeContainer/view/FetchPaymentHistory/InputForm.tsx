@@ -16,10 +16,11 @@ import OrderByInput from "@components/fetchPaymentHistory/OrderByInput";
 import PeriodInput from "@components/fetchPaymentHistory/PeriodInput";
 import { HEADER_MODE } from "@type/common.tsx";
 import {
+  selectHeaderOpen,
   setBottomBarOpenFalse,
   setBottomBarOpenTrue,
 } from "@redux/slices/commonSlice.tsx";
-import { useAppDispatch } from "@redux/hooks.ts";
+import { useAppDispatch, useAppSelector } from "@redux/hooks.ts";
 
 interface InputFormProps {
   selected: string;
@@ -37,6 +38,7 @@ interface InputFormProps {
     target: { id: string; value: string | number };
   }) => void;
   changeStartAndEndDate: (date: string) => void;
+  changeShowInput: () => void;
 }
 
 function InputForm({
@@ -44,16 +46,34 @@ function InputForm({
   form,
   changeDetailInfo,
   changeStartAndEndDate,
+  changeShowInput,
 }: InputFormProps) {
   const [isSelectStartDate, setIsSelectStartDate] = useState(false);
+  const headerMode = useAppSelector(selectHeaderOpen)
   const dispatch = useAppDispatch();
 
   useHeader(true, HEADER_MODE.search);
 
   useEffect(() => {
+    let back_button: Element | null = null;
+
     dispatch(setBottomBarOpenFalse());
-    return () => dispatch(setBottomBarOpenTrue()) as unknown as void;
+
+    (setTimeout(() => {
+      back_button = document.querySelector("#back_button")
+      back_button?.addEventListener("click", handleClickBack);
+    }, 1))
+
+    return () => {
+      dispatch(setBottomBarOpenTrue()) as unknown as void;
+      back_button?.removeEventListener("click", handleClickBack);
+    }
   }, []);
+
+  const handleClickBack = (e: Event) => {
+    e.stopPropagation();
+    changeShowInput();
+  }
 
   const organizations =
     selected === "card" ? CARD_ORGANIZATION : BANK_ORGANIZATION;
