@@ -57,14 +57,16 @@ export const useAuth = () => {
   const mockSignIn = () => {
     alert("게스트 모드로 로그인 합니다.");
     generateRandomToken();
-    setUser({
-      id: 0,
-      user_id: "guest@finthepen.com",
-      name: "guest by msw",
-      bday: "2000-01-01",
-      registerDate: "2023-01-25T14:57:08.023+00:00",
-      phone_number: "010-4413-5698",
-    });
+    dispatch(
+      setUser({
+        id: 0,
+        user_id: "guest@finthepen.com",
+        name: "guest by msw",
+        bday: "2000-01-01",
+        registerDate: "2023-01-25T14:57:08.023+00:00",
+        phone_number: "010-4413-5698",
+      })
+    );
     navigate(PATH.home);
   };
 
