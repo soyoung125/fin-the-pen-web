@@ -9,11 +9,20 @@ import {
   SIGN_UP_SUCCESS,
 } from "../../constants/messages.tsx";
 import { DOMAIN } from "@api/url.ts";
-import { FormEvent } from "react";
+import { FormEvent, useRef, useState } from "react";
 import { SignUp } from "@type/auth.tsx";
 
 function SignUpFields() {
   const navigate = useNavigate();
+  const [isSamePassword, setIsSamePassword] = useState(true);
+  const inputPWd = useRef<HTMLFormElement>(null);
+  const inputPwdCheck = useRef<HTMLFormElement>(null);
+
+  const validatePassword = () =>
+    inputPWd.current?.value === inputPwdCheck.current?.value
+      ? setIsSamePassword(true)
+      : setIsSamePassword(false);
+
   const signUp = async (user: SignUp) => {
     await fetch(`${DOMAIN}/fin-the-pen-web/sign-up`, {
       method: "POST",
@@ -62,17 +71,18 @@ function SignUpFields() {
       sx={{ maxWidth: "400px" }}
     >
       <TextField
-        margin="normal"
+        margin="dense"
         required
         fullWidth
         id="name"
         label="성명"
         name="name"
         autoFocus
+        size="small"
       />
 
       <TextField
-        margin="normal"
+        margin="dense"
         required
         fullWidth
         id="email"
@@ -80,10 +90,13 @@ function SignUpFields() {
         name="email"
         autoComplete="email"
         autoFocus
+        placeholder="email@email.com"
+        size="small"
       />
 
+      <Box mt={1}>비밀번호 입력</Box>
       <TextField
-        margin="normal"
+        margin="dense"
         required
         fullWidth
         name="password"
@@ -91,48 +104,84 @@ function SignUpFields() {
         type="password"
         id="password"
         autoComplete="current-password"
+        size="small"
+        inputRef={inputPWd}
         InputProps={{
           endAdornment: (
             <InputAdornment position="end">
-              <Button variant="contained" size="small" color="success">
+              <Button variant="contained" size="small" color="primary">
                 사용가능
               </Button>
             </InputAdornment>
           ),
         }}
       />
-
       <TextField
-        margin="normal"
+        margin="dense"
+        required
+        fullWidth
+        name="password_check"
+        label="비밀번호 확인"
+        type="password"
+        id="password_check"
+        autoComplete="current-password"
+        size="small"
+        inputRef={inputPwdCheck}
+        onChange={validatePassword}
+        InputProps={{
+          endAdornment: (
+            <InputAdornment position="end">
+              <Button
+                variant="contained"
+                size="small"
+                color={isSamePassword ? "primary" : "warning"}
+              >
+                {isSamePassword ? "동일" : "재입력"}
+              </Button>
+            </InputAdornment>
+          ),
+        }}
+      />
+
+      <Box mt={1}>전화번호 인증</Box>
+      <TextField
+        margin="dense"
         required
         fullWidth
         id="phoneNumber"
         label="전화번호"
         name="phoneNumber"
         autoFocus
+        size="small"
+        placeholder="'-'없이 입력"
         InputProps={{
           endAdornment: (
             <InputAdornment position="end">
-              <Button variant="contained" size="small" color="success">
+              <Button variant="contained" size="small" color="primary">
                 인증완료
               </Button>
             </InputAdornment>
           ),
         }}
       />
-      <Stack direction="row" spacing={1} my={2}>
+      <Box
+        sx={{
+          position: "fixed",
+          display: "flex",
+          bottom: "15px",
+          left: 0,
+          width: "100%",
+        }}
+      >
         <Button
+          type="submit"
           fullWidth
           variant="contained"
-          color="error"
-          onClick={() => navigate(PATH.signIn)}
+          sx={{ marginX: "20px" }}
         >
-          뒤로가기
-        </Button>
-        <Button type="submit" fullWidth variant="contained">
           회원가입
         </Button>
-      </Stack>
+      </Box>
     </Box>
   );
 }
