@@ -164,19 +164,24 @@ function SignUpFields() {
           ),
         }}
       />
-      <Stack direction="row" spacing={1} my={2}>
+      <Box
+        sx={{
+          position: "fixed",
+          display: "flex",
+          bottom: "15px",
+          left: 0,
+          width: "100%",
+        }}
+      >
         <Button
+          type="submit"
           fullWidth
           variant="contained"
-          color="error"
-          onClick={() => navigate(PATH.signIn)}
+          sx={{ marginX: "20px" }}
         >
-          뒤로가기
-        </Button>
-        <Button type="submit" fullWidth variant="contained">
           회원가입
         </Button>
-      </Stack>
+      </Box>
     </Box>
   );
 }
