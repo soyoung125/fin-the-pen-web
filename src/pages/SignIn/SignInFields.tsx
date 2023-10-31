@@ -1,15 +1,18 @@
-import { Box, Button, TextField } from "@mui/material";
-import { FormEvent } from "react";
+import { Box, Button, TextField, IconButton } from "@mui/material";
+import { FormEvent, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { NO_BLANKS } from "../../constants/messages.tsx";
 import PATH from "../../constants/path.tsx";
 import { isObjectValuesEmpty } from "@utils/tools.ts";
 import { useAuth } from "@app/tanstack-query/useAuth.ts";
 import MockSignIn from "@pages/SignIn/MockSignIn.tsx";
+import Visibility from "@mui/icons-material/Visibility";
+import VisibilityOff from "@mui/icons-material/VisibilityOff";
 
 function SignInFields() {
   const navigate = useNavigate();
   const { signIn, isLoading } = useAuth();
+  const [showPassword, setShowPassword] = useState(false);
 
   const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -24,6 +27,12 @@ function SignInFields() {
     } else {
       alert(NO_BLANKS);
     }
+  };
+
+  const handleMouseDownPassword = (
+    event: React.MouseEvent<HTMLButtonElement>,
+  ) => {
+    event.preventDefault();
   };
 
   return (
@@ -50,9 +59,21 @@ function SignInFields() {
           fullWidth
           name="password"
           label="비밀번호"
-          type="password"
+          type={showPassword ? "text" : "password"}
           id="password"
           autoComplete="current-password"
+          InputProps={{
+            endAdornment: (
+              <IconButton
+                aria-label="toggle password visibility"
+                onClick={() => setShowPassword(!showPassword)}
+                onMouseDown={handleMouseDownPassword}
+                edge="end"
+              >
+                {showPassword ? <VisibilityOff /> : <Visibility />}
+              </IconButton>
+            ),
+          }}
         />
 
         <Button
