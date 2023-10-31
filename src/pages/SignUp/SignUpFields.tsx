@@ -1,4 +1,11 @@
-import { Box, Button, InputAdornment, Stack, TextField } from "@mui/material";
+import {
+  Box,
+  Button,
+  InputAdornment,
+  OutlinedInput,
+  Stack,
+  TextField,
+} from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import PATH from "../../constants/path.tsx";
 import { isObjectValuesEmpty } from "@utils/tools.ts";
@@ -62,17 +69,18 @@ function SignUpFields() {
       sx={{ maxWidth: "400px" }}
     >
       <TextField
-        margin="normal"
+        margin="dense"
         required
         fullWidth
         id="name"
         label="성명"
         name="name"
         autoFocus
+        size="small"
       />
 
       <TextField
-        margin="normal"
+        margin="dense"
         required
         fullWidth
         id="email"
@@ -80,10 +88,13 @@ function SignUpFields() {
         name="email"
         autoComplete="email"
         autoFocus
+        placeholder="email@email.com"
+        size="small"
       />
 
+      <Box mt={1}>비밀번호 입력</Box>
       <TextField
-        margin="normal"
+        margin="dense"
         required
         fullWidth
         name="password"
@@ -91,10 +102,11 @@ function SignUpFields() {
         type="password"
         id="password"
         autoComplete="current-password"
+        size="small"
         InputProps={{
           endAdornment: (
             <InputAdornment position="end">
-              <Button variant="contained" size="small" color="success">
+              <Button variant="contained" size="small" color="primary">
                 사용가능
               </Button>
             </InputAdornment>
@@ -102,18 +114,21 @@ function SignUpFields() {
         }}
       />
 
+      <Box mt={1}>전화번호 인증</Box>
       <TextField
-        margin="normal"
+        margin="dense"
         required
         fullWidth
         id="phoneNumber"
         label="전화번호"
         name="phoneNumber"
         autoFocus
+        size="small"
+        placeholder="'-'없이 입력"
         InputProps={{
           endAdornment: (
             <InputAdornment position="end">
-              <Button variant="contained" size="small" color="success">
+              <Button variant="contained" size="small" color="primary">
                 인증완료
               </Button>
             </InputAdornment>

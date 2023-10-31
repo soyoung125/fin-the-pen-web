@@ -24,7 +24,7 @@ function SignUp() {
 
   return (
     <CenterBox>
-      <Stack justifyContent="center" alignItems="center" px={1}>
+      <Stack justifyContent="center" alignItems="center" px={2.5}>
         <Header />
         <SignUpFields />
       </Stack>

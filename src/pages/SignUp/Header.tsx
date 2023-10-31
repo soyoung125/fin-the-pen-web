@@ -3,7 +3,7 @@ import LogoCircle from "@components/common/LogoCircle.tsx";
 
 function Header() {
   return (
-    <Stack mx={2.5} my={3} alignItems="center" spacing={2}>
+    <Stack py={3} alignItems="center" spacing={2}>
       <LogoCircle />
       <Stack my={2}>
         <Typography fontSize={22} fontWeight={700}>
