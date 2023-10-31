@@ -29,10 +29,10 @@ function SignIn() {
     <CenterBox>
       <Stack justifyContent="center" alignItems="center" px={1}>
         {user === null ? ( // 버그 수정 필요
-          <>
+          <Stack justifyContent="center" alignItems="center" px="12px">
             <Header />
             <SignInFields />
-          </>
+          </Stack>
         ) : (
           <div>이미 로그인이 되어있습니다.</div>
         )}

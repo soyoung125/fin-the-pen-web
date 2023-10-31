@@ -35,7 +35,7 @@ function SignInFields() {
         sx={{ maxWidth: "400px" }}
       >
         <TextField
-          margin="normal"
+          margin="dense"
           required
           fullWidth
           id="email"
@@ -45,36 +45,32 @@ function SignInFields() {
           autoFocus
         />
         <TextField
-          margin="normal"
+          margin="dense"
           required
           fullWidth
           name="password"
-          label="Password"
+          label="비밀번호"
           type="password"
           id="password"
           autoComplete="current-password"
         />
 
         <Button
+          sx={{ pl: 0 }}
           onClick={() =>
             alert(
-              "You forget a thousand things every day. Make sure this is one of them :)"
+              "You forget a thousand things every day. Make sure this is one of them :)",
             )
           }
         >
           비밀번호를 잊으셨나요?
         </Button>
 
-        <Button
-          type="submit"
-          fullWidth
-          variant="contained"
-          sx={{ mt: 3, mb: 2 }}
-        >
+        <Button type="submit" fullWidth variant="contained">
           {isLoading ? "로그인 중..." : "로그인"}
         </Button>
 
-        <Button onClick={() => navigate(PATH.signUp)}>
+        <Button onClick={() => navigate(PATH.signUp)} sx={{ pl: 0 }}>
           계정이 없으신가요?
         </Button>
       </Box>
