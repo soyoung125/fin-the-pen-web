@@ -1,9 +1,10 @@
-import { Box, Input, InputAdornment, InputBase } from "@mui/material";
+import { Box, Input, InputAdornment, InputBase, Stack } from "@mui/material";
 import { useSelector } from "react-redux";
 import { SCHEDULE_DRAWER } from "../../../../../constants/schedule";
 import { selectSchedule } from "../../../../../app/redux/slices/scheduleSlice";
 import { updateSchedule } from "../../domain/schedule";
 import { useAppDispatch } from "../../../../../app/redux/hooks";
+import SwitchButton from "@components/common/SwitchButton";
 
 function DateInput() {
   const dispatch = useAppDispatch();
@@ -70,6 +71,14 @@ function DateInput() {
         value={schedule?.date}
         onChange={changeSchedule}
       />
+
+      <Stack direction="row" justifyContent="space-between">
+        <Box>하루종일</Box>
+        <SwitchButton
+          checked={true}
+          handleChange={() => console.log("toggle")}
+        />
+      </Stack>
     </>
   );
 }
