@@ -1,4 +1,4 @@
-import { Stack, TextField } from "@mui/material";
+import { Box, Input, InputAdornment, InputBase } from "@mui/material";
 import { useSelector } from "react-redux";
 import { SCHEDULE_DRAWER } from "../../../../../constants/schedule";
 import { selectSchedule } from "../../../../../app/redux/slices/scheduleSlice";
@@ -10,63 +10,66 @@ function DateInput() {
   const schedule = useSelector(selectSchedule);
 
   const changeSchedule = (
-    state: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>
+    state: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>,
   ) => {
     updateSchedule(dispatch, schedule, state);
   };
 
   return (
     <>
-      <TextField
-        id="date"
-        label={SCHEDULE_DRAWER.date}
+      <Input
         type="date"
-        fullWidth
-        InputLabelProps={{
-          shrink: true,
-        }}
+        id="date"
+        startAdornment={
+          <InputAdornment position="start">
+            <Box sx={{ color: "primary.main", fontWeight: 500 }}>
+              {SCHEDULE_DRAWER.start_time}
+            </Box>
+          </InputAdornment>
+        }
+        endAdornment={
+          <InputAdornment position="start">
+            <InputBase
+              id="start_time"
+              type="time"
+              value={schedule?.start_time}
+              onChange={changeSchedule}
+              inputProps={{
+                style: { textAlign: "right" },
+              }}
+            />
+          </InputAdornment>
+        }
         value={schedule?.date}
         onChange={changeSchedule}
-        size="small"
       />
-      <Stack
-        direction="row"
-        justifyContent="space-between"
-        alignItems="center"
-        spacing={2}
-        sx={{ width: "100%" }}
-      >
-        <TextField
-          id="start_time"
-          label={SCHEDULE_DRAWER.start_time}
-          type="time"
-          InputLabelProps={{
-            shrink: true,
-          }}
-          inputProps={{
-            step: 300, // 5 min
-          }}
-          fullWidth
-          value={schedule?.start_time}
-          onChange={changeSchedule}
-          size="small"
-        />
-        <TextField
-          id="end_time"
-          label={SCHEDULE_DRAWER.end_time}
-          type="time"
-          InputLabelProps={{
-            shrink: true,
-          }}
-          inputProps={{
-            step: 300, // 5 min
-          }}
-          fullWidth
-          value={schedule?.end_time}
-          onChange={changeSchedule}
-          size="small"
-        />
-      </Stack>
+
+      <Input
+        type="date"
+        id="date"
+        startAdornment={
+          <InputAdornment position="start">
+            <Box sx={{ color: "primary.main", fontWeight: 500 }}>
+              {SCHEDULE_DRAWER.end_time}
+            </Box>
+          </InputAdornment>
+        }
+        endAdornment={
+          <InputAdornment position="start">
+            <InputBase
+              id="end_time"
+              type="time"
+              value={schedule?.end_time}
+              onChange={changeSchedule}
+              inputProps={{
+                style: { textAlign: "right" },
+              }}
+            />
+          </InputAdornment>
+        }
+        value={schedule?.date}
+        onChange={changeSchedule}
+      />
     </>
   );
 }
