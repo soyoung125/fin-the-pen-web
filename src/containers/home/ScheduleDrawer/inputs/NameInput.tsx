@@ -26,7 +26,6 @@ function NameInput() {
         }
         value={schedule?.event_name}
         onChange={changeSchedule}
-        sx={{ marginX: 1.5 }}
         inputProps={{
           style: { textAlign: "right" },
         }}

@@ -54,7 +54,6 @@ export default function CategoryInput({ selected }: { selected: string }) {
         }}
         id="category"
         options={[""].concat(CATEGORIES.map((cat) => cat.title))}
-        sx={{ marginX: 1.5 }}
         renderInput={(params) => (
           <TextField
             {...params}

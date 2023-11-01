@@ -97,7 +97,7 @@ function ScheduleDrawer({
                 {CONSUMPTION_ALERTS[random].message}
               </Alert>
             </Snackbar>
-            <Stack justifyContent="space-between" spacing={2} m={1}>
+            <Stack justifyContent="space-between" spacing={2} mx={2.5} mt={1}>
               <ScheduleDrawerHeader value={value} handleChange={handleChange} />
 
               {value === 0 ? (
