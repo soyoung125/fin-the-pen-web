@@ -1,10 +1,4 @@
-import {
-  FormControl,
-  IconButton,
-  InputAdornment,
-  OutlinedInput,
-} from "@mui/material";
-import NotificationsNoneIcon from "@mui/icons-material/NotificationsNone";
+import { Box, FormControl, Input, InputAdornment } from "@mui/material";
 import { useSelector } from "react-redux";
 import { SCHEDULE_DRAWER } from "../../../../constants/schedule";
 import { updateSchedule } from "../domain/schedule";
@@ -19,37 +13,20 @@ function NameInput() {
     updateSchedule(dispatch, schedule, state);
   };
 
-  const changeAlarm = () => {
-    updateSchedule(dispatch, schedule, {
-      target: {
-        id: "alarm",
-        value: !schedule?.alarm,
-      },
-    });
-  };
   return (
     <FormControl fullWidth>
-      <OutlinedInput
+      <Input
         id="event_name"
         startAdornment={
           <InputAdornment position="start">
-            {SCHEDULE_DRAWER.name}
-          </InputAdornment>
-        }
-        endAdornment={
-          <InputAdornment position="end">
-            <IconButton
-              aria-label="toggle password visibility"
-              onClick={changeAlarm}
-              edge="end"
-            >
-              <NotificationsNoneIcon />
-            </IconButton>
+            <Box sx={{ color: "primary.main", fontWeight: 500 }}>
+              {SCHEDULE_DRAWER.name}
+            </Box>
           </InputAdornment>
         }
         value={schedule?.event_name}
         onChange={changeSchedule}
-        size="small"
+        sx={{ marginX: 1.5 }}
         inputProps={{
           style: { textAlign: "right" },
         }}

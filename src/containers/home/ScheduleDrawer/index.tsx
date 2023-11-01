@@ -105,12 +105,6 @@ function ScheduleDrawer({
                   {/* 이벤트 제목 */}
                   <NameInput />
 
-                  {/* 이벤트 일정 */}
-                  <DateInput />
-
-                  {/* 이벤트 반복 설정 */}
-                  <RepeatInput />
-
                   {/* 이벤트 카테고리 */}
                   <CategoryInput
                     selected={
@@ -119,6 +113,12 @@ function ScheduleDrawer({
                         : schedule.category
                     }
                   />
+
+                  {/* 이벤트 일정 */}
+                  <DateInput />
+
+                  {/* 이벤트 반복 설정 */}
+                  <RepeatInput />
                 </>
               ) : (
                 <AssetSettings mode={mode} />
