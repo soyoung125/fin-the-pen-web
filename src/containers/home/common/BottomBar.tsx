@@ -56,7 +56,7 @@ function BottomBar() {
     <>
       <BottomNavigation
         value={bottomTabMenu}
-        onChange={(event, newValue) => {
+        onChange={(event: React.SyntheticEvent, newValue: any) => {
           dispatch(setBottomDrawerTabMenu(newValue));
         }}
         sx={{
