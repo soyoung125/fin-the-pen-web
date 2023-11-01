@@ -23,10 +23,10 @@ export const updateSchedule = (
   schedule: Schedule | null,
   state:
     | React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>
-    | UpdateStateInterface
+    | UpdateStateInterface,
 ) => {
   dispatch(
-    setDrawerSchedule({ ...schedule, [state.target.id]: state.target.value })
+    setDrawerSchedule({ ...schedule, [state.target.id]: state.target.value }),
   );
   if (state.target.id === "start_time") {
     const endTime = moment(state.target.value as string, "HH:mm")
@@ -37,7 +37,7 @@ export const updateSchedule = (
         ...schedule,
         [state.target.id]: state.target.value,
         end_time: endTime,
-      })
+      }),
     );
   }
 };
@@ -46,7 +46,9 @@ export const updateRepeat = (
   dispatch: Dispatch,
   schedule: Schedule | null,
   setOpenDatePickerModal: React.Dispatch<React.SetStateAction<boolean>>,
-  state: SelectChangeEvent<string>
+  state:
+    | SelectChangeEvent<string>
+    | { target: { value: string; name: string } },
 ) => {
   if (
     state.target.name === "repeating_cycle" &&
@@ -57,14 +59,14 @@ export const updateRepeat = (
         ...schedule,
         [state.target.name]: state.target.value,
         repeat_deadline: "없음",
-      })
+      }),
     );
   } else {
     dispatch(
       setDrawerSchedule({
         ...schedule,
         [state.target.name]: state.target.value,
-      })
+      }),
     );
   }
   if (
@@ -78,7 +80,7 @@ export const updateRepeat = (
 export const updateRepeatEndDate = (
   schedule: Schedule | null,
   setRepeatEndDate: React.Dispatch<React.SetStateAction<moment.Moment>>,
-  endDate: moment.Moment | null
+  endDate: moment.Moment | null,
 ) => {
   if (endDate?.isBefore(schedule?.date)) {
     alert("반복 종료일을 다시 선택해주세요.");
@@ -89,15 +91,15 @@ export const updateRepeatEndDate = (
 
 export const updateSpendingType = (
   dispatch: Dispatch,
-  schedule: Schedule | null
+  schedule: Schedule | null,
 ) => {
   if (schedule?.type === SCHEDULE_DRAWER.type_plus) {
     dispatch(
-      setDrawerSchedule({ ...schedule, type: SCHEDULE_DRAWER.type_minus })
+      setDrawerSchedule({ ...schedule, type: SCHEDULE_DRAWER.type_minus }),
     );
   } else {
     dispatch(
-      setDrawerSchedule({ ...schedule, type: SCHEDULE_DRAWER.type_plus })
+      setDrawerSchedule({ ...schedule, type: SCHEDULE_DRAWER.type_plus }),
     );
   }
 };
@@ -132,7 +134,7 @@ export const handleCreate = async (
   user: User | null,
   guestMode: boolean,
   date: moment.Moment,
-  handleClose: () => void
+  handleClose: () => void,
 ) => {
   const scheduleWithUuid = {
     ...schedule,
@@ -147,7 +149,7 @@ export const handleCreate = async (
     }
     let repeatDate = moment(schedule.date).add(
       1,
-      REPEAT_CYCLE[schedule.repeating_cycle]
+      REPEAT_CYCLE[schedule.repeating_cycle],
     );
     while (moment(schedule.repeat_endDate).isSameOrAfter(repeatDate)) {
       // eslint-disable-next-line no-await-in-loop
@@ -159,7 +161,7 @@ export const handleCreate = async (
       dispatch(createSchedule(newData));
       repeatDate = moment(repeatDate).add(
         1,
-        REPEAT_CYCLE[schedule.repeating_cycle]
+        REPEAT_CYCLE[schedule.repeating_cycle],
       );
     }
   }
@@ -172,7 +174,7 @@ export const handleCreate = async (
       getMonthSchedules({
         user_id: user?.user_id || "",
         date: moment(date).format("YYYY-MM"),
-      })
+      }),
     );
   }
   handleClose();
