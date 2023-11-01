@@ -133,14 +133,6 @@ function RepeatInput() {
         />
       </Stack>
 
-      <Stack direction="row" justifyContent="space-between">
-        <Box sx={{ color: "primary.main" }}>기간</Box>
-        <SwitchButton
-          checked={schedule?.repeating_cycle === "없음"}
-          handleChange={() => console.log("기간")}
-        />
-      </Stack>
-
       {/* <Stack
         direction="row"
         justifyContent="space-between"
