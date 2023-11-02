@@ -2,6 +2,8 @@ import {
   LocalizationProvider,
   MobileDatePicker,
   PickersDay,
+  PickersDayProps,
+  koKR,
 } from "@mui/x-date-pickers";
 import { Stack, InputAdornment, TextField, Box, Grid } from "@mui/material";
 import moment from "moment";
@@ -9,6 +11,8 @@ import CalendarTodayOutlinedIcon from "@mui/icons-material/CalendarTodayOutlined
 import { AdapterMoment } from "@mui/x-date-pickers/AdapterMoment";
 import { RenderDayFunction } from "@type/common";
 import InputGrid from "./InputGrid";
+import "moment/locale/zh-cn";
+import { useState } from "react";
 
 interface PeriodInputProps {
   startDate: string;
@@ -23,13 +27,12 @@ function PeriodInput({
   isSelectStartDate,
   changeDate,
 }: PeriodInputProps) {
-  const renderDayInPicker: RenderDayFunction = (
-    day,
-    _value,
-    DayComponentProps,
-  ) => {
+  const [openCalendar, setOpenCalendar] = useState(false);
+
+  const renderDayInPicker = (props: PickersDayProps<moment.Moment>) => {
+    const { day, ...other } = props;
     if (moment(startDate).isSame(endDate)) {
-      return <PickersDay {...DayComponentProps} />;
+      return <PickersDay {...props} />;
     }
     if (moment(startDate).isSame(day)) {
       return (
@@ -41,7 +44,7 @@ function PeriodInput({
             width: "40px",
           }}
           className="Mui-selected"
-          {...DayComponentProps}
+          {...props}
         />
       );
     }
@@ -55,7 +58,7 @@ function PeriodInput({
             width: "40px",
           }}
           className="Mui-selected"
-          {...DayComponentProps}
+          {...props}
         />
       );
     }
@@ -68,62 +71,68 @@ function PeriodInput({
             width: "40px",
           }}
           className="Mui-selected"
-          {...DayComponentProps}
+          {...props}
         />
       );
     }
-    return <PickersDay {...DayComponentProps} />;
+    return <PickersDay {...props} />;
   };
 
   return (
     <InputGrid title="조회기간">
       <Grid xs item>
-        <LocalizationProvider dateAdapter={AdapterMoment}>
+        <LocalizationProvider
+          dateAdapter={AdapterMoment}
+          adapterLocale="zh-cn"
+          localeText={
+            koKR.components.MuiLocalizationProvider.defaultProps.localeText
+          }
+          dateFormats={{ monthAndYear: "YYYY-MM" }}
+        >
           <MobileDatePicker
-          // value={moment(startDate)}
-          // onChange={(newValue) => {
-          //     newValue && changeDate(newValue.format("YYYY-MM-DD"));
-          // }}
-          // ToolbarComponent={() => (
-          //     <Stack direction="row" spacing={1} justifyContent="center" p={2}>
-          //         <Box sx={{ color: isSelectStartDate ? "grey" : "black" }}>
-          //             {startDate}
-          //         </Box>
-          //         <Box>~</Box>
-          //         <Box sx={{ color: isSelectStartDate ? "black" : "grey" }}>
-          //             {endDate}
-          //         </Box>
-          //     </Stack>
-          // )}
-          // renderDay={renderDayInPicker}
-          // componentsProps={{
-          //     actionBar: {
-          //         actions: ["accept"],
-          //     },
-          // }}
-          // renderInput={(params) => (
-          //     <TextField
-          //         {...params}
-          //         fullWidth
-          //         InputProps={{
-          //             endAdornment: (
-          //                 <InputAdornment position="end">
-          //                     <CalendarTodayOutlinedIcon
-          //                         fontSize="small"
-          //                         color={endDate === "" ? "secondary" : "primary"}
-          //                     />
-          //                 </InputAdornment>
-          //             ),
-          //         }}
-          //         inputProps={{
-          //             style: { textAlign: "right" },
-          //         }}
-          //         size="small"
-          //         value={`${startDate}~${endDate}`}
-          //     />
-          // )}
+            value={moment(startDate)}
+            onChange={(newValue) => {
+              newValue && changeDate(newValue.format("YYYY-MM-DD"));
+            }}
+            open={openCalendar}
+            onClose={() => setOpenCalendar(false)}
+            slots={{
+              day: renderDayInPicker,
+            }}
+            slotProps={{
+              textField: {
+                sx: { display: "none" },
+              },
+              actionBar: {
+                actions: ["accept"],
+              },
+              toolbar: {
+                hidden: true,
+              },
+            }}
           />
         </LocalizationProvider>
+        <TextField
+          fullWidth
+          onClick={() => {
+            setOpenCalendar(true);
+          }}
+          InputProps={{
+            endAdornment: (
+              <InputAdornment position="end">
+                <CalendarTodayOutlinedIcon
+                  fontSize="small"
+                  color={endDate === "" ? "secondary" : "primary"}
+                />
+              </InputAdornment>
+            ),
+          }}
+          inputProps={{
+            style: { textAlign: "right" },
+          }}
+          size="small"
+          value={`${startDate}~${endDate}`}
+        />
       </Grid>
     </InputGrid>
   );
