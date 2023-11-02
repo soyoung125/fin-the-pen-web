@@ -1,4 +1,4 @@
-import { Box } from '@mui/material';
+import { Box } from "@mui/material";
 
 interface CalendarBoxProps {
   dateHeight: number;
@@ -7,7 +7,10 @@ interface CalendarBoxProps {
   week: number;
 }
 function CalenderBox({
-  dateHeight, dateSize, children, week,
+  dateHeight,
+  dateSize,
+  children,
+  week,
 }: CalendarBoxProps) {
   const DATE_HEIGHT = dateHeight;
   const DATE_SIZE = dateSize;
@@ -15,70 +18,61 @@ function CalenderBox({
   return (
     <Box
       sx={{
-        '& > div': {
-          minWidth: '100%',
+        ".MuiDateCalendar-root": {
+          minWidth: "100%",
+          minHeight: `calc(30px + 40px + ${DATE_HEIGHT * week}px)`,
         },
-        '& > div > div, & > div > div > div, & .MuiCalendarPicker-root': {
-          width: '100%',
-          minHeight: DATE_HEIGHT * week + 100,
-        },
-        // 헤더 디자인을 위한 css
-        '.MuiCalendarOrClockPicker-root > div': {
-          width: '100%',
-          margin: '0',
-          minHeight: DATE_HEIGHT * week + 100,
-        },
-        '.MuiPickersCalendarHeader-root': {
-          display: 'flex',
-          width: '100vw',
+        ".MuiPickersCalendarHeader-root": {
+          width: "100%",
+          margin: "0",
+          display: "flex",
           paddingX: 2,
         },
-        '.MuiPickersArrowSwitcher-root': {
-          width: '100vw',
-          display: 'inline-flex',
-          justifyContent: 'space-between',
+        ".MuiPickersArrowSwitcher-root": {
+          width: "100vw",
+          display: "inline-flex",
+          justifyContent: "space-between",
         },
-        '.MuiPickersCalendarHeader-label': {
-          textAlign: 'center',
-        },
-        '.MuiPickersArrowSwitcher-spacer': {
-          width: '50vw',
-        },
-        '.MuiPickersCalendarHeader-labelContainer': {
-          position: 'absolute',
+        ".MuiPickersCalendarHeader-labelContainer": {
+          position: "absolute",
           left: 0,
           right: 0,
-          alignItems: 'center',
-          justifyContent: 'center',
+          margin: 0,
+          alignItems: "center",
+          justifyContent: "center",
+        },
+        ".MuiPickersCalendarHeader-switchViewButton": {
+          display: "none",
+          margin: 0,
         },
 
         // 데이 디자인을 위한 css
-        '& .MuiTypography-caption': {
-          width: '100%',
+        "& .MuiTypography-caption": {
+          width: "100%",
           margin: 0,
         },
-        '& .PrivatePickersSlideTransition-root': {
+        ".MuiPickersSlideTransition-root": {
           minHeight: DATE_HEIGHT * week,
         },
-        '& .PrivatePickersSlideTransition-root [role="row"]': {
+        '.MuiDayCalendar-monthContainer [role="row"]': {
           margin: 0,
         },
-        '& .MuiPickersDay-dayWithMargin': {
-          margin: 0,
-        },
-        '& .MuiDayPicker-weekContainer': {
+        // "& .MuiPickersDay-dayWithMargin": {
+        //   margin: 0,
+        // },
+        "& .MuiDayCalendar-weekContainer": {
           height: DATE_HEIGHT,
         },
-        '& .MuiPickersDay-root': {
+        "& .MuiPickersDay-root": {
           width: DATE_SIZE,
           height: DATE_SIZE,
-          marginX: 'auto',
+          marginX: "auto",
         },
-        '& .Mui-selected': {
+        "& .Mui-selected": {
           borderRadius: 2,
-          backgroundColor: 'primary.main',
-          color: 'white',
-          fontWeight: 'bold',
+          backgroundColor: "primary.main",
+          color: "white",
+          fontWeight: "bold",
         },
       }}
     >
