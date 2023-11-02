@@ -1,6 +1,6 @@
 /* eslint-disable no-underscore-dangle */
 /* eslint-disable max-len */
-import { Box, TextField } from "@mui/material";
+import { Box } from "@mui/material";
 import { DateCalendar, LocalizationProvider } from "@mui/x-date-pickers";
 import {
   PickersDay,
@@ -26,7 +26,6 @@ import { makeMarkerData } from "./domain/calender";
 import WeeklyStatement from "./boxes/WeeklyStatement";
 import { selectIsDarkMode } from "../../../../../app/redux/slices/settingSlice";
 import useSchedule from "../../../../../hooks/useSchedule";
-import { RenderDayFunction } from "../../../../../types/common";
 import { Schedule } from "../../../../../types/schedule";
 import { useAppDispatch } from "../../../../../app/redux/hooks";
 import { AdapterMoment } from "@mui/x-date-pickers/AdapterMoment";

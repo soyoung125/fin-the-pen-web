@@ -5,11 +5,10 @@ import {
   PickersDayProps,
   koKR,
 } from "@mui/x-date-pickers";
-import { Stack, InputAdornment, TextField, Box, Grid } from "@mui/material";
+import { InputAdornment, TextField, Grid } from "@mui/material";
 import moment from "moment";
 import CalendarTodayOutlinedIcon from "@mui/icons-material/CalendarTodayOutlined";
 import { AdapterMoment } from "@mui/x-date-pickers/AdapterMoment";
-import { RenderDayFunction } from "@type/common";
 import InputGrid from "./InputGrid";
 import "moment/locale/zh-cn";
 import { useState } from "react";
@@ -21,12 +20,7 @@ interface PeriodInputProps {
   changeDate: (date: string) => void;
 }
 
-function PeriodInput({
-  startDate,
-  endDate,
-  isSelectStartDate,
-  changeDate,
-}: PeriodInputProps) {
+function PeriodInput({ startDate, endDate, changeDate }: PeriodInputProps) {
   const [openCalendar, setOpenCalendar] = useState(false);
 
   const renderDayInPicker = (props: PickersDayProps<moment.Moment>) => {
