@@ -112,17 +112,14 @@ function Calender({ dateHeight }: CalenderProps) {
   };
 
   // 실제 지출 데이터를 불러오기 전이기 때문에 일정 데이터의 지출 데이터 사용중
-  const renderAssetDayPicker: RenderDayFunction = (
-    day,
-    _value,
-    DayComponentProps,
-  ) => {
+  const renderAssetDayPicker = (props: PickersDayProps<moment.Moment>) => {
+    const { day, ...other } = props;
     const weekday = day.format("dd");
     const isSameOrBefore = day.isSameOrBefore(today);
 
     // 오늘이 이달의 마지막 주에 해당하고 후달이 일요일로 시작하지 않은 경우 회색바가 그려지는 문제를 해결하기 위한 코드
     if (!day.isSame(value, "month") && today.isBefore(value)) {
-      return <PickersDay {...DayComponentProps} />;
+      return <PickersDay {...props} />;
     }
 
     // 오늘 이전의 일별 수입/지출, 주별 수입/지출을 표시하기 위한 조건문
@@ -144,12 +141,12 @@ function Calender({ dateHeight }: CalenderProps) {
 
       return (
         <IncomeExpenditureBox
-          key={DayComponentProps.key}
+          key={props.key}
           income={income}
           expenditure={expenditure}
           incomeColor={pink[100]}
           expenditureColor={lightBlue[200]}
-          pickersDay={<PickersDay {...DayComponentProps} />}
+          pickersDay={<PickersDay {...props} />}
         >
           {day.isSame(today, "week") ? (
             // 이번주의 주별 수입/지출 표시
@@ -201,7 +198,7 @@ function Calender({ dateHeight }: CalenderProps) {
     // 뒷날의 일별 수입/지출액 표시
     return (
       <IncomeExpenditureBox
-        key={DayComponentProps.key}
+        key={props.key}
         income={calculateIncomeExpenditure(
           schedules,
           (s: Schedule) => day.isSame(s.date, "day"),
@@ -214,7 +211,7 @@ function Calender({ dateHeight }: CalenderProps) {
         )}
         incomeColor={isSameOrBefore ? pink[100] : grey[500]}
         expenditureColor={isSameOrBefore ? lightBlue[200] : grey[500]}
-        pickersDay={<PickersDay {...DayComponentProps} />}
+        pickersDay={<PickersDay {...props} />}
       />
     );
   };
@@ -243,7 +240,10 @@ function Calender({ dateHeight }: CalenderProps) {
             dispatch(selectedDate(month));
           }}
           slots={{
-            day: renderDayInPicker,
+            day:
+              viewMode === "schedule"
+                ? renderDayInPicker
+                : renderAssetDayPicker,
           }}
           reduceAnimations
         />
