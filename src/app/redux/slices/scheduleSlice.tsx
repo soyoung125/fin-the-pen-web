@@ -8,7 +8,6 @@ import {
   fetchDeleteSchedule,
   fetchMonthSchedules,
 } from "@api/API.tsx";
-import { fetchMockDeleteSchedule } from "@api/mockAPI.tsx";
 import { GetScheduleQuery, Schedule, ViewModeValue } from "@type/schedule.tsx";
 import { ASYNC_THUNK_STATUS } from "../../../constants/common";
 import { AnalysisData, AsyncThunkStatusValue } from "@type/common.tsx";
@@ -72,19 +71,13 @@ export const createSchedule = createAsyncThunk<Schedule, Schedule>(
   }
 );
 
-export const deleteSchedule = createAsyncThunk<
-  string,
-  string,
-  { state: { common: { guestMode: boolean } } }
->("schedule/deleteSchedule", async (id, { getState }) => {
-  const { guestMode } = getState().common;
-  if (guestMode) {
-    const response = await fetchMockDeleteSchedule(id);
+export const deleteSchedule = createAsyncThunk<string, string>(
+  "schedule/deleteSchedule",
+  async (id) => {
+    const response = await fetchDeleteSchedule(id);
     return response.data;
   }
-  await fetchDeleteSchedule(id);
-  return null;
-});
+);
 
 export const scheduleSlice = createSlice({
   name: "schedule",
