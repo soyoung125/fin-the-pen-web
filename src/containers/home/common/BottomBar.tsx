@@ -108,7 +108,6 @@ function BottomBar() {
             maxWidth: "425px",
             left:
               drawerWidth === 425 ? `calc((100dvw - ${drawerWidth}px)/2)` : 0,
-            overflow: "hidden",
             borderTopLeftRadius: "20px",
             borderTopRightRadius: "20px",
           },

@@ -79,7 +79,7 @@ function ScheduleDrawer({
     <div ref={ref}>
       <Box>
         {schedule && (
-          <Box>
+          <Box sx={{ overflow: "scroll" }}>
             <Snackbar
               anchorOrigin={{ vertical: "top", horizontal: "center" }}
               autoHideDuration={5000}
@@ -123,7 +123,6 @@ function ScheduleDrawer({
               ) : (
                 <AssetSettings mode={mode} />
               )}
-              <Tab></Tab>
 
               {/* 제출 버튼 */}
               <ScheduleDrawerFooter mode={mode} handleClose={handleClose} />
@@ -135,3 +134,4 @@ function ScheduleDrawer({
   );
 }
 export default ScheduleDrawer;
+<NameInput />;
