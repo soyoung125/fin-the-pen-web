@@ -77,14 +77,11 @@ export const deleteSchedule = createAsyncThunk<
   string,
   { state: { common: { guestMode: boolean } } }
 >("schedule/deleteSchedule", async (id, { getState }) => {
-  // console.log(id);
   const { guestMode } = getState().common;
   if (guestMode) {
-    // console.log('게스트 모드에서 제거');
     const response = await fetchMockDeleteSchedule(id);
     return response.data;
   }
-  // console.log('일반 모드에서 제거');
   await fetchDeleteSchedule(id);
   return null;
 });
@@ -104,7 +101,7 @@ export const scheduleSlice = createSlice({
     setDrawerSchedule: (state, action) => {
       state.schedule = action.payload;
     },
-    selectedDate: (state, action) => {
+    setSelectedDate: (state, action) => {
       state.date = action.payload;
     },
     updateAnalyzedData: (state) => {
@@ -237,15 +234,6 @@ export const scheduleSlice = createSlice({
           state.schedules = action.payload ?? [];
         }
       )
-      // .addCase(
-      //   createSchedule.fulfilled,
-      //   (state, action: PayloadAction<Schedule>) => {
-      //     // createSchedule 가 끝나면
-      //     if (action.payload !== null) {
-      //       state.schedules.push(action.payload as never); // schedules의 타입이 지정되면 never를 제거할 수 있습니다...!
-      //     }
-      //   }
-      // )
       .addCase(deleteSchedule.fulfilled, (state, action) => {
         // deleteSchedule 가 끝나면
         if (action.payload !== null) {
@@ -259,7 +247,7 @@ export const scheduleSlice = createSlice({
 export const {
   setSchedules,
   setDrawerSchedule,
-  selectedDate,
+  setSelectedDate,
   modifySchedule,
   updateAnalyzedData,
   updateFilter,
@@ -276,8 +264,10 @@ export const selectSchedules = (state: RootState) =>
   );
 export const selectDate = (state: RootState) =>
   (state.schedule as InitialState).date;
-export const selectMonth = (state: RootState) =>
-  (state.schedule as InitialState).date.format("YYYY-MM");
+export const selectMonth = (state: RootState) => {
+  const date = moment((state.schedule as InitialState).date);
+  return date.format("YYYY-MM");
+};
 export const selectFiltered = (state: RootState): string[] =>
   (state.schedule as InitialState).filtered;
 export const selectFilteredDate = (state: RootState) =>

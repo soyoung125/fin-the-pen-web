@@ -3,7 +3,7 @@ import moment from "moment";
 import { useSelector } from "react-redux";
 import {
   selectDate,
-  selectedDate,
+  setSelectedDate,
 } from "../../../../../app/redux/slices/scheduleSlice";
 import { calculateIncomeExpenditure } from "@utils/tools.ts";
 import StatusStack from "../../../../../components/assetManagement/ScheduleStatusCard/StatusStack";
@@ -24,10 +24,10 @@ function MonthlyStatement() {
       <SwitchingHeader
         justifyContent="space-between"
         handleClickLeftArrow={() =>
-          dispatch(selectedDate(moment(date).subtract(1, "months")))
+          dispatch(setSelectedDate(moment(date).subtract(1, "months")))
         }
         handleClickRightArrow={() =>
-          dispatch(selectedDate(moment(date).add(1, "months")))
+          dispatch(setSelectedDate(moment(date).add(1, "months")))
         }
       >
         <Typography variant="h6" sx={{ fontWeight: "bold" }}>{`${moment(
