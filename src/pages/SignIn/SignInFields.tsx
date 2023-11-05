@@ -1,17 +1,17 @@
-import {Box, Button, IconButton, TextField} from "@mui/material";
-import {FormEvent, useState} from "react";
-import {useNavigate} from "react-router-dom";
-import {NO_BLANKS} from "../../constants/messages.tsx";
+import { Box, Button, IconButton, TextField } from "@mui/material";
+import { FormEvent, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { NO_BLANKS } from "../../constants/messages.tsx";
 import PATH from "../../constants/path.tsx";
-import {isObjectValuesEmpty} from "@utils/tools.ts";
-import {useAuth} from "@app/tanstack-query/useAuth.ts";
+import { isObjectValuesEmpty } from "@utils/tools.ts";
+import { useAuth } from "@app/tanstack-query/useAuth.ts";
 import MockSignIn from "@pages/SignIn/MockSignIn.tsx";
 import Visibility from "@mui/icons-material/Visibility";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
 
 function SignInFields() {
   const navigate = useNavigate();
-  const {signIn, isLoading} = useAuth();
+  const { signIn, isLoading } = useAuth();
   const [showPassword, setShowPassword] = useState(false);
 
   const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
@@ -30,7 +30,7 @@ function SignInFields() {
   };
 
   const handleMouseDownPassword = (
-    event: React.MouseEvent<HTMLButtonElement>,
+    event: React.MouseEvent<HTMLButtonElement>
   ) => {
     event.preventDefault();
   };
@@ -41,7 +41,7 @@ function SignInFields() {
         component="form"
         onSubmit={handleSubmit}
         noValidate
-        sx={{maxWidth: "400px"}}
+        sx={{ maxWidth: "400px" }}
       >
         <TextField
           margin="dense"
@@ -70,17 +70,17 @@ function SignInFields() {
                 onMouseDown={handleMouseDownPassword}
                 edge="end"
               >
-                {showPassword ? <VisibilityOff/> : <Visibility/>}
+                {showPassword ? <VisibilityOff /> : <Visibility />}
               </IconButton>
             ),
           }}
         />
 
         <Button
-          sx={{pl: 0}}
+          sx={{ pl: 0 }}
           onClick={() =>
             alert(
-              "You forget a thousand things every day. Make sure this is one of them :)",
+              "You forget a thousand things every day. Make sure this is one of them :)"
             )
           }
         >
@@ -91,12 +91,12 @@ function SignInFields() {
           {isLoading ? "로그인 중..." : "로그인"}
         </Button>
 
-        <Button onClick={() => navigate(PATH.signUp)} sx={{pl: 0}}>
+        <Button onClick={() => navigate(PATH.signUp)} sx={{ pl: 0 }}>
           계정이 없으신가요?
         </Button>
       </Box>
       {/* TODO: production 모드에서도 출력되지 않도록 개선 예정 */}
-      {!isLoading && <MockSignIn/>}
+      {!isLoading && <MockSignIn />}
     </>
   );
 }
