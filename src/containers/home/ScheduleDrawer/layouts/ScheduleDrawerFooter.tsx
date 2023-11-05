@@ -111,7 +111,7 @@ function ScheduleDrawerFooter({
         </Button>
       </Box>
       <Stack direction="row" spacing={1}>
-        {mode === "create" && (
+        {mode === "create" && process.env.NODE_ENV === "development" && (
           <Button
             fullWidth
             variant="contained"
@@ -120,7 +120,7 @@ function ScheduleDrawerFooter({
               dispatch(setDrawerSchedule(generateRandomSchedule(date)))
             }
           >
-            랜덤 데이터 채우기
+            랜덤 일정 채우기(dev)
           </Button>
         )}
         <Tooltip
