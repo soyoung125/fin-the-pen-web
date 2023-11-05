@@ -11,7 +11,6 @@ import SettingsIcon from "@mui/icons-material/Settings";
 import LockIcon from "@mui/icons-material/Lock";
 import { grey } from "@mui/material/colors";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { deleteSelectedSchedule } from "@utils/tools.ts";
 import {
   selectGuestMode,
   setBottomBarOpenFalse,
@@ -20,13 +19,14 @@ import CategoryTypeBadge from "../../../../../components/common/CategoryTypeBadg
 import { Schedule } from "@type/schedule.tsx";
 import { Category } from "../../../../../constants/categories.tsx";
 import { useAppDispatch, useAppSelector } from "@redux/hooks.ts";
-import { modifySchedule, selectDate } from "@redux/slices/scheduleSlice.tsx";
+import { modifySchedule } from "@redux/slices/scheduleSlice.tsx";
 import { NOT_AVAILABLE } from "../../../../../constants/messages.tsx";
 import { selectIsBudgetHidden } from "@redux/slices/settingSlice.ts";
 import useModal from "../../../../../hooks/useModal";
 import AlertModal from "../../../../../components/common/AlertModal";
 import { useSelector } from "react-redux";
 import { selectUser } from "@redux/slices/userSlice.tsx";
+import useSchedule from "@hooks/useSchedule.tsx";
 
 interface ScheduleCardProps {
   schedule: Schedule;
@@ -50,13 +50,14 @@ function ScheduleCard({
     +schedule.expected_spending === recommendedSpendingAmount;
   const color = isSpend ? "#5AC8FA" : "#FA5A5A";
   const user = useSelector(selectUser);
-  const date = useSelector(selectDate);
 
   const {
     modalOpen: alertModalOpen,
     openModal: openAlertModal,
     closeModal: closeAlertModal,
   } = useModal();
+
+  const { deleteSelectedSchedule } = useSchedule();
 
   const handleClose = () => dispatch(setBottomBarOpenFalse());
 
@@ -90,15 +91,8 @@ function ScheduleCard({
           <Button
             variant="contained"
             onClick={() => {
-              if (user) {
-                deleteSelectedSchedule(
-                  user,
-                  date,
-                  dispatch,
-                  schedule,
-                  handleClose
-                );
-              }
+              deleteSelectedSchedule(schedule.id as string);
+              handleClose();
             }}
           >
             <DeleteForeverIcon fontSize="large" />

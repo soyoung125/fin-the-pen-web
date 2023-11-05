@@ -130,12 +130,13 @@ export const handleCreate = async (
   dispatch: AppDispatch,
   schedule: Schedule,
   user: User | null,
-  date: moment.Moment,
+  stringDate: string,
   handleClose: () => void
 ) => {
   if (user === null) {
     return alert("로그인이 필요합니다.");
   }
+  const date = moment(stringDate);
 
   const scheduleWithUuid = {
     ...schedule,
@@ -184,7 +185,8 @@ export const handleCreate = async (
  * @param {*} date
  * @returns schedule
  */
-export const generateRandomSchedule = (date: moment.Moment) => {
+export const generateRandomSchedule = (stringDate: string) => {
+  const date = moment(stringDate);
   const generateRandomString = (num: number) => {
     const characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890";
     let result = "";

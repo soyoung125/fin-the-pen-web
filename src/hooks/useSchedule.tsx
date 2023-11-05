@@ -1,12 +1,15 @@
 import { useSelector } from "react-redux";
 import {
+  deleteSchedule,
+  getMonthSchedules,
   selectDate,
   selectSchedules,
   selectStatus,
-} from "../app/redux/slices/scheduleSlice";
+} from "@redux/slices/scheduleSlice.tsx";
 import { useEffect, useState } from "react";
 import { Schedule } from "../types/schedule.tsx";
-import moment from "moment/moment";
+import { selectUser } from "@redux/slices/userSlice.tsx";
+import { useAppDispatch } from "@redux/hooks.ts";
 
 /**
  * 앞으로 스케쥴에 관련된 로직은 여기에 몰아넣고 꺼내쓰는 방식으로 구현
@@ -18,12 +21,29 @@ const useSchedule = () => {
     null
   );
   const status = useSelector(selectStatus);
-  const date = moment(useSelector(selectDate)).format("YYYY-MM-DD");
+  const dispatch = useAppDispatch();
+  const user = useSelector(selectUser);
+  const date = useSelector(selectDate);
   const [todaySchedules, setTodaySchedules] = useState<Schedule[]>([]);
 
   useEffect(() => {
     setTodaySchedules(schedules.filter((schedule) => schedule.date === date));
   }, [schedules]);
+
+  const deleteSelectedSchedule = async (scheduleId: string) => {
+    if (window.confirm("정말로 삭제 하시겠습니까?")) {
+      console.log(scheduleId);
+      const result = await dispatch(deleteSchedule(scheduleId));
+      if (result && user) {
+        dispatch(
+          getMonthSchedules({
+            user_id: user.user_id,
+            date: date,
+          })
+        );
+      }
+    }
+  };
 
   return {
     status,
@@ -32,6 +52,7 @@ const useSchedule = () => {
     setSelectedSchedule,
     todaySchedules,
     date,
+    deleteSelectedSchedule,
   };
 };
 

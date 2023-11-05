@@ -6,15 +6,10 @@ import {
   SCHEDULE_DRAWER,
   SCHEDULE_DRAWER_MODE,
 } from "../../../../constants/schedule";
-import {
-  selectDate,
-  selectSchedule,
-} from "../../../../app/redux/slices/scheduleSlice";
+import { selectSchedule } from "../../../../app/redux/slices/scheduleSlice";
 import { selectGuestMode } from "../../../../app/redux/slices/commonSlice";
-import { deleteSelectedSchedule } from "@utils/tools.ts";
 import { ScheduleDrawerModeValue } from "../../../../types/schedule";
-import { useAppDispatch } from "../../../../app/redux/hooks";
-import { selectUser } from "@redux/slices/userSlice.tsx";
+import useSchedule from "@hooks/useSchedule.tsx";
 
 interface ScheduleDrawerHeaderProps {
   mode: ScheduleDrawerModeValue;
@@ -25,11 +20,9 @@ function ScheduleDrawerHeader({
   mode,
   handleClose,
 }: ScheduleDrawerHeaderProps) {
-  const dispatch = useAppDispatch();
   const schedule = useSelector(selectSchedule);
   const guestMode = useSelector(selectGuestMode);
-  const user = useSelector(selectUser);
-  const date = useSelector(selectDate);
+  const { deleteSelectedSchedule } = useSchedule();
 
   return (
     <Stack direction="row" alignItems="center" justifyContent="space-between">
@@ -40,14 +33,9 @@ function ScheduleDrawerHeader({
         >
           <Button
             onClick={() => {
-              if (user) {
-                deleteSelectedSchedule(
-                  user,
-                  date,
-                  dispatch,
-                  schedule,
-                  handleClose
-                );
+              if (schedule) {
+                deleteSelectedSchedule(schedule.id as string);
+                handleClose();
               }
             }}
             color="error"

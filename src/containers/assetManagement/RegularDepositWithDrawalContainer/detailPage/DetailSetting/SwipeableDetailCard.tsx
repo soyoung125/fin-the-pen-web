@@ -6,18 +6,13 @@ import SettingsIcon from "@mui/icons-material/Settings";
 import { useState } from "react";
 import moment from "moment";
 import ModifyModal from "./ModifyModal";
-import { deleteSelectedSchedule } from "@utils/tools.ts";
 import RoundedBorderBox from "../../../../../components/common/RoundedBorderBox";
 import AlertModal from "../../../../../components/common/AlertModal";
-import {
-  modifySchedule,
-  selectDate,
-} from "../../../../../app/redux/slices/scheduleSlice";
-import { Schedule } from "../../../../../types/schedule";
-import { useAppDispatch } from "../../../../../app/redux/hooks";
+import { modifySchedule } from "@redux/slices/scheduleSlice.tsx";
+import { Schedule } from "@type/schedule.tsx";
+import { useAppDispatch } from "@redux/hooks.ts";
 import useModal from "../../../../../hooks/useModal";
-import { useSelector } from "react-redux";
-import { selectUser } from "@redux/slices/userSlice.tsx";
+import useSchedule from "@hooks/useSchedule.tsx";
 
 interface SwipeableDetailCardProps {
   data: Schedule[];
@@ -25,8 +20,6 @@ interface SwipeableDetailCardProps {
 
 function SwipeableDetailCard({ data }: SwipeableDetailCardProps) {
   const dispatch = useAppDispatch();
-  const user = useSelector(selectUser);
-  const date = useSelector(selectDate);
   const [settingModalOpen, setSettingModalOpen] = useState(false);
   const schedule = data[0];
   const {
@@ -34,6 +27,7 @@ function SwipeableDetailCard({ data }: SwipeableDetailCardProps) {
     openModal: openAlertModal,
     closeModal: closeAlertModal,
   } = useModal();
+  const { deleteSelectedSchedule } = useSchedule();
 
   // const handleCloseAlert = () => {
   //   setOpenAlertModal(false);
@@ -41,9 +35,8 @@ function SwipeableDetailCard({ data }: SwipeableDetailCardProps) {
 
   const deleteData = () => {
     data.map((d) => {
-      if (user) {
-        deleteSelectedSchedule(user, date, dispatch, d, closeAlertModal);
-      }
+      deleteSelectedSchedule(d.id as string);
+      closeAlertModal();
     });
   };
 
