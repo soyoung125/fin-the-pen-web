@@ -48,11 +48,7 @@ function Home() {
   };
 
   useEffect(() => {
-    // 게스트 모드가 아닌 경우에만 서버에 데이터를 요청
-    // TODO: 게스트 모드에서도 서버에 데이터를 요청하도록 수정예정
-    if (user) {
-      getSchedules();
-    }
+    getSchedules();
   }, [month]);
 
   return (
