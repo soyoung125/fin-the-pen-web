@@ -5,16 +5,20 @@ import {
   SCHEDULE_DRAWER,
   VIEW_MODE,
 } from "../../../../constants/schedule";
-import { selectGuestMode } from "../../../../app/redux/slices/commonSlice";
+import { selectGuestMode } from "@redux/slices/commonSlice.tsx";
 import {
   modifySchedule,
   selectDate,
   selectSchedule,
   setDrawerSchedule,
-} from "../../../../app/redux/slices/scheduleSlice";
+} from "@redux/slices/scheduleSlice.tsx";
 import { generateRandomSchedule, handleCreate } from "../domain/schedule";
-import { Schedule, ScheduleDrawerModeValue } from "../../../../types/schedule";
-import { useAppDispatch, useAppSelector } from "../../../../app/redux/hooks";
+import {
+  Schedule,
+  ScheduleDrawerModeValue,
+  ViewModeValue,
+} from "@type/schedule.tsx";
+import { useAppDispatch, useAppSelector } from "@redux/hooks.ts";
 import { User } from "@type/auth.tsx";
 import { useSelector } from "react-redux";
 import { selectUser } from "@redux/slices/userSlice.tsx";
@@ -26,15 +30,15 @@ import { grey } from "@mui/material/colors";
 
 interface ScheduleDrawerFooterProps {
   mode: ScheduleDrawerModeValue;
-  viewMode: string;
-  changeViewMode: (mode: string) => void;
+  viewMode: ViewModeValue;
+  setViewMode: (mode: ViewModeValue) => void;
   handleClose: () => void;
 }
 
 function ScheduleDrawerFooter({
   mode,
   viewMode,
-  changeViewMode,
+  setViewMode,
   handleClose,
 }: ScheduleDrawerFooterProps) {
   const date = useAppSelector(selectDate);
@@ -96,7 +100,7 @@ function ScheduleDrawerFooter({
         <Button
           sx={{ borderRadius: "8px" }}
           variant={viewMode === "schedule" ? "contained" : "text"}
-          onClick={() => changeViewMode(VIEW_MODE.schedule)}
+          onClick={() => setViewMode(VIEW_MODE.schedule)}
         >
           일정
         </Button>
@@ -104,7 +108,7 @@ function ScheduleDrawerFooter({
           sx={{ borderRadius: "8px" }}
           variant={viewMode === VIEW_MODE.asset ? "contained" : "text"}
           onClick={() => {
-            changeViewMode(VIEW_MODE.asset);
+            setViewMode(VIEW_MODE.asset);
           }}
         >
           자산
