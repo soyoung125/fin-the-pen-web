@@ -63,6 +63,8 @@ function InputDateTime({
               disableHighlightToday
               dayOfWeekFormatter={(day) => day.substring(0, 3)}
               value={moment(date)}
+              maxDate={moment().add(18, "M")}
+              minDate={moment().subtract(18, "M")}
               onChange={(newValue) => {
                 newValue &&
                   changeSchedule({
