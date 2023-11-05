@@ -12,17 +12,17 @@ import {
   selectSchedule,
   setDrawerSchedule,
 } from "@redux/slices/scheduleSlice.tsx";
-import { generateRandomSchedule, handleCreate } from "../domain/schedule";
+import { generateRandomSchedule } from "../domain/schedule";
 import {
   Schedule,
   ScheduleDrawerModeValue,
   ViewModeValue,
 } from "@type/schedule.tsx";
 import { useAppDispatch, useAppSelector } from "@redux/hooks.ts";
-import { User } from "@type/auth.tsx";
 import { useSelector } from "react-redux";
 import { selectUser } from "@redux/slices/userSlice.tsx";
 import { grey } from "@mui/material/colors";
+import useSchedule from "@hooks/useSchedule.tsx";
 
 /**
  * 각종 로직들 모듈로 이전 예정
@@ -46,6 +46,7 @@ function ScheduleDrawerFooter({
   const guestMode = useAppSelector(selectGuestMode);
   const schedule = useAppSelector(selectSchedule) as Schedule;
   const dispatch = useAppDispatch();
+  const { handleCreate } = useSchedule();
 
   const handleModify = async () => {
     /**
@@ -62,8 +63,8 @@ function ScheduleDrawerFooter({
   const handleMode = () => {
     switch (mode) {
       case "create":
-        // TODO: as 제거 예정
-        handleCreate(dispatch, schedule, user as User, date, handleClose);
+        handleCreate(schedule, date);
+        handleClose();
         break;
       case "modify":
         handleModify();
