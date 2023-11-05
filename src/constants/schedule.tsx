@@ -1,5 +1,5 @@
 import moment from "moment";
-import { Schedule, ScheduleDrawerMode, ViewMode } from "@type/schedule.tsx";
+import { Schedule, ScheduleDrawerMode } from "@type/schedule.tsx";
 
 interface ScheduleDrawer {
   readonly drawer_title: {
@@ -98,15 +98,16 @@ const REPEAT_CYCLE = {
   연간: "years",
 } as const;
 
-const VIEW_MODE: ViewMode = {
+const VIEW_MODE = {
   asset: "asset",
   schedule: "schedule",
-};
+} as const;
 
 interface RegularDepositWithdrawalType {
   "+": "입금";
   "-": "출금";
 }
+
 const REGULAR_DEPOSIT_WITHDRAWAL_TYPE: Readonly<RegularDepositWithdrawalType> =
   {
     "+": "입금",
