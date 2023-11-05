@@ -27,7 +27,7 @@ function SwipeableDetailCard({ data }: SwipeableDetailCardProps) {
     openModal: openAlertModal,
     closeModal: closeAlertModal,
   } = useModal();
-  const { deleteSelectedSchedule } = useSchedule();
+  const { handleDeleteSchedule } = useSchedule();
 
   // const handleCloseAlert = () => {
   //   setOpenAlertModal(false);
@@ -35,7 +35,7 @@ function SwipeableDetailCard({ data }: SwipeableDetailCardProps) {
 
   const deleteData = () => {
     data.map((d) => {
-      deleteSelectedSchedule(d.id as string);
+      handleDeleteSchedule(d.id as string);
       closeAlertModal();
     });
   };

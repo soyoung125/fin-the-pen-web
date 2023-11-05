@@ -57,7 +57,7 @@ function ScheduleCard({
     closeModal: closeAlertModal,
   } = useModal();
 
-  const { deleteSelectedSchedule } = useSchedule();
+  const { handleDeleteSchedule } = useSchedule();
 
   const handleClose = () => dispatch(setBottomBarOpenFalse());
 
@@ -91,7 +91,7 @@ function ScheduleCard({
           <Button
             variant="contained"
             onClick={() => {
-              deleteSelectedSchedule(schedule.id as string);
+              handleDeleteSchedule(schedule.id as string);
               handleClose();
             }}
           >

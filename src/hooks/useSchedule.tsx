@@ -30,7 +30,7 @@ const useSchedule = () => {
     setTodaySchedules(schedules.filter((schedule) => schedule.date === date));
   }, [schedules]);
 
-  const deleteSelectedSchedule = async (scheduleId: string) => {
+  const handleDeleteSchedule = async (scheduleId: string) => {
     if (window.confirm("정말로 삭제 하시겠습니까?")) {
       console.log(scheduleId);
       const result = await dispatch(deleteSchedule(scheduleId));
@@ -52,7 +52,7 @@ const useSchedule = () => {
     setSelectedSchedule,
     todaySchedules,
     date,
-    deleteSelectedSchedule,
+    handleDeleteSchedule,
   };
 };
 

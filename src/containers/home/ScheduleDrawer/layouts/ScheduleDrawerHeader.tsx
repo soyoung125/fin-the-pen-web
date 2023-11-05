@@ -22,7 +22,7 @@ function ScheduleDrawerHeader({
 }: ScheduleDrawerHeaderProps) {
   const schedule = useSelector(selectSchedule);
   const guestMode = useSelector(selectGuestMode);
-  const { deleteSelectedSchedule } = useSchedule();
+  const { handleDeleteSchedule } = useSchedule();
 
   return (
     <Stack direction="row" alignItems="center" justifyContent="space-between">
@@ -34,7 +34,7 @@ function ScheduleDrawerHeader({
           <Button
             onClick={() => {
               if (schedule) {
-                deleteSelectedSchedule(schedule.id as string);
+                handleDeleteSchedule(schedule.id as string);
                 handleClose();
               }
             }}
