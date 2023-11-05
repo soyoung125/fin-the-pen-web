@@ -9,10 +9,10 @@ export default defineConfig({
   server: {
     proxy: {
       // 옵션과 함께: http://localhost:5173/api/bar-> http://jsonplaceholder.typicode.com/bar
-      "/real": {
+      "/local": {
         target: "http://localhost:8080",
         changeOrigin: true,
-        rewrite: (path) => path.replace(/^\/real/, ""),
+        rewrite: (path) => path.replace(/^\/local/, ""),
       },
     },
   },
