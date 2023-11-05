@@ -14,6 +14,7 @@ import { useAppDispatch } from "@redux/hooks.ts";
 import moment from "moment/moment";
 import { v4 as uuidv4 } from "uuid";
 import { REPEAT_CYCLE } from "../constants/schedule.tsx";
+import { NOT_AVAILABLE } from "../constants/messages.tsx";
 
 /**
  * 앞으로 스케쥴에 관련된 로직은 여기에 몰아넣고 꺼내쓰는 방식으로 구현
@@ -34,7 +35,10 @@ const useSchedule = () => {
     setTodaySchedules(schedules.filter((schedule) => schedule.date === date));
   }, [schedules]);
 
-  const handleCreate = async (schedule: Schedule, stringDate: string) => {
+  const handleCreateSchedule = async (
+    schedule: Schedule,
+    stringDate: string
+  ) => {
     if (user === null) {
       return alert("로그인이 필요합니다.");
     }
@@ -97,6 +101,10 @@ const useSchedule = () => {
     }
   };
 
+  const handleModifySchedule = async () => {
+    alert(NOT_AVAILABLE);
+  };
+
   return {
     status,
     schedules,
@@ -105,7 +113,8 @@ const useSchedule = () => {
     todaySchedules,
     date,
     handleDeleteSchedule,
-    handleCreate,
+    handleCreateSchedule,
+    handleModifySchedule,
   };
 };
 

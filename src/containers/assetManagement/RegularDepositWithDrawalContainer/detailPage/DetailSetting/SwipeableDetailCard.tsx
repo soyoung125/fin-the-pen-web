@@ -8,7 +8,6 @@ import moment from "moment";
 import ModifyModal from "./ModifyModal";
 import RoundedBorderBox from "../../../../../components/common/RoundedBorderBox";
 import AlertModal from "../../../../../components/common/AlertModal";
-import { modifySchedule } from "@redux/slices/scheduleSlice.tsx";
 import { Schedule } from "@type/schedule.tsx";
 import { useAppDispatch } from "@redux/hooks.ts";
 import useModal from "../../../../../hooks/useModal";
@@ -27,7 +26,7 @@ function SwipeableDetailCard({ data }: SwipeableDetailCardProps) {
     openModal: openAlertModal,
     closeModal: closeAlertModal,
   } = useModal();
-  const { handleDeleteSchedule } = useSchedule();
+  const { handleDeleteSchedule, handleModifySchedule } = useSchedule();
 
   // const handleCloseAlert = () => {
   //   setOpenAlertModal(false);
@@ -43,22 +42,9 @@ function SwipeableDetailCard({ data }: SwipeableDetailCardProps) {
   const modifyData = (form: Schedule) => {
     data.map((d) => {
       if (moment().isBefore(d.date)) {
-        dispatch(
-          modifySchedule({
-            ...d,
-            event_name: form.event_name,
-            repeat_endDate: form.repeat_endDate,
-          })
-        );
+        handleModifySchedule();
       } else {
-        dispatch(
-          modifySchedule({
-            ...d,
-            event_name: form.event_name,
-            repeat_endDate: form.repeat_endDate,
-            expected_spending: form.expected_spending,
-          })
-        );
+        handleModifySchedule();
       }
     });
   };

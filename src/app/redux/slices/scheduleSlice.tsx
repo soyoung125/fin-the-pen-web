@@ -83,11 +83,6 @@ export const scheduleSlice = createSlice({
   name: "schedule",
   initialState,
   reducers: {
-    modifySchedule: (state, action) => {
-      state.schedules = state.schedules.map((s: Schedule) =>
-        s.id === action.payload.id ? action.payload : s
-      );
-    },
     setSchedules: (state, action) => {
       state.schedules = action.payload;
     },
@@ -241,7 +236,6 @@ export const {
   setSchedules,
   setDrawerSchedule,
   setSelectedDate,
-  modifySchedule,
   updateAnalyzedData,
   updateFilter,
   updateFiltersForce,

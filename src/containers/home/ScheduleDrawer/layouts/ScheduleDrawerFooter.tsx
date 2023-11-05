@@ -1,5 +1,5 @@
 import { Box, Button, Stack, Tooltip } from "@mui/material";
-import { NEED_SIGN_IN, NOT_AVAILABLE } from "../../../../constants/messages";
+import { NEED_SIGN_IN } from "../../../../constants/messages";
 import {
   NEED_TITLE,
   SCHEDULE_DRAWER,
@@ -7,7 +7,6 @@ import {
 } from "../../../../constants/schedule";
 import { selectGuestMode } from "@redux/slices/commonSlice.tsx";
 import {
-  modifySchedule,
   selectDate,
   selectSchedule,
   setDrawerSchedule,
@@ -46,28 +45,15 @@ function ScheduleDrawerFooter({
   const guestMode = useAppSelector(selectGuestMode);
   const schedule = useAppSelector(selectSchedule) as Schedule;
   const dispatch = useAppDispatch();
-  const { handleCreate } = useSchedule();
-
-  const handleModify = async () => {
-    /**
-     * TODO: 수정 로직 아직 api 명세가 없는 것 같던데 확인이 필요한 것 같아요
-     */
-    if (guestMode) {
-      dispatch(modifySchedule(schedule));
-      handleClose();
-    } else {
-      alert(NOT_AVAILABLE);
-    }
-  };
-
+  const { handleCreateSchedule, handleModifySchedule } = useSchedule();
   const handleMode = () => {
     switch (mode) {
       case "create":
-        handleCreate(schedule, date);
+        handleCreateSchedule(schedule, date);
         handleClose();
         break;
       case "modify":
-        handleModify();
+        handleModifySchedule();
         break;
       default:
         alert("잘못 된 요청입니다.");
