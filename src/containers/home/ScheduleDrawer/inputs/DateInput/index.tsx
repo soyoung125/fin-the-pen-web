@@ -12,6 +12,7 @@ import { DateCalendar, LocalizationProvider } from "@mui/x-date-pickers";
 import moment from "moment";
 import { UpdateStateInterface } from "@type/common";
 import { AdapterMoment } from "@mui/x-date-pickers/AdapterMoment";
+import InputDateTime from "./InputDateTime";
 
 function DateInput() {
   const dispatch = useAppDispatch();
@@ -29,84 +30,22 @@ function DateInput() {
 
   return (
     <>
-      <Box>
-        <Input
-          // type="date"
-          onClick={() => setShowStart(!showStart)}
-          id="date"
-          startAdornment={
-            <InputAdornment position="start">
-              <Box sx={{ color: "primary.main", fontWeight: 500 }}>
-                {SCHEDULE_DRAWER.start_time}
-              </Box>
-            </InputAdornment>
-          }
-          endAdornment={
-            <InputAdornment position="start">
-              <InputBase
-                id="start_time"
-                type="time"
-                value={schedule?.start_time}
-                onChange={changeSchedule}
-                onClick={(e) => e.stopPropagation()}
-                inputProps={{
-                  style: { textAlign: "right" },
-                }}
-              />
-            </InputAdornment>
-          }
-          value={schedule?.date}
-          onChange={changeSchedule}
-        />
-        <Collapse in={showStart}>
-          <LocalizationProvider dateAdapter={AdapterMoment}>
-            <CalenderBox dateHeight={50} dateSize={32} week={6}>
-              <DateCalendar
-                views={["year", "month", "day"]}
-                disableHighlightToday
-                dayOfWeekFormatter={(day) => day.substring(0, 3)}
-                value={moment(schedule?.date)}
-                onChange={(newValue) => {
-                  newValue &&
-                    changeSchedule({
-                      target: {
-                        id: "date",
-                        value: newValue.format("YYYY-MM-DD"),
-                      },
-                    });
-                }}
-                reduceAnimations
-              />
-            </CalenderBox>
-          </LocalizationProvider>
-        </Collapse>
-      </Box>
+      <InputDateTime
+        date={schedule?.date}
+        time={schedule?.start_time}
+        handleClick={() => setShowStart(!showStart)}
+        title={SCHEDULE_DRAWER.start_time}
+        changeSchedule={changeSchedule}
+        showCalendar={showStart}
+      />
 
-      <Input
-        type="date"
-        id="date"
-        startAdornment={
-          <InputAdornment position="start">
-            <Box sx={{ color: "primary.main", fontWeight: 500 }}>
-              {SCHEDULE_DRAWER.end_time}
-            </Box>
-          </InputAdornment>
-        }
-        endAdornment={
-          <InputAdornment position="start">
-            <InputBase
-              id="end_time"
-              type="time"
-              value={schedule?.end_time}
-              onChange={changeSchedule}
-              inputProps={{
-                style: { textAlign: "right" },
-              }}
-            />
-          </InputAdornment>
-        }
-        value={schedule?.date}
-        onChange={changeSchedule}
+      <InputDateTime
+        date={schedule?.date}
+        time={schedule?.end_time}
+        handleClick={() => setShowEnd(!showEnd)}
+        title={SCHEDULE_DRAWER.end_time}
+        changeSchedule={changeSchedule}
+        showCalendar={showEnd}
       />
 
       <Stack direction="row" justifyContent="space-between">
