@@ -276,6 +276,8 @@ export const selectSchedules = (state: RootState) =>
   );
 export const selectDate = (state: RootState) =>
   (state.schedule as InitialState).date;
+export const selectMonth = (state: RootState) =>
+  (state.schedule as InitialState).date.format("YYYY-MM");
 export const selectFiltered = (state: RootState): string[] =>
   (state.schedule as InitialState).filtered;
 export const selectFilteredDate = (state: RootState) =>
