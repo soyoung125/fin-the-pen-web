@@ -7,18 +7,11 @@ import {
   fetchCreateSchedule,
   fetchDeleteSchedule,
   fetchMonthSchedules,
-} from "../../api/API";
-import {
-  fetchMockCreateSchedule,
-  fetchMockDeleteSchedule,
-} from "../../api/mockAPI";
-import {
-  GetScheduleQuery,
-  Schedule,
-  ViewModeValue,
-} from "../../../types/schedule";
+} from "@api/API.tsx";
+import { fetchMockDeleteSchedule } from "@api/mockAPI.tsx";
+import { GetScheduleQuery, Schedule, ViewModeValue } from "@type/schedule.tsx";
 import { ASYNC_THUNK_STATUS } from "../../../constants/common";
-import { AnalysisData, AsyncThunkStatusValue } from "../../../types/common";
+import { AnalysisData, AsyncThunkStatusValue } from "@type/common.tsx";
 import { CATEGORIES, COLORLIST } from "../../../constants/categories";
 import { RootState } from "../store.ts";
 
@@ -71,22 +64,13 @@ export const getMonthSchedules = createAsyncThunk(
   }
 );
 
-export const createSchedule = createAsyncThunk<
-  Schedule,
-  Schedule,
-  { state: { common: { guestMode: boolean } } }
->("schedule/createSchedule", async (scheduleWithUuid, { getState }) => {
-  const { guestMode } = getState().common;
-  if (guestMode) {
-    // console.log('게스트 모드에서 추가');/
-    const response = await fetchMockCreateSchedule(scheduleWithUuid);
+export const createSchedule = createAsyncThunk<Schedule, Schedule>(
+  "schedule/createSchedule",
+  async (scheduleWithUuid) => {
+    const response = await fetchCreateSchedule(scheduleWithUuid);
     return response.data;
   }
-  // console.log('일반 모드에서 추가');
-  // console.log(scheduleWithUuid);
-  const response = await fetchCreateSchedule(scheduleWithUuid);
-  return null;
-});
+);
 
 export const deleteSchedule = createAsyncThunk<
   string,
@@ -253,15 +237,15 @@ export const scheduleSlice = createSlice({
           state.schedules = action.payload ?? [];
         }
       )
-      .addCase(
-        createSchedule.fulfilled,
-        (state, action: PayloadAction<Schedule>) => {
-          // createSchedule 가 끝나면
-          if (action.payload !== null) {
-            state.schedules.push(action.payload as never); // schedules의 타입이 지정되면 never를 제거할 수 있습니다...!
-          }
-        }
-      )
+      // .addCase(
+      //   createSchedule.fulfilled,
+      //   (state, action: PayloadAction<Schedule>) => {
+      //     // createSchedule 가 끝나면
+      //     if (action.payload !== null) {
+      //       state.schedules.push(action.payload as never); // schedules의 타입이 지정되면 never를 제거할 수 있습니다...!
+      //     }
+      //   }
+      // )
       .addCase(deleteSchedule.fulfilled, (state, action) => {
         // deleteSchedule 가 끝나면
         if (action.payload !== null) {

@@ -1,5 +1,5 @@
 import axios, { AxiosResponse } from "axios";
-import { GetScheduleQuery, Schedule } from "@type/schedule.tsx";
+import { MonthScheduleQuery, Schedule } from "@type/schedule.tsx";
 import { DOMAIN } from "./url.ts";
 
 export const fetchCreateSchedule = async (schedule: Schedule) => {
@@ -22,12 +22,12 @@ export const fetchDeleteSchedule = async (id: string) => {
 };
 
 export const fetchMonthSchedules = async (
-  schedule: GetScheduleQuery
+  query: MonthScheduleQuery
 ): Promise<Schedule[] | undefined> => {
   try {
     const response: AxiosResponse<Schedule[]> = await axios.post<Schedule[]>(
       `${DOMAIN}/getMonthSchedules`,
-      schedule
+      query
     );
     const schedules: Schedule[] = response.data;
     return schedules;

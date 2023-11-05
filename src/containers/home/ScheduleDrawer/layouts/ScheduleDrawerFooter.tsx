@@ -63,14 +63,7 @@ function ScheduleDrawerFooter({
     switch (mode) {
       case "create":
         // TODO: as 제거 예정
-        handleCreate(
-          dispatch,
-          schedule,
-          user as User,
-          guestMode,
-          date,
-          handleClose
-        );
+        handleCreate(dispatch, schedule, user as User, date, handleClose);
         break;
       case "modify":
         handleModify();
@@ -134,7 +127,7 @@ function ScheduleDrawerFooter({
           <Button
             variant="contained"
             fullWidth
-            disabled={user === undefined}
+            disabled={user === null}
             onClick={() => handleSubmit()}
           >
             {user === null

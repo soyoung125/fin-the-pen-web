@@ -57,7 +57,7 @@ function Calender({ dateHeight }: CalenderProps) {
     if (!day.isSame(value, "month")) {
       return <PickersDay {...DayComponentProps} />;
     }
-
+    console.log(JSON.stringify(schedules));
     const daySchedules = schedules
       .filter((e) => e.date === day.format("YYYY-MM-DD"))
       .map((s) => ({

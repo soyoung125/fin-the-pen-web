@@ -105,7 +105,7 @@ export const updateSpendingType = (
 export const updateExclusion = (
   dispatch: Dispatch,
   schedule: Schedule | null,
-  state: boolean,
+  state: boolean
 ) => {
   dispatch(setDrawerSchedule({ ...schedule, exclusion: state }));
 };
@@ -130,14 +130,17 @@ export const handleCreate = async (
   dispatch: AppDispatch,
   schedule: Schedule,
   user: User | null,
-  guestMode: boolean,
   date: moment.Moment,
   handleClose: () => void
 ) => {
+  if (user === null) {
+    return alert("로그인이 필요합니다.");
+  }
+
   const scheduleWithUuid = {
     ...schedule,
     id: uuidv4(),
-    user_id: user?.user_id,
+    user_id: user.user_id,
   };
   // 반복 일정 추가
   if (schedule.repeating_cycle !== "없음") {
@@ -164,14 +167,12 @@ export const handleCreate = async (
     }
   }
   // 원래 일정 추가
-  console.log(scheduleWithUuid);
   const result = await dispatch(createSchedule(scheduleWithUuid));
-  if (!guestMode) {
-    // 게스트 모드가 아니라면, 현재 서버 상태를 새롭게 요청하기
+  if (result) {
     dispatch(
       getMonthSchedules({
-        user_id: user?.user_id || "",
-        date: moment(date).format("YYYY-MM"),
+        user_id: user.user_id,
+        date: date.format("YYYY-MM-DD"),
       })
     );
   }
