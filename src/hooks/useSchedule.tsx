@@ -16,10 +16,6 @@ import { v4 as uuidv4 } from "uuid";
 import { REPEAT_CYCLE } from "../constants/schedule.tsx";
 import { NOT_AVAILABLE } from "../constants/messages.tsx";
 
-/**
- * 앞으로 스케쥴에 관련된 로직은 여기에 몰아넣고 꺼내쓰는 방식으로 구현
- */
-
 const useSchedule = () => {
   const schedules = useSelector(selectSchedules);
   const [selectedSchedule, setSelectedSchedule] = useState<Schedule | null>(
