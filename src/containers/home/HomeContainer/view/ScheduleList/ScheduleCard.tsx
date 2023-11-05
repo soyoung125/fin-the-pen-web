@@ -20,11 +20,13 @@ import CategoryTypeBadge from "../../../../../components/common/CategoryTypeBadg
 import { Schedule } from "@type/schedule.tsx";
 import { Category } from "../../../../../constants/categories.tsx";
 import { useAppDispatch, useAppSelector } from "@redux/hooks.ts";
-import { modifySchedule } from "@redux/slices/scheduleSlice.tsx";
+import { modifySchedule, selectDate } from "@redux/slices/scheduleSlice.tsx";
 import { NOT_AVAILABLE } from "../../../../../constants/messages.tsx";
 import { selectIsBudgetHidden } from "@redux/slices/settingSlice.ts";
 import useModal from "../../../../../hooks/useModal";
 import AlertModal from "../../../../../components/common/AlertModal";
+import { useSelector } from "react-redux";
+import { selectUser } from "@redux/slices/userSlice.tsx";
 
 interface ScheduleCardProps {
   schedule: Schedule;
@@ -47,6 +49,8 @@ function ScheduleCard({
   const isSameWithRecommend =
     +schedule.expected_spending === recommendedSpendingAmount;
   const color = isSpend ? "#5AC8FA" : "#FA5A5A";
+  const user = useSelector(selectUser);
+  const date = useSelector(selectDate);
 
   const {
     modalOpen: alertModalOpen,
@@ -85,9 +89,17 @@ function ScheduleCard({
         <SwiperSlide style={{ display: "flex", width: "auto", height: "auto" }}>
           <Button
             variant="contained"
-            onClick={() =>
-              deleteSelectedSchedule(dispatch, schedule, handleClose)
-            }
+            onClick={() => {
+              if (user) {
+                deleteSelectedSchedule(
+                  user,
+                  date,
+                  dispatch,
+                  schedule,
+                  handleClose
+                );
+              }
+            }}
           >
             <DeleteForeverIcon fontSize="large" />
           </Button>

@@ -49,7 +49,7 @@ function ScheduleDrawerFooter({
 
   const handleModify = async () => {
     /**
-     * 함수 완성되면 그 때 외부 모듈로 분리하겠습니다.
+     * TODO: 수정 로직 아직 api 명세가 없는 것 같던데 확인이 필요한 것 같아요
      */
     if (guestMode) {
       dispatch(modifySchedule(schedule));

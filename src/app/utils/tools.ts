@@ -3,9 +3,13 @@
 /* eslint-disable @typescript-eslint/naming-convention */
 
 import { EXPENDITURE } from "../../constants/categories.tsx";
-import { deleteSchedule } from "@redux/slices/scheduleSlice.tsx";
+import {
+  deleteSchedule,
+  getMonthSchedules,
+} from "@redux/slices/scheduleSlice.tsx";
 import { Schedule } from "@type/schedule.tsx";
 import { AppDispatch } from "@redux/store.ts";
+import { User } from "@type/auth.tsx";
 
 /**
  * 유용한 함수들을 모아두는 곳.
@@ -63,14 +67,27 @@ export const calculateIncomeExpenditure = (
 export const isTimeOrderCorrect = (startTime: string, endTime: string) =>
   startTime <= endTime;
 
-export const deleteSelectedSchedule = (
+/**
+ * TODO: 그냥 커스텀 훅으로 빼는게 어떨까요?
+ */
+export const deleteSelectedSchedule = async (
+  user: User,
+  date: moment.Moment,
   dispatch: AppDispatch,
   schedule: Schedule | null,
   handleClose: () => void
 ) => {
   if (window.confirm("정말로 삭제 하시겠습니까?")) {
     console.log(schedule?.id);
-    dispatch(deleteSchedule(schedule?.id || ""));
+    const result = await dispatch(deleteSchedule(schedule?.id || ""));
+    if (result) {
+      dispatch(
+        getMonthSchedules({
+          user_id: user.user_id,
+          date: date.format("YYYY-MM-DD"),
+        })
+      );
+    }
     handleClose();
   }
 };

@@ -67,4 +67,15 @@ export const handlers = [
     console.log(monthSchedules);
     return res(ctx.delay(1000), ctx.status(200), ctx.json(monthSchedules));
   }),
+
+  rest.post(`${DOMAIN}/deleteSchedule`, async (req, res, ctx) => {
+    const { id } = await req.json();
+    const prevSchedules = getLocalStorage<Schedule[]>(
+      LOCAL_STORAGE_KEY_SCHEDULES,
+      []
+    );
+    const newSchedules = prevSchedules.filter((schedule) => schedule.id !== id);
+    setLocalStorage(LOCAL_STORAGE_KEY_SCHEDULES, newSchedules);
+    return res(ctx.delay(1000), ctx.status(200), ctx.json(true));
+  }),
 ];

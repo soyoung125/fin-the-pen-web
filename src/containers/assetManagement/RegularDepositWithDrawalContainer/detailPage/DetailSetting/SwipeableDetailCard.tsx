@@ -9,10 +9,15 @@ import ModifyModal from "./ModifyModal";
 import { deleteSelectedSchedule } from "@utils/tools.ts";
 import RoundedBorderBox from "../../../../../components/common/RoundedBorderBox";
 import AlertModal from "../../../../../components/common/AlertModal";
-import { modifySchedule } from "../../../../../app/redux/slices/scheduleSlice";
+import {
+  modifySchedule,
+  selectDate,
+} from "../../../../../app/redux/slices/scheduleSlice";
 import { Schedule } from "../../../../../types/schedule";
 import { useAppDispatch } from "../../../../../app/redux/hooks";
 import useModal from "../../../../../hooks/useModal";
+import { useSelector } from "react-redux";
+import { selectUser } from "@redux/slices/userSlice.tsx";
 
 interface SwipeableDetailCardProps {
   data: Schedule[];
@@ -20,6 +25,8 @@ interface SwipeableDetailCardProps {
 
 function SwipeableDetailCard({ data }: SwipeableDetailCardProps) {
   const dispatch = useAppDispatch();
+  const user = useSelector(selectUser);
+  const date = useSelector(selectDate);
   const [settingModalOpen, setSettingModalOpen] = useState(false);
   const schedule = data[0];
   const {
@@ -33,7 +40,11 @@ function SwipeableDetailCard({ data }: SwipeableDetailCardProps) {
   // };
 
   const deleteData = () => {
-    data.map((d) => deleteSelectedSchedule(dispatch, d, closeAlertModal));
+    data.map((d) => {
+      if (user) {
+        deleteSelectedSchedule(user, date, dispatch, d, closeAlertModal);
+      }
+    });
   };
 
   const modifyData = (form: Schedule) => {
