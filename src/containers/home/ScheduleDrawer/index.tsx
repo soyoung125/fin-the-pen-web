@@ -76,30 +76,35 @@ function ScheduleDrawer({
   }, [ref.current]);
 
   return (
-    <div ref={ref}>
-      <Box>
-        {schedule && (
-          <Box sx={{ overflow: "scroll" }}>
-            <Snackbar
-              anchorOrigin={{ vertical: "top", horizontal: "center" }}
-              autoHideDuration={5000}
-              open={snackbarOpen}
-              onClose={() => {
-                setSnackbarOpen(false);
-              }}
-              TransitionComponent={TransitionUp}
+    <div ref={ref} style={{ height: "100%" }}>
+      {schedule && (
+        <Box sx={{ height: "100%", mx: 2.5, pt: 1, mb: 3 }}>
+          <Snackbar
+            anchorOrigin={{ vertical: "top", horizontal: "center" }}
+            autoHideDuration={5000}
+            open={snackbarOpen}
+            onClose={() => {
+              setSnackbarOpen(false);
+            }}
+            TransitionComponent={TransitionUp}
+          >
+            <Alert
+              color={CONSUMPTION_ALERTS[random].color}
+              sx={{ width: "100%" }}
+              icon={CONSUMPTION_ALERTS[random].icon}
             >
-              <Alert
-                color={CONSUMPTION_ALERTS[random].color}
-                sx={{ width: "100%" }}
-                icon={CONSUMPTION_ALERTS[random].icon}
-              >
-                {CONSUMPTION_ALERTS[random].message}
-              </Alert>
-            </Snackbar>
-            <Stack justifyContent="space-between" spacing={2} mx={2.5} mt={1}>
-              <ScheduleDrawerHeader value={value} handleChange={handleChange} />
+              {CONSUMPTION_ALERTS[random].message}
+            </Alert>
+          </Snackbar>
 
+          <ScheduleDrawerHeader value={value} handleChange={handleChange} />
+
+          <Stack
+            justifyContent="space-between"
+            spacing={2}
+            sx={{ height: `calc(100% - 56px)` }}
+          >
+            <Stack spacing={2} pt={2}>
               {value === 0 ? (
                 <>
                   {/* 이벤트 제목 */}
@@ -123,13 +128,13 @@ function ScheduleDrawer({
               ) : (
                 <AssetSettings mode={mode} />
               )}
-
-              {/* 제출 버튼 */}
-              <ScheduleDrawerFooter mode={mode} handleClose={handleClose} />
             </Stack>
-          </Box>
-        )}
-      </Box>
+
+            {/* 제출 버튼 */}
+            <ScheduleDrawerFooter mode={mode} handleClose={handleClose} />
+          </Stack>
+        </Box>
+      )}
     </div>
   );
 }
