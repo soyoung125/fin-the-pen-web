@@ -10,29 +10,29 @@
 
 ## 👤 Team Members
 
-| role    | name                                                                         |
-|---------|------------------------------------------------------------------------------|
-| `기획/팀장` | [@5minha (오민하)](https://github.com/5minha)                                   |
-| `데이터분석` | [김상우]() [김가람]()                                                              |
-| `프론트엔드` | [@soyoung125 (박소영)](https://github.com/soyoung125)                           |
-| `프론트엔드` | [@gabrielyoon7 (윤주현, Gabriel Ju Hyun Yoon)](https://github.com/gabrielyoon7) |
-| `백엔드`   | [이태양]()                                                                      |
-| `백엔드`   | [엄희승]()                                                                      |
+| role    | name                                                   |
+|---------|--------------------------------------------------------|
+| `기획/팀장` | [@5minha (오민하)](https://github.com/5minha)             |
+| `데이터분석` | [김상우]() [김가람]()                                        |
+| `디자인`   | [안재윤]()                                                |
+| `프론트엔드` | [@soyoung125 (박소영)](https://github.com/soyoung125)     |
+| `프론트엔드` | [@gabrielyoon7 (윤주현)](https://github.com/gabrielyoon7) |
+| `백엔드`   | [이태양]()                                                |
+| `백엔드`   | [엄희승]()                                                |
 
 ## ⚙️ Tech
 
-- 상태관리
-    - React
-    - Redux Took Kit
-    - TanStack Query (적용중)
-- 스타일링 라이브러리
-    - Material UI
-    - chart.js
+- React
+- Redux Took Kit
+- TanStack Query (적용중)
+- Material UI
+- chart.js
+
 - Axios
 - React Router Dom
 - vite
 
-- MSW
+- MSW (적용중)
 
 ## ✅ Features
 
