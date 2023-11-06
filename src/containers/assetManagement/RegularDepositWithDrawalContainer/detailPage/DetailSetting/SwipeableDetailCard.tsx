@@ -6,13 +6,12 @@ import SettingsIcon from "@mui/icons-material/Settings";
 import { useState } from "react";
 import moment from "moment";
 import ModifyModal from "./ModifyModal";
-import { deleteSelectedSchedule } from "@utils/tools.ts";
 import RoundedBorderBox from "../../../../../components/common/RoundedBorderBox";
 import AlertModal from "../../../../../components/common/AlertModal";
-import { modifySchedule } from "../../../../../app/redux/slices/scheduleSlice";
-import { Schedule } from "../../../../../types/schedule";
-import { useAppDispatch } from "../../../../../app/redux/hooks";
+import { Schedule } from "@type/schedule.tsx";
+import { useAppDispatch } from "@redux/hooks.ts";
 import useModal from "../../../../../hooks/useModal";
+import useSchedule from "@hooks/useSchedule.tsx";
 
 interface SwipeableDetailCardProps {
   data: Schedule[];
@@ -27,34 +26,25 @@ function SwipeableDetailCard({ data }: SwipeableDetailCardProps) {
     openModal: openAlertModal,
     closeModal: closeAlertModal,
   } = useModal();
+  const { handleDeleteSchedule, handleModifySchedule } = useSchedule();
 
   // const handleCloseAlert = () => {
   //   setOpenAlertModal(false);
   // };
 
   const deleteData = () => {
-    data.map((d) => deleteSelectedSchedule(dispatch, d, closeAlertModal));
+    data.map((d) => {
+      handleDeleteSchedule(d.id as string);
+      closeAlertModal();
+    });
   };
 
   const modifyData = (form: Schedule) => {
     data.map((d) => {
       if (moment().isBefore(d.date)) {
-        dispatch(
-          modifySchedule({
-            ...d,
-            event_name: form.event_name,
-            repeat_endDate: form.repeat_endDate,
-          })
-        );
+        handleModifySchedule();
       } else {
-        dispatch(
-          modifySchedule({
-            ...d,
-            event_name: form.event_name,
-            repeat_endDate: form.repeat_endDate,
-            expected_spending: form.expected_spending,
-          })
-        );
+        handleModifySchedule();
       }
     });
   };

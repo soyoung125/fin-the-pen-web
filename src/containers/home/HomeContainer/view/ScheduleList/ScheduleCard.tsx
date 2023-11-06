@@ -11,20 +11,15 @@ import SettingsIcon from "@mui/icons-material/Settings";
 import LockIcon from "@mui/icons-material/Lock";
 import { grey } from "@mui/material/colors";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { deleteSelectedSchedule } from "@utils/tools.ts";
-import {
-  selectGuestMode,
-  setBottomBarOpenFalse,
-} from "@redux/slices/commonSlice.tsx";
+import { setBottomBarOpenFalse } from "@redux/slices/commonSlice.tsx";
 import CategoryTypeBadge from "../../../../../components/common/CategoryTypeBadge";
 import { Schedule } from "@type/schedule.tsx";
 import { Category } from "../../../../../constants/categories.tsx";
 import { useAppDispatch, useAppSelector } from "@redux/hooks.ts";
-import { modifySchedule } from "@redux/slices/scheduleSlice.tsx";
-import { NOT_AVAILABLE } from "../../../../../constants/messages.tsx";
 import { selectIsBudgetHidden } from "@redux/slices/settingSlice.ts";
 import useModal from "../../../../../hooks/useModal";
 import AlertModal from "../../../../../components/common/AlertModal";
+import useSchedule from "@hooks/useSchedule.tsx";
 
 interface ScheduleCardProps {
   schedule: Schedule;
@@ -40,7 +35,6 @@ function ScheduleCard({
   openAuthenticationPage,
 }: ScheduleCardProps) {
   const dispatch = useAppDispatch();
-  const guestMode = useAppSelector(selectGuestMode);
   const recommendedSpendingAmount = 50000;
   const isHideBudgetMode = useAppSelector(selectIsBudgetHidden);
   const isSpend = schedule.type === "-";
@@ -54,28 +48,13 @@ function ScheduleCard({
     closeModal: closeAlertModal,
   } = useModal();
 
+  const { handleDeleteSchedule, handleModifySchedule } = useSchedule();
+
   const handleClose = () => dispatch(setBottomBarOpenFalse());
 
   const handleModifyModal = () => {
     if (!isHideBudgetMode) {
       handleModal(schedule);
-    }
-  };
-
-  const handleModify = async () => {
-    /**
-     * 함수 완성되면 그 때 외부 모듈로 분리하겠습니다.
-     */
-    if (guestMode) {
-      dispatch(
-        modifySchedule({
-          ...schedule,
-          expected_spending: recommendedSpendingAmount,
-        })
-      );
-      handleClose();
-    } else {
-      alert(NOT_AVAILABLE);
     }
   };
 
@@ -85,9 +64,10 @@ function ScheduleCard({
         <SwiperSlide style={{ display: "flex", width: "auto", height: "auto" }}>
           <Button
             variant="contained"
-            onClick={() =>
-              deleteSelectedSchedule(dispatch, schedule, handleClose)
-            }
+            onClick={() => {
+              handleDeleteSchedule(schedule.id as string);
+              handleClose();
+            }}
           >
             <DeleteForeverIcon fontSize="large" />
           </Button>
@@ -117,7 +97,7 @@ function ScheduleCard({
                     onClick={(e) => {
                       e.stopPropagation();
                       console.log("소비추천금액 적용하기");
-                      handleModify();
+                      handleModifySchedule();
                     }}
                   >
                     <Box>

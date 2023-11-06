@@ -7,18 +7,10 @@ import {
   fetchCreateSchedule,
   fetchDeleteSchedule,
   fetchMonthSchedules,
-} from "../../api/API";
-import {
-  fetchMockCreateSchedule,
-  fetchMockDeleteSchedule,
-} from "../../api/mockAPI";
-import {
-  GetScheduleQuery,
-  Schedule,
-  ViewModeValue,
-} from "../../../types/schedule";
+} from "@api/API.tsx";
+import { GetScheduleQuery, Schedule, ViewModeValue } from "@type/schedule.tsx";
 import { ASYNC_THUNK_STATUS } from "../../../constants/common";
-import { AnalysisData, AsyncThunkStatusValue } from "../../../types/common";
+import { AnalysisData, AsyncThunkStatusValue } from "@type/common.tsx";
 import { CATEGORIES, COLORLIST } from "../../../constants/categories";
 import { RootState } from "../store.ts";
 
@@ -71,56 +63,33 @@ export const getMonthSchedules = createAsyncThunk(
   }
 );
 
-export const createSchedule = createAsyncThunk<
-  Schedule,
-  Schedule,
-  { state: { common: { guestMode: boolean } } }
->("schedule/createSchedule", async (scheduleWithUuid, { getState }) => {
-  const { guestMode } = getState().common;
-  if (guestMode) {
-    // console.log('게스트 모드에서 추가');/
-    const response = await fetchMockCreateSchedule(scheduleWithUuid);
+export const createSchedule = createAsyncThunk<Schedule, Schedule>(
+  "schedule/createSchedule",
+  async (scheduleWithUuid) => {
+    const response = await fetchCreateSchedule(scheduleWithUuid);
     return response.data;
   }
-  // console.log('일반 모드에서 추가');
-  // console.log(scheduleWithUuid);
-  const response = await fetchCreateSchedule(scheduleWithUuid);
-  return null;
-});
+);
 
-export const deleteSchedule = createAsyncThunk<
-  string,
-  string,
-  { state: { common: { guestMode: boolean } } }
->("schedule/deleteSchedule", async (id, { getState }) => {
-  // console.log(id);
-  const { guestMode } = getState().common;
-  if (guestMode) {
-    // console.log('게스트 모드에서 제거');
-    const response = await fetchMockDeleteSchedule(id);
+export const deleteSchedule = createAsyncThunk<string, string>(
+  "schedule/deleteSchedule",
+  async (id) => {
+    const response = await fetchDeleteSchedule(id);
     return response.data;
   }
-  // console.log('일반 모드에서 제거');
-  await fetchDeleteSchedule(id);
-  return null;
-});
+);
 
 export const scheduleSlice = createSlice({
   name: "schedule",
   initialState,
   reducers: {
-    modifySchedule: (state, action) => {
-      state.schedules = state.schedules.map((s: Schedule) =>
-        s.id === action.payload.id ? action.payload : s
-      );
-    },
     setSchedules: (state, action) => {
       state.schedules = action.payload;
     },
     setDrawerSchedule: (state, action) => {
       state.schedule = action.payload;
     },
-    selectedDate: (state, action) => {
+    setSelectedDate: (state, action) => {
       state.date = action.payload;
     },
     updateAnalyzedData: (state) => {
@@ -253,15 +222,6 @@ export const scheduleSlice = createSlice({
           state.schedules = action.payload ?? [];
         }
       )
-      .addCase(
-        createSchedule.fulfilled,
-        (state, action: PayloadAction<Schedule>) => {
-          // createSchedule 가 끝나면
-          if (action.payload !== null) {
-            state.schedules.push(action.payload as never); // schedules의 타입이 지정되면 never를 제거할 수 있습니다...!
-          }
-        }
-      )
       .addCase(deleteSchedule.fulfilled, (state, action) => {
         // deleteSchedule 가 끝나면
         if (action.payload !== null) {
@@ -275,8 +235,7 @@ export const scheduleSlice = createSlice({
 export const {
   setSchedules,
   setDrawerSchedule,
-  selectedDate,
-  modifySchedule,
+  setSelectedDate,
   updateAnalyzedData,
   updateFilter,
   updateFiltersForce,
@@ -290,8 +249,15 @@ export const selectSchedules = (state: RootState) =>
   [...state.schedule.schedules].sort((a, b) =>
     a.start_time.localeCompare(b.start_time)
   );
-export const selectDate = (state: RootState) =>
-  (state.schedule as InitialState).date;
+export const selectDate = (state: RootState) => {
+  const date = moment((state.schedule as InitialState).date);
+  return date.format("YYYY-MM-DD");
+};
+
+export const selectMonth = (state: RootState) => {
+  const date = moment((state.schedule as InitialState).date);
+  return date.format("YYYY-MM");
+};
 export const selectFiltered = (state: RootState): string[] =>
   (state.schedule as InitialState).filtered;
 export const selectFilteredDate = (state: RootState) =>

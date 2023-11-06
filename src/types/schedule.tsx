@@ -1,3 +1,5 @@
+import { VIEW_MODE } from "../constants/schedule.tsx";
+
 export interface Schedule {
   id?: string;
   user_id?: string;
@@ -6,7 +8,7 @@ export interface Schedule {
   date: string;
   start_time: string;
   end_time: string;
-  repeating_cycle: '일간' | '주간' | '월간' | '연간' | '없음';
+  repeating_cycle: "일간" | "주간" | "월간" | "연간" | "없음";
   repeat_deadline: string;
   repeat_endDate: string;
   category: string;
@@ -16,12 +18,7 @@ export interface Schedule {
   exclusion: boolean;
 }
 
-export type ViewModeValue = ViewMode[keyof ViewMode];
-
-export interface ViewMode {
-  asset: "asset";
-  schedule: "schedule";
-}
+export type ViewModeValue = (typeof VIEW_MODE)[keyof typeof VIEW_MODE];
 
 export type ScheduleDrawerModeValue =
   ScheduleDrawerMode[keyof ScheduleDrawerMode];

@@ -1,24 +1,27 @@
 import { Box, Button, Stack, Tooltip } from "@mui/material";
-import { NEED_SIGN_IN, NOT_AVAILABLE } from "../../../../constants/messages";
+import { NEED_SIGN_IN } from "../../../../constants/messages";
 import {
   NEED_TITLE,
   SCHEDULE_DRAWER,
   VIEW_MODE,
 } from "../../../../constants/schedule";
-import { selectGuestMode } from "../../../../app/redux/slices/commonSlice";
+import { selectGuestMode } from "@redux/slices/commonSlice.tsx";
 import {
-  modifySchedule,
   selectDate,
   selectSchedule,
   setDrawerSchedule,
-} from "../../../../app/redux/slices/scheduleSlice";
-import { generateRandomSchedule, handleCreate } from "../domain/schedule";
-import { Schedule, ScheduleDrawerModeValue } from "../../../../types/schedule";
-import { useAppDispatch, useAppSelector } from "../../../../app/redux/hooks";
-import { User } from "@type/auth.tsx";
+} from "@redux/slices/scheduleSlice.tsx";
+import { generateRandomSchedule } from "../domain/schedule";
+import {
+  Schedule,
+  ScheduleDrawerModeValue,
+  ViewModeValue,
+} from "@type/schedule.tsx";
+import { useAppDispatch, useAppSelector } from "@redux/hooks.ts";
 import { useSelector } from "react-redux";
 import { selectUser } from "@redux/slices/userSlice.tsx";
 import { grey } from "@mui/material/colors";
+import useSchedule from "@hooks/useSchedule.tsx";
 
 /**
  * 각종 로직들 모듈로 이전 예정
@@ -26,15 +29,15 @@ import { grey } from "@mui/material/colors";
 
 interface ScheduleDrawerFooterProps {
   mode: ScheduleDrawerModeValue;
-  viewMode: string;
-  changeViewMode: (mode: string) => void;
+  viewMode: ViewModeValue;
+  setViewMode: (mode: ViewModeValue) => void;
   handleClose: () => void;
 }
 
 function ScheduleDrawerFooter({
   mode,
   viewMode,
-  changeViewMode,
+  setViewMode,
   handleClose,
 }: ScheduleDrawerFooterProps) {
   const date = useAppSelector(selectDate);
@@ -42,34 +45,15 @@ function ScheduleDrawerFooter({
   const guestMode = useAppSelector(selectGuestMode);
   const schedule = useAppSelector(selectSchedule) as Schedule;
   const dispatch = useAppDispatch();
-
-  const handleModify = async () => {
-    /**
-     * 함수 완성되면 그 때 외부 모듈로 분리하겠습니다.
-     */
-    if (guestMode) {
-      dispatch(modifySchedule(schedule));
-      handleClose();
-    } else {
-      alert(NOT_AVAILABLE);
-    }
-  };
-
+  const { handleCreateSchedule, handleModifySchedule } = useSchedule();
   const handleMode = () => {
     switch (mode) {
       case "create":
-        // TODO: as 제거 예정
-        handleCreate(
-          dispatch,
-          schedule,
-          user as User,
-          guestMode,
-          date,
-          handleClose
-        );
+        handleCreateSchedule(schedule, date);
+        handleClose();
         break;
       case "modify":
-        handleModify();
+        handleModifySchedule();
         break;
       default:
         alert("잘못 된 요청입니다.");
@@ -96,7 +80,7 @@ function ScheduleDrawerFooter({
         <Button
           sx={{ borderRadius: "8px" }}
           variant={viewMode === "schedule" ? "contained" : "text"}
-          onClick={() => changeViewMode(VIEW_MODE.schedule)}
+          onClick={() => setViewMode(VIEW_MODE.schedule)}
         >
           일정
         </Button>
@@ -104,14 +88,14 @@ function ScheduleDrawerFooter({
           sx={{ borderRadius: "8px" }}
           variant={viewMode === VIEW_MODE.asset ? "contained" : "text"}
           onClick={() => {
-            changeViewMode(VIEW_MODE.asset);
+            setViewMode(VIEW_MODE.asset);
           }}
         >
           자산
         </Button>
       </Box>
       <Stack direction="row" spacing={1}>
-        {mode === "create" && (
+        {mode === "create" && process.env.NODE_ENV === "development" && (
           <Button
             fullWidth
             variant="contained"
@@ -120,7 +104,7 @@ function ScheduleDrawerFooter({
               dispatch(setDrawerSchedule(generateRandomSchedule(date)))
             }
           >
-            랜덤 데이터 채우기
+            랜덤 일정 채우기(dev)
           </Button>
         )}
         <Tooltip
@@ -130,7 +114,7 @@ function ScheduleDrawerFooter({
           <Button
             variant="contained"
             fullWidth
-            disabled={user === undefined}
+            disabled={user === null}
             onClick={() => handleSubmit()}
           >
             {user === null

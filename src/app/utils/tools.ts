@@ -3,9 +3,7 @@
 /* eslint-disable @typescript-eslint/naming-convention */
 
 import { EXPENDITURE } from "../../constants/categories.tsx";
-import { deleteSchedule } from "@redux/slices/scheduleSlice.tsx";
 import { Schedule } from "@type/schedule.tsx";
-import { AppDispatch } from "@redux/store.ts";
 
 /**
  * 유용한 함수들을 모아두는 곳.
@@ -62,18 +60,6 @@ export const calculateIncomeExpenditure = (
  */
 export const isTimeOrderCorrect = (startTime: string, endTime: string) =>
   startTime <= endTime;
-
-export const deleteSelectedSchedule = (
-  dispatch: AppDispatch,
-  schedule: Schedule | null,
-  handleClose: () => void
-) => {
-  if (window.confirm("정말로 삭제 하시겠습니까?")) {
-    console.log(schedule?.id);
-    dispatch(deleteSchedule(schedule?.id || ""));
-    handleClose();
-  }
-};
 
 export const initAssetsByCategory = () =>
   EXPENDITURE.nested.map((category) => ({

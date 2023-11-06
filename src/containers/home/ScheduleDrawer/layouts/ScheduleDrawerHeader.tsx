@@ -8,21 +8,21 @@ import {
 } from "../../../../constants/schedule";
 import { selectSchedule } from "../../../../app/redux/slices/scheduleSlice";
 import { selectGuestMode } from "../../../../app/redux/slices/commonSlice";
-import { deleteSelectedSchedule } from "@utils/tools.ts";
 import { ScheduleDrawerModeValue } from "../../../../types/schedule";
-import { useAppDispatch } from "../../../../app/redux/hooks";
+import useSchedule from "@hooks/useSchedule.tsx";
 
 interface ScheduleDrawerHeaderProps {
   mode: ScheduleDrawerModeValue;
   handleClose: () => void;
 }
+
 function ScheduleDrawerHeader({
   mode,
   handleClose,
 }: ScheduleDrawerHeaderProps) {
-  const dispatch = useAppDispatch();
   const schedule = useSelector(selectSchedule);
   const guestMode = useSelector(selectGuestMode);
+  const { handleDeleteSchedule } = useSchedule();
 
   return (
     <Stack direction="row" alignItems="center" justifyContent="space-between">
@@ -32,9 +32,12 @@ function ScheduleDrawerHeader({
           placement="top"
         >
           <Button
-            onClick={() =>
-              deleteSelectedSchedule(dispatch, schedule, handleClose)
-            }
+            onClick={() => {
+              if (schedule) {
+                handleDeleteSchedule(schedule.id as string);
+                handleClose();
+              }
+            }}
             color="error"
           >
             <DeleteForeverIcon />
@@ -53,4 +56,5 @@ function ScheduleDrawerHeader({
     </Stack>
   );
 }
+
 export default ScheduleDrawerHeader;

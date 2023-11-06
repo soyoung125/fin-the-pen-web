@@ -1,12 +1,25 @@
-import { Box, Button, Dialog, DialogActions, DialogContent, DialogTitle, Stack, TextField, Typography } from '@mui/material';
-import moment from 'moment';
-import { useSelector } from 'react-redux';
-import { selectDate, selectedDate } from '../../app/redux/slices/scheduleSlice';
-import SwitchingHeader from '../../components/common/SwitchingHeader';
-import { LocalizationProvider, StaticDatePicker } from '@mui/x-date-pickers';
-import { AdapterMoment } from '@mui/x-date-pickers/AdapterMoment';
-import { useState } from 'react';
-import { useAppDispatch } from '../../app/redux/hooks';
+import {
+  Box,
+  Button,
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogTitle,
+  Stack,
+  TextField,
+  Typography,
+} from "@mui/material";
+import moment from "moment";
+import { useSelector } from "react-redux";
+import {
+  selectDate,
+  setSelectedDate,
+} from "../../app/redux/slices/scheduleSlice";
+import SwitchingHeader from "../../components/common/SwitchingHeader";
+import { LocalizationProvider, StaticDatePicker } from "@mui/x-date-pickers";
+import { AdapterMoment } from "@mui/x-date-pickers/AdapterMoment";
+import { useState } from "react";
+import { useAppDispatch } from "../../app/redux/hooks";
 
 function AnalysisHeader() {
   const dispatch = useAppDispatch();
@@ -16,22 +29,28 @@ function AnalysisHeader() {
 
   const handleModalClose = () => {
     setOpenDatePickerModal(false);
-    dispatch(selectedDate(moment(newDate)))
+    dispatch(setSelectedDate(moment(newDate)));
   };
 
   return (
     <Stack justifyContent="center">
-      <Typography variant="h6" sx={{ fontWeight: 'bold', textAlign: 'center' }}>카테고리별 소비 현황</Typography>
+      <Typography variant="h6" sx={{ fontWeight: "bold", textAlign: "center" }}>
+        카테고리별 소비 현황
+      </Typography>
       <SwitchingHeader
         justifyContent="center"
-        handleClickLeftArrow={() => dispatch(selectedDate(moment(date).subtract(1, 'months')))}
-        handleClickRightArrow={() => dispatch(selectedDate(moment(date).add(1, 'months')))}
+        handleClickLeftArrow={() =>
+          dispatch(setSelectedDate(moment(date).subtract(1, "months")))
+        }
+        handleClickRightArrow={() =>
+          dispatch(setSelectedDate(moment(date).add(1, "months")))
+        }
       >
         <Box
-          sx={{ typography: 'caption', mx: 1 }}
+          sx={{ typography: "caption", mx: 1 }}
           onClick={() => setOpenDatePickerModal(true)}
         >
-          {`${moment(date).format('YYYY년 M월')}`}
+          {`${moment(date).format("YYYY년 M월")}`}
         </Box>
       </SwitchingHeader>
 
@@ -41,31 +60,29 @@ function AnalysisHeader() {
         aria-labelledby="alert-dialog-title"
         aria-describedby="alert-dialog-description"
         sx={{
-          '.MuiDialogContent-root': {
+          ".MuiDialogContent-root": {
             padding: 0,
           },
-          '& > div > div, & > div > div > div, & .MuiCalendarPicker-root': {
-            width: '100%',
+          "& > div > div, & > div > div > div, & .MuiCalendarPicker-root": {
+            width: "100%",
           },
-          '.MuiPickerStaticWrapper-content': {
-            minWidth: '100%',
+          ".MuiPickerStaticWrapper-content": {
+            minWidth: "100%",
           },
-          '.MuiCalendarOrClockPicker-root > div': {
-            width: '100%',
-            margin: '0',
+          ".MuiCalendarOrClockPicker-root > div": {
+            width: "100%",
+            margin: "0",
           },
-          '.MuiMonthPicker-root': {
+          ".MuiMonthPicker-root": {
             margin: 0,
-          }
+          },
         }}
       >
-        <DialogTitle id="alert-dialog-title">
-          날짜 선택
-        </DialogTitle>
+        <DialogTitle id="alert-dialog-title">날짜 선택</DialogTitle>
         <DialogContent>
           <LocalizationProvider dateAdapter={AdapterMoment}>
             <StaticDatePicker
-              views={['year', 'month']}
+              views={["year", "month"]}
               openTo="year"
               displayStaticWrapperAs="desktop"
               value={newDate}
