@@ -246,9 +246,12 @@ export const {
 } = scheduleSlice.actions;
 
 export const selectSchedules = (state: RootState) =>
-  [...state.schedule.schedules].sort((a, b) =>
-    a.start_time.localeCompare(b.start_time)
-  );
+  state.schedule.schedules
+    ? [...state.schedule.schedules].sort((a, b) =>
+        a.start_time.localeCompare(b.start_time)
+      )
+    : [];
+
 export const selectDate = (state: RootState) => {
   const date = moment((state.schedule as InitialState).date);
   return date.format("YYYY-MM-DD");
