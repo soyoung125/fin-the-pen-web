@@ -1,8 +1,7 @@
 import {
   BottomNavigation,
   BottomNavigationAction,
-  Drawer,
-  Box,
+  SwipeableDrawer,
 } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import CalendarMonthIcon from "@mui/icons-material/CalendarMonth";
@@ -25,6 +24,9 @@ import {
   selectBottomDrawerTabMenu,
   setBottomDrawerTabMenu,
 } from "@redux/slices/commonSlice.tsx";
+import { Global } from "@emotion/react";
+
+const drawerBleeding = 56;
 
 function BottomBar() {
   const navigate = useNavigate();
@@ -38,6 +40,10 @@ function BottomBar() {
   const [drawerWidth, setDrawerWidth] = useState(0);
   const [startTime, setStartTime] = useState("09");
 
+  const toggleDrawer = (newOpen: boolean) => () => {
+    setIsBottomDrawerOpen(newOpen);
+  };
+
   useEffect(() => {
     if (moment().isSame(date, "day")) {
       setStartTime(moment().add(1, "hours").format("HH"));
@@ -50,7 +56,7 @@ function BottomBar() {
     <>
       <BottomNavigation
         value={bottomTabMenu}
-        onChange={(event, newValue) => {
+        onChange={(event: React.SyntheticEvent, newValue: any) => {
           dispatch(setBottomDrawerTabMenu(newValue));
         }}
         sx={{
@@ -93,20 +99,31 @@ function BottomBar() {
         />
       </BottomNavigation>
 
-      <Drawer
-        open={isBottomDrawerOpen}
-        anchor="bottom"
-        onClose={() => setIsBottomDrawerOpen(false)}
-        // Drawer를 가운데로 위치할 수 있도록 도와줌. resize는 이후 업데이트 예정
-        PaperProps={{
-          sx: {
-            maxWidth: "400px",
-            marginX:
-              drawerWidth === 400 ? `calc((100% - ${drawerWidth}px)/2)` : null,
+      <Global
+        styles={{
+          ".MuiDrawer-root > .MuiPaper-root": {
+            position: "absolute",
+            height: `calc(100% - ${drawerBleeding}px)`,
+            width: "100dvhw",
+            maxWidth: "425px",
+            left:
+              drawerWidth === 425 ? `calc((100dvw - ${drawerWidth}px)/2)` : 0,
+            borderTopLeftRadius: "20px",
+            borderTopRightRadius: "20px",
           },
         }}
+      />
+
+      <SwipeableDrawer
+        anchor="bottom"
+        open={isBottomDrawerOpen}
+        onClose={toggleDrawer(false)}
+        onOpen={toggleDrawer(true)}
+        disableSwipeToOpen={true}
+        ModalProps={{
+          keepMounted: true,
+        }}
       >
-        {/* 이 부분을 범용적으로 사용할 수 있게 만드는 건 어떨까? */}
         <ScheduleDrawer
           setDrawerWidth={setDrawerWidth}
           handleClose={() => setIsBottomDrawerOpen(false)}
@@ -115,7 +132,7 @@ function BottomBar() {
           }}
           mode={SCHEDULE_DRAWER_MODE.create}
         />
-      </Drawer>
+      </SwipeableDrawer>
     </>
   );
 }

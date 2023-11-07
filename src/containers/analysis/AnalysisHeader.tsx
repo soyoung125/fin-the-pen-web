@@ -6,7 +6,6 @@ import {
   DialogContent,
   DialogTitle,
   Stack,
-  TextField,
   Typography,
 } from "@mui/material";
 import moment from "moment";
@@ -16,7 +15,7 @@ import {
   setSelectedDate,
 } from "../../app/redux/slices/scheduleSlice";
 import SwitchingHeader from "../../components/common/SwitchingHeader";
-import { LocalizationProvider, StaticDatePicker } from "@mui/x-date-pickers";
+import { LocalizationProvider, DateCalendar } from "@mui/x-date-pickers";
 import { AdapterMoment } from "@mui/x-date-pickers/AdapterMoment";
 import { useState } from "react";
 import { useAppDispatch } from "../../app/redux/hooks";
@@ -81,15 +80,13 @@ function AnalysisHeader() {
         <DialogTitle id="alert-dialog-title">날짜 선택</DialogTitle>
         <DialogContent>
           <LocalizationProvider dateAdapter={AdapterMoment}>
-            <StaticDatePicker
+            <DateCalendar
               views={["year", "month"]}
               openTo="year"
-              displayStaticWrapperAs="desktop"
               value={newDate}
               onChange={(newValue) => {
                 newValue && setNewDate(newValue);
               }}
-              renderInput={(params) => <TextField {...params} />}
             />
           </LocalizationProvider>
         </DialogContent>

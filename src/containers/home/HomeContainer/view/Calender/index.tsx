@@ -1,10 +1,11 @@
 /* eslint-disable no-underscore-dangle */
 /* eslint-disable max-len */
-import { Box, TextField } from "@mui/material";
-import { StaticDatePicker } from "@mui/x-date-pickers";
-import { AdapterMoment } from "@mui/x-date-pickers/AdapterMoment";
-import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
-import { PickersDay } from "@mui/x-date-pickers/PickersDay/PickersDay";
+import { Box } from "@mui/material";
+import { DateCalendar, LocalizationProvider } from "@mui/x-date-pickers";
+import {
+  PickersDay,
+  PickersDayProps,
+} from "@mui/x-date-pickers/PickersDay/PickersDay";
 import moment from "moment";
 import { useEffect } from "react";
 import { useSelector } from "react-redux";
@@ -25,9 +26,9 @@ import { makeMarkerData } from "./domain/calender";
 import WeeklyStatement from "./boxes/WeeklyStatement";
 import { selectIsDarkMode } from "../../../../../app/redux/slices/settingSlice";
 import useSchedule from "../../../../../hooks/useSchedule";
-import { RenderDayFunction } from "../../../../../types/common";
 import { Schedule } from "../../../../../types/schedule";
 import { useAppDispatch } from "../../../../../app/redux/hooks";
+import { AdapterMoment } from "@mui/x-date-pickers/AdapterMoment";
 
 interface CalenderProps {
   dateHeight: number;
@@ -48,14 +49,11 @@ function Calender({ dateHeight }: CalenderProps) {
     dispatch(setSelectedDate(moment(new Date())));
   }, []);
 
-  const renderDayInPicker: RenderDayFunction = (
-    day,
-    _value,
-    DayComponentProps
-  ) => {
+  const renderDayInPicker = (props: PickersDayProps<moment.Moment>) => {
+    const { day, ...other } = props;
     // 오늘이 이달에 해당하지 않을 때 마커가 표시되지 않도록 하는 코드
     if (!day.isSame(value, "month")) {
-      return <PickersDay {...DayComponentProps} />;
+      return <PickersDay {...props} />;
     }
     console.log(JSON.stringify(schedules));
     const daySchedules = schedules
@@ -71,66 +69,56 @@ function Calender({ dateHeight }: CalenderProps) {
       }));
 
     const fixedWithdrawal = daySchedules.filter((s) =>
-      ["고정 입출금", "미분류"].includes(s.category.type)
+      ["고정 입출금", "미분류"].includes(s.category.type),
     );
     const nonFixedWithdrwal = daySchedules.filter(
-      (s) => s.category.type !== "고정 입출금"
+      (s) => s.category.type !== "고정 입출금",
     );
 
     if (fixedWithdrawal.length > 0) {
       const borderColor = Array.from(
-        new Set(fixedWithdrawal.map((f) => f.category.color))
+        new Set(fixedWithdrawal.map((f) => f.category.color)),
       ).sort((a, b) => (a > b ? 1 : -1));
       if (nonFixedWithdrwal.length > 0) {
         const categoryForMarker = makeMarkerData(daySchedules, isDarkMode);
         return (
-          <Box sx={{ width: "calc(100vw / 7)" }} key={DayComponentProps.key}>
+          <Box sx={{ width: "calc(100vw / 7)" }} key={other.key}>
             <Box sx={{ display: "flex", justifyContent: "center" }}>
-              <MarkedPickersDay
-                color={borderColor}
-                DayComponentProps={DayComponentProps}
-              />
+              <MarkedPickersDay color={borderColor} props={props} />
             </Box>
             <MarkerStack categoryForMarker={categoryForMarker} />
           </Box>
         );
       }
       return (
-        <MarkedPickersDay
-          color={borderColor}
-          DayComponentProps={DayComponentProps}
-          key={DayComponentProps.key}
-        />
+        <MarkedPickersDay color={borderColor} props={props} key={other.key} />
       );
     }
 
     if (nonFixedWithdrwal.length > 0) {
       const categoryForMarker = makeMarkerData(daySchedules, isDarkMode);
       return (
-        <Box sx={{ width: "calc(100vw / 7)" }} key={DayComponentProps.key}>
+        <Box sx={{ width: "calc(100vw / 7)" }} key={other.key}>
           <Box sx={{ display: "flex", justifyContent: "center" }}>
-            <PickersDay {...DayComponentProps} />
+            <PickersDay {...props} />
           </Box>
           <MarkerStack categoryForMarker={categoryForMarker} />
         </Box>
       );
     }
 
-    return <PickersDay {...DayComponentProps} />;
+    return <PickersDay {...props} />;
   };
 
   // 실제 지출 데이터를 불러오기 전이기 때문에 일정 데이터의 지출 데이터 사용중
-  const renderAssetDayPicker: RenderDayFunction = (
-    day,
-    _value,
-    DayComponentProps
-  ) => {
+  const renderAssetDayPicker = (props: PickersDayProps<moment.Moment>) => {
+    const { day, ...other } = props;
     const weekday = day.format("dd");
     const isSameOrBefore = day.isSameOrBefore(today);
 
     // 오늘이 이달의 마지막 주에 해당하고 후달이 일요일로 시작하지 않은 경우 회색바가 그려지는 문제를 해결하기 위한 코드
     if (!day.isSame(value, "month") && today.isBefore(value)) {
-      return <PickersDay {...DayComponentProps} />;
+      return <PickersDay {...props} />;
     }
 
     // 오늘 이전의 일별 수입/지출, 주별 수입/지출을 표시하기 위한 조건문
@@ -140,24 +128,24 @@ function Calender({ dateHeight }: CalenderProps) {
         : calculateIncomeExpenditure(
             schedules,
             (s: Schedule) => day.isSame(s.date, "day"),
-            "+"
+            "+",
           );
       const expenditure = !day.isSame(value, "month")
         ? "0"
         : calculateIncomeExpenditure(
             schedules,
             (s: Schedule) => day.isSame(s.date, "day"),
-            "-"
+            "-",
           );
 
       return (
         <IncomeExpenditureBox
-          key={DayComponentProps.key}
+          key={props.key}
           income={income}
           expenditure={expenditure}
           incomeColor={pink[100]}
           expenditureColor={lightBlue[200]}
-          pickersDay={<PickersDay {...DayComponentProps} />}
+          pickersDay={<PickersDay {...props} />}
         >
           {day.isSame(today, "week") ? (
             // 이번주의 주별 수입/지출 표시
@@ -171,13 +159,13 @@ function Calender({ dateHeight }: CalenderProps) {
                   schedules,
                   (s: Schedule) =>
                     day.isSameOrBefore(s.date) && day.isSame(s.date, "week"),
-                  "-"
+                  "-",
                 )}
                 income={calculateIncomeExpenditure(
                   schedules,
                   (s: Schedule) =>
                     day.isSameOrBefore(s.date) && day.isSame(s.date, "week"),
-                  "+"
+                  "+",
                 )}
               />
             </Box>
@@ -192,12 +180,12 @@ function Calender({ dateHeight }: CalenderProps) {
                 expenditure={calculateIncomeExpenditure(
                   schedules,
                   (s: Schedule) => day.isSame(s.date, "week"),
-                  "-"
+                  "-",
                 )}
                 income={calculateIncomeExpenditure(
                   schedules,
                   (s: Schedule) => day.isSame(s.date, "week"),
-                  "+"
+                  "+",
                 )}
               />
             </Box>
@@ -209,29 +197,26 @@ function Calender({ dateHeight }: CalenderProps) {
     // 뒷날의 일별 수입/지출액 표시
     return (
       <IncomeExpenditureBox
-        key={DayComponentProps.key}
+        key={props.key}
         income={calculateIncomeExpenditure(
           schedules,
           (s: Schedule) => day.isSame(s.date, "day"),
-          "+"
+          "+",
         )}
         expenditure={calculateIncomeExpenditure(
           schedules,
           (s: Schedule) => day.isSame(s.date, "day"),
-          "-"
+          "-",
         )}
         incomeColor={isSameOrBefore ? pink[100] : grey[500]}
         expenditureColor={isSameOrBefore ? lightBlue[200] : grey[500]}
-        pickersDay={<PickersDay {...DayComponentProps} />}
+        pickersDay={<PickersDay {...props} />}
       />
     );
   };
 
   return (
-    <LocalizationProvider
-      dateAdapter={AdapterMoment}
-      dateFormats={{ monthAndYear: "yyyy년 MM월" }}
-    >
+    <LocalizationProvider dateAdapter={AdapterMoment}>
       <CalenderBox
         dateHeight={DATE_HEIGHT}
         dateSize={DATE_SIZE}
@@ -242,22 +227,24 @@ function Calender({ dateHeight }: CalenderProps) {
           1
         }
       >
-        <StaticDatePicker
-          views={["day"]}
-          displayStaticWrapperAs="desktop"
+        <DateCalendar
+          views={["year", "month", "day"]}
           disableHighlightToday
           dayOfWeekFormatter={(day) => day.substring(0, 3)}
-          value={value}
+          value={moment(value)}
           onChange={(newValue) => {
             dispatch(setSelectedDate(newValue));
           }}
           onMonthChange={(month) => {
             dispatch(setSelectedDate(month));
           }}
-          renderDay={
-            viewMode === "schedule" ? renderDayInPicker : renderAssetDayPicker
-          }
-          renderInput={(params) => <TextField {...params} />}
+          slots={{
+            day:
+              viewMode === "schedule"
+                ? renderDayInPicker
+                : renderAssetDayPicker,
+          }}
+          reduceAnimations
         />
       </CalenderBox>
     </LocalizationProvider>

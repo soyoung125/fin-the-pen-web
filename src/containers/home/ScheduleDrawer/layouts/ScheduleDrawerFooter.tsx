@@ -1,10 +1,6 @@
-import { Box, Button, Stack, Tooltip } from "@mui/material";
+import { Button, Stack, Tooltip } from "@mui/material";
 import { NEED_SIGN_IN } from "../../../../constants/messages";
-import {
-  NEED_TITLE,
-  SCHEDULE_DRAWER,
-  VIEW_MODE,
-} from "../../../../constants/schedule";
+import { NEED_TITLE, SCHEDULE_DRAWER } from "../../../../constants/schedule";
 import { selectGuestMode } from "@redux/slices/commonSlice.tsx";
 import {
   selectDate,
@@ -12,11 +8,7 @@ import {
   setDrawerSchedule,
 } from "@redux/slices/scheduleSlice.tsx";
 import { generateRandomSchedule } from "../domain/schedule";
-import {
-  Schedule,
-  ScheduleDrawerModeValue,
-  ViewModeValue,
-} from "@type/schedule.tsx";
+import { Schedule, ScheduleDrawerModeValue } from "@type/schedule.tsx";
 import { useAppDispatch, useAppSelector } from "@redux/hooks.ts";
 import { useSelector } from "react-redux";
 import { selectUser } from "@redux/slices/userSlice.tsx";
@@ -29,15 +21,11 @@ import useSchedule from "@hooks/useSchedule.tsx";
 
 interface ScheduleDrawerFooterProps {
   mode: ScheduleDrawerModeValue;
-  viewMode: ViewModeValue;
-  setViewMode: (mode: ViewModeValue) => void;
   handleClose: () => void;
 }
 
 function ScheduleDrawerFooter({
   mode,
-  viewMode,
-  setViewMode,
   handleClose,
 }: ScheduleDrawerFooterProps) {
   const date = useAppSelector(selectDate);
@@ -69,60 +57,34 @@ function ScheduleDrawerFooter({
   };
 
   return (
-    <Stack spacing={3}>
-      <Box
-        sx={{
-          borderRadius: "8px",
-          backgroundColor: grey[200],
-          marginX: "auto",
-        }}
+    <Stack direction="row" spacing={1}>
+      {mode === "create" && process.env.NODE_ENV === "development" && (
+        <Button
+          fullWidth
+          variant="contained"
+          color="warning"
+          onClick={() =>
+            dispatch(setDrawerSchedule(generateRandomSchedule(date)))
+          }
+        >
+          랜덤 일정 채우기(dev)
+        </Button>
+      )}
+      <Tooltip
+        title={!guestMode && "아직 일반 모드에서는 동작하지 않습니다."}
+        placement="top"
       >
         <Button
-          sx={{ borderRadius: "8px" }}
-          variant={viewMode === "schedule" ? "contained" : "text"}
-          onClick={() => setViewMode(VIEW_MODE.schedule)}
+          variant="contained"
+          fullWidth
+          disabled={user === null}
+          onClick={() => handleSubmit()}
         >
-          일정
+          {user === null
+            ? NEED_SIGN_IN
+            : `${SCHEDULE_DRAWER.add_schedule[mode]}`}
         </Button>
-        <Button
-          sx={{ borderRadius: "8px" }}
-          variant={viewMode === VIEW_MODE.asset ? "contained" : "text"}
-          onClick={() => {
-            setViewMode(VIEW_MODE.asset);
-          }}
-        >
-          자산
-        </Button>
-      </Box>
-      <Stack direction="row" spacing={1}>
-        {mode === "create" && process.env.NODE_ENV === "development" && (
-          <Button
-            fullWidth
-            variant="contained"
-            color="warning"
-            onClick={() =>
-              dispatch(setDrawerSchedule(generateRandomSchedule(date)))
-            }
-          >
-            랜덤 일정 채우기(dev)
-          </Button>
-        )}
-        <Tooltip
-          title={!guestMode && "아직 일반 모드에서는 동작하지 않습니다."}
-          placement="top"
-        >
-          <Button
-            variant="contained"
-            fullWidth
-            disabled={user === null}
-            onClick={() => handleSubmit()}
-          >
-            {user === null
-              ? NEED_SIGN_IN
-              : `${SCHEDULE_DRAWER.add_schedule[mode]}`}
-          </Button>
-        </Tooltip>
-      </Stack>
+      </Tooltip>
     </Stack>
   );
 }

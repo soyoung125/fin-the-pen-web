@@ -32,6 +32,7 @@ import {
 import { updateRepeat, updateRepeatEndDate } from "../domain/schedule";
 import { RenderDayFunction } from "../../../../types/common";
 import { useAppDispatch } from "../../../../app/redux/hooks";
+import SwitchButton from "@components/common/SwitchButton";
 
 function RepeatInput() {
   const dispatch = useAppDispatch();
@@ -39,10 +40,14 @@ function RepeatInput() {
 
   const [openDatePickerModal, setOpenDatePickerModal] = useState(false);
   const [repeatEndDate, setRepeatEndDate] = useState(
-    moment(schedule?.repeat_endDate)
+    moment(schedule?.repeat_endDate),
   );
 
-  const changeRepeat = (state: SelectChangeEvent<string>) => {
+  const changeRepeat = (
+    state:
+      | SelectChangeEvent<string>
+      | { target: { value: string; name: string } },
+  ) => {
     updateRepeat(dispatch, schedule, setOpenDatePickerModal, state);
   };
 
@@ -52,14 +57,14 @@ function RepeatInput() {
       setDrawerSchedule({
         ...schedule,
         repeat_endDate: moment(repeatEndDate).format("YYYY-MM-DD"),
-      })
+      }),
     );
   };
 
   const renderDayInPicker: RenderDayFunction = (
     day,
     _value,
-    DayComponentProps
+    DayComponentProps,
   ) => {
     if (moment(schedule?.date).isSame(repeatEndDate)) {
       return <PickersDay {...DayComponentProps} />;
@@ -112,8 +117,23 @@ function RepeatInput() {
   };
 
   return (
-    <Box>
-      <Stack
+    <>
+      <Stack direction="row" justifyContent="space-between">
+        <Box sx={{ color: "primary.main" }}>반복</Box>
+        <SwitchButton
+          checked={schedule?.repeating_cycle === "없음"}
+          handleChange={() =>
+            changeRepeat({
+              target: {
+                value: "repeating_cycle",
+                name: "일간",
+              },
+            })
+          }
+        />
+      </Stack>
+
+      {/* <Stack
         direction="row"
         justifyContent="space-between"
         alignItems="center"
@@ -206,8 +226,8 @@ function RepeatInput() {
             설정
           </Button>
         </DialogActions>
-      </Dialog>
-    </Box>
+      </Dialog> */}
+    </>
   );
 }
 

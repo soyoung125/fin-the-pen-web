@@ -1,4 +1,4 @@
-import { Autocomplete, TextField } from "@mui/material";
+import { Autocomplete, TextField, InputAdornment, Box } from "@mui/material";
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { CATEGORIES, Category } from "../../../../constants/categories";
@@ -55,9 +55,25 @@ export default function CategoryInput({ selected }: { selected: string }) {
         id="category"
         options={[""].concat(CATEGORIES.map((cat) => cat.title))}
         renderInput={(params) => (
-          <TextField {...params} label={SCHEDULE_DRAWER.category_title} />
+          <TextField
+            {...params}
+            variant="standard"
+            InputProps={{
+              ...params.InputProps,
+              startAdornment: (
+                <InputAdornment position="start">
+                  <Box sx={{ color: "primary.main", fontWeight: 500 }}>
+                    {SCHEDULE_DRAWER.category_title}
+                  </Box>
+                </InputAdornment>
+              ),
+            }}
+            inputProps={{
+              ...params.inputProps,
+              style: { textAlign: "right" },
+            }}
+          />
         )}
-        size="small"
       />
     </div>
   );

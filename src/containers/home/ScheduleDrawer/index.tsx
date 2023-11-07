@@ -1,9 +1,17 @@
-import { Alert, Box, Slide, SlideProps, Snackbar, Stack } from "@mui/material";
+import {
+  Alert,
+  Box,
+  Slide,
+  SlideProps,
+  Snackbar,
+  Stack,
+  Tab,
+} from "@mui/material";
 import { useEffect, useRef, useState } from "react";
 import { useSelector } from "react-redux";
 import NameInput from "./inputs/NameInput";
 import DateInput from "./inputs/DateInput";
-import { SCHEDULE_DRAWER_MODE, VIEW_MODE } from "../../../constants/schedule";
+import { SCHEDULE_DRAWER_MODE } from "../../../constants/schedule";
 import {
   selectSchedule,
   setDrawerSchedule,
@@ -14,11 +22,7 @@ import AssetSettings from "./inputs/AssetSettings";
 import ScheduleDrawerHeader from "./layouts/ScheduleDrawerHeader";
 import ScheduleDrawerFooter from "./layouts/ScheduleDrawerFooter";
 import { CONSUMPTION_ALERTS } from "../../../constants/alerts";
-import {
-  Schedule,
-  ScheduleDrawerModeValue,
-  ViewModeValue,
-} from "../../../types/schedule";
+import { Schedule, ScheduleDrawerModeValue } from "../../../types/schedule";
 import { useAppDispatch } from "../../../app/redux/hooks";
 
 function TransitionUp(props: SlideProps) {
@@ -45,10 +49,14 @@ function ScheduleDrawer({
   const schedule = useSelector(selectSchedule);
 
   const [expandAccordion, setExpandAccordion] = useState(
-    mode !== SCHEDULE_DRAWER_MODE.create
+    mode !== SCHEDULE_DRAWER_MODE.create,
   );
   const [snackbarOpen, setSnackbarOpen] = useState(true);
-  const [viewMode, setViewMode] = useState<ViewModeValue>(VIEW_MODE.schedule);
+  const [value, setValue] = useState(0);
+
+  const handleChange = (event: React.SyntheticEvent, newValue: number) => {
+    setValue(newValue);
+  };
 
   const handleExpand = () => {
     setExpandAccordion(!expandAccordion);
@@ -68,40 +76,39 @@ function ScheduleDrawer({
   }, [ref.current]);
 
   return (
-    <div ref={ref}>
-      <Box>
-        {schedule && (
-          <Box>
-            <Snackbar
-              anchorOrigin={{ vertical: "top", horizontal: "center" }}
-              autoHideDuration={5000}
-              open={snackbarOpen}
-              onClose={() => {
-                setSnackbarOpen(false);
-              }}
-              TransitionComponent={TransitionUp}
+    <div ref={ref} style={{ height: "100%" }}>
+      {schedule && (
+        <Box sx={{ height: "100%", mx: 2.5, pt: 1, mb: 3 }}>
+          <Snackbar
+            anchorOrigin={{ vertical: "top", horizontal: "center" }}
+            autoHideDuration={5000}
+            open={snackbarOpen}
+            onClose={() => {
+              setSnackbarOpen(false);
+            }}
+            TransitionComponent={TransitionUp}
+          >
+            <Alert
+              color={CONSUMPTION_ALERTS[random].color}
+              sx={{ width: "100%" }}
+              icon={CONSUMPTION_ALERTS[random].icon}
             >
-              <Alert
-                color={CONSUMPTION_ALERTS[random].color}
-                sx={{ width: "100%" }}
-                icon={CONSUMPTION_ALERTS[random].icon}
-              >
-                {CONSUMPTION_ALERTS[random].message}
-              </Alert>
-            </Snackbar>
-            <Stack justifyContent="space-between" spacing={2} m={1}>
-              <ScheduleDrawerHeader mode={mode} handleClose={handleClose} />
+              {CONSUMPTION_ALERTS[random].message}
+            </Alert>
+          </Snackbar>
 
-              {viewMode === "schedule" ? (
+          <ScheduleDrawerHeader value={value} handleChange={handleChange} />
+
+          <Stack
+            justifyContent="space-between"
+            spacing={2}
+            sx={{ height: `calc(100% - 56px)` }}
+          >
+            <Stack spacing={2} pt={2}>
+              {value === 0 ? (
                 <>
                   {/* 이벤트 제목 */}
                   <NameInput />
-
-                  {/* 이벤트 일정 */}
-                  <DateInput />
-
-                  {/* 이벤트 반복 설정 */}
-                  <RepeatInput />
 
                   {/* 이벤트 카테고리 */}
                   <CategoryInput
@@ -111,24 +118,26 @@ function ScheduleDrawer({
                         : schedule.category
                     }
                   />
+
+                  {/* 이벤트 일정 */}
+                  <DateInput />
+
+                  {/* 이벤트 반복 설정 */}
+                  <RepeatInput />
                 </>
               ) : (
                 <AssetSettings mode={mode} />
               )}
-
-              {/* 제출 버튼 */}
-              <ScheduleDrawerFooter
-                mode={mode}
-                viewMode={viewMode}
-                setViewMode={setViewMode}
-                handleClose={handleClose}
-              />
             </Stack>
-          </Box>
-        )}
-      </Box>
+
+            {/* 제출 버튼 */}
+            <ScheduleDrawerFooter mode={mode} handleClose={handleClose} />
+          </Stack>
+        </Box>
+      )}
     </div>
   );
 }
 
 export default ScheduleDrawer;
+<NameInput />;
