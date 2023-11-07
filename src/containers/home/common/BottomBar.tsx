@@ -35,7 +35,7 @@ function BottomBar() {
   const date = useAppSelector(selectDate);
   const bottomTabMenu = useAppSelector(selectBottomDrawerTabMenu);
   const bottomBarOpen = useAppSelector(selectBottomBarOpen);
-  const [isBottomDrawerOpen, setIsBottomDrawerOpen] = useState(true);
+  const [isBottomDrawerOpen, setIsBottomDrawerOpen] = useState(false);
 
   const [drawerWidth, setDrawerWidth] = useState(0);
   const [startTime, setStartTime] = useState("09");
