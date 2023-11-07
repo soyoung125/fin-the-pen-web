@@ -1,18 +1,11 @@
 import moment from "moment";
-import { v4 as uuidv4 } from "uuid";
 import { CATEGORIES, Category } from "../../../../constants/categories";
-import { REPEAT_CYCLE, SCHEDULE_DRAWER } from "../../../../constants/schedule";
-import {
-  createSchedule,
-  getMonthSchedules,
-  setDrawerSchedule,
-} from "../../../../app/redux/slices/scheduleSlice";
+import { SCHEDULE_DRAWER } from "../../../../constants/schedule";
+import { setDrawerSchedule } from "../../../../app/redux/slices/scheduleSlice";
 import { Schedule } from "../../../../types/schedule";
 import { Dispatch } from "redux";
 import { UpdateStateInterface } from "../../../../types/common";
 import { SelectChangeEvent } from "@mui/material/Select";
-import { AppDispatch } from "../../../../app/redux/store";
-import { User } from "@type/auth.tsx";
 
 /**
  * index
@@ -128,64 +121,13 @@ export const switchTitle = (id: string) => {
  * Footer
  */
 
-export const handleCreate = async (
-  dispatch: AppDispatch,
-  schedule: Schedule,
-  user: User | null,
-  guestMode: boolean,
-  date: moment.Moment,
-  handleClose: () => void,
-) => {
-  const scheduleWithUuid = {
-    ...schedule,
-    id: uuidv4(),
-    user_id: user?.user_id,
-  };
-  // 반복 일정 추가
-  if (schedule.repeating_cycle !== "없음") {
-    if (schedule.repeat_deadline === "없음") {
-      alert("반복 종료일을 설정해 주시길 바랍니다.");
-      return;
-    }
-    let repeatDate = moment(schedule.date).add(
-      1,
-      REPEAT_CYCLE[schedule.repeating_cycle],
-    );
-    while (moment(schedule.repeat_endDate).isSameOrAfter(repeatDate)) {
-      // eslint-disable-next-line no-await-in-loop
-      const newData = {
-        ...scheduleWithUuid,
-        id: uuidv4(),
-        date: repeatDate.format("YYYY-MM-DD"),
-      };
-      dispatch(createSchedule(newData));
-      repeatDate = moment(repeatDate).add(
-        1,
-        REPEAT_CYCLE[schedule.repeating_cycle],
-      );
-    }
-  }
-  // 원래 일정 추가
-  console.log(scheduleWithUuid);
-  const result = await dispatch(createSchedule(scheduleWithUuid));
-  if (!guestMode) {
-    // 게스트 모드가 아니라면, 현재 서버 상태를 새롭게 요청하기
-    dispatch(
-      getMonthSchedules({
-        user_id: user?.user_id || "",
-        date: moment(date).format("YYYY-MM"),
-      }),
-    );
-  }
-  handleClose();
-};
-
 /**
  * date를 주면, 해당 날짜에 랜덤한 일정을 만들어준다.
  * @param {*} date
  * @returns schedule
  */
-export const generateRandomSchedule = (date: moment.Moment) => {
+export const generateRandomSchedule = (stringDate: string) => {
+  const date = moment(stringDate);
   const generateRandomString = (num: number) => {
     const characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890";
     let result = "";

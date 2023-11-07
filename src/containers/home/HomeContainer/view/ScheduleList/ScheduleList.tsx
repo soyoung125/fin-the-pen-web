@@ -2,9 +2,9 @@ import {
   Box,
   CircularProgress,
   Drawer,
+  IconButton,
   Stack,
   Typography,
-  IconButton,
 } from "@mui/material";
 import ExpandCircleDownRoundedIcon from "@mui/icons-material/ExpandCircleDownRounded";
 import { useEffect, useRef, useState } from "react";
@@ -12,11 +12,11 @@ import ScheduleDrawer from "../../../ScheduleDrawer";
 import { CATEGORIES, Category } from "../../../../../constants/categories";
 import { SCHEDULE_DRAWER_MODE } from "../../../../../constants/schedule";
 import ScheduleCard from "./ScheduleCard";
-import { Schedule } from "../../../../../types/schedule";
+import { Schedule } from "@type/schedule.tsx";
 import useSchedule from "../../../../../hooks/useSchedule";
 import EasyAuthentication from "../../../../sign/EasyAuthentication";
-import { useAppDispatch } from "../../../../../app/redux/hooks";
-import { changeHideBudgetMode } from "../../../../../app/redux/slices/settingSlice";
+import { useAppDispatch } from "@redux/hooks.ts";
+import { changeHideBudgetMode } from "@redux/slices/settingSlice.ts";
 
 function ScheduleList() {
   const dispatch = useAppDispatch();
@@ -24,7 +24,7 @@ function ScheduleList() {
   const [showButton, setShowButton] = useState(false);
   const [bottomDrawerOpen, setBottomDrawerOpen] = useState(false);
   const [drawerWidth, setDrawerWidth] = useState(0);
-  const [authenticationPageopen, steAuthenticationPageOpen] = useState(false);
+  const [authenticationPageOpen, setAuthenticationPageOpen] = useState(false);
 
   const {
     status,
@@ -117,14 +117,14 @@ function ScheduleList() {
             }
             key={Math.random()}
             handleModal={handleModal}
-            openAuthenticationPage={() => steAuthenticationPageOpen(true)}
+            openAuthenticationPage={() => setAuthenticationPageOpen(true)}
           />
         ))
       }
 
       {
         // 예산 숨김 off를 위한 화면
-        authenticationPageopen && (
+        authenticationPageOpen && (
           <EasyAuthentication
             handleAuthenticate={() => dispatch(changeHideBudgetMode(false))}
           />

@@ -1,4 +1,4 @@
-import { Box, Button, TextField, IconButton } from "@mui/material";
+import { Box, Button, IconButton, TextField } from "@mui/material";
 import { FormEvent, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { NO_BLANKS } from "../../constants/messages.tsx";
@@ -30,7 +30,7 @@ function SignInFields() {
   };
 
   const handleMouseDownPassword = (
-    event: React.MouseEvent<HTMLButtonElement>,
+    event: React.MouseEvent<HTMLButtonElement>
   ) => {
     event.preventDefault();
   };
@@ -48,7 +48,7 @@ function SignInFields() {
           required
           fullWidth
           id="email"
-          label="Email Address"
+          label="이메일"
           name="email"
           autoComplete="email"
           autoFocus
@@ -80,7 +80,7 @@ function SignInFields() {
           sx={{ pl: 0 }}
           onClick={() =>
             alert(
-              "You forget a thousand things every day. Make sure this is one of them :)",
+              "You forget a thousand things every day. Make sure this is one of them :)"
             )
           }
         >
@@ -100,4 +100,5 @@ function SignInFields() {
     </>
   );
 }
+
 export default SignInFields;

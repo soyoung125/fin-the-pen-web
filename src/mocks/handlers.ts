@@ -1,9 +1,13 @@
 // src/mocks/handlers.js
 import { rest } from "msw";
-import { LOCAL_STORAGE_KEY_USERS } from "@api/keys.ts";
+import {
+  LOCAL_STORAGE_KEY_SCHEDULES,
+  LOCAL_STORAGE_KEY_USERS,
+} from "@api/keys.ts";
 import { getLocalStorage, setLocalStorage } from "@utils/storage.ts";
 import { DOMAIN } from "@api/url.ts";
 import { MockUser, SignUp, User } from "@type/auth.tsx";
+import { Schedule } from "@type/schedule.tsx";
 
 export const handlers = [
   rest.post(`${DOMAIN}/fin-the-pen-web/sign-up`, async (req, res, ctx) => {
@@ -35,5 +39,43 @@ export const handlers = [
       return res(ctx.delay(1000), ctx.status(200), ctx.json(""));
     }
     return res(ctx.delay(1000), ctx.status(200), ctx.json(user));
+  }),
+
+  rest.post(`${DOMAIN}/createSchedule`, async (req, res, ctx) => {
+    const schedule = await req.json();
+    const prevSchedules = getLocalStorage<Schedule[]>(
+      LOCAL_STORAGE_KEY_SCHEDULES,
+      []
+    );
+    const newSchedules: Schedule[] = [...prevSchedules, schedule];
+    setLocalStorage(LOCAL_STORAGE_KEY_SCHEDULES, newSchedules);
+    return res(ctx.delay(1000), ctx.status(200), ctx.json(true));
+  }),
+
+  rest.post(`${DOMAIN}/getMonthSchedules`, async (req, res, ctx) => {
+    const { user_id, date } = await req.json();
+    console.log(user_id, date);
+    const schedules = getLocalStorage<Schedule[]>(
+      LOCAL_STORAGE_KEY_SCHEDULES,
+      []
+    );
+    const monthSchedules = schedules.filter(
+      (schedule) =>
+        schedule.user_id === user_id &&
+        schedule.date.slice(0, 7) === date.slice(0, 7)
+    );
+    console.log(monthSchedules);
+    return res(ctx.delay(1000), ctx.status(200), ctx.json(monthSchedules));
+  }),
+
+  rest.post(`${DOMAIN}/deleteSchedule`, async (req, res, ctx) => {
+    const { id } = await req.json();
+    const prevSchedules = getLocalStorage<Schedule[]>(
+      LOCAL_STORAGE_KEY_SCHEDULES,
+      []
+    );
+    const newSchedules = prevSchedules.filter((schedule) => schedule.id !== id);
+    setLocalStorage(LOCAL_STORAGE_KEY_SCHEDULES, newSchedules);
+    return res(ctx.delay(1000), ctx.status(200), ctx.json(true));
   }),
 ];

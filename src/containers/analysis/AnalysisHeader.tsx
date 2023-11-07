@@ -6,18 +6,16 @@ import {
   DialogContent,
   DialogTitle,
   Stack,
-  TextField,
   Typography,
 } from "@mui/material";
 import moment from "moment";
 import { useSelector } from "react-redux";
-import { selectDate, selectedDate } from "../../app/redux/slices/scheduleSlice";
-import SwitchingHeader from "../../components/common/SwitchingHeader";
 import {
-  DateCalendar,
-  LocalizationProvider,
-  StaticDatePicker,
-} from "@mui/x-date-pickers";
+  selectDate,
+  setSelectedDate,
+} from "../../app/redux/slices/scheduleSlice";
+import SwitchingHeader from "../../components/common/SwitchingHeader";
+import { LocalizationProvider, DateCalendar } from "@mui/x-date-pickers";
 import { AdapterMoment } from "@mui/x-date-pickers/AdapterMoment";
 import { useState } from "react";
 import { useAppDispatch } from "../../app/redux/hooks";
@@ -30,7 +28,7 @@ function AnalysisHeader() {
 
   const handleModalClose = () => {
     setOpenDatePickerModal(false);
-    dispatch(selectedDate(moment(newDate)));
+    dispatch(setSelectedDate(moment(newDate)));
   };
 
   return (
@@ -41,10 +39,10 @@ function AnalysisHeader() {
       <SwitchingHeader
         justifyContent="center"
         handleClickLeftArrow={() =>
-          dispatch(selectedDate(moment(date).subtract(1, "months")))
+          dispatch(setSelectedDate(moment(date).subtract(1, "months")))
         }
         handleClickRightArrow={() =>
-          dispatch(selectedDate(moment(date).add(1, "months")))
+          dispatch(setSelectedDate(moment(date).add(1, "months")))
         }
       >
         <Box

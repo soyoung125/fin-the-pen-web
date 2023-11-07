@@ -3,7 +3,7 @@ import { Outlet } from "react-router-dom";
 import { useEffect } from "react";
 import moment from "moment";
 import EasyAuthentication from "../../../containers/sign/EasyAuthentication";
-import { selectedDate } from "@redux/slices/scheduleSlice.tsx";
+import { setSelectedDate } from "@redux/slices/scheduleSlice.tsx";
 import { useAppDispatch, useAppSelector } from "@redux/hooks.ts";
 import { selectIsBudgetHidden } from "@redux/slices/settingSlice.ts";
 
@@ -22,7 +22,7 @@ function AnalysisLayout() {
     if (isHideBudgetMode) {
       dispatch(setIsAuthenticatedFalse());
     }
-    dispatch(selectedDate(moment(new Date())));
+    dispatch(setSelectedDate(moment(new Date())));
   }, []);
 
   return (

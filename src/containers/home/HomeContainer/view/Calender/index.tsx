@@ -13,8 +13,8 @@ import { grey, lightBlue, pink } from "@mui/material/colors";
 import { CATEGORIES } from "../../../../../constants/categories";
 import {
   selectDate,
-  selectedDate,
   selectViewMode,
+  setSelectedDate,
 } from "../../../../../app/redux/slices/scheduleSlice";
 import MarkedPickersDay from "./boxes/scheduleMarker/MarkedPickersDay";
 import MarkerStack from "./boxes/scheduleMarker/MarkerStack";
@@ -46,7 +46,7 @@ function Calender({ dateHeight }: CalenderProps) {
   const DATE_HEIGHT = dateHeight;
 
   useEffect(() => {
-    dispatch(selectedDate(moment(new Date())));
+    dispatch(setSelectedDate(moment(new Date())));
   }, []);
 
   const renderDayInPicker = (props: PickersDayProps<moment.Moment>) => {
@@ -55,7 +55,7 @@ function Calender({ dateHeight }: CalenderProps) {
     if (!day.isSame(value, "month")) {
       return <PickersDay {...props} />;
     }
-
+    console.log(JSON.stringify(schedules));
     const daySchedules = schedules
       .filter((e) => e.date === day.format("YYYY-MM-DD"))
       .map((s) => ({
@@ -233,10 +233,10 @@ function Calender({ dateHeight }: CalenderProps) {
           dayOfWeekFormatter={(day) => day.substring(0, 3)}
           value={moment(value)}
           onChange={(newValue) => {
-            dispatch(selectedDate(newValue));
+            dispatch(setSelectedDate(newValue));
           }}
           onMonthChange={(month) => {
-            dispatch(selectedDate(month));
+            dispatch(setSelectedDate(month));
           }}
           slots={{
             day:

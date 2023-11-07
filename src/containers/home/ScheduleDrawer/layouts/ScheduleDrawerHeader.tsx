@@ -4,6 +4,7 @@ interface ScheduleDrawerHeaderProps {
   value: number;
   handleChange: (event: React.SyntheticEvent, newValue: number) => void;
 }
+
 function ScheduleDrawerHeader({
   value,
   handleChange,
@@ -15,4 +16,5 @@ function ScheduleDrawerHeader({
     </Tabs>
   );
 }
+
 export default ScheduleDrawerHeader;

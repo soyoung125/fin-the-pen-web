@@ -1,15 +1,12 @@
-import { PayloadAction, createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { AsyncThunkStatusValue, ServerState } from "../../../types/common";
+import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { AsyncThunkStatusValue } from "../../../types/common";
 import { RootState } from "../store";
-import { getSessionStorage, setSessionStorage } from "@utils/storage.ts";
-import {
-  LOCAL_STORAGE_KEY_SERVER,
-  SESSION_STORAGE_KEY_TOKEN,
-} from "@api/keys.ts";
+import { setSessionStorage } from "@utils/storage.ts";
+import { SESSION_STORAGE_KEY_TOKEN } from "@api/keys.ts";
 import axios from "axios";
-import { url } from "@api/url.ts";
 import { ASYNC_THUNK_STATUS } from "../../../constants/common.tsx";
 import { SignIn, User } from "@type/auth.tsx";
+import { DOMAIN } from "@api/url.ts";
 
 interface UserState {
   user: User | null; // User가 null 인 경우 비로그인 상태
@@ -23,12 +20,8 @@ const initialState: UserState = {
 
 export const fetchLogin = async (sign: SignIn) => {
   try {
-    const server = getSessionStorage<ServerState>(
-      LOCAL_STORAGE_KEY_SERVER,
-      "real"
-    );
     const response = await axios.post<User | "">(
-      `${url[server]}/fin-the-pen-web/sign-in`,
+      `${DOMAIN}/fin-the-pen-web/sign-in`,
       sign
     );
     return response.data as User | "";

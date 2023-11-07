@@ -2,13 +2,7 @@
  * 반드시 슬래시가 없는 상태로 끝내기
  */
 
-// deprecated
-export const url: { [server: string]: string } = {
-  guest: "",
-  real: "/real", // vite proxy에 의해 외부 서버로 통신 시 CORS 문제가 해결됨
-};
-
 export const DOMAIN =
   process.env.NODE_ENV === "production"
-    ? "https://api.foo.com"
-    : "/real";
+    ? "https://api.foo.com" // 배포 시 실제로 연결할 서버
+    : "/local"; // 로컬 서버와 연결할 때 (단, MSW 동작 시 로컬 서버로 요청이 나가지 않고 mocking 당할 수 있음)
