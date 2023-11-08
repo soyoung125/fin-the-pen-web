@@ -33,6 +33,30 @@ export const updateSchedule = (
       }),
     );
   }
+  if (
+    state.target.id === "start_date" &&
+    moment(schedule?.end_date).isBefore(state.target.value as string)
+  ) {
+    dispatch(
+      setDrawerSchedule({
+        ...schedule,
+        end_date: state.target.value,
+        [state.target.id]: state.target.value,
+      }),
+    );
+  }
+  if (
+    state.target.id === "end_date" &&
+    moment(schedule?.start_date).isAfter(state.target.value as string)
+  ) {
+    dispatch(
+      setDrawerSchedule({
+        ...schedule,
+        start_date: state.target.value,
+        [state.target.id]: state.target.value,
+      }),
+    );
+  }
 };
 
 export const updateAllDay = (
