@@ -12,6 +12,8 @@ import { SCHEDULE_DRAWER } from "../../../../../constants/schedule";
 import { selectSchedule } from "../../../../../app/redux/slices/scheduleSlice";
 import { updateSchedule, updateSpendingType } from "../../domain/schedule";
 import { useAppDispatch } from "../../../../../app/redux/hooks";
+import SwitchButton from "@components/common/SwitchButton";
+import { UpdateStateInterface } from "@type/common";
 
 function SpendingInput({ mode }: { mode: string }) {
   const dispatch = useAppDispatch();
@@ -25,6 +27,10 @@ function SpendingInput({ mode }: { mode: string }) {
     updateSchedule(dispatch, schedule, {
       target: { id: state.currentTarget.id, value: state.currentTarget.value },
     });
+  };
+
+  const changeFixAmount = (state: UpdateStateInterface) => {
+    updateSchedule(dispatch, schedule, state);
   };
   return (
     <Grid container spacing={2}>
@@ -117,6 +123,31 @@ function SpendingInput({ mode }: { mode: string }) {
             </InputAdornment>
           }
         />
+      </Grid>
+
+      <Grid item xs={12}>
+        <Stack
+          direction="row"
+          justifyContent="space-between"
+          alignItems="center"
+        >
+          <Typography sx={{ fontWeight: 500 }}>
+            {SCHEDULE_DRAWER.fix_amount}
+          </Typography>
+          <Stack direction="row" alignItems="center">
+            <SwitchButton
+              checked={schedule?.is_fix_amount ?? false}
+              handleChange={() =>
+                changeFixAmount({
+                  target: {
+                    id: "is_fix_amount",
+                    value: schedule?.is_fix_amount ? false : true,
+                  },
+                })
+              }
+            />
+          </Stack>
+        </Stack>
       </Grid>
     </Grid>
   );
