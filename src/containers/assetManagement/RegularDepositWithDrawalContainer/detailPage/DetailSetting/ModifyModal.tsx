@@ -160,7 +160,7 @@ function ModifyModal({
                 startAdornment={
                   <InputAdornment position="start">{`${typeContent}액`}</InputAdornment>
                 }
-                value={form.set_amount}
+                value={form.amount}
                 onChange={changeDetailInfo}
                 size="small"
                 inputProps={{
