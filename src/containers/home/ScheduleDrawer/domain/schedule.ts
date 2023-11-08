@@ -35,6 +35,19 @@ export const updateSchedule = (
   }
 };
 
+export const updateAllDay = (
+  dispatch: Dispatch,
+  schedule: Schedule | null,
+  state: { target: { value: boolean; name: string } },
+) => {
+  dispatch(
+    setDrawerSchedule({
+      ...schedule,
+      [state.target.name]: state.target.value,
+    }),
+  );
+};
+
 export const updateRepeat = (
   dispatch: Dispatch,
   schedule: Schedule | null,
