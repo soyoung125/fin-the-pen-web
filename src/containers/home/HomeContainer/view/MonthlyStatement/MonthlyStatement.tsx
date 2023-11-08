@@ -28,7 +28,7 @@ function MonthlyStatement() {
         }
       >
         <Typography variant="h6" sx={{ fontWeight: "bold" }}>{`${moment(
-          date
+          date,
         ).format("M")}월`}</Typography>
         <Typography variant="caption">{moment(date).format("YYYY")}</Typography>
       </SwitchingHeader>
@@ -39,8 +39,8 @@ function MonthlyStatement() {
             title="수입"
             content={`+${calculateIncomeExpenditure(
               schedules,
-              (s: Schedule) => moment(date).isSame(s.date, "month"),
-              "+"
+              (s: Schedule) => moment(date).isSame(s.start_date, "month"),
+              "+",
             )}`}
           />
 
@@ -48,8 +48,8 @@ function MonthlyStatement() {
             title="지출"
             content={`-${calculateIncomeExpenditure(
               schedules,
-              (s: Schedule) => moment(date).isSame(s.date, "month"),
-              "-"
+              (s: Schedule) => moment(date).isSame(s.end_date, "month"),
+              "-",
             )}`}
           />
         </Stack>

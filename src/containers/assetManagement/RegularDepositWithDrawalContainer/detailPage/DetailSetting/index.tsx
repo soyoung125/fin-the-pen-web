@@ -19,15 +19,16 @@ function DetailSetting() {
   const { state } = useLocation();
   const { type, data }: StateData = state;
   const [detailData, setDetailData] = useState<{ [key: string]: Schedule[] }>(
-    {}
+    {},
   );
 
+  // 추후 반복 일정에 대한 기획이 고정되면 살리기
   useEffect(() => {
-    setDetailData(
-      makeGroupForRegularData(
-        schedules.filter((s) => s.repeating_cycle !== "없음" && s.type === type)
-      )
-    );
+    // setDetailData(
+    //   makeGroupForRegularData(
+    //     schedules.filter((s) => s.repeating_cycle !== "없음" && s.type === type)
+    //   )
+    // );
   }, [schedules]);
 
   return (

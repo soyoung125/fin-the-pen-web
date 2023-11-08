@@ -36,7 +36,7 @@ function ModifyModal({
   data,
 }: ModifyModalProps) {
   // const dispatch = useDispatch();
-  const type = data.type === "+" ? "+" : "-";
+  const type = data.price_type === "+" ? "+" : "-";
   const typeContent = REGULAR_DEPOSIT_WITHDRAWAL_TYPE[type];
   const [form, setForm] = useState(data);
   console.log(form);
@@ -104,11 +104,10 @@ function ModifyModal({
                   <InputAdornment position="start">{`${typeContent}일`}</InputAdornment>
                 ),
               }}
-              // eslint-disable-next-line react/jsx-no-duplicate-props
               inputProps={{
                 style: { textAlign: "right" },
               }}
-              value={form.date}
+              value={form.start_date}
               onChange={changeDetailInfo}
               size="small"
             />
@@ -123,11 +122,10 @@ function ModifyModal({
                   <InputAdornment position="start">{`${typeContent}기간`}</InputAdornment>
                 ),
               }}
-              // eslint-disable-next-line react/jsx-no-duplicate-props
               inputProps={{
                 style: { textAlign: "right" },
               }}
-              value={form.repeat_endDate}
+              value={form.end_date}
               onChange={changeDetailInfo}
               size="small"
             />
@@ -162,7 +160,7 @@ function ModifyModal({
                 startAdornment={
                   <InputAdornment position="start">{`${typeContent}액`}</InputAdornment>
                 }
-                value={form.expected_spending}
+                value={form.set_amount}
                 onChange={changeDetailInfo}
                 size="small"
                 inputProps={{

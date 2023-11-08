@@ -75,7 +75,7 @@ export const updateRepeatEndDate = (
   setRepeatEndDate: React.Dispatch<React.SetStateAction<moment.Moment>>,
   endDate: moment.Moment | null,
 ) => {
-  if (endDate?.isBefore(schedule?.date)) {
+  if (endDate?.isBefore(schedule?.end_date)) {
     alert("반복 종료일을 다시 선택해주세요.");
   } else {
     endDate && setRepeatEndDate(endDate);
@@ -86,7 +86,7 @@ export const updateSpendingType = (
   dispatch: Dispatch,
   schedule: Schedule | null,
 ) => {
-  if (schedule?.type === SCHEDULE_DRAWER.type_plus) {
+  if (schedule?.price_type === SCHEDULE_DRAWER.type_plus) {
     dispatch(
       setDrawerSchedule({ ...schedule, type: SCHEDULE_DRAWER.type_minus }),
     );

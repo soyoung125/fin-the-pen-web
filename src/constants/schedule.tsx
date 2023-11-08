@@ -77,16 +77,17 @@ const WRONG_TIME_ORDER = "종료 시각이 시작 시각보다 빠르지 않았�
 
 const INIT_SCHEDULE = (date: string, start_time: string): Schedule => ({
   event_name: "",
-  alarm: false,
-  date,
+  start_date: date,
+  end_date: date,
   start_time: `${start_time}:00`,
   end_time: `${moment(start_time, "HH").add(2, "h").format("HH")}:00`,
-  repeating_cycle: "없음",
-  repeat_deadline: "없음",
-  repeat_endDate: date,
   category: "",
-  type: SCHEDULE_DRAWER.type_minus,
-  expected_spending: "0",
+  all_day: false,
+  repeat: "none",
+  period: "none",
+  price_type: SCHEDULE_DRAWER.type_minus,
+  amount: "0",
+  is_fix_Amount: false,
   importance: SCHEDULE_DRAWER.importance_middle,
   exclusion: false, // false면 포함
 });

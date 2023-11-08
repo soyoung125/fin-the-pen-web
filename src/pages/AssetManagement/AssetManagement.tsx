@@ -39,10 +39,10 @@ function AssetManagement() {
             numberOfSchedule={
               schedules.filter(
                 (s) =>
-                  today.isSame(s.date, "month") &&
+                  today.isSame(s.start_date, "month") &&
                   today.isSameOrBefore(
-                    moment(s.date + s.start_time, "YYYY-MM-DDhh:mm")
-                  )
+                    moment(s.start_date + s.start_time, "YYYY-MM-DDhh:mm"),
+                  ),
               ).length
             }
           />

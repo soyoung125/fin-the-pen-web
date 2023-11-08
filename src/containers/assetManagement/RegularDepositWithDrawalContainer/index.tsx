@@ -38,17 +38,18 @@ function RegularDepositWithdrawal() {
   const [withdrawals, setWithdrawals] = useState<DataInterface>({});
   const [type, setType] = useState("+");
 
+  // 추후 반복 일정에 대한 기획이 고정되면 살리기
   useEffect(() => {
-    setDeposits(
-      makeGroupForRegularData(
-        schedules.filter((s) => s.repeating_cycle !== "없음" && s.type === "+")
-      )
-    );
-    setWithdrawals(
-      makeGroupForRegularData(
-        schedules.filter((s) => s.repeating_cycle !== "없음" && s.type === "-")
-      )
-    );
+    // setDeposits(
+    //   makeGroupForRegularData(
+    //     schedules.filter((s) => s.repeating_cycle !== "없음" && s.type === "+")
+    //   )
+    // );
+    // setWithdrawals(
+    //   makeGroupForRegularData(
+    //     schedules.filter((s) => s.repeating_cycle !== "없음" && s.type === "-")
+    //   )
+    // );
   }, [schedules]);
 
   // const makeGroup: MakeGroupInterface = (data) => data

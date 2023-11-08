@@ -1,4 +1,12 @@
-import { Button, Grid, InputAdornment, OutlinedInput, Stack, TextField, Typography } from "@mui/material";
+import {
+  Button,
+  Grid,
+  InputAdornment,
+  OutlinedInput,
+  Stack,
+  TextField,
+  Typography,
+} from "@mui/material";
 import { useSelector } from "react-redux";
 import { SCHEDULE_DRAWER } from "../../../../../constants/schedule";
 import { selectSchedule } from "../../../../../app/redux/slices/scheduleSlice";
@@ -8,7 +16,7 @@ import { useAppDispatch } from "../../../../../app/redux/hooks";
 function SpendingInput({ mode }: { mode: string }) {
   const dispatch = useAppDispatch();
   const schedule = useSelector(selectSchedule);
-  const expectedSpending = schedule ? schedule?.expected_spending : "0";
+  const expectedSpending = schedule ? schedule?.amount : "0";
 
   const changeSpendingType = () => {
     updateSpendingType(dispatch, schedule);
@@ -19,10 +27,7 @@ function SpendingInput({ mode }: { mode: string }) {
     });
   };
   return (
-    <Grid
-      container
-      spacing={2}
-    >
+    <Grid container spacing={2}>
       <Grid item xs={12} sx={{ fontWeight: 500 }}>
         {SCHEDULE_DRAWER.set_spending_title}
       </Grid>
@@ -30,7 +35,11 @@ function SpendingInput({ mode }: { mode: string }) {
       <Grid item container spacing={1.5}>
         <Grid item xs={6}>
           <Button
-            variant={schedule?.type === SCHEDULE_DRAWER.type_minus ? "contained" : "outlined"}
+            variant={
+              schedule?.price_type === SCHEDULE_DRAWER.type_minus
+                ? "contained"
+                : "outlined"
+            }
             fullWidth
             id="type"
             value={SCHEDULE_DRAWER.type_minus}
@@ -45,7 +54,11 @@ function SpendingInput({ mode }: { mode: string }) {
 
         <Grid item xs={6}>
           <Button
-            variant={schedule?.type === SCHEDULE_DRAWER.type_plus ? "contained" : "outlined"}
+            variant={
+              schedule?.price_type === SCHEDULE_DRAWER.type_plus
+                ? "contained"
+                : "outlined"
+            }
             fullWidth
             id="type"
             value={SCHEDULE_DRAWER.type_plus}
@@ -94,7 +107,7 @@ function SpendingInput({ mode }: { mode: string }) {
                   height: "30px",
                 }}
               >
-                {schedule?.type}
+                {schedule?.price_type}
               </Button>
             </InputAdornment>
           }

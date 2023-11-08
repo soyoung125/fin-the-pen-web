@@ -22,12 +22,13 @@ function AnalysisDetailContainer() {
   const date = useSelector(selectDate);
   const momentDate = moment(date);
   const assetsByCategory: AssetsByCategoryInterface[] = useSelector(
-    selectAssetsByCategory
+    selectAssetsByCategory,
   );
   const [selectedItem, setSelectedItem] = useState(
     schedules.filter(
-      (s) => momentDate.isSame(s.date, "month") && s.category === category
-    )
+      (s) =>
+        momentDate.isSame(s.start_date, "month") && s.category === category,
+    ),
   );
   const [spending, setSpending] = useState(0);
   const [sortByDate, setSortByDate] = useState(true);
@@ -48,15 +49,16 @@ function AnalysisDetailContainer() {
   useEffect(() => {
     const newData = schedules
       .filter(
-        (s) => momentDate.isSame(s.date, "month") && s.category === category
+        (s) =>
+          momentDate.isSame(s.start_date, "month") && s.category === category,
       )
-      .sort((a, b) => +new Date(a.date) - +new Date(b.date));
+      .sort((a, b) => +new Date(a.start_date) - +new Date(b.start_date));
     setSelectedItem(newData);
     setSpending(
       newData.reduce(
-        (result, schedule) => result + parseInt(schedule.expected_spending, 10),
-        0
-      )
+        (result, schedule) => result + parseInt(schedule.amount, 10),
+        0,
+      ),
     );
   }, [date]);
 
@@ -64,15 +66,15 @@ function AnalysisDetailContainer() {
     if (sortByDate) {
       setSelectedItem([
         ...selectedItem.sort((a, b) =>
-          +new Date(a.date) - +new Date(b.date) ? +!isAscending : +isAscending
+          +new Date(a.start_date) - +new Date(b.start_date)
+            ? +!isAscending
+            : +isAscending,
         ),
       ]);
     } else {
       setSelectedItem([
         ...selectedItem.sort((a, b) =>
-          b.expected_spending > a.expected_spending
-            ? +!isAscending
-            : +isAscending
+          b.amount > a.amount ? +!isAscending : +isAscending,
         ),
       ]);
     }
