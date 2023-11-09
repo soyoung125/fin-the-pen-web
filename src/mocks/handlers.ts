@@ -8,6 +8,7 @@ import { getLocalStorage, setLocalStorage } from "@utils/storage.ts";
 import { DOMAIN } from "@api/url.ts";
 import { MockUser, SignUp, User } from "@type/auth.tsx";
 import { Schedule } from "@type/schedule.tsx";
+import moment from "moment";
 
 export const handlers = [
   rest.post(`${DOMAIN}/fin-the-pen-web/sign-up`, async (req, res, ctx) => {
@@ -33,7 +34,7 @@ export const handlers = [
     const user = users.find(
       (user) =>
         user.user_id === credentials.user_id &&
-        user.password === credentials.password
+        user.password === credentials.password,
     );
     if (user === undefined) {
       return res(ctx.delay(1000), ctx.status(200), ctx.json(""));
@@ -45,7 +46,7 @@ export const handlers = [
     const schedule = await req.json();
     const prevSchedules = getLocalStorage<Schedule[]>(
       LOCAL_STORAGE_KEY_SCHEDULES,
-      []
+      [],
     );
     const newSchedules: Schedule[] = [...prevSchedules, schedule];
     setLocalStorage(LOCAL_STORAGE_KEY_SCHEDULES, newSchedules);
@@ -57,12 +58,12 @@ export const handlers = [
     console.log(user_id, date);
     const schedules = getLocalStorage<Schedule[]>(
       LOCAL_STORAGE_KEY_SCHEDULES,
-      []
+      [],
     );
     const monthSchedules = schedules.filter(
       (schedule) =>
         schedule.user_id === user_id &&
-        schedule.date.slice(0, 7) === date.slice(0, 7)
+        moment(date).isSame(schedule.start_date, "month"),
     );
     console.log(monthSchedules);
     return res(ctx.delay(1000), ctx.status(200), ctx.json(monthSchedules));
@@ -72,7 +73,7 @@ export const handlers = [
     const { id } = await req.json();
     const prevSchedules = getLocalStorage<Schedule[]>(
       LOCAL_STORAGE_KEY_SCHEDULES,
-      []
+      [],
     );
     const newSchedules = prevSchedules.filter((schedule) => schedule.id !== id);
     setLocalStorage(LOCAL_STORAGE_KEY_SCHEDULES, newSchedules);

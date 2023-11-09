@@ -1,18 +1,14 @@
-import { Box, Input, InputAdornment, InputBase, Stack } from "@mui/material";
-import Collapse from "@mui/material/Collapse";
+import { Box, Stack } from "@mui/material";
 import { useSelector } from "react-redux";
-import { SCHEDULE_DRAWER } from "../../../../../constants/schedule";
 import { selectSchedule } from "../../../../../app/redux/slices/scheduleSlice";
-import { updateSchedule } from "../../domain/schedule";
+import { updateAllDay, updateSchedule } from "../../domain/schedule";
 import { useAppDispatch } from "../../../../../app/redux/hooks";
 import SwitchButton from "@components/common/SwitchButton";
 import { useState } from "react";
-import CalenderBox from "@containers/home/HomeContainer/view/Calender/boxes/CalenderBox";
-import { DateCalendar, LocalizationProvider } from "@mui/x-date-pickers";
-import moment from "moment";
 import { UpdateStateInterface } from "@type/common";
-import { AdapterMoment } from "@mui/x-date-pickers/AdapterMoment";
 import InputDateTime from "./InputDateTime";
+import { SCHEDULE_DRAWER } from "constants/schedule";
+import { trace } from "console";
 
 function DateInput() {
   const dispatch = useAppDispatch();
@@ -28,31 +24,44 @@ function DateInput() {
     updateSchedule(dispatch, schedule, state);
   };
 
+  const changeAllDay = (state: {
+    target: { value: boolean; name: string };
+  }) => {
+    updateAllDay(dispatch, schedule, state);
+  };
+
   return (
     <>
       <InputDateTime
-        date={schedule?.date}
+        date={schedule?.start_date}
         time={schedule?.start_time}
         handleClick={() => setShowStart(!showStart)}
-        title={SCHEDULE_DRAWER.start_time}
         changeSchedule={changeSchedule}
         showCalendar={showStart}
+        type="start"
       />
 
       <InputDateTime
-        date={schedule?.date}
+        date={schedule?.end_date}
         time={schedule?.end_time}
         handleClick={() => setShowEnd(!showEnd)}
-        title={SCHEDULE_DRAWER.end_time}
         changeSchedule={changeSchedule}
         showCalendar={showEnd}
+        type="end"
       />
 
       <Stack direction="row" justifyContent="space-between">
-        <Box>하루종일</Box>
+        <Box>{SCHEDULE_DRAWER.all_day}</Box>
         <SwitchButton
-          checked={true}
-          handleChange={() => console.log("toggle")}
+          checked={schedule?.all_day ?? true}
+          handleChange={() =>
+            changeAllDay({
+              target: {
+                value: !schedule?.all_day,
+                name: "all_day",
+              },
+            })
+          }
         />
       </Stack>
     </>

@@ -41,7 +41,7 @@ function SwipeableDetailCard({ data }: SwipeableDetailCardProps) {
 
   const modifyData = (form: Schedule) => {
     data.map((d) => {
-      if (moment().isBefore(d.date)) {
+      if (moment().isBefore(d.start_date)) {
         handleModifySchedule();
       } else {
         handleModifySchedule();
@@ -71,17 +71,15 @@ function SwipeableDetailCard({ data }: SwipeableDetailCardProps) {
               }}
             >
               <Box>
-                <Box sx={{ mb: 3 }}>{`매${schedule.repeating_cycle.charAt(
+                {/* <Box sx={{ mb: 3 }}>{`매${schedule.repeating_cycle.charAt(
                   0
-                )} ${moment(schedule.date).format("D일")}`}</Box>
+                )} ${moment(schedule.date).format("D일")}`}</Box> */}
                 <Box>{schedule.event_name}</Box>
               </Box>
               <Box sx={{ textAlign: "end" }}>
                 <Box sx={{ mb: 3 }}>{schedule.event_name}</Box>
                 <Box sx={{ color: "primary.main" }}>
-                  {`${parseInt(schedule.expected_spending, 10).toLocaleString(
-                    "ko-kr"
-                  )}원`}
+                  {`${parseInt(schedule.amount, 10).toLocaleString("ko-kr")}원`}
                 </Box>
               </Box>
             </Stack>

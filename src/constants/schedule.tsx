@@ -8,12 +8,11 @@ interface ScheduleDrawer {
     readonly modify: string;
   };
   readonly name: string;
-  readonly date: string;
-  readonly start_time: string;
-  readonly end_time: string;
+  readonly start: string;
+  readonly end: string;
   readonly repeat: string;
-  readonly repeating_cycle: string;
-  readonly repeat_deadline: string;
+  readonly period: string;
+  readonly all_day: string;
   readonly category_title: string;
   readonly add_category: string;
   readonly set_finance_title: string;
@@ -22,6 +21,7 @@ interface ScheduleDrawer {
   readonly type_minus: "-"; // 저장 데이터와 연동되어 있음
   readonly won: string;
   readonly expected_spending: string;
+  readonly fix_amount: string;
   readonly set_importance_title: string;
   readonly importance_high: "상"; // 저장 데이터와 연동되어 있음
   readonly importance_middle: "중"; // 저장 데이터와 연동되어 있음
@@ -42,11 +42,11 @@ const SCHEDULE_DRAWER: Readonly<ScheduleDrawer> = Object.freeze({
   },
   name: "제목",
   date: "날짜",
-  start_time: "시작",
-  end_time: "종료",
+  start: "시작",
+  end: "종료",
   repeat: "반복",
-  repeating_cycle: "반복 주기",
-  repeat_deadline: "반복 종료 기한",
+  period: "기간",
+  all_day: "하루종일",
   category_title: "일정 카테고리",
   add_category: "+ 카테고리 추가",
   set_finance_title: "자산 설정하기",
@@ -55,6 +55,7 @@ const SCHEDULE_DRAWER: Readonly<ScheduleDrawer> = Object.freeze({
   type_minus: "-",
   won: "원",
   expected_spending: "예상 비용",
+  fix_amount: "예산 고정",
   set_importance_title: "일정 중요도",
   importance_high: "상",
   importance_middle: "중",
@@ -77,16 +78,17 @@ const WRONG_TIME_ORDER = "종료 시각이 시작 시각보다 빠르지 않았�
 
 const INIT_SCHEDULE = (date: string, start_time: string): Schedule => ({
   event_name: "",
-  alarm: false,
-  date,
+  start_date: date,
+  end_date: date,
   start_time: `${start_time}:00`,
   end_time: `${moment(start_time, "HH").add(2, "h").format("HH")}:00`,
-  repeating_cycle: "없음",
-  repeat_deadline: "없음",
-  repeat_endDate: date,
   category: "",
-  type: SCHEDULE_DRAWER.type_minus,
-  expected_spending: "0",
+  all_day: false,
+  repeat: "none",
+  period: "none",
+  price_type: SCHEDULE_DRAWER.type_minus,
+  amount: "0",
+  is_fix: false,
   importance: SCHEDULE_DRAWER.importance_middle,
   exclusion: false, // false면 포함
 });
