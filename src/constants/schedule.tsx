@@ -88,7 +88,7 @@ const INIT_SCHEDULE = (date: string, start_time: string): Schedule => ({
   period: "none",
   price_type: SCHEDULE_DRAWER.type_minus,
   amount: "0",
-  is_fix_amount: false,
+  is_fix: false,
   importance: SCHEDULE_DRAWER.importance_middle,
   exclusion: false, // false면 포함
 });

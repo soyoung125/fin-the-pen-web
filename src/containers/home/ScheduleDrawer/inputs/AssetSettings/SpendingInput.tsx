@@ -136,12 +136,12 @@ function SpendingInput({ mode }: { mode: string }) {
           </Typography>
           <Stack direction="row" alignItems="center">
             <SwitchButton
-              checked={schedule?.is_fix_amount ?? false}
+              checked={schedule?.is_fix ?? false}
               handleChange={() =>
                 changeFixAmount({
                   target: {
                     id: "is_fix_amount",
-                    value: schedule?.is_fix_amount ? false : true,
+                    value: schedule?.is_fix ? false : true,
                   },
                 })
               }
