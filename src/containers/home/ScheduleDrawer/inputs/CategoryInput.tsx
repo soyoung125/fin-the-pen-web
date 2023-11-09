@@ -34,7 +34,7 @@ export default function CategoryInput({ selected }: { selected: string }) {
     if (schedule?.price_type !== type) {
       updateSchedule(dispatch, schedule, {
         target: {
-          id: "type",
+          id: "price_type",
           value: type,
         },
       });
