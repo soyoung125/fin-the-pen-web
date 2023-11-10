@@ -27,7 +27,7 @@ export const isObjectValuesEmpty = (obj: object) =>
 export const calculateIncomeExpenditure = (
   schedules: Schedule[],
   expression: (s: Schedule) => boolean,
-  type: "+" | "-"
+  type: "+" | "-",
 ) => {
   let result = 0;
   if (type === "-") {
@@ -35,20 +35,20 @@ export const calculateIncomeExpenditure = (
       .filter((s: Schedule) => expression(s))
       .reduce(
         (sum: number, current: Schedule) =>
-          current.type === type
-            ? sum - parseInt(current.expected_spending, 10)
+          current.price_type === type
+            ? sum - parseInt(current.amount, 10)
             : sum,
-        result
+        result,
       );
   } else {
     result = schedules
       .filter((s: Schedule) => expression(s))
       .reduce(
         (sum: number, current: Schedule) =>
-          current.type === type
-            ? sum + parseInt(current.expected_spending, 10)
+          current.price_type === type
+            ? sum + parseInt(current.amount, 10)
             : sum,
-        result
+        result,
       );
   }
   return Math.abs(result).toLocaleString("ko-KR");

@@ -25,9 +25,9 @@ function DetailCard({ data }: DetailCardProps) {
           }}
         >
           <Box>
-            <Box sx={{ mb: 1 }}>{`매${schedule.repeating_cycle.charAt(
+            {/* <Box sx={{ mb: 1 }}>{`매${schedule.repeating_cycle.charAt(
               0
-            )} ${moment(schedule.date).format("D일")}`}</Box>
+            )} ${moment(schedule.date).format("D일")}`}</Box> */}
             <Box>{schedule.event_name}</Box>
           </Box>
           <Box sx={{ textAlign: "end" }}>
@@ -40,9 +40,7 @@ function DetailCard({ data }: DetailCardProps) {
               {schedule.event_name}
             </Box>
             <Box sx={{ color: "primary.main" }}>
-              {`${parseInt(schedule.expected_spending, 10).toLocaleString(
-                "ko-kr"
-              )}원`}
+              {`${parseInt(schedule.amount, 10).toLocaleString("ko-kr")}원`}
             </Box>
           </Box>
         </Stack>

@@ -1,37 +1,45 @@
-import {
-  Box,
-  Button, Grid, Paper, Stack, Typography,
-} from '@mui/material';
-import AccessTimeIcon from '@mui/icons-material/AccessTime';
-import moment from 'moment';
-import { Schedule } from '../../../../types/schedule';
+import { Box, Button, Grid, Paper, Stack, Typography } from "@mui/material";
+import AccessTimeIcon from "@mui/icons-material/AccessTime";
+import moment from "moment";
+import { Schedule } from "../../../../types/schedule";
 
 interface SpendingDetailCardProps {
-  schedule: Schedule,
-  bgColor: string,
+  schedule: Schedule;
+  bgColor: string;
 }
 
 function SpendingDetailCard({ schedule, bgColor }: SpendingDetailCardProps) {
   return (
-    <Paper sx={{
-      marginY: 1,
-      paddingY: 2,
-      paddingX: 3,
-      borderRadius: 3,
-      borderLeft: 12,
-      borderLeftColor: bgColor,
-    }}
+    <Paper
+      sx={{
+        marginY: 1,
+        paddingY: 2,
+        paddingX: 3,
+        borderRadius: 3,
+        borderLeft: 12,
+        borderLeftColor: bgColor,
+      }}
     >
       <Stack direction="row" justifyContent="space-between">
-        <Typography sx={{ fontWeight: 'bold' }}>{moment(schedule.date).format('MM월 DD일')}</Typography>
-        <Typography sx={{ fontWeight: 'bold' }}>{schedule.event_name}</Typography>
+        <Typography sx={{ fontWeight: "bold" }}>
+          {moment(schedule.start_date).format("MM월 DD일")}
+        </Typography>
+        <Typography sx={{ fontWeight: "bold" }}>
+          {schedule.event_name}
+        </Typography>
       </Stack>
       <Grid container>
         <Grid item xs>
-          <Stack direction="row" sx={{ fontSize: 'small', display: 'flex', alignItems: 'center' }}>
-            <AccessTimeIcon sx={{
-              width: '10px', height: '10px', marginRight: 0.5,
-            }}
+          <Stack
+            direction="row"
+            sx={{ fontSize: "small", display: "flex", alignItems: "center" }}
+          >
+            <AccessTimeIcon
+              sx={{
+                width: "10px",
+                height: "10px",
+                marginRight: 0.5,
+              }}
             />
             <Box>{schedule.start_time}</Box>
           </Stack>
@@ -42,12 +50,18 @@ function SpendingDetailCard({ schedule, bgColor }: SpendingDetailCardProps) {
               variant="contained"
               size="small"
               sx={{
-                borderRadius: 5, minWidth: 0, width: '20px', height: '20px',
+                borderRadius: 5,
+                minWidth: 0,
+                width: "20px",
+                height: "20px",
               }}
             >
-              {schedule.type}
+              {schedule.price_type}
             </Button>
-            <Box sx={{ color: 'primary.main' }}>{`${parseInt(schedule.expected_spending, 10).toLocaleString('ko-KR')}원`}</Box>
+            <Box sx={{ color: "primary.main" }}>{`${parseInt(
+              schedule.amount,
+              10,
+            ).toLocaleString("ko-KR")}원`}</Box>
           </Stack>
         </Grid>
       </Grid>

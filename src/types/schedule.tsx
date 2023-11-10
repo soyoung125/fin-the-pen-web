@@ -4,16 +4,17 @@ export interface Schedule {
   id?: string;
   user_id?: string;
   event_name: string;
-  alarm: boolean;
-  date: string;
+  category: string;
+  start_date: string;
+  end_date: string;
   start_time: string;
   end_time: string;
-  repeating_cycle: "일간" | "주간" | "월간" | "연간" | "없음";
-  repeat_deadline: string;
-  repeat_endDate: string;
-  category: string;
-  type: string;
-  expected_spending: string;
+  all_day: boolean;
+  repeat: string;
+  period: string;
+  price_type: string;
+  amount: string;
+  is_fix: boolean;
   importance: string;
   exclusion: boolean;
 }

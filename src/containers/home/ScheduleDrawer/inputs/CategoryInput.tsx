@@ -31,10 +31,10 @@ export default function CategoryInput({ selected }: { selected: string }) {
 
   const changeType = (category: Category) => {
     const type = getType(category);
-    if (schedule?.type !== type) {
+    if (schedule?.price_type !== type) {
       updateSchedule(dispatch, schedule, {
         target: {
-          id: "type",
+          id: "price_type",
           value: type,
         },
       });

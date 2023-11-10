@@ -3,36 +3,38 @@ import { Box, Collapse, Input, InputAdornment, InputBase } from "@mui/material";
 import { DateCalendar, LocalizationProvider } from "@mui/x-date-pickers";
 import { AdapterMoment } from "@mui/x-date-pickers/AdapterMoment";
 import { UpdateStateInterface } from "@type/common";
+import { SCHEDULE_DRAWER } from "constants/schedule";
 import moment from "moment";
 
 interface InputDateTimeProps {
   date: string | undefined;
   time: string | undefined;
   handleClick: () => void;
-  title: string;
   changeSchedule: (
     state:
       | React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>
       | UpdateStateInterface,
   ) => void;
   showCalendar: boolean;
+  type: string;
 }
 
 function InputDateTime({
   date,
   time,
   handleClick,
-  title,
   changeSchedule,
   showCalendar,
+  type,
 }: InputDateTimeProps) {
+  const title = type === "start" ? SCHEDULE_DRAWER.start : SCHEDULE_DRAWER.end;
   return (
     <Box>
       <Input
         // type="date"
         fullWidth
         onClick={handleClick}
-        id="date"
+        id={type + "_date"}
         startAdornment={
           <InputAdornment position="start">
             <Box sx={{ color: "primary.main", fontWeight: 500 }}>{title}</Box>
@@ -41,7 +43,7 @@ function InputDateTime({
         endAdornment={
           <InputAdornment position="start">
             <InputBase
-              id="start_time"
+              id={type + "_time"}
               type="time"
               value={time}
               onChange={changeSchedule}
@@ -69,7 +71,7 @@ function InputDateTime({
                 newValue &&
                   changeSchedule({
                     target: {
-                      id: "date",
+                      id: type + "_date",
                       value: newValue.format("YYYY-MM-DD"),
                     },
                   });

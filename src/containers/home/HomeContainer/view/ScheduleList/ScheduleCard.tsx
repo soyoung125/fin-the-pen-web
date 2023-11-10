@@ -37,9 +37,8 @@ function ScheduleCard({
   const dispatch = useAppDispatch();
   const recommendedSpendingAmount = 50000;
   const isHideBudgetMode = useAppSelector(selectIsBudgetHidden);
-  const isSpend = schedule.type === "-";
-  const isSameWithRecommend =
-    +schedule.expected_spending === recommendedSpendingAmount;
+  const isSpend = schedule.price_type === "-";
+  const isSameWithRecommend = +schedule.amount === recommendedSpendingAmount;
   const color = isSpend ? "#5AC8FA" : "#FA5A5A";
 
   const {
@@ -149,9 +148,9 @@ function ScheduleCard({
                   <Typography
                     sx={{ color: isSameWithRecommend ? color : grey[500] }}
                   >
-                    {`${schedule.type}${parseInt(
-                      schedule.expected_spending,
-                      10
+                    {`${schedule.price_type}${parseInt(
+                      schedule.amount,
+                      10,
                     ).toLocaleString("ko-KR")}`}
                   </Typography>
                 )}

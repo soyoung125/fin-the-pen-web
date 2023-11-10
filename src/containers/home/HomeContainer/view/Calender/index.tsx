@@ -56,7 +56,10 @@ function Calender({ dateHeight }: CalenderProps) {
       return <PickersDay {...props} />;
     }
     const daySchedules = schedules
-      .filter((e) => e.date === day.format("YYYY-MM-DD"))
+      .filter(
+        (e) =>
+          day.isSameOrAfter(e.start_date) && day.isSameOrBefore(e.end_date),
+      )
       .map((s) => ({
         ...s,
         category: CATEGORIES.find((c) => c.title === s.category) || {
@@ -79,13 +82,14 @@ function Calender({ dateHeight }: CalenderProps) {
         new Set(fixedWithdrawal.map((f) => f.category.color)),
       ).sort((a, b) => (a > b ? 1 : -1));
       if (nonFixedWithdrwal.length > 0) {
-        const categoryForMarker = makeMarkerData(daySchedules, isDarkMode);
+        // const categoryForMarker = makeMarkerData(daySchedules, isDarkMode);
         return (
           <Box sx={{ width: "calc(100vw / 7)" }} key={other.key}>
             <Box sx={{ display: "flex", justifyContent: "center" }}>
               <MarkedPickersDay color={borderColor} props={props} />
             </Box>
-            <MarkerStack categoryForMarker={categoryForMarker} />
+            {/* <MarkerStack categoryForMarker={categoryForMarker} /> */}
+            {fixedWithdrawal.length}
           </Box>
         );
       }
@@ -95,13 +99,14 @@ function Calender({ dateHeight }: CalenderProps) {
     }
 
     if (nonFixedWithdrwal.length > 0) {
-      const categoryForMarker = makeMarkerData(daySchedules, isDarkMode);
+      // const categoryForMarker = makeMarkerData(daySchedules, isDarkMode);
       return (
         <Box sx={{ width: "calc(100vw / 7)" }} key={other.key}>
           <Box sx={{ display: "flex", justifyContent: "center" }}>
             <PickersDay {...props} />
           </Box>
-          <MarkerStack categoryForMarker={categoryForMarker} />
+          {/* <MarkerStack categoryForMarker={categoryForMarker} /> */}
+          {fixedWithdrawal.length}
         </Box>
       );
     }
@@ -110,109 +115,110 @@ function Calender({ dateHeight }: CalenderProps) {
   };
 
   // 실제 지출 데이터를 불러오기 전이기 때문에 일정 데이터의 지출 데이터 사용중
-  const renderAssetDayPicker = (props: PickersDayProps<moment.Moment>) => {
-    const { day, ...other } = props;
-    const weekday = day.format("dd");
-    const isSameOrBefore = day.isSameOrBefore(today);
+  // 자산 탭 사라짐 (일주일 일정에 사용 예정)
+  // const renderAssetDayPicker = (props: PickersDayProps<moment.Moment>) => {
+  //   const { day, ...other } = props;
+  //   const weekday = day.format("dd");
+  //   const isSameOrBefore = day.isSameOrBefore(today);
 
-    // 오늘이 이달의 마지막 주에 해당하고 후달이 일요일로 시작하지 않은 경우 회색바가 그려지는 문제를 해결하기 위한 코드
-    if (!day.isSame(value, "month") && today.isBefore(value)) {
-      return <PickersDay {...props} />;
-    }
+  //   // 오늘이 이달의 마지막 주에 해당하고 후달이 일요일로 시작하지 않은 경우 회색바가 그려지는 문제를 해결하기 위한 코드
+  //   if (!day.isSame(value, "month") && today.isBefore(value)) {
+  //     return <PickersDay {...props} />;
+  //   }
 
-    // 오늘 이전의 일별 수입/지출, 주별 수입/지출을 표시하기 위한 조건문
-    if (isSameOrBefore && weekday === "일") {
-      const income = !day.isSame(value, "month")
-        ? "0"
-        : calculateIncomeExpenditure(
-            schedules,
-            (s: Schedule) => day.isSame(s.date, "day"),
-            "+",
-          );
-      const expenditure = !day.isSame(value, "month")
-        ? "0"
-        : calculateIncomeExpenditure(
-            schedules,
-            (s: Schedule) => day.isSame(s.date, "day"),
-            "-",
-          );
+  //   // 오늘 이전의 일별 수입/지출, 주별 수입/지출을 표시하기 위한 조건문
+  //   if (isSameOrBefore && weekday === "일") {
+  //     const income = !day.isSame(value, "month")
+  //       ? "0"
+  //       : calculateIncomeExpenditure(
+  //           schedules,
+  //           (s: Schedule) => day.isSame(s.date, "day"),
+  //           "+",
+  //         );
+  //     const expenditure = !day.isSame(value, "month")
+  //       ? "0"
+  //       : calculateIncomeExpenditure(
+  //           schedules,
+  //           (s: Schedule) => day.isSame(s.date, "day"),
+  //           "-",
+  //         );
 
-      return (
-        <IncomeExpenditureBox
-          key={props.key}
-          income={income}
-          expenditure={expenditure}
-          incomeColor={pink[100]}
-          expenditureColor={lightBlue[200]}
-          pickersDay={<PickersDay {...props} />}
-        >
-          {day.isSame(today, "week") ? (
-            // 이번주의 주별 수입/지출 표시
-            <Box
-              sx={{
-                width: `calc(100vw / 7 * (${today.diff(day, "days")} + 1))`,
-              }}
-            >
-              <WeeklyStatement
-                expenditure={calculateIncomeExpenditure(
-                  schedules,
-                  (s: Schedule) =>
-                    day.isSameOrBefore(s.date) && day.isSame(s.date, "week"),
-                  "-",
-                )}
-                income={calculateIncomeExpenditure(
-                  schedules,
-                  (s: Schedule) =>
-                    day.isSameOrBefore(s.date) && day.isSame(s.date, "week"),
-                  "+",
-                )}
-              />
-            </Box>
-          ) : (
-            // 지난주들의 주별 수입/지출 표시
-            <Box
-              sx={{
-                width: "100vw",
-              }}
-            >
-              <WeeklyStatement
-                expenditure={calculateIncomeExpenditure(
-                  schedules,
-                  (s: Schedule) => day.isSame(s.date, "week"),
-                  "-",
-                )}
-                income={calculateIncomeExpenditure(
-                  schedules,
-                  (s: Schedule) => day.isSame(s.date, "week"),
-                  "+",
-                )}
-              />
-            </Box>
-          )}
-        </IncomeExpenditureBox>
-      );
-    }
+  //     return (
+  //       <IncomeExpenditureBox
+  //         key={props.key}
+  //         income={income}
+  //         expenditure={expenditure}
+  //         incomeColor={pink[100]}
+  //         expenditureColor={lightBlue[200]}
+  //         pickersDay={<PickersDay {...props} />}
+  //       >
+  //         {day.isSame(today, "week") ? (
+  //           // 이번주의 주별 수입/지출 표시
+  //           <Box
+  //             sx={{
+  //               width: `calc(100vw / 7 * (${today.diff(day, "days")} + 1))`,
+  //             }}
+  //           >
+  //             <WeeklyStatement
+  //               expenditure={calculateIncomeExpenditure(
+  //                 schedules,
+  //                 (s: Schedule) =>
+  //                   day.isSameOrBefore(s.date) && day.isSame(s.date, "week"),
+  //                 "-",
+  //               )}
+  //               income={calculateIncomeExpenditure(
+  //                 schedules,
+  //                 (s: Schedule) =>
+  //                   day.isSameOrBefore(s.date) && day.isSame(s.date, "week"),
+  //                 "+",
+  //               )}
+  //             />
+  //           </Box>
+  //         ) : (
+  //           // 지난주들의 주별 수입/지출 표시
+  //           <Box
+  //             sx={{
+  //               width: "100vw",
+  //             }}
+  //           >
+  //             <WeeklyStatement
+  //               expenditure={calculateIncomeExpenditure(
+  //                 schedules,
+  //                 (s: Schedule) => day.isSame(s.date, "week"),
+  //                 "-",
+  //               )}
+  //               income={calculateIncomeExpenditure(
+  //                 schedules,
+  //                 (s: Schedule) => day.isSame(s.date, "week"),
+  //                 "+",
+  //               )}
+  //             />
+  //           </Box>
+  //         )}
+  //       </IncomeExpenditureBox>
+  //     );
+  //   }
 
-    // 뒷날의 일별 수입/지출액 표시
-    return (
-      <IncomeExpenditureBox
-        key={props.key}
-        income={calculateIncomeExpenditure(
-          schedules,
-          (s: Schedule) => day.isSame(s.date, "day"),
-          "+",
-        )}
-        expenditure={calculateIncomeExpenditure(
-          schedules,
-          (s: Schedule) => day.isSame(s.date, "day"),
-          "-",
-        )}
-        incomeColor={isSameOrBefore ? pink[100] : grey[500]}
-        expenditureColor={isSameOrBefore ? lightBlue[200] : grey[500]}
-        pickersDay={<PickersDay {...props} />}
-      />
-    );
-  };
+  //   // 뒷날의 일별 수입/지출액 표시
+  //   return (
+  //     <IncomeExpenditureBox
+  //       key={props.key}
+  //       income={calculateIncomeExpenditure(
+  //         schedules,
+  //         (s: Schedule) => day.isSame(s.date, "day"),
+  //         "+",
+  //       )}
+  //       expenditure={calculateIncomeExpenditure(
+  //         schedules,
+  //         (s: Schedule) => day.isSame(s.date, "day"),
+  //         "-",
+  //       )}
+  //       incomeColor={isSameOrBefore ? pink[100] : grey[500]}
+  //       expenditureColor={isSameOrBefore ? lightBlue[200] : grey[500]}
+  //       pickersDay={<PickersDay {...props} />}
+  //     />
+  //   );
+  // };
 
   return (
     <LocalizationProvider dateAdapter={AdapterMoment}>
@@ -238,10 +244,7 @@ function Calender({ dateHeight }: CalenderProps) {
             dispatch(setSelectedDate(month));
           }}
           slots={{
-            day:
-              viewMode === "schedule"
-                ? renderDayInPicker
-                : renderAssetDayPicker,
+            day: renderDayInPicker,
           }}
           reduceAnimations
         />

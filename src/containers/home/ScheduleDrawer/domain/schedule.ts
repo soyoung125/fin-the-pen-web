@@ -33,39 +33,59 @@ export const updateSchedule = (
       }),
     );
   }
+  if (
+    state.target.id === "start_date" &&
+    moment(schedule?.end_date).isBefore(state.target.value as string)
+  ) {
+    dispatch(
+      setDrawerSchedule({
+        ...schedule,
+        end_date: state.target.value,
+        [state.target.id]: state.target.value,
+      }),
+    );
+  }
+  if (
+    state.target.id === "end_date" &&
+    moment(schedule?.start_date).isAfter(state.target.value as string)
+  ) {
+    dispatch(
+      setDrawerSchedule({
+        ...schedule,
+        start_date: state.target.value,
+        [state.target.id]: state.target.value,
+      }),
+    );
+  }
+};
+
+export const updateAllDay = (
+  dispatch: Dispatch,
+  schedule: Schedule | null,
+  state: { target: { value: boolean; name: string } },
+) => {
+  dispatch(
+    setDrawerSchedule({
+      ...schedule,
+      [state.target.name]: state.target.value,
+    }),
+  );
 };
 
 export const updateRepeat = (
   dispatch: Dispatch,
   schedule: Schedule | null,
   setOpenDatePickerModal: React.Dispatch<React.SetStateAction<boolean>>,
-  state:
-    | SelectChangeEvent<string>
-    | { target: { value: string; name: string } },
+  state: { target: { value: string; name: string } },
 ) => {
-  if (
-    state.target.name === "repeating_cycle" &&
-    state.target.value === "없음"
-  ) {
-    dispatch(
-      setDrawerSchedule({
-        ...schedule,
-        [state.target.name]: state.target.value,
-        repeat_deadline: "없음",
-      }),
-    );
-  } else {
-    dispatch(
-      setDrawerSchedule({
-        ...schedule,
-        [state.target.name]: state.target.value,
-      }),
-    );
-  }
-  if (
-    state.target.name === "repeat_deadline" &&
-    state.target.value !== "없음"
-  ) {
+  dispatch(
+    setDrawerSchedule({
+      ...schedule,
+      [state.target.name]: state.target.value,
+    }),
+  );
+
+  if (state.target.value !== "none") {
     setOpenDatePickerModal(true);
   }
 };
@@ -75,7 +95,7 @@ export const updateRepeatEndDate = (
   setRepeatEndDate: React.Dispatch<React.SetStateAction<moment.Moment>>,
   endDate: moment.Moment | null,
 ) => {
-  if (endDate?.isBefore(schedule?.date)) {
+  if (endDate?.isBefore(schedule?.end_date)) {
     alert("반복 종료일을 다시 선택해주세요.");
   } else {
     endDate && setRepeatEndDate(endDate);
@@ -86,7 +106,7 @@ export const updateSpendingType = (
   dispatch: Dispatch,
   schedule: Schedule | null,
 ) => {
-  if (schedule?.type === SCHEDULE_DRAWER.type_plus) {
+  if (schedule?.price_type === SCHEDULE_DRAWER.type_plus) {
     dispatch(
       setDrawerSchedule({ ...schedule, type: SCHEDULE_DRAWER.type_minus }),
     );
@@ -141,16 +161,17 @@ export const generateRandomSchedule = (stringDate: string) => {
   const category = CATEGORIES[Math.floor(Math.random() * CATEGORIES.length)];
   return {
     event_name: generateRandomString(5),
-    alarm: Math.floor(Math.random() * 2) === 0,
-    date: date.format("YYYY-MM-DD"),
+    start_date: date.format("YYYY-MM-DD"),
+    end_date: date.format("YYYY-MM-DD"),
     start_time: `0${Math.floor(Math.random() * 9 + 1)}:00`,
     end_time: `2${Math.floor(Math.random() * 4)}:00`,
-    repeating_cycle: "없음",
-    repeat_deadline: "없음",
-    repeat_endDate: date.format("YYYY-MM-DD"),
     category: category.title,
-    type: getType(category),
-    expected_spending: Math.floor(Math.random() * 1000) * 100,
+    all_day: false,
+    repeat: "none",
+    period: "none",
+    price_type: getType(category),
+    amount: Math.floor(Math.random() * 1000) * 100,
+    is_fix_amount: false,
     importance: importances[Math.floor(Math.random() * 3)],
     exclusion: Math.floor(Math.random() * 2) === 0,
   };

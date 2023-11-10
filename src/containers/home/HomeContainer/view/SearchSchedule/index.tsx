@@ -63,7 +63,7 @@ function SearchSchedule() {
         console.log("게스트 모드로 스케줄 검색");
         setResultSchedules([
           ...schedules.filter((s) =>
-            s.event_name.toLowerCase().includes(keyword.toLowerCase())
+            s.event_name.toLowerCase().includes(keyword.toLowerCase()),
           ),
         ]);
       }
@@ -158,13 +158,15 @@ function SearchSchedule() {
                       </Box>
                     </RoundedBorderBox>
                     <Stack>
-                      <Box>{moment(schedule.date).format("YYYY/MM/DD")}</Box>
+                      <Box>
+                        {moment(schedule.start_date).format("YYYY/MM/DD")}
+                      </Box>
                       <Box>{`${schedule.start_time}~${schedule.end_time}`}</Box>
                     </Stack>
                   </Stack>
                   <Stack alignItems="flex-end">
                     <Box>{schedule.event_name}</Box>
-                    <Box>{`${schedule.type} ${schedule.expected_spending}`}</Box>
+                    <Box>{`${schedule.price_type} ${schedule.amount}`}</Box>
                   </Stack>
                 </Stack>
               </RoundedBorderBox>
