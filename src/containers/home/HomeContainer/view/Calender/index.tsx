@@ -55,7 +55,6 @@ function Calender({ dateHeight }: CalenderProps) {
     if (!day.isSame(value, "month")) {
       return <PickersDay {...props} />;
     }
-
     const daySchedules = schedules
       .filter(
         (e) =>
