@@ -20,6 +20,7 @@ import { selectIsBudgetHidden } from "@redux/slices/settingSlice.ts";
 import useModal from "../../../../../hooks/useModal";
 import AlertModal from "../../../../../components/common/AlertModal";
 import useSchedule from "@hooks/useSchedule.tsx";
+import { getSign } from "@containers/home/ScheduleDrawer/domain/schedule.ts";
 
 interface ScheduleCardProps {
   schedule: Schedule;
@@ -37,7 +38,7 @@ function ScheduleCard({
   const dispatch = useAppDispatch();
   const recommendedSpendingAmount = 50000;
   const isHideBudgetMode = useAppSelector(selectIsBudgetHidden);
-  const isSpend = schedule.price_type === "-";
+  const isSpend = schedule.price_type === "Minus";
   const isSameWithRecommend = +schedule.amount === recommendedSpendingAmount;
   const color = isSpend ? "#5AC8FA" : "#FA5A5A";
 
@@ -148,7 +149,7 @@ function ScheduleCard({
                   <Typography
                     sx={{ color: isSameWithRecommend ? color : grey[500] }}
                   >
-                    {`${schedule.price_type}${parseInt(
+                    {`${getSign(schedule.price_type)}${parseInt(
                       schedule.amount,
                       10,
                     ).toLocaleString("ko-KR")}`}

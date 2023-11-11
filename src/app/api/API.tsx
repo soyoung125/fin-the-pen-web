@@ -14,7 +14,7 @@ export const fetchCreateSchedule = async (schedule: Schedule) => {
       set_amount: schedule.amount,
       fix_amount: schedule.is_fix,
     } as RequestSchedule;
-    const response = await axios.post(`${DOMAIN}/createSchedule`, schedule);
+    const response = await axios.post(`${DOMAIN}/createSchedule`, data);
     return response.data;
   } catch (err) {
     alert(err);
