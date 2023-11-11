@@ -1,9 +1,19 @@
 import axios, { AxiosResponse } from "axios";
-import { MonthScheduleQuery, Schedule } from "@type/schedule.tsx";
+import {
+  MonthScheduleQuery,
+  RequestSchedule,
+  Schedule,
+} from "@type/schedule.tsx";
 import { DOMAIN } from "./url.ts";
 
 export const fetchCreateSchedule = async (schedule: Schedule) => {
   try {
+    const data = {
+      ...schedule,
+      is_all_day: schedule.all_day,
+      set_amount: schedule.amount,
+      fix_amount: schedule.is_fix,
+    } as RequestSchedule;
     const response = await axios.post(`${DOMAIN}/createSchedule`, schedule);
     return response.data;
   } catch (err) {

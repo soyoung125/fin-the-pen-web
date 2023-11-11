@@ -85,7 +85,7 @@ export const updateRepeat = (
     }),
   );
 
-  if (state.target.value !== "none") {
+  if (state.target.value !== "None") {
     setOpenDatePickerModal(true);
   }
 };
@@ -167,8 +167,8 @@ export const generateRandomSchedule = (stringDate: string) => {
     end_time: `2${Math.floor(Math.random() * 4)}:00`,
     category: category.title,
     all_day: false,
-    repeat: "none",
-    period: "none",
+    repeat: "None",
+    period: "None",
     price_type: getType(category),
     amount: Math.floor(Math.random() * 1000) * 100,
     is_fix_amount: false,

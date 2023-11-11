@@ -68,10 +68,10 @@ const SCHEDULE_DRAWER: Readonly<ScheduleDrawer> = Object.freeze({
   },
 });
 
-const SCHEDULE_DRAWER_MODE: Readonly<ScheduleDrawerMode> = {
+const SCHEDULE_DRAWER_MODE = {
   modify: "modify",
   create: "create",
-};
+} as const;
 
 const NEED_TITLE = "제목을 입력해야 합니다.";
 const WRONG_TIME_ORDER = "종료 시각이 시작 시각보다 빠르지 않았으면 좋겠어요.";
@@ -84,8 +84,8 @@ const INIT_SCHEDULE = (date: string, start_time: string): Schedule => ({
   end_time: `${moment(start_time, "HH").add(2, "h").format("HH")}:00`,
   category: "",
   all_day: false,
-  repeat: "none",
-  period: "none",
+  repeat: "None",
+  period: "None",
   price_type: SCHEDULE_DRAWER.type_minus,
   amount: "0",
   is_fix: false,
