@@ -7,6 +7,7 @@ import { useEffect, useState } from "react";
 import Title from "../../../../components/common/Title";
 import RoundedBorderBox from "../../../../components/common/RoundedBorderBox";
 import { Schedule } from "../../../../types/schedule";
+import { getSign } from "@containers/home/ScheduleDrawer/domain/schedule";
 
 function DetailInformation() {
   const { state } = useLocation();
@@ -115,7 +116,7 @@ function DetailInformation() {
                       height: "20px",
                     }}
                   >
-                    {schedule.price_type}
+                    {getSign(schedule.price_type)}
                   </Button>
                   <Box sx={{ color: "primary.main" }}>
                     {`${parseInt(schedule.amount, 10).toLocaleString(

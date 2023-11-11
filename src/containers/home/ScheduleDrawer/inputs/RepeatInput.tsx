@@ -25,11 +25,11 @@ function RepeatInput() {
       <Stack direction="row" justifyContent="space-between">
         <Box sx={{ color: "primary.main" }}>반복</Box>
         <SwitchButton
-          checked={schedule?.repeat !== "none"}
+          checked={schedule?.repeat !== "None"}
           handleChange={() =>
             changeRepeat({
               target: {
-                value: schedule?.repeat === "none" ? "yes" : "none",
+                value: schedule?.repeat === "None" ? "" : "None",
                 name: "repeat",
               },
             })

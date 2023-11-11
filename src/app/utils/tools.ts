@@ -27,10 +27,10 @@ export const isObjectValuesEmpty = (obj: object) =>
 export const calculateIncomeExpenditure = (
   schedules: Schedule[],
   expression: (s: Schedule) => boolean,
-  type: "+" | "-",
+  type: "Plus" | "Minus",
 ) => {
   let result = 0;
-  if (type === "-") {
+  if (type === "Minus") {
     result = schedules
       .filter((s: Schedule) => expression(s))
       .reduce(

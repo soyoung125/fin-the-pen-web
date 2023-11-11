@@ -36,7 +36,7 @@ function ModifyModal({
   data,
 }: ModifyModalProps) {
   // const dispatch = useDispatch();
-  const type = data.price_type === "+" ? "+" : "-";
+  const type = data.price_type === "Plus" ? "Plus" : "Minus";
   const typeContent = REGULAR_DEPOSIT_WITHDRAWAL_TYPE[type];
   const [form, setForm] = useState(data);
   console.log(form);

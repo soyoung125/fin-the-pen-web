@@ -17,8 +17,8 @@ interface ScheduleDrawer {
   readonly add_category: string;
   readonly set_finance_title: string;
   readonly set_spending_title: string;
-  readonly type_plus: "+"; // 저장 데이터와 연동되어 있음
-  readonly type_minus: "-"; // 저장 데이터와 연동되어 있음
+  readonly type_plus: "Plus"; // 저장 데이터와 연동되어 있음
+  readonly type_minus: "Minus"; // 저장 데이터와 연동되어 있음
   readonly won: string;
   readonly expected_spending: string;
   readonly fix_amount: string;
@@ -51,8 +51,8 @@ const SCHEDULE_DRAWER: Readonly<ScheduleDrawer> = Object.freeze({
   add_category: "+ 카테고리 추가",
   set_finance_title: "자산 설정하기",
   set_spending_title: "금액 설정",
-  type_plus: "+",
-  type_minus: "-",
+  type_plus: "Plus",
+  type_minus: "Minus",
   won: "원",
   expected_spending: "예상 비용",
   fix_amount: "예산 고정",
@@ -68,10 +68,10 @@ const SCHEDULE_DRAWER: Readonly<ScheduleDrawer> = Object.freeze({
   },
 });
 
-const SCHEDULE_DRAWER_MODE: Readonly<ScheduleDrawerMode> = {
+const SCHEDULE_DRAWER_MODE = {
   modify: "modify",
   create: "create",
-};
+} as const;
 
 const NEED_TITLE = "제목을 입력해야 합니다.";
 const WRONG_TIME_ORDER = "종료 시각이 시작 시각보다 빠르지 않았으면 좋겠어요.";
@@ -84,8 +84,8 @@ const INIT_SCHEDULE = (date: string, start_time: string): Schedule => ({
   end_time: `${moment(start_time, "HH").add(2, "h").format("HH")}:00`,
   category: "",
   all_day: false,
-  repeat: "none",
-  period: "none",
+  repeat: "None",
+  period: "None",
   price_type: SCHEDULE_DRAWER.type_minus,
   amount: "0",
   is_fix: false,
@@ -105,16 +105,10 @@ const VIEW_MODE = {
   schedule: "schedule",
 } as const;
 
-interface RegularDepositWithdrawalType {
-  "+": "입금";
-  "-": "출금";
-}
-
-const REGULAR_DEPOSIT_WITHDRAWAL_TYPE: Readonly<RegularDepositWithdrawalType> =
-  {
-    "+": "입금",
-    "-": "출금",
-  };
+const REGULAR_DEPOSIT_WITHDRAWAL_TYPE = {
+  Plus: "입금",
+  Minus: "출금",
+} as const;
 
 export default null;
 export {
