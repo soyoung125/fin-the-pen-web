@@ -78,7 +78,7 @@ function RegularDepositWithdrawal() {
     <>
       <Title
         type="+"
-        title={`정기 ${REGULAR_DEPOSIT_WITHDRAWAL_TYPE["+"]} 내역`}
+        title={`정기 ${REGULAR_DEPOSIT_WITHDRAWAL_TYPE["Plus"]} 내역`}
       >
         <Stack
           direction="row"
@@ -98,7 +98,7 @@ function RegularDepositWithdrawal() {
 
       <Title
         type="-"
-        title={`정기 ${REGULAR_DEPOSIT_WITHDRAWAL_TYPE["-"]} 내역`}
+        title={`정기 ${REGULAR_DEPOSIT_WITHDRAWAL_TYPE["Minus"]} 내역`}
       >
         <Stack
           direction="row"
