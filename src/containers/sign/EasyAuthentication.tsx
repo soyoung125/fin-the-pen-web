@@ -1,15 +1,6 @@
-import {
-  Alert,
-  Box,
-  Button,
-  Dialog,
-  Grid,
-  InputBase,
-  Stack,
-} from "@mui/material";
-import { useRef, useState } from "react";
+import { Alert, Box, Button, Dialog, Grid, Stack } from "@mui/material";
+import { useState } from "react";
 import LogoCircle from "../../components/common/LogoCircle";
-import CenterBox from "../../components/layouts/CenterBox";
 import { useSelector } from "react-redux";
 import { selectUser } from "@redux/slices/userSlice.tsx";
 import { useAppDispatch, useAppSelector } from "@redux/hooks.ts";
@@ -17,6 +8,7 @@ import {
   selectIsAuthenticated,
   setIsAuthenticatedTrue,
 } from "@redux/slices/commonSlice.tsx";
+import Keypad from "@containers/sign/Keypad.tsx";
 
 interface EasyAuthenticationProps {
   handleAuthenticate?: () => void;
@@ -27,20 +19,25 @@ function EasyAuthentication({ handleAuthenticate }: EasyAuthenticationProps) {
   const dispatch = useAppDispatch();
   const isAuthenticated = useAppSelector(selectIsAuthenticated);
   const user = useSelector(selectUser);
-  const input = useRef<HTMLInputElement>();
-  const [password, setPassword] = useState("");
+  const [password, setPassword] = useState<number[]>([]);
 
   const handleClick = () => {
-    dispatch(setIsAuthenticatedTrue());
-    handleAuthenticate && handleAuthenticate();
+    if (CHARACTER_LIMIT === password.length) {
+      dispatch(setIsAuthenticatedTrue());
+      handleAuthenticate && handleAuthenticate();
+    }
   };
 
   return (
     <>
       {user ? (
         <Dialog fullScreen open={!isAuthenticated}>
-          <CenterBox>
-            <Stack justifyContent="center" alignItems="center" px={1}>
+          <Stack
+            direction="column"
+            justifyContent="space-between"
+            height="100%"
+          >
+            <Stack justifyContent="center" alignItems="center" height="100%">
               <LogoCircle />
 
               <Box my={2} sx={{ typography: "h5", fontWeight: "bold" }}>
@@ -53,27 +50,20 @@ function EasyAuthentication({ handleAuthenticate }: EasyAuthenticationProps) {
                   fontSize: "17px",
                   color: "primary.main",
                 }}
+                mb={3}
               >
                 설정하신 PIN 6자리를 입력해주세요.
               </Box>
 
               <Box
                 component="form"
-                // onSubmit={handleSubmit}
                 noValidate
-                sx={{ maxWidth: "400px", width: "100%" }}
+                sx={{ maxWidth: "300px", width: "100%" }}
+                px={1}
               >
-                <InputBase
-                  sx={{ height: 0, width: 0, color: "white" }}
-                  inputRef={input}
-                  onChange={(e) => setPassword(e.target.value)}
-                  inputProps={{
-                    maxLength: CHARACTER_LIMIT,
-                  }}
-                />
                 <Grid container spacing={1} mb={1}>
                   {[...Array(CHARACTER_LIMIT)].map((d, index) => (
-                    <Grid item xs={2} key={Math.random()}>
+                    <Grid item xs={2} key={index}>
                       <Box
                         sx={{
                           height: "56px",
@@ -85,7 +75,6 @@ function EasyAuthentication({ handleAuthenticate }: EasyAuthenticationProps) {
                               ? "rgba(115, 91, 242, 0.6)"
                               : "white",
                         }}
-                        onClick={() => input.current && input.current.focus()}
                       >
                         <Box
                           sx={{
@@ -100,17 +89,24 @@ function EasyAuthentication({ handleAuthenticate }: EasyAuthenticationProps) {
                     </Grid>
                   ))}
                 </Grid>
-
-                <Button
-                  fullWidth
-                  variant="contained"
-                  onClick={() => handleClick()}
-                >
-                  인증
-                </Button>
+                {CHARACTER_LIMIT === password.length && (
+                  <Button
+                    fullWidth
+                    variant="contained"
+                    onClick={() => handleClick()}
+                  >
+                    인증
+                  </Button>
+                )}
               </Box>
             </Stack>
-          </CenterBox>
+
+            <Keypad
+              numbers={password}
+              setNumbers={setPassword}
+              maxLength={CHARACTER_LIMIT}
+            />
+          </Stack>
         </Dialog>
       ) : (
         <Alert severity="error" sx={{ m: 3 }}>
