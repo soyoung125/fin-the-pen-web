@@ -22,8 +22,10 @@ function EasyAuthentication({ handleAuthenticate }: EasyAuthenticationProps) {
   const [password, setPassword] = useState<number[]>([]);
 
   const handleClick = () => {
-    dispatch(setIsAuthenticatedTrue());
-    handleAuthenticate && handleAuthenticate();
+    if (CHARACTER_LIMIT === password.length) {
+      dispatch(setIsAuthenticatedTrue());
+      handleAuthenticate && handleAuthenticate();
+    }
   };
 
   return (
@@ -87,14 +89,15 @@ function EasyAuthentication({ handleAuthenticate }: EasyAuthenticationProps) {
                     </Grid>
                   ))}
                 </Grid>
-
-                <Button
-                  fullWidth
-                  variant="contained"
-                  onClick={() => handleClick()}
-                >
-                  인증
-                </Button>
+                {CHARACTER_LIMIT === password.length && (
+                  <Button
+                    fullWidth
+                    variant="contained"
+                    onClick={() => handleClick()}
+                  >
+                    인증
+                  </Button>
+                )}
               </Box>
             </Stack>
 
