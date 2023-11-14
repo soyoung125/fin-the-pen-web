@@ -1,15 +1,6 @@
-import {
-  Alert,
-  Box,
-  Button,
-  Dialog,
-  Grid,
-  InputBase,
-  Stack,
-} from "@mui/material";
-import { useRef, useState } from "react";
+import { Alert, Box, Button, Dialog, Grid, Stack } from "@mui/material";
+import { useState } from "react";
 import LogoCircle from "../../components/common/LogoCircle";
-import CenterBox from "../../components/layouts/CenterBox";
 import { useSelector } from "react-redux";
 import { selectUser } from "@redux/slices/userSlice.tsx";
 import { useAppDispatch, useAppSelector } from "@redux/hooks.ts";
@@ -70,7 +61,7 @@ function EasyAuthentication({ handleAuthenticate }: EasyAuthenticationProps) {
               >
                 <Grid container spacing={1} mb={1}>
                   {[...Array(CHARACTER_LIMIT)].map((d, index) => (
-                    <Grid item xs={2} key={Math.random()}>
+                    <Grid item xs={2} key={index}>
                       <Box
                         sx={{
                           height: "56px",
