@@ -48,9 +48,6 @@ function ScheduleDrawer({
   const dispatch = useAppDispatch();
   const schedule = useSelector(selectSchedule);
 
-  const [expandAccordion, setExpandAccordion] = useState(
-    mode !== SCHEDULE_DRAWER_MODE.create,
-  );
   const [snackbarOpen, setSnackbarOpen] = useState(true);
   const [value, setValue] = useState(0);
 
@@ -58,8 +55,8 @@ function ScheduleDrawer({
     setValue(newValue);
   };
 
-  const handleExpand = () => {
-    setExpandAccordion(!expandAccordion);
+  const handleReset = () => {
+    dispatch(setDrawerSchedule(data));
   };
 
   useEffect(() => {
@@ -97,7 +94,11 @@ function ScheduleDrawer({
             </Alert>
           </Snackbar>
 
-          <ScheduleDrawerHeader value={value} handleChange={handleChange} />
+          <ScheduleDrawerHeader
+            value={value}
+            handleChange={handleChange}
+            handleReset={handleReset}
+          />
 
           <Stack
             justifyContent="space-between"
