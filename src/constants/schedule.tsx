@@ -74,6 +74,7 @@ const SCHEDULE_DRAWER_MODE = {
 } as const;
 
 const NEED_TITLE = "제목을 입력해야 합니다.";
+const NEED_CATEGORY = "카테고리를 선택해야 합니다.";
 const WRONG_TIME_ORDER = "종료 시각이 시작 시각보다 빠르지 않았으면 좋겠어요.";
 
 const INIT_SCHEDULE = (date: string, start_time: string): Schedule => ({
@@ -115,6 +116,7 @@ export {
   SCHEDULE_DRAWER,
   SCHEDULE_DRAWER_MODE,
   NEED_TITLE,
+  NEED_CATEGORY,
   WRONG_TIME_ORDER,
   INIT_SCHEDULE,
   REPEAT_CYCLE,

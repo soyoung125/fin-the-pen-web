@@ -49,6 +49,7 @@ function ScheduleDrawer({
   const schedule = useSelector(selectSchedule);
 
   const [snackbarOpen, setSnackbarOpen] = useState(true);
+  const [showError, setShowError] = useState(false);
   const [value, setValue] = useState(0);
 
   const handleChange = (event: React.SyntheticEvent, newValue: number) => {
@@ -56,6 +57,7 @@ function ScheduleDrawer({
   };
 
   const handleReset = () => {
+    setShowError(false);
     dispatch(setDrawerSchedule(data));
   };
 
@@ -109,7 +111,7 @@ function ScheduleDrawer({
               {value === 0 ? (
                 <>
                   {/* 이벤트 제목 */}
-                  <NameInput />
+                  <NameInput showError={showError} />
 
                   {/* 이벤트 카테고리 */}
                   <CategoryInput
@@ -118,10 +120,11 @@ function ScheduleDrawer({
                         ? ""
                         : schedule.category
                     }
+                    showError={showError}
                   />
 
                   {/* 이벤트 일정 */}
-                  <DateInput />
+                  <DateInput showError={showError} />
 
                   {/* 이벤트 반복 설정 */}
                   <RepeatInput />
@@ -132,7 +135,11 @@ function ScheduleDrawer({
             </Stack>
 
             {/* 제출 버튼 */}
-            <ScheduleDrawerFooter mode={mode} handleClose={handleClose} />
+            <ScheduleDrawerFooter
+              mode={mode}
+              handleClose={handleClose}
+              setShowError={setShowError}
+            />
           </Stack>
         </Box>
       )}
@@ -141,4 +148,3 @@ function ScheduleDrawer({
 }
 
 export default ScheduleDrawer;
-<NameInput />;

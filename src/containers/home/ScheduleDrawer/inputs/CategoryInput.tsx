@@ -7,7 +7,15 @@ import { selectSchedule } from "../../../../app/redux/slices/scheduleSlice";
 import { getType, updateSchedule } from "../domain/schedule";
 import { useAppDispatch } from "../../../../app/redux/hooks";
 
-export default function CategoryInput({ selected }: { selected: string }) {
+interface CategoryInputProps {
+  selected: string;
+  showError: boolean;
+}
+
+export default function CategoryInput({
+  selected,
+  showError,
+}: CategoryInputProps) {
   const dispatch = useAppDispatch();
   const schedule = useSelector(selectSchedule);
 
@@ -58,6 +66,12 @@ export default function CategoryInput({ selected }: { selected: string }) {
           <TextField
             {...params}
             variant="standard"
+            error={showError && schedule?.category === ""}
+            helperText={
+              showError && schedule?.category === ""
+                ? "필수 입력 값입니다!"
+                : ""
+            }
             InputProps={{
               ...params.InputProps,
               startAdornment: (

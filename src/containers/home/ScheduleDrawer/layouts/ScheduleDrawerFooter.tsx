@@ -1,6 +1,10 @@
 import { Button, Stack, Tooltip } from "@mui/material";
 import { NEED_SIGN_IN } from "../../../../constants/messages";
-import { NEED_TITLE, SCHEDULE_DRAWER } from "../../../../constants/schedule";
+import {
+  NEED_CATEGORY,
+  NEED_TITLE,
+  SCHEDULE_DRAWER,
+} from "../../../../constants/schedule";
 import { selectGuestMode } from "@redux/slices/commonSlice.tsx";
 import {
   selectDate,
@@ -22,11 +26,13 @@ import useSchedule from "@hooks/useSchedule.tsx";
 interface ScheduleDrawerFooterProps {
   mode: ScheduleDrawerModeValue;
   handleClose: () => void;
+  setShowError: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 function ScheduleDrawerFooter({
   mode,
   handleClose,
+  setShowError,
 }: ScheduleDrawerFooterProps) {
   const date = useAppSelector(selectDate);
   const user = useSelector(selectUser);
@@ -49,10 +55,16 @@ function ScheduleDrawerFooter({
   };
 
   const handleSubmit = () => {
-    if (schedule.event_name.length === 0) {
-      alert(NEED_TITLE);
+    if (
+      schedule.event_name === "" ||
+      schedule.category === "" ||
+      schedule.start_date === "" ||
+      schedule.end_date === ""
+    ) {
+      setShowError(true);
       return;
     }
+    setShowError(false);
     handleMode();
   };
 

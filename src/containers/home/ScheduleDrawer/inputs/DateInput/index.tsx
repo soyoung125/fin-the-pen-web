@@ -10,7 +10,10 @@ import InputDateTime from "./InputDateTime";
 import { SCHEDULE_DRAWER } from "constants/schedule";
 import { trace } from "console";
 
-function DateInput() {
+interface DateInputProps {
+  showError: boolean;
+}
+function DateInput({ showError }: DateInputProps) {
   const dispatch = useAppDispatch();
   const schedule = useSelector(selectSchedule);
   const [showStart, setShowStart] = useState(false);
@@ -39,6 +42,7 @@ function DateInput() {
         changeSchedule={changeSchedule}
         showCalendar={showStart}
         type="start"
+        showError={showError}
       />
 
       <InputDateTime
@@ -48,6 +52,7 @@ function DateInput() {
         changeSchedule={changeSchedule}
         showCalendar={showEnd}
         type="end"
+        showError={showError}
       />
 
       <Stack direction="row" justifyContent="space-between">
