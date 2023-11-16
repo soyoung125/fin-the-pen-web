@@ -23,13 +23,21 @@ function ImportanceInput() {
     },
   ];
 
-  const changeSchedule = (state: React.MouseEvent<HTMLButtonElement>) => {
+  const changeSchedule = (state: {
+    target: { value: string; name: string };
+  }) => {
     updateSchedule(dispatch, schedule, {
-      target: { id: state.currentTarget.id, value: state.currentTarget.value },
+      target: { id: state.target.name, value: state.target.value },
     });
   };
 
-  function valuetext(value: number) {
+  const handleChange = (event: Event, newValue: number | number[]) => {
+    changeSchedule({
+      target: { value: valuetext(newValue), name: "importance" },
+    });
+  };
+
+  function valuetext(value: number | number[]) {
     switch (value) {
       case 0:
         return SCHEDULE_DRAWER.importance_low;
@@ -49,13 +57,13 @@ function ImportanceInput() {
       <Box sx={{ px: 1, pt: 3 }}>
         <Slider
           defaultValue={1}
-          valueLabelFormat={valuetext}
           getAriaValueText={valuetext}
           step={1}
           marks={marks}
           min={0}
           max={2}
           valueLabelDisplay="off"
+          onChange={handleChange}
           sx={{
             ".MuiSlider-rail, .MuiSlider-track": { height: "10px" },
             ".MuiSlider-markLabel": { top: "-20px" },
@@ -70,60 +78,6 @@ function ImportanceInput() {
           }}
         />
       </Box>
-
-      {/* <Stack direction="row" alignItems="center" spacing={1}>
-        <Button
-          variant={
-            schedule?.importance === SCHEDULE_DRAWER.importance_high
-              ? "contained"
-              : "outlined"
-          }
-          id="importance"
-          value={SCHEDULE_DRAWER.importance_high}
-          onClick={changeSchedule}
-          fullWidth
-          size="small"
-          sx={{
-            borderRadius: "17px",
-          }}
-        >
-          {SCHEDULE_DRAWER.importance_high}
-        </Button>
-        <Button
-          variant={
-            schedule?.importance === SCHEDULE_DRAWER.importance_middle
-              ? "contained"
-              : "outlined"
-          }
-          id="importance"
-          value={SCHEDULE_DRAWER.importance_middle}
-          onClick={changeSchedule}
-          fullWidth
-          size="small"
-          sx={{
-            borderRadius: "17px",
-          }}
-        >
-          {SCHEDULE_DRAWER.importance_middle}
-        </Button>
-        <Button
-          variant={
-            schedule?.importance === SCHEDULE_DRAWER.importance_low
-              ? "contained"
-              : "outlined"
-          }
-          id="importance"
-          value={SCHEDULE_DRAWER.importance_low}
-          onClick={changeSchedule}
-          fullWidth
-          size="small"
-          sx={{
-            borderRadius: "17px",
-          }}
-        >
-          {SCHEDULE_DRAWER.importance_low}
-        </Button>
-      </Stack> */}
     </Stack>
   );
 }
