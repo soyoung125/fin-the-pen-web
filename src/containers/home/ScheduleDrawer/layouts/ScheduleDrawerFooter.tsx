@@ -1,10 +1,6 @@
-import { Button, Stack, Tooltip } from "@mui/material";
+import { Box, Button, Stack, Tooltip } from "@mui/material";
 import { NEED_SIGN_IN } from "../../../../constants/messages";
-import {
-  NEED_CATEGORY,
-  NEED_TITLE,
-  SCHEDULE_DRAWER,
-} from "../../../../constants/schedule";
+import { SCHEDULE_DRAWER } from "../../../../constants/schedule";
 import { selectGuestMode } from "@redux/slices/commonSlice.tsx";
 import {
   selectDate,
@@ -16,8 +12,8 @@ import { Schedule, ScheduleDrawerModeValue } from "@type/schedule.tsx";
 import { useAppDispatch, useAppSelector } from "@redux/hooks.ts";
 import { useSelector } from "react-redux";
 import { selectUser } from "@redux/slices/userSlice.tsx";
-import { grey } from "@mui/material/colors";
 import useSchedule from "@hooks/useSchedule.tsx";
+import Save from "@assets/icons/save_icon.svg";
 
 /**
  * 각종 로직들 모듈로 이전 예정
@@ -69,35 +65,51 @@ function ScheduleDrawerFooter({
   };
 
   return (
-    <Stack direction="row" spacing={1}>
-      {mode === "create" && process.env.NODE_ENV === "development" && (
-        <Button
-          fullWidth
-          variant="contained"
-          color="warning"
-          onClick={() =>
-            dispatch(setDrawerSchedule(generateRandomSchedule(date)))
-          }
-        >
-          랜덤 일정 채우기(dev)
-        </Button>
-      )}
-      <Tooltip
-        title={!guestMode && "아직 일반 모드에서는 동작하지 않습니다."}
-        placement="top"
+    <Box>
+      <Box
+        sx={{
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          textAlign: "center",
+          color: "#8C919C",
+          fontSize: "14px",
+          mb: 1.5,
+        }}
       >
-        <Button
-          variant="contained"
-          fullWidth
-          disabled={user === null}
-          onClick={() => handleSubmit()}
+        <img src={Save} />
+        입력 정보는 자동으로 저장됩니다.
+      </Box>
+      <Stack direction="row" spacing={1}>
+        {mode === "create" && process.env.NODE_ENV === "development" && (
+          <Button
+            fullWidth
+            variant="contained"
+            color="warning"
+            onClick={() =>
+              dispatch(setDrawerSchedule(generateRandomSchedule(date)))
+            }
+          >
+            랜덤 일정 채우기(dev)
+          </Button>
+        )}
+        <Tooltip
+          title={!guestMode && "아직 일반 모드에서는 동작하지 않습니다."}
+          placement="top"
         >
-          {user === null
-            ? NEED_SIGN_IN
-            : `${SCHEDULE_DRAWER.add_schedule[mode]}`}
-        </Button>
-      </Tooltip>
-    </Stack>
+          <Button
+            variant="contained"
+            fullWidth
+            disabled={user === null}
+            onClick={() => handleSubmit()}
+          >
+            {user === null
+              ? NEED_SIGN_IN
+              : `${SCHEDULE_DRAWER.add_schedule[mode]}`}
+          </Button>
+        </Tooltip>
+      </Stack>
+    </Box>
   );
 }
 
