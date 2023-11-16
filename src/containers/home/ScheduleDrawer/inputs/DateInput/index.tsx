@@ -8,7 +8,6 @@ import { useState } from "react";
 import { UpdateStateInterface } from "@type/common";
 import InputDateTime from "./InputDateTime";
 import { SCHEDULE_DRAWER } from "constants/schedule";
-import { trace } from "console";
 
 interface DateInputProps {
   showError: boolean;

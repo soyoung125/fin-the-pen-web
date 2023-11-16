@@ -1,4 +1,4 @@
-import { Card, Divider, Stack } from "@mui/material";
+import { Divider, Stack } from "@mui/material";
 import ExclusionInput from "./ExclusionInput";
 import ImportanceInput from "./ImportanceInput";
 import SpendingInput from "./SpendingInput";

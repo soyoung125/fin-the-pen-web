@@ -1,4 +1,4 @@
-import { Box, Button, Slider, Stack, Typography } from "@mui/material";
+import { Box, Slider, Stack, Typography } from "@mui/material";
 import { useSelector } from "react-redux";
 import { SCHEDULE_DRAWER } from "../../../../../constants/schedule";
 import { selectSchedule } from "../../../../../app/redux/slices/scheduleSlice";
