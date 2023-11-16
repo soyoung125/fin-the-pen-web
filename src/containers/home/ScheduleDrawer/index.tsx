@@ -24,6 +24,8 @@ import ScheduleDrawerFooter from "./layouts/ScheduleDrawerFooter";
 import { CONSUMPTION_ALERTS } from "../../../constants/alerts";
 import { Schedule, ScheduleDrawerModeValue } from "../../../types/schedule";
 import { useAppDispatch } from "../../../app/redux/hooks";
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Swiper as SwiperType } from "swiper/types";
 
 function TransitionUp(props: SlideProps) {
   return <Slide {...props} direction="right" />;
@@ -47,12 +49,14 @@ function ScheduleDrawer({
 
   const dispatch = useAppDispatch();
   const schedule = useSelector(selectSchedule);
+  const [swiper, setSwiper] = useState<SwiperType>();
 
   const [snackbarOpen, setSnackbarOpen] = useState(true);
   const [showError, setShowError] = useState(false);
   const [value, setValue] = useState(0);
 
   const handleChange = (event: React.SyntheticEvent, newValue: number) => {
+    swiper?.slideTo(newValue);
     setValue(newValue);
   };
 
@@ -77,7 +81,7 @@ function ScheduleDrawer({
   return (
     <div ref={ref} style={{ height: "100%" }}>
       {schedule && (
-        <Box sx={{ height: "100%", mx: 2.5, pt: 1, mb: 3 }}>
+        <Box sx={{ height: "100%", pt: 1, mb: 3 }}>
           <Snackbar
             anchorOrigin={{ vertical: "top", horizontal: "center" }}
             autoHideDuration={5000}
@@ -107,9 +111,19 @@ function ScheduleDrawer({
             spacing={2}
             sx={{ height: `calc(100% - 56px)` }}
           >
-            <Stack spacing={2} pt={2}>
-              {value === 0 ? (
-                <>
+            <Swiper
+              className="mySwiper"
+              style={{
+                width: "100%",
+                paddingLeft: "20px",
+                paddingRight: "20px",
+              }}
+              spaceBetween={50}
+              onSlideChange={(e) => setValue(e.activeIndex)}
+              onSwiper={(swiper) => setSwiper(swiper)}
+            >
+              <SwiperSlide style={{ overflow: "scroll" }}>
+                <Stack spacing={2} pt={2}>
                   {/* 이벤트 제목 */}
                   <NameInput showError={showError} />
 
@@ -130,11 +144,13 @@ function ScheduleDrawer({
 
                   {/* 이벤트 반복 설정 */}
                   <RepeatInput />
-                </>
-              ) : (
+                </Stack>
+              </SwiperSlide>
+              <SwiperSlide>
                 <AssetSettings mode={mode} />
-              )}
-            </Stack>
+              </SwiperSlide>
+              ...
+            </Swiper>
 
             {/* 제출 버튼 */}
             <ScheduleDrawerFooter

@@ -54,7 +54,7 @@ function DateInput({ showError }: DateInputProps) {
         showError={showError}
       />
 
-      <Stack direction="row" justifyContent="space-between">
+      <Stack direction="row" justifyContent="space-between" pr={1}>
         <Box>{SCHEDULE_DRAWER.all_day}</Box>
         <SwitchButton
           checked={schedule?.all_day ?? true}
