@@ -8,7 +8,6 @@ import { useState } from "react";
 import { UpdateStateInterface } from "@type/common";
 import InputDateTime from "./InputDateTime";
 import { SCHEDULE_DRAWER } from "constants/schedule";
-import { trace } from "console";
 
 interface DateInputProps {
   showError: boolean;
@@ -55,7 +54,7 @@ function DateInput({ showError }: DateInputProps) {
         showError={showError}
       />
 
-      <Stack direction="row" justifyContent="space-between">
+      <Stack direction="row" justifyContent="space-between" pr={1}>
         <Box>{SCHEDULE_DRAWER.all_day}</Box>
         <SwitchButton
           checked={schedule?.all_day ?? true}
