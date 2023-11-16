@@ -1,6 +1,7 @@
 import {
   Alert,
   Box,
+  Divider,
   Slide,
   SlideProps,
   Snackbar,
@@ -122,9 +123,11 @@ function ScheduleDrawer({
                     }
                     showError={showError}
                   />
+                  <Divider />
 
                   {/* 이벤트 일정 */}
                   <DateInput showError={showError} />
+                  <Divider />
 
                   {/* 이벤트 반복 설정 */}
                   <RepeatInput />

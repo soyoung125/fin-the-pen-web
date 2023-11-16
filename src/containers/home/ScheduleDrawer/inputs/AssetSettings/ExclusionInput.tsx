@@ -16,17 +16,12 @@ function ExclusionInput() {
   };
 
   return (
-    <Stack
-      direction="row"
-      justifyContent="space-between"
-      alignItems="center"
-    >
-      <Typography sx={{ fontWeight: 500 }}>{SCHEDULE_DRAWER.exclusion_title}</Typography>
+    <Stack direction="row" justifyContent="space-between" alignItems="center">
+      <Typography sx={{ fontWeight: 500, color: "primary.main" }}>
+        {SCHEDULE_DRAWER.exclusion_title}
+      </Typography>
       <Stack direction="row" alignItems="center">
-        <SwitchButton
-          checked={exclusion}
-          handleChange={changeExclustion}
-        />
+        <SwitchButton checked={exclusion} handleChange={changeExclustion} />
       </Stack>
     </Stack>
   );

@@ -50,7 +50,7 @@ function ImportanceInput() {
 
   return (
     <Stack spacing={2}>
-      <Typography sx={{ fontWeight: 500 }}>
+      <Typography sx={{ fontWeight: 500, color: "primary.main" }}>
         {SCHEDULE_DRAWER.set_importance_title}
       </Typography>
 

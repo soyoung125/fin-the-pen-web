@@ -58,7 +58,7 @@ function SpendingInput({ mode }: { mode: string }) {
 
   return (
     <Grid container spacing={2}>
-      <Grid item xs={12} sx={{ fontWeight: 500 }}>
+      <Grid item xs={12} sx={{ fontWeight: 500, color: "primary.main" }}>
         {SCHEDULE_DRAWER.set_spending_title}
       </Grid>
 
@@ -152,7 +152,7 @@ function SpendingInput({ mode }: { mode: string }) {
           justifyContent="space-between"
           alignItems="center"
         >
-          <Typography sx={{ fontWeight: 500 }}>
+          <Typography sx={{ fontWeight: 500, color: "primary.main" }}>
             {SCHEDULE_DRAWER.fix_amount}
           </Typography>
           <Stack direction="row" alignItems="center">
@@ -161,7 +161,7 @@ function SpendingInput({ mode }: { mode: string }) {
               handleChange={() =>
                 changeFixAmount({
                   target: {
-                    id: "is_fix_amount",
+                    id: "is_fix",
                     value: schedule?.is_fix ? false : true,
                   },
                 })
