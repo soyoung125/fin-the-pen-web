@@ -1,5 +1,12 @@
 import CalenderBox from "@containers/home/HomeContainer/view/Calender/boxes/CalenderBox";
-import { Box, Collapse, Input, InputAdornment, InputBase } from "@mui/material";
+import {
+  Box,
+  Collapse,
+  Input,
+  InputAdornment,
+  InputBase,
+  TextField,
+} from "@mui/material";
 import { DateCalendar, LocalizationProvider } from "@mui/x-date-pickers";
 import { AdapterMoment } from "@mui/x-date-pickers/AdapterMoment";
 import { UpdateStateInterface } from "@type/common";
@@ -17,6 +24,7 @@ interface InputDateTimeProps {
   ) => void;
   showCalendar: boolean;
   type: string;
+  showError: boolean;
 }
 
 function InputDateTime({
@@ -26,34 +34,39 @@ function InputDateTime({
   changeSchedule,
   showCalendar,
   type,
+  showError,
 }: InputDateTimeProps) {
   const title = type === "start" ? SCHEDULE_DRAWER.start : SCHEDULE_DRAWER.end;
   return (
     <Box>
-      <Input
-        // type="date"
+      <TextField
         fullWidth
         onClick={handleClick}
         id={type + "_date"}
-        startAdornment={
-          <InputAdornment position="start">
-            <Box sx={{ color: "primary.main", fontWeight: 500 }}>{title}</Box>
-          </InputAdornment>
-        }
-        endAdornment={
-          <InputAdornment position="start">
-            <InputBase
-              id={type + "_time"}
-              type="time"
-              value={time}
-              onChange={changeSchedule}
-              onClick={(e) => e.stopPropagation()}
-              inputProps={{
-                style: { textAlign: "right" },
-              }}
-            />
-          </InputAdornment>
-        }
+        variant="standard"
+        error={showError && date === ""}
+        helperText={showError && date === "" ? "필수 입력 값입니다!" : ""}
+        InputProps={{
+          startAdornment: (
+            <InputAdornment position="start">
+              <Box sx={{ color: "primary.main", fontWeight: 500 }}>{title}</Box>
+            </InputAdornment>
+          ),
+          endAdornment: (
+            <InputAdornment position="start">
+              <InputBase
+                id={type + "_time"}
+                type="time"
+                value={time}
+                onChange={changeSchedule}
+                onClick={(e) => e.stopPropagation()}
+                inputProps={{
+                  style: { textAlign: "right" },
+                }}
+              />
+            </InputAdornment>
+          ),
+        }}
         value={date}
         onChange={changeSchedule}
       />

@@ -1,11 +1,14 @@
-import { Box, FormControl, Input, InputAdornment } from "@mui/material";
+import { Box, FormControl, TextField, InputAdornment } from "@mui/material";
 import { useSelector } from "react-redux";
 import { SCHEDULE_DRAWER } from "../../../../constants/schedule";
 import { updateSchedule } from "../domain/schedule";
 import { selectSchedule } from "../../../../app/redux/slices/scheduleSlice";
 import { useAppDispatch } from "../../../../app/redux/hooks";
 
-function NameInput() {
+interface NameInputProps {
+  showError: boolean;
+}
+function NameInput({ showError }: NameInputProps) {
   const dispatch = useAppDispatch();
   const schedule = useSelector(selectSchedule);
 
@@ -15,19 +18,26 @@ function NameInput() {
 
   return (
     <FormControl fullWidth>
-      <Input
+      <TextField
+        error={showError && schedule?.event_name === ""}
         id="event_name"
-        startAdornment={
-          <InputAdornment position="start">
-            <Box sx={{ color: "primary.main", fontWeight: 500 }}>
-              {SCHEDULE_DRAWER.name}
-            </Box>
-          </InputAdornment>
-        }
+        variant="standard"
         value={schedule?.event_name}
         onChange={changeSchedule}
+        helperText={
+          showError && schedule?.event_name === "" ? "필수 입력 값입니다!" : ""
+        }
         inputProps={{
           style: { textAlign: "right" },
+        }}
+        InputProps={{
+          startAdornment: (
+            <InputAdornment position="start">
+              <Box sx={{ color: "primary.main", fontWeight: 500 }}>
+                {SCHEDULE_DRAWER.name}
+              </Box>
+            </InputAdornment>
+          ),
         }}
       />
     </FormControl>
