@@ -34,7 +34,7 @@ export const handlers = [
     const user = users.find(
       (user) =>
         user.user_id === credentials.user_id &&
-        user.password === credentials.password,
+        user.password === credentials.password
     );
     if (user === undefined) {
       return res(ctx.delay(1000), ctx.status(200), ctx.json(""));
@@ -46,7 +46,7 @@ export const handlers = [
     const schedule = await req.json();
     const prevSchedules = getLocalStorage<Schedule[]>(
       LOCAL_STORAGE_KEY_SCHEDULES,
-      [],
+      []
     );
     const newSchedules: Schedule[] = [...prevSchedules, schedule];
     setLocalStorage(LOCAL_STORAGE_KEY_SCHEDULES, newSchedules);
@@ -58,22 +58,25 @@ export const handlers = [
     console.log(user_id, date);
     const schedules = getLocalStorage<Schedule[]>(
       LOCAL_STORAGE_KEY_SCHEDULES,
-      [],
+      []
     );
     const monthSchedules = schedules.filter(
       (schedule) =>
         schedule.user_id === user_id &&
-        moment(date).isSame(schedule.start_date, "month"),
+        moment(date).isSame(schedule.start_date, "month")
     );
-    console.log(monthSchedules);
-    return res(ctx.delay(1000), ctx.status(200), ctx.json(monthSchedules));
+    return res(
+      ctx.delay(1000),
+      ctx.status(200),
+      ctx.json({ data: monthSchedules })
+    );
   }),
 
   rest.post(`${DOMAIN}/deleteSchedule`, async (req, res, ctx) => {
     const { id } = await req.json();
     const prevSchedules = getLocalStorage<Schedule[]>(
       LOCAL_STORAGE_KEY_SCHEDULES,
-      [],
+      []
     );
     const newSchedules = prevSchedules.filter((schedule) => schedule.id !== id);
     setLocalStorage(LOCAL_STORAGE_KEY_SCHEDULES, newSchedules);

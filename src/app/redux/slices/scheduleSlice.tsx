@@ -60,7 +60,7 @@ export const getMonthSchedules = createAsyncThunk(
   async ({ user_id, date }: GetScheduleQuery) => {
     const schedules = await fetchMonthSchedules({ user_id, date });
     return schedules || [];
-  },
+  }
 );
 
 export const createSchedule = createAsyncThunk<Schedule, Schedule>(
@@ -68,7 +68,7 @@ export const createSchedule = createAsyncThunk<Schedule, Schedule>(
   async (scheduleWithUuid) => {
     const response = await fetchCreateSchedule(scheduleWithUuid);
     return response.data;
-  },
+  }
 );
 
 export const deleteSchedule = createAsyncThunk<string, string>(
@@ -76,7 +76,7 @@ export const deleteSchedule = createAsyncThunk<string, string>(
   async (id) => {
     const response = await fetchDeleteSchedule(id);
     return response.data;
-  },
+  }
 );
 
 export const scheduleSlice = createSlice({
@@ -114,13 +114,13 @@ export const scheduleSlice = createSlice({
 
       let newTotal = 0;
       const expenditureCategories = CATEGORIES.filter(
-        (c) => c.type === "지출" || c.nestedType === "출금",
+        (c) => c.type === "지출" || c.nestedType === "출금"
       );
       const schedules = state.schedules.filter(
         (s) =>
           state.date.isSame(s.start_date, "month") &&
           (dateExpression(s.start_date) || dateExpression(s.end_date)) &&
-          exeptionExpression(s),
+          exeptionExpression(s)
       );
 
       expenditureCategories.map((c, index) => {
@@ -129,7 +129,7 @@ export const scheduleSlice = createSlice({
         if (cnt > 0) {
           const spending = schByCategory.reduce(
             (result, schedule) => result + parseInt(schedule.amount, 10),
-            0,
+            0
           );
           if (spending > 0) {
             newData.push({
@@ -157,11 +157,11 @@ export const scheduleSlice = createSlice({
 
       if (state.filtered.includes(action.payload as string)) {
         state.filtered = state.filtered.filter(
-          (filteredWord) => filteredWord !== action.payload,
+          (filteredWord) => filteredWord !== action.payload
         );
       } else {
         const set = new Set(
-          [...state.filtered].concat(action.payload as string),
+          [...state.filtered].concat(action.payload as string)
         );
         state.filtered = Array.from(set);
       }
@@ -175,7 +175,7 @@ export const scheduleSlice = createSlice({
       switch (mode) {
         case "write":
           state.filtered = Array.from(
-            new Set([...state.filtered].concat(categories)),
+            new Set([...state.filtered].concat(categories))
           );
           break;
         case "remove":
@@ -189,7 +189,7 @@ export const scheduleSlice = createSlice({
     },
     setFilteredDate: (
       state,
-      action: PayloadAction<{ type: string; date: string }>,
+      action: PayloadAction<{ type: string; date: string }>
     ) => {
       state.filtered_date[action.payload.type] = action.payload.date;
     },
@@ -220,13 +220,13 @@ export const scheduleSlice = createSlice({
           // getMonthSchedules 가 끝나면
           state.status = ASYNC_THUNK_STATUS.fulfilled;
           state.schedules = action.payload ?? [];
-        },
+        }
       )
       .addCase(deleteSchedule.fulfilled, (state, action) => {
         // deleteSchedule 가 끝나면
         if (action.payload !== null) {
           state.schedules = state.schedules.filter(
-            (s: Schedule) => s.id !== action.payload,
+            (s: Schedule) => s.id !== action.payload
           );
         }
       });
@@ -245,12 +245,13 @@ export const {
   changeViewMode,
 } = scheduleSlice.actions;
 
-export const selectSchedules = (state: RootState) =>
-  state.schedule.schedules
+export const selectSchedules = (state: RootState) => {
+  return state.schedule.schedules
     ? [...state.schedule.schedules].sort((a, b) =>
-        a.start_time.localeCompare(b.start_time),
+        a.start_time.localeCompare(b.start_time)
       )
     : [];
+};
 
 export const selectDate = (state: RootState) => {
   const date = moment((state.schedule as InitialState).date);
