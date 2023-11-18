@@ -32,15 +32,14 @@ export const fetchDeleteSchedule = async (id: string) => {
 };
 
 export const fetchMonthSchedules = async (
-  query: MonthScheduleQuery,
+  query: MonthScheduleQuery
 ): Promise<Schedule[] | undefined> => {
   try {
-    const response = await axios.post<{ data: Schedule[] | string[] }>(
+    const response = await axios.post<Schedule[]>(
       `${DOMAIN}/getMonthSchedules`,
-      query,
+      query
     );
-    const data = response.data.data;
-    const schedules: Schedule[] = (data as Schedule[]) ?? [];
+    const schedules: Schedule[] = response.data ?? [];
     return schedules;
   } catch (err) {
     console.log(err);
@@ -51,7 +50,7 @@ export const fetchGetTransavrionList = async (data: any) => {
   try {
     const response: AxiosResponse<any[]> = await axios.post<any[]>(
       `${DOMAIN}/codef/occasionalAccount`,
-      data,
+      data
     );
     const result = response.data;
     return result;
@@ -64,7 +63,7 @@ export const fetchFindSchedules = async (name: string) => {
   try {
     const response = await axios.post<Schedule[]>(
       `${DOMAIN}/find/contains/name`,
-      { name },
+      { name }
     );
     const result = response.data;
     return result;
@@ -104,7 +103,7 @@ export const fetchGetCardList = async (organization: string) => {
       `${DOMAIN}/codef/card/account/card-list`,
       {
         organization,
-      },
+      }
     );
     const result = response.data;
     return result;
