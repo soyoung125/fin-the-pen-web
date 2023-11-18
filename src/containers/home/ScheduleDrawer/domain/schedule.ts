@@ -188,4 +188,4 @@ export const getType = (category: Category) => {
 };
 
 export const getSign = (type: string) =>
-  type === SCHEDULE_DRAWER.type_minus ? "-" : "+";
+  type === SCHEDULE_DRAWER.type_minus ? "Minus" : "Plus";

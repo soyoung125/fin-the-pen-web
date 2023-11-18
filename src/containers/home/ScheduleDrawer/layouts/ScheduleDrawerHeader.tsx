@@ -13,7 +13,7 @@ function ScheduleDrawerHeader({
   handleReset,
 }: ScheduleDrawerHeaderProps) {
   return (
-    <Stack direction="row" justifyContent="space-between" mx={2.5}>
+    <Stack direction="row" justifyContent="space-between">
       <ResetButton handleClick={handleReset} />
       <Tabs value={value} onChange={handleChange}>
         <Tab label="일정" />

@@ -55,7 +55,7 @@ const SCHEDULE_DRAWER: Readonly<ScheduleDrawer> = Object.freeze({
   type_minus: "Minus",
   won: "원",
   expected_spending: "예상 비용",
-  fix_amount: "금액 고정",
+  fix_amount: "예산 고정",
   set_importance_title: "일정 중요도",
   importance_high: "상",
   importance_middle: "중",
