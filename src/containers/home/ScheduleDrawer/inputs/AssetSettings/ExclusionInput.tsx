@@ -1,4 +1,4 @@
-import { Stack, Typography } from "@mui/material";
+import { Stack, Switch, Typography } from "@mui/material";
 import { useSelector } from "react-redux";
 import { SCHEDULE_DRAWER } from "../../../../../constants/schedule";
 import { selectSchedule } from "../../../../../app/redux/slices/scheduleSlice";
@@ -16,12 +16,17 @@ function ExclusionInput() {
   };
 
   return (
-    <Stack direction="row" justifyContent="space-between" alignItems="center">
-      <Typography sx={{ fontWeight: 500, color: "primary.main" }}>
-        {SCHEDULE_DRAWER.exclusion_title}
-      </Typography>
+    <Stack
+      direction="row"
+      justifyContent="space-between"
+      alignItems="center"
+    >
+      <Typography sx={{ fontWeight: 500 }}>{SCHEDULE_DRAWER.exclusion_title}</Typography>
       <Stack direction="row" alignItems="center">
-        <SwitchButton checked={exclusion} handleChange={changeExclustion} />
+        <SwitchButton
+          checked={exclusion}
+          handleChange={changeExclustion}
+        />
       </Stack>
     </Stack>
   );

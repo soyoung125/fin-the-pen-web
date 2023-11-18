@@ -2,6 +2,7 @@ import {
   Button,
   Grid,
   InputAdornment,
+  OutlinedInput,
   Stack,
   TextField,
   Typography,
@@ -17,47 +18,27 @@ import {
 import { useAppDispatch } from "../../../../../app/redux/hooks";
 import SwitchButton from "@components/common/SwitchButton";
 import { UpdateStateInterface } from "@type/common";
-import { useState } from "react";
 
 function SpendingInput({ mode }: { mode: string }) {
   const dispatch = useAppDispatch();
   const schedule = useSelector(selectSchedule);
   const expectedSpending = schedule ? schedule?.amount : "0";
-  const [showError, setShowError] = useState(false);
 
   const changeSpendingType = () => {
     updateSpendingType(dispatch, schedule);
   };
-
   const changeSchedule = (state: React.MouseEvent<HTMLButtonElement>) => {
     updateSchedule(dispatch, schedule, {
       target: { id: state.currentTarget.id, value: state.currentTarget.value },
     });
   };
 
-  const changeAmount = (state: React.ChangeEvent<HTMLInputElement>) => {
-    console.log(state);
-    const amount = state.target.value.replaceAll(",", "");
-    if (Number(amount) > 100000000 && !showError) {
-      setShowError(true);
-    } else if (Number(amount) <= 100000000 && showError) {
-      setShowError(false);
-    }
-    updateSchedule(dispatch, schedule, {
-      target: {
-        id: "amount",
-        value: state.target.value.replaceAll(",", ""),
-      },
-    });
-  };
-
   const changeFixAmount = (state: UpdateStateInterface) => {
     updateSchedule(dispatch, schedule, state);
   };
-
   return (
     <Grid container spacing={2}>
-      <Grid item xs={12} sx={{ fontWeight: 500, color: "primary.main" }}>
+      <Grid item xs={12} sx={{ fontWeight: 500 }}>
         {SCHEDULE_DRAWER.set_spending_title}
       </Grid>
 
@@ -102,46 +83,49 @@ function SpendingInput({ mode }: { mode: string }) {
       </Grid>
 
       <Grid item xs={12}>
-        <TextField
-          variant="outlined"
+        <OutlinedInput
           id="expected_spending"
           value={
             expectedSpending === ""
               ? "0"
               : parseInt(expectedSpending, 10).toLocaleString("ko-KR")
           }
-          onChange={changeAmount}
-          error={showError}
-          helperText={showError ? "입력 금액이 범위를 초과했습니다!" : ""}
+          onChange={(e) =>
+            updateSchedule(dispatch, schedule, {
+              target: {
+                id: "expected_spending",
+                value: e.target.value.replaceAll(",", ""),
+              },
+            })
+          }
           fullWidth
+          type="text"
           size="small"
           inputProps={{
             style: { textAlign: "right" },
             min: 0,
           }}
-          InputProps={{
-            startAdornment: (
-              <InputAdornment position="start">
-                <Button
-                  variant="contained"
-                  size="small"
-                  sx={{
-                    borderRadius: "100px",
-                    minWidth: 0,
-                    width: "30px",
-                    height: "30px",
-                  }}
-                >
-                  {getSign(schedule?.price_type ?? "Plus")}
-                </Button>
-              </InputAdornment>
-            ),
-            endAdornment: (
-              <InputAdornment position="end">
-                {SCHEDULE_DRAWER.won}
-              </InputAdornment>
-            ),
-          }}
+          startAdornment={
+            <InputAdornment position="start">
+              <Button
+                variant="contained"
+                size="small"
+                sx={{
+                  borderRadius: "100px",
+                  minWidth: 0,
+                  width: "30px",
+                  height: "30px",
+                }}
+              >
+                {getSign(schedule?.price_type ?? "Plus")}
+              </Button>
+            </InputAdornment>
+          }
+          endAdornment={
+            <InputAdornment position="end">
+              {SCHEDULE_DRAWER.won}
+            </InputAdornment>
+          }
         />
       </Grid>
 
@@ -151,7 +135,7 @@ function SpendingInput({ mode }: { mode: string }) {
           justifyContent="space-between"
           alignItems="center"
         >
-          <Typography sx={{ fontWeight: 500, color: "primary.main" }}>
+          <Typography sx={{ fontWeight: 500 }}>
             {SCHEDULE_DRAWER.fix_amount}
           </Typography>
           <Stack direction="row" alignItems="center">
@@ -160,7 +144,7 @@ function SpendingInput({ mode }: { mode: string }) {
               handleChange={() =>
                 changeFixAmount({
                   target: {
-                    id: "is_fix",
+                    id: "is_fix_amount",
                     value: schedule?.is_fix ? false : true,
                   },
                 })

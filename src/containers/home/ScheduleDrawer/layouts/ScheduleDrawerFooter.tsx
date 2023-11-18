@@ -65,7 +65,7 @@ function ScheduleDrawerFooter({
   };
 
   return (
-    <Box mx={2.5}>
+    <Box>
       <Box
         sx={{
           display: "flex",
