@@ -35,11 +35,11 @@ export const fetchMonthSchedules = async (
   query: MonthScheduleQuery
 ): Promise<Schedule[] | undefined> => {
   try {
-    const response = await axios.post<Schedule[]>(
+    const response = await axios.post<{ data: Schedule[] }>(
       `${DOMAIN}/getMonthSchedules`,
       query
     );
-    const schedules: Schedule[] = response.data ?? [];
+    const schedules: Schedule[] = response.data.data ?? [];
     return schedules;
   } catch (err) {
     console.log(err);
