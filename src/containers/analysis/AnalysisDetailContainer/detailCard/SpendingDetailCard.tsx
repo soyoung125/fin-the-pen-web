@@ -2,7 +2,6 @@ import { Box, Button, Grid, Paper, Stack, Typography } from "@mui/material";
 import AccessTimeIcon from "@mui/icons-material/AccessTime";
 import moment from "moment";
 import { Schedule } from "../../../../types/schedule";
-import { getSign } from "@containers/home/ScheduleDrawer/domain/schedule";
 
 interface SpendingDetailCardProps {
   schedule: Schedule;
@@ -57,7 +56,7 @@ function SpendingDetailCard({ schedule, bgColor }: SpendingDetailCardProps) {
                 height: "20px",
               }}
             >
-              {getSign(schedule.price_type)}
+              {schedule.price_type}
             </Button>
             <Box sx={{ color: "primary.main" }}>{`${parseInt(
               schedule.amount,

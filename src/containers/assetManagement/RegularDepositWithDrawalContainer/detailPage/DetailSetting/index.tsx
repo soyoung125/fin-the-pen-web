@@ -18,7 +18,6 @@ function DetailSetting() {
   const { schedules } = useSchedule();
   const { state } = useLocation();
   const { type, data }: StateData = state;
-  const price_type = type === "+" ? "Plus" : "Minus";
   const [detailData, setDetailData] = useState<{ [key: string]: Schedule[] }>(
     {},
   );
@@ -36,7 +35,7 @@ function DetailSetting() {
     <>
       <Title
         type={state.type}
-        title={`정기 ${REGULAR_DEPOSIT_WITHDRAWAL_TYPE[price_type]} 내역`}
+        title={`정기 ${REGULAR_DEPOSIT_WITHDRAWAL_TYPE[type]} 내역`}
       >
         <Box sx={{ color: "primary.main" }}>{`총 ${
           Object.keys(detailData).length
