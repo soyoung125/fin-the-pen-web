@@ -14,7 +14,7 @@ export interface Schedule {
   period: string;
   price_type: string;
   amount: string;
-  is_fix: boolean;
+  fix_amount: boolean;
   importance: string;
   exclude: boolean;
 }

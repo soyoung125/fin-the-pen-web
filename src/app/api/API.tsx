@@ -13,7 +13,6 @@ export const fetchCreateSchedule = async (schedule: Schedule) => {
       ...schedule,
       is_all_day: schedule.all_day,
       set_amount: schedule.amount,
-      fix_amount: schedule.is_fix,
       exclusion: schedule.exclude,
       price_type: getSign(schedule.price_type),
     } as RequestSchedule;
@@ -40,7 +39,6 @@ export const fetchModifySchedule = async (schedule: Schedule) => {
       ...schedule,
       is_all_day: schedule.all_day,
       set_amount: schedule.amount,
-      fix_amount: schedule.is_fix,
       exclusion: schedule.exclude,
       price_type: getSign(schedule.price_type),
     } as RequestSchedule;

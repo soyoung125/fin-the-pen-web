@@ -14,18 +14,37 @@ import { updateSchedule, updateSpendingType } from "../../domain/schedule";
 import { useAppDispatch } from "../../../../../app/redux/hooks";
 import SwitchButton from "@components/common/SwitchButton";
 import { UpdateStateInterface } from "@type/common";
+import { useState } from "react";
 
 function SpendingInput({ mode }: { mode: string }) {
   const dispatch = useAppDispatch();
   const schedule = useSelector(selectSchedule);
   const expectedSpending = schedule ? schedule?.amount : "0";
+  const [showError, setShowError] = useState(false);
 
   const changeSpendingType = () => {
     updateSpendingType(dispatch, schedule);
   };
+
   const changeSchedule = (state: React.MouseEvent<HTMLButtonElement>) => {
     updateSchedule(dispatch, schedule, {
       target: { id: state.currentTarget.id, value: state.currentTarget.value },
+    });
+  };
+
+  const changeAmount = (state: React.ChangeEvent<HTMLInputElement>) => {
+    console.log(state);
+    const amount = state.target.value.replaceAll(",", "");
+    if (Number(amount) > 100000000 && !showError) {
+      setShowError(true);
+    } else if (Number(amount) <= 100000000 && showError) {
+      setShowError(false);
+    }
+    updateSchedule(dispatch, schedule, {
+      target: {
+        id: "amount",
+        value: state.target.value.replaceAll(",", ""),
+      },
     });
   };
 
@@ -79,21 +98,17 @@ function SpendingInput({ mode }: { mode: string }) {
       </Grid>
 
       <Grid item xs={12}>
-        <OutlinedInput
+        <TextField
+          variant="outlined"
           id="expected_spending"
           value={
             expectedSpending === ""
               ? "0"
               : parseInt(expectedSpending, 10).toLocaleString("ko-KR")
           }
-          onChange={(e) =>
-            updateSchedule(dispatch, schedule, {
-              target: {
-                id: "expected_spending",
-                value: e.target.value.replaceAll(",", ""),
-              },
-            })
-          }
+          onChange={changeAmount}
+          error={showError}
+          helperText={showError ? "입력 금액이 범위를 초과했습니다!" : ""}
           fullWidth
           type="text"
           size="small"
@@ -101,27 +116,29 @@ function SpendingInput({ mode }: { mode: string }) {
             style: { textAlign: "right" },
             min: 0,
           }}
-          startAdornment={
-            <InputAdornment position="start">
-              <Button
-                variant="contained"
-                size="small"
-                sx={{
-                  borderRadius: "100px",
-                  minWidth: 0,
-                  width: "30px",
-                  height: "30px",
-                }}
-              >
-                {schedule?.price_type}
-              </Button>
-            </InputAdornment>
-          }
-          endAdornment={
-            <InputAdornment position="end">
-              {SCHEDULE_DRAWER.won}
-            </InputAdornment>
-          }
+          InputProps={{
+            startAdornment: (
+              <InputAdornment position="start">
+                <Button
+                  variant="contained"
+                  size="small"
+                  sx={{
+                    borderRadius: "100px",
+                    minWidth: 0,
+                    width: "30px",
+                    height: "30px",
+                  }}
+                >
+                  {schedule?.price_type}
+                </Button>
+              </InputAdornment>
+            ),
+            endAdornment: (
+              <InputAdornment position="end">
+                {SCHEDULE_DRAWER.won}
+              </InputAdornment>
+            ),
+          }}
         />
       </Grid>
 
@@ -136,12 +153,12 @@ function SpendingInput({ mode }: { mode: string }) {
           </Typography>
           <Stack direction="row" alignItems="center">
             <SwitchButton
-              checked={schedule?.is_fix ?? false}
+              checked={schedule?.fix_amount ?? false}
               handleChange={() =>
                 changeFixAmount({
                   target: {
-                    id: "is_fix_amount",
-                    value: schedule?.is_fix ? false : true,
+                    id: "fix_amount",
+                    value: schedule?.fix_amount ? false : true,
                   },
                 })
               }
