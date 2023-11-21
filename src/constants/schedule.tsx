@@ -91,7 +91,7 @@ const INIT_SCHEDULE = (date: string, start_time: string): Schedule => ({
   amount: "0",
   is_fix: false,
   importance: SCHEDULE_DRAWER.importance_middle,
-  exclusion: false, // false면 포함
+  exclude: false, // false면 포함
 });
 
 const REPEAT_CYCLE = {

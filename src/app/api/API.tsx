@@ -14,6 +14,7 @@ export const fetchCreateSchedule = async (schedule: Schedule) => {
       is_all_day: schedule.all_day,
       set_amount: schedule.amount,
       fix_amount: schedule.is_fix,
+      exclusion: schedule.exclude,
       price_type: getSign(schedule.price_type),
     } as RequestSchedule;
     const response = await axios.post(`${DOMAIN}/createSchedule`, data);
@@ -27,6 +28,23 @@ export const fetchDeleteSchedule = async (id: string) => {
   try {
     console.log({ id });
     const response = await axios.post(`${DOMAIN}/deleteSchedule`, { id });
+    return response.data;
+  } catch (err) {
+    alert(err);
+  }
+};
+
+export const fetchModifySchedule = async (schedule: Schedule) => {
+  try {
+    const data = {
+      ...schedule,
+      is_all_day: schedule.all_day,
+      set_amount: schedule.amount,
+      fix_amount: schedule.is_fix,
+      exclusion: schedule.exclude,
+      price_type: getSign(schedule.price_type),
+    } as RequestSchedule;
+    const response = await axios.post(`${DOMAIN}/modifySchedule`, { ...data });
     return response.data;
   } catch (err) {
     alert(err);
