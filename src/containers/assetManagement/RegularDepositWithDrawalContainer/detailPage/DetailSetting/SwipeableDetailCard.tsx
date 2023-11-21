@@ -42,9 +42,9 @@ function SwipeableDetailCard({ data }: SwipeableDetailCardProps) {
   const modifyData = (form: Schedule) => {
     data.map((d) => {
       if (moment().isBefore(d.start_date)) {
-        handleModifySchedule();
+        handleModifySchedule(form);
       } else {
-        handleModifySchedule();
+        handleModifySchedule(form);
       }
     });
   };
