@@ -17,7 +17,7 @@ import {
   setSelectedDate,
 } from "../../../../../app/redux/slices/scheduleSlice";
 import MarkedPickersDay from "./boxes/scheduleMarker/MarkedPickersDay";
-import MarkerStack from "./boxes/scheduleMarker/MarkerStack";
+import MarkerStack from "./boxes/scheduleMarker/ScheduleCount";
 import "moment/locale/ko";
 import CalenderBox from "./boxes/CalenderBox";
 import IncomeExpenditureBox from "./boxes/IncomeExpenditureBox";
@@ -29,6 +29,7 @@ import useSchedule from "../../../../../hooks/useSchedule";
 import { Schedule } from "../../../../../types/schedule";
 import { useAppDispatch } from "../../../../../app/redux/hooks";
 import { AdapterMoment } from "@mui/x-date-pickers/AdapterMoment";
+import ScheduleCount from "./boxes/scheduleMarker/ScheduleCount";
 
 interface CalenderProps {
   dateHeight: number;
@@ -82,14 +83,12 @@ function Calender({ dateHeight }: CalenderProps) {
         new Set(fixedWithdrawal.map((f) => f.category.color)),
       ).sort((a, b) => (a > b ? 1 : -1));
       if (nonFixedWithdrwal.length > 0) {
-        // const categoryForMarker = makeMarkerData(daySchedules, isDarkMode);
         return (
           <Box sx={{ width: "calc(100vw / 7)" }} key={other.key}>
             <Box sx={{ display: "flex", justifyContent: "center" }}>
               <MarkedPickersDay color={borderColor} props={props} />
             </Box>
-            {/* <MarkerStack categoryForMarker={categoryForMarker} /> */}
-            {fixedWithdrawal.length}
+            <ScheduleCount count={daySchedules.length} />
           </Box>
         );
       }
@@ -99,14 +98,12 @@ function Calender({ dateHeight }: CalenderProps) {
     }
 
     if (nonFixedWithdrwal.length > 0) {
-      // const categoryForMarker = makeMarkerData(daySchedules, isDarkMode);
       return (
         <Box sx={{ width: "calc(100vw / 7)" }} key={other.key}>
           <Box sx={{ display: "flex", justifyContent: "center" }}>
             <PickersDay {...props} />
           </Box>
-          {/* <MarkerStack categoryForMarker={categoryForMarker} /> */}
-          {fixedWithdrawal.length}
+          <ScheduleCount count={daySchedules.length} />
         </Box>
       );
     }
