@@ -122,7 +122,7 @@ export const updateExclusion = (
   schedule: Schedule | null,
   state: boolean,
 ) => {
-  dispatch(setDrawerSchedule({ ...schedule, exclusion: state }));
+  dispatch(setDrawerSchedule({ ...schedule, exclude: state }));
 };
 
 // 안쓰는 함수 같음
@@ -173,7 +173,7 @@ export const generateRandomSchedule = (stringDate: string) => {
     amount: Math.floor(Math.random() * 1000) * 100,
     is_fix_amount: false,
     importance: importances[Math.floor(Math.random() * 3)],
-    exclusion: Math.floor(Math.random() * 2) === 0,
+    exclude: Math.floor(Math.random() * 2) === 0,
   };
 };
 

@@ -9,24 +9,20 @@ import SwitchButton from "@components/common/SwitchButton";
 function ExclusionInput() {
   const dispatch = useAppDispatch();
   const schedule = useSelector(selectSchedule);
-  const exclusion = schedule?.exclusion ? true : false;
+  const exclusion = schedule?.exclude ? true : false;
 
-  const changeExclustion = () => {
+  const changeExclusion = () => {
+    console.log(exclusion);
     updateExclusion(dispatch, schedule, !exclusion);
   };
 
   return (
-    <Stack
-      direction="row"
-      justifyContent="space-between"
-      alignItems="center"
-    >
-      <Typography sx={{ fontWeight: 500 }}>{SCHEDULE_DRAWER.exclusion_title}</Typography>
+    <Stack direction="row" justifyContent="space-between" alignItems="center">
+      <Typography sx={{ fontWeight: 500 }}>
+        {SCHEDULE_DRAWER.exclusion_title}
+      </Typography>
       <Stack direction="row" alignItems="center">
-        <SwitchButton
-          checked={exclusion}
-          handleChange={changeExclustion}
-        />
+        <SwitchButton checked={exclusion} handleChange={changeExclusion} />
       </Stack>
     </Stack>
   );

@@ -3,6 +3,7 @@ import {
   createSchedule,
   deleteSchedule,
   getMonthSchedules,
+  modifySchedule,
   selectDate,
   selectSchedules,
   selectStatus,
@@ -58,7 +59,7 @@ const useSchedule = () => {
       dispatch(
         getMonthSchedules({
           user_id: user.user_id,
-          date: date.format("YYYY-MM-DD"),
+          date: date.format("YYYY-MM"),
         }),
       );
     }
@@ -79,8 +80,16 @@ const useSchedule = () => {
     }
   };
 
-  const handleModifySchedule = async () => {
-    alert(NOT_AVAILABLE);
+  const handleModifySchedule = async (schedule: Schedule) => {
+    const result = await dispatch(modifySchedule(schedule));
+    if (result && user) {
+      dispatch(
+        getMonthSchedules({
+          user_id: user.user_id,
+          date: moment(date).format("YYYY-MM"),
+        }),
+      );
+    }
   };
 
   return {

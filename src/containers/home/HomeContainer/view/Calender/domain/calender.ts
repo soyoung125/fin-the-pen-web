@@ -18,7 +18,7 @@ interface DaySchedulesInterface {
   type: string;
   expected_spending: string;
   importance: string;
-  exclusion: boolean;
+  exclude: boolean;
 }
 /**
  * 해당 일의 일정을 받아 카테고리 수별로 마커위치를 고정하기 위해 새로운 배열을 생성해 반환하는 함수
@@ -27,7 +27,7 @@ interface DaySchedulesInterface {
  */
 export const makeMarkerData = (
   daySchedules: DaySchedulesInterface[],
-  isDarkMode: boolean
+  isDarkMode: boolean,
 ) => {
   const emptyData = Array(6)
     .fill(undefined)
@@ -37,8 +37,8 @@ export const makeMarkerData = (
     .filter(
       (c) =>
         daySchedules.findIndex(
-          (s: DaySchedulesInterface) => s.category?.nestedType === c.type
-        ) !== -1
+          (s: DaySchedulesInterface) => s.category?.nestedType === c.type,
+        ) !== -1,
     );
 
   switch (categoryForMarker.length) {

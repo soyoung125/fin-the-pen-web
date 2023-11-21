@@ -43,7 +43,8 @@ function ScheduleDrawerFooter({
         handleClose();
         break;
       case "modify":
-        handleModifySchedule();
+        handleModifySchedule(schedule);
+        handleClose();
         break;
       default:
         alert("잘못 된 요청입니다.");

@@ -16,7 +16,7 @@ export interface Schedule {
   amount: string;
   is_fix: boolean;
   importance: string;
-  exclusion: boolean;
+  exclude: boolean;
 }
 
 export interface RequestSchedule {
