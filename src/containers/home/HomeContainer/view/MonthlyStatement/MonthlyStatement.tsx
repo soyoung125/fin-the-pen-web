@@ -40,7 +40,7 @@ function MonthlyStatement() {
             content={`+${calculateIncomeExpenditure(
               schedules,
               (s: Schedule) => moment(date).isSame(s.start_date, "month"),
-              "Plus",
+              "+",
             )}`}
           />
 
@@ -49,7 +49,7 @@ function MonthlyStatement() {
             content={`-${calculateIncomeExpenditure(
               schedules,
               (s: Schedule) => moment(date).isSame(s.end_date, "month"),
-              "Minus",
+              "-",
             )}`}
           />
         </Stack>

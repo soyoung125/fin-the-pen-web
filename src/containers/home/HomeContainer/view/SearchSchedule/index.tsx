@@ -29,7 +29,6 @@ import {
   setBottomBarOpenFalse,
   setBottomBarOpenTrue,
 } from "@redux/slices/commonSlice.tsx";
-import { getSign } from "@containers/home/ScheduleDrawer/domain/schedule";
 
 function SearchSchedule() {
   const dispatch = useAppDispatch();
@@ -167,9 +166,7 @@ function SearchSchedule() {
                   </Stack>
                   <Stack alignItems="flex-end">
                     <Box>{schedule.event_name}</Box>
-                    <Box>{`${getSign(schedule.price_type)} ${
-                      schedule.amount
-                    }`}</Box>
+                    <Box>{`${schedule.price_type} ${schedule.amount}`}</Box>
                   </Stack>
                 </Stack>
               </RoundedBorderBox>

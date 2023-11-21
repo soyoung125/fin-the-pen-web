@@ -10,11 +10,7 @@ import {
 import { useSelector } from "react-redux";
 import { SCHEDULE_DRAWER } from "../../../../../constants/schedule";
 import { selectSchedule } from "../../../../../app/redux/slices/scheduleSlice";
-import {
-  getSign,
-  updateSchedule,
-  updateSpendingType,
-} from "../../domain/schedule";
+import { updateSchedule, updateSpendingType } from "../../domain/schedule";
 import { useAppDispatch } from "../../../../../app/redux/hooks";
 import SwitchButton from "@components/common/SwitchButton";
 import { UpdateStateInterface } from "@type/common";
@@ -117,7 +113,7 @@ function SpendingInput({ mode }: { mode: string }) {
                   height: "30px",
                 }}
               >
-                {getSign(schedule?.price_type ?? "Plus")}
+                {schedule?.price_type}
               </Button>
             </InputAdornment>
           }
