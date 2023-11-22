@@ -9,8 +9,8 @@ export const lightThemeOptions: ThemeOptions = {
     },
     secondary: {
       main: "#C8CBD0",
-      light: "#C8CBD0",
-      dark: "#C8CBD0",
+      light: "#DEE0E3",
+      dark: "#8C919C",
       contrastText: "#FFFFFF",
     },
     error: {
