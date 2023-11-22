@@ -55,7 +55,7 @@ const SCHEDULE_DRAWER: Readonly<ScheduleDrawer> = Object.freeze({
   type_minus: "-",
   won: "원",
   expected_spending: "예상 비용",
-  fix_amount: "예산 고정",
+  fix_amount: "금액 고정",
   set_importance_title: "일정 중요도",
   importance_high: "상",
   importance_middle: "중",
@@ -67,6 +67,24 @@ const SCHEDULE_DRAWER: Readonly<ScheduleDrawer> = Object.freeze({
     modify: "수정 완료",
   },
 });
+
+const IMPORTANCES = [
+  {
+    id: "importance_low",
+    value: "하",
+    label: "낮음",
+  },
+  {
+    id: "importance_middle",
+    value: "중",
+    label: "중간",
+  },
+  {
+    id: "importance_high",
+    value: "상",
+    label: "높음",
+  },
+];
 
 const SCHEDULE_DRAWER_MODE = {
   modify: "modify",
@@ -89,7 +107,7 @@ const INIT_SCHEDULE = (date: string, start_time: string): Schedule => ({
   period: "None",
   price_type: SCHEDULE_DRAWER.type_minus,
   amount: "0",
-  is_fix: false,
+  fix_amount: false,
   importance: SCHEDULE_DRAWER.importance_middle,
   exclude: false, // false면 포함
 });
@@ -115,6 +133,7 @@ export default null;
 export {
   SCHEDULE_DRAWER,
   SCHEDULE_DRAWER_MODE,
+  IMPORTANCES,
   NEED_TITLE,
   NEED_CATEGORY,
   WRONG_TIME_ORDER,

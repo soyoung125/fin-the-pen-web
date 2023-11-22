@@ -38,7 +38,7 @@ function InputDateTime({
 }: InputDateTimeProps) {
   const title = type === "start" ? SCHEDULE_DRAWER.start : SCHEDULE_DRAWER.end;
   return (
-    <Box>
+    <Box sx={{ px: 2.5 }}>
       <TextField
         fullWidth
         onClick={handleClick}

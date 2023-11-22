@@ -29,7 +29,7 @@ function RepeatInput() {
 
   return (
     <>
-      <Stack direction="row" justifyContent="space-between">
+      <Stack direction="row" justifyContent="space-between" sx={{ px: 2.5 }}>
         <Box sx={{ color: "primary.main" }}>반복</Box>
         <SwitchButton
           checked={schedule?.repeat !== "None"}

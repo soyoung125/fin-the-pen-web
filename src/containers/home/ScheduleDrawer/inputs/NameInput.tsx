@@ -19,6 +19,7 @@ function NameInput({ showError }: NameInputProps) {
   return (
     <FormControl fullWidth>
       <TextField
+        sx={{ px: 2.5 }}
         error={showError && schedule?.event_name === ""}
         id="event_name"
         variant="standard"

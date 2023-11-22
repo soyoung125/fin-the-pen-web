@@ -1,11 +1,12 @@
 import {
   Button,
   Grid,
-  InputAdornment,
-  OutlinedInput,
+  InputBase,
   Stack,
-  TextField,
   Typography,
+  Box,
+  FormControl,
+  FormHelperText,
 } from "@mui/material";
 import { useSelector } from "react-redux";
 import { SCHEDULE_DRAWER } from "../../../../../constants/schedule";
@@ -14,18 +15,38 @@ import { updateSchedule, updateSpendingType } from "../../domain/schedule";
 import { useAppDispatch } from "../../../../../app/redux/hooks";
 import SwitchButton from "@components/common/SwitchButton";
 import { UpdateStateInterface } from "@type/common";
+import { useState } from "react";
+import AddRoundedIcon from "@mui/icons-material/AddRounded";
+import RemoveRoundedIcon from "@mui/icons-material/RemoveRounded";
 
 function SpendingInput({ mode }: { mode: string }) {
   const dispatch = useAppDispatch();
   const schedule = useSelector(selectSchedule);
   const expectedSpending = schedule ? schedule?.amount : "0";
+  const [showError, setShowError] = useState(false);
 
   const changeSpendingType = () => {
     updateSpendingType(dispatch, schedule);
   };
+
   const changeSchedule = (state: React.MouseEvent<HTMLButtonElement>) => {
     updateSchedule(dispatch, schedule, {
       target: { id: state.currentTarget.id, value: state.currentTarget.value },
+    });
+  };
+
+  const changeAmount = (state: React.ChangeEvent<HTMLInputElement>) => {
+    const amount = state.target.value.replaceAll(",", "");
+    if (Number(amount) > 100000000 && !showError) {
+      setShowError(true);
+    } else if (Number(amount) <= 100000000 && showError) {
+      setShowError(false);
+    }
+    updateSchedule(dispatch, schedule, {
+      target: {
+        id: "amount",
+        value: state.target.value.replaceAll(",", ""),
+      },
     });
   };
 
@@ -33,8 +54,8 @@ function SpendingInput({ mode }: { mode: string }) {
     updateSchedule(dispatch, schedule, state);
   };
   return (
-    <Grid container spacing={2}>
-      <Grid item xs={12} sx={{ fontWeight: 500 }}>
+    <Grid container spacing={2} px={2.5}>
+      <Grid item xs={12} sx={{ typography: "h4", color: "primary.main" }}>
         {SCHEDULE_DRAWER.set_spending_title}
       </Grid>
 
@@ -51,7 +72,7 @@ function SpendingInput({ mode }: { mode: string }) {
             value={SCHEDULE_DRAWER.type_minus}
             onClick={mode === "create" ? changeSchedule : changeSpendingType}
             sx={{
-              borderRadius: "17px",
+              borderRadius: "20px",
             }}
           >
             출금
@@ -70,7 +91,7 @@ function SpendingInput({ mode }: { mode: string }) {
             value={SCHEDULE_DRAWER.type_plus}
             onClick={mode === "create" ? changeSchedule : changeSpendingType}
             sx={{
-              borderRadius: "17px",
+              borderRadius: "20px",
             }}
           >
             입금
@@ -79,50 +100,56 @@ function SpendingInput({ mode }: { mode: string }) {
       </Grid>
 
       <Grid item xs={12}>
-        <OutlinedInput
-          id="expected_spending"
-          value={
-            expectedSpending === ""
-              ? "0"
-              : parseInt(expectedSpending, 10).toLocaleString("ko-KR")
-          }
-          onChange={(e) =>
-            updateSchedule(dispatch, schedule, {
-              target: {
-                id: "expected_spending",
-                value: e.target.value.replaceAll(",", ""),
-              },
-            })
-          }
-          fullWidth
-          type="text"
-          size="small"
-          inputProps={{
-            style: { textAlign: "right" },
-            min: 0,
-          }}
-          startAdornment={
-            <InputAdornment position="start">
-              <Button
-                variant="contained"
-                size="small"
-                sx={{
-                  borderRadius: "100px",
-                  minWidth: 0,
-                  width: "30px",
-                  height: "30px",
-                }}
-              >
-                {schedule?.price_type}
-              </Button>
-            </InputAdornment>
-          }
-          endAdornment={
-            <InputAdornment position="end">
-              {SCHEDULE_DRAWER.won}
-            </InputAdornment>
-          }
-        />
+        <FormControl fullWidth>
+          <Stack
+            direction="row"
+            justifyContent="flex-end"
+            alignItems="center"
+            sx={{
+              borderRadius: "4px",
+              border: "1px solid",
+              borderColor: showError ? "error.main" : "primary.main",
+              padding: "8px 12px",
+            }}
+          >
+            <Box
+              sx={{
+                display: "flex",
+                padding: "3px",
+                borderRadius: 10,
+                backgroundColor: "#735BF2",
+                color: "white",
+              }}
+            >
+              {schedule?.price_type === "-" ? (
+                <RemoveRoundedIcon fontSize="small" />
+              ) : (
+                <AddRoundedIcon fontSize="small" />
+              )}
+            </Box>
+            <InputBase
+              sx={{
+                ml: 1,
+                minWidth: "25px",
+                width: `calc(${expectedSpending.length ?? 5} * 11px + 11px)`,
+              }}
+              id="expected_spending"
+              value={
+                expectedSpending === ""
+                  ? "0"
+                  : parseInt(expectedSpending, 10).toLocaleString("ko-KR")
+              }
+              onChange={changeAmount}
+              endAdornment={SCHEDULE_DRAWER.won}
+              inputProps={{
+                style: { textAlign: "right" },
+              }}
+            />
+          </Stack>
+          <FormHelperText sx={{ ml: 0, color: "error.main" }}>
+            {showError ? "입력 금액이 범위를 초과했습니다!" : ""}
+          </FormHelperText>
+        </FormControl>
       </Grid>
 
       <Grid item xs={12}>
@@ -131,17 +158,17 @@ function SpendingInput({ mode }: { mode: string }) {
           justifyContent="space-between"
           alignItems="center"
         >
-          <Typography sx={{ fontWeight: 500 }}>
+          <Typography variant="h4" sx={{ color: "primary.main" }}>
             {SCHEDULE_DRAWER.fix_amount}
           </Typography>
           <Stack direction="row" alignItems="center">
             <SwitchButton
-              checked={schedule?.is_fix ?? false}
+              checked={schedule?.fix_amount ?? false}
               handleChange={() =>
                 changeFixAmount({
                   target: {
-                    id: "is_fix_amount",
-                    value: schedule?.is_fix ? false : true,
+                    id: "fix_amount",
+                    value: schedule?.fix_amount ? false : true,
                   },
                 })
               }

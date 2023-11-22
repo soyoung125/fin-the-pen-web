@@ -55,8 +55,10 @@ function DateInput({ showError }: DateInputProps) {
         showError={showError}
       />
 
-      <Stack direction="row" justifyContent="space-between">
-        <Box>{SCHEDULE_DRAWER.all_day}</Box>
+      <Stack direction="row" justifyContent="space-between" sx={{ px: 2.5 }}>
+        <Box sx={{ fontSize: 13, fontWeight: 500 }}>
+          {SCHEDULE_DRAWER.all_day}
+        </Box>
         <SwitchButton
           checked={schedule?.all_day ?? true}
           handleChange={() =>
