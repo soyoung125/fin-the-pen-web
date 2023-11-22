@@ -52,6 +52,7 @@ export default function CategoryInput({
   return (
     <div>
       <Autocomplete
+        sx={{ px: 2.5 }}
         value={value}
         onChange={(event, newValue) => {
           setValue(newValue);

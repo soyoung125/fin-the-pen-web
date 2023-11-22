@@ -2,7 +2,7 @@ import {
   Button,
   Grid,
   InputAdornment,
-  OutlinedInput,
+  Divider,
   Stack,
   TextField,
   Typography,
@@ -52,7 +52,7 @@ function SpendingInput({ mode }: { mode: string }) {
     updateSchedule(dispatch, schedule, state);
   };
   return (
-    <Grid container spacing={2}>
+    <Grid container spacing={2} px={2.5}>
       <Grid item xs={12} sx={{ fontWeight: 500 }}>
         {SCHEDULE_DRAWER.set_spending_title}
       </Grid>
