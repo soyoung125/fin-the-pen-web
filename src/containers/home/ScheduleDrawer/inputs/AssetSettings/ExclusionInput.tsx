@@ -23,7 +23,7 @@ function ExclusionInput() {
       alignItems="center"
       px={2.5}
     >
-      <Typography sx={{ fontWeight: 500 }}>
+      <Typography variant="h4" sx={{ color: "primary.main" }}>
         {SCHEDULE_DRAWER.exclusion_title}
       </Typography>
       <Stack direction="row" alignItems="center">

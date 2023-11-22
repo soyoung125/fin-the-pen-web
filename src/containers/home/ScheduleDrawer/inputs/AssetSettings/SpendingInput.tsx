@@ -53,7 +53,7 @@ function SpendingInput({ mode }: { mode: string }) {
   };
   return (
     <Grid container spacing={2} px={2.5}>
-      <Grid item xs={12} sx={{ fontWeight: 500 }}>
+      <Grid item xs={12} sx={{ typography: "h4", color: "primary.main" }}>
         {SCHEDULE_DRAWER.set_spending_title}
       </Grid>
 
@@ -148,7 +148,7 @@ function SpendingInput({ mode }: { mode: string }) {
           justifyContent="space-between"
           alignItems="center"
         >
-          <Typography sx={{ fontWeight: 500 }}>
+          <Typography variant="h4" sx={{ color: "primary.main" }}>
             {SCHEDULE_DRAWER.fix_amount}
           </Typography>
           <Stack direction="row" alignItems="center">
