@@ -68,6 +68,24 @@ const SCHEDULE_DRAWER: Readonly<ScheduleDrawer> = Object.freeze({
   },
 });
 
+const IMPORTANCES = [
+  {
+    id: "importance_low",
+    value: "하",
+    label: "낮음",
+  },
+  {
+    id: "importance_middle",
+    value: "중",
+    label: "중간",
+  },
+  {
+    id: "importance_high",
+    value: "상",
+    label: "높음",
+  },
+];
+
 const SCHEDULE_DRAWER_MODE = {
   modify: "modify",
   create: "create",
@@ -115,6 +133,7 @@ export default null;
 export {
   SCHEDULE_DRAWER,
   SCHEDULE_DRAWER_MODE,
+  IMPORTANCES,
   NEED_TITLE,
   NEED_CATEGORY,
   WRONG_TIME_ORDER,
