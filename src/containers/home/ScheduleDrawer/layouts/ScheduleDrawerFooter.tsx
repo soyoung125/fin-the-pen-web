@@ -66,7 +66,7 @@ function ScheduleDrawerFooter({
   };
 
   return (
-    <Box mx={2.5}>
+    <Box>
       <Box
         sx={{
           display: "flex",
@@ -81,7 +81,7 @@ function ScheduleDrawerFooter({
         <img src={Save} />
         입력 정보는 자동으로 저장됩니다.
       </Box>
-      <Stack direction="row" spacing={1}>
+      <Stack direction="row" spacing={1} mx={2.5}>
         {mode === "create" && process.env.NODE_ENV === "development" && (
           <Button
             fullWidth
