@@ -70,7 +70,7 @@ function SpendingInput({ mode }: { mode: string }) {
             value={SCHEDULE_DRAWER.type_minus}
             onClick={mode === "create" ? changeSchedule : changeSpendingType}
             sx={{
-              borderRadius: "17px",
+              borderRadius: "20px",
             }}
           >
             출금
@@ -89,7 +89,7 @@ function SpendingInput({ mode }: { mode: string }) {
             value={SCHEDULE_DRAWER.type_plus}
             onClick={mode === "create" ? changeSchedule : changeSpendingType}
             sx={{
-              borderRadius: "17px",
+              borderRadius: "20px",
             }}
           >
             입금
