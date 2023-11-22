@@ -27,6 +27,7 @@ function ImportanceInput() {
       <Stack direction="row" alignItems="center" spacing={1}>
         {IMPORTANCES.map((importance) => (
           <Button
+            key={importance.id}
             variant="contained"
             color={
               schedule?.importance === importance.value
