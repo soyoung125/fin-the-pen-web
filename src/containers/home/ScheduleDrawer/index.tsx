@@ -111,6 +111,7 @@ function ScheduleDrawer({
             justifyContent="space-between"
             spacing={2}
             sx={{ height: `calc(100% - 56px)` }}
+            onTouchStart={(e) => e.stopPropagation()}
           >
             <Swiper
               className="mySwiper"
