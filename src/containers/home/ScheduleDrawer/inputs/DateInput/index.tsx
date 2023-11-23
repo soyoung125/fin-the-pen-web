@@ -19,14 +19,6 @@ function DateInput({ showError }: DateInputProps) {
   const [showStart, setShowStart] = useState(false);
   const [showEnd, setShowEnd] = useState(false);
 
-  const changeSchedule = (
-    state:
-      | React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>
-      | UpdateStateInterface,
-  ) => {
-    updateSchedule(dispatch, schedule, state);
-  };
-
   const changeAllDay = (state: {
     target: { value: boolean; name: string };
   }) => {
@@ -39,7 +31,6 @@ function DateInput({ showError }: DateInputProps) {
         date={schedule?.start_date}
         time={schedule?.start_time}
         handleClick={() => setShowStart(!showStart)}
-        changeSchedule={changeSchedule}
         showCalendar={showStart}
         type="start"
         showError={showError}
@@ -49,7 +40,6 @@ function DateInput({ showError }: DateInputProps) {
         date={schedule?.end_date}
         time={schedule?.end_time}
         handleClick={() => setShowEnd(!showEnd)}
-        changeSchedule={changeSchedule}
         showCalendar={showEnd}
         type="end"
         showError={showError}
