@@ -17,6 +17,7 @@ import moment from "moment";
 import { useSelector } from "react-redux";
 import { updateSchedule } from "../../domain/schedule";
 import SelectTime from "./select/SelectTime";
+import SelectDate from "./select/SelectDate";
 
 interface InputDateTimeProps {
   date: string | undefined;
@@ -80,28 +81,7 @@ function InputDateTime({
         onChange={changeSchedule}
       />
       <Collapse in={showCalendar}>
-        <LocalizationProvider dateAdapter={AdapterMoment}>
-          <CalenderBox dateHeight={50} dateSize={32} week={6}>
-            <DateCalendar
-              views={["year", "month", "day"]}
-              disableHighlightToday
-              dayOfWeekFormatter={(day) => day.substring(0, 3)}
-              value={moment(date)}
-              maxDate={moment().add(18, "M")}
-              minDate={moment().subtract(18, "M")}
-              onChange={(newValue) => {
-                newValue &&
-                  changeSchedule({
-                    target: {
-                      id: type + "_date",
-                      value: newValue.format("YYYY-MM-DD"),
-                    },
-                  });
-              }}
-              reduceAnimations
-            />
-          </CalenderBox>
-        </LocalizationProvider>
+        <SelectDate date={date} changeSchedule={changeSchedule} type={type} />
 
         <SelectTime />
       </Collapse>
