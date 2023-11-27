@@ -1,14 +1,12 @@
 import { Box, Stack } from "@mui/material";
 import { useSelector } from "react-redux";
 import { selectSchedule } from "../../../../../app/redux/slices/scheduleSlice";
-import { updateAllDay, updateSchedule } from "../../domain/schedule";
+import { updateAllDay } from "../../domain/schedule";
 import { useAppDispatch } from "../../../../../app/redux/hooks";
 import SwitchButton from "@components/common/SwitchButton";
 import { useState } from "react";
-import { UpdateStateInterface } from "@type/common";
 import InputDateTime from "./InputDateTime";
 import { SCHEDULE_DRAWER } from "constants/schedule";
-import { trace } from "console";
 
 interface DateInputProps {
   showError: boolean;
