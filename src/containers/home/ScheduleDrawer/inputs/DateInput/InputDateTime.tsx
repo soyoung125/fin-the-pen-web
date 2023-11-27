@@ -6,6 +6,7 @@ import {
   Collapse,
   InputAdornment,
   InputBase,
+  Stack,
   TextField,
 } from "@mui/material";
 import { DateCalendar, LocalizationProvider } from "@mui/x-date-pickers";
@@ -15,6 +16,7 @@ import { SCHEDULE_DRAWER } from "constants/schedule";
 import moment from "moment";
 import { useSelector } from "react-redux";
 import { updateSchedule } from "../../domain/schedule";
+import SelectTime from "./select/SelectTime";
 
 interface InputDateTimeProps {
   date: string | undefined;
@@ -100,6 +102,8 @@ function InputDateTime({
             />
           </CalenderBox>
         </LocalizationProvider>
+
+        <SelectTime />
       </Collapse>
     </Box>
   );
