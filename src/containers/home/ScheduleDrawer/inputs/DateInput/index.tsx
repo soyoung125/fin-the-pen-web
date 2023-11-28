@@ -14,8 +14,8 @@ interface DateInputProps {
 function DateInput({ showError }: DateInputProps) {
   const dispatch = useAppDispatch();
   const schedule = useSelector(selectSchedule);
-  const [showStart, setShowStart] = useState(false);
-  const [showEnd, setShowEnd] = useState(false);
+  const [showStart, setShowStart] = useState("");
+  const [showEnd, setShowEnd] = useState("");
 
   const changeAllDay = (state: {
     target: { value: boolean; name: string };
@@ -23,12 +23,22 @@ function DateInput({ showError }: DateInputProps) {
     updateAllDay(dispatch, schedule, state);
   };
 
+  const handleClick = (type: string, selectType: string) => {
+    if (type === "start") {
+      if (showStart === selectType) setShowStart("");
+      else setShowStart(selectType);
+    } else {
+      if (showEnd === selectType) setShowEnd("");
+      else setShowEnd(selectType);
+    }
+  };
+
   return (
     <>
       <InputDateTime
         date={schedule?.start_date}
         time={schedule?.start_time}
-        handleClick={() => setShowStart(!showStart)}
+        handleClick={handleClick}
         showCalendar={showStart}
         type="start"
         showError={showError}
@@ -37,7 +47,7 @@ function DateInput({ showError }: DateInputProps) {
       <InputDateTime
         date={schedule?.end_date}
         time={schedule?.end_time}
-        handleClick={() => setShowEnd(!showEnd)}
+        handleClick={handleClick}
         showCalendar={showEnd}
         type="end"
         showError={showError}

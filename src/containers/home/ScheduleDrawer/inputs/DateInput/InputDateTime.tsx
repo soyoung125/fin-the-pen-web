@@ -19,8 +19,8 @@ import "moment/dist/locale/ko";
 interface InputDateTimeProps {
   date: string | undefined;
   time: string | undefined;
-  handleClick: () => void;
-  showCalendar: boolean;
+  handleClick: (type: string, selectType: string) => void;
+  showCalendar: string;
   type: string;
   showError: boolean;
 }
@@ -48,7 +48,7 @@ function InputDateTime({
     <Box sx={{ px: 2.5 }}>
       <TextField
         fullWidth
-        onClick={handleClick}
+        onClick={() => handleClick(type, "date")}
         id={type + "_date"}
         variant="standard"
         error={showError && date === ""}
@@ -61,27 +61,26 @@ function InputDateTime({
           ),
           endAdornment: !schedule?.all_day && (
             <InputAdornment position="start">
-              {/* <InputBase
-                id={type + "_time"}
-                type="time"
-                value={time}
-                onChange={changeSchedule}
-                onClick={(e) => e.stopPropagation()}
-                inputProps={{
-                  style: { textAlign: "right" },
+              <Box
+                onClick={(e) => {
+                  e.stopPropagation();
+                  handleClick(type, "calendar");
                 }}
-              /> */}
-              <Box>{moment(time, "hh:mm").locale("ko").format("LT")}</Box>
+              >
+                {moment(time, "hh:mm").locale("ko").format("LT")}
+              </Box>
             </InputAdornment>
           ),
         }}
         value={date}
         onChange={changeSchedule}
       />
-      <Collapse in={showCalendar}>
-        <SelectDate date={date} changeSchedule={changeSchedule} type={type} />
-
-        <SelectTime time={time} changeSchedule={changeSchedule} type={type} />
+      <Collapse in={showCalendar !== ""}>
+        {showCalendar === "date" ? (
+          <SelectDate date={date} changeSchedule={changeSchedule} type={type} />
+        ) : (
+          <SelectTime time={time} changeSchedule={changeSchedule} type={type} />
+        )}
       </Collapse>
     </Box>
   );
