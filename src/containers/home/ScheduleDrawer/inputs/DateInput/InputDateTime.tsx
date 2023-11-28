@@ -1,28 +1,20 @@
-import CalenderBox from "@containers/home/HomeContainer/view/Calender/boxes/CalenderBox";
-import {
-  Box,
-  Collapse,
-  Input,
-  InputAdornment,
-  InputBase,
-  TextField,
-} from "@mui/material";
-import { DateCalendar, LocalizationProvider } from "@mui/x-date-pickers";
-import { AdapterMoment } from "@mui/x-date-pickers/AdapterMoment";
+import { useAppDispatch } from "@app/redux/hooks";
+import { selectSchedule } from "@app/redux/slices/scheduleSlice";
+import { Box, Collapse, InputAdornment, TextField } from "@mui/material";
 import { UpdateStateInterface } from "@type/common";
 import { SCHEDULE_DRAWER } from "constants/schedule";
+import { useSelector } from "react-redux";
+import { updateSchedule } from "../../domain/schedule";
+import SelectTime from "./select/SelectTime";
+import SelectDate from "./select/SelectDate";
 import moment from "moment";
+import "moment/dist/locale/ko";
 
 interface InputDateTimeProps {
   date: string | undefined;
   time: string | undefined;
-  handleClick: () => void;
-  changeSchedule: (
-    state:
-      | React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>
-      | UpdateStateInterface,
-  ) => void;
-  showCalendar: boolean;
+  handleClick: (type: string, selectType: string) => void;
+  showCalendar: string;
   type: string;
   showError: boolean;
 }
@@ -31,17 +23,27 @@ function InputDateTime({
   date,
   time,
   handleClick,
-  changeSchedule,
   showCalendar,
   type,
   showError,
 }: InputDateTimeProps) {
+  const dispatch = useAppDispatch();
+  const schedule = useSelector(selectSchedule);
   const title = type === "start" ? SCHEDULE_DRAWER.start : SCHEDULE_DRAWER.end;
+
+  const changeSchedule = (
+    state:
+      | React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>
+      | UpdateStateInterface,
+  ) => {
+    updateSchedule(dispatch, schedule, state);
+  };
+
   return (
     <Box sx={{ px: 2.5 }}>
       <TextField
         fullWidth
-        onClick={handleClick}
+        onClick={() => handleClick(type, "date")}
         id={type + "_date"}
         variant="standard"
         error={showError && date === ""}
@@ -52,47 +54,28 @@ function InputDateTime({
               <Box sx={{ color: "primary.main", fontWeight: 500 }}>{title}</Box>
             </InputAdornment>
           ),
-          endAdornment: (
+          endAdornment: !schedule?.all_day && (
             <InputAdornment position="start">
-              <InputBase
-                id={type + "_time"}
-                type="time"
-                value={time}
-                onChange={changeSchedule}
-                onClick={(e) => e.stopPropagation()}
-                inputProps={{
-                  style: { textAlign: "right" },
+              <Box
+                onClick={(e) => {
+                  e.stopPropagation();
+                  handleClick(type, "calendar");
                 }}
-              />
+              >
+                {moment(time, "hh:mm").locale("ko").format("LT")}
+              </Box>
             </InputAdornment>
           ),
         }}
         value={date}
         onChange={changeSchedule}
       />
-      <Collapse in={showCalendar}>
-        <LocalizationProvider dateAdapter={AdapterMoment}>
-          <CalenderBox dateHeight={50} dateSize={32} week={6}>
-            <DateCalendar
-              views={["year", "month", "day"]}
-              disableHighlightToday
-              dayOfWeekFormatter={(day) => day.substring(0, 3)}
-              value={moment(date)}
-              maxDate={moment().add(18, "M")}
-              minDate={moment().subtract(18, "M")}
-              onChange={(newValue) => {
-                newValue &&
-                  changeSchedule({
-                    target: {
-                      id: type + "_date",
-                      value: newValue.format("YYYY-MM-DD"),
-                    },
-                  });
-              }}
-              reduceAnimations
-            />
-          </CalenderBox>
-        </LocalizationProvider>
+      <Collapse in={showCalendar !== ""}>
+        {showCalendar === "date" ? (
+          <SelectDate date={date} changeSchedule={changeSchedule} type={type} />
+        ) : (
+          <SelectTime time={time} changeSchedule={changeSchedule} type={type} />
+        )}
       </Collapse>
     </Box>
   );

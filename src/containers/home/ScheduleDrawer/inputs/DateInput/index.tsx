@@ -1,14 +1,12 @@
 import { Box, Stack } from "@mui/material";
 import { useSelector } from "react-redux";
 import { selectSchedule } from "../../../../../app/redux/slices/scheduleSlice";
-import { updateAllDay, updateSchedule } from "../../domain/schedule";
+import { updateAllDay } from "../../domain/schedule";
 import { useAppDispatch } from "../../../../../app/redux/hooks";
 import SwitchButton from "@components/common/SwitchButton";
 import { useState } from "react";
-import { UpdateStateInterface } from "@type/common";
 import InputDateTime from "./InputDateTime";
 import { SCHEDULE_DRAWER } from "constants/schedule";
-import { trace } from "console";
 
 interface DateInputProps {
   showError: boolean;
@@ -16,16 +14,8 @@ interface DateInputProps {
 function DateInput({ showError }: DateInputProps) {
   const dispatch = useAppDispatch();
   const schedule = useSelector(selectSchedule);
-  const [showStart, setShowStart] = useState(false);
-  const [showEnd, setShowEnd] = useState(false);
-
-  const changeSchedule = (
-    state:
-      | React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>
-      | UpdateStateInterface,
-  ) => {
-    updateSchedule(dispatch, schedule, state);
-  };
+  const [showStart, setShowStart] = useState("");
+  const [showEnd, setShowEnd] = useState("");
 
   const changeAllDay = (state: {
     target: { value: boolean; name: string };
@@ -33,13 +23,22 @@ function DateInput({ showError }: DateInputProps) {
     updateAllDay(dispatch, schedule, state);
   };
 
+  const handleClick = (type: string, selectType: string) => {
+    if (type === "start") {
+      if (showStart === selectType) setShowStart("");
+      else setShowStart(selectType);
+    } else {
+      if (showEnd === selectType) setShowEnd("");
+      else setShowEnd(selectType);
+    }
+  };
+
   return (
     <>
       <InputDateTime
         date={schedule?.start_date}
         time={schedule?.start_time}
-        handleClick={() => setShowStart(!showStart)}
-        changeSchedule={changeSchedule}
+        handleClick={handleClick}
         showCalendar={showStart}
         type="start"
         showError={showError}
@@ -48,8 +47,7 @@ function DateInput({ showError }: DateInputProps) {
       <InputDateTime
         date={schedule?.end_date}
         time={schedule?.end_time}
-        handleClick={() => setShowEnd(!showEnd)}
-        changeSchedule={changeSchedule}
+        handleClick={handleClick}
         showCalendar={showEnd}
         type="end"
         showError={showError}

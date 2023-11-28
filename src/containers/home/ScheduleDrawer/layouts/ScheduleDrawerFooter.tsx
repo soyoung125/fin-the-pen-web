@@ -1,4 +1,4 @@
-import { Box, Button, Stack, Tooltip } from "@mui/material";
+import { Box, Button, Divider, Stack, Tooltip } from "@mui/material";
 import { NEED_SIGN_IN } from "../../../../constants/messages";
 import { SCHEDULE_DRAWER } from "../../../../constants/schedule";
 import { selectGuestMode } from "@redux/slices/commonSlice.tsx";
@@ -75,13 +75,16 @@ function ScheduleDrawerFooter({
           textAlign: "center",
           color: "#8C919C",
           fontSize: "14px",
-          mb: 1.5,
+          mb: 0.5,
         }}
       >
         <img src={Save} />
         입력 정보는 자동으로 저장됩니다.
       </Box>
-      <Stack direction="row" spacing={1} mx={2.5}>
+
+      <Divider />
+
+      <Stack direction="row" spacing={1} mx={2.5} mt={1}>
         {mode === "create" && process.env.NODE_ENV === "development" && (
           <Button
             fullWidth
