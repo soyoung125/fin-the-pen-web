@@ -71,7 +71,7 @@ function InputDateTime({
                   style: { textAlign: "right" },
                 }}
               /> */}
-              <Box>{moment(time, "hh:mm").locale("ko").format("A HH:mm")}</Box>
+              <Box>{moment(time, "hh:mm").locale("ko").format("LT")}</Box>
             </InputAdornment>
           ),
         }}

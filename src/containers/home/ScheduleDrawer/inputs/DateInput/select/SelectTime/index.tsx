@@ -15,20 +15,31 @@ interface SelectDateProps {
 
 function SelectTime({ time, changeSchedule, type }: SelectDateProps) {
   const [hour, minute] = time?.split(":") ?? [];
-  const aa = Number(hour) > 12 ? 1 : 0;
+  const aa = Number(hour) < 12 ? 0 : 1;
   const meridiem = aa === 0 ? 0 : 12;
 
   const changeTime = (timeType: string, select: number) => {
     const h = Number(hour);
     const newTime = moment(time, "hh:mm");
+
     switch (timeType) {
       case "meridiem":
-        if (select === 0 && h >= 12) newTime.set("hour", h - 12);
-        else if (select === 1 && h < 12) newTime.set("hour", h + 12);
+        if (select === 0) {
+          if (h === 12) newTime.set("hour", 0);
+          else if (h > 12) newTime.set("hour", h - 12);
+        } else {
+          if (h === 0) newTime.set("hour", 12);
+          if (h < 12) newTime.set("hour", h + 12);
+        }
         break;
       case "hour":
-        if (aa === 0) newTime.set("hour", select + 1);
-        else newTime.set("hour", select + 13);
+        if (aa === 0) {
+          if (select === 11) newTime.set("hour", 0);
+          else newTime.set("hour", select + 1);
+        } else {
+          if (select === 11) newTime.set("hour", 12);
+          else newTime.set("hour", select + 13);
+        }
         break;
       case "minute":
         newTime.set("minute", select);
