@@ -69,6 +69,7 @@ function InputDateTime({
                   style: { textAlign: "right" },
                 }}
               />
+              {/* <Box>{time}</Box> */}
             </InputAdornment>
           ),
         }}
@@ -78,7 +79,7 @@ function InputDateTime({
       <Collapse in={showCalendar}>
         <SelectDate date={date} changeSchedule={changeSchedule} type={type} />
 
-        <SelectTime />
+        <SelectTime time={time} changeSchedule={changeSchedule} type={type} />
       </Collapse>
     </Box>
   );

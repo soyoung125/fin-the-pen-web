@@ -1,7 +1,21 @@
 import { Stack } from "@mui/material";
 import TimeOption from "./TimeOption";
+import { UpdateStateInterface } from "@type/common";
 
-function SelectTime() {
+interface SelectDateProps {
+  time: string | undefined;
+  changeSchedule: (
+    state:
+      | React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>
+      | UpdateStateInterface,
+  ) => void;
+  type: string;
+}
+
+function SelectTime({ time, changeSchedule, type }: SelectDateProps) {
+  const [hour, minute] = time?.split(":") ?? [];
+  const aa = Number(hour) < 12 ? 0 : 1;
+  const newHour = aa === 0 ? 0 : 12;
   return (
     <div style={{ position: "relative" }}>
       <div
@@ -16,9 +30,15 @@ function SelectTime() {
         }}
       />
       <Stack direction="row" justifyContent="space-evenly">
-        <TimeOption timeOption={["오전", "오후"]} />
-        <TimeOption timeOption={Array.from({ length: 12 }, (_, i) => i + 1)} />
-        <TimeOption timeOption={Array.from({ length: 60 }, (_, i) => i + 1)} />
+        <TimeOption timeOption={["오전", "오후"]} selected={aa} />
+        <TimeOption
+          timeOption={Array.from({ length: 12 }, (_, i) => i + 1)}
+          selected={Number(hour) - newHour - 1}
+        />
+        <TimeOption
+          timeOption={Array.from({ length: 60 }, (_, i) => i)}
+          selected={Number(minute)}
+        />
       </Stack>
     </div>
   );
