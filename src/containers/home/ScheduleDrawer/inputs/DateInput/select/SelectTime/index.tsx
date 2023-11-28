@@ -1,6 +1,7 @@
 import { Stack } from "@mui/material";
 import TimeOption from "./TimeOption";
 import { UpdateStateInterface } from "@type/common";
+import moment from "moment";
 
 interface SelectDateProps {
   time: string | undefined;
@@ -14,8 +15,34 @@ interface SelectDateProps {
 
 function SelectTime({ time, changeSchedule, type }: SelectDateProps) {
   const [hour, minute] = time?.split(":") ?? [];
-  const aa = Number(hour) < 12 ? 0 : 1;
-  const newHour = aa === 0 ? 0 : 12;
+  const aa = Number(hour) > 12 ? 1 : 0;
+  const meridiem = aa === 0 ? 0 : 12;
+
+  const changeTime = (timeType: string, select: number) => {
+    const h = Number(hour);
+    const newTime = moment(time, "hh:mm");
+    switch (timeType) {
+      case "meridiem":
+        if (select === 0 && h >= 12) newTime.set("hour", h - 12);
+        else if (select === 1 && h < 12) newTime.set("hour", h + 12);
+        break;
+      case "hour":
+        if (aa === 0) newTime.set("hour", select + 1);
+        else newTime.set("hour", select + 13);
+        break;
+      case "minute":
+        newTime.set("minute", select);
+        break;
+    }
+
+    changeSchedule({
+      target: {
+        id: type + "_time",
+        value: newTime.format("HH:mm"),
+      },
+    });
+  };
+
   return (
     <div style={{ position: "relative" }}>
       <div
@@ -30,14 +57,23 @@ function SelectTime({ time, changeSchedule, type }: SelectDateProps) {
         }}
       />
       <Stack direction="row" justifyContent="space-evenly">
-        <TimeOption timeOption={["오전", "오후"]} selected={aa} />
+        <TimeOption
+          timeOption={["오전", "오후"]}
+          selected={aa}
+          type="meridiem"
+          changeTime={changeTime}
+        />
         <TimeOption
           timeOption={Array.from({ length: 12 }, (_, i) => i + 1)}
-          selected={Number(hour) - newHour - 1}
+          selected={Number(hour) - meridiem - 1}
+          type="hour"
+          changeTime={changeTime}
         />
         <TimeOption
           timeOption={Array.from({ length: 60 }, (_, i) => i)}
           selected={Number(minute)}
+          type="minute"
+          changeTime={changeTime}
         />
       </Stack>
     </div>

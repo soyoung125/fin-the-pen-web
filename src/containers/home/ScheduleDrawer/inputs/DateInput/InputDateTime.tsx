@@ -13,6 +13,8 @@ import { useSelector } from "react-redux";
 import { updateSchedule } from "../../domain/schedule";
 import SelectTime from "./select/SelectTime";
 import SelectDate from "./select/SelectDate";
+import moment from "moment";
+import "moment/dist/locale/ko";
 
 interface InputDateTimeProps {
   date: string | undefined;
@@ -59,7 +61,7 @@ function InputDateTime({
           ),
           endAdornment: !schedule?.all_day && (
             <InputAdornment position="start">
-              <InputBase
+              {/* <InputBase
                 id={type + "_time"}
                 type="time"
                 value={time}
@@ -68,8 +70,8 @@ function InputDateTime({
                 inputProps={{
                   style: { textAlign: "right" },
                 }}
-              />
-              {/* <Box>{time}</Box> */}
+              /> */}
+              <Box>{moment(time, "hh:mm").locale("ko").format("A HH:mm")}</Box>
             </InputAdornment>
           ),
         }}

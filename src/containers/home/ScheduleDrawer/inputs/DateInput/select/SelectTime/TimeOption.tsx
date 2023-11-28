@@ -12,15 +12,22 @@ import { useEffect, useState } from "react";
 interface SelectTimeProps {
   timeOption: string[] | number[];
   selected: number;
+  type: string;
+  changeTime: (timeType: string, select: number) => void;
 }
 
-function TimeOption({ timeOption, selected }: SelectTimeProps) {
-  const [swiper, setSwiper] = useState<SwiperType>();
+function TimeOption({
+  timeOption,
+  selected,
+  type,
+  changeTime,
+}: SelectTimeProps) {
+  // const [swiper, setSwiper] = useState<SwiperType>();
 
-  useEffect(() => {
-    console.log(selected);
-    swiper?.slideTo(selected);
-  }, [selected]);
+  // useEffect(() => {
+  //   console.log(selected);
+  //   swiper?.slideTo(selected);
+  // }, [selected]);
 
   return (
     <Swiper
@@ -33,10 +40,10 @@ function TimeOption({ timeOption, selected }: SelectTimeProps) {
       style={{ height: "210px" }}
       mousewheel={true}
       modules={[Mousewheel]}
-      onSlideChange={(swiper) => console.log(swiper)}
+      onSlideChange={(swiper) => changeTime(type, swiper.activeIndex)}
       onSwiper={(swiper) => {
         swiper.slideTo(selected);
-        setSwiper(swiper);
+        // setSwiper(swiper);
       }}
     >
       {timeOption.map((i) => (
