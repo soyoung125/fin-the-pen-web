@@ -1,12 +1,6 @@
 import { useAppDispatch } from "@app/redux/hooks";
 import { selectSchedule } from "@app/redux/slices/scheduleSlice";
-import {
-  Box,
-  Collapse,
-  InputAdornment,
-  InputBase,
-  TextField,
-} from "@mui/material";
+import { Box, Collapse, InputAdornment, TextField } from "@mui/material";
 import { UpdateStateInterface } from "@type/common";
 import { SCHEDULE_DRAWER } from "constants/schedule";
 import { useSelector } from "react-redux";
@@ -44,6 +38,7 @@ function InputDateTime({
   ) => {
     updateSchedule(dispatch, schedule, state);
   };
+
   return (
     <Box sx={{ px: 2.5 }}>
       <TextField

@@ -1,13 +1,9 @@
-// Import Swiper React components
 import { Swiper, SwiperSlide } from "swiper/react";
-import { Swiper as SwiperType } from "swiper/types";
 
-// Import Swiper styles
 import "swiper/css";
 import "swiper/css/pagination";
 
 import { Mousewheel } from "swiper/modules";
-import { useEffect, useState } from "react";
 
 interface SelectTimeProps {
   timeOption: string[] | number[];
@@ -22,28 +18,18 @@ function TimeOption({
   type,
   changeTime,
 }: SelectTimeProps) {
-  // const [swiper, setSwiper] = useState<SwiperType>();
-
-  // useEffect(() => {
-  //   console.log(selected);
-  //   swiper?.slideTo(selected);
-  // }, [selected]);
-
   return (
     <Swiper
       direction={"vertical"}
       centeredSlides={true}
       slidesPerView={7}
       speed={100}
-      // freeMode={true}
-      // scrollbar={true}
       style={{ height: "210px" }}
       mousewheel={true}
       modules={[Mousewheel]}
       onSlideChange={(swiper) => changeTime(type, swiper.activeIndex)}
       onSwiper={(swiper) => {
         swiper.slideTo(selected);
-        // setSwiper(swiper);
       }}
     >
       {timeOption.map((i) => (

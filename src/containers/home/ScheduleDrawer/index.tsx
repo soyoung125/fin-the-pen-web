@@ -1,12 +1,4 @@
-import {
-  Alert,
-  Box,
-  Slide,
-  SlideProps,
-  Snackbar,
-  Stack,
-  Divider,
-} from "@mui/material";
+import { Alert, Box, Slide, SlideProps, Snackbar, Stack } from "@mui/material";
 import { useEffect, useRef, useState } from "react";
 import { useSelector } from "react-redux";
 import NameInput from "./inputs/NameInput";
