@@ -149,7 +149,7 @@ function FilterDrawer({
     <>
       <Drawer
         open={bottomDrawerOpen}
-        anchor="top"
+        anchor="bottom"
         onClose={() => setBottomDrawerOpen(false)}
       >
         <Stack justifyContent="space-between" spacing={2} m={1} pt={5} pb={2}>

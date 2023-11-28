@@ -104,7 +104,6 @@ function BottomBar() {
           ".MuiDrawer-root > .MuiPaper-root": {
             position: "absolute",
             height: `calc(100% - ${drawerBleeding}px)`,
-            width: "100dvhw",
             maxWidth: "425px",
             left:
               drawerWidth === 425 ? `calc((100dvw - ${drawerWidth}px)/2)` : 0,
