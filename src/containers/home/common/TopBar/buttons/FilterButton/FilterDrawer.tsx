@@ -21,12 +21,12 @@ import {
   setFilteredDate,
   updateAnalyzedData,
   updateFilter,
-} from "../../../../../../app/redux/slices/scheduleSlice";
+} from "@redux/slices/scheduleSlice.tsx";
 import { WRONG_TIME_ORDER } from "../../../../../../constants/schedule";
 import { isTimeOrderCorrect } from "@utils/tools.ts";
 import { EXPENDITURE, FIXED } from "../../../../../../constants/categories";
 import AlertModal from "../../../../../../components/common/AlertModal";
-import { useAppDispatch } from "../../../../../../app/redux/hooks";
+import { useAppDispatch } from "@redux/hooks.ts";
 import useModal from "../../../../../../hooks/useModal";
 import ResetButton from "@components/common/ResetButton";
 
