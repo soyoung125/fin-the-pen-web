@@ -1,39 +1,11 @@
-import {
-  Alert,
-  Box,
-  Button,
-  Chip,
-  Divider,
-  Drawer,
-  Paper,
-  Stack,
-  TextField,
-  Typography,
-} from "@mui/material";
-import React, { useContext, useEffect, useState } from "react";
-import { useSelector } from "react-redux";
-import moment from "moment";
-import FilterAccordion from "./inputs/FilterAccordion";
-import {
-  initFilter,
-  revertFilter,
-  selectFiltered,
-  selectFilteredDate,
-  setFilteredDate,
-  updateAnalyzedData,
-  updateFilter,
-} from "@redux/slices/scheduleSlice.tsx";
-import { WRONG_TIME_ORDER } from "../../../../../../constants/schedule";
-import { isTimeOrderCorrect } from "@utils/tools.ts";
-import { EXPENDITURE, FIXED } from "../../../../../../constants/categories";
-import AlertModal from "../../../../../../components/common/AlertModal";
-import { useAppDispatch } from "@redux/hooks.ts";
-import useModal from "../../../../../../hooks/useModal";
-import ResetButton from "@components/common/ResetButton";
+import { Button, Divider, Drawer, Stack, Typography } from "@mui/material";
+import { useContext } from "react";
 import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
 import RoundedButton from "@components/common/RoundedButton.tsx";
 import DialogContext from "@components/layouts/dialog/DialogContext.tsx";
 import FilterHeader from "@containers/home/common/TopBar/buttons/FilterButton/FilterHeader.tsx";
+import { categories } from "@containers/home/common/TopBar/buttons/FilterButton/constants/categories.ts";
+import { useSelectCategory } from "@containers/home/common/TopBar/buttons/FilterButton/hooks/useSelectCategory.ts";
 
 interface FilterDrawerProps {
   bottomDrawerOpen: boolean;
@@ -45,8 +17,10 @@ function FilterDrawer({
   setBottomDrawerOpen,
 }: FilterDrawerProps) {
   const { dialog } = useContext(DialogContext);
+  const { onClickCheckFilterButton, isSubCategorySelected, switchSubCategory } =
+    useSelectCategory();
 
-  const foo = async () => {
+  const onClickSaveFilter = async () => {
     const answer = await dialog({
       title: "알림",
       content: "저장하시겠습니까?",
@@ -81,8 +55,50 @@ function FilterDrawer({
         />
         <div>날짜 선택기</div>
 
+        {categories.map((category) => {
+          return (
+            <>
+              <FilterHeader
+                title={category.type}
+                isCheckAll={true}
+                onClickCheckAll={() => switchSubCategory(category.type)}
+              />
+              <Stack
+                flexWrap="wrap"
+                alignSelf="stretch"
+                alignContent="flex-start"
+                direction="row"
+                py="12px"
+                px="20px"
+                gap="8px"
+              >
+                {category.subCategories.map((subCategory) => (
+                  <Button
+                    variant={
+                      isSubCategorySelected(category.type, subCategory)
+                        ? "contained"
+                        : "outlined"
+                    }
+                    size="small"
+                    sx={{ borderRadius: "18px" }}
+                    onClick={() =>
+                      onClickCheckFilterButton(category.type, subCategory)
+                    }
+                  >
+                    {subCategory}
+                  </Button>
+                ))}
+              </Stack>
+            </>
+          );
+        })}
+
         <Stack justifyContent="space-between" spacing={2} m={1} pt={5} pb={2}>
-          <Button variant="contained" color="primary" onClick={() => foo()}>
+          <Button
+            variant="contained"
+            color="primary"
+            onClick={() => onClickSaveFilter()}
+          >
             저장
           </Button>
         </Stack>
