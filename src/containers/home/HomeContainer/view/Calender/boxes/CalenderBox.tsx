@@ -23,17 +23,21 @@ function CalenderBox({
           minHeight: `calc(30px + 40px + ${DATE_HEIGHT * week}px)`,
         },
         ".MuiPickersCalendarHeader-root": {
-          width: "100%",
+          maxHeight: "40px",
+          minHeight: "40px",
+          height: "40px",
           margin: "0",
           display: "flex",
-          paddingX: 2,
+          paddingX: 0.5,
         },
         ".MuiPickersArrowSwitcher-root": {
+          height: "40px",
           width: "100vw",
           display: "inline-flex",
           justifyContent: "space-between",
         },
         ".MuiPickersCalendarHeader-labelContainer": {
+          height: "40px",
           position: "absolute",
           left: 0,
           right: 0,
