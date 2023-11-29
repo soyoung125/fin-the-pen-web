@@ -46,9 +46,7 @@ function FilterDrawer({
 }: FilterDrawerProps) {
   const { dialog } = useContext(DialogContext);
 
-  const changeAlertMode = async (mode: "reset" | "saveFilter") => {
-    // setAlertMode(mode);
-    // openAlertModal();
+  const foo = async () => {
     const answer = await dialog({
       title: "알림",
       content: "저장하시겠습니까?",
@@ -84,11 +82,7 @@ function FilterDrawer({
         <div>날짜 선택기</div>
 
         <Stack justifyContent="space-between" spacing={2} m={1} pt={5} pb={2}>
-          <Button
-            variant="contained"
-            color="primary"
-            onClick={() => changeAlertMode("saveFilter")}
-          >
+          <Button variant="contained" color="primary" onClick={() => foo()}>
             저장
           </Button>
         </Stack>
