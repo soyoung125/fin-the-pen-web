@@ -1,4 +1,7 @@
+import { useEffect, useState } from "react";
+
 import { Swiper, SwiperSlide } from "swiper/react";
+import { Swiper as SwiperType } from "swiper/types";
 
 import "swiper/css";
 import "swiper/css/pagination";
@@ -18,6 +21,21 @@ function TimeOption({
   type,
   changeTime,
 }: SelectTimeProps) {
+  const [swiper, setSwiper] = useState<SwiperType>();
+  const lastIndex = timeOption.length + 2;
+  const index = swiper?.activeIndex ?? 0;
+  const prevIndex = 3;
+
+  useEffect(() => {
+    if (index < prevIndex) {
+      swiper?.slideTo(prevIndex);
+    }
+
+    if (index > lastIndex) {
+      swiper?.slideTo(lastIndex);
+    }
+  }, [swiper?.activeIndex]);
+
   return (
     <Swiper
       direction={"vertical"}
@@ -27,11 +45,20 @@ function TimeOption({
       style={{ height: "210px" }}
       mousewheel={true}
       modules={[Mousewheel]}
-      onSlideChange={(swiper) => changeTime(type, swiper.activeIndex)}
+      allowSlidePrev={index === prevIndex ? false : true}
+      allowSlideNext={index === lastIndex ? false : true}
+      onSlideChange={(swiper) =>
+        changeTime(type, swiper.activeIndex - prevIndex)
+      }
       onSwiper={(swiper) => {
-        swiper.slideTo(selected);
+        swiper.slideTo(selected + prevIndex);
+        setSwiper(swiper);
       }}
+      slideToClickedSlide={true}
     >
+      <SwiperSlide />
+      <SwiperSlide />
+      <SwiperSlide />
       {timeOption.map((i) => (
         <SwiperSlide key={Math.random()}>
           {({ isActive }) => (
@@ -46,6 +73,9 @@ function TimeOption({
           )}
         </SwiperSlide>
       ))}
+      <SwiperSlide />
+      <SwiperSlide />
+      <SwiperSlide />
     </Swiper>
   );
 }
