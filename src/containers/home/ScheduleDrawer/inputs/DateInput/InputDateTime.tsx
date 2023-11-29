@@ -59,7 +59,7 @@ function InputDateTime({
               <Box
                 onClick={(e) => {
                   e.stopPropagation();
-                  handleClick(type, "calendar");
+                  handleClick(type, "time");
                 }}
               >
                 {moment(time, "hh:mm").locale("ko").format("LT")}
@@ -71,9 +71,10 @@ function InputDateTime({
         onChange={changeSchedule}
       />
       <Collapse in={showCalendar !== ""}>
-        {showCalendar === "date" ? (
+        {showCalendar === "date" && (
           <SelectDate date={date} changeSchedule={changeSchedule} type={type} />
-        ) : (
+        )}
+        {showCalendar === "time" && (
           <SelectTime time={time} changeSchedule={changeSchedule} type={type} />
         )}
       </Collapse>
