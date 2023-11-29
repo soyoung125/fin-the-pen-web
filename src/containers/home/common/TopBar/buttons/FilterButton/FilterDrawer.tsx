@@ -1,4 +1,11 @@
-import { Button, Divider, Drawer, Stack, Typography } from "@mui/material";
+import {
+  Button,
+  Divider,
+  Drawer,
+  Stack,
+  TextField,
+  Typography,
+} from "@mui/material";
 import { useContext } from "react";
 import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
 import RoundedButton from "@components/common/RoundedButton.tsx";
@@ -6,6 +13,7 @@ import DialogContext from "@components/layouts/dialog/DialogContext.tsx";
 import FilterHeader from "@containers/home/common/TopBar/buttons/FilterButton/FilterHeader.tsx";
 import { categories } from "@containers/home/common/TopBar/buttons/FilterButton/constants/categories.ts";
 import { useSelectCategory } from "@containers/home/common/TopBar/buttons/FilterButton/hooks/useSelectCategory.ts";
+import { useSelectDate } from "@containers/home/common/TopBar/buttons/FilterButton/hooks/useSelectDate.ts";
 
 interface FilterDrawerProps {
   bottomDrawerOpen: boolean;
@@ -19,6 +27,8 @@ function FilterDrawer({
   const { dialog } = useContext(DialogContext);
   const { onClickCheckFilterButton, isSubCategorySelected, switchSubCategory } =
     useSelectCategory();
+
+  const { setDate, date } = useSelectDate();
 
   const onClickSaveFilter = async () => {
     const answer = await dialog({
@@ -48,12 +58,66 @@ function FilterDrawer({
         </Stack>
 
         <Divider />
-        <FilterHeader
-          title="날짜"
-          isCheckAll={true}
-          onClickCheckAll={() => {}}
-        />
-        <div>날짜 선택기</div>
+        <FilterHeader title="날짜" />
+
+        <Stack
+          direction="row"
+          justifyContent="space-between"
+          alignItems="center"
+          sx={{ width: "100%" }}
+          px="20px"
+          py="4px"
+          gap="8px"
+        >
+          <Button variant="contained" fullWidth size="small">
+            1년
+          </Button>
+          <Button variant="outlined" fullWidth size="small">
+            6개월
+          </Button>
+          <Button variant="outlined" fullWidth size="small">
+            1개월
+          </Button>
+          <Button variant="outlined" fullWidth size="small">
+            1주일
+          </Button>
+        </Stack>
+
+        <Stack
+          direction="row"
+          justifyContent="space-between"
+          alignItems="center"
+          spacing={2}
+          sx={{ width: "100%" }}
+          px="20px"
+          py="4px"
+        >
+          <TextField
+            id="start"
+            // label="시작일"
+            type="date"
+            fullWidth
+            InputLabelProps={{
+              shrink: true,
+            }}
+            // value={filteredDate.start}
+            // onChange={changeSchedule}
+            size="small"
+          />
+          <Typography>-</Typography>
+          <TextField
+            id="end"
+            // label="종료일"
+            type="date"
+            fullWidth
+            InputLabelProps={{
+              shrink: true,
+            }}
+            // value={filteredDate.end}
+            // onChange={changeSchedule}
+            size="small"
+          />
+        </Stack>
 
         {categories.map((category) => {
           return (
@@ -92,6 +156,8 @@ function FilterDrawer({
             </>
           );
         })}
+
+        <Divider />
 
         <Stack justifyContent="space-between" spacing={2} m={1} pt={5} pb={2}>
           <Button
