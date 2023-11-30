@@ -25,11 +25,19 @@ function DateInput({ showError }: DateInputProps) {
 
   const handleClick = (type: string, selectType: string) => {
     if (type === "start") {
-      if (showStart === selectType) setShowStart("");
-      else setShowStart(selectType);
+      if (showStart === selectType) {
+        setShowStart("");
+        setShowEnd("date");
+      } else {
+        setShowEnd("");
+        setShowStart(selectType);
+      }
     } else {
       if (showEnd === selectType) setShowEnd("");
-      else setShowEnd(selectType);
+      else {
+        setShowStart("");
+        setShowEnd(selectType);
+      }
     }
   };
 
