@@ -1,11 +1,4 @@
-import {
-  Button,
-  Divider,
-  Drawer,
-  Stack,
-  TextField,
-  Typography,
-} from "@mui/material";
+import { Button, Divider, Drawer, Stack, Typography } from "@mui/material";
 import { useContext } from "react";
 import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
 import RoundedButton from "@components/common/RoundedButton.tsx";
@@ -14,6 +7,8 @@ import FilterHeader from "@containers/home/common/TopBar/buttons/FilterButton/Fi
 import { categories } from "@containers/home/common/TopBar/buttons/FilterButton/constants/categories.ts";
 import { useSelectCategory } from "@containers/home/common/TopBar/buttons/FilterButton/hooks/useSelectCategory.ts";
 import { useSelectDate } from "@containers/home/common/TopBar/buttons/FilterButton/hooks/useSelectDate.ts";
+import FilterLayout from "@containers/home/common/TopBar/buttons/FilterButton/FilterLayout.tsx";
+import DateInput from "@containers/home/common/TopBar/buttons/FilterButton/DateInput.tsx";
 
 interface FilterDrawerProps {
   bottomDrawerOpen: boolean;
@@ -33,7 +28,7 @@ function FilterDrawer({
     switchSubCategory,
   } = useSelectCategory();
 
-  const { setDate, date } = useSelectDate();
+  const { date, error: dateError, updateDate } = useSelectDate();
 
   const onClickSaveFilter = async () => {
     const answer = await dialog({
@@ -65,66 +60,29 @@ function FilterDrawer({
         </Stack>
 
         <Divider />
+        <Typography mx="20px" my="8px" variant="caption">
+          선택한 카테고리의 소비내역만 보여집니다.
+        </Typography>
+
         <FilterHeader title="날짜" />
-
-        <Stack
-          direction="row"
-          justifyContent="space-between"
-          alignItems="center"
-          sx={{ width: "100%" }}
-          px="20px"
-          py="4px"
-          gap="8px"
-        >
-          <Button variant="contained" fullWidth size="small">
-            1년
-          </Button>
-          <Button variant="outlined" fullWidth size="small">
-            6개월
-          </Button>
-          <Button variant="outlined" fullWidth size="small">
-            1개월
-          </Button>
-          <Button variant="outlined" fullWidth size="small">
-            1주일
-          </Button>
-        </Stack>
-
-        <Stack
-          direction="row"
-          justifyContent="space-between"
-          alignItems="center"
-          spacing={2}
-          sx={{ width: "100%" }}
-          px="20px"
-          py="4px"
-        >
-          <TextField
-            id="start"
-            // label="시작일"
-            type="date"
-            fullWidth
-            InputLabelProps={{
-              shrink: true,
-            }}
-            // value={filteredDate.start}
-            // onChange={changeSchedule}
-            size="small"
-          />
-          <Typography>-</Typography>
-          <TextField
-            id="end"
-            // label="종료일"
-            type="date"
-            fullWidth
-            InputLabelProps={{
-              shrink: true,
-            }}
-            // value={filteredDate.end}
-            // onChange={changeSchedule}
-            size="small"
-          />
-        </Stack>
+        <FilterLayout>
+          <Stack direction="row" alignItems="center" sx={{ width: "100%" }}>
+            <DateInput
+              date={date.startDate}
+              dateType="startDate"
+              updateDate={updateDate}
+            />
+            <Typography mx={1}>-</Typography>
+            <DateInput
+              date={date.endDate}
+              dateType="endDate"
+              updateDate={updateDate}
+            />
+          </Stack>
+          <Typography variant="caption" color="error">
+            {dateError}
+          </Typography>
+        </FilterLayout>
 
         {categories.map((category) => {
           return (
@@ -134,15 +92,7 @@ function FilterDrawer({
                 isCheckAll={isAllSubCategoriesSelected(category.type)}
                 onClickCheckAll={() => switchSubCategory(category.type)}
               />
-              <Stack
-                flexWrap="wrap"
-                alignSelf="stretch"
-                alignContent="flex-start"
-                direction="row"
-                py="12px"
-                px="20px"
-                gap="8px"
-              >
+              <FilterLayout>
                 {category.subCategories.map((subCategory) => (
                   <Button
                     variant={
@@ -159,7 +109,7 @@ function FilterDrawer({
                     {subCategory}
                   </Button>
                 ))}
-              </Stack>
+              </FilterLayout>
             </>
           );
         })}
