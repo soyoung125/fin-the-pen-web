@@ -1,4 +1,6 @@
 import { Stack, Typography } from "@mui/material";
+import CheckCircleOutlineIcon from "@mui/icons-material/CheckCircleOutline";
+import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 
 interface FilterHeaderProps {
   title: string;
@@ -23,13 +25,22 @@ function FilterHeader({
     >
       <Typography fontSize="14px">{title}</Typography>
       {onClickCheckAll && (
-        <Typography
+        <Stack
+          direction="row"
           onClick={onClickCheckAll}
-          fontSize="14px"
           color={isCheckAll ? "#735BF2" : "#8C919C"}
+          alignItems="center"
+          gap="2px"
         >
-          전체
-        </Typography>
+          <Typography fontSize="14px" lineHeight={0}>
+            전체
+          </Typography>
+          {isCheckAll ? (
+            <CheckCircleIcon sx={{ width: "15px", height: "15px" }} />
+          ) : (
+            <CheckCircleOutlineIcon sx={{ width: "15px", height: "15px" }} />
+          )}
+        </Stack>
       )}
     </Stack>
   );

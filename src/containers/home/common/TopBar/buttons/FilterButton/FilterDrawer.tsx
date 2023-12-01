@@ -25,8 +25,13 @@ function FilterDrawer({
   setBottomDrawerOpen,
 }: FilterDrawerProps) {
   const { dialog } = useContext(DialogContext);
-  const { onClickCheckFilterButton, isSubCategorySelected, switchSubCategory } =
-    useSelectCategory();
+  const {
+    selectedCategories,
+    onClickCheckFilterButton,
+    isSubCategorySelected,
+    isAllSubCategoriesSelected,
+    switchSubCategory,
+  } = useSelectCategory();
 
   const { setDate, date } = useSelectDate();
 
@@ -36,7 +41,9 @@ function FilterDrawer({
       content: "저장하시겠습니까?",
     });
 
-    console.log(answer);
+    if (answer) {
+      console.log(JSON.stringify(selectedCategories));
+    }
   };
 
   return (
@@ -124,7 +131,7 @@ function FilterDrawer({
             <>
               <FilterHeader
                 title={category.type}
-                isCheckAll={true}
+                isCheckAll={isAllSubCategoriesSelected(category.type)}
                 onClickCheckAll={() => switchSubCategory(category.type)}
               />
               <Stack

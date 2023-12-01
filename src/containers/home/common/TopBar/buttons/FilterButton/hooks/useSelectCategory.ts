@@ -34,6 +34,12 @@ export const useSelectCategory = () => {
     return selectedCategories[index].subCategories.includes(subCategory);
   };
 
+  const isAllSubCategoriesSelected = (type: string) => {
+    const index = selectedCategories.findIndex((c) => c.type === type);
+    const subCategories = selectedCategories[index].subCategories;
+    return subCategories.length === categories[index].subCategories.length;
+  };
+
   const switchSubCategory = (type: string) => {
     const index = selectedCategories.findIndex((c) => c.type === type);
     const subCategories = selectedCategories[index].subCategories;
@@ -54,8 +60,10 @@ export const useSelectCategory = () => {
   };
 
   return {
+    selectedCategories,
     onClickCheckFilterButton,
     isSubCategorySelected,
+    isAllSubCategoriesSelected,
     switchSubCategory,
   };
 };
