@@ -27,5 +27,10 @@ export const useSelectDate = () => {
     }
   };
 
-  return { date, error, updateDate };
+  const initDate = () => {
+    setDate({ endDate: "", startDate: "" });
+    setError("");
+  };
+
+  return { date, error, updateDate, initDate };
 };

@@ -9,7 +9,7 @@ import { useSelectCategory } from "@containers/home/common/TopBar/buttons/Filter
 import { useSelectDate } from "@containers/home/common/TopBar/buttons/FilterButton/hooks/useSelectDate.ts";
 import FilterLayout from "@containers/home/common/TopBar/buttons/FilterButton/FilterLayout.tsx";
 import DateInput from "@containers/home/common/TopBar/buttons/FilterButton/DateInput.tsx";
-
+import RefreshIcon from "@mui/icons-material/Refresh";
 interface FilterDrawerProps {
   bottomDrawerOpen: boolean;
   setBottomDrawerOpen: React.Dispatch<React.SetStateAction<boolean>>;
@@ -26,18 +26,30 @@ function FilterDrawer({
     isSubCategorySelected,
     isAllSubCategoriesSelected,
     switchSubCategory,
+    initSelectedCategories,
   } = useSelectCategory();
 
-  const { date, error: dateError, updateDate } = useSelectDate();
+  const { date, error: dateError, updateDate, initDate } = useSelectDate();
 
   const onClickSaveFilter = async () => {
     const answer = await dialog({
       title: "알림",
-      content: "저장하시겠습니까?",
+      content: "필터 설정을 저장하시겠습니까?",
     });
 
     if (answer) {
       console.log(JSON.stringify(selectedCategories));
+    }
+  };
+
+  const initFilter = async () => {
+    const answer = await dialog({
+      title: "알림",
+      content: "필터를 초기화 하시겠습니까?",
+    });
+    if (answer) {
+      initSelectedCategories();
+      initDate();
     }
   };
 
@@ -114,15 +126,27 @@ function FilterDrawer({
           );
         })}
 
+        <Stack
+          justifyContent="center"
+          direction="row"
+          alignItems="center"
+          color="#5B5F67"
+          py="10px"
+          onClick={() => initFilter()}
+        >
+          <RefreshIcon sx={{ width: "14px", height: "14px" }} />
+          <Typography fontSize="14px">초기화</Typography>
+        </Stack>
+
         <Divider />
 
-        <Stack justifyContent="space-between" spacing={2} m={1} pt={5} pb={2}>
+        <Stack mt="8px" mb="20px" mx="20px">
           <Button
             variant="contained"
             color="primary"
             onClick={() => onClickSaveFilter()}
           >
-            저장
+            선택 완료
           </Button>
         </Stack>
       </Drawer>

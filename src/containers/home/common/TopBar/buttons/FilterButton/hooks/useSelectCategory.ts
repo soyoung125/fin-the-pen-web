@@ -59,11 +59,18 @@ export const useSelectCategory = () => {
     }
   };
 
+  const initSelectedCategories = () => {
+    setSelectedCategories(
+      categories.map((category) => ({ ...category, subCategories: [] }))
+    );
+  };
+
   return {
     selectedCategories,
     onClickCheckFilterButton,
     isSubCategorySelected,
     isAllSubCategoriesSelected,
     switchSubCategory,
+    initSelectedCategories,
   };
 };
