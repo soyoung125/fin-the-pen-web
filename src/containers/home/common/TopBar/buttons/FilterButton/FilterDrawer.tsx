@@ -1,4 +1,4 @@
-import { Button, Divider, Drawer, Stack, Typography } from "@mui/material";
+import { Box, Button, Divider, Drawer, Stack, Typography } from "@mui/material";
 import { useContext } from "react";
 import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
 import RoundedButton from "@components/common/RoundedButton.tsx";
@@ -72,59 +72,61 @@ function FilterDrawer({
         </Stack>
 
         <Divider />
-        <Typography mx="20px" my="8px" variant="caption">
-          선택한 카테고리의 소비내역만 보여집니다.
-        </Typography>
-
-        <FilterHeader title="날짜" />
-        <FilterLayout>
-          <Stack direction="row" alignItems="center" sx={{ width: "100%" }}>
-            <DateInput
-              date={date.startDate}
-              dateType="startDate"
-              updateDate={updateDate}
-            />
-            <Typography mx={1}>-</Typography>
-            <DateInput
-              date={date.endDate}
-              dateType="endDate"
-              updateDate={updateDate}
-            />
-          </Stack>
-          <Typography variant="caption" color="error">
-            {dateError}
+        <Box height="100vh">
+          <Typography mx="20px" my="8px" variant="caption">
+            선택한 카테고리의 소비내역만 보여집니다.
           </Typography>
-        </FilterLayout>
 
-        {categories.map((category) => {
-          return (
-            <>
-              <FilterHeader
-                title={category.type}
-                isCheckAll={isAllSubCategoriesSelected(category.type)}
-                onClickCheckAll={() => switchSubCategory(category.type)}
+          <FilterHeader title="날짜" />
+          <FilterLayout>
+            <Stack direction="row" alignItems="center" sx={{ width: "100%" }}>
+              <DateInput
+                date={date.startDate}
+                dateType="startDate"
+                updateDate={updateDate}
               />
-              <FilterLayout>
-                {category.subCategories.map((subCategory) => (
-                  <Button
-                    variant={
-                      isSubCategorySelected(category.type, subCategory)
-                        ? "contained"
-                        : "outlined"
-                    }
-                    size="small"
-                    sx={{ borderRadius: "18px" }}
-                    onClick={() =>
-                      onClickCheckFilterButton(category.type, subCategory)
-                    }
-                  >
-                    {subCategory}
-                  </Button>
-                ))}
-              </FilterLayout>
-            </>
-          );
-        })}
+              <Typography mx={1}>-</Typography>
+              <DateInput
+                date={date.endDate}
+                dateType="endDate"
+                updateDate={updateDate}
+              />
+            </Stack>
+            <Typography variant="caption" color="error">
+              {dateError}
+            </Typography>
+          </FilterLayout>
+
+          {categories.map((category) => {
+            return (
+              <>
+                <FilterHeader
+                  title={category.type}
+                  isCheckAll={isAllSubCategoriesSelected(category.type)}
+                  onClickCheckAll={() => switchSubCategory(category.type)}
+                />
+                <FilterLayout>
+                  {category.subCategories.map((subCategory) => (
+                    <Button
+                      variant={
+                        isSubCategorySelected(category.type, subCategory)
+                          ? "contained"
+                          : "outlined"
+                      }
+                      size="small"
+                      sx={{ borderRadius: "18px" }}
+                      onClick={() =>
+                        onClickCheckFilterButton(category.type, subCategory)
+                      }
+                    >
+                      {subCategory}
+                    </Button>
+                  ))}
+                </FilterLayout>
+              </>
+            );
+          })}
+        </Box>
 
         <Stack
           justifyContent="center"
