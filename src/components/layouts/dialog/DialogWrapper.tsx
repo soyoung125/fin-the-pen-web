@@ -9,6 +9,8 @@ export interface DialogState {
   content?: string;
   onClickApprove: () => void;
   onClickReject: () => void;
+  rejectText?: string;
+  approveText?: string;
 }
 
 function DialogWrapper({ children }: { children: ReactNode }) {
@@ -17,11 +19,15 @@ function DialogWrapper({ children }: { children: ReactNode }) {
   const dialog = ({
     title,
     content,
+    rejectText,
+    approveText,
   }: DialogContextParams): Promise<boolean> => {
     return new Promise((resolve) => {
       setState({
         title: title ?? "",
         content: content ?? "",
+        approveText: approveText ?? undefined,
+        rejectText: rejectText ?? undefined,
         onClickApprove: () => {
           setState(undefined);
           resolve(true);
@@ -43,6 +49,8 @@ function DialogWrapper({ children }: { children: ReactNode }) {
           content={state.content}
           onClickApprove={state.onClickApprove}
           onClickReject={state.onClickReject}
+          rejectText={state.rejectText}
+          approveText={state.approveText}
         />
       )}
     </DialogContext.Provider>

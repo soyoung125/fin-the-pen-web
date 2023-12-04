@@ -5,19 +5,16 @@ import {
   Stack,
   Typography,
 } from "@mui/material";
+import { DialogState } from "@components/layouts/dialog/DialogWrapper.tsx";
 
-interface DialogProps {
-  title?: string;
-  content?: string;
-  onClickApprove: () => void;
-  onClickReject: () => void;
-}
 function Dialog({
   title,
   content,
   onClickApprove,
   onClickReject,
-}: DialogProps) {
+  rejectText,
+  approveText,
+}: DialogState) {
   return (
     <MuiDialog
       sx={{ "& .MuiDialog-paper": { borderRadius: "1rem", width: "100%" } }}
@@ -40,12 +37,16 @@ function Dialog({
           {content}
         </Typography>
         <Stack direction="row" gap="10px">
-          <Button variant="outlined" onClick={onClickReject} fullWidth>
-            아니오
-          </Button>
-          <Button variant="contained" onClick={onClickApprove} fullWidth>
-            네
-          </Button>
+          {rejectText && (
+            <Button variant="outlined" onClick={onClickReject} fullWidth>
+              {rejectText}
+            </Button>
+          )}
+          {approveText && (
+            <Button variant="contained" onClick={onClickApprove} fullWidth>
+              {approveText}
+            </Button>
+          )}
         </Stack>
       </Stack>
     </MuiDialog>

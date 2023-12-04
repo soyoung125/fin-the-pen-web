@@ -10,6 +10,7 @@ import { useSelectDate } from "@containers/home/common/TopBar/buttons/FilterButt
 import FilterLayout from "@containers/home/common/TopBar/buttons/FilterButton/FilterLayout.tsx";
 import DateInput from "@containers/home/common/TopBar/buttons/FilterButton/DateInput.tsx";
 import RefreshIcon from "@mui/icons-material/Refresh";
+import { useDialog } from "@components/layouts/dialog/hooks/useDialog.ts";
 interface FilterDrawerProps {
   bottomDrawerOpen: boolean;
   setBottomDrawerOpen: React.Dispatch<React.SetStateAction<boolean>>;
@@ -19,7 +20,7 @@ function FilterDrawer({
   bottomDrawerOpen,
   setBottomDrawerOpen,
 }: FilterDrawerProps) {
-  const { dialog } = useContext(DialogContext);
+  const { customConfirm } = useDialog();
   const {
     selectedCategories,
     onClickCheckFilterButton,
@@ -32,9 +33,11 @@ function FilterDrawer({
   const { date, error: dateError, updateDate, initDate } = useSelectDate();
 
   const onClickSaveFilter = async () => {
-    const answer = await dialog({
+    const answer = await customConfirm({
       title: "알림",
       content: "필터 설정을 저장하시겠습니까?",
+      approveText: "저장",
+      rejectText: "취소",
     });
 
     if (answer) {
@@ -43,9 +46,11 @@ function FilterDrawer({
   };
 
   const initFilter = async () => {
-    const answer = await dialog({
+    const answer = await customConfirm({
       title: "알림",
       content: "필터를 초기화 하시겠습니까?",
+      approveText: "초기화",
+      rejectText: "취소",
     });
     if (answer) {
       initSelectedCategories();

@@ -49,8 +49,6 @@ function ScheduleCard({
 
   const { handleDeleteSchedule, handleModifySchedule } = useSchedule();
 
-  const handleClose = () => dispatch(setBottomBarOpenFalse());
-
   const handleModifyModal = () => {
     if (!isHideBudgetMode) {
       handleModal(schedule);
@@ -65,7 +63,6 @@ function ScheduleCard({
             variant="contained"
             onClick={() => {
               handleDeleteSchedule(schedule.id as string);
-              handleClose();
             }}
           >
             <DeleteForeverIcon fontSize="large" />
@@ -150,7 +147,7 @@ function ScheduleCard({
                   >
                     {`${schedule.price_type}${parseInt(
                       schedule.amount,
-                      10,
+                      10
                     ).toLocaleString("ko-KR")}`}
                   </Typography>
                 )}
