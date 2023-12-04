@@ -14,33 +14,33 @@ import { selectUser } from "@redux/slices/userSlice.tsx";
 import { useAppDispatch } from "@redux/hooks.ts";
 import moment from "moment/moment";
 import { v4 as uuidv4 } from "uuid";
-import { REPEAT_CYCLE } from "../constants/schedule.tsx";
-import { NOT_AVAILABLE } from "../constants/messages.tsx";
+import { useDialog } from "@components/layouts/dialog/hooks/useDialog.ts";
 
 const useSchedule = () => {
   const schedules = useSelector(selectSchedules);
   const [selectedSchedule, setSelectedSchedule] = useState<Schedule | null>(
-    null,
+    null
   );
   const status = useSelector(selectStatus);
   const dispatch = useAppDispatch();
   const user = useSelector(selectUser);
   const date = useSelector(selectDate);
   const [todaySchedules, setTodaySchedules] = useState<Schedule[]>([]);
+  const { customConfirm } = useDialog();
 
   useEffect(() => {
     setTodaySchedules(
       schedules.filter(
         (schedule) =>
           moment(date).isSameOrAfter(schedule.start_date) &&
-          moment(date).isSameOrBefore(schedule.end_date),
-      ),
+          moment(date).isSameOrBefore(schedule.end_date)
+      )
     );
   }, [schedules]);
 
   const handleCreateSchedule = async (
     schedule: Schedule,
-    stringDate: string,
+    stringDate: string
   ) => {
     if (user === null) {
       return alert("로그인이 필요합니다.");
@@ -60,13 +60,19 @@ const useSchedule = () => {
         getMonthSchedules({
           user_id: user.user_id,
           date: date.format("YYYY-MM"),
-        }),
+        })
       );
     }
   };
 
   const handleDeleteSchedule = async (scheduleId: string) => {
-    if (window.confirm("정말로 삭제 하시겠습니까?")) {
+    const answer = await customConfirm({
+      title: "일정 삭제",
+      content: "정말로 삭제 하시겠습니까?",
+      approveText: "삭제",
+      rejectText: "취소",
+    });
+    if (answer) {
       console.log(scheduleId);
       const result = await dispatch(deleteSchedule(scheduleId));
       if (result && user) {
@@ -74,7 +80,7 @@ const useSchedule = () => {
           getMonthSchedules({
             user_id: user.user_id,
             date: date,
-          }),
+          })
         );
       }
     }
@@ -87,7 +93,7 @@ const useSchedule = () => {
         getMonthSchedules({
           user_id: user.user_id,
           date: moment(date).format("YYYY-MM"),
-        }),
+        })
       );
     }
   };
