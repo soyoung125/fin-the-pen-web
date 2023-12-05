@@ -36,7 +36,18 @@ function Week() {
         {schedule?.repeat === "Week" &&
           week.map((w) => (
             <Grid item xs={2}>
-              <Button>{w}</Button>
+              <Button
+                variant="outlined"
+                color="secondary"
+                sx={{
+                  minWidth: "36px",
+                  height: "36px",
+                  p: 0,
+                  borderRadius: "12px",
+                }}
+              >
+                {w}
+              </Button>
             </Grid>
           ))}
       </Grid>

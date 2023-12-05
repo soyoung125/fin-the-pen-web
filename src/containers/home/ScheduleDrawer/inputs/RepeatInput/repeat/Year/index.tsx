@@ -32,10 +32,28 @@ function Year() {
       />
 
       {schedule?.repeat === "Year" && (
-        <Stack px={2.5}>
-          <Button>MM월 DD일</Button>
-          <Button>MM월 N 번째 D요일</Button>
-          <Button>MM월 마지막 D요일</Button>
+        <Stack px={2.5} spacing={1} alignItems="center">
+          <Button
+            variant="outlined"
+            color="secondary"
+            sx={{ borderRadius: "20px", width: "200px" }}
+          >
+            MM월 DD일
+          </Button>
+          <Button
+            variant="outlined"
+            color="secondary"
+            sx={{ borderRadius: "20px", width: "200px" }}
+          >
+            MM월 N 번째 D요일
+          </Button>
+          <Button
+            variant="outlined"
+            color="secondary"
+            sx={{ borderRadius: "20px", width: "200px" }}
+          >
+            MM월 마지막 D요일
+          </Button>
         </Stack>
       )}
     </Box>
