@@ -1,4 +1,4 @@
-import { Box, Collapse, Stack, Input } from "@mui/material";
+import { Box, Collapse, Stack } from "@mui/material";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import { useState } from "react";
 import { useSelector } from "react-redux";
@@ -8,6 +8,10 @@ import { selectSchedule } from "@app/redux/slices/scheduleSlice";
 import { updateRepeat } from "../../domain/schedule";
 import RepeatRadioGroup from "./RepeatRadioGroup";
 import RadioButton from "@components/common/RadioButton";
+import AllDay from "./repeat/AllDay";
+import Week from "./repeat/Week";
+import Month from "./repeat/Month";
+import Year from "./repeat/Year";
 
 function RepeatInput() {
   const dispatch = useAppDispatch();
@@ -38,91 +42,13 @@ function RepeatInput() {
       <Collapse in={schedule?.repeat !== "None"}>
         <RepeatRadioGroup type="repeat" handleChange={changeRepeat}>
           <>
-            <FormControlLabel
-              control={<RadioButton value="AllDay" />}
-              label={
-                schedule?.repeat === "AllDay" ? (
-                  <>
-                    <Input
-                      defaultValue={1}
-                      type="number"
-                      inputProps={{
-                        min: 1,
-                        max: 365,
-                      }}
-                      sx={{ width: "30px" }}
-                    />
-                    일 마다
-                  </>
-                ) : (
-                  <>매일</>
-                )
-              }
-            />
-            <FormControlLabel
-              control={<RadioButton value="Week" />}
-              label={
-                schedule?.repeat === "Week" ? (
-                  <>
-                    <Input
-                      defaultValue={1}
-                      type="number"
-                      inputProps={{
-                        min: 1,
-                        max: 365,
-                      }}
-                      sx={{ width: "30px" }}
-                    />
-                    주 마다
-                  </>
-                ) : (
-                  <>매주</>
-                )
-              }
-            />
-            <FormControlLabel
-              control={<RadioButton value="Month" />}
-              label={
-                schedule?.repeat === "Month" ? (
-                  <>
-                    <Input
-                      defaultValue={1}
-                      type="number"
-                      inputProps={{
-                        min: 1,
-                        max: 365,
-                      }}
-                      sx={{ width: "30px" }}
-                    />
-                    개월 마다
-                  </>
-                ) : (
-                  <>매월</>
-                )
-              }
-            />
+            <AllDay />
 
-            <FormControlLabel
-              control={<RadioButton value="Year" />}
-              label={
-                schedule?.repeat === "Year" ? (
-                  <>
-                    <Input
-                      defaultValue={1}
-                      type="number"
-                      inputProps={{
-                        min: 1,
-                        max: 365,
-                      }}
-                      sx={{ width: "30px" }}
-                    />
-                    년 마다
-                  </>
-                ) : (
-                  <>매년</>
-                )
-              }
-            />
+            <Week />
+
+            <Month />
+
+            <Year />
           </>
         </RepeatRadioGroup>
 
