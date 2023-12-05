@@ -53,7 +53,7 @@ function EasyAuthentication({ handleAuthenticate }: EasyAuthenticationProps) {
             <Box width="100%" px={2} pt={2}>
               <BackButton
                 handleClick={
-                  viewMode === VIEW_MODE.asset ? handleClickBack : null
+                  viewMode === VIEW_MODE.asset ? handleClickBack : undefined
                 }
               />
             </Box>
