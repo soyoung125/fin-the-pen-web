@@ -9,6 +9,12 @@ import {
   setIsAuthenticatedTrue,
 } from "@redux/slices/commonSlice.tsx";
 import Keypad from "@containers/sign/Keypad.tsx";
+import BackButton from "@containers/home/common/TopBar/buttons/BackButton";
+import {
+  changeViewMode,
+  selectViewMode,
+} from "@app/redux/slices/scheduleSlice";
+import { VIEW_MODE } from "constants/schedule";
 
 interface EasyAuthenticationProps {
   handleAuthenticate?: () => void;
@@ -17,9 +23,16 @@ interface EasyAuthenticationProps {
 function EasyAuthentication({ handleAuthenticate }: EasyAuthenticationProps) {
   const CHARACTER_LIMIT = 6;
   const dispatch = useAppDispatch();
+
   const isAuthenticated = useAppSelector(selectIsAuthenticated);
   const user = useSelector(selectUser);
+  const viewMode = useAppSelector(selectViewMode);
+
   const [password, setPassword] = useState<number[]>([]);
+
+  const handleClickBack = () => {
+    dispatch(changeViewMode(VIEW_MODE.schedule));
+  };
 
   const handleClick = () => {
     if (CHARACTER_LIMIT === password.length) {
@@ -37,6 +50,13 @@ function EasyAuthentication({ handleAuthenticate }: EasyAuthenticationProps) {
             justifyContent="space-between"
             height="100%"
           >
+            <Box width="100%" px={2} pt={2}>
+              <BackButton
+                handleClick={
+                  viewMode === VIEW_MODE.asset ? handleClickBack : null
+                }
+              />
+            </Box>
             <Stack justifyContent="center" alignItems="center" height="100%">
               <LogoCircle />
 
