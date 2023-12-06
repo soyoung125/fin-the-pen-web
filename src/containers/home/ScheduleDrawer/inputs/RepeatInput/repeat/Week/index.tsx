@@ -1,5 +1,5 @@
 import { selectSchedule } from "@app/redux/slices/scheduleSlice";
-import { Box, Button, Grid } from "@mui/material";
+import { Box, Button, Stack } from "@mui/material";
 import { useState } from "react";
 import { useSelector } from "react-redux";
 import RadioLabel from "../../radio/RadioLabel";
@@ -35,25 +35,23 @@ function Week() {
       />
 
       {schedule?.repeat === "Week" && (
-        <Grid px={2.5} my={1.5} container columns={{ xs: 14 }}>
+        <Stack px={2.5} my={1.5} direction="row" justifyContent="space-between">
           {week.map((w) => (
-            <Grid item xs={2}>
-              <Button
-                onClick={() => handleChange(w)}
-                variant={selected.includes(w) ? "contained" : "outlined"}
-                color={selected.includes(w) ? "primary" : "secondary"}
-                sx={{
-                  minWidth: "36px",
-                  height: "36px",
-                  p: 0,
-                  borderRadius: "12px",
-                }}
-              >
-                {w}
-              </Button>
-            </Grid>
+            <Button
+              onClick={() => handleChange(w)}
+              variant={selected.includes(w) ? "contained" : "outlined"}
+              color={selected.includes(w) ? "primary" : "secondary"}
+              sx={{
+                minWidth: "36px",
+                height: "36px",
+                p: 0,
+                borderRadius: "12px",
+              }}
+            >
+              {w}
+            </Button>
           ))}
-        </Grid>
+        </Stack>
       )}
     </Box>
   );
