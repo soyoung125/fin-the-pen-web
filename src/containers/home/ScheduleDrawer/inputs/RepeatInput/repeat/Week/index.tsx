@@ -4,6 +4,7 @@ import { useState } from "react";
 import { useSelector } from "react-redux";
 import RadioLabel from "../../radio/RadioLabel";
 import InputLabel from "../../radio/RadioLabel/InputLabel";
+import DateButton from "@components/common/DateButton";
 
 function Week() {
   const schedule = useSelector(selectSchedule);
@@ -37,19 +38,11 @@ function Week() {
       {schedule?.repeat === "Week" && (
         <Stack px={2.5} my={1.5} direction="row" justifyContent="space-between">
           {week.map((w) => (
-            <Button
-              onClick={() => handleChange(w)}
-              variant={selected.includes(w) ? "contained" : "outlined"}
-              color={selected.includes(w) ? "primary" : "secondary"}
-              sx={{
-                minWidth: "36px",
-                height: "36px",
-                p: 0,
-                borderRadius: "12px",
-              }}
-            >
-              {w}
-            </Button>
+            <DateButton
+              value={w}
+              handleClick={() => handleChange(w)}
+              isSelected={selected.includes(w)}
+            />
           ))}
         </Stack>
       )}
