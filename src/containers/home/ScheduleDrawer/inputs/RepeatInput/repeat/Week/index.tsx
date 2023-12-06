@@ -1,8 +1,9 @@
 import { selectSchedule } from "@app/redux/slices/scheduleSlice";
-import { Input, Box, Button, Grid } from "@mui/material";
+import { Box, Button, Grid } from "@mui/material";
 import { useState } from "react";
 import { useSelector } from "react-redux";
 import RadioLabel from "../../radio/RadioLabel";
+import InputLabel from "../../radio/RadioLabel/InputLabel";
 
 function Week() {
   const schedule = useSelector(selectSchedule);
@@ -23,22 +24,13 @@ function Week() {
       <RadioLabel
         value="Week"
         label={
-          schedule?.repeat === "Week" ? (
-            <>
-              <Input
-                defaultValue={1}
-                type="number"
-                inputProps={{
-                  min: 1,
-                  max: 52,
-                }}
-                sx={{ width: "30px" }}
-              />
-              주 마다
-            </>
-          ) : (
-            <>매주</>
-          )
+          <InputLabel
+            label="매주"
+            postInputLabel="주 마다"
+            max={52}
+            type="repeat"
+            option="Week"
+          />
         }
       />
 

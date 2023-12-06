@@ -3,7 +3,7 @@ import { Box, Stack, InputBase } from "@mui/material";
 import { useSelector } from "react-redux";
 import RadioLabel from "../../radio/RadioLabel";
 
-function End() {
+function EndDate() {
   const schedule = useSelector(selectSchedule);
 
   return (
@@ -63,4 +63,4 @@ function End() {
   );
 }
 
-export default End;
+export default EndDate;

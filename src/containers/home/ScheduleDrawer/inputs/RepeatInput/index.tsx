@@ -10,8 +10,10 @@ import AllDay from "./repeat/AllDay";
 import Week from "./repeat/Week";
 import Month from "./repeat/Month";
 import Year from "./repeat/Year";
-import End from "./period/End";
+import EndDate from "./period/EndDate";
 import RadioLabel from "./radio/RadioLabel";
+import RepetitionCount from "./period/RepetitionCount";
+import ThickDivider from "@components/common/ThickDivider";
 
 function RepeatInput() {
   const dispatch = useAppDispatch();
@@ -52,6 +54,8 @@ function RepeatInput() {
           </>
         </RepeatRadioGroup>
 
+        <ThickDivider />
+
         <Box sx={{ color: "primary.main" }} px={2}>
           기간
         </Box>
@@ -59,30 +63,9 @@ function RepeatInput() {
           <>
             <RadioLabel value="All" label="계속 반복" />
 
-            <RadioLabel
-              value="numberOf"
-              label={
-                schedule?.period === "numberOf" ? (
-                  <>
-                    총
-                    <Input
-                      defaultValue={1}
-                      type="number"
-                      inputProps={{
-                        min: 1,
-                        max: 100,
-                      }}
-                      sx={{ width: "30px" }}
-                    />
-                    번 반복
-                  </>
-                ) : (
-                  <>일정 반복 횟수</>
-                )
-              }
-            />
+            <RepetitionCount />
 
-            <End />
+            <EndDate />
           </>
         </RepeatRadioGroup>
       </Collapse>
