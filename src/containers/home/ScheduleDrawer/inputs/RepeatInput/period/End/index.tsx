@@ -1,18 +1,14 @@
 import { selectSchedule } from "@app/redux/slices/scheduleSlice";
-import RadioButton from "@components/common/RadioButton";
-import { FormControlLabel, Box, Stack, InputBase } from "@mui/material";
+import { Box, Stack, InputBase } from "@mui/material";
 import { useSelector } from "react-redux";
+import RadioLabel from "../../radio/RadioLabel";
 
 function End() {
   const schedule = useSelector(selectSchedule);
 
   return (
     <Box>
-      <FormControlLabel
-        control={<RadioButton value="end" />}
-        label="종료 날짜"
-        sx={{ px: 2.5 }}
-      />
+      <RadioLabel value="end" label="종료 날짜" />
 
       {schedule?.period === "end" && (
         <Stack

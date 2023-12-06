@@ -1,14 +1,14 @@
 import { selectSchedule } from "@app/redux/slices/scheduleSlice";
-import RadioButton from "@components/common/RadioButton";
-import { FormControlLabel, Input } from "@mui/material";
+import { Input } from "@mui/material";
 import { useSelector } from "react-redux";
+import RadioLabel from "../radio/RadioLabel";
 
 function AllDay() {
   const schedule = useSelector(selectSchedule);
 
   return (
-    <FormControlLabel
-      control={<RadioButton value="AllDay" />}
+    <RadioLabel
+      value="AllDay"
       label={
         schedule?.repeat === "AllDay" ? (
           <>
@@ -27,7 +27,6 @@ function AllDay() {
           <>매일</>
         )
       }
-      sx={{ px: 2.5 }}
     />
   );
 }

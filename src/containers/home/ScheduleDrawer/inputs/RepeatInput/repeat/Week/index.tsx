@@ -1,15 +1,8 @@
 import { selectSchedule } from "@app/redux/slices/scheduleSlice";
-import RadioButton from "@components/common/RadioButton";
-import {
-  FormControlLabel,
-  Input,
-  Box,
-  Button,
-  Grid,
-  Divider,
-} from "@mui/material";
+import { Input, Box, Button, Grid } from "@mui/material";
 import { useState } from "react";
 import { useSelector } from "react-redux";
+import RadioLabel from "../../radio/RadioLabel";
 
 function Week() {
   const schedule = useSelector(selectSchedule);
@@ -27,8 +20,8 @@ function Week() {
 
   return (
     <Box>
-      <FormControlLabel
-        control={<RadioButton value="Week" />}
+      <RadioLabel
+        value="Week"
         label={
           schedule?.repeat === "Week" ? (
             <>
@@ -47,10 +40,7 @@ function Week() {
             <>매주</>
           )
         }
-        sx={{ px: 2.5 }}
       />
-
-      <Divider />
 
       {schedule?.repeat === "Week" && (
         <Grid px={2.5} my={1.5} container columns={{ xs: 14 }}>

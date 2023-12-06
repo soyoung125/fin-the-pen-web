@@ -1,18 +1,17 @@
 import { Box, Collapse, Stack, Input } from "@mui/material";
-import FormControlLabel from "@mui/material/FormControlLabel";
 import { useState } from "react";
 import { useSelector } from "react-redux";
 import SwitchButton from "@components/common/SwitchButton";
 import { useAppDispatch } from "@app/redux/hooks";
 import { selectSchedule } from "@app/redux/slices/scheduleSlice";
 import { updateRepeat } from "../../domain/schedule";
-import RepeatRadioGroup from "./RepeatRadioGroup";
-import RadioButton from "@components/common/RadioButton";
+import RepeatRadioGroup from "./radio/RepeatRadioGroup";
 import AllDay from "./repeat/AllDay";
 import Week from "./repeat/Week";
 import Month from "./repeat/Month";
 import Year from "./repeat/Year";
 import End from "./period/End";
+import RadioLabel from "./radio/RadioLabel";
 
 function RepeatInput() {
   const dispatch = useAppDispatch();
@@ -58,13 +57,10 @@ function RepeatInput() {
         </Box>
         <RepeatRadioGroup type="period" handleChange={changeRepeat}>
           <>
-            <FormControlLabel
-              control={<RadioButton value="All" />}
-              label="계속 반복"
-              sx={{ px: 2.5 }}
-            />
-            <FormControlLabel
-              control={<RadioButton value="numberOf" />}
+            <RadioLabel value="All" label="계속 반복" />
+
+            <RadioLabel
+              value="numberOf"
               label={
                 schedule?.period === "numberOf" ? (
                   <>
@@ -84,7 +80,6 @@ function RepeatInput() {
                   <>일정 반복 횟수</>
                 )
               }
-              sx={{ px: 2.5 }}
             />
 
             <End />

@@ -1,15 +1,15 @@
 import { selectSchedule } from "@app/redux/slices/scheduleSlice";
-import RadioButton from "@components/common/RadioButton";
-import { FormControlLabel, Input, Box, Button, Stack } from "@mui/material";
+import { Input, Box, Button, Stack } from "@mui/material";
 import { useSelector } from "react-redux";
+import RadioLabel from "../../radio/RadioLabel";
 
 function Year() {
   const schedule = useSelector(selectSchedule);
 
   return (
     <Box>
-      <FormControlLabel
-        control={<RadioButton value="Year" />}
+      <RadioLabel
+        value="Year"
         label={
           schedule?.repeat === "Year" ? (
             <>
@@ -28,7 +28,6 @@ function Year() {
             <>매년</>
           )
         }
-        sx={{ px: 2.5 }}
       />
 
       {schedule?.repeat === "Year" && (
