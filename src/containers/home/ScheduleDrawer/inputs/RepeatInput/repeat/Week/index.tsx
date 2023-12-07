@@ -39,6 +39,7 @@ function Week() {
         <Stack px={2.5} my={1.5} direction="row" justifyContent="space-between">
           {week.map((w) => (
             <DateButton
+              key={Math.random()}
               value={w}
               handleClick={() => handleChange(w)}
               isSelected={selected.includes(w)}

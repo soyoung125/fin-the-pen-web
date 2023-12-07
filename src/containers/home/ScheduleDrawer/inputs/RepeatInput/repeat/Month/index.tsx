@@ -66,6 +66,7 @@ function Month() {
             months.map((d) => (
               <Grid item xs={2} display="flex" mt={2.5} justifyContent="center">
                 <DateButton
+                  key={Math.random()}
                   value={d}
                   handleClick={() => handleClick(d)}
                   isSelected={selectedDate.includes(d)}
