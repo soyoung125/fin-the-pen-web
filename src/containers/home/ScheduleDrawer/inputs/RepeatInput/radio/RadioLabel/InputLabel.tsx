@@ -30,8 +30,13 @@ function InputLabel({
         inputProps={{
           min: 1,
           max: max,
+          style: { textAlign: "center" },
         }}
-        sx={{ width: "30px" }}
+        sx={{
+          width: "30px",
+          color: "primary.main",
+        }}
+        color="primary"
       />
       {postInputLabel}
     </>
