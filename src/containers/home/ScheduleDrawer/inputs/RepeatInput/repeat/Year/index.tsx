@@ -1,4 +1,7 @@
-import { selectSchedule } from "@app/redux/slices/scheduleSlice";
+import {
+  selectSchedule,
+  selectStartDate,
+} from "@app/redux/slices/scheduleSlice";
 import { Box, Button, Stack } from "@mui/material";
 import { useSelector } from "react-redux";
 import RadioLabel from "../../radio/RadioLabel";
@@ -8,18 +11,32 @@ import moment from "moment";
 
 function Year() {
   const schedule = useSelector(selectSchedule);
-  const start_date = moment(schedule?.start_date);
-  const week = ["첫", "두", "세", "네", "여섯"];
+  const startDate = useSelector(selectStartDate);
+  const week = ["첫", "두", "세", "네", "다섯", "여섯"];
 
   const [selected, setSelected] = useState("date");
-  const date = {
-    month: start_date.month(),
-    date: start_date.date(),
-    day: start_date.format("dddd"),
-    week: start_date.week() - start_date.startOf("month").week(),
-    lastWeek: start_date.daysInMonth(),
-    lastDate: start_date.endOf("month"),
-  };
+  const [date, setDate] = useState({
+    month: 1,
+    date: 1,
+    day: "월요일",
+    week: 0,
+    lastDate: moment(),
+  });
+
+  useEffect(() => {
+    const start = moment(startDate);
+    const month = start.month() + 1;
+    const firstWeek = moment(startDate).startOf("month").week();
+    const thisWeek = month === 12 && start.week() === 1 ? 53 : start.week();
+
+    setDate({
+      month: month,
+      date: start.date(),
+      day: start.format("dddd"),
+      week: thisWeek - firstWeek,
+      lastDate: start.endOf("month"),
+    });
+  }, [startDate]);
 
   return (
     <Box>
@@ -52,7 +69,7 @@ function Year() {
             sx={{ borderRadius: "20px", width: "200px" }}
             onClick={() => setSelected("weekNum")}
           >
-            {`${date.month}월 ${week[date.week - 1]}번째 ${date.day}`}
+            {`${date.month}월 ${week[date.week]}번째 ${date.day}`}
           </Button>
           {date.lastDate.diff(schedule?.start_date, "day") < 7 && (
             <Button
