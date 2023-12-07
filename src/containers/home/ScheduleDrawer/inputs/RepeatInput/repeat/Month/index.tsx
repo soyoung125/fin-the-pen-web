@@ -1,6 +1,9 @@
-import { selectSchedule } from "@app/redux/slices/scheduleSlice";
+import {
+  selectSchedule,
+  selectStartDate,
+} from "@app/redux/slices/scheduleSlice";
 import { Box, Button, Grid } from "@mui/material";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import moment from "moment";
 import { useSelector } from "react-redux";
 import RadioLabel from "../../radio/RadioLabel";
@@ -9,11 +12,19 @@ import DateButton from "@components/common/DateButton";
 
 function Month() {
   const schedule = useSelector(selectSchedule);
+  const startDate = useSelector(selectStartDate);
   const months = Array.from({ length: 31 }, (_, i) => i + 1);
-  const date = moment(schedule?.start_date).format("D");
 
   const [selectedOption, setSelectedOption] = useState("date");
-  const [selectedDate, setSelectedDate] = useState<number[]>([Number(date)]);
+  const [selectedDate, setSelectedDate] = useState<number[]>([]);
+  const [date, setDate] = useState(0);
+
+  useEffect(() => {
+    const date = moment(startDate).date();
+
+    setDate(date);
+    setSelectedDate([date]);
+  }, [startDate]);
 
   const handleClick = (d: number) => {
     if (selectedDate.includes(d)) {
@@ -64,9 +75,15 @@ function Month() {
 
           {selectedOption === "select" &&
             months.map((d) => (
-              <Grid item xs={2} display="flex" mt={2.5} justifyContent="center">
+              <Grid
+                item
+                xs={2}
+                display="flex"
+                mt={2.5}
+                justifyContent="center"
+                key={Math.random()}
+              >
                 <DateButton
-                  key={Math.random()}
                   value={d}
                   handleClick={() => handleClick(d)}
                   isSelected={selectedDate.includes(d)}
