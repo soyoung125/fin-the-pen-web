@@ -283,5 +283,7 @@ export const selectStatus = (state: RootState) =>
   (state.schedule as InitialState).status;
 export const selectAnalyzedData = (state: RootState) =>
   (state.schedule as InitialState).analyzedData;
+export const selectStartDate = (state: RootState) =>
+  (state.schedule as InitialState).schedule?.start_date;
 
 export default scheduleSlice.reducer;

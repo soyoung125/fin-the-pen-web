@@ -1,16 +1,28 @@
-import { selectSchedule } from "@app/redux/slices/scheduleSlice";
+import {
+  selectSchedule,
+  selectStartDate,
+} from "@app/redux/slices/scheduleSlice";
 import { Box, Button, Stack } from "@mui/material";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import RadioLabel from "../../radio/RadioLabel";
 import InputLabel from "../../radio/RadioLabel/InputLabel";
 import DateButton from "@components/common/DateButton";
+import moment from "moment";
 
 function Week() {
   const schedule = useSelector(selectSchedule);
+  const startDate = useSelector(selectStartDate);
   const week = ["월", "화", "수", "목", "금", "토", "일"];
 
   const [selected, setSelected] = useState<string[]>([]);
+
+  useEffect(() => {
+    const day = moment(startDate).day();
+
+    if (day === 0) setSelected(["일"]);
+    else setSelected([week[day - 1]]);
+  }, [startDate]);
 
   const handleChange = (w: string) => {
     if (selected.includes(w)) {
