@@ -1,24 +1,11 @@
-import { createContext, ReactNode } from "react";
-
-export interface DatePickerContextParams {
-  title?: string;
-  content?: ReactNode;
-  rejectText?: string;
-  approveText?: string;
-}
-
-export type DatePickerContextType = string | null;
+import { createContext } from "react";
 
 const DatePickerContext = createContext<{
-  datePicker: ({
-    title,
-    content,
-    approveText,
-    rejectText,
-  }: DatePickerContextParams) => Promise<DatePickerContextType>;
+  datePicker: () => Promise<string>;
+  // timePicker: () => Promise<string>;
 }>({
-  datePicker: () =>
-    new Promise<DatePickerContextType>((_, reject) => reject(null)),
+  datePicker: () => new Promise<string>((_, reject) => reject("")),
+  // timePicker: () => new Promise<string>((_, reject) => reject("")),
 });
 
 export default DatePickerContext;

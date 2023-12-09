@@ -11,6 +11,7 @@ import FilterLayout from "@containers/home/common/TopBar/buttons/FilterButton/Fi
 import DateInput from "@containers/home/common/TopBar/buttons/FilterButton/DateInput.tsx";
 import RefreshIcon from "@mui/icons-material/Refresh";
 import { useDialog } from "@components/layouts/dialog/hooks/useDialog.ts";
+import Temp from "@containers/home/common/TopBar/buttons/FilterButton/Temp.tsx";
 interface FilterDrawerProps {
   bottomDrawerOpen: boolean;
   setBottomDrawerOpen: React.Dispatch<React.SetStateAction<boolean>>;
@@ -101,6 +102,7 @@ function FilterDrawer({
               {dateError}
             </Typography>
           </FilterLayout>
+          <Temp />
 
           {categories.map((category) => {
             return (
