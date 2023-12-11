@@ -115,8 +115,9 @@ function EndDate() {
             value={date.year}
             handleBlur={handleBlur}
             handleChange={handleChange}
-            min={moment(startDate).year() + 50}
+            min={moment(startDate).year()}
             max={moment(startDate).year() + 50}
+            width="60px"
           />
 
           <Box>년</Box>
