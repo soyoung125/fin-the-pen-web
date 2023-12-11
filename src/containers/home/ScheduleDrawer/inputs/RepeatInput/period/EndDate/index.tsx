@@ -1,17 +1,19 @@
 import {
+  selectRepeat,
   selectSchedule,
   selectStartDate,
 } from "@app/redux/slices/scheduleSlice";
-import { Box, Stack, InputBase, FormControl } from "@mui/material";
+import { Box, Stack } from "@mui/material";
 import { useSelector } from "react-redux";
 import RadioLabel from "../../radio/RadioLabel";
-import { FocusEvent, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import moment from "moment";
 import Input from "./Input";
 
 function EndDate() {
   const schedule = useSelector(selectSchedule);
   const startDate = useSelector(selectStartDate);
+  const repeat = useSelector(selectRepeat);
 
   const [date, setDate] = useState({
     year: 2023,
@@ -23,7 +25,7 @@ function EndDate() {
   useEffect(() => {
     let date = moment(startDate);
 
-    switch (schedule?.repeat) {
+    switch (repeat) {
       case "AllDay": {
         date = date.add(1, "w");
         break;
@@ -50,7 +52,7 @@ function EndDate() {
       date: date.date(),
       day: date.format("dddd"),
     });
-  }, [startDate]);
+  }, [startDate, repeat]);
 
   const handleBlur = (e: React.FocusEvent<HTMLInputElement>) => {
     const { id, value, min, max } = e.target;
