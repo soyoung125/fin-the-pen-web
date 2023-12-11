@@ -5,14 +5,18 @@ import {
   Stack,
   Typography,
 } from "@mui/material";
-import { DatePickerState } from "@components/layouts/date-picker/DatePickerWrapper.tsx";
 import SelectDate from "@components/layouts/date-picker/components/SelectDate.tsx";
 import { AdapterMoment } from "@mui/x-date-pickers/AdapterMoment";
 import { LocalizationProvider } from "@mui/x-date-pickers";
 import DatePickerContext from "@components/layouts/date-picker/DatePickerContext.tsx";
 import { useContext } from "react";
 
-function DatePicker({ onClickApprove, onClickReject }: DatePickerState) {
+export interface DatePickerProps {
+  onClickApprove: (answer: string) => void;
+  onClickReject: (answer: string) => void;
+}
+
+function DatePicker({ onClickApprove, onClickReject }: DatePickerProps) {
   const { value, setValue } = useContext(DatePickerContext);
   return (
     <MuiDialog
