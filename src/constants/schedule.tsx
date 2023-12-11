@@ -104,7 +104,7 @@ const INIT_SCHEDULE = (date: string, start_time: string): Schedule => ({
   category: "",
   all_day: false,
   repeat: "None",
-  period: "None",
+  period: "All",
   price_type: SCHEDULE_DRAWER.type_minus,
   amount: "0",
   fix_amount: false,

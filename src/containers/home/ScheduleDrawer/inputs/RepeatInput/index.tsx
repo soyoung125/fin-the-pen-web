@@ -1,4 +1,4 @@
-import { Box, Collapse, Stack, Input } from "@mui/material";
+import { Box, Collapse, Stack } from "@mui/material";
 import { useState } from "react";
 import { useSelector } from "react-redux";
 import SwitchButton from "@components/common/SwitchButton";
@@ -19,10 +19,8 @@ function RepeatInput() {
   const dispatch = useAppDispatch();
   const schedule = useSelector(selectSchedule);
 
-  const [openDatePickerModal, setOpenDatePickerModal] = useState(false);
-
   const changeRepeat = (state: { target: { value: string; name: string } }) => {
-    updateRepeat(dispatch, schedule, setOpenDatePickerModal, state);
+    updateRepeat(dispatch, schedule, state);
   };
 
   return (
