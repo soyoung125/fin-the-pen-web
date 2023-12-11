@@ -5,7 +5,7 @@ import {
 import { Box, Stack, InputBase, FormControl } from "@mui/material";
 import { useSelector } from "react-redux";
 import RadioLabel from "../../radio/RadioLabel";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import moment from "moment";
 
 function EndDate() {
@@ -20,45 +20,67 @@ function EndDate() {
   });
 
   useEffect(() => {
-    const date = moment(startDate);
+    let date = moment(startDate);
+
+    switch (schedule?.repeat) {
+      case "AllDay": {
+        date = date.add(1, "w");
+        break;
+      }
+      case "Week": {
+        date = date.add(1, "M");
+        break;
+      }
+      case "Month": {
+        date = date.add(1, "y");
+        break;
+      }
+      case "Year": {
+        date = date.add(10, "y");
+        break;
+      }
+      default:
+        return;
+    }
 
     setDate({
       year: date.year(),
-      month: date.month(),
+      month: date.month() + 1,
       date: date.date(),
       day: date.format("dddd"),
     });
   }, [startDate]);
 
-  const handleChange = (e: React.FocusEvent<HTMLInputElement>) => {
+  const handleBlur = (e: React.FocusEvent<HTMLInputElement>) => {
     const { id, value, min, max } = e.target;
-    if (value < min) e.target.value = min;
-    if (value > max) e.target.value = max;
+    let newValue = Number(value);
+    if (newValue < Number(min)) newValue = Number(min);
+    if (newValue > Number(max)) newValue = Number(max);
 
     switch (id) {
       case "year": {
-        const d = `${e.target.value}-${date.month}-${date.date}`;
+        const d = `${newValue}-${date.month}-${date.date}`;
         setDate({
           ...date,
-          year: Number(e.target.value),
+          year: newValue,
           day: moment(d, "YYYY-M-D").format("dddd"),
         });
         break;
       }
       case "month": {
-        const d = `${date.year}-${e.target.value}-${date.date}`;
+        const d = `${date.year}-${newValue}-${date.date}`;
         setDate({
           ...date,
-          month: Number(e.target.value),
+          month: newValue,
           day: moment(d, "YYYY-M-D").format("dddd"),
         });
         break;
       }
       case "date": {
-        const d = `${date.year}-${date.month}-${e.target.value}`;
+        const d = `${date.year}-${date.month}-${newValue}`;
         setDate({
           ...date,
-          date: Number(e.target.value),
+          date: newValue,
           day: moment(d, "YYYY-M-D").format("dddd"),
         });
         break;
@@ -66,6 +88,13 @@ function EndDate() {
       default:
         return;
     }
+  };
+
+  const handleChange = (e: React.FocusEvent<HTMLInputElement>) => {
+    setDate({
+      ...date,
+      [e.target.id]: Number(e.target.value) || "",
+    });
   };
 
   return (
@@ -80,7 +109,7 @@ function EndDate() {
           alignItems="center"
           mt={0.5}
         >
-          <FormControl onSubmit={() => console.log(111)}>
+          <FormControl>
             <InputBase
               id="year"
               sx={{
@@ -89,14 +118,14 @@ function EndDate() {
                 width: "60px",
                 backgroundColor: "rgba(115, 91, 242, 0.10)",
               }}
-              type="number"
               placeholder="YYYY"
-              onBlur={handleChange}
-              defaultValue={date.year}
+              onBlur={handleBlur}
+              onChange={handleChange}
+              value={date.year}
               inputProps={{
                 style: { textAlign: "center" },
-                min: date.year,
-                max: date.year + 50,
+                min: moment(startDate).year(),
+                max: moment(startDate).year() + 50,
               }}
             />
           </FormControl>
@@ -112,10 +141,10 @@ function EndDate() {
                 width: "50px",
                 backgroundColor: "rgba(115, 91, 242, 0.10)",
               }}
-              type="number"
               placeholder="MM"
-              onBlur={handleChange}
-              defaultValue={date.month}
+              onBlur={handleBlur}
+              onChange={handleChange}
+              value={date.month}
               inputProps={{ style: { textAlign: "center" }, min: 1, max: 12 }}
             />
           </FormControl>
@@ -131,10 +160,10 @@ function EndDate() {
                 width: "50px",
                 backgroundColor: "rgba(115, 91, 242, 0.10)",
               }}
-              type="number"
               placeholder="DD"
-              onBlur={handleChange}
-              defaultValue={date.date}
+              onBlur={handleBlur}
+              onChange={handleChange}
+              value={date.date}
               inputProps={{
                 style: { textAlign: "center" },
                 min: 1,
