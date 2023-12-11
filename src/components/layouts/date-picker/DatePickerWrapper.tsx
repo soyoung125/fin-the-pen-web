@@ -2,8 +2,9 @@ import { ReactNode, useState } from "react";
 import DatePickerContext, {
   DatePickerType,
 } from "@components/layouts/date-picker/DatePickerContext.tsx";
-import DatePicker from "@components/layouts/date-picker/DatePicker.tsx";
+import DatePicker from "@components/layouts/date-picker/components/DatePicker.tsx";
 import moment from "moment/moment";
+import TimePicker from "@components/layouts/date-picker/components/TimePicker.tsx";
 
 export interface DatePickerState {
   type: DatePickerType;
@@ -36,6 +37,12 @@ function DatePickerWrapper({ children }: { children: ReactNode }) {
       {children}
       {datePickerState?.type === "date" && (
         <DatePicker
+          onClickApprove={datePickerState.onClickApprove}
+          onClickReject={datePickerState.onClickReject}
+        />
+      )}
+      {datePickerState?.type === "time" && (
+        <TimePicker
           onClickApprove={datePickerState.onClickApprove}
           onClickReject={datePickerState.onClickReject}
         />
