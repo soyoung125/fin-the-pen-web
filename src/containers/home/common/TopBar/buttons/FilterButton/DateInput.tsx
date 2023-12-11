@@ -1,4 +1,6 @@
 import { SelectDate } from "@containers/home/common/TopBar/buttons/FilterButton/hooks/useSelectDate.ts";
+import { useDatePicker } from "@components/layouts/date-picker/hooks/useDatePicker.tsx";
+import { MouseEventHandler } from "react";
 
 interface DateInputProps {
   dateType: keyof SelectDate;
@@ -7,12 +9,18 @@ interface DateInputProps {
 }
 
 function DateInput({ updateDate, date, dateType }: DateInputProps) {
+  const { pickYYYYMMDD } = useDatePicker();
+  const onClick: MouseEventHandler<HTMLInputElement> = async (event) => {
+    event.preventDefault();
+    const answer = await pickYYYYMMDD();
+    updateDate(dateType, answer);
+  };
+
   return (
     <input
       type="date"
       value={date}
-      onChange={(e) => updateDate(dateType, e.target.value)}
-      onClick={(e) => e.currentTarget.showPicker()}
+      onClick={onClick}
       style={{
         display: "flex",
         height: "50px",
