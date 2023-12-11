@@ -3,7 +3,7 @@ import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
 import { useNavigate } from "react-router-dom";
 
 interface BackButtonProps {
-  handleClick?: null | (() => void);
+  handleClick?: () => void;
 }
 
 function BackButton({ handleClick }: BackButtonProps) {

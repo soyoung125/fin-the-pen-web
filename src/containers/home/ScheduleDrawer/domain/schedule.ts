@@ -75,7 +75,6 @@ export const updateAllDay = (
 export const updateRepeat = (
   dispatch: Dispatch,
   schedule: Schedule | null,
-  setOpenDatePickerModal: React.Dispatch<React.SetStateAction<boolean>>,
   state: { target: { value: string; name: string } },
 ) => {
   dispatch(
@@ -84,10 +83,6 @@ export const updateRepeat = (
       [state.target.name]: state.target.value,
     }),
   );
-
-  if (state.target.value !== "None") {
-    setOpenDatePickerModal(true);
-  }
 };
 
 export const updateRepeatEndDate = (
