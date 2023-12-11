@@ -6,8 +6,14 @@ import {
   Typography,
 } from "@mui/material";
 import { DatePickerState } from "@components/layouts/date-picker/DatePickerWrapper.tsx";
+import SelectDate from "@components/layouts/date-picker/components/SelectDate.tsx";
+import { AdapterMoment } from "@mui/x-date-pickers/AdapterMoment";
+import { LocalizationProvider } from "@mui/x-date-pickers";
+import DatePickerContext from "@components/layouts/date-picker/DatePickerContext.tsx";
+import { useContext } from "react";
 
 function DatePicker({ onClickApprove, onClickReject }: DatePickerState) {
+  const { value, setValue } = useContext(DatePickerContext);
   return (
     <MuiDialog
       sx={{ "& .MuiDialog-paper": { borderRadius: "1rem", width: "100%" } }}
@@ -26,9 +32,9 @@ function DatePicker({ onClickApprove, onClickReject }: DatePickerState) {
           </Typography>
         </Stack>
         <Divider sx={{ backgroundColor: "black", height: "1px" }} />
-        <Typography variant="h2" textAlign="center" my="24px">
-          {/*{content}*/}
-        </Typography>
+        <LocalizationProvider dateAdapter={AdapterMoment}>
+          <SelectDate value={value} setValue={setValue} />
+        </LocalizationProvider>
         <Stack direction="row" gap="10px">
           <Button
             variant="outlined"
@@ -39,7 +45,7 @@ function DatePicker({ onClickApprove, onClickReject }: DatePickerState) {
           </Button>
           <Button
             variant="contained"
-            onClick={() => onClickApprove("hi")}
+            onClick={() => onClickApprove(value)}
             fullWidth
           >
             선택

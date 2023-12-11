@@ -1,11 +1,14 @@
-import { createContext } from "react";
+import { createContext, Dispatch, SetStateAction } from "react";
+import moment from "moment";
 
 const DatePickerContext = createContext<{
   datePicker: () => Promise<string>;
-  // timePicker: () => Promise<string>;
+  value: string;
+  setValue: Dispatch<SetStateAction<string>>;
 }>({
   datePicker: () => new Promise<string>((_, reject) => reject("")),
-  // timePicker: () => new Promise<string>((_, reject) => reject("")),
+  value: moment().format("YYYY-MM-DD"),
+  setValue: () => {},
 });
 
 export default DatePickerContext;

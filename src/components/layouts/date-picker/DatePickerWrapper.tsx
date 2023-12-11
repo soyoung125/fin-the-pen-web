@@ -1,6 +1,7 @@
 import { ReactNode, useState } from "react";
 import DatePickerContext from "@components/layouts/date-picker/DatePickerContext.tsx";
 import DatePicker from "@components/layouts/date-picker/DatePicker.tsx";
+import moment from "moment/moment";
 
 export interface DatePickerState {
   onClickApprove: (answer: string) => void;
@@ -8,6 +9,7 @@ export interface DatePickerState {
 }
 
 function DatePickerWrapper({ children }: { children: ReactNode }) {
+  const [value, setValue] = useState(moment().format("YYYY-MM-DD"));
   const [datePickerState, setDatePickerState] = useState<DatePickerState>();
 
   const datePicker = (): Promise<string> => {
@@ -26,7 +28,7 @@ function DatePickerWrapper({ children }: { children: ReactNode }) {
   };
 
   return (
-    <DatePickerContext.Provider value={{ datePicker }}>
+    <DatePickerContext.Provider value={{ value, setValue, datePicker }}>
       {children}
       {datePickerState && (
         <DatePicker
