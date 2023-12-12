@@ -2,7 +2,7 @@ import { useAppDispatch } from "@app/redux/hooks";
 import { selectSchedule } from "@app/redux/slices/scheduleSlice";
 import { Box, Collapse, InputAdornment } from "@mui/material";
 import { UpdateStateInterface } from "@type/common";
-import { SCHEDULE_DRAWER } from "constants/schedule";
+import { SCHEDULE_DRAWER, ScheduleDrawerType } from "constants/schedule";
 import { useSelector } from "react-redux";
 import { updateSchedule } from "../../domain/schedule";
 import SelectTime from "./select/SelectTime";
@@ -17,7 +17,7 @@ interface InputDateTimeProps {
   time: string | undefined;
   handleClick: (type: string, selectType: string) => void;
   showCalendar: string;
-  type: string;
+  type: "start" | "end";
   showError: boolean;
 }
 
@@ -31,7 +31,7 @@ function InputDateTime({
 }: InputDateTimeProps) {
   const dispatch = useAppDispatch();
   const schedule = useSelector(selectSchedule);
-  const title = type === "start" ? SCHEDULE_DRAWER.start : SCHEDULE_DRAWER.end;
+  const title = SCHEDULE_DRAWER[type];
 
   const changeSchedule = (state: UpdateStateInterface) => {
     updateSchedule(dispatch, schedule, state);

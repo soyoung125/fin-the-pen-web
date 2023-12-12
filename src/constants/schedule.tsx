@@ -1,40 +1,9 @@
 import moment from "moment";
 import { Schedule, ScheduleDrawerMode } from "@type/schedule.tsx";
 
-interface ScheduleDrawer {
-  readonly drawer_title: {
-    readonly create: string;
-    readonly read: string;
-    readonly modify: string;
-  };
-  readonly name: string;
-  readonly start: string;
-  readonly end: string;
-  readonly repeat: string;
-  readonly period: string;
-  readonly all_day: string;
-  readonly category_title: string;
-  readonly add_category: string;
-  readonly set_finance_title: string;
-  readonly set_spending_title: string;
-  readonly type_plus: "+"; // 저장 데이터와 연동되어 있음
-  readonly type_minus: "-"; // 저장 데이터와 연동되어 있음
-  readonly won: string;
-  readonly expected_spending: string;
-  readonly fix_amount: string;
-  readonly set_importance_title: string;
-  readonly importance_high: "상"; // 저장 데이터와 연동되어 있음
-  readonly importance_middle: "중"; // 저장 데이터와 연동되어 있음
-  readonly importance_low: "하"; // 저장 데이터와 연동되어 있음
-  readonly exclusion_title: string;
-  readonly add_schedule: {
-    readonly create: string;
-    readonly read: string;
-    readonly modify: string;
-  };
-}
+export type ScheduleDrawerType = typeof SCHEDULE_DRAWER;
 
-const SCHEDULE_DRAWER: Readonly<ScheduleDrawer> = Object.freeze({
+const SCHEDULE_DRAWER = {
   drawer_title: {
     create: "새로운 이벤트",
     read: "일정",
@@ -51,22 +20,22 @@ const SCHEDULE_DRAWER: Readonly<ScheduleDrawer> = Object.freeze({
   add_category: "+ 카테고리 추가",
   set_finance_title: "자산 설정하기",
   set_spending_title: "금액 설정",
-  type_plus: "+",
-  type_minus: "-",
+  type_plus: "+", // 저장 데이터와 연동되어 있음 (수정금지)
+  type_minus: "-", // 저장 데이터와 연동되어 있음 (수정금지)
   won: "원",
   expected_spending: "예상 비용",
   fix_amount: "금액 고정",
   set_importance_title: "일정 중요도",
-  importance_high: "상",
-  importance_middle: "중",
-  importance_low: "하",
+  importance_high: "상", // 저장 데이터와 연동되어 있음 (수정금지)
+  importance_middle: "중", // 저장 데이터와 연동되어 있음 (수정금지)
+  importance_low: "하", // 저장 데이터와 연동되어 있음 (수정금지)
   exclusion_title: "예산에서 제외",
   add_schedule: {
     create: "일정 추가하기",
     read: "문구를 뭐로할까요",
     modify: "수정 완료",
   },
-});
+} as const;
 
 const IMPORTANCES = [
   {
