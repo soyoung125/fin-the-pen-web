@@ -1,10 +1,11 @@
 import { selectSchedule } from "@app/redux/slices/scheduleSlice";
 import { RadioGroup, Input } from "@mui/material";
+import { UpdateStateInterface } from "@type/common";
 import { useSelector } from "react-redux";
 
 interface RepeatRadioGroupProps {
   type: "repeat" | "period";
-  handleChange: (state: { target: { value: string; name: string } }) => void;
+  handleChange: (state: UpdateStateInterface) => void;
   children: JSX.Element;
 }
 
@@ -24,7 +25,7 @@ function RepeatRadioGroup({
         handleChange({
           target: {
             value: e.target.value,
-            name: type,
+            id: type,
           },
         })
       }

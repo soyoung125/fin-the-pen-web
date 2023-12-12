@@ -7,7 +7,7 @@ import {
   selectRepeatType,
   selectSchedule,
 } from "@app/redux/slices/scheduleSlice";
-import { updateRepeat } from "../../domain/schedule";
+import { updateRepeat, updateSchedule } from "../../domain/schedule";
 import RepeatRadioGroup from "./radio/RepeatRadioGroup";
 import AllDay from "./repeat/AllDay";
 import Week from "./repeat/Week";
@@ -17,14 +17,19 @@ import EndDate from "./period/EndDate";
 import RadioLabel from "./radio/RadioLabel";
 import RepetitionCount from "./period/RepetitionCount";
 import ThickDivider from "@components/common/ThickDivider";
+import { UpdateStateInterface } from "@type/common";
 
 function RepeatInput() {
   const dispatch = useAppDispatch();
   const schedule = useSelector(selectSchedule);
   const repeatType = useSelector(selectRepeatType);
 
-  const changeRepeat = (state: { target: { value: string; name: string } }) => {
+  const changeRepeat = (state: UpdateStateInterface) => {
     updateRepeat(dispatch, schedule, state);
+  };
+
+  const changePeriod = (state: UpdateStateInterface) => {
+    updateSchedule(dispatch, schedule, state);
   };
 
   return (
@@ -37,7 +42,7 @@ function RepeatInput() {
             changeRepeat({
               target: {
                 value: repeatType === "None" ? "day_type" : "None",
-                name: "repeat",
+                id: "repeat",
               },
             })
           }
@@ -61,7 +66,7 @@ function RepeatInput() {
         <Box sx={{ color: "primary.main" }} px={2}>
           기간
         </Box>
-        <RepeatRadioGroup type="period" handleChange={changeRepeat}>
+        <RepeatRadioGroup type="period" handleChange={changePeriod}>
           <>
             <RadioLabel value="All" label="계속 반복" />
 

@@ -1,5 +1,8 @@
+import { useAppDispatch } from "@app/redux/hooks";
 import { selectSchedule } from "@app/redux/slices/scheduleSlice";
+import { updateRepeat } from "@containers/home/ScheduleDrawer/domain/schedule";
 import { Input } from "@mui/material";
+import { UpdateStateInterface } from "@type/common";
 import { useSelector } from "react-redux";
 
 interface InputLabelProps {
@@ -7,8 +10,7 @@ interface InputLabelProps {
   preInputLabel?: string;
   postInputLabel: string;
   max: number;
-  type: "repeat" | "period";
-  option: string;
+  option: "day_type" | "week_type" | "month_type" | "year_type";
 }
 
 function InputLabel({
@@ -16,16 +18,35 @@ function InputLabel({
   preInputLabel,
   postInputLabel,
   max,
-  type,
   option,
 }: InputLabelProps) {
+  const dispatch = useAppDispatch();
   const schedule = useSelector(selectSchedule);
 
-  return schedule?.[type] === option ? (
+  const handleUpdate = (e: UpdateStateInterface) => {
+    updateRepeat(dispatch, schedule, e);
+  };
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { id, value, max } = e.target;
+    let newValue = value;
+    if (Number(newValue) > Number(max)) newValue = max;
+    handleUpdate({ target: { id: id, value: newValue } });
+  };
+
+  const handleBlur = (e: React.FocusEvent<HTMLInputElement>) => {
+    const { id, value, min } = e.target;
+    let newValue = value;
+    if (Number(newValue) < Number(min)) newValue = min;
+    handleUpdate({ target: { id: id, value: newValue.toString() } });
+  };
+
+  return schedule?.repeat.kind_type === option ? (
     <>
       {preInputLabel}
       <Input
-        defaultValue={1}
+        id="repeat_value"
+        value={schedule?.repeat[option].repeat_value}
         type="number"
         inputProps={{
           min: 1,
@@ -37,6 +58,8 @@ function InputLabel({
           color: "primary.main",
         }}
         color="primary"
+        onChange={handleChange}
+        onBlur={handleBlur}
       />
       {postInputLabel}
     </>

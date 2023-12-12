@@ -75,10 +75,10 @@ export const updateAllDay = (
 export const updateRepeat = (
   dispatch: Dispatch,
   schedule: Schedule | null,
-  state: { target: { value: string; name: string } },
+  state: UpdateStateInterface,
 ) => {
-  const { name, value } = state.target;
-  if (name === "repeat") {
+  const { id, value } = state.target;
+  if (id === "repeat") {
     dispatch(
       setDrawerSchedule({
         ...schedule,
@@ -88,11 +88,21 @@ export const updateRepeat = (
         },
       }),
     );
-  } else {
+    return;
+  }
+  const type = schedule?.repeat.kind_type ?? "None";
+  if (type !== "None") {
+    const newValue = {
+      ...schedule?.repeat[type],
+      [id]: value,
+    };
     dispatch(
       setDrawerSchedule({
         ...schedule,
-        [name]: value,
+        repeat: {
+          ...schedule?.repeat,
+          [type]: newValue,
+        },
       }),
     );
   }

@@ -43,7 +43,6 @@ function Week() {
             label="매주"
             postInputLabel="주 마다"
             max={52}
-            type="repeat"
             option="week_type"
           />
         }

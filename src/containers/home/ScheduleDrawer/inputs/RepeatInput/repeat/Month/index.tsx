@@ -45,7 +45,6 @@ function Month() {
             label="매달"
             postInputLabel="개월 마다"
             max={12}
-            type="repeat"
             option="month_type"
           />
         }

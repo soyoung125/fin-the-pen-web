@@ -49,7 +49,6 @@ function Year() {
             label="매년"
             postInputLabel="년 마다"
             max={10}
-            type="repeat"
             option="year_type"
           />
         }

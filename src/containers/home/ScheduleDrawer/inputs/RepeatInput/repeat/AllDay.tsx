@@ -10,7 +10,6 @@ function AllDay() {
           label="매일"
           postInputLabel="일 마다"
           max={365}
-          type="repeat"
           option="day_type"
         />
       }
