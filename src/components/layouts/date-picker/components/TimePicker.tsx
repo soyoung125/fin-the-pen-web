@@ -9,7 +9,10 @@ import SelectDate from "@components/layouts/date-picker/components/SelectDate.ts
 import { AdapterMoment } from "@mui/x-date-pickers/AdapterMoment";
 import { LocalizationProvider } from "@mui/x-date-pickers";
 import DatePickerContext from "@components/layouts/date-picker/DatePickerContext.tsx";
-import { useContext } from "react";
+import { useContext, useState } from "react";
+import SelectTime, {
+  HHMMType,
+} from "@components/layouts/date-picker/components/SelectTime.tsx";
 
 export interface TimePickerProps {
   onClickApprove: (answer: string) => void;
@@ -18,6 +21,7 @@ export interface TimePickerProps {
 
 function TimePicker({ onClickApprove, onClickReject }: TimePickerProps) {
   const { value, setValue } = useContext(DatePickerContext);
+  const [time, setTime] = useState<string>("13:04");
   return (
     <MuiDialog
       sx={{ "& .MuiDialog-paper": { borderRadius: "1rem", width: "100%" } }}
@@ -36,7 +40,9 @@ function TimePicker({ onClickApprove, onClickReject }: TimePickerProps) {
           </Typography>
         </Stack>
         <Divider sx={{ backgroundColor: "black", height: "1px" }} />
-        <div>ㅇㅇ</div>
+        <div>
+          <SelectTime value={time} setValue={setTime} />
+        </div>
         <Stack direction="row" gap="10px">
           <Button
             variant="outlined"
