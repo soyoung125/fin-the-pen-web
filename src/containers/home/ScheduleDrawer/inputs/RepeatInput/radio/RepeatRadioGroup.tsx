@@ -14,10 +14,12 @@ function RepeatRadioGroup({
   children,
 }: RepeatRadioGroupProps) {
   const schedule = useSelector(selectSchedule);
+  const value =
+    type === "repeat" ? schedule?.repeat.kind_type : schedule?.period;
 
   return (
     <RadioGroup
-      value={schedule?.[type]}
+      value={value}
       onChange={(e) =>
         handleChange({
           target: {

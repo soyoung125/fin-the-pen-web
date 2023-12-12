@@ -3,7 +3,10 @@ import { useState } from "react";
 import { useSelector } from "react-redux";
 import SwitchButton from "@components/common/SwitchButton";
 import { useAppDispatch } from "@app/redux/hooks";
-import { selectSchedule } from "@app/redux/slices/scheduleSlice";
+import {
+  selectRepeatType,
+  selectSchedule,
+} from "@app/redux/slices/scheduleSlice";
 import { updateRepeat } from "../../domain/schedule";
 import RepeatRadioGroup from "./radio/RepeatRadioGroup";
 import AllDay from "./repeat/AllDay";
@@ -18,6 +21,7 @@ import ThickDivider from "@components/common/ThickDivider";
 function RepeatInput() {
   const dispatch = useAppDispatch();
   const schedule = useSelector(selectSchedule);
+  const repeatType = useSelector(selectRepeatType);
 
   const changeRepeat = (state: { target: { value: string; name: string } }) => {
     updateRepeat(dispatch, schedule, state);
@@ -28,18 +32,18 @@ function RepeatInput() {
       <Stack direction="row" justifyContent="space-between" sx={{ px: 2.5 }}>
         <Box sx={{ color: "primary.main" }}>반복</Box>
         <SwitchButton
-          checked={schedule?.repeat !== "None"}
+          checked={repeatType !== "None"}
           handleChange={() =>
             changeRepeat({
               target: {
-                value: schedule?.repeat === "None" ? "AllDay" : "None",
+                value: repeatType === "None" ? "day_type" : "None",
                 name: "repeat",
               },
             })
           }
         />
       </Stack>
-      <Collapse in={schedule?.repeat !== "None"}>
+      <Collapse in={repeatType !== "None"}>
         <RepeatRadioGroup type="repeat" handleChange={changeRepeat}>
           <>
             <AllDay />

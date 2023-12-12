@@ -103,7 +103,26 @@ const INIT_SCHEDULE = (date: string, start_time: string): Schedule => ({
   end_time: `${moment(start_time, "HH").add(2, "h").format("HH")}:00`,
   category: "",
   all_day: false,
-  repeat: "None",
+  repeat: {
+    day_type: {
+      repeat_value: "1",
+    },
+    week_type: {
+      repeat_day_of_week: "",
+      repeat_value: "1",
+    },
+    month_type: {
+      today_repeat: true,
+      select_date: "",
+      repeat_value: "1",
+    },
+    year_type: {
+      year_repeat: "string",
+      repeat_value: "1",
+      year_category: "MonthAndDay",
+    },
+    kind_type: "None",
+  },
   period: "All",
   price_type: SCHEDULE_DRAWER.type_minus,
   amount: "0",

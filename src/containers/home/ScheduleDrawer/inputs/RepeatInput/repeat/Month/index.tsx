@@ -1,4 +1,5 @@
 import {
+  selectRepeatType,
   selectSchedule,
   selectStartDate,
 } from "@app/redux/slices/scheduleSlice";
@@ -13,6 +14,7 @@ import DateButton from "@components/common/DateButton";
 function Month() {
   const schedule = useSelector(selectSchedule);
   const startDate = useSelector(selectStartDate);
+  const repeatType = useSelector(selectRepeatType);
   const months = Array.from({ length: 31 }, (_, i) => i + 1);
 
   const [selectedOption, setSelectedOption] = useState("date");
@@ -37,19 +39,19 @@ function Month() {
   return (
     <>
       <RadioLabel
-        value="Month"
+        value="month_type"
         label={
           <InputLabel
             label="매달"
             postInputLabel="개월 마다"
             max={12}
             type="repeat"
-            option="Month"
+            option="month_type"
           />
         }
       />
 
-      {schedule?.repeat === "Month" && (
+      {repeatType === "month_type" && (
         <Grid container px={2.5} py={1.5} columns={14} spacing={1.5}>
           <Grid item xs={7}>
             <Button

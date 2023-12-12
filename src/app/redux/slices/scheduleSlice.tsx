@@ -285,7 +285,7 @@ export const selectAnalyzedData = (state: RootState) =>
   (state.schedule as InitialState).analyzedData;
 export const selectStartDate = (state: RootState) =>
   (state.schedule as InitialState).schedule?.start_date;
-export const selectRepeat = (state: RootState) =>
-  (state.schedule as InitialState).schedule?.repeat;
+export const selectRepeatType = (state: RootState) =>
+  (state.schedule as InitialState).schedule?.repeat.kind_type;
 
 export default scheduleSlice.reducer;

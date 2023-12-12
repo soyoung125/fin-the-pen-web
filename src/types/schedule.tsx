@@ -10,7 +10,7 @@ export interface Schedule {
   start_time: string;
   end_time: string;
   all_day: boolean;
-  repeat: string;
+  repeat: ScheduleRepeat;
   period: string;
   price_type: string;
   amount: string;
@@ -35,6 +35,27 @@ export interface RequestSchedule {
   fix_amount: boolean;
   importance: string;
   exclusion: boolean;
+}
+
+export interface ScheduleRepeat {
+  day_type: {
+    repeat_value: string;
+  };
+  week_type: {
+    repeat_day_of_week: string;
+    repeat_value: string;
+  };
+  month_type: {
+    today_repeat: boolean;
+    select_date: string;
+    repeat_value: string;
+  };
+  year_type: {
+    year_repeat: string;
+    repeat_value: string;
+    year_category: "MonthAndDay";
+  };
+  kind_type: "day_type" | "week_type" | "month_type" | "year_type" | "None";
 }
 
 export type ViewModeValue = (typeof VIEW_MODE)[keyof typeof VIEW_MODE];

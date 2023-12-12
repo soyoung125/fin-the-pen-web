@@ -1,4 +1,5 @@
 import {
+  selectRepeatType,
   selectSchedule,
   selectStartDate,
 } from "@app/redux/slices/scheduleSlice";
@@ -13,6 +14,7 @@ import moment from "moment";
 function Week() {
   const schedule = useSelector(selectSchedule);
   const startDate = useSelector(selectStartDate);
+  const repeatType = useSelector(selectRepeatType);
   const week = ["월", "화", "수", "목", "금", "토", "일"];
 
   const [selected, setSelected] = useState<string[]>([]);
@@ -35,19 +37,19 @@ function Week() {
   return (
     <Box>
       <RadioLabel
-        value="Week"
+        value="week_type"
         label={
           <InputLabel
             label="매주"
             postInputLabel="주 마다"
             max={52}
             type="repeat"
-            option="Week"
+            option="week_type"
           />
         }
       />
 
-      {schedule?.repeat === "Week" && (
+      {repeatType === "week_type" && (
         <Stack px={2.5} my={1.5} direction="row" justifyContent="space-between">
           {week.map((w) => (
             <DateButton

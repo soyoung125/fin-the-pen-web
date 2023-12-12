@@ -77,12 +77,25 @@ export const updateRepeat = (
   schedule: Schedule | null,
   state: { target: { value: string; name: string } },
 ) => {
-  dispatch(
-    setDrawerSchedule({
-      ...schedule,
-      [state.target.name]: state.target.value,
-    }),
-  );
+  const { name, value } = state.target;
+  if (name === "repeat") {
+    dispatch(
+      setDrawerSchedule({
+        ...schedule,
+        repeat: {
+          ...schedule?.repeat,
+          kind_type: value,
+        },
+      }),
+    );
+  } else {
+    dispatch(
+      setDrawerSchedule({
+        ...schedule,
+        [name]: value,
+      }),
+    );
+  }
 };
 
 export const updateRepeatEndDate = (

@@ -1,4 +1,5 @@
 import {
+  selectRepeatType,
   selectSchedule,
   selectStartDate,
 } from "@app/redux/slices/scheduleSlice";
@@ -12,6 +13,7 @@ import moment from "moment";
 function Year() {
   const schedule = useSelector(selectSchedule);
   const startDate = useSelector(selectStartDate);
+  const repeatType = useSelector(selectRepeatType);
   const week = ["첫", "두", "세", "네", "다섯", "여섯"];
 
   const [selected, setSelected] = useState("date");
@@ -41,19 +43,19 @@ function Year() {
   return (
     <Box>
       <RadioLabel
-        value="Year"
+        value="year_type"
         label={
           <InputLabel
             label="매년"
             postInputLabel="년 마다"
             max={10}
             type="repeat"
-            option="Year"
+            option="year_type"
           />
         }
       />
 
-      {schedule?.repeat === "Year" && (
+      {repeatType === "year_type" && (
         <Stack px={2.5} my={1.5} spacing={1} alignItems="center">
           <Button
             variant={selected === "date" ? "contained" : "outlined"}
