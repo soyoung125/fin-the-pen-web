@@ -17,9 +17,11 @@ interface InputDateTimeProps {
   time: string | undefined;
   handleClick: (type: string, selectType: string) => void;
   showCalendar: string;
-  type: "start" | "end";
+  type: InputDateTimeType;
   showError: boolean;
 }
+
+export type InputDateTimeType = "start" | "end";
 
 function InputDateTime({
   date,
