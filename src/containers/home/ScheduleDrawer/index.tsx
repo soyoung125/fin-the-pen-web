@@ -1,4 +1,12 @@
-import { Alert, Box, Slide, SlideProps, Snackbar, Stack } from "@mui/material";
+import {
+  Alert,
+  Box,
+  Button,
+  Slide,
+  SlideProps,
+  Snackbar,
+  Stack,
+} from "@mui/material";
 import { useEffect, useRef, useState } from "react";
 import { useSelector } from "react-redux";
 import NameInput from "./inputs/NameInput";
@@ -19,6 +27,8 @@ import { useAppDispatch } from "../../../app/redux/hooks";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Swiper as SwiperType } from "swiper/types";
 import ThickDivider from "@components/common/ThickDivider";
+import { useDatePicker } from "@components/layouts/date-picker/hooks/useDatePicker.tsx";
+import moment from "moment";
 
 function TransitionUp(props: SlideProps) {
   return <Slide {...props} direction="right" />;
@@ -47,6 +57,13 @@ function ScheduleDrawer({
   const [showError, setShowError] = useState(false);
   const [value, setValue] = useState(0);
   const [swiper, setSwiper] = useState<SwiperType>();
+
+  const { pickHHMM } = useDatePicker();
+  const [time, setTime] = useState<string>(moment().format("HH:mm"));
+  const onClick = async () => {
+    const answer = await pickHHMM();
+    setTime(answer);
+  };
 
   const handleChange = (event: React.SyntheticEvent, newValue: number) => {
     swiper?.slideTo(newValue);
@@ -132,6 +149,8 @@ function ScheduleDrawer({
 
                   {/* 이벤트 일정 */}
                   <DateInput showError={showError} />
+
+                  <Button onClick={onClick}>{time}</Button>
                   <ThickDivider />
 
                   {/* 이벤트 반복 설정 */}

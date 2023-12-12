@@ -6,5 +6,10 @@ export const useDatePicker = () => {
   const pickYYYYMMDD = () => {
     return datePicker({ type: "date" });
   };
-  return { pickYYYYMMDD };
+
+  const pickHHMM = () => {
+    return datePicker({ type: "time" });
+  };
+
+  return { pickYYYYMMDD, pickHHMM };
 };
