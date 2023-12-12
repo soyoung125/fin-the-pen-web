@@ -1,7 +1,5 @@
 import moment from "moment";
-import { Schedule, ScheduleDrawerMode } from "@type/schedule.tsx";
-
-export type ScheduleDrawerType = typeof SCHEDULE_DRAWER;
+import { Schedule } from "@type/schedule.tsx";
 
 const SCHEDULE_DRAWER = {
   drawer_title: {
