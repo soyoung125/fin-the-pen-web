@@ -122,6 +122,7 @@ function EasyAuthentication({ handleAuthenticate }: EasyAuthenticationProps) {
             </Stack>
 
             <Keypad
+              isRandom={true}
               setPassword={setPassword}
               currentLength={password.length}
               maxLength={CHARACTER_LIMIT}
