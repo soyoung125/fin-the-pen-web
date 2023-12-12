@@ -15,9 +15,9 @@ function Keypad({
   maxLength,
 }: KeypadProps) {
   const initialNumbers = [...Array(10)].map((_, index) => index);
-  const numbers: (number | string)[] = isRandom
+  const numbers: (number | "clear" | "delete")[] = isRandom
     ? [...initialNumbers].sort(() => Math.random() - 0.5)
-    : [...initialNumbers];
+    : [...initialNumbers.slice(1), 0];
   numbers.splice(10 - 1, 0, "clear");
   numbers.splice(10 + 1, 0, "delete");
 
