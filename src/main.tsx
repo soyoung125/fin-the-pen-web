@@ -11,6 +11,7 @@ import router from "./app/router";
 import { worker } from "./mocks/browser";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import DialogWrapper from "@components/layouts/dialog/DialogWrapper.tsx";
+import DatePickerWrapper from "@components/layouts/date-picker/DatePickerWrapper.tsx";
 
 const queryClient = new QueryClient();
 
@@ -38,7 +39,9 @@ async function main() {
           <PersistGate loading={null} persistor={persistor}>
             <CustomThemeProvider>
               <DialogWrapper>
-                <RouterProvider router={router} />
+                <DatePickerWrapper>
+                  <RouterProvider router={router} />
+                </DatePickerWrapper>
               </DialogWrapper>
             </CustomThemeProvider>
           </PersistGate>

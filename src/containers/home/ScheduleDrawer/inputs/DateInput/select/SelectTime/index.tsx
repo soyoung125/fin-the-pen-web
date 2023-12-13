@@ -2,15 +2,16 @@ import { Stack } from "@mui/material";
 import TimeOption from "./TimeOption";
 import { UpdateStateInterface } from "@type/common";
 import moment from "moment";
+import { InputDateTimeType } from "@containers/home/ScheduleDrawer/inputs/DateInput/InputDateTime.tsx";
 
 interface SelectDateProps {
   time: string | undefined;
   changeSchedule: (
     state:
       | React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>
-      | UpdateStateInterface,
+      | UpdateStateInterface
   ) => void;
-  type: string;
+  type: InputDateTimeType;
 }
 
 function SelectTime({ time, changeSchedule, type }: SelectDateProps) {

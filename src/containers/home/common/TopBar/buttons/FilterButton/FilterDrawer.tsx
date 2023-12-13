@@ -1,8 +1,6 @@
 import { Box, Button, Divider, Drawer, Stack, Typography } from "@mui/material";
-import { useContext } from "react";
 import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
 import RoundedButton from "@components/common/RoundedButton.tsx";
-import DialogContext from "@components/layouts/dialog/DialogContext.tsx";
 import FilterHeader from "@containers/home/common/TopBar/buttons/FilterButton/FilterHeader.tsx";
 import { categories } from "@containers/home/common/TopBar/buttons/FilterButton/constants/categories.ts";
 import { useSelectCategory } from "@containers/home/common/TopBar/buttons/FilterButton/hooks/useSelectCategory.ts";
