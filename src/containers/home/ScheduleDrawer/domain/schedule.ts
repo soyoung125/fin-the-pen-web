@@ -2,10 +2,9 @@ import moment from "moment";
 import { CATEGORIES, Category } from "../../../../constants/categories";
 import { SCHEDULE_DRAWER } from "../../../../constants/schedule";
 import { setDrawerSchedule } from "../../../../app/redux/slices/scheduleSlice";
-import { Schedule } from "../../../../types/schedule";
+import { Schedule, ScheduleRepeat } from "../../../../types/schedule";
 import { Dispatch } from "redux";
 import { UpdateStateInterface } from "../../../../types/common";
-import { SelectChangeEvent } from "@mui/material/Select";
 
 /**
  * index
@@ -18,45 +17,93 @@ export const updateSchedule = (
     | React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>
     | UpdateStateInterface,
 ) => {
+  switch (state.target.id) {
+    case "start_time": {
+      const endTime = moment(state.target.value as string, "HH:mm")
+        .add(2, "hours")
+        .format("HH:mm");
+      dispatch(
+        setDrawerSchedule({
+          ...schedule,
+          [state.target.id]: state.target.value,
+          end_time: endTime,
+        }),
+      );
+      break;
+    }
+    case "start_date": {
+      const startDate = state.target.value as string;
+      const start = moment(startDate);
+
+      if (start.isAfter(schedule?.end_date)) {
+        dispatch(
+          setDrawerSchedule({
+            ...schedule,
+            end_date: startDate,
+            start_date: startDate,
+          }),
+        );
+      } else {
+        initRepeat(dispatch, schedule, start);
+      }
+      break;
+    }
+    case "end_date":
+      if (moment(schedule?.start_date).isAfter(state.target.value as string)) {
+        dispatch(
+          setDrawerSchedule({
+            ...schedule,
+            start_date: state.target.value,
+            [state.target.id]: state.target.value,
+          }),
+        );
+      } else {
+        dispatch(
+          setDrawerSchedule({
+            ...schedule,
+            [state.target.id]: state.target.value,
+          }),
+        );
+      }
+      break;
+    default:
+      dispatch(
+        setDrawerSchedule({
+          ...schedule,
+          [state.target.id]: state.target.value,
+        }),
+      );
+      break;
+  }
+};
+
+const initRepeat = (
+  dispatch: Dispatch,
+  schedule: Schedule | null,
+  start: moment.Moment,
+) => {
   dispatch(
-    setDrawerSchedule({ ...schedule, [state.target.id]: state.target.value }),
+    setDrawerSchedule({
+      ...schedule,
+      start_date: start.format("YYYY-MM-DD"),
+      repeat: {
+        ...schedule?.repeat,
+        week_type: {
+          ...schedule?.repeat.week_type,
+          repeat_day_of_week: start.locale("en").format("dddd").toUpperCase(),
+        },
+        month_type: {
+          ...schedule?.repeat.month_type,
+          select_date: start.format("D"),
+        },
+        year_type: {
+          ...schedule?.repeat.year_type,
+          year_repeat: start.format("M월 D일"),
+          year_category: "MonthAndDay",
+        },
+      },
+    }),
   );
-  if (state.target.id === "start_time") {
-    const endTime = moment(state.target.value as string, "HH:mm")
-      .add(2, "hours")
-      .format("HH:mm");
-    dispatch(
-      setDrawerSchedule({
-        ...schedule,
-        [state.target.id]: state.target.value,
-        end_time: endTime,
-      }),
-    );
-  }
-  if (
-    state.target.id === "start_date" &&
-    moment(schedule?.end_date).isBefore(state.target.value as string)
-  ) {
-    dispatch(
-      setDrawerSchedule({
-        ...schedule,
-        end_date: state.target.value,
-        [state.target.id]: state.target.value,
-      }),
-    );
-  }
-  if (
-    state.target.id === "end_date" &&
-    moment(schedule?.start_date).isAfter(state.target.value as string)
-  ) {
-    dispatch(
-      setDrawerSchedule({
-        ...schedule,
-        start_date: state.target.value,
-        [state.target.id]: state.target.value,
-      }),
-    );
-  }
 };
 
 export const updateAllDay = (
@@ -186,7 +233,7 @@ export const generateRandomSchedule = (stringDate: string) => {
     end_time: `2${Math.floor(Math.random() * 4)}:00`,
     category: category.title,
     all_day: false,
-    repeat: "None",
+    repeat: getInitRepeat(date),
     period: "None",
     price_type: getType(category),
     amount: Math.floor(Math.random() * 1000) * 100,
@@ -207,3 +254,26 @@ export const getType = (category: Category) => {
 };
 
 export const getSign = (type: string) => (type === "+" ? "Plus" : "Minus");
+
+export const getInitRepeat = (date: moment.Moment): ScheduleRepeat => {
+  return {
+    day_type: {
+      repeat_value: "1",
+    },
+    week_type: {
+      repeat_day_of_week: date.locale("en").format("dddd").toUpperCase(),
+      repeat_value: "1",
+    },
+    month_type: {
+      today_repeat: true,
+      select_date: date.format("D"),
+      repeat_value: "1",
+    },
+    year_type: {
+      year_repeat: date.format("M월 D일"),
+      repeat_value: "1",
+      year_category: "MonthAndDay",
+    },
+    kind_type: "",
+  };
+};
