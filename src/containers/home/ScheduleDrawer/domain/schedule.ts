@@ -90,10 +90,11 @@ export const updateRepeat = (
     );
     return;
   }
-  const type = schedule?.repeat.kind_type ?? "None";
-  if (type !== "None") {
+  const type = schedule?.repeat.kind_type ?? "";
+  if (type !== "") {
+    const kind_type = `${type}_type` as const;
     const newValue = {
-      ...schedule?.repeat[type],
+      ...schedule?.repeat[kind_type],
       [id]: value,
     };
     dispatch(
@@ -101,7 +102,7 @@ export const updateRepeat = (
         ...schedule,
         repeat: {
           ...schedule?.repeat,
-          [type]: newValue,
+          [kind_type]: newValue,
         },
       }),
     );
