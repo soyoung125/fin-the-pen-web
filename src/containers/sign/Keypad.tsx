@@ -2,34 +2,42 @@ import { Dispatch, SetStateAction } from "react";
 import { Box, Button } from "@mui/material";
 
 interface KeypadProps {
-  numbers: number[];
-  setNumbers: Dispatch<SetStateAction<number[]>>;
+  isRandom?: boolean;
+  setPassword: Dispatch<SetStateAction<number[]>>;
+  currentLength: number;
   maxLength: number;
 }
 
-function Keypad({ numbers, setNumbers, maxLength }: KeypadProps) {
-  const keypadNumbers = [...Array(10)].map((_, index) => index);
-  const randomNumbers: (number | string)[] = [...keypadNumbers].sort(
-    () => Math.random() - 0.5
-  );
-  randomNumbers.splice(10 - 1, 0, "clear");
-  randomNumbers.splice(10 + 1, 0, "delete");
+function Keypad({
+  isRandom,
+  setPassword,
+  currentLength,
+  maxLength,
+}: KeypadProps) {
+  const initialNumbers = [...Array(10)].map((_, index) => index);
+  const numbers: (number | "clear" | "delete")[] = isRandom
+    ? [...initialNumbers].sort(() => Math.random() - 0.5)
+    : [...initialNumbers.slice(1), 0];
+  numbers.splice(10 - 1, 0, "clear");
+  numbers.splice(10 + 1, 0, "delete");
 
   const handleClickNumberButton = (number: number) => {
-    if (maxLength !== numbers.length) {
-      setNumbers((prevNumbers) => [...prevNumbers, number]);
+    if (maxLength !== currentLength) {
+      setPassword((prevNumbers) => [...prevNumbers, number]);
     }
   };
 
   const handleClickDeleteButton = () => {
-    if (numbers.length !== 0) {
-      setNumbers((prevNumbers) => prevNumbers.slice(0, prevNumbers.length - 1));
+    if (currentLength !== 0) {
+      setPassword((prevNumbers) =>
+        prevNumbers.slice(0, prevNumbers.length - 1)
+      );
     }
   };
 
   const handleClickClearButton = () => {
-    if (numbers.length !== 0) {
-      setNumbers([]);
+    if (currentLength !== 0) {
+      setPassword([]);
     }
   };
 
@@ -41,7 +49,7 @@ function Keypad({ numbers, setNumbers, maxLength }: KeypadProps) {
         gridTemplateRows: "repeat(4, 100px)",
       }}
     >
-      {randomNumbers.map((value) => (
+      {numbers.map((value) => (
         <Button
           key={value}
           className="item"

@@ -1,47 +1,64 @@
 import { useAppDispatch } from "@app/redux/hooks";
 import { selectSchedule } from "@app/redux/slices/scheduleSlice";
-import { Box, Collapse, InputAdornment } from "@mui/material";
+import { Box, InputAdornment } from "@mui/material";
 import { UpdateStateInterface } from "@type/common";
 import { SCHEDULE_DRAWER } from "constants/schedule";
 import { useSelector } from "react-redux";
 import { updateSchedule } from "../../domain/schedule";
-import SelectTime from "./select/SelectTime";
-import SelectDate from "./select/SelectDate";
 import moment from "moment";
 import "moment/dist/locale/ko";
 import { DateField, LocalizationProvider } from "@mui/x-date-pickers";
 import { AdapterMoment } from "@mui/x-date-pickers/AdapterMoment";
+import { useDatePicker } from "@components/layouts/date-picker/hooks/useDatePicker.tsx";
 
 interface InputDateTimeProps {
   date: string | undefined;
   time: string | undefined;
-  handleClick: (type: string, selectType: string) => void;
-  showCalendar: string;
-  type: string;
+  type: InputDateTimeType;
   showError: boolean;
 }
 
-function InputDateTime({
-  date,
-  time,
-  handleClick,
-  showCalendar,
-  type,
-  showError,
-}: InputDateTimeProps) {
+export type InputDateTimeType = "start" | "end";
+
+function InputDateTime({ date, time, type, showError }: InputDateTimeProps) {
   const dispatch = useAppDispatch();
   const schedule = useSelector(selectSchedule);
-  const title = type === "start" ? SCHEDULE_DRAWER.start : SCHEDULE_DRAWER.end;
+  const title = SCHEDULE_DRAWER[type];
+  const { pickHHMM, pickYYYYMMDD } = useDatePicker();
 
   const changeSchedule = (state: UpdateStateInterface) => {
     updateSchedule(dispatch, schedule, state);
+  };
+
+  const onClickDateField = async () => {
+    const date = await pickYYYYMMDD();
+    if (date) {
+      changeSchedule({
+        target: {
+          id: type + "_date",
+          value: date,
+        },
+      });
+    }
+  };
+
+  const onClickTimeField = async () => {
+    const time = await pickHHMM();
+    if (time) {
+      changeSchedule({
+        target: {
+          id: type + "_time",
+          value: time,
+        },
+      });
+    }
   };
 
   return (
     <Box sx={{ px: 2.5 }}>
       <LocalizationProvider dateAdapter={AdapterMoment}>
         <DateField
-          onClick={() => handleClick(type, "date")}
+          onClick={onClickDateField}
           fullWidth
           variant="standard"
           format="YYYY-MM-DD"
@@ -60,13 +77,7 @@ function InputDateTime({
                 <Box
                   onClick={(e) => {
                     e.stopPropagation();
-                    handleClick(type, "time");
-                  }}
-                />
-                <Box
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    handleClick(type, "time");
+                    onClickTimeField();
                   }}
                 >
                   {moment(time, "hh:mm").format("LT")}
@@ -75,35 +86,7 @@ function InputDateTime({
             ),
           }}
           value={moment(date)}
-          onChange={(value, context) =>
-            context.validationError === null &&
-            value &&
-            changeSchedule({
-              target: {
-                id: type + "_date",
-                value: value.format("YYYY-MM-DD"),
-              },
-            })
-          }
-          onSelectedSectionsChange={(newValue) => console.log(1, newValue)}
         />
-
-        <Collapse in={showCalendar !== ""}>
-          {showCalendar === "date" && (
-            <SelectDate
-              date={date}
-              changeSchedule={changeSchedule}
-              type={type}
-            />
-          )}
-          {showCalendar === "time" && (
-            <SelectTime
-              time={time}
-              changeSchedule={changeSchedule}
-              type={type}
-            />
-          )}
-        </Collapse>
       </LocalizationProvider>
     </Box>
   );

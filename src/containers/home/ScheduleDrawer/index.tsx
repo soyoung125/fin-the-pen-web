@@ -1,4 +1,12 @@
-import { Alert, Box, Slide, SlideProps, Snackbar, Stack } from "@mui/material";
+import {
+  Alert,
+  Box,
+  Button,
+  Slide,
+  SlideProps,
+  Snackbar,
+  Stack,
+} from "@mui/material";
 import { useEffect, useRef, useState } from "react";
 import { useSelector } from "react-redux";
 import NameInput from "./inputs/NameInput";
@@ -132,6 +140,7 @@ function ScheduleDrawer({
 
                   {/* 이벤트 일정 */}
                   <DateInput showError={showError} />
+
                   <ThickDivider />
 
                   {/* 이벤트 반복 설정 */}
