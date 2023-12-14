@@ -10,7 +10,7 @@ interface InputLabelProps {
   preInputLabel?: string;
   postInputLabel: string;
   max: number;
-  option: "day_type" | "week_type" | "month_type" | "year_type";
+  option: "day" | "week" | "month" | "year";
 }
 
 function InputLabel({
@@ -22,6 +22,7 @@ function InputLabel({
 }: InputLabelProps) {
   const dispatch = useAppDispatch();
   const schedule = useSelector(selectSchedule);
+  const type = `${option}_type` as const;
 
   const handleUpdate = (e: UpdateStateInterface) => {
     updateRepeat(dispatch, schedule, e);
@@ -46,7 +47,7 @@ function InputLabel({
       {preInputLabel}
       <Input
         id="repeat_value"
-        value={schedule?.repeat[option].repeat_value}
+        value={schedule?.repeat[type].repeat_value}
         type="number"
         inputProps={{
           min: 1,

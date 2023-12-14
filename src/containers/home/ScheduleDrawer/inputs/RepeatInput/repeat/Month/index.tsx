@@ -39,18 +39,18 @@ function Month() {
   return (
     <>
       <RadioLabel
-        value="month_type"
+        value="month"
         label={
           <InputLabel
             label="매달"
             postInputLabel="개월 마다"
             max={12}
-            option="month_type"
+            option="month"
           />
         }
       />
 
-      {repeatType === "month_type" && (
+      {repeatType === "month" && (
         <Grid container px={2.5} py={1.5} columns={14} spacing={1.5}>
           <Grid item xs={7}>
             <Button

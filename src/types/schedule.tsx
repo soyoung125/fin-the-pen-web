@@ -55,7 +55,7 @@ export interface ScheduleRepeat {
     repeat_value: string;
     year_category: "MonthAndDay";
   };
-  kind_type: "day_type" | "week_type" | "month_type" | "year_type" | "None";
+  kind_type: "day" | "week" | "month" | "year" | "";
 }
 
 export type ViewModeValue = (typeof VIEW_MODE)[keyof typeof VIEW_MODE];

@@ -26,19 +26,19 @@ function EndDate() {
     let date = moment(startDate);
 
     switch (repeatType) {
-      case "day_type": {
+      case "day": {
         date = date.add(1, "w");
         break;
       }
-      case "week_type": {
+      case "week": {
         date = date.add(1, "M");
         break;
       }
-      case "month_type": {
+      case "month": {
         date = date.add(1, "y");
         break;
       }
-      case "year_type": {
+      case "year": {
         date = date.add(10, "y");
         break;
       }

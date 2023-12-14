@@ -43,18 +43,18 @@ function Year() {
   return (
     <Box>
       <RadioLabel
-        value="year_type"
+        value="year"
         label={
           <InputLabel
             label="매년"
             postInputLabel="년 마다"
             max={10}
-            option="year_type"
+            option="year"
           />
         }
       />
 
-      {repeatType === "year_type" && (
+      {repeatType === "year" && (
         <Stack px={2.5} my={1.5} spacing={1} alignItems="center">
           <Button
             variant={selected === "date" ? "contained" : "outlined"}

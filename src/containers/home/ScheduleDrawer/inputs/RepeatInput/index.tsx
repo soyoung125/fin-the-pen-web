@@ -37,18 +37,18 @@ function RepeatInput() {
       <Stack direction="row" justifyContent="space-between" sx={{ px: 2.5 }}>
         <Box sx={{ color: "primary.main" }}>반복</Box>
         <SwitchButton
-          checked={repeatType !== "None"}
+          checked={repeatType !== ""}
           handleChange={() =>
             changeRepeat({
               target: {
-                value: repeatType === "None" ? "day_type" : "None",
+                value: repeatType === "" ? "day" : "",
                 id: "repeat",
               },
             })
           }
         />
       </Stack>
-      <Collapse in={repeatType !== "None"}>
+      <Collapse in={repeatType !== ""}>
         <RepeatRadioGroup type="repeat" handleChange={changeRepeat}>
           <>
             <AllDay />

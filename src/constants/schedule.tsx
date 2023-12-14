@@ -121,7 +121,7 @@ const INIT_SCHEDULE = (date: string, start_time: string): Schedule => ({
       repeat_value: "1",
       year_category: "MonthAndDay",
     },
-    kind_type: "None",
+    kind_type: "",
   },
   period: "All",
   price_type: SCHEDULE_DRAWER.type_minus,

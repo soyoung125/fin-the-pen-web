@@ -18,6 +18,7 @@ function Week() {
   const week = ["월", "화", "수", "목", "금", "토", "일"];
 
   const [selected, setSelected] = useState<string[]>([]);
+  // const selected = schedule?.repeat.week_type.repeat_day_of_week ?? "";
 
   useEffect(() => {
     const day = moment(startDate).day();
@@ -37,22 +38,22 @@ function Week() {
   return (
     <Box>
       <RadioLabel
-        value="week_type"
+        value="week"
         label={
           <InputLabel
             label="매주"
             postInputLabel="주 마다"
             max={52}
-            option="week_type"
+            option="week"
           />
         }
       />
 
-      {repeatType === "week_type" && (
+      {repeatType === "week" && (
         <Stack px={2.5} my={1.5} direction="row" justifyContent="space-between">
           {week.map((w) => (
             <DateButton
-              key={Math.random()}
+              key={w}
               value={w}
               handleClick={() => handleChange(w)}
               isSelected={selected.includes(w)}
