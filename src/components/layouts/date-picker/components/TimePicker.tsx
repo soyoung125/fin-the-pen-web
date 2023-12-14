@@ -35,7 +35,7 @@ function TimePicker({ onClickApprove, onClickReject }: TimePickerProps) {
         </Stack>
         <Divider sx={{ backgroundColor: "black", height: "1px" }} />
         <div>
-          <SelectTime value={value} setValue={setValue} />
+          <SelectTime setValue={setValue} />
         </div>
         <Stack direction="row" gap="10px">
           <Button
