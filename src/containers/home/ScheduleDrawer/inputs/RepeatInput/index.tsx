@@ -53,7 +53,7 @@ function RepeatInput() {
           <>
             <AllDay />
 
-            <Week />
+            <Week changeRepeat={changeRepeat} />
 
             <Month />
 

@@ -10,29 +10,38 @@ import RadioLabel from "../../radio/RadioLabel";
 import InputLabel from "../../radio/RadioLabel/InputLabel";
 import DateButton from "@components/common/DateButton";
 import moment from "moment";
+import { UpdateStateInterface } from "@type/common";
 
-function Week() {
+interface WeekProps {
+  changeRepeat: (state: UpdateStateInterface) => void;
+}
+
+function Week({ changeRepeat }: WeekProps) {
   const schedule = useSelector(selectSchedule);
-  const startDate = useSelector(selectStartDate);
   const repeatType = useSelector(selectRepeatType);
-  const week = ["월", "화", "수", "목", "금", "토", "일"];
+  const weekName: { [key: string]: string } = {
+    월: "MONDAY",
+    화: "TUESDAY",
+    수: "WEDNESDAY",
+    목: "THURSDAY",
+    금: "FRIDAY",
+    토: "SATURDAY",
+    일: "SUNDAY",
+  };
 
-  const [selected, setSelected] = useState<string[]>([]);
-  // const selected = schedule?.repeat.week_type.repeat_day_of_week ?? "";
+  const selectedWeek = schedule?.repeat.week_type.repeat_day_of_week ?? "";
 
-  useEffect(() => {
-    const day = moment(startDate).day();
-
-    if (day === 0) setSelected(["일"]);
-    else setSelected([week[day - 1]]);
-  }, [startDate]);
+  const changeDayOfWeek = (week: string) => {
+    changeRepeat({ target: { id: "repeat_day_of_week", value: week } });
+  };
 
   const handleChange = (w: string) => {
+    const selected = selectedWeek.split(", ");
     if (selected.includes(w)) {
-      setSelected(selected.filter((s) => s !== w));
+      changeDayOfWeek(selected.filter((s) => s !== w).join(", "));
       return;
     }
-    setSelected(selected.concat(w));
+    changeDayOfWeek(selected.concat(w).join(", "));
   };
 
   return (
@@ -51,12 +60,12 @@ function Week() {
 
       {repeatType === "week" && (
         <Stack px={2.5} my={1.5} direction="row" justifyContent="space-between">
-          {week.map((w) => (
+          {Object.keys(weekName).map((w) => (
             <DateButton
               key={w}
               value={w}
-              handleClick={() => handleChange(w)}
-              isSelected={selected.includes(w)}
+              handleClick={() => handleChange(weekName[w])}
+              isSelected={selectedWeek.includes(weekName[w])}
             />
           ))}
         </Stack>
