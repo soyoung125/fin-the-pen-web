@@ -3,37 +3,42 @@ import {
   selectSchedule,
   selectStartDate,
 } from "@app/redux/slices/scheduleSlice";
-import { Box, Button, Grid } from "@mui/material";
-import { useEffect, useState } from "react";
+import { Button, Grid } from "@mui/material";
 import moment from "moment";
 import { useSelector } from "react-redux";
 import RadioLabel from "../../radio/RadioLabel";
 import InputLabel from "../../radio/RadioLabel/InputLabel";
 import DateButton from "@components/common/DateButton";
+import { UpdateStateInterface } from "@type/common";
 
-function Month() {
+interface MonthProps {
+  changeRepeat: (state: UpdateStateInterface) => void;
+}
+
+function Month({ changeRepeat }: MonthProps) {
   const schedule = useSelector(selectSchedule);
-  const startDate = useSelector(selectStartDate);
   const repeatType = useSelector(selectRepeatType);
-  const months = Array.from({ length: 31 }, (_, i) => i + 1);
+  const startDate = useSelector(selectStartDate);
+  const months = Array.from({ length: 31 }, (_, i) => (i + 1).toString());
 
-  const [selectedOption, setSelectedOption] = useState("date");
-  const [selectedDate, setSelectedDate] = useState<number[]>([]);
-  const [date, setDate] = useState(0);
+  const selectedDate =
+    schedule?.repeat.month_type.select_date.split(", ") ?? [];
+  const todayRepeat = schedule?.repeat.month_type.today_repeat ?? true;
 
-  useEffect(() => {
-    const date = moment(startDate).date();
+  const changeTodayRepeat = () => {
+    changeRepeat({ target: { id: "today_repeat", value: !todayRepeat } });
+  };
 
-    setDate(date);
-    setSelectedDate([date]);
-  }, [startDate]);
+  const changeSelectDate = (date: string) => {
+    changeRepeat({ target: { id: "select_date", value: date } });
+  };
 
-  const handleClick = (d: number) => {
+  const handleClick = (d: string) => {
     if (selectedDate.includes(d)) {
-      setSelectedDate(selectedDate.filter((s) => s !== d));
+      changeSelectDate(selectedDate.filter((s) => s !== d).join(", "));
       return;
     }
-    setSelectedDate(selectedDate.concat(d));
+    changeSelectDate(selectedDate.concat(d).join(", "));
   };
 
   return (
@@ -55,26 +60,26 @@ function Month() {
           <Grid item xs={7}>
             <Button
               fullWidth
-              variant={selectedOption === "date" ? "contained" : "outlined"}
-              color={selectedOption === "date" ? "primary" : "secondary"}
+              variant={todayRepeat ? "contained" : "outlined"}
+              color={todayRepeat ? "primary" : "secondary"}
               sx={{ borderRadius: "20px" }}
-              onClick={() => setSelectedOption("date")}
-            >{`${date}일마다 반복`}</Button>
+              onClick={changeTodayRepeat}
+            >{`${moment(startDate).date()}일마다 반복`}</Button>
           </Grid>
 
           <Grid item xs={7}>
             <Button
               fullWidth
-              variant={selectedOption === "select" ? "contained" : "outlined"}
-              color={selectedOption === "select" ? "primary" : "secondary"}
+              variant={!todayRepeat ? "contained" : "outlined"}
+              color={!todayRepeat ? "primary" : "secondary"}
               sx={{ borderRadius: "20px" }}
-              onClick={() => setSelectedOption("select")}
+              onClick={changeTodayRepeat}
             >
               반복할 날짜 선택
             </Button>
           </Grid>
 
-          {selectedOption === "select" &&
+          {!todayRepeat &&
             months.map((d) => (
               <Grid
                 item

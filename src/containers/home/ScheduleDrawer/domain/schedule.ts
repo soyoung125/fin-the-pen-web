@@ -43,9 +43,8 @@ export const updateSchedule = (
             start_date: startDate,
           }),
         );
-      } else {
-        initRepeat(dispatch, schedule, start);
       }
+      initRepeat(dispatch, schedule, start);
       break;
     }
     case "end_date":
@@ -85,7 +84,6 @@ const initRepeat = (
   dispatch(
     setDrawerSchedule({
       ...schedule,
-      start_date: start.format("YYYY-MM-DD"),
       repeat: {
         ...schedule?.repeat,
         week_type: {

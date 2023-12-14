@@ -55,7 +55,7 @@ function RepeatInput() {
 
             <Week changeRepeat={changeRepeat} />
 
-            <Month />
+            <Month changeRepeat={changeRepeat} />
 
             <Year />
           </>
