@@ -33,18 +33,8 @@ export const updateSchedule = (
     }
     case "start_date": {
       const startDate = state.target.value as string;
-      const start = moment(startDate);
 
-      if (start.isAfter(schedule?.end_date)) {
-        dispatch(
-          setDrawerSchedule({
-            ...schedule,
-            end_date: startDate,
-            start_date: startDate,
-          }),
-        );
-      }
-      initRepeat(dispatch, schedule, start);
+      initRepeat(dispatch, schedule, startDate);
       break;
     }
     case "end_date":
@@ -79,29 +69,44 @@ export const updateSchedule = (
 const initRepeat = (
   dispatch: Dispatch,
   schedule: Schedule | null,
-  start: moment.Moment,
+  startDate: string,
 ) => {
-  dispatch(
-    setDrawerSchedule({
-      ...schedule,
-      repeat: {
-        ...schedule?.repeat,
-        week_type: {
-          ...schedule?.repeat.week_type,
-          repeat_day_of_week: start.locale("en").format("dddd").toUpperCase(),
-        },
-        month_type: {
-          ...schedule?.repeat.month_type,
-          select_date: start.format("D"),
-        },
-        year_type: {
-          ...schedule?.repeat.year_type,
-          year_repeat: start.format("M월 D일"),
-          year_category: "MonthAndDay",
-        },
-      },
-    }),
-  );
+  const start = moment(startDate);
+  const repeat = {
+    ...schedule?.repeat,
+    week_type: {
+      ...schedule?.repeat.week_type,
+      repeat_day_of_week: start.locale("en").format("dddd").toUpperCase(),
+    },
+    month_type: {
+      ...schedule?.repeat.month_type,
+      select_date: start.format("D"),
+    },
+    year_type: {
+      ...schedule?.repeat.year_type,
+      year_repeat: start.format("M월 D일"),
+      year_category: "MonthAndDay",
+    },
+  };
+
+  if (start.isAfter(schedule?.end_date)) {
+    dispatch(
+      setDrawerSchedule({
+        ...schedule,
+        end_date: startDate,
+        start_date: startDate,
+        repeat,
+      }),
+    );
+  } else {
+    dispatch(
+      setDrawerSchedule({
+        ...schedule,
+        start_date: startDate,
+        repeat,
+      }),
+    );
+  }
 };
 
 export const updateAllDay = (
