@@ -11,6 +11,7 @@ import { useEffect, useState } from "react";
 import moment from "moment";
 import { useAppDispatch } from "@app/redux/hooks";
 import { updateYearRepeat } from "@containers/home/ScheduleDrawer/domain/schedule";
+import OptionButton from "@components/repeat/OptionButton";
 
 function Year() {
   const dispatch = useAppDispatch();
@@ -63,39 +64,28 @@ function Year() {
       />
 
       {repeatType === "year" && (
-        <Stack px={2.5} my={1.5} spacing={1} alignItems="center">
-          <Button
+        <Stack px={2.5} my={1.5} spacing={1} mx="auto" sx={{ width: "200px" }}>
+          <OptionButton
             id="MonthAndDay"
-            variant={yearRepeat === "MonthAndDay" ? "contained" : "outlined"}
-            color={yearRepeat === "MonthAndDay" ? "primary" : "secondary"}
-            sx={{ borderRadius: "20px", width: "200px" }}
-            onClick={changeYearRepeat}
-          >
-            {`${date.month}월 ${date.date}일`}
-          </Button>
+            isSelected={yearRepeat === "MonthAndDay"}
+            value={`${date.month}월 ${date.date}일`}
+            handleClick={changeYearRepeat}
+          />
 
-          <Button
+          <OptionButton
             id="NthDayOfMonth"
-            variant={yearRepeat === "NthDayOfMonth" ? "contained" : "outlined"}
-            color={yearRepeat === "NthDayOfMonth" ? "primary" : "secondary"}
-            sx={{ borderRadius: "20px", width: "200px" }}
-            onClick={changeYearRepeat}
-          >
-            {`${date.month}월 ${week[date.week]}번째 ${date.day}`}
-          </Button>
+            isSelected={yearRepeat === "NthDayOfMonth"}
+            value={`${date.month}월 ${week[date.week]}번째 ${date.day}`}
+            handleClick={changeYearRepeat}
+          />
 
           {date.lastDate.diff(schedule?.start_date, "day") < 7 && (
-            <Button
+            <OptionButton
               id="LastDayOfMonth"
-              variant={
-                yearRepeat === "LastDayOfMonth" ? "contained" : "outlined"
-              }
-              color={yearRepeat === "LastDayOfMonth" ? "primary" : "secondary"}
-              sx={{ borderRadius: "20px", width: "200px" }}
-              onClick={changeYearRepeat}
-            >
-              {`${date.month}월 마지막 ${date.day}`}
-            </Button>
+              isSelected={yearRepeat === "LastDayOfMonth"}
+              value={`${date.month}월 마지막 ${date.day}`}
+              handleClick={changeYearRepeat}
+            />
           )}
         </Stack>
       )}

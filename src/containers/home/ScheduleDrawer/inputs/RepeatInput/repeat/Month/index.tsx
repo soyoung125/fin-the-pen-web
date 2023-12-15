@@ -8,8 +8,9 @@ import moment from "moment";
 import { useSelector } from "react-redux";
 import RadioLabel from "../../radio/RadioLabel";
 import InputLabel from "../../radio/RadioLabel/InputLabel";
-import DateButton from "@components/common/DateButton";
+import DateButton from "@components/repeat/DateButton";
 import { UpdateStateInterface } from "@type/common";
+import OptionButton from "@components/repeat/OptionButton";
 
 interface MonthProps {
   changeRepeat: (state: UpdateStateInterface) => void;
@@ -25,8 +26,12 @@ function Month({ changeRepeat }: MonthProps) {
     schedule?.repeat.month_type.select_date.split(", ") ?? [];
   const todayRepeat = schedule?.repeat.month_type.today_repeat ?? true;
 
-  const changeTodayRepeat = () => {
-    changeRepeat({ target: { id: "today_repeat", value: !todayRepeat } });
+  const changeTodayRepeat = (e: React.MouseEvent) => {
+    if (e.currentTarget.id === "todayRepeat") {
+      changeRepeat({ target: { id: "today_repeat", value: true } });
+    } else {
+      changeRepeat({ target: { id: "today_repeat", value: false } });
+    }
   };
 
   const changeSelectDate = (date: string) => {
@@ -58,25 +63,21 @@ function Month({ changeRepeat }: MonthProps) {
       {repeatType === "month" && (
         <Grid container px={2.5} py={1.5} columns={14} spacing={1.5}>
           <Grid item xs={7}>
-            <Button
-              fullWidth
-              variant={todayRepeat ? "contained" : "outlined"}
-              color={todayRepeat ? "primary" : "secondary"}
-              sx={{ borderRadius: "20px" }}
-              onClick={changeTodayRepeat}
-            >{`${moment(startDate).date()}일마다 반복`}</Button>
+            <OptionButton
+              id="todayRepeat"
+              isSelected={todayRepeat}
+              value={`${moment(startDate).date()}일마다 반복`}
+              handleClick={changeTodayRepeat}
+            />
           </Grid>
 
           <Grid item xs={7}>
-            <Button
-              fullWidth
-              variant={!todayRepeat ? "contained" : "outlined"}
-              color={!todayRepeat ? "primary" : "secondary"}
-              sx={{ borderRadius: "20px" }}
-              onClick={changeTodayRepeat}
-            >
-              반복할 날짜 선택
-            </Button>
+            <OptionButton
+              id="selectDate"
+              isSelected={!todayRepeat}
+              value="반복할 날짜 선택"
+              handleClick={changeTodayRepeat}
+            />
           </Grid>
 
           {!todayRepeat &&

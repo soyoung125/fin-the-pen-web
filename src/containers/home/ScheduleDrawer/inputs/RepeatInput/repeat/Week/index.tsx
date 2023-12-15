@@ -8,7 +8,7 @@ import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import RadioLabel from "../../radio/RadioLabel";
 import InputLabel from "../../radio/RadioLabel/InputLabel";
-import DateButton from "@components/common/DateButton";
+import DateButton from "@components/repeat/DateButton";
 import moment from "moment";
 import { UpdateStateInterface } from "@type/common";
 
