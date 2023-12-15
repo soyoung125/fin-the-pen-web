@@ -9,14 +9,18 @@ import RadioLabel from "../../radio/RadioLabel";
 import InputLabel from "../../radio/RadioLabel/InputLabel";
 import { useEffect, useState } from "react";
 import moment from "moment";
+import { useAppDispatch } from "@app/redux/hooks";
+import { updateYearRepeat } from "@containers/home/ScheduleDrawer/domain/schedule";
 
 function Year() {
+  const dispatch = useAppDispatch();
   const schedule = useSelector(selectSchedule);
   const startDate = useSelector(selectStartDate);
   const repeatType = useSelector(selectRepeatType);
   const week = ["첫", "두", "세", "네", "다섯", "여섯"];
 
-  const [selected, setSelected] = useState("date");
+  const yearRepeat = schedule?.repeat.year_type.year_category ?? "";
+
   const [date, setDate] = useState({
     month: 1,
     date: 1,
@@ -40,6 +44,10 @@ function Year() {
     });
   }, [startDate]);
 
+  const changeYearRepeat = (e: React.MouseEvent) => {
+    updateYearRepeat(dispatch, schedule, e);
+  };
+
   return (
     <Box>
       <RadioLabel
@@ -57,27 +65,34 @@ function Year() {
       {repeatType === "year" && (
         <Stack px={2.5} my={1.5} spacing={1} alignItems="center">
           <Button
-            variant={selected === "date" ? "contained" : "outlined"}
-            color={selected === "date" ? "primary" : "secondary"}
+            id="MonthAndDay"
+            variant={yearRepeat === "MonthAndDay" ? "contained" : "outlined"}
+            color={yearRepeat === "MonthAndDay" ? "primary" : "secondary"}
             sx={{ borderRadius: "20px", width: "200px" }}
-            onClick={() => setSelected("date")}
+            onClick={changeYearRepeat}
           >
             {`${date.month}월 ${date.date}일`}
           </Button>
+
           <Button
-            variant={selected === "weekNum" ? "contained" : "outlined"}
-            color={selected === "weekNum" ? "primary" : "secondary"}
+            id="NthDayOfMonth"
+            variant={yearRepeat === "NthDayOfMonth" ? "contained" : "outlined"}
+            color={yearRepeat === "NthDayOfMonth" ? "primary" : "secondary"}
             sx={{ borderRadius: "20px", width: "200px" }}
-            onClick={() => setSelected("weekNum")}
+            onClick={changeYearRepeat}
           >
             {`${date.month}월 ${week[date.week]}번째 ${date.day}`}
           </Button>
+
           {date.lastDate.diff(schedule?.start_date, "day") < 7 && (
             <Button
-              variant={selected === "lastWeek" ? "contained" : "outlined"}
-              color={selected === "lastWeek" ? "primary" : "secondary"}
+              id="LastDayOfMonth"
+              variant={
+                yearRepeat === "LastDayOfMonth" ? "contained" : "outlined"
+              }
+              color={yearRepeat === "LastDayOfMonth" ? "primary" : "secondary"}
               sx={{ borderRadius: "20px", width: "200px" }}
-              onClick={() => setSelected("lastWeek")}
+              onClick={changeYearRepeat}
             >
               {`${date.month}월 마지막 ${date.day}`}
             </Button>

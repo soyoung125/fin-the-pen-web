@@ -159,6 +159,27 @@ export const updateRepeat = (
   }
 };
 
+export const updateYearRepeat = (
+  dispatch: Dispatch,
+  schedule: Schedule | null,
+  event: React.MouseEvent,
+) => {
+  const { id, textContent } = event.currentTarget;
+  dispatch(
+    setDrawerSchedule({
+      ...schedule,
+      repeat: {
+        ...schedule?.repeat,
+        year_type: {
+          ...schedule?.repeat.year_type,
+          year_category: id,
+          year_repeat: textContent,
+        },
+      },
+    }),
+  );
+};
+
 export const updateSpendingType = (
   dispatch: Dispatch,
   schedule: Schedule | null,
