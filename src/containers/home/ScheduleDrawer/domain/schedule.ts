@@ -154,18 +154,6 @@ export const updateRepeat = (
   }
 };
 
-export const updateRepeatEndDate = (
-  schedule: Schedule | null,
-  setRepeatEndDate: React.Dispatch<React.SetStateAction<moment.Moment>>,
-  endDate: moment.Moment | null,
-) => {
-  if (endDate?.isBefore(schedule?.end_date)) {
-    alert("반복 종료일을 다시 선택해주세요.");
-  } else {
-    endDate && setRepeatEndDate(endDate);
-  }
-};
-
 export const updateSpendingType = (
   dispatch: Dispatch,
   schedule: Schedule | null,
