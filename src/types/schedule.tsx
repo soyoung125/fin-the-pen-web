@@ -1,4 +1,5 @@
 import { SCHEDULE_DRAWER_MODE, VIEW_MODE } from "../constants/schedule.tsx";
+import { UpdateStateInterface } from "./common.tsx";
 
 export interface Schedule {
   id?: string;
@@ -73,4 +74,8 @@ export interface GetScheduleQuery {
 export interface MonthScheduleQuery {
   user_id: string;
   date: string;
+}
+
+export interface RepeatOptionProps {
+  changeRepeat: (state: UpdateStateInterface) => void;
 }

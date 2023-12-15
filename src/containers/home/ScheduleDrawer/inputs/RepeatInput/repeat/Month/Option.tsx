@@ -5,15 +5,11 @@ import {
 import DateButton from "@components/repeat/DateButton";
 import OptionButton from "@components/repeat/OptionButton";
 import { Grid } from "@mui/material";
-import { UpdateStateInterface } from "@type/common";
+import { RepeatOptionProps } from "@type/schedule";
 import moment from "moment";
 import { useSelector } from "react-redux";
 
-interface OptionProps {
-  changeRepeat: (state: UpdateStateInterface) => void;
-}
-
-function Option({ changeRepeat }: OptionProps) {
+function Option({ changeRepeat }: RepeatOptionProps) {
   const schedule = useSelector(selectSchedule);
   const startDate = useSelector(selectStartDate);
   const months = Array.from({ length: 31 }, (_, i) => (i + 1).toString());

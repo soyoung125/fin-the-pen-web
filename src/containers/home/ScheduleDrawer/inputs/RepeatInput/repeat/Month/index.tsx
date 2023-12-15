@@ -2,14 +2,10 @@ import { selectRepeatType } from "@app/redux/slices/scheduleSlice";
 import { useSelector } from "react-redux";
 import RadioLabel from "../../radio/RadioLabel";
 import InputLabel from "../../radio/RadioLabel/InputLabel";
-import { UpdateStateInterface } from "@type/common";
 import Option from "./Option";
+import { RepeatOptionProps } from "@type/schedule";
 
-interface MonthProps {
-  changeRepeat: (state: UpdateStateInterface) => void;
-}
-
-function Month({ changeRepeat }: MonthProps) {
+function Month({ changeRepeat }: RepeatOptionProps) {
   const repeatType = useSelector(selectRepeatType);
 
   return (

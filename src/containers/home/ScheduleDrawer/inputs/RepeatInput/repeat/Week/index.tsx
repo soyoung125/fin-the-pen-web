@@ -3,14 +3,10 @@ import { Box } from "@mui/material";
 import { useSelector } from "react-redux";
 import RadioLabel from "../../radio/RadioLabel";
 import InputLabel from "../../radio/RadioLabel/InputLabel";
-import { UpdateStateInterface } from "@type/common";
 import Option from "./Option";
+import { RepeatOptionProps } from "@type/schedule";
 
-interface WeekProps {
-  changeRepeat: (state: UpdateStateInterface) => void;
-}
-
-function Week({ changeRepeat }: WeekProps) {
+function Week({ changeRepeat }: RepeatOptionProps) {
   const repeatType = useSelector(selectRepeatType);
 
   const changeDayOfWeek = (week: string) => {
