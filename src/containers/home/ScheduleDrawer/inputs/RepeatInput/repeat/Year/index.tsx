@@ -6,10 +6,10 @@ import {
 import { Box } from "@mui/material";
 import { useSelector } from "react-redux";
 import RadioLabel from "../../radio/RadioLabel";
-import InputLabel from "../../radio/RadioLabel/InputLabel";
 import Option from "./Option";
 import { useEffect, useState } from "react";
 import moment from "moment";
+import RepeatInputLabel from "../../radio/RadioLabel/RepeatInputLabel";
 
 function Year() {
   const schedule = useSelector(selectSchedule);
@@ -45,7 +45,7 @@ function Year() {
       <RadioLabel
         value="year"
         label={
-          <InputLabel
+          <RepeatInputLabel
             label="매년"
             postInputLabel="년 마다"
             max={10}

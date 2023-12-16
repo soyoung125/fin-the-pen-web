@@ -1,9 +1,9 @@
 import { selectRepeatType } from "@app/redux/slices/scheduleSlice";
 import { useSelector } from "react-redux";
 import RadioLabel from "../../radio/RadioLabel";
-import InputLabel from "../../radio/RadioLabel/InputLabel";
 import Option from "./Option";
 import { RepeatOptionProps } from "@type/schedule";
+import RepeatInputLabel from "../../radio/RadioLabel/RepeatInputLabel";
 
 function Month({ handleChangeOption }: RepeatOptionProps) {
   const repeatType = useSelector(selectRepeatType);
@@ -13,7 +13,7 @@ function Month({ handleChangeOption }: RepeatOptionProps) {
       <RadioLabel
         value="month"
         label={
-          <InputLabel
+          <RepeatInputLabel
             label="매달"
             postInputLabel="개월 마다"
             max={12}

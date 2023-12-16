@@ -1,31 +1,44 @@
 import { useAppDispatch } from "@app/redux/hooks";
 import { selectSchedule } from "@app/redux/slices/scheduleSlice";
-import { updateRepeat } from "@containers/home/ScheduleDrawer/domain/schedule";
+import {
+  updatePeriod,
+  updateRepeat,
+} from "@containers/home/ScheduleDrawer/domain/schedule";
 import { Input } from "@mui/material";
 import { UpdateStateInterface } from "@type/common";
 import { useSelector } from "react-redux";
 
 interface InputLabelProps {
-  label: string;
+  id: string;
+  value: string | undefined;
+  type: "repeat" | "period";
   preInputLabel?: string;
   postInputLabel: string;
   max: number;
-  option: "day" | "week" | "month" | "year";
 }
 
 function InputLabel({
-  label,
+  id,
+  value,
+  type,
   preInputLabel,
   postInputLabel,
   max,
-  option,
 }: InputLabelProps) {
   const dispatch = useAppDispatch();
   const schedule = useSelector(selectSchedule);
-  const type = `${option}_type` as const;
 
   const handleUpdate = (e: UpdateStateInterface) => {
-    updateRepeat(dispatch, schedule, e);
+    switch (type) {
+      case "repeat":
+        updateRepeat(dispatch, schedule, e);
+        break;
+      case "period":
+        updatePeriod(dispatch, schedule, e);
+        break;
+      default:
+        break;
+    }
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -42,12 +55,12 @@ function InputLabel({
     handleUpdate({ target: { id: id, value: newValue.toString() } });
   };
 
-  return schedule?.repeat.kind_type === option ? (
+  return (
     <>
       {preInputLabel}
       <Input
-        id="repeat_value"
-        value={schedule?.repeat[type].repeat_value}
+        id={id}
+        value={value}
         type="number"
         inputProps={{
           min: 1,
@@ -64,8 +77,6 @@ function InputLabel({
       />
       {postInputLabel}
     </>
-  ) : (
-    <>{label}</>
   );
 }
 

@@ -1,12 +1,12 @@
 import RadioLabel from "../radio/RadioLabel";
-import InputLabel from "../radio/RadioLabel/InputLabel";
+import RepeatInputLabel from "../radio/RadioLabel/RepeatInputLabel";
 
 function AllDay() {
   return (
     <RadioLabel
       value="day"
       label={
-        <InputLabel
+        <RepeatInputLabel
           label="매일"
           postInputLabel="일 마다"
           max={365}
