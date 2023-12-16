@@ -1,11 +1,12 @@
 import { Button, Stack, Typography } from "@mui/material";
 import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 import CheckCircleOutlineIcon from "@mui/icons-material/CheckCircleOutline";
+import { MouseEventHandler } from "react";
 
 export interface CategoryButtonProps {
   selected: boolean;
   category: string;
-  onClick: () => any;
+  onClick: MouseEventHandler<HTMLButtonElement>;
 }
 
 function CategoryButton({ category, selected, onClick }: CategoryButtonProps) {
