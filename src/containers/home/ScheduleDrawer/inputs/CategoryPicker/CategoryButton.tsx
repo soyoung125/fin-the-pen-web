@@ -5,9 +5,10 @@ import CheckCircleOutlineIcon from "@mui/icons-material/CheckCircleOutline";
 export interface CategoryButtonProps {
   selected: boolean;
   category: string;
+  onClick: () => any;
 }
 
-function CategoryButton({ category, selected }: CategoryButtonProps) {
+function CategoryButton({ category, selected, onClick }: CategoryButtonProps) {
   return (
     <Button
       sx={{
@@ -16,6 +17,7 @@ function CategoryButton({ category, selected }: CategoryButtonProps) {
         borderRadius: 0,
       }}
       fullWidth
+      onClick={onClick}
     >
       <Stack
         p="16px"
