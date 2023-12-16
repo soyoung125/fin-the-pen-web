@@ -53,9 +53,9 @@ function RepeatInput() {
           <>
             <AllDay />
 
-            <Week changeRepeat={changeRepeat} />
+            <Week handleChangeOption={changeRepeat} />
 
-            <Month changeRepeat={changeRepeat} />
+            <Month handleChangeOption={changeRepeat} />
 
             <Year />
           </>
@@ -72,7 +72,7 @@ function RepeatInput() {
 
             <RepetitionCount />
 
-            <EndDate />
+            <EndDate handleChangeOption={changePeriod} />
           </>
         </RepeatRadioGroup>
       </Collapse>

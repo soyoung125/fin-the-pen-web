@@ -5,7 +5,7 @@ import InputLabel from "../../radio/RadioLabel/InputLabel";
 import Option from "./Option";
 import { RepeatOptionProps } from "@type/schedule";
 
-function Month({ changeRepeat }: RepeatOptionProps) {
+function Month({ handleChangeOption }: RepeatOptionProps) {
   const repeatType = useSelector(selectRepeatType);
 
   return (
@@ -22,7 +22,9 @@ function Month({ changeRepeat }: RepeatOptionProps) {
         }
       />
 
-      {repeatType === "month" && <Option changeRepeat={changeRepeat} />}
+      {repeatType === "month" && (
+        <Option handleChangeOption={handleChangeOption} />
+      )}
     </>
   );
 }

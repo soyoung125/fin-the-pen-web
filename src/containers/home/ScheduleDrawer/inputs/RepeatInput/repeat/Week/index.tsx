@@ -6,11 +6,11 @@ import InputLabel from "../../radio/RadioLabel/InputLabel";
 import Option from "./Option";
 import { RepeatOptionProps } from "@type/schedule";
 
-function Week({ changeRepeat }: RepeatOptionProps) {
+function Week({ handleChangeOption }: RepeatOptionProps) {
   const repeatType = useSelector(selectRepeatType);
 
   const changeDayOfWeek = (week: string) => {
-    changeRepeat({ target: { id: "repeat_day_of_week", value: week } });
+    handleChangeOption({ target: { id: "repeat_day_of_week", value: week } });
   };
 
   return (

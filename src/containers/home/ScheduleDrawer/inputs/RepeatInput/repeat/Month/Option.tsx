@@ -9,7 +9,7 @@ import { RepeatOptionProps } from "@type/schedule";
 import moment from "moment";
 import { useSelector } from "react-redux";
 
-function Option({ changeRepeat }: RepeatOptionProps) {
+function Option({ handleChangeOption }: RepeatOptionProps) {
   const schedule = useSelector(selectSchedule);
   const startDate = useSelector(selectStartDate);
   const months = Array.from({ length: 31 }, (_, i) => (i + 1).toString());
@@ -18,7 +18,7 @@ function Option({ changeRepeat }: RepeatOptionProps) {
     schedule?.repeat.month_type.select_date.split(", ") ?? [];
 
   const changeSelectDate = (date: string) => {
-    changeRepeat({ target: { id: "select_date", value: date } });
+    handleChangeOption({ target: { id: "select_date", value: date } });
   };
 
   const handleClick = (d: string) => {
@@ -31,9 +31,9 @@ function Option({ changeRepeat }: RepeatOptionProps) {
 
   const changeTodayRepeat = (e: React.MouseEvent) => {
     if (e.currentTarget.id === "todayRepeat") {
-      changeRepeat({ target: { id: "today_repeat", value: true } });
+      handleChangeOption({ target: { id: "today_repeat", value: true } });
     } else {
-      changeRepeat({ target: { id: "today_repeat", value: false } });
+      handleChangeOption({ target: { id: "today_repeat", value: false } });
     }
   };
 
