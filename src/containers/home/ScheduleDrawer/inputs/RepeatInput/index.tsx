@@ -63,7 +63,7 @@ function RepeatInput() {
 
         <ThickDivider />
 
-        <Box sx={{ color: "primary.main" }} px={2}>
+        <Box sx={{ color: "primary.main" }} px={2} py={2}>
           기간
         </Box>
         <RepeatRadioGroup type="period" handleChange={changePeriod}>
