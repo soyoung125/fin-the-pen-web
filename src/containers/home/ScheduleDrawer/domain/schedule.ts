@@ -92,6 +92,10 @@ const initRepeat = (
       year_category: "MonthAndDay",
     },
   };
+  const period = {
+    ...schedule?.period,
+    repeat_end_line: getRepeatEndDate(startDate, schedule?.repeat.kind_type),
+  };
 
   if (start.isAfter(schedule?.end_date)) {
     dispatch(
@@ -100,6 +104,7 @@ const initRepeat = (
         end_date: startDate,
         start_date: startDate,
         repeat,
+        period,
       }),
     );
   } else {
@@ -108,6 +113,7 @@ const initRepeat = (
         ...schedule,
         start_date: startDate,
         repeat,
+        period,
       }),
     );
   }
@@ -133,6 +139,10 @@ export const updateRepeat = (
 ) => {
   const { id, value } = state.target;
   if (id === "repeat") {
+    const period = {
+      ...schedule?.period,
+      repeat_end_line: getRepeatEndDate(schedule?.start_date, value as string),
+    };
     dispatch(
       setDrawerSchedule({
         ...schedule,
@@ -140,10 +150,12 @@ export const updateRepeat = (
           ...schedule?.repeat,
           kind_type: value,
         },
+        period,
       }),
     );
     return;
   }
+
   const type = schedule?.repeat.kind_type ?? "";
   if (type !== "") {
     const kind_type = `${type}_type` as const;
@@ -195,7 +207,7 @@ export const updatePeriod = (
       setDrawerSchedule({
         ...schedule,
         period: {
-          ...schedule?.repeat,
+          ...schedule?.period,
           kind_type: value,
         },
       }),
@@ -282,7 +294,7 @@ export const generateRandomSchedule = (stringDate: string) => {
     category: category.title,
     all_day: false,
     repeat: getInitRepeat(date),
-    period: getInitPeriod(),
+    period: getInitPeriod(date),
     price_type: getType(category),
     amount: Math.floor(Math.random() * 1000) * 100,
     is_fix_amount: false,
@@ -326,11 +338,39 @@ export const getInitRepeat = (date: moment.Moment): ScheduleRepeat => {
   };
 };
 
-export const getInitPeriod = (): SchedulePeriod => {
+export const getInitPeriod = (date: moment.Moment): SchedulePeriod => {
   return {
     is_repeat_again: true,
     repeat_number_time: "1",
-    repeat_end_line: "",
+    repeat_end_line: date.add(1, "w").format("YYYY-MM-DD"),
     kind_type: "is_repeat_again",
   };
+};
+
+const getRepeatEndDate = (
+  startDate: string | undefined,
+  type: string | undefined,
+) => {
+  let date = moment(startDate);
+  switch (type) {
+    case "day": {
+      date = date.add(1, "w");
+      break;
+    }
+    case "week": {
+      date = date.add(1, "M");
+      break;
+    }
+    case "month": {
+      date = date.add(1, "y");
+      break;
+    }
+    case "year": {
+      date = date.add(10, "y");
+      break;
+    }
+    default:
+      break;
+  }
+  return date.format("YYYY-MM-DD");
 };

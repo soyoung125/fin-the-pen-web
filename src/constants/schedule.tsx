@@ -75,7 +75,7 @@ const INIT_SCHEDULE = (date: string, start_time: string): Schedule => ({
   category: "",
   all_day: false,
   repeat: getInitRepeat(moment(date)),
-  period: getInitPeriod(),
+  period: getInitPeriod(moment(date)),
   price_type: SCHEDULE_DRAWER.type_minus,
   amount: "0",
   fix_amount: false,

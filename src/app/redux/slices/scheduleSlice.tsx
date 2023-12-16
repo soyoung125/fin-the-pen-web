@@ -287,5 +287,7 @@ export const selectStartDate = (state: RootState) =>
   (state.schedule as InitialState).schedule?.start_date;
 export const selectRepeatType = (state: RootState) =>
   (state.schedule as InitialState).schedule?.repeat.kind_type;
+export const selectRepeatEndDate = (state: RootState) =>
+  (state.schedule as InitialState).schedule?.period.repeat_end_line;
 
 export default scheduleSlice.reducer;

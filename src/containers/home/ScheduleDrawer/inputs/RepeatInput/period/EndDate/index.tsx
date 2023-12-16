@@ -1,5 +1,5 @@
 import {
-  selectRepeatType,
+  selectRepeatEndDate,
   selectSchedule,
   selectStartDate,
 } from "@app/redux/slices/scheduleSlice";
@@ -13,7 +13,7 @@ import Input from "./Input";
 function EndDate() {
   const schedule = useSelector(selectSchedule);
   const startDate = useSelector(selectStartDate);
-  const repeatType = useSelector(selectRepeatType);
+  const repeatEndDate = useSelector(selectRepeatEndDate);
 
   const [date, setDate] = useState({
     year: 2023,
@@ -23,36 +23,21 @@ function EndDate() {
   });
 
   useEffect(() => {
-    let date = moment(startDate);
+    const oldEndDate = moment(
+      `${date.year}-${date.month}-${date.date}`,
+      "YYYY-M-D",
+    );
+    const newEndDate = moment(repeatEndDate);
 
-    switch (repeatType) {
-      case "day": {
-        date = date.add(1, "w");
-        break;
-      }
-      case "week": {
-        date = date.add(1, "M");
-        break;
-      }
-      case "month": {
-        date = date.add(1, "y");
-        break;
-      }
-      case "year": {
-        date = date.add(10, "y");
-        break;
-      }
-      default:
-        return;
-    }
+    if (oldEndDate.isSame(newEndDate)) return;
 
     setDate({
-      year: date.year(),
-      month: date.month() + 1,
-      date: date.date(),
-      day: date.format("dddd"),
+      year: newEndDate.year(),
+      month: newEndDate.month() + 1,
+      date: newEndDate.date(),
+      day: newEndDate.format("dddd"),
     });
-  }, [startDate, repeatType]);
+  }, [repeatEndDate]);
 
   const handleBlur = (e: React.FocusEvent<HTMLInputElement>) => {
     const { id, value, min, max } = e.target;
