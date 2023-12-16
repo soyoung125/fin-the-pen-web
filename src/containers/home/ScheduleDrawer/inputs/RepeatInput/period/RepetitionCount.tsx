@@ -11,33 +11,15 @@ function RepetitionCount() {
     <RadioLabel
       value="repeat_number_time"
       label={
-        // <InputLabel
-        //   label="일정 반복 횟수"
-        //   preInputLabel="총"
-        //   postInputLabel="번 반복"
-        //   max={100}
-        //   type="period"
-        //   option="numberOf"
-        // />
         schedule?.period.kind_type === "repeat_number_time" ? (
-          <>
-            총
-            <Input
-              type="number"
-              defaultValue={1}
-              inputProps={{
-                min: 1,
-                max: 100,
-                style: { textAlign: "center" },
-              }}
-              sx={{
-                width: "30px",
-                color: "primary.main",
-              }}
-              color="primary"
-            />
-            번 반복
-          </>
+          <InputLabel
+            preInputLabel="총"
+            postInputLabel="번 반복"
+            max={100}
+            type="period"
+            id="repeat_number_time"
+            value={schedule.period.repeat_number_time}
+          />
         ) : (
           <>일정 반복 횟수</>
         )
