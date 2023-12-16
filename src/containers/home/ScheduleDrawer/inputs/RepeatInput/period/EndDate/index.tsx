@@ -102,9 +102,9 @@ function EndDate() {
 
   return (
     <Box>
-      <RadioLabel value="end" label="종료 날짜" />
+      <RadioLabel value="repeat_end_line" label="종료 날짜" />
 
-      {schedule?.period === "end" && (
+      {schedule?.period.kind_type === "repeat_end_line" && (
         <Stack
           direction="row"
           spacing={1}

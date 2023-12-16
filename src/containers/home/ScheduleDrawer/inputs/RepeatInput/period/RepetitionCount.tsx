@@ -9,7 +9,7 @@ function RepetitionCount() {
 
   return (
     <RadioLabel
-      value="numberOf"
+      value="repeat_number_time"
       label={
         // <InputLabel
         //   label="일정 반복 횟수"
@@ -19,7 +19,7 @@ function RepetitionCount() {
         //   type="period"
         //   option="numberOf"
         // />
-        schedule?.period === "numberOf" ? (
+        schedule?.period.kind_type === "repeat_number_time" ? (
           <>
             총
             <Input

@@ -2,7 +2,11 @@ import moment from "moment";
 import { CATEGORIES, Category } from "../../../../constants/categories";
 import { SCHEDULE_DRAWER } from "../../../../constants/schedule";
 import { setDrawerSchedule } from "../../../../app/redux/slices/scheduleSlice";
-import { Schedule, ScheduleRepeat } from "../../../../types/schedule";
+import {
+  Schedule,
+  SchedulePeriod,
+  ScheduleRepeat,
+} from "../../../../types/schedule";
 import { Dispatch } from "redux";
 import { UpdateStateInterface } from "../../../../types/common";
 
@@ -180,6 +184,38 @@ export const updateYearRepeat = (
   );
 };
 
+export const updatePeriod = (
+  dispatch: Dispatch,
+  schedule: Schedule | null,
+  state: UpdateStateInterface,
+) => {
+  const { id, value } = state.target;
+  if (id === "period") {
+    dispatch(
+      setDrawerSchedule({
+        ...schedule,
+        period: {
+          ...schedule?.repeat,
+          kind_type: value,
+        },
+      }),
+    );
+    return;
+  }
+  const type = schedule?.period.kind_type ?? "";
+  if (type !== "") {
+    dispatch(
+      setDrawerSchedule({
+        ...schedule,
+        period: {
+          ...schedule?.period,
+          [type]: value,
+        },
+      }),
+    );
+  }
+};
+
 export const updateSpendingType = (
   dispatch: Dispatch,
   schedule: Schedule | null,
@@ -246,7 +282,7 @@ export const generateRandomSchedule = (stringDate: string) => {
     category: category.title,
     all_day: false,
     repeat: getInitRepeat(date),
-    period: "None",
+    period: getInitPeriod(),
     price_type: getType(category),
     amount: Math.floor(Math.random() * 1000) * 100,
     is_fix_amount: false,
@@ -287,5 +323,14 @@ export const getInitRepeat = (date: moment.Moment): ScheduleRepeat => {
       year_category: "MonthAndDay",
     },
     kind_type: "",
+  };
+};
+
+export const getInitPeriod = (): SchedulePeriod => {
+  return {
+    is_repeat_again: true,
+    repeat_number_time: "1",
+    repeat_end_line: "",
+    kind_type: "is_repeat_again",
   };
 };

@@ -7,7 +7,7 @@ import {
   selectRepeatType,
   selectSchedule,
 } from "@app/redux/slices/scheduleSlice";
-import { updateRepeat, updateSchedule } from "../../domain/schedule";
+import { updatePeriod, updateRepeat } from "../../domain/schedule";
 import RepeatRadioGroup from "./radio/RepeatRadioGroup";
 import AllDay from "./repeat/AllDay";
 import Week from "./repeat/Week";
@@ -29,7 +29,7 @@ function RepeatInput() {
   };
 
   const changePeriod = (state: UpdateStateInterface) => {
-    updateSchedule(dispatch, schedule, state);
+    updatePeriod(dispatch, schedule, state);
   };
 
   return (
@@ -68,7 +68,7 @@ function RepeatInput() {
         </Box>
         <RepeatRadioGroup type="period" handleChange={changePeriod}>
           <>
-            <RadioLabel value="All" label="계속 반복" />
+            <RadioLabel value="is_repeat_again" label="계속 반복" />
 
             <RepetitionCount />
 
