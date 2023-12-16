@@ -1,64 +1,33 @@
-import {
-  selectSchedule,
-  selectStartDate,
-} from "@app/redux/slices/scheduleSlice";
-import { Box, Button, Stack } from "@mui/material";
-import { useEffect, useState } from "react";
+import { selectRepeatType } from "@app/redux/slices/scheduleSlice";
+import { Box } from "@mui/material";
 import { useSelector } from "react-redux";
 import RadioLabel from "../../radio/RadioLabel";
-import InputLabel from "../../radio/RadioLabel/InputLabel";
-import DateButton from "@components/common/DateButton";
-import moment from "moment";
+import Option from "./Option";
+import { RepeatOptionProps } from "@type/schedule";
+import RepeatInputLabel from "../../radio/RadioLabel/RepeatInputLabel";
 
-function Week() {
-  const schedule = useSelector(selectSchedule);
-  const startDate = useSelector(selectStartDate);
-  const week = ["월", "화", "수", "목", "금", "토", "일"];
+function Week({ handleChangeOption }: RepeatOptionProps) {
+  const repeatType = useSelector(selectRepeatType);
 
-  const [selected, setSelected] = useState<string[]>([]);
-
-  useEffect(() => {
-    const day = moment(startDate).day();
-
-    if (day === 0) setSelected(["일"]);
-    else setSelected([week[day - 1]]);
-  }, [startDate]);
-
-  const handleChange = (w: string) => {
-    if (selected.includes(w)) {
-      setSelected(selected.filter((s) => s !== w));
-      return;
-    }
-    setSelected(selected.concat(w));
+  const changeDayOfWeek = (week: string) => {
+    handleChangeOption({ target: { id: "repeat_day_of_week", value: week } });
   };
 
   return (
     <Box>
       <RadioLabel
-        value="Week"
+        value="week"
         label={
-          <InputLabel
+          <RepeatInputLabel
             label="매주"
             postInputLabel="주 마다"
             max={52}
-            type="repeat"
-            option="Week"
+            option="week"
           />
         }
       />
 
-      {schedule?.repeat === "Week" && (
-        <Stack px={2.5} my={1.5} direction="row" justifyContent="space-between">
-          {week.map((w) => (
-            <DateButton
-              key={Math.random()}
-              value={w}
-              handleClick={() => handleChange(w)}
-              isSelected={selected.includes(w)}
-            />
-          ))}
-        </Stack>
-      )}
+      {repeatType === "week" && <Option changeDayOfWeek={changeDayOfWeek} />}
     </Box>
   );
 }

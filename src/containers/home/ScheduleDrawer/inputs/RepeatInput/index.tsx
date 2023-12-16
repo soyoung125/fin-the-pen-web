@@ -3,8 +3,11 @@ import { useState } from "react";
 import { useSelector } from "react-redux";
 import SwitchButton from "@components/common/SwitchButton";
 import { useAppDispatch } from "@app/redux/hooks";
-import { selectSchedule } from "@app/redux/slices/scheduleSlice";
-import { updateRepeat } from "../../domain/schedule";
+import {
+  selectRepeatType,
+  selectSchedule,
+} from "@app/redux/slices/scheduleSlice";
+import { updatePeriod, updateRepeat } from "../../domain/schedule";
 import RepeatRadioGroup from "./radio/RepeatRadioGroup";
 import AllDay from "./repeat/AllDay";
 import Week from "./repeat/Week";
@@ -14,13 +17,19 @@ import EndDate from "./period/EndDate";
 import RadioLabel from "./radio/RadioLabel";
 import RepetitionCount from "./period/RepetitionCount";
 import ThickDivider from "@components/common/ThickDivider";
+import { UpdateStateInterface } from "@type/common";
 
 function RepeatInput() {
   const dispatch = useAppDispatch();
   const schedule = useSelector(selectSchedule);
+  const repeatType = useSelector(selectRepeatType);
 
-  const changeRepeat = (state: { target: { value: string; name: string } }) => {
+  const changeRepeat = (state: UpdateStateInterface) => {
     updateRepeat(dispatch, schedule, state);
+  };
+
+  const changePeriod = (state: UpdateStateInterface) => {
+    updatePeriod(dispatch, schedule, state);
   };
 
   return (
@@ -28,25 +37,25 @@ function RepeatInput() {
       <Stack direction="row" justifyContent="space-between" sx={{ px: 2.5 }}>
         <Box sx={{ color: "primary.main" }}>반복</Box>
         <SwitchButton
-          checked={schedule?.repeat !== "None"}
+          checked={repeatType !== ""}
           handleChange={() =>
             changeRepeat({
               target: {
-                value: schedule?.repeat === "None" ? "AllDay" : "None",
-                name: "repeat",
+                value: repeatType === "" ? "day" : "",
+                id: "repeat",
               },
             })
           }
         />
       </Stack>
-      <Collapse in={schedule?.repeat !== "None"}>
+      <Collapse in={repeatType !== ""}>
         <RepeatRadioGroup type="repeat" handleChange={changeRepeat}>
           <>
             <AllDay />
 
-            <Week />
+            <Week handleChangeOption={changeRepeat} />
 
-            <Month />
+            <Month handleChangeOption={changeRepeat} />
 
             <Year />
           </>
@@ -54,16 +63,16 @@ function RepeatInput() {
 
         <ThickDivider />
 
-        <Box sx={{ color: "primary.main" }} px={2}>
+        <Box sx={{ color: "primary.main" }} px={2} py={2}>
           기간
         </Box>
-        <RepeatRadioGroup type="period" handleChange={changeRepeat}>
+        <RepeatRadioGroup type="period" handleChange={changePeriod}>
           <>
-            <RadioLabel value="All" label="계속 반복" />
+            <RadioLabel value="is_repeat_again" label="계속 반복" />
 
             <RepetitionCount />
 
-            <EndDate />
+            <EndDate handleChangeOption={changePeriod} />
           </>
         </RepeatRadioGroup>
       </Collapse>

@@ -1,5 +1,9 @@
 import moment from "moment";
 import { Schedule } from "@type/schedule.tsx";
+import {
+  getInitPeriod,
+  getInitRepeat,
+} from "@containers/home/ScheduleDrawer/domain/schedule";
 
 const SCHEDULE_DRAWER = {
   drawer_title: {
@@ -70,8 +74,8 @@ const INIT_SCHEDULE = (date: string, start_time: string): Schedule => ({
   end_time: `${moment(start_time, "HH").add(2, "h").format("HH")}:00`,
   category: "",
   all_day: false,
-  repeat: "None",
-  period: "All",
+  repeat: getInitRepeat(moment(date)),
+  period: getInitPeriod(moment(date)),
   price_type: SCHEDULE_DRAWER.type_minus,
   amount: "0",
   fix_amount: false,

@@ -1,5 +1,5 @@
 import {
-  selectRepeat,
+  selectRepeatEndDate,
   selectSchedule,
   selectStartDate,
 } from "@app/redux/slices/scheduleSlice";
@@ -9,11 +9,12 @@ import RadioLabel from "../../radio/RadioLabel";
 import { useEffect, useState } from "react";
 import moment from "moment";
 import Input from "./Input";
+import { RepeatOptionProps } from "@type/schedule";
 
-function EndDate() {
+function EndDate({ handleChangeOption }: RepeatOptionProps) {
   const schedule = useSelector(selectSchedule);
   const startDate = useSelector(selectStartDate);
-  const repeat = useSelector(selectRepeat);
+  const repeatEndDate = useSelector(selectRepeatEndDate);
 
   const [date, setDate] = useState({
     year: 2023,
@@ -23,36 +24,21 @@ function EndDate() {
   });
 
   useEffect(() => {
-    let date = moment(startDate);
+    const oldEndDate = moment(
+      `${date.year}-${date.month}-${date.date}`,
+      "YYYY-M-D",
+    );
+    const newEndDate = moment(repeatEndDate);
 
-    switch (repeat) {
-      case "AllDay": {
-        date = date.add(1, "w");
-        break;
-      }
-      case "Week": {
-        date = date.add(1, "M");
-        break;
-      }
-      case "Month": {
-        date = date.add(1, "y");
-        break;
-      }
-      case "Year": {
-        date = date.add(10, "y");
-        break;
-      }
-      default:
-        return;
-    }
+    if (oldEndDate.isSame(newEndDate)) return;
 
     setDate({
-      year: date.year(),
-      month: date.month() + 1,
-      date: date.date(),
-      day: date.format("dddd"),
+      year: newEndDate.year(),
+      month: newEndDate.month() + 1,
+      date: newEndDate.date(),
+      day: newEndDate.format("dddd"),
     });
-  }, [startDate, repeat]);
+  }, [repeatEndDate]);
 
   const handleBlur = (e: React.FocusEvent<HTMLInputElement>) => {
     const { id, value, min, max } = e.target;
@@ -60,9 +46,11 @@ function EndDate() {
     if (newValue < Number(min)) newValue = Number(min);
     if (newValue > Number(max)) newValue = Number(max);
 
+    let d = "";
+
     switch (id) {
       case "year": {
-        const d = `${newValue}-${date.month}-${date.date}`;
+        d = `${newValue}-${date.month}-${date.date}`;
         setDate({
           ...date,
           year: newValue,
@@ -71,7 +59,7 @@ function EndDate() {
         break;
       }
       case "month": {
-        const d = `${date.year}-${newValue}-${date.date}`;
+        d = `${date.year}-${newValue}-${date.date}`;
         setDate({
           ...date,
           month: newValue,
@@ -80,7 +68,7 @@ function EndDate() {
         break;
       }
       case "date": {
-        const d = `${date.year}-${date.month}-${newValue}`;
+        d = `${date.year}-${date.month}-${newValue}`;
         setDate({
           ...date,
           date: newValue,
@@ -91,6 +79,7 @@ function EndDate() {
       default:
         return;
     }
+    handleChangeOption({ target: { id: "repeat_end_line", value: d } });
   };
 
   const handleChange = (e: React.FocusEvent<HTMLInputElement>) => {
@@ -102,9 +91,9 @@ function EndDate() {
 
   return (
     <Box>
-      <RadioLabel value="end" label="종료 날짜" />
+      <RadioLabel value="repeat_end_line" label="종료 날짜" />
 
-      {schedule?.period === "end" && (
+      {schedule?.period.kind_type === "repeat_end_line" && (
         <Stack
           direction="row"
           spacing={1}
