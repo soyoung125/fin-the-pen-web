@@ -208,6 +208,7 @@ export const updatePeriod = (
         ...schedule,
         period: {
           ...schedule?.period,
+          is_repeat_again: value === "is_repeat_again",
           kind_type: value,
         },
       }),
