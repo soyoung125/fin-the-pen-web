@@ -136,6 +136,7 @@ function ScheduleDrawer({
                     }
                     showError={showError}
                   />
+                  <Button>일정 카테고리 선택하기 (임시)</Button>
                   <ThickDivider />
 
                   {/* 이벤트 일정 */}
