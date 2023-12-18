@@ -18,3 +18,11 @@ export const Default = (args: TopNavigationBarProps) => {
     </div>
   );
 };
+
+export const NoneTitle = () => {
+  return (
+    <div style={{ width: "500px" }}>
+      <TopNavigationBar onClick={() => alert("clicked")} />
+    </div>
+  );
+};

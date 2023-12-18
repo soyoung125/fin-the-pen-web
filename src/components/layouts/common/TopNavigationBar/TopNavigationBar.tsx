@@ -4,7 +4,7 @@ import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
 import * as React from "react";
 
 export interface TopNavigationBarProps {
-  title: string;
+  title?: string;
   onClick: (event: React.MouseEvent<HTMLElement>, value: unknown) => void;
 }
 
