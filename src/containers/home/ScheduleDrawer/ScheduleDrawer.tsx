@@ -1,15 +1,15 @@
 import { Alert, Box, Slide, SlideProps, Snackbar, Stack } from "@mui/material";
 import { useEffect, useRef, useState } from "react";
-import { setDrawerSchedule } from "../../../app/redux/slices/scheduleSlice";
+import { setDrawerSchedule } from "@redux/slices/scheduleSlice.tsx";
 import AssetFormPage from "./pages/AssetFormPage";
 import ScheduleDrawerHeader from "./layouts/ScheduleDrawerHeader";
 import ScheduleDrawerFooter from "./layouts/ScheduleDrawerFooter";
 import { CONSUMPTION_ALERTS } from "../../../constants/alerts";
-import { Schedule, ScheduleDrawerModeValue } from "../../../types/schedule";
-import { useAppDispatch } from "../../../app/redux/hooks";
+import { Schedule, ScheduleDrawerModeValue } from "@type/schedule.tsx";
+import { useAppDispatch } from "@redux/hooks.ts";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Swiper as SwiperType } from "swiper/types";
-import ScheduleFormPage from "@containers/home/ScheduleDrawer/pages/ScheduleFormPage/ScheduleFormPage.tsx";
+import ScheduleFormPage from "@containers/home/ScheduleDrawer/pages/ScheduleFormPage";
 
 function TransitionUp(props: SlideProps) {
   return <Slide {...props} direction="right" />;
