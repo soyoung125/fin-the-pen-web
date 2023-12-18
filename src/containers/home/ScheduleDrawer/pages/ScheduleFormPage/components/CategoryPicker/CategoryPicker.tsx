@@ -55,9 +55,11 @@ function CategoryPicker({ setIsCategoryPickerOpen }: CategoryPickerProps) {
       </Tabs>
       <Box height="100vh">{content(activeTabIndex)}</Box>
       <Divider />
-      <Button fullWidth variant="contained">
-        {selectedCategory} 카테고리 선택
-      </Button>
+      <Box px="20px" pt="8px" pb="28px">
+        <Button fullWidth variant="contained">
+          {selectedCategory} 카테고리 선택
+        </Button>
+      </Box>
     </>
   );
 }
