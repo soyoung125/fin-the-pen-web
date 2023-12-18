@@ -1,20 +1,20 @@
 import {
+  Box,
   Button,
+  FormControl,
+  FormHelperText,
   Grid,
   InputBase,
   Stack,
   Typography,
-  Box,
-  FormControl,
-  FormHelperText,
 } from "@mui/material";
 import { useSelector } from "react-redux";
-import { SCHEDULE_DRAWER } from "../../../../../constants/schedule";
-import { selectSchedule } from "../../../../../app/redux/slices/scheduleSlice";
-import { updateSchedule, updateSpendingType } from "../../domain/schedule";
-import { useAppDispatch } from "../../../../../app/redux/hooks";
-import SwitchButton from "@components/common/SwitchButton";
-import { UpdateStateInterface } from "@type/common";
+import { SCHEDULE_DRAWER } from "../../../../../constants/schedule.tsx";
+import { selectSchedule } from "@redux/slices/scheduleSlice.tsx";
+import { updateSchedule, updateSpendingType } from "../../domain/schedule.ts";
+import { useAppDispatch } from "@redux/hooks.ts";
+import SwitchButton from "@components/common/SwitchButton.tsx";
+import { UpdateStateInterface } from "@type/common.tsx";
 import { useState } from "react";
 import AddRoundedIcon from "@mui/icons-material/AddRounded";
 import RemoveRoundedIcon from "@mui/icons-material/RemoveRounded";
@@ -179,4 +179,5 @@ function SpendingInput({ mode }: { mode: string }) {
     </Grid>
   );
 }
+
 export default SpendingInput;

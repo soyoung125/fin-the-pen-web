@@ -3,10 +3,10 @@ import { useSelector } from "react-redux";
 import {
   IMPORTANCES,
   SCHEDULE_DRAWER,
-} from "../../../../../constants/schedule";
-import { selectSchedule } from "../../../../../app/redux/slices/scheduleSlice";
-import { updateSchedule } from "../../domain/schedule";
-import { useAppDispatch } from "../../../../../app/redux/hooks";
+} from "../../../../../constants/schedule.tsx";
+import { selectSchedule } from "@redux/slices/scheduleSlice.tsx";
+import { updateSchedule } from "../../domain/schedule.ts";
+import { useAppDispatch } from "@redux/hooks.ts";
 
 function ImportanceInput() {
   const dispatch = useAppDispatch();
@@ -50,4 +50,5 @@ function ImportanceInput() {
     </Stack>
   );
 }
+
 export default ImportanceInput;

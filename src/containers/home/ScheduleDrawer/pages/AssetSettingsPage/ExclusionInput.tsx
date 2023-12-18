@@ -1,10 +1,10 @@
-import { Stack, Switch, Typography } from "@mui/material";
+import { Stack, Typography } from "@mui/material";
 import { useSelector } from "react-redux";
-import { SCHEDULE_DRAWER } from "../../../../../constants/schedule";
-import { selectSchedule } from "../../../../../app/redux/slices/scheduleSlice";
-import { updateExclusion } from "../../domain/schedule";
-import { useAppDispatch } from "../../../../../app/redux/hooks";
-import SwitchButton from "@components/common/SwitchButton";
+import { SCHEDULE_DRAWER } from "../../../../../constants/schedule.tsx";
+import { selectSchedule } from "@redux/slices/scheduleSlice.tsx";
+import { updateExclusion } from "../../domain/schedule.ts";
+import { useAppDispatch } from "@redux/hooks.ts";
+import SwitchButton from "@components/common/SwitchButton.tsx";
 
 function ExclusionInput() {
   const dispatch = useAppDispatch();
@@ -32,4 +32,5 @@ function ExclusionInput() {
     </Stack>
   );
 }
+
 export default ExclusionInput;

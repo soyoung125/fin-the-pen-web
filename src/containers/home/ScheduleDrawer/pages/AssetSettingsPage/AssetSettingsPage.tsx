@@ -1,8 +1,8 @@
-import { Card, Stack } from "@mui/material";
-import ExclusionInput from "./ExclusionInput";
-import ImportanceInput from "./ImportanceInput";
-import SpendingInput from "./SpendingInput";
-import ThickDivider from "@components/common/ThickDivider";
+import { Stack } from "@mui/material";
+import ExclusionInput from "./ExclusionInput.tsx";
+import ImportanceInput from "./ImportanceInput.tsx";
+import SpendingInput from "./SpendingInput.tsx";
+import ThickDivider from "@components/common/ThickDivider.tsx";
 
 function AssetSettings({ mode }: { mode: string }) {
   return (
