@@ -5,7 +5,7 @@ import CategorySideTabButton, {
 import { useState } from "react";
 
 const meta = {
-  title: "ui/ScheduleDrawer/CategorySideTabButton",
+  title: "ui/ScheduleDrawer/category-picker/CategorySideTabButton",
   component: CategorySideTabButton,
   tags: ["autodocs"],
   args: {

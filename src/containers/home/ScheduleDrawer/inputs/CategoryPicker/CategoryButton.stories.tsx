@@ -3,7 +3,7 @@ import CategoryButton, { CategoryButtonProps } from "./CategoryButton";
 import { useState } from "react";
 
 const meta = {
-  title: "ui/ScheduleDrawer/CategoryButton",
+  title: "ui/ScheduleDrawer/category-picker/CategoryButton",
   component: CategoryButton,
   tags: ["autodocs"],
   args: { category: "카테고리", selected: true },
