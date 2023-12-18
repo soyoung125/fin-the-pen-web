@@ -1,19 +1,15 @@
 import { Button, Stack, Typography } from "@mui/material";
-import { useSelector } from "react-redux";
 import {
   IMPORTANCES,
   SCHEDULE_DRAWER,
 } from "../../../../../constants/schedule.tsx";
-import { selectSchedule } from "@redux/slices/scheduleSlice.tsx";
-import { updateSchedule } from "../../domain/schedule.ts";
-import { useAppDispatch } from "@redux/hooks.ts";
+import { useScheduleForm } from "@containers/home/ScheduleDrawer/hooks/useScheduleForm.ts";
 
 function ImportanceInput() {
-  const dispatch = useAppDispatch();
-  const schedule = useSelector(selectSchedule);
+  const { scheduleForm, updateSchedule } = useScheduleForm();
 
   const changeSchedule = (state: React.MouseEvent<HTMLButtonElement>) => {
-    updateSchedule(dispatch, schedule, {
+    updateSchedule({
       target: { id: state.currentTarget.id, value: state.currentTarget.value },
     });
   };
@@ -30,7 +26,7 @@ function ImportanceInput() {
             key={importance.id}
             variant="contained"
             color={
-              schedule?.importance === importance.value
+              scheduleForm?.importance === importance.value
                 ? "primary"
                 : "secondary"
             }

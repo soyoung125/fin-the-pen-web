@@ -12,5 +12,5 @@ const meta = {
 export default meta;
 
 export const Default = () => {
-  return <CategoryPicker />;
+  return <CategoryPicker setIsCategoryPickerOpen={() => alert("hi")} />;
 };

@@ -1,15 +1,12 @@
-import { useAppDispatch } from "@redux/hooks.ts";
-import { selectSchedule } from "@redux/slices/scheduleSlice.tsx";
 import { Box, InputAdornment } from "@mui/material";
 import { UpdateStateInterface } from "@type/common.tsx";
 import { SCHEDULE_DRAWER } from "../../../../../../../constants/schedule.tsx";
-import { useSelector } from "react-redux";
-import { updateSchedule } from "../../../../domain/schedule.ts";
 import moment from "moment";
 import "moment/dist/locale/ko";
 import { DateField, LocalizationProvider } from "@mui/x-date-pickers";
 import { AdapterMoment } from "@mui/x-date-pickers/AdapterMoment";
 import { useDatePicker } from "@components/layouts/date-picker/hooks/useDatePicker.tsx";
+import { useScheduleForm } from "@containers/home/ScheduleDrawer/hooks/useScheduleForm.ts";
 
 interface InputDateTimeProps {
   date: string | undefined;
@@ -21,13 +18,13 @@ interface InputDateTimeProps {
 export type InputDateTimeType = "start" | "end";
 
 function InputDateTime({ date, time, type, showError }: InputDateTimeProps) {
-  const dispatch = useAppDispatch();
-  const schedule = useSelector(selectSchedule);
+  const { scheduleForm, updateSchedule } = useScheduleForm();
+
   const title = SCHEDULE_DRAWER[type];
   const { pickHHMM, pickYYYYMMDD } = useDatePicker();
 
   const changeSchedule = (state: UpdateStateInterface) => {
-    updateSchedule(dispatch, schedule, state);
+    updateSchedule(state);
   };
 
   const onClickDateField = async () => {
@@ -72,7 +69,7 @@ function InputDateTime({ date, time, type, showError }: InputDateTimeProps) {
                 </Box>
               </InputAdornment>
             ),
-            endAdornment: !schedule?.all_day && (
+            endAdornment: !scheduleForm?.all_day && (
               <InputAdornment position="start">
                 <Box
                   onClick={(e) => {

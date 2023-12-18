@@ -1,33 +1,31 @@
 import { Box, FormControl, InputAdornment, TextField } from "@mui/material";
-import { useSelector } from "react-redux";
 import { SCHEDULE_DRAWER } from "../../../../../../constants/schedule.tsx";
-import { updateSchedule } from "../../../domain/schedule.ts";
-import { selectSchedule } from "@redux/slices/scheduleSlice.tsx";
-import { useAppDispatch } from "@redux/hooks.ts";
+import { useScheduleForm } from "@containers/home/ScheduleDrawer/hooks/useScheduleForm.ts";
 
 interface NameInputProps {
   showError: boolean;
 }
 
 function NameInput({ showError }: NameInputProps) {
-  const dispatch = useAppDispatch();
-  const schedule = useSelector(selectSchedule);
+  const { scheduleForm, updateSchedule } = useScheduleForm();
 
   const changeSchedule = (state: { target: { id: string; value: string } }) => {
-    updateSchedule(dispatch, schedule, state);
+    updateSchedule(state);
   };
 
   return (
     <FormControl fullWidth>
       <TextField
         sx={{ px: 2.5 }}
-        error={showError && schedule?.event_name === ""}
+        error={showError && scheduleForm?.event_name === ""}
         id="event_name"
         variant="standard"
-        value={schedule?.event_name}
+        value={scheduleForm?.event_name}
         onChange={changeSchedule}
         helperText={
-          showError && schedule?.event_name === "" ? "필수 입력 값입니다!" : ""
+          showError && scheduleForm?.event_name === ""
+            ? "필수 입력 값입니다!"
+            : ""
         }
         inputProps={{
           style: { textAlign: "right" },

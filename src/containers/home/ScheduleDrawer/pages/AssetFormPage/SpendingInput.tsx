@@ -8,29 +8,26 @@ import {
   Stack,
   Typography,
 } from "@mui/material";
-import { useSelector } from "react-redux";
 import { SCHEDULE_DRAWER } from "../../../../../constants/schedule.tsx";
-import { selectSchedule } from "@redux/slices/scheduleSlice.tsx";
-import { updateSchedule, updateSpendingType } from "../../domain/schedule.ts";
-import { useAppDispatch } from "@redux/hooks.ts";
 import SwitchButton from "@components/common/SwitchButton.tsx";
 import { UpdateStateInterface } from "@type/common.tsx";
 import { useState } from "react";
 import AddRoundedIcon from "@mui/icons-material/AddRounded";
 import RemoveRoundedIcon from "@mui/icons-material/RemoveRounded";
+import { useScheduleForm } from "@containers/home/ScheduleDrawer/hooks/useScheduleForm.ts";
 
 function SpendingInput({ mode }: { mode: string }) {
-  const dispatch = useAppDispatch();
-  const schedule = useSelector(selectSchedule);
-  const expectedSpending = schedule ? schedule?.amount : "0";
+  const { scheduleForm, updateSchedule, updateSpendingType } =
+    useScheduleForm();
+  const expectedSpending = scheduleForm ? scheduleForm?.amount : "0";
   const [showError, setShowError] = useState(false);
 
   const changeSpendingType = () => {
-    updateSpendingType(dispatch, schedule);
+    updateSpendingType();
   };
 
   const changeSchedule = (state: React.MouseEvent<HTMLButtonElement>) => {
-    updateSchedule(dispatch, schedule, {
+    updateSchedule({
       target: { id: state.currentTarget.id, value: state.currentTarget.value },
     });
   };
@@ -42,7 +39,7 @@ function SpendingInput({ mode }: { mode: string }) {
     } else if (Number(amount) <= 100000000 && showError) {
       setShowError(false);
     }
-    updateSchedule(dispatch, schedule, {
+    updateSchedule({
       target: {
         id: "amount",
         value: state.target.value.replaceAll(",", ""),
@@ -51,7 +48,7 @@ function SpendingInput({ mode }: { mode: string }) {
   };
 
   const changeFixAmount = (state: UpdateStateInterface) => {
-    updateSchedule(dispatch, schedule, state);
+    updateSchedule(state);
   };
   return (
     <Grid container spacing={2} px={2.5}>
@@ -63,7 +60,7 @@ function SpendingInput({ mode }: { mode: string }) {
         <Grid item xs={6}>
           <Button
             variant={
-              schedule?.price_type === SCHEDULE_DRAWER.type_minus
+              scheduleForm?.price_type === SCHEDULE_DRAWER.type_minus
                 ? "contained"
                 : "outlined"
             }
@@ -82,7 +79,7 @@ function SpendingInput({ mode }: { mode: string }) {
         <Grid item xs={6}>
           <Button
             variant={
-              schedule?.price_type === SCHEDULE_DRAWER.type_plus
+              scheduleForm?.price_type === SCHEDULE_DRAWER.type_plus
                 ? "contained"
                 : "outlined"
             }
@@ -121,7 +118,7 @@ function SpendingInput({ mode }: { mode: string }) {
                 color: "white",
               }}
             >
-              {schedule?.price_type === "-" ? (
+              {scheduleForm?.price_type === "-" ? (
                 <RemoveRoundedIcon fontSize="small" />
               ) : (
                 <AddRoundedIcon fontSize="small" />
@@ -163,12 +160,12 @@ function SpendingInput({ mode }: { mode: string }) {
           </Typography>
           <Stack direction="row" alignItems="center">
             <SwitchButton
-              checked={schedule?.fix_amount ?? false}
+              checked={scheduleForm?.fix_amount ?? false}
               handleChange={() =>
                 changeFixAmount({
                   target: {
                     id: "fix_amount",
-                    value: schedule?.fix_amount ? false : true,
+                    value: !scheduleForm?.fix_amount,
                   },
                 })
               }

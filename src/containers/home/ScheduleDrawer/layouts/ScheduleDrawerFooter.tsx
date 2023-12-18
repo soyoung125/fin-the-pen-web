@@ -7,13 +7,13 @@ import {
   selectSchedule,
   setDrawerSchedule,
 } from "@redux/slices/scheduleSlice.tsx";
-import { generateRandomSchedule } from "../domain/schedule";
 import { Schedule, ScheduleDrawerModeValue } from "@type/schedule.tsx";
 import { useAppDispatch, useAppSelector } from "@redux/hooks.ts";
 import { useSelector } from "react-redux";
 import { selectUser } from "@redux/slices/userSlice.tsx";
 import useSchedule from "@hooks/useSchedule.tsx";
 import Save from "@assets/icons/save_icon.svg";
+import { generateRandomSchedule } from "@containers/home/ScheduleDrawer/hooks/useScheduleForm.ts";
 
 /**
  * 각종 로직들 모듈로 이전 예정

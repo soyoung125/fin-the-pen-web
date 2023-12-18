@@ -1,19 +1,15 @@
 import { Stack, Typography } from "@mui/material";
-import { useSelector } from "react-redux";
 import { SCHEDULE_DRAWER } from "../../../../../constants/schedule.tsx";
-import { selectSchedule } from "@redux/slices/scheduleSlice.tsx";
-import { updateExclusion } from "../../domain/schedule.ts";
-import { useAppDispatch } from "@redux/hooks.ts";
 import SwitchButton from "@components/common/SwitchButton.tsx";
+import { useScheduleForm } from "@containers/home/ScheduleDrawer/hooks/useScheduleForm.ts";
 
 function ExclusionInput() {
-  const dispatch = useAppDispatch();
-  const schedule = useSelector(selectSchedule);
-  const exclusion = schedule?.exclude ? true : false;
+  const { scheduleForm, updateExclusion } = useScheduleForm();
+  const exclusion = Boolean(scheduleForm?.exclude);
 
   const changeExclusion = () => {
     console.log(exclusion);
-    updateExclusion(dispatch, schedule, !exclusion);
+    updateExclusion(!exclusion);
   };
 
   return (

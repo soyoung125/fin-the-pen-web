@@ -1,9 +1,5 @@
 import { Box, Collapse, Stack } from "@mui/material";
-import { useSelector } from "react-redux";
 import SwitchButton from "@components/common/SwitchButton.tsx";
-import { useAppDispatch } from "@redux/hooks.ts";
-import { selectSchedule } from "@redux/slices/scheduleSlice.tsx";
-import { updateRepeat } from "../../../../domain/schedule.ts";
 import RepeatRadioGroup from "./radio/RepeatRadioGroup.tsx";
 import AllDay from "./repeat/AllDay.tsx";
 import Week from "./repeat/Week";
@@ -13,13 +9,13 @@ import EndDate from "./period/EndDate";
 import RadioLabel from "./radio/RadioLabel";
 import RepetitionCount from "./period/RepetitionCount.tsx";
 import ThickDivider from "@components/common/ThickDivider.tsx";
+import { useScheduleForm } from "@containers/home/ScheduleDrawer/hooks/useScheduleForm.ts";
 
 function RepeatInput() {
-  const dispatch = useAppDispatch();
-  const schedule = useSelector(selectSchedule);
+  const { updateRepeat, scheduleForm } = useScheduleForm();
 
   const changeRepeat = (state: { target: { value: string; name: string } }) => {
-    updateRepeat(dispatch, schedule, state);
+    updateRepeat(state);
   };
 
   return (
@@ -27,18 +23,18 @@ function RepeatInput() {
       <Stack direction="row" justifyContent="space-between" sx={{ px: 2.5 }}>
         <Box sx={{ color: "primary.main" }}>반복</Box>
         <SwitchButton
-          checked={schedule?.repeat !== "None"}
+          checked={scheduleForm?.repeat !== "None"}
           handleChange={() =>
             changeRepeat({
               target: {
-                value: schedule?.repeat === "None" ? "AllDay" : "None",
+                value: scheduleForm?.repeat === "None" ? "AllDay" : "None",
                 name: "repeat",
               },
             })
           }
         />
       </Stack>
-      <Collapse in={schedule?.repeat !== "None"}>
+      <Collapse in={scheduleForm?.repeat !== "None"}>
         <RepeatRadioGroup type="repeat" handleChange={changeRepeat}>
           <>
             <AllDay />

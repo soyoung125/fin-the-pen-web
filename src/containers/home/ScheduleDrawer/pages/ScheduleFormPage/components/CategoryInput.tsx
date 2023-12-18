@@ -7,8 +7,11 @@ import {
 } from "../../../../../../constants/categories.tsx";
 import { SCHEDULE_DRAWER } from "../../../../../../constants/schedule.tsx";
 import { selectSchedule } from "@redux/slices/scheduleSlice.tsx";
-import { getType, updateSchedule } from "../../../domain/schedule.ts";
 import { useAppDispatch } from "@redux/hooks.ts";
+import {
+  getType,
+  useScheduleForm,
+} from "@containers/home/ScheduleDrawer/hooks/useScheduleForm.ts";
 
 interface CategoryInputProps {
   selected: string;
@@ -21,6 +24,7 @@ export default function CategoryInput({
 }: CategoryInputProps) {
   const dispatch = useAppDispatch();
   const schedule = useSelector(selectSchedule);
+  const { updateSchedule } = useScheduleForm();
 
   const [value, setValue] = useState<string | null>(selected);
   const [inputValue, setInputValue] = useState("");
@@ -29,7 +33,7 @@ export default function CategoryInput({
     if (value) {
       const category = CATEGORIES.filter((cat) => cat.title === value);
       if (category.length > 0) {
-        updateSchedule(dispatch, schedule, {
+        updateSchedule({
           target: {
             id: "category",
             value: category[0].title,
@@ -43,7 +47,7 @@ export default function CategoryInput({
   const changeType = (category: Category) => {
     const type = getType(category);
     if (schedule?.price_type !== type) {
-      updateSchedule(dispatch, schedule, {
+      updateSchedule({
         target: {
           id: "price_type",
           value: type,
