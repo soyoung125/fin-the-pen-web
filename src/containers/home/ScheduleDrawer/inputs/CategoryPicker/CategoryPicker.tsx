@@ -1,7 +1,8 @@
 import { SyntheticEvent, useState } from "react";
-import { Tab, Tabs } from "@mui/material";
+import { Box, Button, Divider, Tab, Tabs } from "@mui/material";
 import ExpenditureCategoryPage from "./pages/ExpenditureCategoryPage";
 import IncomeCategoryPage from "./pages/IncomeCategoryPage";
+import TopNavigationBar from "@components/layouts/common/TopNavigationBar";
 
 function CategoryPicker() {
   const [activeTabIndex, setActiveTabIndex] = useState(0);
@@ -34,6 +35,7 @@ function CategoryPicker() {
 
   return (
     <>
+      <TopNavigationBar onClick={() => alert("hi")} title="카테고리 설정" />
       <Tabs
         value={activeTabIndex}
         onChange={handleTabChange}
@@ -44,7 +46,11 @@ function CategoryPicker() {
         <Tab label="지출" />
         <Tab label="수입" />
       </Tabs>
-      {content(activeTabIndex)}
+      <Box height="100vh">{content(activeTabIndex)}</Box>
+      <Divider />
+      <Button fullWidth variant="contained">
+        {selectedCategory} 카테고리 선택
+      </Button>
     </>
   );
 }
