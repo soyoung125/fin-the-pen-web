@@ -1,17 +1,16 @@
 import RadioLabel from "../radio/RadioLabel";
-import InputLabel from "../radio/RadioLabel/InputLabel.tsx";
+import RepeatInputLabel from "../radio/RadioLabel/RepeatInputLabel";
 
 function AllDay() {
   return (
     <RadioLabel
-      value="AllDay"
+      value="day"
       label={
-        <InputLabel
+        <RepeatInputLabel
           label="매일"
           postInputLabel="일 마다"
           max={365}
-          type="repeat"
-          option="AllDay"
+          option="day"
         />
       }
     />
