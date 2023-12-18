@@ -3,8 +3,9 @@ import ExclusionInput from "./ExclusionInput.tsx";
 import ImportanceInput from "./ImportanceInput.tsx";
 import SpendingInput from "./SpendingInput.tsx";
 import ThickDivider from "@components/common/ThickDivider.tsx";
+import { ScheduleDrawerModeValue } from "@type/schedule.tsx";
 
-function AssetSettings({ mode }: { mode: string }) {
+function AssetFormPage({ mode }: { mode: ScheduleDrawerModeValue }) {
   return (
     <Stack spacing={2}>
       <SpendingInput mode={mode} />
@@ -18,4 +19,4 @@ function AssetSettings({ mode }: { mode: string }) {
   );
 }
 
-export default AssetSettings;
+export default AssetFormPage;

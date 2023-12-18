@@ -18,7 +18,7 @@ import {
 } from "../../../app/redux/slices/scheduleSlice";
 import CategoryInput from "./inputs/CategoryInput";
 import RepeatInput from "./inputs/RepeatInput";
-import AssetSettings from "./pages/AssetSettingsPage";
+import AssetFormPage from "./pages/AssetFormPage";
 import ScheduleDrawerHeader from "./layouts/ScheduleDrawerHeader";
 import ScheduleDrawerFooter from "./layouts/ScheduleDrawerFooter";
 import { CONSUMPTION_ALERTS } from "../../../constants/alerts";
@@ -151,7 +151,7 @@ function ScheduleDrawer({
                 </Stack>
               </SwiperSlide>
               <SwiperSlide>
-                <AssetSettings mode={mode} />
+                <AssetFormPage mode={mode} />
               </SwiperSlide>
             </Swiper>
 
