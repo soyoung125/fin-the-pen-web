@@ -1,9 +1,37 @@
 import moment from "moment";
-import { Schedule } from "@type/schedule.tsx";
-import {
-  getInitPeriod,
-  getInitRepeat,
-} from "@containers/home/ScheduleDrawer/domain/schedule";
+import { Schedule, SchedulePeriod, ScheduleRepeat } from "@type/schedule.tsx";
+
+const getInitRepeat = (date: moment.Moment): ScheduleRepeat => {
+  return {
+    day_type: {
+      repeat_value: "1",
+    },
+    week_type: {
+      repeat_day_of_week: date.locale("en").format("dddd").toUpperCase(),
+      repeat_value: "1",
+    },
+    month_type: {
+      today_repeat: true,
+      select_date: date.format("D"),
+      repeat_value: "1",
+    },
+    year_type: {
+      year_repeat: date.format("M월 D일"),
+      repeat_value: "1",
+      year_category: "MonthAndDay",
+    },
+    kind_type: "",
+  };
+};
+
+const getInitPeriod = (date: moment.Moment): SchedulePeriod => {
+  return {
+    is_repeat_again: true,
+    repeat_number_time: "1",
+    repeat_end_line: date.add(1, "w").format("YYYY-MM-DD"),
+    kind_type: "is_repeat_again",
+  };
+};
 
 const SCHEDULE_DRAWER = {
   drawer_title: {

@@ -1,6 +1,4 @@
 import { Box, Button, Divider, Drawer, Stack, Typography } from "@mui/material";
-import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
-import RoundedButton from "@components/common/RoundedButton.tsx";
 import FilterHeader from "@containers/home/common/TopBar/buttons/FilterButton/FilterHeader.tsx";
 import { categories } from "@containers/home/common/TopBar/buttons/FilterButton/constants/categories.ts";
 import { useSelectCategory } from "@containers/home/common/TopBar/buttons/FilterButton/hooks/useSelectCategory.ts";
@@ -9,6 +7,8 @@ import FilterLayout from "@containers/home/common/TopBar/buttons/FilterButton/Fi
 import DateInput from "@containers/home/common/TopBar/buttons/FilterButton/DateInput.tsx";
 import RefreshIcon from "@mui/icons-material/Refresh";
 import { useDialog } from "@components/layouts/dialog/hooks/useDialog.ts";
+import TopNavigationBar from "@components/layouts/common/TopNavigationBar";
+
 interface FilterDrawerProps {
   bottomDrawerOpen: boolean;
   setBottomDrawerOpen: React.Dispatch<React.SetStateAction<boolean>>;
@@ -63,16 +63,10 @@ function FilterDrawer({
         anchor="bottom"
         onClose={() => setBottomDrawerOpen(false)}
       >
-        <Stack gap={1} direction="row" px="20px" py="12px" alignItems="center">
-          <RoundedButton
-            value="arrow-back-ios-icon"
-            onClick={() => setBottomDrawerOpen(false)}
-          >
-            <ArrowBackIosIcon />
-          </RoundedButton>
-
-          <Typography variant="h4">카테고리 필터 설정</Typography>
-        </Stack>
+        <TopNavigationBar
+          onClick={() => setBottomDrawerOpen(false)}
+          title="카테고리 필터 설정"
+        />
 
         <Divider />
         <Box height="100vh">
@@ -158,4 +152,5 @@ function FilterDrawer({
     </>
   );
 }
+
 export default FilterDrawer;
