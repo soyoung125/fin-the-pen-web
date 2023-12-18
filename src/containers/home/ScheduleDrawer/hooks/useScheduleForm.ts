@@ -9,36 +9,6 @@ import { SCHEDULE_DRAWER } from "../../../../constants/schedule.tsx";
 import { useAppDispatch } from "@redux/hooks.ts";
 import { useSelector } from "react-redux";
 
-export const generateRandomSchedule = (stringDate: string) => {
-  const date = moment(stringDate);
-  const generateRandomString = (num: number) => {
-    const characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890";
-    let result = "";
-    const charactersLength = characters.length;
-    for (let i = 0; i < num; i += 1) {
-      result += characters.charAt(Math.floor(Math.random() * charactersLength));
-    }
-    return result;
-  };
-  const importances = ["상", "중", "하"];
-  const category = CATEGORIES[Math.floor(Math.random() * CATEGORIES.length)];
-  return {
-    event_name: generateRandomString(5),
-    start_date: date.format("YYYY-MM-DD"),
-    end_date: date.format("YYYY-MM-DD"),
-    start_time: `0${Math.floor(Math.random() * 9 + 1)}:00`,
-    end_time: `2${Math.floor(Math.random() * 4)}:00`,
-    category: category.title,
-    all_day: false,
-    repeat: "None",
-    period: "None",
-    price_type: getType(category),
-    amount: Math.floor(Math.random() * 1000) * 100,
-    is_fix_amount: false,
-    importance: importances[Math.floor(Math.random() * 3)],
-    exclude: Math.floor(Math.random() * 2) === 0,
-  };
-};
 export const getType = (category: Category) => {
   const type = category.type;
   const nestedType = category.nestedType;
@@ -143,6 +113,41 @@ export const useScheduleForm = () => {
   const updateExclusion = (state: boolean) => {
     dispatch(setDrawerSchedule({ ...scheduleForm, exclude: state }));
   };
+
+  const setRandomGeneratedSchedule = (stringDate: string) => {
+    const date = moment(stringDate);
+    const generateRandomString = (num: number) => {
+      const characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890";
+      let result = "";
+      const charactersLength = characters.length;
+      for (let i = 0; i < num; i += 1) {
+        result += characters.charAt(
+          Math.floor(Math.random() * charactersLength)
+        );
+      }
+      return result;
+    };
+    const importances = ["상", "중", "하"];
+    const category = CATEGORIES[Math.floor(Math.random() * CATEGORIES.length)];
+    const randomSchedule = {
+      event_name: generateRandomString(5),
+      start_date: date.format("YYYY-MM-DD"),
+      end_date: date.format("YYYY-MM-DD"),
+      start_time: `0${Math.floor(Math.random() * 9 + 1)}:00`,
+      end_time: `2${Math.floor(Math.random() * 4)}:00`,
+      category: category.title,
+      all_day: false,
+      repeat: "None",
+      period: "None",
+      price_type: getType(category),
+      amount: Math.floor(Math.random() * 1000) * 100,
+      is_fix_amount: false,
+      importance: importances[Math.floor(Math.random() * 3)],
+      exclude: Math.floor(Math.random() * 2) === 0,
+    };
+    dispatch(setDrawerSchedule(randomSchedule));
+  };
+
   return {
     scheduleForm,
     updateSchedule,
@@ -151,5 +156,6 @@ export const useScheduleForm = () => {
     updateRepeatEndDate,
     updateSpendingType,
     updateExclusion,
+    setRandomGeneratedSchedule,
   };
 };

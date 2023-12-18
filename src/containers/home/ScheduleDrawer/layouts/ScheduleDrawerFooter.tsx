@@ -2,18 +2,14 @@ import { Box, Button, Divider, Stack, Tooltip } from "@mui/material";
 import { NEED_SIGN_IN } from "../../../../constants/messages";
 import { SCHEDULE_DRAWER } from "../../../../constants/schedule";
 import { selectGuestMode } from "@redux/slices/commonSlice.tsx";
-import {
-  selectDate,
-  selectSchedule,
-  setDrawerSchedule,
-} from "@redux/slices/scheduleSlice.tsx";
+import { selectDate, selectSchedule } from "@redux/slices/scheduleSlice.tsx";
 import { Schedule, ScheduleDrawerModeValue } from "@type/schedule.tsx";
-import { useAppDispatch, useAppSelector } from "@redux/hooks.ts";
+import { useAppSelector } from "@redux/hooks.ts";
 import { useSelector } from "react-redux";
 import { selectUser } from "@redux/slices/userSlice.tsx";
 import useSchedule from "@hooks/useSchedule.tsx";
 import Save from "@assets/icons/save_icon.svg";
-import { generateRandomSchedule } from "@containers/home/ScheduleDrawer/hooks/useScheduleForm.ts";
+import { useScheduleForm } from "@containers/home/ScheduleDrawer/hooks/useScheduleForm.ts";
 
 /**
  * 각종 로직들 모듈로 이전 예정
@@ -34,8 +30,8 @@ function ScheduleDrawerFooter({
   const user = useSelector(selectUser);
   const guestMode = useAppSelector(selectGuestMode);
   const schedule = useAppSelector(selectSchedule) as Schedule;
-  const dispatch = useAppDispatch();
   const { handleCreateSchedule, handleModifySchedule } = useSchedule();
+  const { setRandomGeneratedSchedule } = useScheduleForm();
   const handleMode = () => {
     switch (mode) {
       case "create":
@@ -90,9 +86,7 @@ function ScheduleDrawerFooter({
             fullWidth
             variant="contained"
             color="warning"
-            onClick={() =>
-              dispatch(setDrawerSchedule(generateRandomSchedule(date)))
-            }
+            onClick={() => setRandomGeneratedSchedule(date)}
           >
             랜덤 일정 채우기(dev)
           </Button>
