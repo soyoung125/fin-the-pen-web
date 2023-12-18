@@ -11,7 +11,7 @@ const meta = {
   args: {
     tab: "탭",
     isSelected: true,
-    selectedCategoryCount: 3,
+    categoryCount: 3,
     onClick: () => alert("clicked"),
   },
   argTypes: {},
@@ -33,7 +33,7 @@ export const Dynamic = () => {
     <div style={{ width: "500px" }}>
       <CategorySideTabButton
         tab="hi"
-        selectedCategoryCount={5}
+        categoryCount={5}
         isSelected={isSelected}
         onClick={() => setIsSelected(!isSelected)}
       />
@@ -55,7 +55,7 @@ export const Dynamics = () => {
         <CategorySideTabButton
           isSelected={tab.isActive}
           tab={tab.tab}
-          selectedCategoryCount={tab.count}
+          categoryCount={tab.count}
           onClick={() =>
             setTabList((prev) => {
               const list = [...prev].map((t) => ({ ...t, isActive: false }));

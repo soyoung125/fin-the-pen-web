@@ -4,14 +4,14 @@ import { Button, Stack, Typography } from "@mui/material";
 export interface CategorySideTabProps {
   isSelected: boolean;
   tab: string;
-  selectedCategoryCount: number;
+  categoryCount: number;
   onClick: MouseEventHandler<HTMLButtonElement>;
 }
 
 function CategorySideTabButton({
   isSelected,
   tab,
-  selectedCategoryCount,
+  categoryCount,
   onClick,
 }: CategorySideTabProps) {
   return (
@@ -33,7 +33,7 @@ function CategorySideTabButton({
         sx={{ width: "100%" }}
       >
         <Typography>
-          {tab}({selectedCategoryCount})
+          {tab}({categoryCount})
         </Typography>
       </Stack>
     </Button>
