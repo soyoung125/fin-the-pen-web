@@ -1,6 +1,6 @@
-import { Dispatch, SetStateAction } from "react";
 import { INCOME_CATEGORY } from "../../constants.ts";
 import CategoryButton from "../../components/CategoryButton.tsx";
+import { Dispatch, SetStateAction } from "react";
 
 export interface IncomeCategoryPageProps {
   selectedCategory: string;

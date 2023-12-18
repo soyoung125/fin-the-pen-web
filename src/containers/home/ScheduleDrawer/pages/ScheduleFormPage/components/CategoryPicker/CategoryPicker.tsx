@@ -3,6 +3,7 @@ import { Box, Button, Divider, Tab, Tabs } from "@mui/material";
 import ExpenditureCategoryPage from "./pages/ExpenditureCategoryPage";
 import IncomeCategoryPage from "./pages/IncomeCategoryPage";
 import TopNavigationBar from "@components/layouts/common/TopNavigationBar";
+import { useScheduleForm } from "@containers/home/ScheduleDrawer/hooks/useScheduleForm.ts";
 
 export interface CategoryPickerProps {
   setIsCategoryPickerOpen: Dispatch<SetStateAction<boolean>>;
@@ -10,7 +11,12 @@ export interface CategoryPickerProps {
 
 function CategoryPicker({ setIsCategoryPickerOpen }: CategoryPickerProps) {
   const [activeTabIndex, setActiveTabIndex] = useState(0);
-  const [selectedCategory, setSelectedCategory] = useState<string>("");
+  const { scheduleForm, updateSchedule } = useScheduleForm();
+  const [selectedCategory, setSelectedCategory] = useState<string>(
+    scheduleForm ? scheduleForm.category : ""
+  );
+
+  const isCategorySelected = selectedCategory !== "";
 
   const handleTabChange = (event: SyntheticEvent, newValue: number) => {
     setActiveTabIndex(newValue);
@@ -57,8 +63,23 @@ function CategoryPicker({ setIsCategoryPickerOpen }: CategoryPickerProps) {
       <Box height="100vh">{content(activeTabIndex)}</Box>
       <Divider />
       <Box px="20px" pt="8px" pb="28px">
-        <Button fullWidth variant="contained">
-          {selectedCategory} 카테고리 선택
+        <Button
+          fullWidth
+          variant="contained"
+          disabled={!isCategorySelected}
+          onClick={() => {
+            updateSchedule({
+              target: {
+                id: "category",
+                value: selectedCategory,
+              },
+            });
+            setIsCategoryPickerOpen(false);
+          }}
+        >
+          {isCategorySelected
+            ? `${selectedCategory} 카테고리 선택`
+            : "카테고리를 선택해주세요"}
         </Button>
       </Box>
     </>

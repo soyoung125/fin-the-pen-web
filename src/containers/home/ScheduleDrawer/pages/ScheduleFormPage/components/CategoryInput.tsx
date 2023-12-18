@@ -1,6 +1,7 @@
 import { Box, FormControl, InputAdornment, TextField } from "@mui/material";
 import { MouseEventHandler } from "react";
 import { SCHEDULE_DRAWER } from "../../../../../../constants/schedule.tsx";
+import ArrowForwardIos from "@mui/icons-material/ArrowForwardIos";
 
 interface CategoryInputProps {
   selectedCategory: string;
@@ -27,6 +28,7 @@ export default function CategoryInput({
               </Box>
             </InputAdornment>
           ),
+          endAdornment: <ArrowForwardIos sx={{ fontSize: "16px" }} />,
         }}
         inputProps={{
           style: { textAlign: "right" },

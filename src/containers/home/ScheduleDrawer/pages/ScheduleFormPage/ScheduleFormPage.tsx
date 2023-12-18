@@ -1,6 +1,5 @@
 import NameInput from "@containers/home/ScheduleDrawer/pages/ScheduleFormPage/components/NameInput.tsx";
 import CategoryInput from "@containers/home/ScheduleDrawer/pages/ScheduleFormPage/components/CategoryInput.tsx";
-import { SCHEDULE_DRAWER_MODE } from "../../../../../constants/schedule.tsx";
 import { Stack } from "@mui/material";
 import ThickDivider from "@components/common/ThickDivider.tsx";
 import DateInput from "@containers/home/ScheduleDrawer/pages/ScheduleFormPage/components/DateInput";
@@ -30,9 +29,7 @@ function ScheduleFormPage({
 
         {/* 이벤트 카테고리 */}
         <CategoryInput
-          selectedCategory={
-            mode === SCHEDULE_DRAWER_MODE.create ? "" : schedule.category
-          }
+          selectedCategory={schedule.category}
           showError={showError}
           onClick={() => setIsCategoryPickerOpen((prev) => !prev)}
         />
