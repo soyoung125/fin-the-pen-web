@@ -53,6 +53,7 @@ function CategoryPicker({ setIsCategoryPickerOpen }: CategoryPickerProps) {
         <Tab label="지출" />
         <Tab label="수입" />
       </Tabs>
+      <Divider sx={{ borderBottom: "1px solid #E0E0E0" }} />
       <Box height="100vh">{content(activeTabIndex)}</Box>
       <Divider />
       <Box px="20px" pt="8px" pb="28px">

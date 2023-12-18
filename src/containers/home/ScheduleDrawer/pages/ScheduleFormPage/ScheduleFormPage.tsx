@@ -1,7 +1,7 @@
 import NameInput from "@containers/home/ScheduleDrawer/pages/ScheduleFormPage/components/NameInput.tsx";
 import CategoryInput from "@containers/home/ScheduleDrawer/pages/ScheduleFormPage/components/CategoryInput.tsx";
 import { SCHEDULE_DRAWER_MODE } from "../../../../../constants/schedule.tsx";
-import { Button, Stack } from "@mui/material";
+import { Stack } from "@mui/material";
 import ThickDivider from "@components/common/ThickDivider.tsx";
 import DateInput from "@containers/home/ScheduleDrawer/pages/ScheduleFormPage/components/DateInput";
 import RepeatInput from "@containers/home/ScheduleDrawer/pages/ScheduleFormPage/components/RepeatInput";
@@ -30,14 +30,12 @@ function ScheduleFormPage({
 
         {/* 이벤트 카테고리 */}
         <CategoryInput
-          selected={
+          selectedCategory={
             mode === SCHEDULE_DRAWER_MODE.create ? "" : schedule.category
           }
           showError={showError}
+          onClick={() => setIsCategoryPickerOpen((prev) => !prev)}
         />
-        <Button onClick={() => setIsCategoryPickerOpen((prev) => !prev)}>
-          일정 카테고리 선택하기 (임시)
-        </Button>
         <ThickDivider />
 
         {/* 이벤트 일정 */}
