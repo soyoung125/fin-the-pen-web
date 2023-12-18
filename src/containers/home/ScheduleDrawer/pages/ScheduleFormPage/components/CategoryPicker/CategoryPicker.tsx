@@ -1,10 +1,14 @@
-import { SyntheticEvent, useState } from "react";
+import { Dispatch, SetStateAction, SyntheticEvent, useState } from "react";
 import { Box, Button, Divider, Tab, Tabs } from "@mui/material";
 import ExpenditureCategoryPage from "./pages/ExpenditureCategoryPage";
 import IncomeCategoryPage from "./pages/IncomeCategoryPage";
 import TopNavigationBar from "@components/layouts/common/TopNavigationBar";
 
-function CategoryPicker() {
+export interface CategoryPickerProps {
+  setIsCategoryPickerOpen: Dispatch<SetStateAction<boolean>>;
+}
+
+function CategoryPicker({ setIsCategoryPickerOpen }: CategoryPickerProps) {
   const [activeTabIndex, setActiveTabIndex] = useState(0);
   const [selectedCategory, setSelectedCategory] = useState<string>("");
 
@@ -35,7 +39,10 @@ function CategoryPicker() {
 
   return (
     <>
-      <TopNavigationBar onClick={() => alert("hi")} title="카테고리 설정" />
+      <TopNavigationBar
+        onClick={() => setIsCategoryPickerOpen(false)}
+        title="카테고리 설정"
+      />
       <Tabs
         value={activeTabIndex}
         onChange={handleTabChange}
