@@ -14,10 +14,15 @@ function CategoryPicker() {
   const content = (activeTabIndex: number) => {
     switch (activeTabIndex) {
       case 0:
-        return <IncomeCategoryPage />;
-      case 1:
         return (
           <ExpenditureCategoryPage
+            selectedCategory={selectedCategory}
+            setSelectedCategory={setSelectedCategory}
+          />
+        );
+      case 1:
+        return (
+          <IncomeCategoryPage
             selectedCategory={selectedCategory}
             setSelectedCategory={setSelectedCategory}
           />

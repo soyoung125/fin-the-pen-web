@@ -1,4 +1,4 @@
-export const EXPENDITURE_CATEGORY = [
+export const INCOME_CATEGORY = [
   "급여",
   "용돈",
   "대출금",
