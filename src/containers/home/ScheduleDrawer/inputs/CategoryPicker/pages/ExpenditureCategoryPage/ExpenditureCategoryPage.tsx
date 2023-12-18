@@ -1,8 +1,8 @@
 import { Dispatch, SetStateAction, useState } from "react";
 import { Box, Stack } from "@mui/material";
-import { EXPENDITURE_CATEGORY } from "@containers/home/ScheduleDrawer/inputs/category-picker/CategoryPicker/constants.ts";
+import { EXPENDITURE_CATEGORY } from "@containers/home/ScheduleDrawer/inputs/CategoryPicker/constants.ts";
 import CategorySideTabButton from "../../components/CategorySideTabButton.tsx";
-import CategoryButton from "@containers/home/ScheduleDrawer/inputs/category-picker/CategoryPicker/components/CategoryButton.tsx";
+import CategoryButton from "@containers/home/ScheduleDrawer/inputs/CategoryPicker/components/CategoryButton.tsx";
 
 export interface ExpenditureCategoryPageProps {
   selectedCategory: string;

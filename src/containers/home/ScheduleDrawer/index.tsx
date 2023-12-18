@@ -55,6 +55,7 @@ function ScheduleDrawer({
   const [showError, setShowError] = useState(false);
   const [value, setValue] = useState(0);
   const [swiper, setSwiper] = useState<SwiperType>();
+  const [isCategoryPickerOpen, setIsCategoryPickerOpen] = useState(false);
 
   const handleChange = (event: React.SyntheticEvent, newValue: number) => {
     swiper?.slideTo(newValue);
@@ -73,6 +74,7 @@ function ScheduleDrawer({
   }, []);
 
   const ref = useRef<HTMLDivElement>(null);
+
   useEffect(() => {
     // 현재 버그 있음
     console.log("width", ref.current ? ref.current.offsetWidth : 0);
