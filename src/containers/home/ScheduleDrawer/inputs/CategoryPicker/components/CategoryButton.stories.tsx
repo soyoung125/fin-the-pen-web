@@ -1,5 +1,5 @@
 import type { Meta } from "@storybook/react";
-import CategoryButton, { CategoryButtonProps } from "./CategoryButton";
+import CategoryButton, { CategoryButtonProps } from "./CategoryButton.tsx";
 import { useState } from "react";
 
 const meta = {
