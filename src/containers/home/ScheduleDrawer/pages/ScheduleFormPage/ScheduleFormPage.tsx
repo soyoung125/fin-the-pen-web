@@ -8,49 +8,46 @@ import RepeatInput from "@containers/home/ScheduleDrawer/pages/ScheduleFormPage/
 import { ScheduleDrawerModeValue } from "@type/schedule.tsx";
 import { useSelector } from "react-redux";
 import { selectSchedule } from "@redux/slices/scheduleSlice.tsx";
-import { useState } from "react";
-import CategoryPicker from "@containers/home/ScheduleDrawer/pages/ScheduleFormPage/components/CategoryPicker";
+import { Dispatch, SetStateAction } from "react";
 
 export interface ScheduleFormPageProps {
   mode: ScheduleDrawerModeValue;
   showError: boolean;
+  setIsCategoryPickerOpen: Dispatch<SetStateAction<boolean>>;
 }
 
-function ScheduleFormPage({ mode, showError }: ScheduleFormPageProps) {
+function ScheduleFormPage({
+  mode,
+  showError,
+  setIsCategoryPickerOpen,
+}: ScheduleFormPageProps) {
   const schedule = useSelector(selectSchedule);
-  const [isCategoryPickerOpen, setIsCategoryPickerOpen] = useState(false);
   if (schedule) {
     return (
-      <>
-        {isCategoryPickerOpen ? (
-          <CategoryPicker setIsCategoryPickerOpen={setIsCategoryPickerOpen} />
-        ) : (
-          <Stack spacing={2} pt={2}>
-            {/* 이벤트 제목 */}
-            <NameInput showError={showError} />
+      <Stack spacing={2} pt={2}>
+        {/* 이벤트 제목 */}
+        <NameInput showError={showError} />
 
-            {/* 이벤트 카테고리 */}
-            <CategoryInput
-              selected={
-                mode === SCHEDULE_DRAWER_MODE.create ? "" : schedule.category
-              }
-              showError={showError}
-            />
-            <Button onClick={() => setIsCategoryPickerOpen((prev) => !prev)}>
-              일정 카테고리 선택하기 (임시)
-            </Button>
-            <ThickDivider />
+        {/* 이벤트 카테고리 */}
+        <CategoryInput
+          selected={
+            mode === SCHEDULE_DRAWER_MODE.create ? "" : schedule.category
+          }
+          showError={showError}
+        />
+        <Button onClick={() => setIsCategoryPickerOpen((prev) => !prev)}>
+          일정 카테고리 선택하기 (임시)
+        </Button>
+        <ThickDivider />
 
-            {/* 이벤트 일정 */}
-            <DateInput showError={showError} />
+        {/* 이벤트 일정 */}
+        <DateInput showError={showError} />
 
-            <ThickDivider />
+        <ThickDivider />
 
-            {/* 이벤트 반복 설정 */}
-            <RepeatInput />
-          </Stack>
-        )}
-      </>
+        {/* 이벤트 반복 설정 */}
+        <RepeatInput />
+      </Stack>
     );
   }
 

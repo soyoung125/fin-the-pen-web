@@ -10,6 +10,7 @@ import { useAppDispatch } from "@redux/hooks.ts";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Swiper as SwiperType } from "swiper/types";
 import ScheduleFormPage from "@containers/home/ScheduleDrawer/pages/ScheduleFormPage";
+import CategoryPicker from "@containers/home/ScheduleDrawer/pages/ScheduleFormPage/components/CategoryPicker";
 
 function TransitionUp(props: SlideProps) {
   return <Slide {...props} direction="right" />;
@@ -32,11 +33,11 @@ function ScheduleDrawer({
   const random = Math.floor(Math.random() * 4); // 현재 CONSUMPTION_ALERTS의 길이가 4임
 
   const dispatch = useAppDispatch();
-
   const [snackbarOpen, setSnackbarOpen] = useState(true);
   const [showError, setShowError] = useState(false);
   const [value, setValue] = useState(0);
   const [swiper, setSwiper] = useState<SwiperType>();
+  const [isCategoryPickerOpen, setIsCategoryPickerOpen] = useState(false);
 
   const handleChange = (event: React.SyntheticEvent, newValue: number) => {
     swiper?.slideTo(newValue);
@@ -61,6 +62,10 @@ function ScheduleDrawer({
     console.log("width", ref.current ? ref.current.offsetWidth : 0);
     setDrawerWidth(ref.current ? ref.current.offsetWidth : 0);
   }, [ref.current]);
+
+  if (isCategoryPickerOpen) {
+    return <CategoryPicker setIsCategoryPickerOpen={setIsCategoryPickerOpen} />;
+  }
 
   return (
     <div ref={ref} style={{ height: "100%" }}>
@@ -105,7 +110,11 @@ function ScheduleDrawer({
             onSwiper={(swiper) => setSwiper(swiper)}
           >
             <SwiperSlide style={{ overflow: "scroll" }}>
-              <ScheduleFormPage mode={mode} showError={showError} />
+              <ScheduleFormPage
+                mode={mode}
+                showError={showError}
+                setIsCategoryPickerOpen={setIsCategoryPickerOpen}
+              />
             </SwiperSlide>
             <SwiperSlide>
               <AssetFormPage mode={mode} />
