@@ -5,18 +5,25 @@ import IncomeCategoryPage from "./pages/IncomeCategoryPage";
 
 function CategoryPicker() {
   const [activeTabIndex, setActiveTabIndex] = useState(0);
-  const handleChange = (event: SyntheticEvent, newValue: number) => {
+  const [selectedCategory, setSelectedCategory] = useState<string>("");
+
+  const handleTabChange = (event: SyntheticEvent, newValue: number) => {
     setActiveTabIndex(newValue);
   };
 
   const content = (activeTabIndex: number) => {
     switch (activeTabIndex) {
       case 0:
-        return <ExpenditureCategoryPage />;
-      case 1:
         return <IncomeCategoryPage />;
+      case 1:
+        return (
+          <ExpenditureCategoryPage
+            selectedCategory={selectedCategory}
+            setSelectedCategory={setSelectedCategory}
+          />
+        );
       default:
-        return <div>지출</div>;
+        return <div>부적절한 인덱스 값이 주어졌습니다.</div>;
     }
   };
 
@@ -24,7 +31,7 @@ function CategoryPicker() {
     <>
       <Tabs
         value={activeTabIndex}
-        onChange={handleChange}
+        onChange={handleTabChange}
         textColor="primary"
         indicatorColor="primary"
         variant="fullWidth"
