@@ -5,7 +5,11 @@ import {
 } from "@redux/slices/scheduleSlice.tsx";
 import moment from "moment/moment";
 import { CATEGORIES, Category } from "../../../../constants/categories.tsx";
-import { SCHEDULE_DRAWER } from "../../../../constants/schedule.tsx";
+import {
+  INIT_PERIOD,
+  INIT_REPEAT,
+  SCHEDULE_DRAWER,
+} from "../../../../constants/schedule.tsx";
 import { useAppDispatch } from "@redux/hooks.ts";
 import { useSelector } from "react-redux";
 
@@ -76,8 +80,8 @@ export const useScheduleForm = () => {
       end_time: `2${Math.floor(Math.random() * 4)}:00`,
       category: category.title,
       all_day: false,
-      repeat: "None",
-      period: "None",
+      repeat: INIT_REPEAT(date),
+      period: INIT_PERIOD(date),
       price_type: getType(category),
       amount: Math.floor(Math.random() * 1000) * 100,
       is_fix_amount: false,
@@ -267,6 +271,7 @@ export const useScheduleForm = () => {
       );
       return;
     }
+
     const type = scheduleForm?.period.kind_type ?? "";
     if (type !== "") {
       dispatch(
