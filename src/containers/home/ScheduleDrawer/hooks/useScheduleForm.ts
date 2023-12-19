@@ -5,7 +5,11 @@ import {
 } from "@redux/slices/scheduleSlice.tsx";
 import moment from "moment/moment";
 import { CATEGORIES, Category } from "../../../../constants/categories.tsx";
-import { SCHEDULE_DRAWER } from "../../../../constants/schedule.tsx";
+import {
+  INIT_PERIOD,
+  INIT_REPEAT,
+  SCHEDULE_DRAWER,
+} from "../../../../constants/schedule.tsx";
 import { useAppDispatch } from "@redux/hooks.ts";
 import { useSelector } from "react-redux";
 
@@ -18,11 +22,12 @@ export const getType = (category: Category) => {
     return SCHEDULE_DRAWER.type_minus;
   }
 };
+
 export const getSign = (type: string) => (type === "+" ? "Plus" : "Minus");
 
 const getRepeatEndDate = (
   startDate: string | undefined,
-  type: string | undefined
+  type: string | undefined,
 ) => {
   let date = moment(startDate);
   switch (type) {
@@ -51,96 +56,6 @@ const getRepeatEndDate = (
 export const useScheduleForm = () => {
   const dispatch = useAppDispatch();
   const scheduleForm = useSelector(selectSchedule);
-  // const updateSchedule = (
-  //   state:
-  //     | React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>
-  //     | UpdateStateInterface
-  // ) => {
-  //   dispatch(
-  //     setDrawerSchedule({
-  //       ...scheduleForm,
-  //       [state.target.id]: state.target.value,
-  //     })
-  //   );
-  //   if (state.target.id === "start_time") {
-  //     const endTime = moment(state.target.value as string, "HH:mm")
-  //       .add(2, "hours")
-  //       .format("HH:mm");
-  //     dispatch(
-  //       setDrawerSchedule({
-  //         ...scheduleForm,
-  //         [state.target.id]: state.target.value,
-  //         end_time: endTime,
-  //       })
-  //     );
-  //   }
-  //   if (
-  //     state.target.id === "start_date" &&
-  //     moment(scheduleForm?.end_date).isBefore(state.target.value as string)
-  //   ) {
-  //     dispatch(
-  //       setDrawerSchedule({
-  //         ...scheduleForm,
-  //         end_date: state.target.value,
-  //         [state.target.id]: state.target.value,
-  //       })
-  //     );
-  //   }
-  //   if (
-  //     state.target.id === "end_date" &&
-  //     moment(scheduleForm?.start_date).isAfter(state.target.value as string)
-  //   ) {
-  //     dispatch(
-  //       setDrawerSchedule({
-  //         ...scheduleForm,
-  //         start_date: state.target.value,
-  //         [state.target.id]: state.target.value,
-  //       })
-  //     );
-  //   }
-  // };
-  // const updateAllDay = (state: {
-  //   target: { value: boolean; name: string };
-  // }) => {
-  //   dispatch(
-  //     setDrawerSchedule({
-  //       ...scheduleForm,
-  //       [state.target.name]: state.target.value,
-  //     })
-  //   );
-  // };
-  // const updateRepeat = (state: { target: { value: string; name: string } }) => {
-  //   dispatch(
-  //     setDrawerSchedule({
-  //       ...scheduleForm,
-  //       [state.target.name]: state.target.value,
-  //     })
-  //   );
-  // };
-  // const updateRepeatEndDate = (
-  //   setRepeatEndDate: React.Dispatch<React.SetStateAction<moment.Moment>>,
-  //   endDate: moment.Moment | null
-  // ) => {
-  //   if (endDate?.isBefore(scheduleForm?.end_date)) {
-  //     alert("반복 종료일을 다시 선택해주세요.");
-  //   } else {
-  //     endDate && setRepeatEndDate(endDate);
-  //   }
-  // };
-  // const updateSpendingType = () => {
-  //   if (scheduleForm?.price_type === SCHEDULE_DRAWER.type_plus) {
-  //     dispatch(
-  //       setDrawerSchedule({ ...scheduleForm, type: SCHEDULE_DRAWER.type_minus })
-  //     );
-  //   } else {
-  //     dispatch(
-  //       setDrawerSchedule({ ...scheduleForm, type: SCHEDULE_DRAWER.type_plus })
-  //     );
-  //   }
-  // };
-  // const updateExclusion = (state: boolean) => {
-  //   dispatch(setDrawerSchedule({ ...scheduleForm, exclude: state }));
-  // };
 
   const setRandomGeneratedSchedule = (stringDate: string) => {
     const date = moment(stringDate);
@@ -150,7 +65,7 @@ export const useScheduleForm = () => {
       const charactersLength = characters.length;
       for (let i = 0; i < num; i += 1) {
         result += characters.charAt(
-          Math.floor(Math.random() * charactersLength)
+          Math.floor(Math.random() * charactersLength),
         );
       }
       return result;
@@ -165,8 +80,8 @@ export const useScheduleForm = () => {
       end_time: `2${Math.floor(Math.random() * 4)}:00`,
       category: category.title,
       all_day: false,
-      repeat: "None",
-      period: "None",
+      repeat: INIT_REPEAT(date),
+      period: INIT_PERIOD(date),
       price_type: getType(category),
       amount: Math.floor(Math.random() * 1000) * 100,
       is_fix_amount: false,
@@ -179,7 +94,7 @@ export const useScheduleForm = () => {
   const updateSchedule = (
     state:
       | React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>
-      | UpdateStateInterface
+      | UpdateStateInterface,
   ) => {
     switch (state.target.id) {
       case "start_time": {
@@ -191,7 +106,7 @@ export const useScheduleForm = () => {
             ...scheduleForm,
             [state.target.id]: state.target.value,
             end_time: endTime,
-          })
+          }),
         );
         break;
       }
@@ -210,14 +125,14 @@ export const useScheduleForm = () => {
               ...scheduleForm,
               start_date: state.target.value,
               [state.target.id]: state.target.value,
-            })
+            }),
           );
         } else {
           dispatch(
             setDrawerSchedule({
               ...scheduleForm,
               [state.target.id]: state.target.value,
-            })
+            }),
           );
         }
         break;
@@ -226,7 +141,7 @@ export const useScheduleForm = () => {
           setDrawerSchedule({
             ...scheduleForm,
             [state.target.id]: state.target.value,
-          })
+          }),
         );
         break;
     }
@@ -254,30 +169,19 @@ export const useScheduleForm = () => {
       ...scheduleForm?.period,
       repeat_end_line: getRepeatEndDate(
         startDate,
-        scheduleForm?.repeat.kind_type
+        scheduleForm?.repeat.kind_type,
       ),
     };
 
-    if (start.isAfter(scheduleForm?.end_date)) {
-      dispatch(
-        setDrawerSchedule({
-          ...scheduleForm,
-          end_date: startDate,
-          start_date: startDate,
-          repeat,
-          period,
-        })
-      );
-    } else {
-      dispatch(
-        setDrawerSchedule({
-          ...scheduleForm,
-          start_date: startDate,
-          repeat,
-          period,
-        })
-      );
-    }
+    dispatch(
+      setDrawerSchedule({
+        ...scheduleForm,
+        end_date: startDate,
+        start_date: startDate,
+        repeat,
+        period,
+      }),
+    );
   };
 
   const updateAllDay = (state: {
@@ -287,7 +191,7 @@ export const useScheduleForm = () => {
       setDrawerSchedule({
         ...scheduleForm,
         [state.target.name]: state.target.value,
-      })
+      }),
     );
   };
 
@@ -298,7 +202,7 @@ export const useScheduleForm = () => {
         ...scheduleForm?.period,
         repeat_end_line: getRepeatEndDate(
           scheduleForm?.start_date,
-          value as string
+          value as string,
         ),
       };
       dispatch(
@@ -309,7 +213,7 @@ export const useScheduleForm = () => {
             kind_type: value,
           },
           period,
-        })
+        }),
       );
       return;
     }
@@ -328,7 +232,7 @@ export const useScheduleForm = () => {
             ...scheduleForm?.repeat,
             [kind_type]: newValue,
           },
-        })
+        }),
       );
     }
   };
@@ -336,11 +240,14 @@ export const useScheduleForm = () => {
   const updateSpendingType = () => {
     if (scheduleForm?.price_type === SCHEDULE_DRAWER.type_plus) {
       dispatch(
-        setDrawerSchedule({ ...scheduleForm, type: SCHEDULE_DRAWER.type_minus })
+        setDrawerSchedule({
+          ...scheduleForm,
+          type: SCHEDULE_DRAWER.type_minus,
+        }),
       );
     } else {
       dispatch(
-        setDrawerSchedule({ ...scheduleForm, type: SCHEDULE_DRAWER.type_plus })
+        setDrawerSchedule({ ...scheduleForm, type: SCHEDULE_DRAWER.type_plus }),
       );
     }
   };
@@ -360,10 +267,11 @@ export const useScheduleForm = () => {
             is_repeat_again: value === "is_repeat_again",
             kind_type: value,
           },
-        })
+        }),
       );
       return;
     }
+
     const type = scheduleForm?.period.kind_type ?? "";
     if (type !== "") {
       dispatch(
@@ -373,7 +281,7 @@ export const useScheduleForm = () => {
             ...scheduleForm?.period,
             [type]: value,
           },
-        })
+        }),
       );
     }
   };
@@ -391,7 +299,7 @@ export const useScheduleForm = () => {
             year_repeat: textContent,
           },
         },
-      })
+      }),
     );
   };
 
@@ -400,7 +308,6 @@ export const useScheduleForm = () => {
     updateSchedule,
     updateAllDay,
     updateRepeat,
-    // updateRepeatEndDate, // 어디갔는지 ??
     updateSpendingType,
     updateExclusion,
     setRandomGeneratedSchedule,

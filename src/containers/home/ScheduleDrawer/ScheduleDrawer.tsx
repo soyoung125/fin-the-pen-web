@@ -11,6 +11,7 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import { Swiper as SwiperType } from "swiper/types";
 import ScheduleFormPage from "@containers/home/ScheduleDrawer/pages/ScheduleFormPage";
 import CategoryPicker from "@containers/home/ScheduleDrawer/pages/ScheduleFormPage/components/CategoryPicker";
+import RepeatPickeer from "@containers/home/ScheduleDrawer/pages/ScheduleFormPage/components/RepeatPicker";
 
 function TransitionUp(props: SlideProps) {
   return <Slide {...props} direction="right" />;
@@ -38,6 +39,7 @@ function ScheduleDrawer({
   const [value, setValue] = useState(0);
   const [swiper, setSwiper] = useState<SwiperType>();
   const [isCategoryPickerOpen, setIsCategoryPickerOpen] = useState(false);
+  const [isRepeatPickerOpen, setIsRepeatPickerOpen] = useState(false);
 
   const handleChange = (event: React.SyntheticEvent, newValue: number) => {
     swiper?.slideTo(newValue);
@@ -65,6 +67,9 @@ function ScheduleDrawer({
 
   if (isCategoryPickerOpen) {
     return <CategoryPicker setIsCategoryPickerOpen={setIsCategoryPickerOpen} />;
+  }
+  if (isRepeatPickerOpen) {
+    return <RepeatPickeer setIsRepeatPickerOpen={setIsRepeatPickerOpen} />;
   }
 
   return (
@@ -114,6 +119,7 @@ function ScheduleDrawer({
                 mode={mode}
                 showError={showError}
                 setIsCategoryPickerOpen={setIsCategoryPickerOpen}
+                setIsRepeatPickerOpen={setIsRepeatPickerOpen}
               />
             </SwiperSlide>
             <SwiperSlide>

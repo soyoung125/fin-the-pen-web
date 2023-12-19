@@ -1,7 +1,7 @@
 import moment from "moment";
 import { Schedule, SchedulePeriod, ScheduleRepeat } from "@type/schedule.tsx";
 
-const getInitRepeat = (date: moment.Moment): ScheduleRepeat => {
+const INIT_REPEAT = (date: moment.Moment): ScheduleRepeat => {
   return {
     day_type: {
       repeat_value: "1",
@@ -24,7 +24,7 @@ const getInitRepeat = (date: moment.Moment): ScheduleRepeat => {
   };
 };
 
-const getInitPeriod = (date: moment.Moment): SchedulePeriod => {
+const INIT_PERIOD = (date: moment.Moment): SchedulePeriod => {
   return {
     is_repeat_again: true,
     repeat_number_time: "1",
@@ -102,8 +102,8 @@ const INIT_SCHEDULE = (date: string, start_time: string): Schedule => ({
   end_time: `${moment(start_time, "HH").add(2, "h").format("HH")}:00`,
   category: "",
   all_day: false,
-  repeat: getInitRepeat(moment(date)),
-  period: getInitPeriod(moment(date)),
+  repeat: INIT_REPEAT(moment(date)),
+  period: INIT_PERIOD(moment(date)),
   price_type: SCHEDULE_DRAWER.type_minus,
   amount: "0",
   fix_amount: false,
@@ -140,4 +140,6 @@ export {
   REPEAT_CYCLE,
   VIEW_MODE,
   REGULAR_DEPOSIT_WITHDRAWAL_TYPE,
+  INIT_REPEAT,
+  INIT_PERIOD,
 };

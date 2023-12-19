@@ -13,12 +13,14 @@ export interface ScheduleFormPageProps {
   mode: ScheduleDrawerModeValue;
   showError: boolean;
   setIsCategoryPickerOpen: Dispatch<SetStateAction<boolean>>;
+  setIsRepeatPickerOpen: Dispatch<SetStateAction<boolean>>;
 }
 
 function ScheduleFormPage({
   mode,
   showError,
   setIsCategoryPickerOpen,
+  setIsRepeatPickerOpen,
 }: ScheduleFormPageProps) {
   const schedule = useSelector(selectSchedule);
   if (schedule) {
@@ -41,7 +43,7 @@ function ScheduleFormPage({
         <ThickDivider />
 
         {/* 이벤트 반복 설정 */}
-        <RepeatInput />
+        <RepeatInput onClick={() => setIsRepeatPickerOpen((prev) => !prev)} />
       </Stack>
     );
   }
