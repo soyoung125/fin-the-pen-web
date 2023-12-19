@@ -169,26 +169,15 @@ export const useScheduleForm = () => {
       ),
     };
 
-    if (start.isAfter(scheduleForm?.end_date)) {
-      dispatch(
-        setDrawerSchedule({
-          ...scheduleForm,
-          end_date: startDate,
-          start_date: startDate,
-          repeat,
-          period,
-        }),
-      );
-    } else {
-      dispatch(
-        setDrawerSchedule({
-          ...scheduleForm,
-          start_date: startDate,
-          repeat,
-          period,
-        }),
-      );
-    }
+    dispatch(
+      setDrawerSchedule({
+        ...scheduleForm,
+        end_date: startDate,
+        start_date: startDate,
+        repeat,
+        period,
+      }),
+    );
   };
 
   const updateAllDay = (state: {
