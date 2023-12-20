@@ -4,9 +4,9 @@ import moment from "moment";
 export type DatePickerType = "date" | "time";
 
 const DatePickerContext = createContext<{
-  datePicker: ({ type }: { type: DatePickerType }) => Promise<unknown>;
-  value: unknown;
-  setValue: Dispatch<SetStateAction<unknown>>;
+  datePicker: ({ type }: { type: DatePickerType }) => Promise<string>;
+  value: string;
+  setValue: Dispatch<SetStateAction<string>>;
 }>({
   datePicker: ({ type }: { type: DatePickerType }) =>
     new Promise<string>((_, reject) => reject("")),

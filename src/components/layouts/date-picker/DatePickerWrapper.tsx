@@ -13,18 +13,18 @@ export interface DatePickerState {
 }
 
 function DatePickerWrapper({ children }: { children: ReactNode }) {
-  const [value, setValue] = useState<unknown>(moment().format("YYYY-MM-DD"));
+  const [value, setValue] = useState<string>(moment().format("YYYY-MM-DD"));
   const [datePickerState, setDatePickerState] = useState<DatePickerState>();
 
-  const datePicker = ({ type }: { type: DatePickerType }): Promise<unknown> => {
+  const datePicker = ({ type }: { type: DatePickerType }): Promise<string> => {
     return new Promise((resolve) => {
       setDatePickerState({
         type,
-        onClickApprove: (answer: unknown) => {
+        onClickApprove: (answer: string) => {
           setDatePickerState(undefined);
           resolve(answer);
         },
-        onClickReject: (answer: unknown) => {
+        onClickReject: (answer: string) => {
           setDatePickerState(undefined);
           resolve(answer);
         },
