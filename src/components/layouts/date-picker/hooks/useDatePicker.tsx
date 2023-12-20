@@ -1,15 +1,24 @@
-import { useContext } from "react";
-import DatePickerContext from "../DatePickerContext.tsx";
+import { useOverlay } from "@hooks/use-overlay/useOverlay.tsx";
+import DatePicker from "@components/layouts/date-picker/components/DatePicker.tsx";
 
 export const useDatePicker = () => {
-  const { datePicker } = useContext(DatePickerContext);
-  const pickYYYYMMDD = () => {
-    return datePicker({ type: "date" }) as Promise<string>;
+  const { openOverlay, closeOverlay } = useOverlay();
+  const openDatePicker = (): Promise<string> => {
+    return new Promise((resolve) => {
+      openOverlay(
+        <DatePicker
+          onClickApprove={(answer) => {
+            resolve(answer);
+            closeOverlay();
+          }}
+          onClickReject={(answer) => {
+            resolve(answer);
+            closeOverlay();
+          }}
+        />
+      );
+    });
   };
 
-  const pickHHMM = () => {
-    return datePicker({ type: "time" }) as Promise<string>;
-  };
-
-  return { pickYYYYMMDD, pickHHMM };
+  return { openDatePicker, closeDatePicker: closeOverlay };
 };

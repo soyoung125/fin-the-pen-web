@@ -20,5 +20,5 @@ export const useTimePicker = () => {
     });
   };
 
-  return { openTimePicker, closeOverlay };
+  return { openTimePicker, closeTimePicker: closeOverlay };
 };

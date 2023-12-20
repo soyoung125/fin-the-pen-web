@@ -8,8 +8,8 @@ import {
 import SelectDate from "@components/layouts/date-picker/components/SelectDate.tsx";
 import { AdapterMoment } from "@mui/x-date-pickers/AdapterMoment";
 import { LocalizationProvider } from "@mui/x-date-pickers";
-import DatePickerContext from "@components/layouts/date-picker/DatePickerContext.tsx";
-import { useContext } from "react";
+import { useState } from "react";
+import moment from "moment";
 
 export interface DatePickerProps {
   onClickApprove: (answer: string) => void;
@@ -17,7 +17,7 @@ export interface DatePickerProps {
 }
 
 function DatePicker({ onClickApprove, onClickReject }: DatePickerProps) {
-  const { value, setValue } = useContext(DatePickerContext);
+  const [value, setValue] = useState(moment().format("YYYY-MM-DD"));
   return (
     <MuiDialog
       sx={{ "& .MuiDialog-paper": { borderRadius: "1rem", width: "100%" } }}
