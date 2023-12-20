@@ -1,9 +1,8 @@
-import { Box, Button, Stack } from "@mui/material";
+import { Box, Stack } from "@mui/material";
 import SwitchButton from "@components/common/SwitchButton.tsx";
 import InputDateTime from "./InputDateTime.tsx";
 import { SCHEDULE_DRAWER } from "../../../../../../../constants/schedule.tsx";
 import { useScheduleForm } from "@containers/home/ScheduleDrawer/hooks/useScheduleForm.ts";
-import { useTimePicker } from "@components/layouts/date-picker/hooks/useTimePicker.tsx";
 
 interface DateInputProps {
   showError: boolean;
@@ -11,7 +10,6 @@ interface DateInputProps {
 
 function DateInput({ showError }: DateInputProps) {
   const { scheduleForm, updateAllDay } = useScheduleForm();
-  const { openTimePicker } = useTimePicker();
 
   const changeAllDay = (state: {
     target: { value: boolean; name: string };
@@ -19,14 +17,8 @@ function DateInput({ showError }: DateInputProps) {
     updateAllDay(state);
   };
 
-  const foo = async () => {
-    const time = await openTimePicker();
-    console.log(time);
-  };
-
   return (
     <>
-      <Button onClick={foo}>하이</Button>
       <InputDateTime
         date={scheduleForm?.start_date}
         time={scheduleForm?.start_time}

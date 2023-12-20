@@ -3,7 +3,7 @@ import TimePicker from "@components/layouts/date-picker/components/TimePicker.ts
 
 export const useTimePicker = () => {
   const { openOverlay, closeOverlay } = useOverlay();
-  const openTimePicker = () => {
+  const openTimePicker = (): Promise<string> => {
     return new Promise((resolve) => {
       openOverlay(
         <TimePicker
