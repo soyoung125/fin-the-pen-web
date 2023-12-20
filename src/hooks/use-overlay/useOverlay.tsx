@@ -4,7 +4,7 @@ import { OverlayContext } from "./OverlayContext.ts";
 export const useOverlay = () => {
   const { mount, unmount } = useContext(OverlayContext);
   return {
-    open: (overlayElement: ReactNode) => mount(overlayElement),
-    close: unmount,
+    openOverlay: (overlayElement: ReactNode) => mount(overlayElement),
+    closeOverlay: unmount,
   };
 };

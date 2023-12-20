@@ -2,23 +2,23 @@ import { useOverlay } from "@hooks/use-overlay/useOverlay.tsx";
 import TimePicker from "@components/layouts/date-picker/components/TimePicker.tsx";
 
 export const useTimePicker = () => {
-  const { open, close } = useOverlay();
+  const { openOverlay, closeOverlay } = useOverlay();
   const openTimePicker = () => {
     return new Promise((resolve) => {
-      open(
+      openOverlay(
         <TimePicker
           onClickApprove={(answer) => {
             resolve(answer);
-            close();
+            closeOverlay();
           }}
           onClickReject={(answer) => {
             resolve(answer);
-            close();
+            closeOverlay();
           }}
         />
       );
     });
   };
 
-  return { openTimePicker, close };
+  return { openTimePicker, closeOverlay };
 };
