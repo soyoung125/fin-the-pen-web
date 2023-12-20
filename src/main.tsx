@@ -12,6 +12,7 @@ import { worker } from "./mocks/browser";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import DialogWrapper from "@components/layouts/dialog/DialogWrapper.tsx";
 import DatePickerWrapper from "@components/layouts/date-picker/DatePickerWrapper.tsx";
+import OverlayProvider from "@hooks/use-overlay/OverlayProvider.tsx";
 
 const queryClient = new QueryClient();
 
@@ -40,7 +41,9 @@ async function main() {
             <CustomThemeProvider>
               <DialogWrapper>
                 <DatePickerWrapper>
-                  <RouterProvider router={router} />
+                  <OverlayProvider>
+                    <RouterProvider router={router} />
+                  </OverlayProvider>
                 </DatePickerWrapper>
               </DialogWrapper>
             </CustomThemeProvider>
