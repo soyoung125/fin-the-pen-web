@@ -1,20 +1,11 @@
 import { ReactNode, useState } from "react";
-import Dialog from "@components/layouts/dialog/Dialog.tsx";
+import Dialog, { DialogProps } from "@components/layouts/dialog/Dialog.tsx";
 import DialogContext, {
   DialogContextParams,
 } from "@components/layouts/dialog/DialogContext.tsx";
 
-export interface DialogState {
-  title?: string;
-  content?: string;
-  onClickApprove: () => void;
-  onClickReject: () => void;
-  rejectText?: string;
-  approveText?: string;
-}
-
 function DialogWrapper({ children }: { children: ReactNode }) {
-  const [state, setState] = useState<DialogState>();
+  const [state, setState] = useState<DialogProps>();
 
   const dialog = ({
     title,

@@ -5,7 +5,15 @@ import {
   Stack,
   Typography,
 } from "@mui/material";
-import { DialogState } from "@components/layouts/dialog/DialogWrapper.tsx";
+
+export interface DialogProps {
+  title?: string;
+  content?: string;
+  onClickApprove: () => void;
+  onClickReject: () => void;
+  rejectText?: string;
+  approveText?: string;
+}
 
 function Dialog({
   title,
@@ -14,7 +22,7 @@ function Dialog({
   onClickReject,
   rejectText,
   approveText,
-}: DialogState) {
+}: DialogProps) {
   return (
     <MuiDialog
       sx={{ "& .MuiDialog-paper": { borderRadius: "1rem", width: "100%" } }}
