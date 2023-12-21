@@ -1,7 +1,7 @@
 import RadioButton from "@components/common/RadioButton.tsx";
 import { Divider, FormControlLabel } from "@mui/material";
 
-interface RadioLabelProps {
+export interface RadioLabelProps {
   value: string;
   label: JSX.Element | string;
 }
