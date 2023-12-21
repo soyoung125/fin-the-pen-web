@@ -1,41 +1,55 @@
-import { Dispatch, SetStateAction, useEffect, useState } from "react";
-import Keypad from "@containers/sign/Keypad.tsx";
+import { Button, Stack, TextField, Typography } from "@mui/material";
+import { TimeState } from "@components/layouts/date-picker/components/TimePicker.tsx";
 
 interface SelectTimeProps {
-  setValue: Dispatch<SetStateAction<string>>;
+  timeState: TimeState;
+  setValue: (type: keyof TimeState, value: TimeState[keyof TimeState]) => void;
 }
 
-function SelectTime({ setValue }: SelectTimeProps) {
-  const MAX_LENGTH = 4;
-  const [time, setTime] = useState<number[]>([]);
-
-  const formatTime = (arr: number[]) => {
-    const time: (number | "_" | ":")[] = [...arr];
-    while (time.length < 4) {
-      time.push("_");
-    }
-
-    return "" + time[0] + time[1] + ":" + time[2] + time[3];
+function SelectTime({ timeState, setValue }: SelectTimeProps) {
+  const { meridiem, minute, hour } = timeState;
+  const updateHour = (value: string) => {
+    const numberValue = Number(value);
+    if (numberValue < 0 || numberValue > 12) return;
+    setValue("hour", numberValue);
   };
 
-  useEffect(() => {
-    if (time.length === MAX_LENGTH) {
-      const [hour, minute] = formatTime(time).split(":");
-      setValue(`${hour}:${minute}`);
-    } else {
-      setValue("");
-    }
-  }, [time]);
+  const updateMinute = (value: string) => {
+    const numberValue = Number(value);
+    if (numberValue < 0 || numberValue > 59) return;
+    setValue("minute", numberValue);
+  };
 
   return (
-    <>
-      <div>{formatTime(time)}</div>
-      <Keypad
-        setPassword={setTime}
-        currentLength={time.length}
-        maxLength={MAX_LENGTH}
-      />
-    </>
+    <Stack direction="row" justifyContent="space-between">
+      <Stack width="30%">
+        <Button
+          fullWidth
+          variant={meridiem === "오전" ? "contained" : "outlined"}
+          onClick={() => setValue("meridiem", "오전")}
+        >
+          오전
+        </Button>
+        <Button
+          fullWidth
+          variant={meridiem === "오후" ? "contained" : "outlined"}
+          onClick={() => setValue("meridiem", "오후")}
+        >
+          오후
+        </Button>
+      </Stack>
+      <Stack direction="row" alignItems="center" gap={1} width="70%">
+        <TextField
+          value={hour}
+          onChange={(e) => updateHour(e.target.value)}
+        ></TextField>
+        <Typography>:</Typography>
+        <TextField
+          value={minute}
+          onChange={(e) => updateMinute(e.target.value)}
+        ></TextField>
+      </Stack>
+    </Stack>
   );
 }
 
