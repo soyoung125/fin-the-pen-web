@@ -3,7 +3,6 @@ import {
   selectSchedule,
   selectStartDate,
 } from "@app/redux/slices/scheduleSlice";
-import { Box } from "@mui/material";
 import { useSelector } from "react-redux";
 import RadioLabel from "../../radio/RadioLabel";
 import Option from "./Option";
@@ -41,7 +40,7 @@ function Year() {
   }, [startDate]);
 
   return (
-    <Box>
+    <>
       <RadioLabel
         value="year"
         label={
@@ -62,7 +61,7 @@ function Year() {
           isLastDay={date.lastDate.diff(schedule?.start_date, "day") < 7}
         />
       )}
-    </Box>
+    </>
   );
 }
 

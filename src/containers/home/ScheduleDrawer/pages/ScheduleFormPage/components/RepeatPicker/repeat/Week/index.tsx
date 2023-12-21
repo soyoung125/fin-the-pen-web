@@ -1,5 +1,4 @@
 import { selectRepeatType } from "@app/redux/slices/scheduleSlice";
-import { Box } from "@mui/material";
 import { useSelector } from "react-redux";
 import RadioLabel from "../../radio/RadioLabel";
 import Option from "./Option";
@@ -14,7 +13,7 @@ function Week({ handleChangeOption }: RepeatOptionProps) {
   };
 
   return (
-    <Box>
+    <>
       <RadioLabel
         value="week"
         label={
@@ -28,7 +27,7 @@ function Week({ handleChangeOption }: RepeatOptionProps) {
       />
 
       {repeatType === "week" && <Option changeDayOfWeek={changeDayOfWeek} />}
-    </Box>
+    </>
   );
 }
 

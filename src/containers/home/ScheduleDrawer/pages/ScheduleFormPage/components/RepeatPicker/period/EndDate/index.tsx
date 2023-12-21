@@ -90,7 +90,7 @@ function EndDate({ handleChangeOption }: RepeatOptionProps) {
   };
 
   return (
-    <Box>
+    <>
       <RadioLabel value="repeat_end_line" label="종료 날짜" />
 
       {schedule?.period.kind_type === "repeat_end_line" && (
@@ -136,7 +136,7 @@ function EndDate({ handleChangeOption }: RepeatOptionProps) {
           <Box>{date.day}</Box>
         </Stack>
       )}
-    </Box>
+    </>
   );
 }
 
