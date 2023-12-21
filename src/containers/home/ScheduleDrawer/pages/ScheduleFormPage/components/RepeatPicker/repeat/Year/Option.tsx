@@ -24,7 +24,7 @@ function Option({
   };
 
   return (
-    <Stack px={2.5} my={1.5} spacing={1} mx="auto" sx={{ width: "200px" }}>
+    <Stack my={1.5} spacing={1} mx="auto" sx={{ width: "200px" }}>
       <OptionButton
         id="MonthAndDay"
         isSelected={yearRepeat === "MonthAndDay"}
