@@ -13,6 +13,9 @@ import RepeatInput from "@containers/home/ScheduleDrawer/pages/ScheduleFormPage/
 import { Box } from "@mui/material";
 import { UpdateStateInterface } from "@type/common";
 import { useScheduleForm } from "@containers/home/ScheduleDrawer/hooks/useScheduleForm";
+import { INIT_PERIOD, INIT_REPEAT } from "constants/schedule";
+import { SchedulePeriod, ScheduleRepeat } from "@type/schedule";
+import moment from "moment";
 
 export interface RepeatPickerProps {
   setIsRepeatPickerOpen: Dispatch<SetStateAction<boolean>>;
@@ -23,8 +26,14 @@ function RepeatPicker({ setIsRepeatPickerOpen }: RepeatPickerProps) {
   const [repeatType, setRepeatType] = useState<string>(
     scheduleForm ? scheduleForm.repeat.kind_type : "",
   );
+  const [repeat, setRepeat] = useState<ScheduleRepeat>(
+    INIT_REPEAT(moment(scheduleForm ? scheduleForm.start_date : "")),
+  );
   const [periodType, setPeriodType] = useState<string>(
     scheduleForm ? scheduleForm.repeat.kind_type : "",
+  );
+  const [period, setPeriod] = useState<SchedulePeriod>(
+    INIT_PERIOD(moment(scheduleForm ? scheduleForm.start_date : "")),
   );
 
   useEffect(() => {

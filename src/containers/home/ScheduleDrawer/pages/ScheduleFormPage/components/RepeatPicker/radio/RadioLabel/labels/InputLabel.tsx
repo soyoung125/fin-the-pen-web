@@ -1,7 +1,6 @@
 import { Input } from "@mui/material";
-import { useScheduleForm } from "@containers/home/ScheduleDrawer/hooks/useScheduleForm.ts";
 
-interface InputLabelProps {
+export interface InputLabelProps {
   value: string | undefined;
   handleUpdate: (value: string) => void;
   preInputLabel?: string;
@@ -19,6 +18,7 @@ function InputLabel({
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { value, max } = e.target;
     let newValue = value;
+    if (!Number(newValue)) return;
     if (Number(newValue) > Number(max)) newValue = max;
     handleUpdate(newValue);
   };
@@ -35,7 +35,6 @@ function InputLabel({
       {preInputLabel}
       <Input
         value={value}
-        type="number"
         inputProps={{
           min: 1,
           max: max,
