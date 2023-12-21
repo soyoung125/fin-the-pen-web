@@ -1,21 +1,22 @@
-import { Box, Collapse, Stack } from "@mui/material";
-import { useSelector } from "react-redux";
+import { Box, Stack } from "@mui/material";
 import SwitchButton from "@components/common/SwitchButton";
-import { selectRepeatType } from "@app/redux/slices/scheduleSlice";
 import { UpdateStateInterface } from "@type/common";
 import { useScheduleForm } from "@containers/home/ScheduleDrawer/hooks/useScheduleForm.ts";
 import { MouseEventHandler } from "react";
 
 interface RepeatInputProps {
+  repeatType: string;
   onClick?: MouseEventHandler<HTMLElement>;
+  handleChange?: (value: string) => void;
 }
 
-function RepeatInput({ onClick }: RepeatInputProps) {
-  const repeatType = useSelector(selectRepeatType);
+function RepeatInput({ repeatType, onClick, handleChange }: RepeatInputProps) {
   const { updateRepeat } = useScheduleForm();
 
   const changeRepeat = (state: UpdateStateInterface) => {
-    updateRepeat(state);
+    handleChange
+      ? handleChange(state.target.value as string)
+      : updateRepeat(state);
   };
 
   return (

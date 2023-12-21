@@ -1,34 +1,18 @@
-import { selectSchedule } from "@app/redux/slices/scheduleSlice";
-import { RadioGroup, Input } from "@mui/material";
-import { UpdateStateInterface } from "@type/common";
-import { useSelector } from "react-redux";
+import { RadioGroup } from "@mui/material";
 
 interface RepeatRadioGroupProps {
-  type: "repeat" | "period";
-  handleChange: (state: UpdateStateInterface) => void;
+  value: string;
+  handleChange: (value: string) => void;
   children: JSX.Element;
 }
 
 function RepeatRadioGroup({
-  type,
+  value,
   handleChange,
   children,
 }: RepeatRadioGroupProps) {
-  const schedule = useSelector(selectSchedule);
-  const value = schedule?.[type].kind_type;
-
   return (
-    <RadioGroup
-      value={value}
-      onChange={(e) =>
-        handleChange({
-          target: {
-            value: e.target.value,
-            id: type,
-          },
-        })
-      }
-    >
+    <RadioGroup value={value} onChange={(e) => handleChange(e.target.value)}>
       {children}
     </RadioGroup>
   );

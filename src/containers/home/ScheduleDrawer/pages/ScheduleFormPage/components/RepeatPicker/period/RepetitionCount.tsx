@@ -1,24 +1,31 @@
-import { useSelector } from "react-redux";
 import RadioLabel from "../radio/RadioLabel";
-import InputLabel from "../radio/RadioLabel/InputLabel";
-import { selectSchedule } from "@app/redux/slices/scheduleSlice";
-import { Input } from "@mui/material";
+import InputLabel from "../radio/RadioLabel/labels/InputLabel";
+import { useEffect, useState } from "react";
+import { useScheduleForm } from "@containers/home/ScheduleDrawer/hooks/useScheduleForm";
 
 function RepetitionCount() {
-  const schedule = useSelector(selectSchedule);
+  const { scheduleForm, updatePeriod } = useScheduleForm();
+  const [value, setValue] = useState(
+    scheduleForm ? scheduleForm?.period.repeat_number_time : "1",
+  );
+
+  useEffect(() => {
+    updatePeriod({ target: { id: "repeat_number_time", value: value } });
+  }, [value]);
+
+  const handleUpdate = (value: string) => setValue(value);
 
   return (
     <RadioLabel
       value="repeat_number_time"
       label={
-        schedule?.period.kind_type === "repeat_number_time" ? (
+        scheduleForm?.period.kind_type === "repeat_number_time" ? (
           <InputLabel
             preInputLabel="총"
             postInputLabel="번 반복"
             max={100}
-            type="period"
-            id="repeat_number_time"
-            value={schedule.period.repeat_number_time}
+            handleUpdate={handleUpdate}
+            value={value}
           />
         ) : (
           <>일정 반복 횟수</>

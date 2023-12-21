@@ -1,58 +1,39 @@
 import { Input } from "@mui/material";
-import { UpdateStateInterface } from "@type/common";
 import { useScheduleForm } from "@containers/home/ScheduleDrawer/hooks/useScheduleForm.ts";
 
 interface InputLabelProps {
-  id: string;
   value: string | undefined;
-  type: "repeat" | "period";
+  handleUpdate: (value: string) => void;
   preInputLabel?: string;
   postInputLabel: string;
   max: number;
 }
 
 function InputLabel({
-  id,
   value,
-  type,
+  handleUpdate,
   preInputLabel,
   postInputLabel,
   max,
 }: InputLabelProps) {
-  const { updateRepeat, updatePeriod } = useScheduleForm();
-
-  const handleUpdate = (e: UpdateStateInterface) => {
-    switch (type) {
-      case "repeat":
-        updateRepeat(e);
-        break;
-      case "period":
-        updatePeriod(e);
-        break;
-      default:
-        break;
-    }
-  };
-
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { id, value, max } = e.target;
+    const { value, max } = e.target;
     let newValue = value;
     if (Number(newValue) > Number(max)) newValue = max;
-    handleUpdate({ target: { id: id, value: newValue } });
+    handleUpdate(newValue);
   };
 
   const handleBlur = (e: React.FocusEvent<HTMLInputElement>) => {
-    const { id, value, min } = e.target;
+    const { value, min } = e.target;
     let newValue = value;
     if (Number(newValue) < Number(min)) newValue = min;
-    handleUpdate({ target: { id: id, value: newValue.toString() } });
+    handleUpdate(newValue);
   };
 
   return (
     <>
       {preInputLabel}
       <Input
-        id={id}
         value={value}
         type="number"
         inputProps={{

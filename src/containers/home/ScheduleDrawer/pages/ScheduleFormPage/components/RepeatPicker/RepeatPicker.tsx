@@ -1,4 +1,4 @@
-import { Dispatch, SetStateAction } from "react";
+import { Dispatch, SetStateAction, useEffect, useState } from "react";
 import TopNavigationBar from "@components/layouts/common/TopNavigationBar";
 import RepeatRadioGroup from "@containers/home/ScheduleDrawer/pages/ScheduleFormPage/components/RepeatPicker/radio/RepeatRadioGroup";
 import AllDay from "@containers/home/ScheduleDrawer/pages/ScheduleFormPage/components/RepeatPicker/repeat/AllDay";
@@ -13,16 +13,28 @@ import RepeatInput from "@containers/home/ScheduleDrawer/pages/ScheduleFormPage/
 import { Box } from "@mui/material";
 import { UpdateStateInterface } from "@type/common";
 import { useScheduleForm } from "@containers/home/ScheduleDrawer/hooks/useScheduleForm";
-import { useSelector } from "react-redux";
-import { selectRepeatType } from "@app/redux/slices/scheduleSlice";
 
 export interface RepeatPickerProps {
   setIsRepeatPickerOpen: Dispatch<SetStateAction<boolean>>;
 }
 
 function RepeatPicker({ setIsRepeatPickerOpen }: RepeatPickerProps) {
-  const repeatType = useSelector(selectRepeatType);
-  const { updateRepeat, updatePeriod } = useScheduleForm();
+  const { updateRepeat, updatePeriod, scheduleForm } = useScheduleForm();
+  const [repeatType, setRepeatType] = useState<string>(
+    scheduleForm ? scheduleForm.repeat.kind_type : "",
+  );
+  const [periodType, setPeriodType] = useState<string>(
+    scheduleForm ? scheduleForm.repeat.kind_type : "",
+  );
+
+  useEffect(() => {
+    console.log(repeatType);
+    updateRepeat({ target: { id: "repeat", value: repeatType } });
+  }, [repeatType]);
+
+  useEffect(() => {
+    updatePeriod({ target: { id: "period", value: periodType } });
+  }, [periodType]);
 
   const changeRepeat = (state: UpdateStateInterface) => {
     updateRepeat(state);
@@ -39,19 +51,28 @@ function RepeatPicker({ setIsRepeatPickerOpen }: RepeatPickerProps) {
         title="반복 설정"
       />
 
-      <RepeatInput />
+      <RepeatInput
+        repeatType={repeatType}
+        handleChange={(v) => setRepeatType(v)}
+      />
 
       {repeatType !== "" && (
         <>
-          <RepeatRadioGroup type="repeat" handleChange={changeRepeat}>
+          <RepeatRadioGroup
+            value={repeatType}
+            handleChange={(v) => setRepeatType(v)}
+          >
             <>
-              <AllDay />
+              <AllDay repeatType={repeatType} />
 
-              <Week handleChangeOption={changeRepeat} />
+              <Week repeatType={repeatType} handleChangeOption={changeRepeat} />
 
-              <Month handleChangeOption={changeRepeat} />
+              <Month
+                repeatType={repeatType}
+                handleChangeOption={changeRepeat}
+              />
 
-              <Year />
+              <Year repeatType={repeatType} />
             </>
           </RepeatRadioGroup>
 
@@ -60,7 +81,10 @@ function RepeatPicker({ setIsRepeatPickerOpen }: RepeatPickerProps) {
           <Box sx={{ color: "primary.main" }} px={2} py={2}>
             기간
           </Box>
-          <RepeatRadioGroup type="period" handleChange={changePeriod}>
+          <RepeatRadioGroup
+            value={periodType}
+            handleChange={(v: string) => setPeriodType(v)}
+          >
             <>
               <RadioLabel value="is_repeat_again" label="계속 반복" />
 

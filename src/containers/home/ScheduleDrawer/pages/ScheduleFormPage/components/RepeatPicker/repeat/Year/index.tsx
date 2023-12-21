@@ -1,5 +1,4 @@
 import {
-  selectRepeatType,
   selectSchedule,
   selectStartDate,
 } from "@app/redux/slices/scheduleSlice";
@@ -8,11 +7,11 @@ import RadioLabel from "../../radio/RadioLabel";
 import Option from "./Option";
 import { useEffect, useState } from "react";
 import moment from "moment";
-import RepeatInputLabel from "../../radio/RadioLabel/RepeatInputLabel";
+import RepeatInputLabel from "../../radio/RadioLabel/labels/RepeatInputLabel";
+import { RepeatTypeProps } from "@type/schedule";
 
-function Year() {
+function Year({ repeatType }: RepeatTypeProps) {
   const schedule = useSelector(selectSchedule);
-  const repeatType = useSelector(selectRepeatType);
   const startDate = useSelector(selectStartDate);
   const week = ["첫", "두", "세", "네", "다섯", "여섯"];
 
@@ -49,6 +48,7 @@ function Year() {
             postInputLabel="년 마다"
             max={10}
             option="year"
+            repeatType={repeatType}
           />
         }
       />
