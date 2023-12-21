@@ -1,6 +1,6 @@
 import { RepeatTypeProps } from "@type/schedule";
 import RadioLabel from "../radio/RadioLabel";
-import RepeatInputLabel from "../radio/RadioLabel/labels/RepeatInputLabel";
+import RepeatInputLabel from "./RepeatInputLabel";
 
 function AllDay({ repeatType }: RepeatTypeProps) {
   return (

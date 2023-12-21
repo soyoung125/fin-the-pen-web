@@ -47,10 +47,16 @@ function RepeatPicker({ setIsRepeatPickerOpen }: RepeatPickerProps) {
 
   const changeRepeat = (state: UpdateStateInterface) => {
     updateRepeat(state);
+    setRepeat((pre) => {
+      return { ...pre, [state.target.id]: state.target.value };
+    });
   };
 
   const changePeriod = (state: UpdateStateInterface) => {
     updatePeriod(state);
+    setPeriod((pre) => {
+      return { ...pre, [state.target.id]: state.target.value };
+    });
   };
 
   return (
@@ -71,18 +77,13 @@ function RepeatPicker({ setIsRepeatPickerOpen }: RepeatPickerProps) {
             value={repeatType}
             handleChange={(v) => setRepeatType(v)}
           >
-            <>
-              <AllDay repeatType={repeatType} />
+            <AllDay repeatType={repeatType} />
 
-              <Week repeatType={repeatType} handleChangeOption={changeRepeat} />
+            <Week repeatType={repeatType} handleChangeOption={changeRepeat} />
 
-              <Month
-                repeatType={repeatType}
-                handleChangeOption={changeRepeat}
-              />
+            <Month repeatType={repeatType} handleChangeOption={changeRepeat} />
 
-              <Year repeatType={repeatType} />
-            </>
+            <Year repeatType={repeatType} />
           </RepeatRadioGroup>
 
           <ThickDivider />
@@ -94,13 +95,11 @@ function RepeatPicker({ setIsRepeatPickerOpen }: RepeatPickerProps) {
             value={periodType}
             handleChange={(v: string) => setPeriodType(v)}
           >
-            <>
-              <RadioLabel value="is_repeat_again" label="계속 반복" />
+            <RadioLabel value="is_repeat_again" label="계속 반복" />
 
-              <RepetitionCount />
+            <RepetitionCount periodType={periodType} />
 
-              <EndDate handleChangeOption={changePeriod} />
-            </>
+            <EndDate handleChangeOption={changePeriod} />
           </RepeatRadioGroup>
         </>
       )}

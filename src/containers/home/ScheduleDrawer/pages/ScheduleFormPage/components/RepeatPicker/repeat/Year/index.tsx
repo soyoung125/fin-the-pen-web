@@ -7,7 +7,7 @@ import RadioLabel from "../../radio/RadioLabel";
 import Option from "./Option";
 import { useEffect, useState } from "react";
 import moment from "moment";
-import RepeatInputLabel from "../../radio/RadioLabel/labels/RepeatInputLabel";
+import RepeatInputLabel from "../RepeatInputLabel";
 import { RepeatTypeProps } from "@type/schedule";
 
 function Year({ repeatType }: RepeatTypeProps) {
