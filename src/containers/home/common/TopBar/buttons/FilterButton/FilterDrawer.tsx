@@ -6,8 +6,8 @@ import { useSelectDate } from "@containers/home/common/TopBar/buttons/FilterButt
 import FilterLayout from "@containers/home/common/TopBar/buttons/FilterButton/FilterLayout.tsx";
 import DateInput from "@containers/home/common/TopBar/buttons/FilterButton/DateInput.tsx";
 import RefreshIcon from "@mui/icons-material/Refresh";
-import { useDialog } from "@components/layouts/dialog/hooks/useDialog.ts";
 import TopNavigationBar from "@components/layouts/common/TopNavigationBar";
+import { useConfirm } from "@components/layouts/dialog/hooks/useConfirm.tsx";
 
 interface FilterDrawerProps {
   bottomDrawerOpen: boolean;
@@ -18,7 +18,7 @@ function FilterDrawer({
   bottomDrawerOpen,
   setBottomDrawerOpen,
 }: FilterDrawerProps) {
-  const { customConfirm } = useDialog();
+  const { openConfirm } = useConfirm();
   const {
     selectedCategories,
     onClickCheckFilterButton,
@@ -31,7 +31,7 @@ function FilterDrawer({
   const { date, error: dateError, updateDate, initDate } = useSelectDate();
 
   const onClickSaveFilter = async () => {
-    const answer = await customConfirm({
+    const answer = await openConfirm({
       title: "알림",
       content: "필터 설정을 저장하시겠습니까?",
       approveText: "저장",
@@ -44,7 +44,7 @@ function FilterDrawer({
   };
 
   const initFilter = async () => {
-    const answer = await customConfirm({
+    const answer = await openConfirm({
       title: "알림",
       content: "필터를 초기화 하시겠습니까?",
       approveText: "초기화",

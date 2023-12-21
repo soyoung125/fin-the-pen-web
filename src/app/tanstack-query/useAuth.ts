@@ -7,7 +7,7 @@ import { setSessionStorage } from "@utils/storage.ts";
 import { SESSION_STORAGE_KEY_TOKEN } from "@api/keys.ts";
 import { useDispatch } from "react-redux";
 import { setUser } from "@redux/slices/userSlice.tsx";
-import { useDialog } from "@components/layouts/dialog/hooks/useDialog.ts";
+import { useAlert } from "@components/layouts/dialog/hooks/useAlert.tsx";
 
 const fetchSignIn = async (credentials: SignIn) => {
   return fetch(`${DOMAIN}/fin-the-pen-web/sign-in`, {
@@ -31,7 +31,7 @@ export const useAuth = () => {
   // 추후에 토큰 방식으로 수정 예정입니다. 지금은 기존 구조로 진행합니다.
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const { customAlert } = useDialog();
+  const { openAlert } = useAlert();
 
   const { mutate, isLoading } = useMutation({
     mutationFn: fetchSignIn,
@@ -57,7 +57,7 @@ export const useAuth = () => {
   };
 
   const mockSignIn = async () => {
-    await customAlert({
+    await openAlert({
       title: "로그인",
       content: "게스트 모드로 로그인 합니다.",
       approveText: "확인",

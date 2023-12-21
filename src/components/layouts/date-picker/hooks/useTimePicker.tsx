@@ -1,12 +1,12 @@
 import { useOverlay } from "@hooks/use-overlay/useOverlay.tsx";
-import DatePicker from "@components/layouts/date-picker/components/DatePicker.tsx";
+import TimePicker from "@components/layouts/date-picker/components/TimePicker.tsx";
 
-export const useDatePicker = () => {
+export const useTimePicker = () => {
   const { openOverlay, closeOverlay } = useOverlay();
-  const openDatePicker = (): Promise<string> => {
+  const openTimePicker = (): Promise<string> => {
     return new Promise((resolve) => {
       openOverlay(
-        <DatePicker
+        <TimePicker
           onClickApprove={(answer) => {
             resolve(answer);
             closeOverlay();
@@ -20,5 +20,5 @@ export const useDatePicker = () => {
     });
   };
 
-  return { openDatePicker, closeDatePicker: closeOverlay };
+  return { openTimePicker, closeTimePicker: closeOverlay };
 };

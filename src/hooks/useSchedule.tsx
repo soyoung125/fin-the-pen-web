@@ -14,7 +14,7 @@ import { selectUser } from "@redux/slices/userSlice.tsx";
 import { useAppDispatch } from "@redux/hooks.ts";
 import moment from "moment/moment";
 import { v4 as uuidv4 } from "uuid";
-import { useDialog } from "@components/layouts/dialog/hooks/useDialog.ts";
+import { useConfirm } from "@components/layouts/dialog/hooks/useConfirm.tsx";
 
 const useSchedule = () => {
   const schedules = useSelector(selectSchedules);
@@ -26,7 +26,7 @@ const useSchedule = () => {
   const user = useSelector(selectUser);
   const date = useSelector(selectDate);
   const [todaySchedules, setTodaySchedules] = useState<Schedule[]>([]);
-  const { customConfirm } = useDialog();
+  const { openConfirm } = useConfirm();
 
   useEffect(() => {
     setTodaySchedules(
@@ -66,7 +66,7 @@ const useSchedule = () => {
   };
 
   const handleDeleteSchedule = async (scheduleId: string) => {
-    const answer = await customConfirm({
+    const answer = await openConfirm({
       title: "일정 삭제",
       content: "정말로 삭제 하시겠습니까?",
       approveText: "삭제",

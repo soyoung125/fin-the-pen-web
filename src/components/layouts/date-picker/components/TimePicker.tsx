@@ -5,8 +5,7 @@ import {
   Stack,
   Typography,
 } from "@mui/material";
-import DatePickerContext from "@components/layouts/date-picker/DatePickerContext.tsx";
-import { useContext } from "react";
+import { useState } from "react";
 import SelectTime from "@components/layouts/date-picker/components/SelectTime.tsx";
 
 export interface TimePickerProps {
@@ -15,7 +14,7 @@ export interface TimePickerProps {
 }
 
 function TimePicker({ onClickApprove, onClickReject }: TimePickerProps) {
-  const { value, setValue } = useContext(DatePickerContext);
+  const [value, setValue] = useState("__:__");
   return (
     <MuiDialog
       sx={{ "& .MuiDialog-paper": { borderRadius: "1rem", width: "100%" } }}
