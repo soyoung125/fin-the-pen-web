@@ -10,8 +10,8 @@ import { useScheduleForm } from "@containers/home/ScheduleDrawer/hooks/useSchedu
 import { useTimePicker } from "@components/layouts/date-picker/hooks/useTimePicker.tsx";
 
 interface InputDateTimeProps {
-  date: string;
-  time: string;
+  date?: string;
+  time?: string;
   type: InputDateTimeType;
   showError: boolean;
 }
@@ -43,7 +43,7 @@ function InputDateTime({ date, time, type, showError }: InputDateTimeProps) {
 
   const onClickTimeField = async () => {
     const newTime = await openTimePicker({
-      defaultTime: time,
+      defaultTime: time as string,
     });
     if (newTime) {
       changeSchedule({
