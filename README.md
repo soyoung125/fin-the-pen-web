@@ -2,7 +2,7 @@
 
 ### [웹에서 데모버전 확인하기](https://soyoung125.github.io/fin-the-pen-web/)
 
-#### [Storybook](https://645bb0d7fab3ee51343325b9-omwyqfhecn.chromatic.com/)
+#### [Storybook](https://645bb0d7fab3ee51343325b9-fveqceazhw.chromatic.com/)
 
 [서버 설치하기](https://github.com/eomheeseung/fin-the-pen)
 
@@ -10,14 +10,14 @@
 
 ## 👤 Team Members
 
-| role         | name                                                      |
-| ------------ | --------------------------------------------------------- |
-| `기획/팀장`  | [@5minha (오민하)](https://github.com/5minha)             |
-| `디자인`     | [안재윤]()                                                |
+| role    | name                                                   |
+|---------|--------------------------------------------------------|
+| `기획/팀장` | [@5minha (오민하)](https://github.com/5minha)             |
+| `디자인`   | [안재윤]()                                                |
 | `프론트엔드` | [@soyoung125 (박소영)](https://github.com/soyoung125)     |
 | `프론트엔드` | [@gabrielyoon7 (윤주현)](https://github.com/gabrielyoon7) |
-| `백엔드`     | [이태양]()                                                |
-| `백엔드`     | [엄희승]()                                                |
+| `백엔드`   | [이태양]()                                                |
+| `백엔드`   | [엄희승]()                                                |
 
 ## ⚙️ Tech
 
