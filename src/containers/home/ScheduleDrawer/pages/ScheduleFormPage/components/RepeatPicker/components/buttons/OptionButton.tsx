@@ -1,6 +1,6 @@
 import { Button } from "@mui/material";
 
-interface OptionButtonProps {
+export interface OptionButtonProps {
   isSelected: boolean;
   id?: string;
   value: string;

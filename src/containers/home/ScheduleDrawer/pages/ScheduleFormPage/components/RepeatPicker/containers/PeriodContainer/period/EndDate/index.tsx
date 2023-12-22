@@ -5,7 +5,7 @@ import {
 } from "@app/redux/slices/scheduleSlice";
 import { Box, Stack } from "@mui/material";
 import { useSelector } from "react-redux";
-import RadioLabel from "../../radio/RadioLabel";
+import RadioLabel from "../../../../components/radio/RadioLabel";
 import { useEffect, useState } from "react";
 import moment from "moment";
 import Input from "./Input";
@@ -90,7 +90,7 @@ function EndDate({ handleChangeOption }: RepeatOptionProps) {
   };
 
   return (
-    <Box>
+    <>
       <RadioLabel value="repeat_end_line" label="종료 날짜" />
 
       {schedule?.period.kind_type === "repeat_end_line" && (
@@ -136,7 +136,7 @@ function EndDate({ handleChangeOption }: RepeatOptionProps) {
           <Box>{date.day}</Box>
         </Stack>
       )}
-    </Box>
+    </>
   );
 }
 

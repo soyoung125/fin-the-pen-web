@@ -2,8 +2,8 @@ import {
   selectSchedule,
   selectStartDate,
 } from "@app/redux/slices/scheduleSlice";
-import DateButton from "@components/repeat/DateButton";
-import OptionButton from "@components/repeat/OptionButton";
+import DateButton from "@containers/home/ScheduleDrawer/pages/ScheduleFormPage/components/RepeatPicker/components/buttons/DateButton";
+import OptionButton from "@containers/home/ScheduleDrawer/pages/ScheduleFormPage/components/RepeatPicker/components/buttons/OptionButton";
 import { Grid } from "@mui/material";
 import { RepeatOptionProps } from "@type/schedule";
 import moment from "moment";

@@ -1,35 +1,29 @@
-import { Dispatch, SetStateAction } from "react";
+import { Dispatch, SetStateAction, useEffect, useState } from "react";
 import TopNavigationBar from "@components/layouts/common/TopNavigationBar";
-import RepeatRadioGroup from "@containers/home/ScheduleDrawer/pages/ScheduleFormPage/components/RepeatPicker/radio/RepeatRadioGroup";
-import AllDay from "@containers/home/ScheduleDrawer/pages/ScheduleFormPage/components/RepeatPicker/repeat/AllDay";
-import Week from "@containers/home/ScheduleDrawer/pages/ScheduleFormPage/components/RepeatPicker/repeat/Week";
-import Month from "@containers/home/ScheduleDrawer/pages/ScheduleFormPage/components/RepeatPicker/repeat/Month";
-import Year from "@containers/home/ScheduleDrawer/pages/ScheduleFormPage/components/RepeatPicker/repeat/Year";
-import EndDate from "@containers/home/ScheduleDrawer/pages/ScheduleFormPage/components/RepeatPicker/period/EndDate";
-import RadioLabel from "@containers/home/ScheduleDrawer/pages/ScheduleFormPage/components/RepeatPicker/radio/RadioLabel";
-import RepetitionCount from "@containers/home/ScheduleDrawer/pages/ScheduleFormPage/components/RepeatPicker/period/RepetitionCount";
+import RepeatRadioGroup from "@containers/home/ScheduleDrawer/pages/ScheduleFormPage/components/RepeatPicker/components/radio/RepeatRadioGroup";
 import ThickDivider from "@components/common/ThickDivider";
 import RepeatInput from "@containers/home/ScheduleDrawer/pages/ScheduleFormPage/components/RepeatInput";
 import { Box } from "@mui/material";
-import { UpdateStateInterface } from "@type/common";
 import { useScheduleForm } from "@containers/home/ScheduleDrawer/hooks/useScheduleForm";
-import { useSelector } from "react-redux";
-import { selectRepeatType } from "@app/redux/slices/scheduleSlice";
+import RepeatContainer from "./containers/RepeatContainer/RepeatContainer";
+import PeriodContainer from "./containers/PeriodContainer/PeriodContainer";
 
 export interface RepeatPickerProps {
   setIsRepeatPickerOpen: Dispatch<SetStateAction<boolean>>;
 }
 
 function RepeatPicker({ setIsRepeatPickerOpen }: RepeatPickerProps) {
-  const repeatType = useSelector(selectRepeatType);
-  const { updateRepeat, updatePeriod } = useScheduleForm();
+  const { updateRepeat, updatePeriod, scheduleForm } = useScheduleForm();
 
-  const changeRepeat = (state: UpdateStateInterface) => {
-    updateRepeat(state);
+  const repeatType = scheduleForm?.repeat.kind_type ?? "day";
+  const periodType = scheduleForm?.period.kind_type ?? "is_repeat_again";
+
+  const handleRepeatChange = (v: string) => {
+    updateRepeat({ target: { id: "repeat", value: v } });
   };
 
-  const changePeriod = (state: UpdateStateInterface) => {
-    updatePeriod(state);
+  const handlePeriodChange = (v: string) => {
+    updatePeriod({ target: { id: "period", value: v } });
   };
 
   return (
@@ -39,36 +33,24 @@ function RepeatPicker({ setIsRepeatPickerOpen }: RepeatPickerProps) {
         title="반복 설정"
       />
 
-      <RepeatInput />
+      <RepeatInput repeatType={repeatType} handleChange={handleRepeatChange} />
 
       {repeatType !== "" && (
         <>
-          <RepeatRadioGroup type="repeat" handleChange={changeRepeat}>
-            <>
-              <AllDay />
-
-              <Week handleChangeOption={changeRepeat} />
-
-              <Month handleChangeOption={changeRepeat} />
-
-              <Year />
-            </>
-          </RepeatRadioGroup>
+          <RepeatContainer
+            repeatType={repeatType}
+            handleChange={handleRepeatChange}
+          />
 
           <ThickDivider />
 
           <Box sx={{ color: "primary.main" }} px={2} py={2}>
             기간
           </Box>
-          <RepeatRadioGroup type="period" handleChange={changePeriod}>
-            <>
-              <RadioLabel value="is_repeat_again" label="계속 반복" />
-
-              <RepetitionCount />
-
-              <EndDate handleChangeOption={changePeriod} />
-            </>
-          </RepeatRadioGroup>
+          <PeriodContainer
+            periodType={periodType}
+            handleChange={handlePeriodChange}
+          />
         </>
       )}
     </>

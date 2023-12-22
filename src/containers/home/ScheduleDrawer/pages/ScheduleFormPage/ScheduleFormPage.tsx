@@ -43,7 +43,10 @@ function ScheduleFormPage({
         <ThickDivider />
 
         {/* 이벤트 반복 설정 */}
-        <RepeatInput onClick={() => setIsRepeatPickerOpen((prev) => !prev)} />
+        <RepeatInput
+          repeatType={schedule.repeat.kind_type}
+          onClick={() => setIsRepeatPickerOpen((prev) => !prev)}
+        />
       </Stack>
     );
   }

@@ -1,4 +1,4 @@
-import OptionButton from "@components/repeat/OptionButton";
+import OptionButton from "@containers/home/ScheduleDrawer/pages/ScheduleFormPage/components/RepeatPicker/components/buttons/OptionButton";
 import { Stack } from "@mui/material";
 import { useScheduleForm } from "@containers/home/ScheduleDrawer/hooks/useScheduleForm.ts";
 
@@ -24,7 +24,7 @@ function Option({
   };
 
   return (
-    <Stack px={2.5} my={1.5} spacing={1} mx="auto" sx={{ width: "200px" }}>
+    <Stack my={1.5} spacing={1} mx="auto" sx={{ width: "200px" }}>
       <OptionButton
         id="MonthAndDay"
         isSelected={yearRepeat === "MonthAndDay"}
