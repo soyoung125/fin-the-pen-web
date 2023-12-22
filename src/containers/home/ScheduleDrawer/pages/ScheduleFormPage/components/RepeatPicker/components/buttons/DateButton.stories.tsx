@@ -3,7 +3,7 @@ import { useState } from "react";
 import DateButton, { DateButtonProps } from "./DateButton";
 
 const meta = {
-  title: "ui/ScheduleDrawer/repeat-picker/repeat/DateButton",
+  title: "ui/ScheduleDrawer/repeat-picker/button/DateButton",
   component: DateButton,
   tags: ["autodocs"],
   args: { value: "월", isSelected: false },

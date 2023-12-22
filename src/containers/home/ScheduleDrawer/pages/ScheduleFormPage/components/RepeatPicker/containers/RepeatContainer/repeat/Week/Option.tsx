@@ -1,5 +1,5 @@
 import { selectSchedule } from "@app/redux/slices/scheduleSlice";
-import DateButton from "@components/repeat/DateButton";
+import DateButton from "@containers/home/ScheduleDrawer/pages/ScheduleFormPage/components/RepeatPicker/components/buttons/DateButton";
 import { Stack } from "@mui/material";
 import { useSelector } from "react-redux";
 

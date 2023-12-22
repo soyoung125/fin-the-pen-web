@@ -5,7 +5,7 @@ import {
 } from "@app/redux/slices/scheduleSlice";
 import { Box, Stack } from "@mui/material";
 import { useSelector } from "react-redux";
-import RadioLabel from "../../radio/RadioLabel";
+import RadioLabel from "../../../../components/radio/RadioLabel";
 import { useEffect, useState } from "react";
 import moment from "moment";
 import Input from "./Input";

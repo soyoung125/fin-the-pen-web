@@ -1,5 +1,5 @@
-import RadioLabel from "../radio/RadioLabel";
-import InputLabel from "../radio/RadioLabel/labels/InputLabel";
+import RadioLabel from "../../../components/radio/RadioLabel";
+import InputLabel from "../../../components/radio/RadioLabel/labels/InputLabel";
 import { useEffect, useState } from "react";
 import { useScheduleForm } from "@containers/home/ScheduleDrawer/hooks/useScheduleForm";
 

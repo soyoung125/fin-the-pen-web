@@ -1,4 +1,4 @@
-import RadioLabel from "../../radio/RadioLabel";
+import RadioLabel from "../../../../components/radio/RadioLabel";
 import Option from "./Option";
 import { RepeatProps } from "@type/schedule";
 import RepeatInputLabel from "../RepeatInputLabel";

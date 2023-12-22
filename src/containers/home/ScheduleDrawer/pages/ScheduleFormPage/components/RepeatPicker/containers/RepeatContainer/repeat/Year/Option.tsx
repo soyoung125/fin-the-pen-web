@@ -1,4 +1,4 @@
-import OptionButton from "@components/repeat/OptionButton";
+import OptionButton from "@containers/home/ScheduleDrawer/pages/ScheduleFormPage/components/RepeatPicker/components/buttons/OptionButton";
 import { Stack } from "@mui/material";
 import { useScheduleForm } from "@containers/home/ScheduleDrawer/hooks/useScheduleForm.ts";
 

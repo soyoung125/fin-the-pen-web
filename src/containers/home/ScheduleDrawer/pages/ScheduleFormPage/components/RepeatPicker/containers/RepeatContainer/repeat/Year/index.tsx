@@ -3,7 +3,7 @@ import {
   selectStartDate,
 } from "@app/redux/slices/scheduleSlice";
 import { useSelector } from "react-redux";
-import RadioLabel from "../../radio/RadioLabel";
+import RadioLabel from "../../../../components/radio/RadioLabel";
 import Option from "./Option";
 import { useEffect, useState } from "react";
 import moment from "moment";

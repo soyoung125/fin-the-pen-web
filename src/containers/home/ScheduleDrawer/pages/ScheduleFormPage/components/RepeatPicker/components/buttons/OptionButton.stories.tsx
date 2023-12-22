@@ -3,7 +3,7 @@ import { useState } from "react";
 import OptionButton, { OptionButtonProps } from "./OptionButton";
 
 const meta = {
-  title: "ui/ScheduleDrawer/repeat-picker/repeat/OptionButton",
+  title: "ui/ScheduleDrawer/repeat-picker/button/OptionButton",
   component: OptionButton,
   tags: ["autodocs"],
   args: { value: "21일마다 반복", isSelected: false, id: "todayRepeat" },
