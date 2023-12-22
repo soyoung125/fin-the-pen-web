@@ -25,19 +25,18 @@ function AnalysisLayout() {
     dispatch(setSelectedDate(moment(new Date())));
   }, []);
 
-  return (
-    <>
-      <EasyAuthentication />
-      {isAuthenticated && (
-        <Box sx={{ mt: 2 }}>
-          <AnalysisHeader />
+  if (!isAuthenticated) {
+    return <EasyAuthentication />;
+  }
 
-          <Box sx={{ my: 3, wordBreak: "keep-all", fontWeight: "bold" }}>
-            <Outlet />
-          </Box>
-        </Box>
-      )}
-    </>
+  return (
+    <Box sx={{ mt: 2 }}>
+      <AnalysisHeader />
+
+      <Box sx={{ my: 3, wordBreak: "keep-all", fontWeight: "bold" }}>
+        <Outlet />
+      </Box>
+    </Box>
   );
 }
 
