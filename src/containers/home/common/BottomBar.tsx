@@ -7,11 +7,10 @@ import { useNavigate } from "react-router-dom";
 import CalendarMonthIcon from "@mui/icons-material/CalendarMonth";
 import DataSaverOffIcon from "@mui/icons-material/DataSaverOff";
 import AddCircleIcon from "@mui/icons-material/AddCircle";
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
 import SettingsIcon from "@mui/icons-material/Settings";
 import PaidIcon from "@mui/icons-material/Paid";
 import moment from "moment";
-import PATH from "../../../constants/path";
 import ScheduleDrawer from "../ScheduleDrawer";
 import {
   INIT_SCHEDULE,
@@ -25,6 +24,7 @@ import {
   setBottomDrawerTabMenu,
 } from "@redux/slices/commonSlice.tsx";
 import { Global } from "@emotion/react";
+import { PATH } from "../../../constants/path.ts";
 
 const drawerBleeding = 56;
 
@@ -135,6 +135,7 @@ function BottomBar() {
     </>
   );
 }
+
 export default BottomBar;
 /**
  * 하단 바

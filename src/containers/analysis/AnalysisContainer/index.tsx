@@ -5,7 +5,7 @@ import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import AnalysisGraph from "./AnalysisGraph";
 import AnalysisList from "./analysisList/AnalysisList";
-import PATH from "../../../constants/path";
+import { PATH } from "../../../constants/path.ts";
 import useHeader from "../../../hooks/useHeader";
 import {
   selectAnalyzedData,

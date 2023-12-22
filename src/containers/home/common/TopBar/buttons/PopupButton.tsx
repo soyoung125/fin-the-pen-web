@@ -1,12 +1,11 @@
 import { Fab } from "@mui/material";
 import SavingsOutlinedIcon from "@mui/icons-material/SavingsOutlined";
 import { useEffect, useRef, useState } from "react";
-import { useNavigate } from "react-router-dom";
-import PATH from "../../../../../constants/path";
 
 interface PopupButtonProps {
   handleClickPopup: () => void;
 }
+
 function PopupButton({ handleClickPopup }: PopupButtonProps) {
   const position = 120;
   const [offset, setOffset] = useState(0);

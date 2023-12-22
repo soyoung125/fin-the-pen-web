@@ -1,9 +1,9 @@
-import { Box, Stack, IconButton } from "@mui/material";
+import { Box, IconButton, Stack } from "@mui/material";
 import SettingsIcon from "@mui/icons-material/Settings";
 import { useNavigate } from "react-router-dom";
 import Saving from "./goals/Saving";
 import Personal from "./goals/Personal";
-import PATH from "../../../constants/path";
+import { PATH } from "../../../constants/path.ts";
 import { useSelector } from "react-redux";
 import { selectUser } from "@redux/slices/userSlice.tsx";
 

@@ -12,7 +12,7 @@ import { useAppDispatch, useAppSelector } from "../../../../app/redux/hooks";
 import { selectSavingPopUpSetting } from "../../../../app/redux/slices/assetSlice";
 import PopupButton from "./buttons/PopupButton";
 import { useNavigate } from "react-router-dom";
-import PATH from "../../../../constants/path";
+import { PATH } from "../../../../constants/path.ts";
 import SettingsMode from "./headerMode/SettingsMode";
 import SignMode from "./headerMode/SignMode";
 import SearchMode from "./headerMode/SearchMode";

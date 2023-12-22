@@ -1,5 +1,5 @@
 import { lightBlue, pink, teal, yellow } from "@mui/material/colors";
-import PATH from "./path.tsx";
+import { PATH } from "./path.ts";
 
 export interface AssetManagement {
   title: string;

@@ -10,7 +10,7 @@ import AccordionDetails from "../../components/common/accordions/AccordionDetail
 import { useAppDispatch, useAppSelector } from "../../app/redux/hooks";
 import { selectIsBudgetHidden } from "../../app/redux/slices/settingSlice";
 import useHeader from "../../hooks/useHeader";
-import PATH from "../../constants/path";
+import { PATH } from "../../constants/path.ts";
 import ClickableListItem from "../../components/settings/ClickableListItem";
 import {
   changeHeaderTitle,

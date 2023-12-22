@@ -4,7 +4,7 @@ import { useRef, useState } from "react";
 import RoundedButton from "../../../../../../components/common/RoundedButton";
 import OptionList from "./popover/OptionList";
 import { useNavigate } from "react-router-dom";
-import PATH from "../../../../../../constants/path";
+import { PATH } from "../../../../../../constants/path.ts";
 import { useSelector } from "react-redux";
 import { selectUser } from "@redux/slices/userSlice.tsx";
 

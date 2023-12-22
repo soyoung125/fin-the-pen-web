@@ -5,7 +5,7 @@ import SettingsContainer from "../../containers/settings/SettingsContainer";
 import SignIn from "../../pages/SignIn";
 import SignUp from "../../pages/SignUp";
 import TestContainer from "@pages/MyPage/TestContainer.tsx";
-import PATH from "../../constants/path";
+import { PATH } from "../../constants/path.ts";
 import Home from "../../pages/Home";
 import { RouterDOM } from "../../types/common";
 import DetailSetting from "../../containers/assetManagement/SavingsGoalContainer/DetailSetting";
