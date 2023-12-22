@@ -1,5 +1,5 @@
 import { Button, Stack, TextField, Typography } from "@mui/material";
-import { TimeState } from "@components/layouts/date-picker/components/TimePicker.tsx";
+import { TimeState } from "@hooks/date-picker/components/TimePicker.tsx";
 
 interface SelectTimeProps {
   timeState: TimeState;

@@ -14,7 +14,7 @@ import { selectUser } from "@redux/slices/userSlice.tsx";
 import { useAppDispatch } from "@redux/hooks.ts";
 import moment from "moment/moment";
 import { v4 as uuidv4 } from "uuid";
-import { useConfirm } from "@components/layouts/dialog/hooks/useConfirm.tsx";
+import { useConfirm } from "@hooks/dialog/hooks/useConfirm.tsx";
 
 const useSchedule = () => {
   const schedules = useSelector(selectSchedules);

@@ -5,9 +5,9 @@ import moment from "moment";
 import "moment/dist/locale/ko";
 import { DateField, LocalizationProvider } from "@mui/x-date-pickers";
 import { AdapterMoment } from "@mui/x-date-pickers/AdapterMoment";
-import { useDatePicker } from "@components/layouts/date-picker/hooks/useDatePicker.tsx";
+import { useDatePicker } from "@hooks/date-picker/hooks/useDatePicker.tsx";
 import { useScheduleForm } from "@containers/home/ScheduleDrawer/hooks/useScheduleForm.ts";
-import { useTimePicker } from "@components/layouts/date-picker/hooks/useTimePicker.tsx";
+import { useTimePicker } from "@hooks/date-picker/hooks/useTimePicker.tsx";
 
 interface InputDateTimeProps {
   date?: string;

@@ -6,7 +6,7 @@ import {
   Typography,
 } from "@mui/material";
 import { useState } from "react";
-import SelectTime from "@components/layouts/date-picker/components/SelectTime.tsx";
+import SelectTime from "@hooks/date-picker/components/SelectTime.tsx";
 
 export interface TimePickerProps {
   defaultTime: string;

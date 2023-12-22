@@ -1,5 +1,5 @@
 import { useOverlay } from "@hooks/use-overlay/useOverlay.tsx";
-import Dialog from "@components/layouts/dialog/Dialog.tsx";
+import Dialog from "@hooks/dialog/Dialog.tsx";
 
 export const useConfirm = () => {
   const { openOverlay, closeOverlay } = useOverlay();

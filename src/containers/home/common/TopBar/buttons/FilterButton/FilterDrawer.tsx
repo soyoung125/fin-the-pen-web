@@ -7,7 +7,7 @@ import FilterLayout from "@containers/home/common/TopBar/buttons/FilterButton/Fi
 import DateInput from "@containers/home/common/TopBar/buttons/FilterButton/DateInput.tsx";
 import RefreshIcon from "@mui/icons-material/Refresh";
 import TopNavigationBar from "@components/layouts/common/TopNavigationBar";
-import { useConfirm } from "@components/layouts/dialog/hooks/useConfirm.tsx";
+import { useConfirm } from "@hooks/dialog/hooks/useConfirm.tsx";
 
 interface FilterDrawerProps {
   bottomDrawerOpen: boolean;

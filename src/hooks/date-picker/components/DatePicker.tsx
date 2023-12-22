@@ -5,7 +5,7 @@ import {
   Stack,
   Typography,
 } from "@mui/material";
-import SelectDate from "@components/layouts/date-picker/components/SelectDate.tsx";
+import SelectDate from "@hooks/date-picker/components/SelectDate.tsx";
 import { AdapterMoment } from "@mui/x-date-pickers/AdapterMoment";
 import { LocalizationProvider } from "@mui/x-date-pickers";
 import { useState } from "react";
