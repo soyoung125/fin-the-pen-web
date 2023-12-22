@@ -9,13 +9,11 @@ const meta = {
   tags: ["autodocs"],
   args: {
     value: "day",
-    children: (
-      <>
-        <RadioLabel value="day" label="매일" />
-        <RadioLabel value="week" label="매주" />
-        <RadioLabel value="month" label="매달" />
-      </>
-    ),
+    children: [
+      <RadioLabel value="day" label="매일" />,
+      <RadioLabel value="week" label="매주" />,
+      <RadioLabel value="month" label="매달" />,
+    ],
   },
   argTypes: {},
 } satisfies Meta<typeof RepeatRadioGroup>;
@@ -38,11 +36,9 @@ export const Dynamic = () => {
         value={value}
         handleChange={(value: string) => setValue(value)}
       >
-        <>
-          <RadioLabel value="is_repeat_again" label="계속 반복" />
-          <RadioLabel value="repeat_number_time" label={"일정 반복 횟수"} />
-          <RadioLabel value="repeat_end_line" label={"종료 날짜"} />
-        </>
+        <RadioLabel value="is_repeat_again" label="계속 반복" />
+        <RadioLabel value="repeat_number_time" label={"일정 반복 횟수"} />
+        <RadioLabel value="repeat_end_line" label={"종료 날짜"} />
       </RepeatRadioGroup>
     </div>
   );

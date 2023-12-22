@@ -4,8 +4,9 @@ import { RepeatProps } from "@type/schedule";
 import RepeatInputLabel from "../RepeatInputLabel";
 
 function Week({ repeatType, handleChangeOption }: RepeatProps) {
-  const changeDayOfWeek = (week: string) =>
+  const changeDayOfWeek = (week: string) => {
     handleChangeOption({ target: { id: "repeat_day_of_week", value: week } });
+  };
 
   return (
     <>

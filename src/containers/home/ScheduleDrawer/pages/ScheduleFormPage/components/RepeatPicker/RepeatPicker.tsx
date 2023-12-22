@@ -14,21 +14,17 @@ export interface RepeatPickerProps {
 
 function RepeatPicker({ setIsRepeatPickerOpen }: RepeatPickerProps) {
   const { updateRepeat, updatePeriod, scheduleForm } = useScheduleForm();
-  const [repeatType, setRepeatType] = useState<string>(
-    scheduleForm ? scheduleForm.repeat.kind_type : "",
-  );
-  const [periodType, setPeriodType] = useState<string>(
-    scheduleForm ? scheduleForm.repeat.kind_type : "",
-  );
 
-  useEffect(() => {
-    console.log(repeatType);
-    updateRepeat({ target: { id: "repeat", value: repeatType } });
-  }, [repeatType]);
+  const repeatType = scheduleForm?.repeat.kind_type ?? "day";
+  const periodType = scheduleForm?.period.kind_type ?? "is_repeat_again";
 
-  useEffect(() => {
-    updatePeriod({ target: { id: "period", value: periodType } });
-  }, [periodType]);
+  const handleRepeatChange = (v: string) => {
+    updateRepeat({ target: { id: "repeat", value: v } });
+  };
+
+  const handlePeriodChange = (v: string) => {
+    updatePeriod({ target: { id: "period", value: v } });
+  };
 
   return (
     <>
@@ -37,31 +33,24 @@ function RepeatPicker({ setIsRepeatPickerOpen }: RepeatPickerProps) {
         title="반복 설정"
       />
 
-      <RepeatInput
-        repeatType={repeatType}
-        handleChange={(v) => setRepeatType(v)}
-      />
+      <RepeatInput repeatType={repeatType} handleChange={handleRepeatChange} />
 
       {repeatType !== "" && (
         <>
-          <RepeatRadioGroup
-            value={repeatType}
-            handleChange={(v) => setRepeatType(v)}
-          >
-            <RepeatContainer repeatType={repeatType} />
-          </RepeatRadioGroup>
+          <RepeatContainer
+            repeatType={repeatType}
+            handleChange={handleRepeatChange}
+          />
 
           <ThickDivider />
 
           <Box sx={{ color: "primary.main" }} px={2} py={2}>
             기간
           </Box>
-          <RepeatRadioGroup
-            value={periodType}
-            handleChange={(v: string) => setPeriodType(v)}
-          >
-            <PeriodContainer periodType={periodType} />
-          </RepeatRadioGroup>
+          <PeriodContainer
+            periodType={periodType}
+            handleChange={handlePeriodChange}
+          />
         </>
       )}
     </>

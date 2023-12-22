@@ -3,7 +3,7 @@ import { RadioGroup } from "@mui/material";
 export interface RepeatRadioGroupProps {
   value: string;
   handleChange: (value: string) => void;
-  children: JSX.Element;
+  children: JSX.Element[];
 }
 
 function RepeatRadioGroup({

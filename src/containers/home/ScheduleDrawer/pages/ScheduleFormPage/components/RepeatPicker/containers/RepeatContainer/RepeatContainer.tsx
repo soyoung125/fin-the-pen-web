@@ -1,15 +1,20 @@
-import { RepeatTypeProps } from "@type/schedule";
 import AllDay from "@containers/home/ScheduleDrawer/pages/ScheduleFormPage/components/RepeatPicker/containers/RepeatContainer/repeat/AllDay";
 import Week from "@containers/home/ScheduleDrawer/pages/ScheduleFormPage/components/RepeatPicker/containers/RepeatContainer/repeat/Week";
 import Month from "@containers/home/ScheduleDrawer/pages/ScheduleFormPage/components/RepeatPicker/containers/RepeatContainer/repeat/Month";
 import Year from "@containers/home/ScheduleDrawer/pages/ScheduleFormPage/components/RepeatPicker/containers/RepeatContainer/repeat/Year";
+import RepeatRadioGroup from "@containers/home/ScheduleDrawer/pages/ScheduleFormPage/components//RepeatPicker/components/radio/RepeatRadioGroup";
 import { useScheduleForm } from "@containers/home/ScheduleDrawer/hooks/useScheduleForm";
+import { RepeatTypeProps } from "@type/schedule";
 
-function RepeatContainer({ repeatType }: RepeatTypeProps) {
+interface RepeatContainerProps extends RepeatTypeProps {
+  handleChange: (value: string) => void;
+}
+
+function RepeatContainer({ repeatType, handleChange }: RepeatContainerProps) {
   const { updateRepeat } = useScheduleForm();
 
   return (
-    <>
+    <RepeatRadioGroup value={repeatType} handleChange={handleChange}>
       <AllDay repeatType={repeatType} />
 
       <Week repeatType={repeatType} handleChangeOption={updateRepeat} />
@@ -17,7 +22,7 @@ function RepeatContainer({ repeatType }: RepeatTypeProps) {
       <Month repeatType={repeatType} handleChangeOption={updateRepeat} />
 
       <Year repeatType={repeatType} />
-    </>
+    </RepeatRadioGroup>
   );
 }
 
