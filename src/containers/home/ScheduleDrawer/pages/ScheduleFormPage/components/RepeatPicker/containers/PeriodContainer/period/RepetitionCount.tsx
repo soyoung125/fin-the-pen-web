@@ -1,6 +1,5 @@
 import RadioLabel from "../../../components/radio/RadioLabel";
 import InputLabel from "../../../components/radio/RadioLabel/labels/InputLabel";
-import { useEffect, useState } from "react";
 import { useScheduleForm } from "@containers/home/ScheduleDrawer/hooks/useScheduleForm";
 
 export interface RepetitionCountProps {
@@ -9,15 +8,10 @@ export interface RepetitionCountProps {
 
 function RepetitionCount({ periodType }: RepetitionCountProps) {
   const { scheduleForm, updatePeriod } = useScheduleForm();
-  const [value, setValue] = useState(
-    scheduleForm ? scheduleForm?.period.repeat_number_time : "1",
-  );
+  const value = scheduleForm?.period.repeat_number_time;
 
-  useEffect(() => {
+  const handleUpdate = (value: string) =>
     updatePeriod({ target: { id: "repeat_number_time", value: value } });
-  }, [value]);
-
-  const handleUpdate = (value: string) => setValue(value);
 
   return (
     <RadioLabel

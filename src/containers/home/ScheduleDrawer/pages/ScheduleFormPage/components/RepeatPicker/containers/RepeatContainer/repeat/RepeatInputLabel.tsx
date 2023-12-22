@@ -19,19 +19,14 @@ function RepeatInputLabel({
 }: InputLabelProps) {
   const { scheduleForm, updateRepeat } = useScheduleForm();
   const type = `${option}_type` as const;
-  const [value, setValue] = useState<string>(
-    scheduleForm ? scheduleForm?.repeat[type].repeat_value : "1",
-  );
+  const repeatValue = scheduleForm?.repeat[type].repeat_value;
 
-  useEffect(() => {
+  const handleUpdate = (value: string) =>
     updateRepeat({ target: { id: "repeat_value", value: value } });
-  }, [value]);
-
-  const handleUpdate = (value: string) => setValue(value);
 
   return repeatType === option ? (
     <InputLabel
-      value={value}
+      value={repeatValue}
       handleUpdate={handleUpdate}
       postInputLabel={postInputLabel}
       max={max}
