@@ -1,13 +1,4 @@
-import {
-  Box,
-  Button,
-  Dialog,
-  DialogActions,
-  DialogContent,
-  DialogTitle,
-  Stack,
-  Typography,
-} from "@mui/material";
+import { Box, Stack, Typography } from "@mui/material";
 import moment from "moment";
 import { useSelector } from "react-redux";
 import {
@@ -15,20 +6,18 @@ import {
   setSelectedDate,
 } from "../../app/redux/slices/scheduleSlice";
 import SwitchingHeader from "../../components/common/SwitchingHeader";
-import { LocalizationProvider, DateCalendar } from "@mui/x-date-pickers";
-import { AdapterMoment } from "@mui/x-date-pickers/AdapterMoment";
-import { useState } from "react";
 import { useAppDispatch } from "../../app/redux/hooks";
+import { useMonthPicker } from "@hooks/date-picker/hooks/useMonthPicker.tsx";
 
 function AnalysisHeader() {
   const dispatch = useAppDispatch();
   const date = useSelector(selectDate);
-  const [openDatePickerModal, setOpenDatePickerModal] = useState(false);
-  const [newDate, setNewDate] = useState(moment(date));
-
-  const handleModalClose = () => {
-    setOpenDatePickerModal(false);
-    dispatch(setSelectedDate(moment(newDate)));
+  const { openMonthPicker } = useMonthPicker(date);
+  const handleDate = async () => {
+    const newDate = await openMonthPicker();
+    if (newDate) {
+      dispatch(setSelectedDate(newDate));
+    }
   };
 
   return (
@@ -45,57 +34,10 @@ function AnalysisHeader() {
           dispatch(setSelectedDate(moment(date).add(1, "months")))
         }
       >
-        <Box
-          sx={{ typography: "caption", mx: 1 }}
-          onClick={() => setOpenDatePickerModal(true)}
-        >
+        <Box sx={{ typography: "caption", mx: 1 }} onClick={() => handleDate()}>
           {`${moment(date).format("YYYY년 M월")}`}
         </Box>
       </SwitchingHeader>
-
-      <Dialog
-        open={openDatePickerModal}
-        onClose={() => setOpenDatePickerModal(false)}
-        aria-labelledby="alert-dialog-title"
-        aria-describedby="alert-dialog-description"
-        sx={{
-          ".MuiDialogContent-root": {
-            padding: 0,
-          },
-          "& > div > div, & > div > div > div, & .MuiCalendarPicker-root": {
-            width: "100%",
-          },
-          ".MuiPickerStaticWrapper-content": {
-            minWidth: "100%",
-          },
-          ".MuiCalendarOrClockPicker-root > div": {
-            width: "100%",
-            margin: "0",
-          },
-          ".MuiMonthPicker-root": {
-            margin: 0,
-          },
-        }}
-      >
-        <DialogTitle id="alert-dialog-title">날짜 선택</DialogTitle>
-        <DialogContent>
-          <LocalizationProvider dateAdapter={AdapterMoment}>
-            <DateCalendar
-              views={["year", "month"]}
-              openTo="year"
-              value={newDate}
-              onChange={(newValue) => {
-                newValue && setNewDate(newValue);
-              }}
-            />
-          </LocalizationProvider>
-        </DialogContent>
-        <DialogActions>
-          <Button onClick={handleModalClose} autoFocus>
-            설정
-          </Button>
-        </DialogActions>
-      </Dialog>
     </Stack>
   );
 }
