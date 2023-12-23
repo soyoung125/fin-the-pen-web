@@ -11,19 +11,19 @@ import { useState } from "react";
 import moment from "moment/moment";
 
 interface MonthPickerProps {
-  date: string;
+  defaultDate: string;
   onClickApprove: (answer: moment.Moment) => void;
   onClickReject: (answer: moment.Moment) => void;
 }
 
 function MonthPicker({
-  date,
+  defaultDate,
   onClickApprove,
   onClickReject,
 }: MonthPickerProps) {
-  const [newDate, setNewDate] = useState(moment(date));
+  const [newDate, setNewDate] = useState(moment(defaultDate));
   const handleCloseModal = () => {
-    onClickReject(moment(date));
+    onClickReject(moment(defaultDate));
   };
 
   const handleSetDate = () => {

@@ -2,13 +2,13 @@ import { useOverlay } from "@hooks/use-overlay/useOverlay.tsx";
 import MonthPicker from "@hooks/date-picker/components/MonthPicker.tsx";
 import moment from "moment";
 
-export const useMonthPicker = (date: string) => {
+export const useMonthPicker = () => {
   const { openOverlay, closeOverlay } = useOverlay();
-  const openMonthPicker = (): Promise<moment.Moment> => {
+  const openMonthPicker = (defaultDate: string): Promise<moment.Moment> => {
     return new Promise((resolve) => {
       openOverlay(
         <MonthPicker
-          date={date}
+          defaultDate={defaultDate}
           onClickApprove={(answer) => {
             resolve(answer);
             closeOverlay();

@@ -12,9 +12,9 @@ import { useMonthPicker } from "@hooks/date-picker/hooks/useMonthPicker.tsx";
 function AnalysisHeader() {
   const dispatch = useAppDispatch();
   const date = useSelector(selectDate);
-  const { openMonthPicker } = useMonthPicker(date);
+  const { openMonthPicker } = useMonthPicker();
   const handleDate = async () => {
-    const newDate = await openMonthPicker();
+    const newDate = await openMonthPicker(date);
     if (newDate) {
       dispatch(setSelectedDate(newDate));
     }
