@@ -50,6 +50,7 @@
     "@storybook/react-vite": "7.6.4",
     "@storybook/react-webpack5": "^7.6.4",
     "@storybook/testing-library": "^0.2.2",
+    "@tanstack/eslint-plugin-query": "^5.12.1",
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
