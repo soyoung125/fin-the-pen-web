@@ -83,6 +83,12 @@ export interface MonthScheduleQuery {
   date: string;
 }
 
+export interface RepeatTypeProps {
+  repeatType: string;
+}
+
 export interface RepeatOptionProps {
   handleChangeOption: (state: UpdateStateInterface) => void;
 }
+
+export interface RepeatProps extends RepeatTypeProps, RepeatOptionProps {}

@@ -1,7 +1,8 @@
-import RadioLabel from "../radio/RadioLabel";
-import RepeatInputLabel from "../radio/RadioLabel/RepeatInputLabel";
+import { RepeatTypeProps } from "@type/schedule";
+import RadioLabel from "../../../components/radio/RadioLabel";
+import RepeatInputLabel from "./RepeatInputLabel";
 
-function AllDay() {
+function AllDay({ repeatType }: RepeatTypeProps) {
   return (
     <RadioLabel
       value="day"
@@ -11,6 +12,7 @@ function AllDay() {
           postInputLabel="일 마다"
           max={365}
           option="day"
+          repeatType={repeatType}
         />
       }
     />

@@ -1,15 +1,16 @@
 import { selectSchedule } from "@app/redux/slices/scheduleSlice";
-import DateButton from "@components/repeat/DateButton";
+import { useScheduleForm } from "@containers/home/ScheduleDrawer/hooks/useScheduleForm";
+import DateButton from "@containers/home/ScheduleDrawer/pages/ScheduleFormPage/components/RepeatPicker/components/buttons/DateButton";
 import { Stack } from "@mui/material";
-import { useSelector } from "react-redux";
 
 interface OptionProps {
   changeDayOfWeek: (week: string) => void;
 }
 
 function Option({ changeDayOfWeek }: OptionProps) {
-  const schedule = useSelector(selectSchedule);
-  const selectedWeek = schedule?.repeat.week_type.repeat_day_of_week ?? "";
+  const { scheduleForm } = useScheduleForm();
+
+  const selectedWeek = scheduleForm?.repeat.week_type.repeat_day_of_week ?? "";
 
   const weekName: { [key: string]: string } = {
     월: "MONDAY",
@@ -29,6 +30,7 @@ function Option({ changeDayOfWeek }: OptionProps) {
     }
     changeDayOfWeek(selected.concat(w).join(", "));
   };
+
   return (
     <Stack px={2.5} my={1.5} direction="row" justifyContent="space-between">
       {Object.keys(weekName).map((w) => (

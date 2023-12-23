@@ -1,6 +1,6 @@
 import { Button } from "@mui/material";
 
-interface DateButtonProps {
+export interface DateButtonProps {
   value: string | number;
   handleClick: () => void;
   isSelected: boolean;
