@@ -5,23 +5,13 @@ import moment from "moment";
 import EasyAuthentication from "../../../containers/sign/EasyAuthentication";
 import { setSelectedDate } from "@redux/slices/scheduleSlice.tsx";
 import { useAppDispatch, useAppSelector } from "@redux/hooks.ts";
-import { selectIsBudgetHidden } from "@redux/slices/settingSlice.ts";
-
-import AnalysisHeader from "@containers/analysis/AnalysisHeader.tsx";
-import {
-  selectIsAuthenticated,
-  setIsAuthenticatedFalse,
-} from "@redux/slices/commonSlice.tsx";
+import { selectIsAuthenticated } from "@redux/slices/commonSlice.tsx";
 
 function AnalysisLayout() {
   const isAuthenticated = useAppSelector(selectIsAuthenticated);
-  const isHideBudgetMode = useAppSelector(selectIsBudgetHidden);
   const dispatch = useAppDispatch();
 
   useEffect(() => {
-    if (isHideBudgetMode) {
-      dispatch(setIsAuthenticatedFalse());
-    }
     dispatch(setSelectedDate(moment(new Date())));
   }, []);
 
@@ -30,10 +20,8 @@ function AnalysisLayout() {
   }
 
   return (
-    <Box sx={{ mt: 2 }}>
-      <AnalysisHeader />
-
-      <Box sx={{ my: 3, wordBreak: "keep-all", fontWeight: "bold" }}>
+    <Box bgcolor="#F7F7F8">
+      <Box height="100vh">
         <Outlet />
       </Box>
     </Box>

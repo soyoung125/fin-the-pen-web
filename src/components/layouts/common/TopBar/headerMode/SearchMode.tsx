@@ -1,18 +1,14 @@
-import { Stack } from '@mui/material';
-import PersonalButton from '../buttons/PersonalButton';
-import BackButton from '../buttons/BackButton';
-import SearchButton from '../buttons/SearchButton';
-import NotificationButton from '../buttons/NotificationButton';
+import { Stack } from "@mui/material";
+import PersonalButton from "../buttons/PersonalButton.tsx";
+import BackButton from "../buttons/BackButton.tsx";
+import SearchButton from "../buttons/SearchButton";
+import NotificationButton from "../buttons/NotificationButton.tsx";
 
-function SearchMode() {  
+function SearchMode() {
   return (
     <>
       {/* 헤더 좌측 메뉴 */}
-      <Stack
-        direction="row"
-        justifyContent="space-between"
-        alignItems="center"
-      >
+      <Stack direction="row" justifyContent="space-between" alignItems="center">
         <BackButton />
       </Stack>
 
@@ -21,8 +17,7 @@ function SearchMode() {
         direction="row"
         justifyContent="space-between"
         alignItems="center"
-      >
-      </Stack>
+      ></Stack>
 
       <Stack direction="row" justifyContent="space-between" alignItems="center">
         <NotificationButton />

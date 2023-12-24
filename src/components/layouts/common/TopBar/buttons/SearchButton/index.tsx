@@ -1,10 +1,10 @@
 import { Box, Popover } from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
 import { useRef, useState } from "react";
-import RoundedButton from "../../../../../../components/common/RoundedButton";
-import OptionList from "./popover/OptionList";
+import RoundedButton from "../../../../../common/RoundedButton.tsx";
+import OptionList from "./popover/OptionList.tsx";
 import { useNavigate } from "react-router-dom";
-import { PATH } from "../../../../../../constants/path.ts";
+import { PATH } from "@constants/path.ts";
 import { useSelector } from "react-redux";
 import { selectUser } from "@redux/slices/userSlice.tsx";
 

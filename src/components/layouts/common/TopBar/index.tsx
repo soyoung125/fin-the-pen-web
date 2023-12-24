@@ -5,18 +5,18 @@ import {
   selectHeaderOpen,
   setGuestModeFalse,
   setGuestModeTrue,
-} from "../../../../app/redux/slices/commonSlice";
-import AnalysisMode from "./headerMode/AnalysisMode";
-import HomeMode from "./headerMode/HomeMode";
-import { useAppDispatch, useAppSelector } from "../../../../app/redux/hooks";
-import { selectSavingPopUpSetting } from "../../../../app/redux/slices/assetSlice";
-import PopupButton from "./buttons/PopupButton";
+} from "@redux/slices/commonSlice.tsx";
+import AnalysisMode from "./headerMode/AnalysisMode.tsx";
+import HomeMode from "./headerMode/HomeMode.tsx";
+import { useAppDispatch, useAppSelector } from "@redux/hooks.ts";
+import { selectSavingPopUpSetting } from "@redux/slices/assetSlice.tsx";
+import PopupButton from "./buttons/PopupButton.tsx";
 import { useNavigate } from "react-router-dom";
-import { PATH } from "../../../../constants/path.ts";
-import SettingsMode from "./headerMode/SettingsMode";
-import SignMode from "./headerMode/SignMode";
-import SearchMode from "./headerMode/SearchMode";
-import AssetMode from "./headerMode/AssetMode";
+import { PATH } from "@constants/path.ts";
+import SettingsMode from "./headerMode/SettingsMode.tsx";
+import SignMode from "./headerMode/SignMode.tsx";
+import SearchMode from "./headerMode/SearchMode.tsx";
+import AssetMode from "./headerMode/AssetMode.tsx";
 import { useSelector } from "react-redux";
 import { selectUser } from "@redux/slices/userSlice.tsx";
 

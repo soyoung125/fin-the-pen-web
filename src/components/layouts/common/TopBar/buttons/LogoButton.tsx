@@ -1,10 +1,10 @@
 import { Typography } from "@mui/material";
 import { useNavigate } from "react-router-dom";
-import RoundedButton from "../../../../../components/common/RoundedButton";
-import { PATH } from "../../../../../constants/path.ts";
-import { selectGuestMode } from "../../../../../app/redux/slices/commonSlice";
-import logo from "../../../../../assets/logos/logo_purple.png";
-import { useAppSelector } from "../../../../../app/redux/hooks";
+import RoundedButton from "../../../../common/RoundedButton.tsx";
+import { PATH } from "@constants/path.ts";
+import { selectGuestMode } from "@redux/slices/commonSlice.tsx";
+import logo from "@assets/logos/logo_purple.png";
+import { useAppSelector } from "@redux/hooks.ts";
 
 function LogoButton() {
   const navigate = useNavigate();

@@ -11,11 +11,8 @@ import { useEffect, useState } from "react";
 import SettingsIcon from "@mui/icons-material/Settings";
 import PaidIcon from "@mui/icons-material/Paid";
 import moment from "moment";
-import ScheduleDrawer from "../ScheduleDrawer";
-import {
-  INIT_SCHEDULE,
-  SCHEDULE_DRAWER_MODE,
-} from "../../../constants/schedule.tsx";
+import ScheduleDrawer from "@containers/home/ScheduleDrawer";
+import { INIT_SCHEDULE, SCHEDULE_DRAWER_MODE } from "@constants/schedule.tsx";
 import { changeViewMode, selectDate } from "@redux/slices/scheduleSlice.tsx";
 import { useAppDispatch, useAppSelector } from "@redux/hooks.ts";
 import {
@@ -24,7 +21,7 @@ import {
   setBottomDrawerTabMenu,
 } from "@redux/slices/commonSlice.tsx";
 import { Global } from "@emotion/react";
-import { PATH } from "../../../constants/path.ts";
+import { PATH } from "@constants/path.ts";
 
 const drawerBleeding = 56;
 
@@ -64,7 +61,7 @@ function BottomBar() {
           bottom: 0,
           left: 0,
           right: 0,
-          paddingBottom: 2,
+          py: 2,
           zIndex: 10,
           display: bottomBarOpen ? "flex" : "none",
         }}

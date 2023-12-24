@@ -9,7 +9,7 @@ import {
   setIsAuthenticatedTrue,
 } from "@redux/slices/commonSlice.tsx";
 import Keypad from "@containers/sign/Keypad.tsx";
-import BackButton from "@containers/home/common/TopBar/buttons/BackButton";
+import BackButton from "@components/layouts/common/TopBar/buttons/BackButton";
 import {
   changeViewMode,
   selectViewMode,

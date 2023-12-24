@@ -1,4 +1,4 @@
-import RoundedButton from "@components/common/RoundedButton";
+import RoundedButton from "@components/common/RoundedButton.tsx";
 import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
 import { useNavigate } from "react-router-dom";
 

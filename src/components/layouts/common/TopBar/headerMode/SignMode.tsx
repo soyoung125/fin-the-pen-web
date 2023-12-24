@@ -1,16 +1,12 @@
-import { Stack, Box } from "@mui/material";
-import BackButton from "../buttons/BackButton";
-import { useAppSelector } from "@redux/hooks.ts";
-import { selectHeaderTitle } from "@redux/slices/commonSlice.tsx";
+import { Stack } from "@mui/material";
+import BackButton from "../buttons/BackButton.tsx";
 
-function SettingsMode() {
-  const title = useAppSelector(selectHeaderTitle);
+function SignMode() {
   return (
     <>
       {/* 헤더 좌측 메뉴 */}
       <Stack direction="row" justifyContent="space-between" alignItems="center">
         <BackButton />
-        <Box sx={{ fontSize: "18px", fontWeight: "500" }}>{title}</Box>
       </Stack>
 
       {/* 헤더 중앙 메뉴 */}
@@ -18,16 +14,16 @@ function SettingsMode() {
         direction="row"
         justifyContent="space-between"
         alignItems="center"
-      />
+      ></Stack>
 
       {/* 헤더 우측 메뉴 */}
       <Stack
         direction="row"
         justifyContent="space-between"
         alignItems="center"
-      />
+      ></Stack>
     </>
   );
 }
 
-export default SettingsMode;
+export default SignMode;
