@@ -1,7 +1,5 @@
 import { Meta } from "@storybook/react";
-import ReportTitle, {
-  ReportTitleProps,
-} from "@pages/reports/Report/components/ReportTitle/ReportTitle.tsx";
+import ReportTitle, { ReportTitleProps } from "./ReportTitle.tsx";
 
 const meta = {
   title: "reports/Report/ReportTitle",

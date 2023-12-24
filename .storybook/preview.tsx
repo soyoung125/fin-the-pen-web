@@ -4,6 +4,7 @@ import { store } from "../src/app/redux/store";
 import { Provider } from "react-redux";
 import { PersistGate } from "redux-persist/integration/react";
 import { persistStore } from "redux-persist";
+import { MemoryRouter } from "react-router-dom";
 
 const preview: Preview = {
   parameters: {
@@ -19,7 +20,7 @@ const preview: Preview = {
     (Story) => {
       const persistor = persistStore(store);
       return (
-        <>
+        <MemoryRouter initialEntries={["/"]}>
           <Provider store={store}>
             <PersistGate loading={null} persistor={persistor}>
               <CustomThemeProvider>
@@ -27,7 +28,7 @@ const preview: Preview = {
               </CustomThemeProvider>
             </PersistGate>
           </Provider>
-        </>
+        </MemoryRouter>
       );
     },
   ],
