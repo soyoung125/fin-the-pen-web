@@ -7,7 +7,7 @@ import { setSelectedDate } from "@redux/slices/scheduleSlice.tsx";
 import { useAppDispatch, useAppSelector } from "@redux/hooks.ts";
 import { selectIsAuthenticated } from "@redux/slices/commonSlice.tsx";
 
-function AnalysisLayout() {
+function ReportLayout() {
   const isAuthenticated = useAppSelector(selectIsAuthenticated);
   const dispatch = useAppDispatch();
 
@@ -20,12 +20,10 @@ function AnalysisLayout() {
   }
 
   return (
-    <Box bgcolor="#F7F7F8">
-      <Box height="100vh">
-        <Outlet />
-      </Box>
+    <Box bgcolor="#F7F7F8" height="100vh" px="20px" py="24px">
+      <Outlet />
     </Box>
   );
 }
 
-export default AnalysisLayout;
+export default ReportLayout;

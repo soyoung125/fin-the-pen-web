@@ -77,7 +77,7 @@ function BottomBar() {
         <BottomNavigationAction
           label="리포트"
           icon={<DataSaverOffIcon />}
-          onClick={() => navigate(PATH.analysis)}
+          onClick={() => navigate(PATH.report)}
         />
         <BottomNavigationAction
           label=""
