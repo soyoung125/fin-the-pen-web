@@ -11,7 +11,7 @@ import VisibilityOff from "@mui/icons-material/VisibilityOff";
 
 function SignInFields() {
   const navigate = useNavigate();
-  const { signIn, isLoading } = useAuth();
+  const { signIn, isPending } = useAuth();
   const [showPassword, setShowPassword] = useState(false);
 
   const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
@@ -30,7 +30,7 @@ function SignInFields() {
   };
 
   const handleMouseDownPassword = (
-    event: React.MouseEvent<HTMLButtonElement>
+    event: React.MouseEvent<HTMLButtonElement>,
   ) => {
     event.preventDefault();
   };
@@ -80,7 +80,7 @@ function SignInFields() {
           sx={{ pl: 0 }}
           onClick={() =>
             alert(
-              "You forget a thousand things every day. Make sure this is one of them :)"
+              "You forget a thousand things every day. Make sure this is one of them :)",
             )
           }
         >
@@ -88,7 +88,7 @@ function SignInFields() {
         </Button>
 
         <Button type="submit" fullWidth variant="contained">
-          {isLoading ? "로그인 중..." : "로그인"}
+          {isPending ? "로그인 중..." : "로그인"}
         </Button>
 
         <Button onClick={() => navigate(PATH.signUp)} sx={{ pl: 0 }}>
@@ -96,7 +96,7 @@ function SignInFields() {
         </Button>
       </Box>
       {/* TODO: production 모드에서도 출력되지 않도록 개선 예정 */}
-      {!isLoading && <MockSignIn />}
+      {!isPending && <MockSignIn />}
     </>
   );
 }
