@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 
 export interface ReportBoxProps {
   title: string;
-  navigateTo?: string;
+  navigateTo?: `/${string}`;
   content?: ReactNode;
 }
 
@@ -23,7 +23,7 @@ function ReportBox({ navigateTo, title, content }: ReportBoxProps) {
             sx={{ fontSize: "14px" }}
             onClick={() => navigate(navigateTo)}
           >
-            더보기
+            자세히 보기
             <ArrowForwardIosIcon fontSize="inherit" />
           </Button>
         )}
