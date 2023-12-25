@@ -26,7 +26,7 @@
       "@app/*": ["app/*"],
       "@assets/*": ["assets/*"],
       "@components/*": ["components/*"],
-      "@constants/*": ["domain/constants/*"],
+      "@constants/*": ["constants/*"],
       "@containers/*": ["containers/*"],
       "@domain/*": ["domain/*"],
       "@hooks/*": ["hooks/*"],

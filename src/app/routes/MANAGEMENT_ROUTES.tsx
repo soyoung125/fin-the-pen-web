@@ -4,7 +4,7 @@ import DetailInformation from "../../containers/assetManagement/RegularDepositWi
 import DetailSetting from "../../containers/assetManagement/RegularDepositWithDrawalContainer/detailPage/DetailSetting";
 import SavingsGoal from "../../containers/assetManagement/SavingsGoalContainer";
 import ScheduleManagement from "../../containers/assetManagement/ScheduleManagement";
-import PATH from "../../constants/path";
+import { PATH } from "../../constants/path.ts";
 import { RouterDOM } from "../../types/common";
 
 const MANAGEMENT_ROUTES: RouterDOM[] = [

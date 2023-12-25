@@ -6,8 +6,6 @@
 
 [서버 설치하기](https://github.com/eomheeseung/fin-the-pen)
 
-[//]: # "[핀더펜 v2](https://github.com/soyoung125/fin-the-pen-web-v2)"
-
 ## 👤 Team Members
 
 | role    | name                                                   |
@@ -21,7 +19,7 @@
 
 ## ⚙️ Tech
 
-- React
+- React + TypeScript
 - Redux Took Kit
 - TanStack Query (적용중)
 - Material UI
@@ -94,6 +92,19 @@ npm i -g yarn
 
 ```bash
   yarn dev
+```
+
+7. 빌드가 안되는 경우
+
+```bash
+yarn cache clean --all
+
+npm install -g npm@latest
+npm install -g yarn@latest
+
+rm node_modules/ yarn.lock package-lock.json
+
+yarn
 ```
 
 ## 📜 Documentation

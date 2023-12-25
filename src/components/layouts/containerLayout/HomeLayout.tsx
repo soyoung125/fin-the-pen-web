@@ -1,9 +1,9 @@
-import Box from '@mui/material/Box';
-import CssBaseline from '@mui/material/CssBaseline';
-import { useRef } from 'react';
-import { Outlet } from 'react-router-dom';
-import BottomBar from '../../../containers/home/common/BottomBar';
-import TopBar from '../../../containers/home/common/TopBar';
+import Box from "@mui/material/Box";
+import CssBaseline from "@mui/material/CssBaseline";
+import { useRef } from "react";
+import { Outlet } from "react-router-dom";
+import BottomBar from "../common/BottomBar.tsx";
+import TopBar from "../common/TopBar";
 
 // const messageExamples = [
 //   {
@@ -60,11 +60,11 @@ export default function HomeLayout() {
   // const [messages, setMessages] = React.useState(() => refreshMessages());
 
   /**
- *
- * 일부러 주석처리 해놨는데, 아래 보면 scrollTop을 0으로 만들어주면서 스크롤을 원상 복구하는 기능이 있는 듯 함.
- * 나중에 참고 해서 재활용을 희망함
- *
- */
+   *
+   * 일부러 주석처리 해놨는데, 아래 보면 scrollTop을 0으로 만들어주면서 스크롤을 원상 복구하는 기능이 있는 듯 함.
+   * 나중에 참고 해서 재활용을 희망함
+   *
+   */
 
   // React.useEffect(() => {
   //   ref.current.ownerDocument.body.scrollTop = 0;

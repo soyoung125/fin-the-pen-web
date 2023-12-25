@@ -2,12 +2,12 @@ import { SignIn, User } from "@type/auth.tsx";
 import { DOMAIN } from "@api/url.ts";
 import { useMutation } from "@tanstack/react-query";
 import { useNavigate } from "react-router-dom";
-import PATH from "../../constants/path.tsx";
+import { PATH } from "../../constants/path.ts";
 import { setSessionStorage } from "@utils/storage.ts";
 import { SESSION_STORAGE_KEY_TOKEN } from "@api/keys.ts";
 import { useDispatch } from "react-redux";
 import { setUser } from "@redux/slices/userSlice.tsx";
-import { useAlert } from "@components/layouts/dialog/hooks/useAlert.tsx";
+import { useAlert } from "@hooks/dialog/hooks/useAlert.tsx";
 
 const fetchSignIn = async (credentials: SignIn) => {
   return fetch(`${DOMAIN}/fin-the-pen-web/sign-in`, {
