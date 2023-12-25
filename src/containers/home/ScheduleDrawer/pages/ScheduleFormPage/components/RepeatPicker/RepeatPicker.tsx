@@ -35,7 +35,7 @@ function RepeatPicker({ setIsRepeatPickerOpen }: RepeatPickerProps) {
 
       <RepeatInput repeatType={repeatType} handleChange={handleRepeatChange} />
 
-      {repeatType !== "" && (
+      {repeatType !== "none" && (
         <>
           <RepeatContainer
             repeatType={repeatType}
