@@ -1,10 +1,12 @@
 export interface User {
-  id: number;
+  id?: number;
   user_id: string;
   name: string;
-  bday: string;
-  registerDate: string;
-  phone_number: string;
+  // bday: string;
+  // registerDate: string;
+  // phone_number: string;
+  user_type?: string;
+  token?: string;
 }
 
 export interface MockUser extends User {

@@ -56,7 +56,7 @@ export interface ScheduleRepeat {
     repeat_value: string;
     year_category: "MonthAndDay" | "NthDayOfMonth" | "LastDayOfMonth";
   };
-  kind_type: "day" | "week" | "month" | "year" | "";
+  kind_type: "day" | "week" | "month" | "year" | "none";
 }
 
 export interface SchedulePeriod {

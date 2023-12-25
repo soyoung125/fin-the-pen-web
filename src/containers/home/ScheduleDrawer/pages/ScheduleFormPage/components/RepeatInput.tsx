@@ -26,11 +26,11 @@ function RepeatInput({ repeatType, onClick, handleChange }: RepeatInputProps) {
           반복
         </Box>
         <SwitchButton
-          checked={repeatType !== ""}
+          checked={repeatType !== "none"}
           handleChange={() =>
             changeRepeat({
               target: {
-                value: repeatType === "" ? "day" : "",
+                value: repeatType === "none" ? "day" : "none",
                 id: "repeat",
               },
             })
