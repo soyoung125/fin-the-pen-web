@@ -5,6 +5,7 @@ import { Provider } from "react-redux";
 import { PersistGate } from "redux-persist/integration/react";
 import { persistStore } from "redux-persist";
 import { MemoryRouter } from "react-router-dom";
+import OverlayProvider from "../src/hooks/use-overlay/OverlayProvider";
 
 const preview: Preview = {
   parameters: {
@@ -21,13 +22,15 @@ const preview: Preview = {
       const persistor = persistStore(store);
       return (
         <MemoryRouter initialEntries={["/"]}>
-          <Provider store={store}>
-            <PersistGate loading={null} persistor={persistor}>
-              <CustomThemeProvider>
-                <Story />
-              </CustomThemeProvider>
-            </PersistGate>
-          </Provider>
+          <OverlayProvider>
+            <Provider store={store}>
+              <PersistGate loading={null} persistor={persistor}>
+                <CustomThemeProvider>
+                  <Story />
+                </CustomThemeProvider>
+              </PersistGate>
+            </Provider>
+          </OverlayProvider>
         </MemoryRouter>
       );
     },

@@ -5,17 +5,26 @@ import ArrowRightIcon from "@mui/icons-material/ArrowRight";
 export interface ReportMonthTitleProps {
   year: number;
   month: number;
+  onClickLeftIcon: () => void;
+  onClickMonth: () => void;
+  onClickRightIcon: () => void;
 }
 
-function ReportMonthTitle({ month, year }: ReportMonthTitleProps) {
+function ReportMonthTitle({
+  month,
+  year,
+  onClickMonth,
+  onClickRightIcon,
+  onClickLeftIcon,
+}: ReportMonthTitleProps) {
   return (
     <Stack bgcolor="#F7F7F8" borderRadius="12px" p="14px" gap="10px">
       <Stack direction="row" alignItems="center">
-        <ArrowLeftIcon />
-        <Typography fontSize="16px">
+        <ArrowLeftIcon onClick={onClickLeftIcon} />
+        <Typography fontSize="16px" onClick={onClickMonth}>
           {year}년 {month}월
         </Typography>
-        <ArrowRightIcon />
+        <ArrowRightIcon onClick={onClickRightIcon} />
       </Stack>
       <Typography fontSize="18px" fontWeight={500}>
         <span style={{ color: "#735BF2", fontWeight: 700 }}>
