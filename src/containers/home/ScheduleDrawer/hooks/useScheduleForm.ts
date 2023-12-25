@@ -218,8 +218,8 @@ export const useScheduleForm = () => {
       return;
     }
 
-    const type = scheduleForm?.repeat.kind_type ?? "";
-    if (type !== "") {
+    const type = scheduleForm?.repeat.kind_type ?? "none";
+    if (type !== "none") {
       const kind_type = `${type}_type` as const;
       const newValue = {
         ...scheduleForm?.repeat[kind_type],

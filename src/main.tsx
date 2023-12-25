@@ -10,9 +10,16 @@ import CustomThemeProvider from "./components/providers/CustomThemeProvider";
 import router from "./app/router";
 import { worker } from "./mocks/browser";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import OverlayProvider from "@hooks/use-overlay/OverlayProvider.tsx";
 
 const queryClient = new QueryClient();
+
+const ReactQueryDevtoolsProduction = React.lazy(() =>
+  import("@tanstack/react-query-devtools/production").then((d) => ({
+    default: d.ReactQueryDevtools,
+  })),
+);
 
 async function main() {
   // msw 세팅 시작
@@ -27,7 +34,7 @@ async function main() {
   // msw 세팅 끝
 
   const root = ReactDOM.createRoot(
-    document.getElementById("root") as HTMLElement
+    document.getElementById("root") as HTMLElement,
   );
   const persistor = persistStore(store);
 
@@ -43,8 +50,9 @@ async function main() {
             </CustomThemeProvider>
           </PersistGate>
         </Provider>
+        <ReactQueryDevtools initialIsOpen={false} />
       </QueryClientProvider>
-    </React.StrictMode>
+    </React.StrictMode>,
   );
 }
 

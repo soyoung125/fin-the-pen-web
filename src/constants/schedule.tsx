@@ -20,7 +20,7 @@ const INIT_REPEAT = (date: moment.Moment): ScheduleRepeat => {
       repeat_value: "1",
       year_category: "MonthAndDay",
     },
-    kind_type: "",
+    kind_type: "none",
   };
 };
 
