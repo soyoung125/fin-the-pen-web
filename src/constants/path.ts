@@ -14,7 +14,7 @@ export const PATH = {
   analysisDetail: "/analysis/detail",
 
   report: "/report",
-  reportDetail: "/report/detail",
+  reportMonthDetail: "/report/detail",
 
   // 자산관리의 세부 설정 페이지 (경로명 수정할 계획)
   savingsGoal: "/management/savings-goal",

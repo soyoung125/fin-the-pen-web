@@ -3,7 +3,7 @@ import ReportCard, { ReportCardProps } from "./ReportCard.tsx";
 import { Stack } from "@mui/material";
 
 const meta = {
-  title: "reports/ReportDetails/ReportCard",
+  title: "reports/ReportMonthDetails/ReportCard",
   component: ReportCard,
   tags: ["autodocs"],
   args: { rank: 0, title: "식비", amount: 71000, maxPercent: 20, percent: 20 },

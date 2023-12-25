@@ -1,7 +1,7 @@
 import { RouterDOM } from "@type/common.tsx";
 import { PATH } from "@constants/path.ts";
 import Report from "@pages/reports/Report";
-import ReportDetails from "@pages/reports/ReportDetails";
+import ReportMonthDetails from "pages/reports/ReportMonthDetails";
 
 const REPORT_ROUTES: RouterDOM[] = [
   {
@@ -9,8 +9,8 @@ const REPORT_ROUTES: RouterDOM[] = [
     element: <Report />,
   },
   {
-    path: PATH.reportDetail,
-    element: <ReportDetails />,
+    path: PATH.reportMonthDetail,
+    element: <ReportMonthDetails />,
   },
 ];
 
