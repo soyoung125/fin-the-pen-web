@@ -2,6 +2,7 @@ import { RouterDOM } from "@type/common.tsx";
 import { PATH } from "@constants/path.ts";
 import Report from "@pages/reports/Report";
 import ReportMonthDetails from "pages/reports/ReportMonthDetails";
+import ReportCategoryDetails from "@pages/reports/ReportCategoryDetails/ReportCategoryDetails.tsx";
 
 const REPORT_ROUTES: RouterDOM[] = [
   {
@@ -11,6 +12,10 @@ const REPORT_ROUTES: RouterDOM[] = [
   {
     path: PATH.reportMonthDetail,
     element: <ReportMonthDetails />,
+  },
+  {
+    path: PATH.reportCategoryDetail,
+    element: <ReportCategoryDetails />,
   },
 ];
 
