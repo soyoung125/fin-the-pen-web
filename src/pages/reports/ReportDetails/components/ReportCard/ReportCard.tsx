@@ -24,7 +24,7 @@ function ReportCard({
       <Stack direction="row" justifyContent="space-between" alignItems="center">
         <Stack direction="row" gap="8px" alignItems="center">
           <Typography fontSize="16px">{rank}위</Typography>
-          <Typography fontSize="14px">{title}</Typography>
+          <Typography fontSize="16px">{title}</Typography>
         </Stack>
         <Stack direction="row" gap="8px" alignItems="center">
           <Typography fontSize="14px">{amount.toLocaleString()}원</Typography>
