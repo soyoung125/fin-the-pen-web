@@ -3,6 +3,8 @@ import styled from "@emotion/styled";
 interface ProgressBarProps {
   color: string;
   bgColor: string;
+  max: number;
+  value: number;
 }
 
 export const ProgressBar = styled.progress<ProgressBarProps>`
@@ -21,9 +23,17 @@ export const ProgressBar = styled.progress<ProgressBarProps>`
 
   // 실제
   &::-webkit-progress-value {
-    color: ${({ color }) => color};
     background: ${({ bgColor }) => bgColor};
 
     border-radius: 4px;
+  }
+
+  &::after {
+    content: "${({ value }) => value}%";
+    font-size: 12px;
+    position: relative;
+    top: -22px;
+    left: calc(${({ value, max }) => (value / max) * 100}% - 30px);
+    color: ${({ color }) => color};
   }
 `;
