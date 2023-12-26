@@ -7,16 +7,16 @@ import ScheduleStatusCard from "../../components/assetManagement/ScheduleStatusC
 import SettingsPaper from "../../components/assetManagement/SettingsPaper";
 import useSchedule from "../../hooks/useSchedule";
 import useHeader from "../../hooks/useHeader";
-import { useSelector } from "react-redux";
-import { selectUser } from "@redux/slices/userSlice.tsx";
 import { HEADER_MODE } from "@type/common.tsx";
 import { useAppDispatch } from "@redux/hooks.ts";
 import { setIsAuthenticatedFalse } from "@redux/slices/commonSlice.tsx";
+import { useUser } from "@app/tanstack-query/useUser.ts";
 
 function AssetManagement() {
   const dispatch = useAppDispatch();
   const { schedules } = useSchedule();
-  const user = useSelector(selectUser);
+  const { data: user } = useUser();
+
   const today = moment();
 
   useHeader(true, HEADER_MODE.home);
@@ -41,8 +41,8 @@ function AssetManagement() {
                 (s) =>
                   today.isSame(s.start_date, "month") &&
                   today.isSameOrBefore(
-                    moment(s.start_date + s.start_time, "YYYY-MM-DDhh:mm"),
-                  ),
+                    moment(s.start_date + s.start_time, "YYYY-MM-DDhh:mm")
+                  )
               ).length
             }
           />

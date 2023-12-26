@@ -1,6 +1,6 @@
 import { SignIn, User } from "@type/auth.tsx";
 import { DOMAIN } from "@api/url.ts";
-import { useMutation } from "@tanstack/react-query";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useNavigate } from "react-router-dom";
 import { PATH } from "../../constants/path.ts";
 import { setSessionStorage } from "@utils/storage.ts";
@@ -8,6 +8,7 @@ import { SESSION_STORAGE_KEY_TOKEN } from "@api/keys.ts";
 import { useDispatch } from "react-redux";
 import { setUser } from "@redux/slices/userSlice.tsx";
 import { useAlert } from "@hooks/dialog/hooks/useAlert.tsx";
+import { QUERY_KEY_USER } from "@constants/queryKeys.ts";
 
 const fetchSignIn = async (credentials: SignIn) => {
   return fetch(`${DOMAIN}/fin-the-pen-web/sign-in`, {
@@ -22,12 +23,13 @@ const fetchSignIn = async (credentials: SignIn) => {
 // TODO: 추후에 토큰 방식으로 수정 예정입니다. 지금은 기존 구조로 진행합니다.
 const generateRandomToken = () => {
   const randomEightDigit = Math.floor(
-    10000000 + Math.random() * 90000000,
+    10000000 + Math.random() * 90000000
   ).toString();
   setSessionStorage(SESSION_STORAGE_KEY_TOKEN, randomEightDigit);
 };
 
 export const useAuth = () => {
+  const queryClient = useQueryClient();
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const { openAlert } = useAlert();
@@ -37,11 +39,12 @@ export const useAuth = () => {
     onSuccess: async (data, variable) => {
       const user: User | "" = await data.json();
       if (user !== "") {
-        const useUser = {
+        const useUser: User = {
           name: user.name,
           user_id: variable.user_id?.toString() ?? "",
         };
-        dispatch(setUser(useUser)); // 수정예정
+        queryClient.setQueryData([QUERY_KEY_USER], useUser);
+        dispatch(setUser(useUser)); // 수정예정 (제거 필요)
         setSessionStorage(SESSION_STORAGE_KEY_TOKEN, user.token);
         navigate("//");
       } else {
@@ -74,7 +77,7 @@ export const useAuth = () => {
         // bday: "2000-01-01",
         // registerDate: "2023-01-25T14:57:08.023+00:00",
         // phone_number: "010-4413-5698",
-      }),
+      })
     );
     navigate(PATH.home);
   };

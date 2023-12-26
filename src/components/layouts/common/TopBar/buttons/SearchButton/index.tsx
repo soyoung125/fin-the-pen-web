@@ -5,11 +5,11 @@ import RoundedButton from "../../../../../common/RoundedButton.tsx";
 import OptionList from "./popover/OptionList.tsx";
 import { useNavigate } from "react-router-dom";
 import { PATH } from "@constants/path.ts";
-import { useSelector } from "react-redux";
-import { selectUser } from "@redux/slices/userSlice.tsx";
+import { useUser } from "@app/tanstack-query/useUser.ts";
 
 function SearchButton() {
-  const user = useSelector(selectUser);
+  const { data: user } = useUser();
+
   const navigate = useNavigate();
   const [anchorEl, setAnchorEl] = useState<HTMLButtonElement | null>(null);
   const searchBtn = useRef(null);

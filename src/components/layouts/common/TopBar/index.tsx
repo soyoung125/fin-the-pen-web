@@ -17,20 +17,18 @@ import SettingsMode from "./headerMode/SettingsMode.tsx";
 import SignMode from "./headerMode/SignMode.tsx";
 import SearchMode from "./headerMode/SearchMode.tsx";
 import AssetMode from "./headerMode/AssetMode.tsx";
-import { useSelector } from "react-redux";
-import { selectUser } from "@redux/slices/userSlice.tsx";
+import { useUser } from "@app/tanstack-query/useUser.ts";
 
 function TopBar() {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
-  const user = useSelector(selectUser);
+  const { data: user } = useUser();
   const isHeaderOpen = useAppSelector(selectHeaderOpen);
   const headerMode = useAppSelector(selectHeaderMode);
   const popupSetting = useAppSelector(selectSavingPopUpSetting);
 
   useEffect(() => {
-    // 옵셔널 체이닝 사용하면 eslint에서 오류 발생
-    if (user && user.name === "guest by msw") {
+    if (user?.name === "guest by msw") {
       console.warn(
         "게스트 모드로 동작합니다. 게스트 모드에서는 데이터가 저장되지 않습니다."
       );

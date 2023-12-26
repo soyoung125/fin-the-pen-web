@@ -1,8 +1,6 @@
 import { Alert, Box, Button, Dialog, Grid, Stack } from "@mui/material";
 import { useState } from "react";
 import LogoCircle from "../../components/common/LogoCircle";
-import { useSelector } from "react-redux";
-import { selectUser } from "@redux/slices/userSlice.tsx";
 import { useAppDispatch, useAppSelector } from "@redux/hooks.ts";
 import {
   selectIsAuthenticated,
@@ -15,6 +13,7 @@ import {
   selectViewMode,
 } from "@app/redux/slices/scheduleSlice";
 import { VIEW_MODE } from "constants/schedule";
+import { useUser } from "@app/tanstack-query/useUser.ts";
 
 interface EasyAuthenticationProps {
   handleAuthenticate?: () => void;
@@ -25,7 +24,7 @@ function EasyAuthentication({ handleAuthenticate }: EasyAuthenticationProps) {
   const dispatch = useAppDispatch();
 
   const isAuthenticated = useAppSelector(selectIsAuthenticated);
-  const user = useSelector(selectUser);
+  const { data: user } = useUser();
   const viewMode = useAppSelector(selectViewMode);
 
   const [password, setPassword] = useState<number[]>([]);

@@ -15,15 +15,14 @@ import AssetView from "../../containers/home/AssetView";
 import { VIEW_MODE } from "../../constants/schedule";
 import { useAppDispatch, useAppSelector } from "@redux/hooks.ts";
 import { selectIsBudgetHidden } from "@redux/slices/settingSlice.ts";
-import { useSelector } from "react-redux";
-import { selectUser } from "@redux/slices/userSlice.tsx";
 import { HEADER_MODE } from "@type/common.tsx";
+import { useUser } from "@app/tanstack-query/useUser.ts";
 
 function Home() {
   const dispatch = useAppDispatch();
   const viewMode = useAppSelector(selectViewMode);
   const month = useAppSelector(selectMonth);
-  const user = useSelector(selectUser);
+  const { data: user } = useUser();
   const isHideBudgetMode = useAppSelector(selectIsBudgetHidden);
 
   useEffect(() => {
