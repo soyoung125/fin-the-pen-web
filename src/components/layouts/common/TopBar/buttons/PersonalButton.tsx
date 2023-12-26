@@ -4,14 +4,13 @@ import LoginIcon from "@mui/icons-material/Login";
 import PersonOutlineOutlinedIcon from "@mui/icons-material/PersonOutlineOutlined";
 import RoundedButton from "../../../../common/RoundedButton.tsx";
 import { PATH } from "@constants/path.ts";
-import { useSelector } from "react-redux";
-import { selectUser } from "@redux/slices/userSlice.tsx";
+import { useUser } from "@app/tanstack-query/useUser.ts";
 
 function PersonalButton() {
   const navigate = useNavigate();
-  const user = useSelector(selectUser);
+  const { data: user } = useUser();
 
-  if (user === null) {
+  if (user === undefined) {
     return (
       <RoundedButton value="login" onClick={() => navigate(PATH.signIn)}>
         <LoginIcon />

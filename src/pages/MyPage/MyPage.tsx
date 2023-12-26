@@ -9,13 +9,13 @@ import UserData from "@pages/MyPage/UserData.tsx";
 import { selectGuestMode } from "@redux/slices/commonSlice.tsx";
 import SchedulesData from "@pages/MyPage/SchedulesData.tsx";
 import GuestDataManager from "pages/MyPage/GuestDataManager";
-import { useSelector } from "react-redux";
-import { logOut, selectUser } from "@redux/slices/userSlice.tsx";
+import { logOut } from "@redux/slices/userSlice.tsx";
+import { useUser } from "@app/tanstack-query/useUser.ts";
 
 function MyPage() {
   const navigate = useNavigate();
   const guestMode = useAppSelector(selectGuestMode);
-  const user = useSelector(selectUser);
+  const { data: user } = useUser();
   const dispatch = useAppDispatch();
 
   const userLogOut = () => {
@@ -31,7 +31,7 @@ function MyPage() {
 
   return (
     <>
-      {user === null ? (
+      {user === undefined ? (
         <div>로그인이 되어있지 않습니다.</div>
       ) : (
         <Box>

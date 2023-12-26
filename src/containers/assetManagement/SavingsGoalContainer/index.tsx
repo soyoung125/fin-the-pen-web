@@ -4,11 +4,10 @@ import { useNavigate } from "react-router-dom";
 import Saving from "./goals/Saving";
 import Personal from "./goals/Personal";
 import { PATH } from "../../../constants/path.ts";
-import { useSelector } from "react-redux";
-import { selectUser } from "@redux/slices/userSlice.tsx";
+import { useUser } from "@app/tanstack-query/useUser.ts";
 
 function SavingsGoal() {
-  const user = useSelector(selectUser);
+  const { data: user } = useUser();
   const navigate = useNavigate();
 
   return (

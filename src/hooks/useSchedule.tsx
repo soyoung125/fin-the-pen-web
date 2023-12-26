@@ -9,12 +9,12 @@ import {
 } from "@redux/slices/scheduleSlice.tsx";
 import { useEffect, useState } from "react";
 import { Schedule } from "../types/schedule.tsx";
-import { selectUser } from "@redux/slices/userSlice.tsx";
 import { useAppDispatch } from "@redux/hooks.ts";
 import moment from "moment/moment";
 import { v4 as uuidv4 } from "uuid";
 import { useCreateSchedule } from "@app/tanstack-query/schedules/useCreateSchedule.tsx";
 import { useConfirm } from "@hooks/dialog/hooks/useConfirm.tsx";
+import { useUser } from "@app/tanstack-query/useUser.ts";
 
 const useSchedule = () => {
   const schedules = useSelector(selectSchedules);
@@ -23,7 +23,7 @@ const useSchedule = () => {
   );
   const status = useSelector(selectStatus);
   const dispatch = useAppDispatch();
-  const user = useSelector(selectUser);
+  const { data: user } = useUser();
   const date = useSelector(selectDate);
   const [todaySchedules, setTodaySchedules] = useState<Schedule[]>([]);
   const { openConfirm } = useConfirm();
@@ -43,7 +43,7 @@ const useSchedule = () => {
     schedule: Schedule,
     stringDate: string
   ) => {
-    if (user === null) {
+    if (user === undefined) {
       return alert("로그인이 필요합니다.");
     }
     const date = moment(stringDate);

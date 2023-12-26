@@ -1,13 +1,12 @@
 import {
+  IconButton,
   List,
   ListItem,
-  IconButton,
-  ListItemText,
   ListItemButton,
+  ListItemText,
 } from "@mui/material";
 import KeyboardArrowRightIcon from "@mui/icons-material/KeyboardArrowRight";
-import { useSelector } from "react-redux";
-import { selectUser } from "@redux/slices/userSlice.tsx";
+import { useUser } from "@app/tanstack-query/useUser.ts";
 
 interface OptionListProps {
   openSearchPage: () => void;
@@ -15,7 +14,7 @@ interface OptionListProps {
 }
 
 function OptionList({ openSearchPage, openFetchPage }: OptionListProps) {
-  const user = useSelector(selectUser);
+  const { data: user } = useUser();
   return (
     <List dense>
       <ListItem

@@ -5,11 +5,10 @@ import { selectGuestMode } from "@redux/slices/commonSlice.tsx";
 import { selectDate, selectSchedule } from "@redux/slices/scheduleSlice.tsx";
 import { Schedule, ScheduleDrawerModeValue } from "@type/schedule.tsx";
 import { useAppSelector } from "@redux/hooks.ts";
-import { useSelector } from "react-redux";
-import { selectUser } from "@redux/slices/userSlice.tsx";
 import useSchedule from "@hooks/useSchedule.tsx";
 import Save from "@assets/icons/save_icon.svg";
 import { useScheduleForm } from "@containers/home/ScheduleDrawer/hooks/useScheduleForm.ts";
+import { useUser } from "@app/tanstack-query/useUser.ts";
 
 /**
  * 각종 로직들 모듈로 이전 예정
@@ -27,7 +26,7 @@ function ScheduleDrawerFooter({
   setShowError,
 }: ScheduleDrawerFooterProps) {
   const date = useAppSelector(selectDate);
-  const user = useSelector(selectUser);
+  const { data: user } = useUser();
   const guestMode = useAppSelector(selectGuestMode);
   const schedule = useAppSelector(selectSchedule) as Schedule;
   const { handleCreateSchedule, handleModifySchedule } = useSchedule();
@@ -98,10 +97,10 @@ function ScheduleDrawerFooter({
           <Button
             variant="contained"
             fullWidth
-            disabled={user === null}
+            disabled={user === undefined}
             onClick={() => handleSubmit()}
           >
-            {user === null
+            {user === undefined
               ? NEED_SIGN_IN
               : `${SCHEDULE_DRAWER.add_schedule[mode]}`}
           </Button>

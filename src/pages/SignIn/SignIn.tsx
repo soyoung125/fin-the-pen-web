@@ -5,18 +5,17 @@ import SignInFields from "./SignInFields.tsx";
 import Footer from "./Footer.tsx";
 import useHeader from "../../hooks/useHeader";
 import { useEffect } from "react";
-import { useSelector } from "react-redux";
-import { selectUser } from "@redux/slices/userSlice.tsx";
 import { HEADER_MODE } from "@type/common.tsx";
 import { useAppDispatch } from "@redux/hooks.ts";
 import {
   setBottomBarOpenFalse,
   setBottomBarOpenTrue,
 } from "@redux/slices/commonSlice.tsx";
+import { useUser } from "@app/tanstack-query/useUser.ts";
 
 function SignIn() {
   const dispatch = useAppDispatch();
-  const user = useSelector(selectUser);
+  const { data: user } = useUser();
   // useHeader(false);
   useHeader(true, HEADER_MODE.sign);
 
@@ -28,7 +27,7 @@ function SignIn() {
   return (
     <CenterBox>
       <Stack justifyContent="center" alignItems="center" px={1}>
-        {user === null ? ( // 버그 수정 필요
+        {user === undefined ? ( // 버그 수정 필요
           <Stack justifyContent="center" alignItems="center" px="12px">
             <Header />
             <SignInFields />
@@ -41,4 +40,5 @@ function SignIn() {
     </CenterBox>
   );
 }
+
 export default SignIn;
