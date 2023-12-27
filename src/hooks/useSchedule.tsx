@@ -12,14 +12,14 @@ import { Schedule } from "../types/schedule.tsx";
 import { useAppDispatch } from "@redux/hooks.ts";
 import moment from "moment/moment";
 import { v4 as uuidv4 } from "uuid";
-import { useCreateSchedule } from "@app/tanstack-query/schedules/useCreateSchedule.tsx";
+import { useCreateSchedule } from "@app/tanstack-query/schedules/useCreateSchedule.ts";
 import { useConfirm } from "@hooks/dialog/hooks/useConfirm.tsx";
 import { useUser } from "@app/tanstack-query/useUser.ts";
 
 const useSchedule = () => {
   const schedules = useSelector(selectSchedules);
   const [selectedSchedule, setSelectedSchedule] = useState<Schedule | null>(
-    null
+    null,
   );
   const status = useSelector(selectStatus);
   const dispatch = useAppDispatch();
@@ -34,14 +34,14 @@ const useSchedule = () => {
       schedules.filter(
         (schedule) =>
           moment(date).isSameOrAfter(schedule.start_date) &&
-          moment(date).isSameOrBefore(schedule.end_date)
-      )
+          moment(date).isSameOrBefore(schedule.end_date),
+      ),
     );
   }, [schedules]);
 
   const handleCreateSchedule = async (
     schedule: Schedule,
-    stringDate: string
+    stringDate: string,
   ) => {
     if (user === undefined) {
       return alert("로그인이 필요합니다.");
@@ -81,7 +81,7 @@ const useSchedule = () => {
           getMonthSchedules({
             user_id: user.user_id,
             date: date,
-          })
+          }),
         );
       }
     }
@@ -94,7 +94,7 @@ const useSchedule = () => {
         getMonthSchedules({
           user_id: user.user_id,
           date: moment(date).format("YYYY-MM"),
-        })
+        }),
       );
     }
   };

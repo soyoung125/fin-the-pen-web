@@ -1,8 +1,9 @@
 import { SESSION_STORAGE_KEY_TOKEN } from "@api/keys";
 import { DOMAIN } from "@api/url";
 import { getSessionStorage } from "@app/utils/storage";
+import { QUERY_KEY_SCHEDULES } from "@constants/queryKeys";
 import { getSign } from "@containers/home/ScheduleDrawer/hooks/useScheduleForm";
-import { useMutation } from "@tanstack/react-query";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { RequestSchedule, Schedule } from "@type/schedule";
 
 const fetchCreateSchedule = async (schedule: Schedule) => {
@@ -30,11 +31,13 @@ const fetchCreateSchedule = async (schedule: Schedule) => {
 };
 
 export const useCreateSchedule = () => {
+  const queryClient = useQueryClient();
   const { mutate } = useMutation({
     mutationFn: fetchCreateSchedule,
     onSuccess: async (data) => {
-      const schedule: Schedule | "" = await data?.json();
-      return schedule;
+      queryClient.invalidateQueries({ queryKey: [QUERY_KEY_SCHEDULES] });
+      // const schedule: Schedule | "" = await data?.json();
+      // return schedule;
     },
   });
 
