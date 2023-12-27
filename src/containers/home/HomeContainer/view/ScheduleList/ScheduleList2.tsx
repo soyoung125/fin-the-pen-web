@@ -25,23 +25,23 @@ function ScheduleList2() {
     user_id: user?.user_id ?? "",
     date: moment(date).format("YYYY-MM"),
   };
-  const { data: schedules, isPending } = useSchedules(query);
+  const { data: schedules, isPending, isError } = useSchedules(query);
   const [authenticationPageOpen, setAuthenticationPageOpen] = useState(false);
 
+  if (!schedules || isError) {
+    return (
+      <Stack justifyContent="center" alignItems="center">
+        <Box my={5}>
+          <Typography>{date}에 등록된 일정이 없습니다!</Typography>
+        </Box>
+      </Stack>
+    );
+  }
   if (isPending) {
     return (
       <Stack direction="row" justifyContent="center" alignItems="center">
         <Box my={5}>
           <CircularProgress />
-        </Box>
-      </Stack>
-    );
-  }
-  if (!schedules) {
-    return (
-      <Stack justifyContent="center" alignItems="center">
-        <Box my={5}>
-          <Typography>{date}에 등록된 일정이 없습니다!</Typography>
         </Box>
       </Stack>
     );
