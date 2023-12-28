@@ -37,6 +37,7 @@ function ScheduleList2() {
       </Stack>
     );
   }
+
   if (isPending) {
     return (
       <Stack direction="row" justifyContent="center" alignItems="center">

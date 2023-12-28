@@ -15,27 +15,35 @@ import { v4 as uuidv4 } from "uuid";
 import { useCreateSchedule } from "@app/tanstack-query/schedules/useCreateSchedule.ts";
 import { useConfirm } from "@hooks/dialog/hooks/useConfirm.tsx";
 import { useUser } from "@app/tanstack-query/useUser.ts";
+import { useSchedules } from "@app/tanstack-query/schedules/useSchedules.ts";
 
 const useSchedule = () => {
-  const schedules = useSelector(selectSchedules);
+  // const schedules = useSelector(selectSchedules);
+  const dispatch = useAppDispatch();
+
   const [selectedSchedule, setSelectedSchedule] = useState<Schedule | null>(
     null,
   );
-  const status = useSelector(selectStatus);
-  const dispatch = useAppDispatch();
-  const { data: user } = useUser();
-  const date = useSelector(selectDate);
   const [todaySchedules, setTodaySchedules] = useState<Schedule[]>([]);
+
+  const status = useSelector(selectStatus);
+  const date = useSelector(selectDate);
+
+  const { data: user } = useUser();
   const { openConfirm } = useConfirm();
   const { createSchedule } = useCreateSchedule();
+  const { data: schedules } = useSchedules({
+    user_id: user?.user_id ?? "",
+    date: moment(date).format("YYYY-MM"),
+  });
 
   useEffect(() => {
     setTodaySchedules(
-      schedules.filter(
+      schedules?.filter(
         (schedule) =>
           moment(date).isSameOrAfter(schedule.start_date) &&
           moment(date).isSameOrBefore(schedule.end_date),
-      ),
+      ) ?? [],
     );
   }, [schedules]);
 

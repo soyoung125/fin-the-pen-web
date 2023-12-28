@@ -22,17 +22,17 @@ function AssetPreview() {
   // const schedulesOfMonth = schedules.filter((s) => today.isSame(s.date, 'month') && today.isSameOrBefore(moment(s.date + s.start_time, 'YYYY-MM-DDhh:mm')));
   const [expandAccordion, setExpandAccordion] = useState(false);
 
-  useEffect(() => {
-    setSchedulesOfMonth([
-      ...schedules.filter(
-        (s) =>
-          moment(date).isSame(s.start_date, "month") &&
-          today.isSameOrBefore(
-            moment(s.start_date + s.start_time, "YYYY-MM-DDhh:mm"),
-          ),
-      ),
-    ]);
-  }, [date]);
+  // useEffect(() => {
+  //   setSchedulesOfMonth([
+  //     ...schedules.filter(
+  //       (s) =>
+  //         moment(date).isSame(s.start_date, "month") &&
+  //         today.isSameOrBefore(
+  //           moment(s.start_date + s.start_time, "YYYY-MM-DDhh:mm"),
+  //         ),
+  //     ),
+  //   ]);
+  // }, [date]);
 
   const handleExpand = () => {
     setExpandAccordion(!expandAccordion);

@@ -62,9 +62,9 @@ function SearchSchedule() {
       } else {
         console.log("게스트 모드로 스케줄 검색");
         setResultSchedules([
-          ...schedules.filter((s) =>
+          ...(schedules?.filter((s) =>
             s.event_name.toLowerCase().includes(keyword.toLowerCase()),
-          ),
+          ) ?? []),
         ]);
       }
     }
