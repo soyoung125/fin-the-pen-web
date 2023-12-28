@@ -35,7 +35,7 @@ export const Default = (args: SelectMenusProps) => {
 };
 
 export const Example = () => {
-  const options = ["최신순", "과거순", "높은 금액순", "낮은 금액순"];
+  const options = ["옵션1", "옵션2", "옵션3", "옵션4"];
   const [selectedOption, setSelectedOption] = useState(options[0]);
   return (
     <>

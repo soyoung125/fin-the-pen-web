@@ -101,6 +101,7 @@ export default function SelectMenus({
             key={index}
             onClick={() => handleSelect(option)}
             disableRipple
+            sx={{ background: selectedOption === option ? "#EDEAFF" : "white" }}
           >
             {option}
           </MenuItem>
