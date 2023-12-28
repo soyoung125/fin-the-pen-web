@@ -8,36 +8,30 @@ import { RequestSchedule, Schedule } from "@type/schedule";
 
 const fetchCreateSchedule = async (schedule: Schedule) => {
   const token = getSessionStorage(SESSION_STORAGE_KEY_TOKEN, "");
-  try {
-    const data = {
-      ...schedule,
-      is_all_day: schedule.all_day,
-      set_amount: schedule.amount,
-      exclusion: schedule.exclude,
-      price_type: getSign(schedule.price_type),
-    } as RequestSchedule;
-    console.log(token);
-    return fetch(`${DOMAIN}/createSchedule`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: "Bearer " + token,
-      },
-      body: JSON.stringify(data),
-    });
-  } catch (err) {
-    alert(err);
-  }
+  const data = {
+    ...schedule,
+    is_all_day: schedule.all_day,
+    set_amount: schedule.amount,
+    exclusion: schedule.exclude,
+    price_type: getSign(schedule.price_type),
+  } as RequestSchedule;
+
+  return fetch(`${DOMAIN}/createSchedule`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: "Bearer " + token,
+    },
+    body: JSON.stringify(data),
+  });
 };
 
 export const useCreateSchedule = () => {
   const queryClient = useQueryClient();
   const { mutate } = useMutation({
     mutationFn: fetchCreateSchedule,
-    onSuccess: async (data) => {
+    onSuccess: async () => {
       queryClient.invalidateQueries({ queryKey: [QUERY_KEY_SCHEDULES] });
-      // const schedule: Schedule | "" = await data?.json();
-      // return schedule;
     },
   });
 
