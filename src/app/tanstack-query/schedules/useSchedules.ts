@@ -24,7 +24,7 @@ const fetchMonthSchedules = async (query: MonthScheduleQuery) => {
 
 export const useSchedules = (query: MonthScheduleQuery) => {
   return useQuery({
-    queryKey: [QUERY_KEY_SCHEDULES],
+    queryKey: [QUERY_KEY_SCHEDULES, query],
     queryFn: () => fetchMonthSchedules(query),
   });
 };
