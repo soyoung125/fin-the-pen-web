@@ -12,6 +12,7 @@ import { Swiper as SwiperType } from "swiper/types";
 import ScheduleFormPage from "@containers/home/ScheduleDrawer/pages/ScheduleFormPage";
 import CategoryPicker from "@containers/home/ScheduleDrawer/pages/ScheduleFormPage/components/CategoryPicker";
 import RepeatPicker from "@containers/home/ScheduleDrawer/pages/ScheduleFormPage/components/RepeatPicker";
+import useSchedule from "@hooks/useSchedule";
 
 function TransitionUp(props: SlideProps) {
   return <Slide {...props} direction="right" />;
@@ -21,15 +22,13 @@ interface ScheduleDrawerProps {
   setDrawerWidth: React.Dispatch<React.SetStateAction<number>>;
   handleClose: () => void;
   data: Schedule;
-  mode: ScheduleDrawerModeValue;
 }
 
 function ScheduleDrawer({
   setDrawerWidth,
   handleClose,
-  data,
-  mode,
-}: ScheduleDrawerProps) {
+}: // data,
+ScheduleDrawerProps) {
   // 추후 삭제 예정
   const random = Math.floor(Math.random() * 4); // 현재 CONSUMPTION_ALERTS의 길이가 4임
 
@@ -41,6 +40,8 @@ function ScheduleDrawer({
   const [isCategoryPickerOpen, setIsCategoryPickerOpen] = useState(false);
   const [isRepeatPickerOpen, setIsRepeatPickerOpen] = useState(false);
 
+  const { resetSchedule } = useSchedule();
+
   const handleChange = (event: React.SyntheticEvent, newValue: number) => {
     swiper?.slideTo(newValue);
     setValue(newValue);
@@ -48,14 +49,15 @@ function ScheduleDrawer({
 
   const handleReset = () => {
     setShowError(false);
-    dispatch(setDrawerSchedule(data));
+    // dispatch(setDrawerSchedule(data));
+    resetSchedule();
   };
 
-  useEffect(() => {
-    if (data) {
-      dispatch(setDrawerSchedule(data));
-    }
-  }, []);
+  // useEffect(() => {
+  //   if (data) {
+  //     dispatch(setDrawerSchedule(data));
+  //   }
+  // }, []);
 
   const ref = useRef<HTMLDivElement>(null);
 
@@ -116,20 +118,18 @@ function ScheduleDrawer({
           >
             <SwiperSlide style={{ overflow: "scroll" }}>
               <ScheduleFormPage
-                mode={mode}
                 showError={showError}
                 setIsCategoryPickerOpen={setIsCategoryPickerOpen}
                 setIsRepeatPickerOpen={setIsRepeatPickerOpen}
               />
             </SwiperSlide>
             <SwiperSlide>
-              <AssetFormPage mode={mode} />
+              <AssetFormPage />
             </SwiperSlide>
           </Swiper>
 
           {/* 제출 버튼 */}
           <ScheduleDrawerFooter
-            mode={mode}
             handleClose={handleClose}
             setShowError={setShowError}
           />

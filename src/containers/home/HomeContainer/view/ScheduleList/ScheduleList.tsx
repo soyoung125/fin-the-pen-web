@@ -26,13 +26,7 @@ function ScheduleList() {
   const [drawerWidth, setDrawerWidth] = useState(0);
   const [authenticationPageOpen, setAuthenticationPageOpen] = useState(false);
 
-  const {
-    status,
-    selectedSchedule,
-    setSelectedSchedule,
-    todaySchedules,
-    date,
-  } = useSchedule();
+  const { status, todaySchedules, date } = useSchedule();
 
   useEffect(() => {
     setShowButton(false);
@@ -41,7 +35,7 @@ function ScheduleList() {
         const isVisible = entries[0].isIntersecting;
         setShowButton(!isVisible);
       },
-      { threshold: 0 }
+      { threshold: 0 },
     );
 
     if (lastItemRef.current) {
@@ -50,12 +44,12 @@ function ScheduleList() {
   }, [date]);
 
   const handleModal = (schedule: Schedule) => {
-    setSelectedSchedule(schedule);
+    // setSelectedSchedule(schedule);
     setBottomDrawerOpen(true);
   };
 
   const handleScroll = (
-    event: React.MouseEvent<HTMLButtonElement, MouseEvent>
+    event: React.MouseEvent<HTMLButtonElement, MouseEvent>,
   ) => {
     event.preventDefault();
     window.scrollTo({
@@ -133,7 +127,7 @@ function ScheduleList() {
 
       <Box ref={lastItemRef} />
 
-      <Drawer
+      {/* <Drawer
         open={bottomDrawerOpen}
         anchor="bottom"
         onClose={() => setBottomDrawerOpen(false)}
@@ -145,15 +139,14 @@ function ScheduleList() {
               drawerWidth === 400 ? `calc((100% - ${drawerWidth}px)/2)` : null,
           },
         }}
-      >
-        {/* 이 부분을 범용적으로 사용할 수 있게 만드는 건 어떨까? */}
-        <ScheduleDrawer
+      > */}
+      {/* 이 부분을 범용적으로 사용할 수 있게 만드는 건 어떨까? */}
+      {/* <ScheduleDrawer
           setDrawerWidth={setDrawerWidth}
           handleClose={() => setBottomDrawerOpen(false)}
           data={selectedSchedule as Schedule}
-          mode={SCHEDULE_DRAWER_MODE.modify}
         />
-      </Drawer>
+      </Drawer> */}
     </Box>
   );
 }

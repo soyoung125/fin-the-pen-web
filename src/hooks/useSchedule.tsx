@@ -7,6 +7,7 @@ import {
   selectMonth,
   selectSchedules,
   selectStatus,
+  setDrawerSchedule,
 } from "@redux/slices/scheduleSlice.tsx";
 import { useEffect, useState } from "react";
 import { Schedule } from "../types/schedule.tsx";
@@ -17,15 +18,17 @@ import { useCreateSchedule } from "@app/tanstack-query/schedules/useCreateSchedu
 import { useConfirm } from "@hooks/dialog/hooks/useConfirm.tsx";
 import { useUser } from "@app/tanstack-query/useUser.ts";
 import { useSchedules } from "@app/tanstack-query/schedules/useSchedules.ts";
+import { INIT_SCHEDULE } from "@constants/schedule.tsx";
 
 const useSchedule = () => {
   // const schedules = useSelector(selectSchedules);
   const dispatch = useAppDispatch();
 
-  const [selectedSchedule, setSelectedSchedule] = useState<Schedule | null>(
-    null,
-  );
+  // const [selectedSchedule, setSelectedSchedule] = useState<Schedule | null>(
+  //   null,
+  // );
   // const [todaySchedules, setTodaySchedules] = useState<Schedule[]>([]);
+  const [isBottomDrawerOpen, setIsBottomDrawerOpen] = useState(false);
 
   const status = useSelector(selectStatus);
   const date = useSelector(selectDate);
@@ -120,19 +123,34 @@ const useSchedule = () => {
     }
   };
 
+  const openDrawer = (data: Schedule) => {
+    setIsBottomDrawerOpen(true);
+    dispatch(setDrawerSchedule(data));
+  };
+
+  const closeDrawer = () => {
+    setIsBottomDrawerOpen(false);
+  };
+
+  const resetSchedule = () => {
+    dispatch(setDrawerSchedule(INIT_SCHEDULE(date)));
+  };
+
   return {
     status,
     schedules,
     isPending,
     isError,
-    selectedSchedule,
-    setSelectedSchedule,
+    isBottomDrawerOpen,
     todaySchedules,
     date,
     month,
     handleDeleteSchedule,
     handleCreateSchedule,
     handleModifySchedule,
+    openDrawer,
+    closeDrawer,
+    resetSchedule,
   };
 };
 

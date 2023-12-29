@@ -15,13 +15,11 @@ import { useUser } from "@app/tanstack-query/useUser.ts";
  */
 
 interface ScheduleDrawerFooterProps {
-  mode: ScheduleDrawerModeValue;
   handleClose: () => void;
   setShowError: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 function ScheduleDrawerFooter({
-  mode,
   handleClose,
   setShowError,
 }: ScheduleDrawerFooterProps) {
@@ -31,20 +29,20 @@ function ScheduleDrawerFooter({
   const schedule = useAppSelector(selectSchedule) as Schedule;
   const { handleCreateSchedule, handleModifySchedule } = useSchedule();
   const { setRandomGeneratedSchedule } = useScheduleForm();
-  const handleMode = () => {
-    switch (mode) {
-      case "create":
-        handleCreateSchedule(schedule, date);
-        handleClose();
-        break;
-      case "modify":
-        handleModifySchedule(schedule);
-        handleClose();
-        break;
-      default:
-        alert("잘못 된 요청입니다.");
-    }
-  };
+  // const handleMode = () => {
+  //   switch (mode) {
+  //     case "create":
+  //       handleCreateSchedule(schedule, date);
+  //       handleClose();
+  //       break;
+  //     case "modify":
+  //       handleModifySchedule(schedule);
+  //       handleClose();
+  //       break;
+  //     default:
+  //       alert("잘못 된 요청입니다.");
+  //   }
+  // };
 
   const handleSubmit = () => {
     if (
@@ -57,7 +55,9 @@ function ScheduleDrawerFooter({
       return;
     }
     setShowError(false);
-    handleMode();
+    // handleMode();
+    handleCreateSchedule(schedule, date);
+    handleClose();
   };
 
   return (
@@ -80,7 +80,7 @@ function ScheduleDrawerFooter({
       <Divider />
 
       <Stack direction="row" spacing={1} mx={2.5} mt={1}>
-        {mode === "create" && process.env.NODE_ENV === "development" && (
+        {process.env.NODE_ENV === "development" && (
           <Button
             fullWidth
             variant="contained"
@@ -102,7 +102,7 @@ function ScheduleDrawerFooter({
           >
             {user === undefined
               ? NEED_SIGN_IN
-              : `${SCHEDULE_DRAWER.add_schedule[mode]}`}
+              : `${SCHEDULE_DRAWER.add_schedule}`}
           </Button>
         </Tooltip>
       </Stack>

@@ -60,11 +60,8 @@ const SCHEDULE_DRAWER = {
   importance_middle: "중", // 저장 데이터와 연동되어 있음 (수정금지)
   importance_low: "하", // 저장 데이터와 연동되어 있음 (수정금지)
   exclusion_title: "예산에서 제외",
-  add_schedule: {
-    create: "일정 추가하기",
-    read: "문구를 뭐로할까요",
-    modify: "수정 완료",
-  },
+  add_schedule: "일정 추가하기",
+  modify_schedule: "일정 수정하기",
 } as const;
 
 const IMPORTANCES = [
@@ -94,22 +91,34 @@ const NEED_TITLE = "제목을 입력해야 합니다.";
 const NEED_CATEGORY = "카테고리를 선택해야 합니다.";
 const WRONG_TIME_ORDER = "종료 시각이 시작 시각보다 빠르지 않았으면 좋겠어요.";
 
-const INIT_SCHEDULE = (date: string, start_time: string): Schedule => ({
-  event_name: "",
-  start_date: date,
-  end_date: date,
-  start_time: `${start_time}:00`,
-  end_time: `${moment(start_time, "HH").add(2, "h").format("HH")}:00`,
-  category: "",
-  all_day: false,
-  repeat: INIT_REPEAT(moment(date)),
-  period: INIT_PERIOD(moment(date)),
-  price_type: SCHEDULE_DRAWER.type_minus,
-  amount: "0",
-  fix_amount: false,
-  importance: SCHEDULE_DRAWER.importance_middle,
-  exclude: false, // false면 포함
-});
+const INIT_SCHEDULE = (date: string): Schedule => {
+  const startDate = moment(date);
+  const endDate = moment(date);
+  if (moment().isSame(date, "day")) {
+    startDate.add(1, "hours");
+    endDate.add(3, "hours");
+  } else {
+    startDate.set("hour", 9);
+    endDate.set("hour", 11);
+  }
+
+  return {
+    event_name: "",
+    start_date: date,
+    end_date: endDate.format("YYYY-MM-DD"),
+    start_time: startDate.format("HH:00"),
+    end_time: endDate.format("HH:00"),
+    category: "",
+    all_day: false,
+    repeat: INIT_REPEAT(moment(date)),
+    period: INIT_PERIOD(moment(date)),
+    price_type: SCHEDULE_DRAWER.type_minus,
+    amount: "0",
+    fix_amount: false,
+    importance: SCHEDULE_DRAWER.importance_middle,
+    exclude: false, // false면 포함
+  };
+};
 
 const REPEAT_CYCLE = {
   일간: "days",
