@@ -7,7 +7,15 @@ const meta = {
   title: "reports/ReportCategoryDetails/ReportCategorySummary",
   component: ReportCategorySummary,
   tags: ["autodocs"],
-  args: {},
+  args: {
+    goal: 1000000,
+    amount: 750000,
+    category: "식비",
+    day: 14,
+    month: 5,
+    year: 2023,
+    onClickDateButton: () => alert("hello"),
+  },
   argTypes: {},
 } satisfies Meta<typeof ReportCategorySummary>;
 
