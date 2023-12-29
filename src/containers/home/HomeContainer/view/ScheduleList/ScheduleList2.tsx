@@ -1,13 +1,5 @@
-import { useSchedules } from "@app/tanstack-query/schedules/useSchedules";
-import { useUser } from "@app/tanstack-query/useUser";
 import useSchedule from "@hooks/useSchedule";
-import {
-  Box,
-  CircularProgress,
-  Drawer,
-  Stack,
-  Typography,
-} from "@mui/material";
+import { Box, CircularProgress, Stack, Typography } from "@mui/material";
 import moment from "moment";
 import ScheduleCard from "./ScheduleCard";
 import { CATEGORIES, Category } from "@constants/categories";
@@ -19,21 +11,15 @@ import { changeHideBudgetMode } from "@app/redux/slices/settingSlice";
 
 function ScheduleList2() {
   const dispatch = useAppDispatch();
-  const { data: user } = useUser();
   const { date, schedules, isPending, isError } = useSchedule(); // redux가 직접 하도록 개선 예정
-  // const query = {
-  //   user_id: user?.user_id ?? "",
-  //   date: month,
-  // };
-  // const {
-  //   data: schedules,
-  //   isPending,
-  //   isError,
-  // } = useSchedules({
-  //   user_id: user?.user_id ?? "",
-  //   date: month,
-  // });
   const [authenticationPageOpen, setAuthenticationPageOpen] = useState(false);
+
+  const todaySchedules =
+    schedules?.filter(
+      (schedule) =>
+        moment(date).isSameOrAfter(schedule.start_date) &&
+        moment(date).isSameOrBefore(schedule.end_date),
+    ) ?? [];
 
   if (isPending) {
     return (
@@ -45,7 +31,7 @@ function ScheduleList2() {
     );
   }
 
-  if (!schedules || isError) {
+  if (!todaySchedules || isError) {
     return (
       <Stack justifyContent="center" alignItems="center">
         <Box my={5}>
@@ -70,7 +56,7 @@ function ScheduleList2() {
 
   return (
     <>
-      {schedules.map((schedule) => (
+      {todaySchedules.map((schedule) => (
         <ScheduleCard
           schedule={schedule}
           category={
