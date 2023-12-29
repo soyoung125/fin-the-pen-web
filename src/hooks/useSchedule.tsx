@@ -4,6 +4,7 @@ import {
   getMonthSchedules,
   modifySchedule,
   selectDate,
+  selectMonth,
   selectSchedules,
   selectStatus,
 } from "@redux/slices/scheduleSlice.tsx";
@@ -24,28 +25,40 @@ const useSchedule = () => {
   const [selectedSchedule, setSelectedSchedule] = useState<Schedule | null>(
     null,
   );
-  const [todaySchedules, setTodaySchedules] = useState<Schedule[]>([]);
+  // const [todaySchedules, setTodaySchedules] = useState<Schedule[]>([]);
 
   const status = useSelector(selectStatus);
   const date = useSelector(selectDate);
+  const month = useSelector(selectMonth);
 
   const { data: user } = useUser();
   const { openConfirm } = useConfirm();
   const { createSchedule } = useCreateSchedule();
-  const { data: schedules } = useSchedules({
+  const {
+    data: schedules,
+    isPending,
+    isError,
+  } = useSchedules({
     user_id: user?.user_id ?? "",
-    date: moment(date).format("YYYY-MM"),
+    date: month,
   });
 
-  useEffect(() => {
-    setTodaySchedules(
-      schedules?.filter(
-        (schedule) =>
-          moment(date).isSameOrAfter(schedule.start_date) &&
-          moment(date).isSameOrBefore(schedule.end_date),
-      ) ?? [],
-    );
-  }, [schedules]);
+  const todaySchedules =
+    schedules?.filter(
+      (schedule) =>
+        moment(date).isSameOrAfter(schedule.start_date) &&
+        moment(date).isSameOrBefore(schedule.end_date),
+    ) ?? [];
+
+  // useEffect(() => {
+  //   setTodaySchedules(
+  //     schedules?.filter(
+  //       (schedule) =>
+  //         moment(date).isSameOrAfter(schedule.start_date) &&
+  //         moment(date).isSameOrBefore(schedule.end_date),
+  //     ) ?? [],
+  //   );
+  // }, [schedules]);
 
   const handleCreateSchedule = async (
     schedule: Schedule,
@@ -110,10 +123,13 @@ const useSchedule = () => {
   return {
     status,
     schedules,
+    isPending,
+    isError,
     selectedSchedule,
     setSelectedSchedule,
     todaySchedules,
     date,
+    month,
     handleDeleteSchedule,
     handleCreateSchedule,
     handleModifySchedule,

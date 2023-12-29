@@ -20,29 +20,36 @@ import { changeHideBudgetMode } from "@app/redux/slices/settingSlice";
 function ScheduleList2() {
   const dispatch = useAppDispatch();
   const { data: user } = useUser();
-  const { date } = useSchedule(); // redux가 직접 하도록 개선 예정
-  const query = {
-    user_id: user?.user_id ?? "",
-    date: moment(date).format("YYYY-MM"),
-  };
-  const { data: schedules, isPending, isError } = useSchedules(query);
+  const { date, schedules, isPending, isError } = useSchedule(); // redux가 직접 하도록 개선 예정
+  // const query = {
+  //   user_id: user?.user_id ?? "",
+  //   date: month,
+  // };
+  // const {
+  //   data: schedules,
+  //   isPending,
+  //   isError,
+  // } = useSchedules({
+  //   user_id: user?.user_id ?? "",
+  //   date: month,
+  // });
   const [authenticationPageOpen, setAuthenticationPageOpen] = useState(false);
-
-  if (!schedules || isError) {
-    return (
-      <Stack justifyContent="center" alignItems="center">
-        <Box my={5}>
-          <Typography>{date}에 등록된 일정이 없습니다!</Typography>
-        </Box>
-      </Stack>
-    );
-  }
 
   if (isPending) {
     return (
       <Stack direction="row" justifyContent="center" alignItems="center">
         <Box my={5}>
           <CircularProgress />
+        </Box>
+      </Stack>
+    );
+  }
+
+  if (!schedules || isError) {
+    return (
+      <Stack justifyContent="center" alignItems="center">
+        <Box my={5}>
+          <Typography>{date}에 등록된 일정이 없습니다!</Typography>
         </Box>
       </Stack>
     );
