@@ -20,7 +20,7 @@ function ConsumptionCard({
       <Stack direction="row" justifyContent="space-between" alignItems="center">
         <Typography fontSize="15px">{name}</Typography>
         <Typography fontSize="15px" color="#735BF2">
-          - {price}원
+          - {price.toLocaleString()}원
         </Typography>
       </Stack>
       <Stack direction="row" justifyContent="space-between" alignItems="center">
@@ -28,7 +28,7 @@ function ConsumptionCard({
           {date} | {cardCompany}
         </Typography>
         <Typography fontSize="14px" color="#8C919C">
-          {balance}원
+          {balance.toLocaleString()}원
         </Typography>
       </Stack>
     </Box>
