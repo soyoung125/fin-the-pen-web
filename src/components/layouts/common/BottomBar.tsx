@@ -7,17 +7,13 @@ import { useNavigate } from "react-router-dom";
 import CalendarMonthIcon from "@mui/icons-material/CalendarMonth";
 import DataSaverOffIcon from "@mui/icons-material/DataSaverOff";
 import AddCircleIcon from "@mui/icons-material/AddCircle";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import SettingsIcon from "@mui/icons-material/Settings";
 import PaidIcon from "@mui/icons-material/Paid";
 import moment from "moment";
 import ScheduleDrawer from "@containers/home/ScheduleDrawer";
-import { INIT_SCHEDULE, SCHEDULE_DRAWER_MODE } from "@constants/schedule.tsx";
-import {
-  changeViewMode,
-  selectDate,
-  setDrawerSchedule,
-} from "@redux/slices/scheduleSlice.tsx";
+import { INIT_SCHEDULE } from "@constants/schedule.tsx";
+import { changeViewMode, selectDate } from "@redux/slices/scheduleSlice.tsx";
 import { useAppDispatch, useAppSelector } from "@redux/hooks.ts";
 import {
   selectBottomBarOpen,
@@ -38,29 +34,12 @@ function BottomBar() {
   const date = useAppSelector(selectDate);
   const bottomTabMenu = useAppSelector(selectBottomDrawerTabMenu);
   const bottomBarOpen = useAppSelector(selectBottomBarOpen);
-  // const [isBottomDrawerOpen, setIsBottomDrawerOpen] = useState(false);
 
   const [drawerWidth, setDrawerWidth] = useState(0);
-  // const [startTime, setStartTime] = useState("09");
 
   const toggleDrawer = (newOpen: boolean) => () => {
     !newOpen && closeDrawer();
   };
-
-  // useEffect(() => {
-  //   if (moment().isSame(date, "day")) {
-  //     setStartTime(moment().add(1, "hours").format("HH"));
-  //   } else {
-  //     setStartTime(moment("09:00", "HH:mm").format("HH"));
-  //   }
-  // }, [date]);
-
-  // const openDrawer = () => {
-  //   setIsBottomDrawerOpen(true);
-  //   dispatch(
-  //     setDrawerSchedule(INIT_SCHEDULE(moment(date).format("YYYY-MM-DD"))),
-  //   );
-  // };
 
   return (
     <>

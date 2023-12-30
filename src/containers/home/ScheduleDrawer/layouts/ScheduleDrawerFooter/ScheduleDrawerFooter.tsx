@@ -1,4 +1,4 @@
-import { Box, Divider, Stack } from "@mui/material";
+import { Box, Divider } from "@mui/material";
 import { selectSchedule } from "@redux/slices/scheduleSlice.tsx";
 import { Schedule } from "@type/schedule.tsx";
 import { useAppSelector } from "@redux/hooks.ts";

@@ -58,6 +58,7 @@ const initialState: InitialState = {
 };
 
 // 06-07 typescript 적용
+// tanstack query 적용 후 제거 예정
 export const getMonthSchedules = createAsyncThunk(
   "schedule/getMonthSchedules",
   async ({ user_id, date }: GetScheduleQuery) => {
@@ -291,8 +292,6 @@ export const selectAnalyzedData = (state: RootState) =>
   (state.schedule as InitialState).analyzedData;
 export const selectStartDate = (state: RootState) =>
   (state.schedule as InitialState).schedule?.start_date;
-export const selectRepeatType = (state: RootState) =>
-  (state.schedule as InitialState).schedule?.repeat.kind_type;
 export const selectRepeatEndDate = (state: RootState) =>
   (state.schedule as InitialState).schedule?.period.repeat_end_line;
 export const selectIsBottomDrawerOpen = (state: RootState) =>

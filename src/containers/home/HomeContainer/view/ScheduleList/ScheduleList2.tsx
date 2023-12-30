@@ -12,15 +12,9 @@ import { INIT_PERIOD, INIT_REPEAT } from "@constants/schedule";
 
 function ScheduleList2() {
   const dispatch = useAppDispatch();
-  const { date, schedules, isPending, isError, openDrawer } = useSchedule(); // redux가 직접 하도록 개선 예정
+  const { date, todaySchedules, isPending, isError, openDrawer } =
+    useSchedule(); // redux가 직접 하도록 개선 예정
   const [authenticationPageOpen, setAuthenticationPageOpen] = useState(false);
-
-  const todaySchedules =
-    schedules?.filter(
-      (schedule) =>
-        moment(date).isSameOrAfter(schedule.start_date) &&
-        moment(date).isSameOrBefore(schedule.end_date),
-    ) ?? [];
 
   if (isPending) {
     return (

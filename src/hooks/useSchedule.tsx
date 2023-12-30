@@ -2,16 +2,13 @@ import { useSelector } from "react-redux";
 import {
   deleteSchedule,
   getMonthSchedules,
-  modifySchedule,
   selectDate,
   selectIsBottomDrawerOpen,
   selectMonth,
-  selectSchedules,
   selectStatus,
   setDrawerSchedule,
   setIsBottomDrawerOpen,
 } from "@redux/slices/scheduleSlice.tsx";
-import { useEffect, useState } from "react";
 import { Schedule } from "../types/schedule.tsx";
 import { useAppDispatch } from "@redux/hooks.ts";
 import moment from "moment/moment";
@@ -24,14 +21,7 @@ import { INIT_SCHEDULE } from "@constants/schedule.tsx";
 import { useModifySchedule } from "@app/tanstack-query/schedules/useModifySchedule.ts";
 
 const useSchedule = () => {
-  // const schedules = useSelector(selectSchedules);
   const dispatch = useAppDispatch();
-
-  // const [selectedSchedule, setSelectedSchedule] = useState<Schedule | null>(
-  //   null,
-  // );
-  // const [todaySchedules, setTodaySchedules] = useState<Schedule[]>([]);
-  // const [isBottomDrawerOpen, setIsBottomDrawerOpen] = useState(false);
 
   const status = useSelector(selectStatus);
   const date = useSelector(selectDate);
@@ -58,16 +48,6 @@ const useSchedule = () => {
         moment(date).isSameOrBefore(schedule.end_date),
     ) ?? [];
 
-  // useEffect(() => {
-  //   setTodaySchedules(
-  //     schedules?.filter(
-  //       (schedule) =>
-  //         moment(date).isSameOrAfter(schedule.start_date) &&
-  //         moment(date).isSameOrBefore(schedule.end_date),
-  //     ) ?? [],
-  //   );
-  // }, [schedules]);
-
   const handleCreateSchedule = async (
     schedule: Schedule,
     stringDate: string,
@@ -83,16 +63,7 @@ const useSchedule = () => {
       user_id: user.user_id,
     };
 
-    // 원래 일정 추가
     createSchedule(scheduleWithUuid);
-    // if (result) {
-    //   dispatch(
-    //     getMonthSchedules({
-    //       user_id: user.user_id,
-    //       date: date.format("YYYY-MM"),
-    //     })
-    //   );
-    // }
   };
 
   const handleDeleteSchedule = async (scheduleId: string) => {
@@ -117,15 +88,6 @@ const useSchedule = () => {
   };
 
   const handleModifySchedule = async (schedule: Schedule) => {
-    // const result = await dispatch(modifySchedule(schedule));
-    // if (result && user) {
-    //   dispatch(
-    //     getMonthSchedules({
-    //       user_id: user.user_id,
-    //       date: moment(date).format("YYYY-MM"),
-    //     }),
-    //   );
-    // }
     modifySchedule(schedule);
   };
 
