@@ -21,7 +21,7 @@ function TransitionUp(props: SlideProps) {
 interface ScheduleDrawerProps {
   setDrawerWidth: React.Dispatch<React.SetStateAction<number>>;
   handleClose: () => void;
-  data: Schedule;
+  // data: Schedule;
 }
 
 function ScheduleDrawer({

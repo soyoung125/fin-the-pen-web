@@ -8,10 +8,11 @@ import { Schedule } from "@type/schedule";
 import EasyAuthentication from "@containers/sign/EasyAuthentication";
 import { useAppDispatch } from "@app/redux/hooks";
 import { changeHideBudgetMode } from "@app/redux/slices/settingSlice";
+import { INIT_PERIOD, INIT_REPEAT } from "@constants/schedule";
 
 function ScheduleList2() {
   const dispatch = useAppDispatch();
-  const { date, schedules, isPending, isError } = useSchedule(); // redux가 직접 하도록 개선 예정
+  const { date, schedules, isPending, isError, openDrawer } = useSchedule(); // redux가 직접 하도록 개선 예정
   const [authenticationPageOpen, setAuthenticationPageOpen] = useState(false);
 
   const todaySchedules =
@@ -50,8 +51,15 @@ function ScheduleList2() {
   }
 
   const handleModal = (schedule: Schedule) => {
-    alert(JSON.stringify(schedule));
     // setBottomDrawerOpen(true); // 수정 drawer는 bottombar의 drawer를 공유할 수 있도록 수정 예정
+    if (schedule) {
+      const start = moment(schedule.start_date); // getMonthSchedule api 수정 후 제거 예정
+      openDrawer({
+        ...schedule,
+        repeat: INIT_REPEAT(start),
+        period: INIT_PERIOD(start),
+      });
+    }
   };
 
   return (

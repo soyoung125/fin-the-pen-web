@@ -4,10 +4,12 @@ import {
   getMonthSchedules,
   modifySchedule,
   selectDate,
+  selectIsBottomDrawerOpen,
   selectMonth,
   selectSchedules,
   selectStatus,
   setDrawerSchedule,
+  setIsBottomDrawerOpen,
 } from "@redux/slices/scheduleSlice.tsx";
 import { useEffect, useState } from "react";
 import { Schedule } from "../types/schedule.tsx";
@@ -28,11 +30,12 @@ const useSchedule = () => {
   //   null,
   // );
   // const [todaySchedules, setTodaySchedules] = useState<Schedule[]>([]);
-  const [isBottomDrawerOpen, setIsBottomDrawerOpen] = useState(false);
+  // const [isBottomDrawerOpen, setIsBottomDrawerOpen] = useState(false);
 
   const status = useSelector(selectStatus);
   const date = useSelector(selectDate);
   const month = useSelector(selectMonth);
+  const isBottomDrawerOpen = useSelector(selectIsBottomDrawerOpen);
 
   const { data: user } = useUser();
   const { openConfirm } = useConfirm();
@@ -124,12 +127,12 @@ const useSchedule = () => {
   };
 
   const openDrawer = (data: Schedule) => {
-    setIsBottomDrawerOpen(true);
+    dispatch(setIsBottomDrawerOpen(true));
     dispatch(setDrawerSchedule(data));
   };
 
   const closeDrawer = () => {
-    setIsBottomDrawerOpen(false);
+    dispatch(setIsBottomDrawerOpen(false));
   };
 
   const resetSchedule = () => {

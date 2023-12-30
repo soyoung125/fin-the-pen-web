@@ -138,9 +138,6 @@ function BottomBar() {
         <ScheduleDrawer
           setDrawerWidth={setDrawerWidth}
           handleClose={closeDrawer}
-          data={{
-            ...INIT_SCHEDULE(moment(date).format("YYYY-MM-DD")),
-          }}
         />
       </SwipeableDrawer>
     </>
