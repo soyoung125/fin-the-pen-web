@@ -3,7 +3,7 @@ import { useEffect, useRef, useState } from "react";
 import { setDrawerSchedule } from "@redux/slices/scheduleSlice.tsx";
 import AssetFormPage from "./pages/AssetFormPage";
 import ScheduleDrawerHeader from "./layouts/ScheduleDrawerHeader";
-import ScheduleDrawerFooter from "./layouts/ScheduleDrawerFooter";
+import ScheduleDrawerFooter from "./layouts/ScheduleDrawerFooter/ScheduleDrawerFooter";
 import { CONSUMPTION_ALERTS } from "../../../constants/alerts";
 import { Schedule, ScheduleDrawerModeValue } from "@type/schedule.tsx";
 import { useAppDispatch } from "@redux/hooks.ts";

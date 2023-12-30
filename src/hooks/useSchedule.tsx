@@ -21,6 +21,7 @@ import { useConfirm } from "@hooks/dialog/hooks/useConfirm.tsx";
 import { useUser } from "@app/tanstack-query/useUser.ts";
 import { useSchedules } from "@app/tanstack-query/schedules/useSchedules.ts";
 import { INIT_SCHEDULE } from "@constants/schedule.tsx";
+import { useModifySchedule } from "@app/tanstack-query/schedules/useModifySchedule.ts";
 
 const useSchedule = () => {
   // const schedules = useSelector(selectSchedules);
@@ -40,6 +41,7 @@ const useSchedule = () => {
   const { data: user } = useUser();
   const { openConfirm } = useConfirm();
   const { createSchedule } = useCreateSchedule();
+  const { modifySchedule } = useModifySchedule();
   const {
     data: schedules,
     isPending,
@@ -115,15 +117,16 @@ const useSchedule = () => {
   };
 
   const handleModifySchedule = async (schedule: Schedule) => {
-    const result = await dispatch(modifySchedule(schedule));
-    if (result && user) {
-      dispatch(
-        getMonthSchedules({
-          user_id: user.user_id,
-          date: moment(date).format("YYYY-MM"),
-        }),
-      );
-    }
+    // const result = await dispatch(modifySchedule(schedule));
+    // if (result && user) {
+    //   dispatch(
+    //     getMonthSchedules({
+    //       user_id: user.user_id,
+    //       date: moment(date).format("YYYY-MM"),
+    //     }),
+    //   );
+    // }
+    modifySchedule(schedule);
   };
 
   const openDrawer = (data: Schedule) => {

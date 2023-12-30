@@ -62,6 +62,7 @@ const SCHEDULE_DRAWER = {
   exclusion_title: "예산에서 제외",
   add_schedule: "일정 추가하기",
   modify_schedule: "일정 수정하기",
+  delete_schedule: "일정 삭제하기",
 } as const;
 
 const IMPORTANCES = [
