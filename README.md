@@ -68,6 +68,8 @@
 
 ```bash
 npm i -g yarn
+
+yarn set version stable
 ````
 
 3. 프로젝트를 클론 합니다.
