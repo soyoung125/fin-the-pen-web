@@ -17,7 +17,8 @@ export const generateRandomBubbles = (
   };
   while (generatedBubbles.length < bubbleTemplates.length) {
     const bubbleTemplate = bubbleTemplates[generatedBubbles.length];
-    const backgroundColor = bubbleTemplate.backgroundColor;
+    const background = bubbleTemplate.background;
+    const color = bubbleTemplate.color;
     const r = bubbleTemplate.r;
     const generatedX = Math.floor(Math.random() * 100);
     const generatedY = Math.floor(Math.random() * 100);
@@ -34,7 +35,8 @@ export const generateRandomBubbles = (
         r,
         title,
         subtitle,
-        backgroundColor,
+        background,
+        color,
       });
     }
   }

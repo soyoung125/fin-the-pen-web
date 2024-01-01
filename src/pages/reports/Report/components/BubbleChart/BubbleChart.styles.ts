@@ -12,10 +12,12 @@ export const BubbleComponent = styled.div<{
   $x: Bubble["x"];
   $y: Bubble["y"];
   $r: Bubble["r"];
-  $backgroundColor: Bubble["backgroundColor"];
+  $color: Bubble["color"];
+  $background: Bubble["background"];
 }>`
   position: absolute;
-  background: ${({ $backgroundColor }) => $backgroundColor ?? "#e6e6e6"};
+  color: ${({ $color }) => $color ?? "#000"};
+  background: ${({ $background }) => $background ?? "#e6e6e6"};
   border-radius: 50%;
   display: flex;
   justify-content: center;

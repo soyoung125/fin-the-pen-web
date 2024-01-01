@@ -5,7 +5,8 @@ export interface Bubble {
   x: number;
   y: number;
   r: number;
-  backgroundColor?: string;
+  color?: string;
+  background?: string;
   title: string;
   subtitle?: string;
 }
@@ -24,7 +25,8 @@ function BubbleChart({ bubbles, isBordered }: BubbleChartProps) {
           $x={bubble.x}
           $y={bubble.y}
           $r={bubble.r}
-          $backgroundColor={bubble.backgroundColor}
+          $color={bubble.color}
+          $background={bubble.background}
         >
           <Stack alignItems="center">
             <Typography fontSize={`${bubble.r / 10}rem`} lineHeight={1}>

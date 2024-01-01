@@ -49,36 +49,36 @@ export const MultipleBubbles = () => {
       r: 20,
       title: "식비",
       subtitle: "28%",
-      backgroundColor:
-        "linear-gradient(140deg, #E4E0FF 13.75%, #B4A8FF 86.75%)",
+      background: "linear-gradient(140deg, #E4E0FF 13.75%, #B4A8FF 86.75%)",
+      color: "#280EB1",
     },
     {
       r: 16,
       title: "미용",
       subtitle: "20%",
-      backgroundColor:
-        "linear-gradient(140deg, #CFEBFF 13.75%, #7BC8FF 86.75%)",
+      background: "linear-gradient(140deg, #CFEBFF 13.75%, #7BC8FF 86.75%)",
+      color: "#004FAC",
     },
     {
       r: 12,
       title: "자동차",
       subtitle: "18%",
-      backgroundColor:
-        "linear-gradient(140deg, #D4FFE7 13.75%, #6DFFAE 86.75%)",
+      background: "linear-gradient(140deg, #D4FFE7 13.75%, #6DFFAE 86.75%)",
+      color: "#047223",
     },
     {
       r: 8,
       title: "패션쇼핑",
       subtitle: "8%",
-      backgroundColor:
-        "linear-gradient(140deg, #FFF4C6 13.75%, #FFE36D 86.75%)",
+      background: "linear-gradient(140deg, #FFF4C6 13.75%, #FFE36D 86.75%)",
+      color: "#CE4911",
     },
     {
       r: 4,
       title: "카페",
       subtitle: "7%",
-      backgroundColor:
-        "linear-gradient(140deg, #FFE7F4 13.75%, #FFBFE2 86.75%)",
+      background: "linear-gradient(140deg, #FFE7F4 13.75%, #FFBFE2 86.75%)",
+      color: "#B20000",
     },
   ];
 
