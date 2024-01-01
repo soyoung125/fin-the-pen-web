@@ -16,15 +16,10 @@ import AddRoundedIcon from "@mui/icons-material/AddRounded";
 import RemoveRoundedIcon from "@mui/icons-material/RemoveRounded";
 import { useScheduleForm } from "@containers/home/ScheduleDrawer/hooks/useScheduleForm.ts";
 
-function SpendingInput({ mode }: { mode: string }) {
-  const { scheduleForm, updateSchedule, updateSpendingType } =
-    useScheduleForm();
+function SpendingInput() {
+  const { scheduleForm, updateSchedule } = useScheduleForm();
   const expectedSpending = scheduleForm ? scheduleForm?.amount : "0";
   const [showError, setShowError] = useState(false);
-
-  const changeSpendingType = () => {
-    updateSpendingType();
-  };
 
   const changeSchedule = (state: React.MouseEvent<HTMLButtonElement>) => {
     updateSchedule({
@@ -67,7 +62,7 @@ function SpendingInput({ mode }: { mode: string }) {
             fullWidth
             id="price_type"
             value={SCHEDULE_DRAWER.type_minus}
-            onClick={mode === "create" ? changeSchedule : changeSpendingType}
+            onClick={changeSchedule}
             sx={{
               borderRadius: "20px",
             }}
@@ -86,7 +81,7 @@ function SpendingInput({ mode }: { mode: string }) {
             fullWidth
             id="price_type"
             value={SCHEDULE_DRAWER.type_plus}
-            onClick={mode === "create" ? changeSchedule : changeSpendingType}
+            onClick={changeSchedule}
             sx={{
               borderRadius: "20px",
             }}

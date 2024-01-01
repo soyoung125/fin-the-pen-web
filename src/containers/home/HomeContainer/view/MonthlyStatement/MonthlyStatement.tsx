@@ -38,7 +38,7 @@ function MonthlyStatement() {
           <StatusStack
             title="수입"
             content={`+${calculateIncomeExpenditure(
-              schedules,
+              schedules ?? [],
               (s: Schedule) => moment(date).isSame(s.start_date, "month"),
               "+",
             )}`}
@@ -47,7 +47,7 @@ function MonthlyStatement() {
           <StatusStack
             title="지출"
             content={`-${calculateIncomeExpenditure(
-              schedules,
+              schedules ?? [],
               (s: Schedule) => moment(date).isSame(s.end_date, "month"),
               "-",
             )}`}

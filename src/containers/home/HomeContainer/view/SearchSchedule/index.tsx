@@ -38,7 +38,7 @@ function SearchSchedule() {
   const [drawerWidth, setDrawerWidth] = useState(0);
   const [resultSchedules, setResultSchedules] = useState<Schedule[]>([]);
 
-  const { schedules, selectedSchedule, setSelectedSchedule } = useSchedule();
+  const { schedules, openDrawer } = useSchedule();
 
   useHeader(true, HEADER_MODE.search);
 
@@ -62,9 +62,9 @@ function SearchSchedule() {
       } else {
         console.log("게스트 모드로 스케줄 검색");
         setResultSchedules([
-          ...schedules.filter((s) =>
+          ...(schedules?.filter((s) =>
             s.event_name.toLowerCase().includes(keyword.toLowerCase()),
-          ),
+          ) ?? []),
         ]);
       }
     }
@@ -85,10 +85,10 @@ function SearchSchedule() {
     }
   };
 
-  const handleModify = (schedule: Schedule) => {
-    setBottomDrawerOpen(true);
-    setSelectedSchedule(schedule);
-  };
+  // const handleModify = (schedule: Schedule) => {
+  //   setBottomDrawerOpen(true);
+  //   setSelectedSchedule(schedule);
+  // };
 
   return (
     <>
@@ -125,7 +125,7 @@ function SearchSchedule() {
           {resultSchedules.map((schedule, index) => (
             <CardActionArea
               key={Math.random()}
-              onClick={() => handleModify(schedule)}
+              onClick={() => openDrawer(schedule)}
             >
               <Box pb={1} />
               <RoundedBorderBox greyBorder={true}>
@@ -185,7 +185,7 @@ function SearchSchedule() {
         </RoundedPaper>
       </Stack>
 
-      <Drawer
+      {/* <Drawer
         open={bottomDrawerOpen}
         anchor="bottom"
         onClose={() => setBottomDrawerOpen(false)}
@@ -197,15 +197,13 @@ function SearchSchedule() {
               drawerWidth === 400 ? `calc((100% - ${drawerWidth}px)/2)` : null,
           },
         }}
-      >
-        {/* 이 부분을 범용적으로 사용할 수 있게 만드는 건 어떨까? */}
-        <ScheduleDrawer
+      > */}
+      {/* 이 부분을 범용적으로 사용할 수 있게 만드는 건 어떨까? */}
+      {/* <ScheduleDrawer
           setDrawerWidth={setDrawerWidth}
           handleClose={() => setBottomDrawerOpen(false)}
-          data={selectedSchedule as Schedule}
-          mode={SCHEDULE_DRAWER_MODE.modify}
         />
-      </Drawer>
+      </Drawer> */}
     </>
   );
 }

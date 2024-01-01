@@ -36,6 +36,7 @@ interface InitialState {
     // end: string;
     [key: string]: string;
   };
+  isBottomDrawerOpen: boolean;
 }
 
 const initialState: InitialState = {
@@ -53,9 +54,11 @@ const initialState: InitialState = {
     start: "",
     end: "",
   },
+  isBottomDrawerOpen: false,
 };
 
 // 06-07 typescript 적용
+// tanstack query 적용 후 제거 예정
 export const getMonthSchedules = createAsyncThunk(
   "schedule/getMonthSchedules",
   async ({ user_id, date }: GetScheduleQuery) => {
@@ -216,6 +219,9 @@ export const scheduleSlice = createSlice({
     changeViewMode: (state, action) => {
       state.viewMode = action.payload;
     },
+    setIsBottomDrawerOpen: (state, action) => {
+      state.isBottomDrawerOpen = action.payload;
+    },
   },
   extraReducers: (builder) => {
     builder
@@ -252,6 +258,7 @@ export const {
   revertFilter,
   initFilter,
   changeViewMode,
+  setIsBottomDrawerOpen,
 } = scheduleSlice.actions;
 
 export const selectSchedules = (state: RootState) => {
@@ -285,9 +292,9 @@ export const selectAnalyzedData = (state: RootState) =>
   (state.schedule as InitialState).analyzedData;
 export const selectStartDate = (state: RootState) =>
   (state.schedule as InitialState).schedule?.start_date;
-export const selectRepeatType = (state: RootState) =>
-  (state.schedule as InitialState).schedule?.repeat.kind_type;
 export const selectRepeatEndDate = (state: RootState) =>
   (state.schedule as InitialState).schedule?.period.repeat_end_line;
+export const selectIsBottomDrawerOpen = (state: RootState) =>
+  (state.schedule as InitialState).isBottomDrawerOpen;
 
 export default scheduleSlice.reducer;

@@ -1,6 +1,6 @@
-import { Divider } from '@mui/material';
-import Calender from './HomeContainer/view/Calender';
-import ScheduleList from './HomeContainer/view/ScheduleList';
+import { Divider } from "@mui/material";
+import Calender from "@containers/home/HomeContainer/view/Calender";
+import ScheduleList from "@containers/home/HomeContainer/view/ScheduleList";
 
 function ScheduleView() {
   return (

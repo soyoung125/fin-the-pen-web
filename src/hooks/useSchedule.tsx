@@ -2,46 +2,55 @@ import { useSelector } from "react-redux";
 import {
   deleteSchedule,
   getMonthSchedules,
-  modifySchedule,
   selectDate,
-  selectSchedules,
+  selectIsBottomDrawerOpen,
+  selectMonth,
   selectStatus,
+  setDrawerSchedule,
+  setIsBottomDrawerOpen,
 } from "@redux/slices/scheduleSlice.tsx";
-import { useEffect, useState } from "react";
 import { Schedule } from "../types/schedule.tsx";
 import { useAppDispatch } from "@redux/hooks.ts";
 import moment from "moment/moment";
 import { v4 as uuidv4 } from "uuid";
-import { useCreateSchedule } from "@app/tanstack-query/schedules/useCreateSchedule.tsx";
+import { useCreateSchedule } from "@app/tanstack-query/schedules/useCreateSchedule.ts";
 import { useConfirm } from "@hooks/dialog/hooks/useConfirm.tsx";
 import { useUser } from "@app/tanstack-query/useUser.ts";
+import { useSchedules } from "@app/tanstack-query/schedules/useSchedules.ts";
+import { INIT_SCHEDULE } from "@constants/schedule.tsx";
+import { useModifySchedule } from "@app/tanstack-query/schedules/useModifySchedule.ts";
 
 const useSchedule = () => {
-  const schedules = useSelector(selectSchedules);
-  const [selectedSchedule, setSelectedSchedule] = useState<Schedule | null>(
-    null
-  );
-  const status = useSelector(selectStatus);
   const dispatch = useAppDispatch();
-  const { data: user } = useUser();
+
+  const status = useSelector(selectStatus);
   const date = useSelector(selectDate);
-  const [todaySchedules, setTodaySchedules] = useState<Schedule[]>([]);
+  const month = useSelector(selectMonth);
+  const isBottomDrawerOpen = useSelector(selectIsBottomDrawerOpen);
+
+  const { data: user } = useUser();
   const { openConfirm } = useConfirm();
   const { createSchedule } = useCreateSchedule();
+  const { modifySchedule } = useModifySchedule();
+  const {
+    data: schedules,
+    isPending,
+    isError,
+  } = useSchedules({
+    user_id: user?.user_id ?? "",
+    date: month,
+  });
 
-  useEffect(() => {
-    setTodaySchedules(
-      schedules.filter(
-        (schedule) =>
-          moment(date).isSameOrAfter(schedule.start_date) &&
-          moment(date).isSameOrBefore(schedule.end_date)
-      )
-    );
-  }, [schedules]);
+  const todaySchedules =
+    schedules?.filter(
+      (schedule) =>
+        moment(date).isSameOrAfter(schedule.start_date) &&
+        moment(date).isSameOrBefore(schedule.end_date),
+    ) ?? [];
 
   const handleCreateSchedule = async (
     schedule: Schedule,
-    stringDate: string
+    stringDate: string,
   ) => {
     if (user === undefined) {
       return alert("로그인이 필요합니다.");
@@ -54,16 +63,7 @@ const useSchedule = () => {
       user_id: user.user_id,
     };
 
-    // 원래 일정 추가
     createSchedule(scheduleWithUuid);
-    // if (result) {
-    //   dispatch(
-    //     getMonthSchedules({
-    //       user_id: user.user_id,
-    //       date: date.format("YYYY-MM"),
-    //     })
-    //   );
-    // }
   };
 
   const handleDeleteSchedule = async (scheduleId: string) => {
@@ -81,34 +81,44 @@ const useSchedule = () => {
           getMonthSchedules({
             user_id: user.user_id,
             date: date,
-          })
+          }),
         );
       }
     }
   };
 
   const handleModifySchedule = async (schedule: Schedule) => {
-    const result = await dispatch(modifySchedule(schedule));
-    if (result && user) {
-      dispatch(
-        getMonthSchedules({
-          user_id: user.user_id,
-          date: moment(date).format("YYYY-MM"),
-        })
-      );
-    }
+    modifySchedule(schedule);
+  };
+
+  const openDrawer = (data: Schedule) => {
+    dispatch(setIsBottomDrawerOpen(true));
+    dispatch(setDrawerSchedule(data));
+  };
+
+  const closeDrawer = () => {
+    dispatch(setIsBottomDrawerOpen(false));
+  };
+
+  const resetSchedule = () => {
+    dispatch(setDrawerSchedule(INIT_SCHEDULE(date)));
   };
 
   return {
     status,
     schedules,
-    selectedSchedule,
-    setSelectedSchedule,
+    isPending,
+    isError,
+    isBottomDrawerOpen,
     todaySchedules,
     date,
+    month,
     handleDeleteSchedule,
     handleCreateSchedule,
     handleModifySchedule,
+    openDrawer,
+    closeDrawer,
+    resetSchedule,
   };
 };
 

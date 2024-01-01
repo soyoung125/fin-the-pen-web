@@ -1,17 +1,15 @@
 import { Alert, Box, Slide, SlideProps, Snackbar, Stack } from "@mui/material";
 import { useEffect, useRef, useState } from "react";
-import { setDrawerSchedule } from "@redux/slices/scheduleSlice.tsx";
 import AssetFormPage from "./pages/AssetFormPage";
 import ScheduleDrawerHeader from "./layouts/ScheduleDrawerHeader";
-import ScheduleDrawerFooter from "./layouts/ScheduleDrawerFooter";
+import ScheduleDrawerFooter from "./layouts/ScheduleDrawerFooter/ScheduleDrawerFooter";
 import { CONSUMPTION_ALERTS } from "../../../constants/alerts";
-import { Schedule, ScheduleDrawerModeValue } from "@type/schedule.tsx";
-import { useAppDispatch } from "@redux/hooks.ts";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Swiper as SwiperType } from "swiper/types";
 import ScheduleFormPage from "@containers/home/ScheduleDrawer/pages/ScheduleFormPage";
 import CategoryPicker from "@containers/home/ScheduleDrawer/pages/ScheduleFormPage/components/CategoryPicker";
-import RepeatPickeer from "@containers/home/ScheduleDrawer/pages/ScheduleFormPage/components/RepeatPicker";
+import RepeatPicker from "@containers/home/ScheduleDrawer/pages/ScheduleFormPage/components/RepeatPicker";
+import useSchedule from "@hooks/useSchedule";
 
 function TransitionUp(props: SlideProps) {
   return <Slide {...props} direction="right" />;
@@ -20,26 +18,20 @@ function TransitionUp(props: SlideProps) {
 interface ScheduleDrawerProps {
   setDrawerWidth: React.Dispatch<React.SetStateAction<number>>;
   handleClose: () => void;
-  data: Schedule;
-  mode: ScheduleDrawerModeValue;
 }
 
-function ScheduleDrawer({
-  setDrawerWidth,
-  handleClose,
-  data,
-  mode,
-}: ScheduleDrawerProps) {
+function ScheduleDrawer({ setDrawerWidth, handleClose }: ScheduleDrawerProps) {
   // 추후 삭제 예정
   const random = Math.floor(Math.random() * 4); // 현재 CONSUMPTION_ALERTS의 길이가 4임
 
-  const dispatch = useAppDispatch();
   const [snackbarOpen, setSnackbarOpen] = useState(true);
   const [showError, setShowError] = useState(false);
   const [value, setValue] = useState(0);
   const [swiper, setSwiper] = useState<SwiperType>();
   const [isCategoryPickerOpen, setIsCategoryPickerOpen] = useState(false);
   const [isRepeatPickerOpen, setIsRepeatPickerOpen] = useState(false);
+
+  const { resetSchedule } = useSchedule();
 
   const handleChange = (event: React.SyntheticEvent, newValue: number) => {
     swiper?.slideTo(newValue);
@@ -48,14 +40,8 @@ function ScheduleDrawer({
 
   const handleReset = () => {
     setShowError(false);
-    dispatch(setDrawerSchedule(data));
+    resetSchedule();
   };
-
-  useEffect(() => {
-    if (data) {
-      dispatch(setDrawerSchedule(data));
-    }
-  }, []);
 
   const ref = useRef<HTMLDivElement>(null);
 
@@ -69,7 +55,7 @@ function ScheduleDrawer({
     return <CategoryPicker setIsCategoryPickerOpen={setIsCategoryPickerOpen} />;
   }
   if (isRepeatPickerOpen) {
-    return <RepeatPickeer setIsRepeatPickerOpen={setIsRepeatPickerOpen} />;
+    return <RepeatPicker setIsRepeatPickerOpen={setIsRepeatPickerOpen} />;
   }
 
   return (
@@ -116,20 +102,18 @@ function ScheduleDrawer({
           >
             <SwiperSlide style={{ overflow: "scroll" }}>
               <ScheduleFormPage
-                mode={mode}
                 showError={showError}
                 setIsCategoryPickerOpen={setIsCategoryPickerOpen}
                 setIsRepeatPickerOpen={setIsRepeatPickerOpen}
               />
             </SwiperSlide>
             <SwiperSlide>
-              <AssetFormPage mode={mode} />
+              <AssetFormPage />
             </SwiperSlide>
           </Swiper>
 
           {/* 제출 버튼 */}
           <ScheduleDrawerFooter
-            mode={mode}
             handleClose={handleClose}
             setShowError={setShowError}
           />
