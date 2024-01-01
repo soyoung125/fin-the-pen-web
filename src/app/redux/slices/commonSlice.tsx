@@ -28,7 +28,7 @@ export const commonSlice = createSlice({
   reducers: {
     setHeaderOpenTrue: (
       state,
-      action: PayloadAction<HeaderModeType | undefined>
+      action: PayloadAction<HeaderModeType | undefined>,
     ) => {
       const mode = action.payload;
       if (mode !== undefined) {

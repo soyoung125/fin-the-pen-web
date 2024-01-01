@@ -34,21 +34,21 @@ function Home() {
 
   useHeader(true, HEADER_MODE.home);
 
-  const getSchedules = () => {
-    if (user) {
-      // type guard
-      const query = {
-        user_id: user.user_id,
-        date: month,
-      };
-      // 버그 있을 수 있음
-      dispatch(getMonthSchedules(query)); // help me
-    }
-  };
+  // const getSchedules = () => {
+  //   if (user) {
+  //     // type guard
+  //     const query = {
+  //       user_id: user.user_id,
+  //       date: month,
+  //     };
+  //     // 버그 있을 수 있음
+  //     dispatch(getMonthSchedules(query)); // help me
+  //   }
+  // };
 
-  useEffect(() => {
-    getSchedules();
-  }, [month]);
+  // useEffect(() => {
+  //   getSchedules();
+  // }, [month]);
 
   return (
     <Box>

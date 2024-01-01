@@ -56,20 +56,21 @@ function Calender({ dateHeight }: CalenderProps) {
     if (!day.isSame(value, "month")) {
       return <PickersDay {...props} />;
     }
-    const daySchedules = schedules
-      .filter(
-        (e) =>
-          day.isSameOrAfter(e.start_date) && day.isSameOrBefore(e.end_date),
-      )
-      .map((s) => ({
-        ...s,
-        category: CATEGORIES.find((c) => c.title === s.category) || {
-          type: "미분류",
-          color: "#C8A2C8",
-          nestedType: "미분류",
-          title: "미분류",
-        },
-      }));
+    const daySchedules =
+      schedules
+        ?.filter(
+          (e) =>
+            day.isSameOrAfter(e.start_date) && day.isSameOrBefore(e.end_date),
+        )
+        .map((s) => ({
+          ...s,
+          category: CATEGORIES.find((c) => c.title === s.category) || {
+            type: "미분류",
+            color: "#C8A2C8",
+            nestedType: "미분류",
+            title: "미분류",
+          },
+        })) ?? [];
 
     const fixedWithdrawal = daySchedules.filter((s) =>
       ["고정 입출금", "미분류"].includes(s.category.type),

@@ -33,9 +33,10 @@ function MonthlyGoal({
     let spending = 0;
     for (let i = 1; i <= months; i += 1) {
       const compareDate = moment().subtract(i, "months");
-      const lastMonthSchedules = schedules.filter(
-        (s) => compareDate.isSame(s.start_date, "M") && s.price_type === "-",
-      );
+      const lastMonthSchedules =
+        schedules?.filter(
+          (s) => compareDate.isSame(s.start_date, "M") && s.price_type === "-",
+        ) ?? [];
       spending += lastMonthSchedules.reduce(
         (preVal, current) => preVal + parseInt(current.amount, 10),
         0,

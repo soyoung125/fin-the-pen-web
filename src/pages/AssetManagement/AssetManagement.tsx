@@ -37,13 +37,13 @@ function AssetManagement() {
           <ScheduleStatusCard
             month={today.format("M월")}
             numberOfSchedule={
-              schedules.filter(
+              schedules?.filter(
                 (s) =>
                   today.isSame(s.start_date, "month") &&
                   today.isSameOrBefore(
-                    moment(s.start_date + s.start_time, "YYYY-MM-DDhh:mm")
-                  )
-              ).length
+                    moment(s.start_date + s.start_time, "YYYY-MM-DDhh:mm"),
+                  ),
+              ).length ?? 0
             }
           />
         </>

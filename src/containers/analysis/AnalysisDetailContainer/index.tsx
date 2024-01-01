@@ -25,10 +25,10 @@ function AnalysisDetailContainer() {
     selectAssetsByCategory,
   );
   const [selectedItem, setSelectedItem] = useState(
-    schedules.filter(
+    schedules?.filter(
       (s) =>
         momentDate.isSame(s.start_date, "month") && s.category === category,
-    ),
+    ) ?? [],
   );
   const [spending, setSpending] = useState(0);
   const [sortByDate, setSortByDate] = useState(true);
@@ -47,12 +47,14 @@ function AnalysisDetailContainer() {
   }, []);
 
   useEffect(() => {
-    const newData = schedules
-      .filter(
-        (s) =>
-          momentDate.isSame(s.start_date, "month") && s.category === category,
-      )
-      .sort((a, b) => +new Date(a.start_date) - +new Date(b.start_date));
+    const newData =
+      schedules
+        ?.filter(
+          (s) =>
+            momentDate.isSame(s.start_date, "month") && s.category === category,
+        )
+        .sort((a, b) => +new Date(a.start_date) - +new Date(b.start_date)) ??
+      [];
     setSelectedItem(newData);
     setSpending(
       newData.reduce(

@@ -237,21 +237,6 @@ export const useScheduleForm = () => {
     }
   };
 
-  const updateSpendingType = () => {
-    if (scheduleForm?.price_type === SCHEDULE_DRAWER.type_plus) {
-      dispatch(
-        setDrawerSchedule({
-          ...scheduleForm,
-          type: SCHEDULE_DRAWER.type_minus,
-        }),
-      );
-    } else {
-      dispatch(
-        setDrawerSchedule({ ...scheduleForm, type: SCHEDULE_DRAWER.type_plus }),
-      );
-    }
-  };
-
   const updateExclusion = (state: boolean) => {
     dispatch(setDrawerSchedule({ ...scheduleForm, exclude: state }));
   };
@@ -308,7 +293,6 @@ export const useScheduleForm = () => {
     updateSchedule,
     updateAllDay,
     updateRepeat,
-    updateSpendingType,
     updateExclusion,
     setRandomGeneratedSchedule,
     updatePeriod,

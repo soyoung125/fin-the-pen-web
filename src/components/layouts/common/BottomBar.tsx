@@ -7,12 +7,12 @@ import { useNavigate } from "react-router-dom";
 import CalendarMonthIcon from "@mui/icons-material/CalendarMonth";
 import DataSaverOffIcon from "@mui/icons-material/DataSaverOff";
 import AddCircleIcon from "@mui/icons-material/AddCircle";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import SettingsIcon from "@mui/icons-material/Settings";
 import PaidIcon from "@mui/icons-material/Paid";
 import moment from "moment";
 import ScheduleDrawer from "@containers/home/ScheduleDrawer";
-import { INIT_SCHEDULE, SCHEDULE_DRAWER_MODE } from "@constants/schedule.tsx";
+import { INIT_SCHEDULE } from "@constants/schedule.tsx";
 import { changeViewMode, selectDate } from "@redux/slices/scheduleSlice.tsx";
 import { useAppDispatch, useAppSelector } from "@redux/hooks.ts";
 import {
@@ -22,32 +22,24 @@ import {
 } from "@redux/slices/commonSlice.tsx";
 import { Global } from "@emotion/react";
 import { PATH } from "@constants/path.ts";
+import useSchedule from "@hooks/useSchedule";
 
 const drawerBleeding = 56;
 
 function BottomBar() {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
+  const { openDrawer, closeDrawer, isBottomDrawerOpen } = useSchedule();
 
   const date = useAppSelector(selectDate);
   const bottomTabMenu = useAppSelector(selectBottomDrawerTabMenu);
   const bottomBarOpen = useAppSelector(selectBottomBarOpen);
-  const [isBottomDrawerOpen, setIsBottomDrawerOpen] = useState(false);
 
   const [drawerWidth, setDrawerWidth] = useState(0);
-  const [startTime, setStartTime] = useState("09");
 
   const toggleDrawer = (newOpen: boolean) => () => {
-    setIsBottomDrawerOpen(newOpen);
+    !newOpen && closeDrawer();
   };
-
-  useEffect(() => {
-    if (moment().isSame(date, "day")) {
-      setStartTime(moment().add(1, "hours").format("HH"));
-    } else {
-      setStartTime(moment("09:00", "HH:mm").format("HH"));
-    }
-  }, [date]);
 
   return (
     <>
@@ -82,7 +74,9 @@ function BottomBar() {
         <BottomNavigationAction
           label=""
           icon={<AddCircleIcon />}
-          onClick={() => setIsBottomDrawerOpen(true)}
+          onClick={() =>
+            openDrawer(INIT_SCHEDULE(moment(date).format("YYYY-MM-DD")))
+          }
         />
         <BottomNavigationAction
           label="자산관리"
@@ -122,11 +116,7 @@ function BottomBar() {
       >
         <ScheduleDrawer
           setDrawerWidth={setDrawerWidth}
-          handleClose={() => setIsBottomDrawerOpen(false)}
-          data={{
-            ...INIT_SCHEDULE(moment(date).format("YYYY-MM-DD"), startTime),
-          }}
-          mode={SCHEDULE_DRAWER_MODE.create}
+          handleClose={closeDrawer}
         />
       </SwipeableDrawer>
     </>

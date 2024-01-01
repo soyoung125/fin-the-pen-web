@@ -4,20 +4,17 @@ import { Stack } from "@mui/material";
 import ThickDivider from "@components/common/ThickDivider.tsx";
 import DateInput from "@containers/home/ScheduleDrawer/pages/ScheduleFormPage/components/DateInput";
 import RepeatInput from "@containers/home/ScheduleDrawer/pages/ScheduleFormPage/components/RepeatInput";
-import { ScheduleDrawerModeValue } from "@type/schedule.tsx";
 import { useSelector } from "react-redux";
 import { selectSchedule } from "@redux/slices/scheduleSlice.tsx";
 import { Dispatch, SetStateAction } from "react";
 
 export interface ScheduleFormPageProps {
-  mode: ScheduleDrawerModeValue;
   showError: boolean;
   setIsCategoryPickerOpen: Dispatch<SetStateAction<boolean>>;
   setIsRepeatPickerOpen: Dispatch<SetStateAction<boolean>>;
 }
 
 function ScheduleFormPage({
-  mode,
   showError,
   setIsCategoryPickerOpen,
   setIsRepeatPickerOpen,
