@@ -2,7 +2,7 @@ import styled from "@emotion/styled";
 import { Bubble } from "./BubbleChart.tsx";
 
 export const BubbleChartContainer = styled.div`
-  border: 1px solid #ccc;
+  border: 1px solid #e6e6e6;
   width: 100vw;
   height: 100vw;
   position: relative;

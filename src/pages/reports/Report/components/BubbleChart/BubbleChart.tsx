@@ -26,11 +26,11 @@ function BubbleChart({ bubbles }: BubbleChartProps) {
           $backgroundColor={bubble.backgroundColor}
         >
           <Stack alignItems="center">
-            <Typography fontSize={`${bubble.r / 10}rem`}>
+            <Typography fontSize={`${bubble.r / 10}rem`} lineHeight={1}>
               {bubble.title}
             </Typography>
             {bubble.subtitle && (
-              <Typography fontSize={`${bubble.r / 15}rem`}>
+              <Typography fontSize={`${bubble.r / 15}rem`} lineHeight={1}>
                 {bubble.subtitle}
               </Typography>
             )}

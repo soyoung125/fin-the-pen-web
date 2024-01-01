@@ -1,5 +1,6 @@
 import { Meta } from "@storybook/react";
-import BubbleChart, { BubbleChartProps } from "./BubbleChart.tsx";
+import BubbleChart, { Bubble, BubbleChartProps } from "./BubbleChart.tsx";
+import { useState } from "react";
 
 const meta = {
   title: "reports/Report/BubbleChart",
@@ -38,5 +39,46 @@ export const Default = (args: BubbleChartProps) => {
     <div style={{ width: "500px" }}>
       <BubbleChart {...args} />
     </div>
+  );
+};
+
+export const MultipleBubbles = () => {
+  const generateRandomBubbles = (count: number) => {
+    let bubbles: Bubble[] = [];
+    const isOverlapped = (x: number, y: number, r: number) => {
+      for (const bubble of bubbles) {
+        const distance = Math.sqrt(
+          Math.pow(bubble.x - x, 2) + Math.pow(bubble.y - y, 2)
+        );
+        if (distance < bubble.r + r) {
+          return true;
+        }
+      }
+      return false;
+    };
+    while (bubbles.length < count) {
+      const r = 25 - bubbles.length * 5;
+      const generatedX = Math.floor(Math.random() * 100);
+      const generatedY = Math.floor(Math.random() * 100);
+      const x = generatedX + r > 100 ? generatedX - r - 1 : generatedX;
+      const y = generatedY + r > 100 ? generatedY - r - 1 : generatedY;
+      const title = "title";
+      const subtitle = "subtitle";
+      if (isOverlapped(x, y, r)) {
+        bubbles = [];
+      }
+      bubbles.push({ x, y, r, title, subtitle });
+    }
+    return bubbles;
+  };
+
+  const [bubbles, setBubbles] = useState<Bubble[]>(generateRandomBubbles(5));
+  return (
+    <>
+      <BubbleChart bubbles={bubbles} />
+      <button onClick={() => setBubbles(generateRandomBubbles(5))}>
+        Generate
+      </button>
+    </>
   );
 };
