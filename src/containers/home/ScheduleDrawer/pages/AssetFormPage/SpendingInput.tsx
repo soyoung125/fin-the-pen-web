@@ -14,9 +14,11 @@ import { useState } from "react";
 import AddRoundedIcon from "@mui/icons-material/AddRounded";
 import RemoveRoundedIcon from "@mui/icons-material/RemoveRounded";
 import { useScheduleForm } from "@containers/home/ScheduleDrawer/hooks/useScheduleForm.ts";
+import { useConfirm } from "@hooks/dialog/hooks/useConfirm.tsx";
 
 function SpendingInput() {
   const { scheduleForm, updateSchedule } = useScheduleForm();
+  const { openConfirm } = useConfirm();
   const expectedSpending = scheduleForm ? scheduleForm?.amount : "0";
   const [showError, setShowError] = useState(false);
 
@@ -41,9 +43,20 @@ function SpendingInput() {
     });
   };
 
-  const changeFixAmount = (state: UpdateStateInterface) => {
-    updateSchedule(state);
+  const changeFixAmount = async (state: UpdateStateInterface) => {
+    const answer =
+      !scheduleForm?.fix_amount ||
+      (await openConfirm({
+        title: "알림",
+        content: "금액 고정을 해제하시겠습니까?",
+        approveText: "네",
+        rejectText: "아니오",
+      }));
+    if (answer) {
+      updateSchedule(state);
+    }
   };
+
   return (
     <Stack spacing={2} px={2.5}>
       <Box sx={{ typography: "h4", color: "primary.main" }}>
