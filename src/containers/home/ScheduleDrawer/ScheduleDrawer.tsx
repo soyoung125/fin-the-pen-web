@@ -10,6 +10,7 @@ import ScheduleFormPage from "@containers/home/ScheduleDrawer/pages/ScheduleForm
 import CategoryPicker from "@containers/home/ScheduleDrawer/pages/ScheduleFormPage/components/CategoryPicker";
 import RepeatPicker from "@containers/home/ScheduleDrawer/pages/ScheduleFormPage/components/RepeatPicker";
 import useSchedule from "@hooks/useSchedule";
+import { useConfirm } from "@hooks/dialog/hooks/useConfirm";
 
 function TransitionUp(props: SlideProps) {
   return <Slide {...props} direction="right" />;
@@ -32,15 +33,24 @@ function ScheduleDrawer({ setDrawerWidth, handleClose }: ScheduleDrawerProps) {
   const [isRepeatPickerOpen, setIsRepeatPickerOpen] = useState(false);
 
   const { resetSchedule } = useSchedule();
+  const { openConfirm } = useConfirm();
 
   const handleChange = (event: React.SyntheticEvent, newValue: number) => {
     swiper?.slideTo(newValue);
     setValue(newValue);
   };
 
-  const handleReset = () => {
-    setShowError(false);
-    resetSchedule();
+  const handleReset = async () => {
+    const answer = await openConfirm({
+      title: "알림",
+      content: "입력 정보를 초기화하시겠습니까?",
+      approveText: "네",
+      rejectText: "아니오",
+    });
+    if (answer) {
+      setShowError(false);
+      resetSchedule();
+    }
   };
 
   const ref = useRef<HTMLDivElement>(null);
