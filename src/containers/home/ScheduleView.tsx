@@ -1,15 +1,13 @@
 import { Divider } from "@mui/material";
-import Calender from "./HomeContainer/view/Calender";
-import ScheduleList from "./HomeContainer/view/ScheduleList";
-import ScheduleList2 from "./HomeContainer/view/ScheduleList/ScheduleList2";
+import Calender from "@containers/home/HomeContainer/view/Calender";
+import ScheduleList from "@containers/home/HomeContainer/view/ScheduleList";
 
 function ScheduleView() {
   return (
     <>
       <Calender dateHeight={50} />
       <Divider />
-      <ScheduleList2 />
-      {/* <ScheduleList /> */}
+      <ScheduleList />
     </>
   );
 }
