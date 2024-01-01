@@ -1,6 +1,7 @@
 import { Meta } from "@storybook/react";
 import BubbleChart, { Bubble, BubbleChartProps } from "./BubbleChart.tsx";
 import { useState } from "react";
+import { generateRandomBubbles } from "@pages/reports/Report/components/BubbleChart/utils.ts";
 
 const meta = {
   title: "reports/Report/BubbleChart",
@@ -43,42 +44,64 @@ export const Default = (args: BubbleChartProps) => {
 };
 
 export const MultipleBubbles = () => {
-  const generateRandomBubbles = (count: number) => {
-    let bubbles: Bubble[] = [];
-    const isOverlapped = (x: number, y: number, r: number) => {
-      for (const bubble of bubbles) {
-        const distance = Math.sqrt(
-          Math.pow(bubble.x - x, 2) + Math.pow(bubble.y - y, 2)
-        );
-        if (distance < bubble.r + r) {
-          return true;
-        }
-      }
-      return false;
-    };
-    while (bubbles.length < count) {
-      const r = 25 - bubbles.length * 5;
-      const generatedX = Math.floor(Math.random() * 100);
-      const generatedY = Math.floor(Math.random() * 100);
-      const x = generatedX + r > 100 ? generatedX - r - 1 : generatedX;
-      const y = generatedY + r > 100 ? generatedY - r - 1 : generatedY;
-      const title = "title";
-      const subtitle = "subtitle";
-      if (isOverlapped(x, y, r)) {
-        bubbles = [];
-      }
-      bubbles.push({ x, y, r, title, subtitle });
-    }
-    return bubbles;
-  };
+  const bubbleTemplates: Omit<Bubble, "x" | "y">[] = [
+    {
+      r: 20,
+      title: "식비",
+      subtitle: "28%",
+      backgroundColor:
+        "linear-gradient(140deg, #E4E0FF 13.75%, #B4A8FF 86.75%)",
+    },
+    {
+      r: 16,
+      title: "미용",
+      subtitle: "20%",
+      backgroundColor:
+        "linear-gradient(140deg, #CFEBFF 13.75%, #7BC8FF 86.75%)",
+    },
+    {
+      r: 12,
+      title: "자동차",
+      subtitle: "18%",
+      backgroundColor:
+        "linear-gradient(140deg, #D4FFE7 13.75%, #6DFFAE 86.75%)",
+    },
+    {
+      r: 8,
+      title: "패션쇼핑",
+      subtitle: "8%",
+      backgroundColor:
+        "linear-gradient(140deg, #FFF4C6 13.75%, #FFE36D 86.75%)",
+    },
+    {
+      r: 4,
+      title: "카페",
+      subtitle: "7%",
+      backgroundColor:
+        "linear-gradient(140deg, #FFE7F4 13.75%, #FFBFE2 86.75%)",
+    },
+  ];
 
-  const [bubbles, setBubbles] = useState<Bubble[]>(generateRandomBubbles(5));
+  const [bubbles, setBubbles] = useState<Bubble[]>(
+    generateRandomBubbles(bubbleTemplates)
+  );
+
   return (
     <>
-      <BubbleChart bubbles={bubbles} />
-      <button onClick={() => setBubbles(generateRandomBubbles(5))}>
-        Generate
+      <BubbleChart bubbles={bubbles} isBordered />
+      <button
+        onClick={() =>
+          setBubbles([
+            ...generateRandomBubbles(bubbleTemplates).slice(
+              0,
+              Math.random() * 5 + 1
+            ),
+          ])
+        }
+      >
+        1~5개의 버블을 랜덤 생성하기
       </button>
+      <div>{JSON.stringify(bubbles)}</div>
     </>
   );
 };

@@ -1,8 +1,8 @@
 import styled from "@emotion/styled";
 import { Bubble } from "./BubbleChart.tsx";
 
-export const BubbleChartContainer = styled.div`
-  border: 1px solid #e6e6e6;
+export const BubbleChartContainer = styled.div<{ $isBordered?: boolean }>`
+  ${({ $isBordered }) => $isBordered && `border: 1px solid #e6e6e6;`}
   width: 100vw;
   height: 100vw;
   position: relative;
@@ -15,7 +15,7 @@ export const BubbleComponent = styled.div<{
   $backgroundColor: Bubble["backgroundColor"];
 }>`
   position: absolute;
-  background-color: ${({ $backgroundColor }) => $backgroundColor ?? "#e6e6e6"};
+  background: ${({ $backgroundColor }) => $backgroundColor ?? "#e6e6e6"};
   border-radius: 50%;
   display: flex;
   justify-content: center;

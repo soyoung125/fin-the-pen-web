@@ -12,11 +12,12 @@ export interface Bubble {
 
 export interface BubbleChartProps {
   bubbles: Bubble[];
+  isBordered?: boolean;
 }
 
-function BubbleChart({ bubbles }: BubbleChartProps) {
+function BubbleChart({ bubbles, isBordered }: BubbleChartProps) {
   return (
-    <BubbleChartContainer>
+    <BubbleChartContainer $isBordered={isBordered}>
       {bubbles.map((bubble, index) => (
         <BubbleComponent
           key={index}
