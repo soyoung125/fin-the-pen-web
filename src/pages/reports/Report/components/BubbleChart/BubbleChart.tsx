@@ -1,11 +1,42 @@
-import { BubbleChartContainer, Circle } from "./BubbleChart.styles.ts";
+import { BubbleChartContainer, BubbleComponent } from "./BubbleChart.styles.ts";
+import { Stack, Typography } from "@mui/material";
 
-export interface BubbleChartProps {}
+export interface Bubble {
+  x: number;
+  y: number;
+  r: number;
+  backgroundColor?: string;
+  title: string;
+  subtitle?: string;
+}
 
-function BubbleChart({}: BubbleChartProps) {
+export interface BubbleChartProps {
+  bubbles: Bubble[];
+}
+
+function BubbleChart({ bubbles }: BubbleChartProps) {
   return (
     <BubbleChartContainer>
-      <Circle $x={10} $y={10} $r={10} />
+      {bubbles.map((bubble, index) => (
+        <BubbleComponent
+          key={index}
+          $x={bubble.x}
+          $y={bubble.y}
+          $r={bubble.r}
+          $backgroundColor={bubble.backgroundColor}
+        >
+          <Stack alignItems="center">
+            <Typography fontSize={`${bubble.r / 10}rem`}>
+              {bubble.title}
+            </Typography>
+            {bubble.subtitle && (
+              <Typography fontSize={`${bubble.r / 15}rem`}>
+                {bubble.subtitle}
+              </Typography>
+            )}
+          </Stack>
+        </BubbleComponent>
+      ))}
     </BubbleChartContainer>
   );
 }
