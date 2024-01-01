@@ -5,6 +5,7 @@ import { QUERY_KEY_SCHEDULES } from "@constants/queryKeys";
 import { getSign } from "@containers/home/ScheduleDrawer/hooks/useScheduleForm";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { Schedule } from "@type/schedule";
+import moment from "moment";
 
 const fetchModifySchedule = async (schedule: Schedule) => {
   const token = getSessionStorage(SESSION_STORAGE_KEY_TOKEN, "");
@@ -34,8 +35,11 @@ export const useModifySchedule = () => {
   const queryClient = useQueryClient();
   const { mutate } = useMutation({
     mutationFn: fetchModifySchedule,
-    onSuccess: async () => {
-      queryClient.invalidateQueries({ queryKey: [QUERY_KEY_SCHEDULES] });
+    onSuccess: async (data, variables) => {
+      const date = moment(variables.start_date);
+      queryClient.invalidateQueries({
+        queryKey: [QUERY_KEY_SCHEDULES, date.format("YYYY-MM")],
+      });
     },
   });
 
