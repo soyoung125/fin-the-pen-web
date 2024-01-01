@@ -12,5 +12,9 @@ const meta = {
 export default meta;
 
 export const Default = (args: BubbleChartProps) => {
-  return <BubbleChart {...args} />;
+  return (
+    <div style={{ width: "500px" }}>
+      <BubbleChart {...args} />
+    </div>
+  );
 };
