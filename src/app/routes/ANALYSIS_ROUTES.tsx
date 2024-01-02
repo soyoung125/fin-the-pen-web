@@ -1,5 +1,5 @@
-import AnalysisContainer from "../../containers/analysis/AnalysisContainer";
-import AnalysisDetailContainer from "../../containers/analysis/AnalysisDetailContainer";
+import AnalysisContainer from "../../legacies/analysis/AnalysisContainer";
+import AnalysisDetailContainer from "../../legacies/analysis/AnalysisDetailContainer";
 import { RouterDOM } from "@type/common.tsx";
 import { PATH } from "../../constants/path.ts";
 

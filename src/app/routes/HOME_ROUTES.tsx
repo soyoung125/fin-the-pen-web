@@ -8,9 +8,9 @@ import TestContainer from "@pages/MyPage/TestContainer.tsx";
 import { PATH } from "../../constants/path.ts";
 import Home from "@pages/Home";
 import { RouterDOM } from "../../types/common";
-import DetailSetting from "../../containers/assetManagement/SavingsGoalContainer/DetailSetting";
-import FetchPaymentHistory from "../../containers/home/HomeContainer/view/FetchPaymentHistory";
-import SearchSchedule from "../../containers/home/HomeContainer/view/SearchSchedule";
+import DetailSetting from "../../legacies/assetManagement/SavingsGoalContainer/DetailSetting";
+import FetchPaymentHistory from "../../pages/Home/components/HomeContainer/view/FetchPaymentHistory";
+import SearchSchedule from "../../pages/Home/components/HomeContainer/view/SearchSchedule";
 import MyData from "@pages/Settings/connection/MyData";
 
 const HOME_ROUTES: RouterDOM[] = [

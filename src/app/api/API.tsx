@@ -6,7 +6,7 @@ import {
 } from "@type/schedule.tsx";
 import { DOMAIN } from "./url.ts";
 
-import { getSign } from "@containers/home/ScheduleDrawer/hooks/useScheduleForm.ts";
+import { getSign } from "@components/ScheduleDrawer/hooks/useScheduleForm.ts";
 
 export const fetchCreateSchedule = async (schedule: Schedule) => {
   try {

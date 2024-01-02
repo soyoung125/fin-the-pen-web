@@ -2,16 +2,15 @@ import { useEffect } from "react";
 import { Box } from "@mui/material";
 import {
   changeViewMode,
-  getMonthSchedules,
   selectMonth,
   selectViewMode,
 } from "@redux/slices/scheduleSlice.tsx";
 import { setIsAuthenticatedFalse } from "@redux/slices/commonSlice.tsx";
 import useHeader from "../../hooks/useHeader";
-import ConsumptionAlert from "../../containers/home/HomeContainer/layout/ConsumptionAlert";
-import ScheduleViewMode from "../../containers/home/HomeContainer/layout/ScheduleViewMode";
-import ScheduleView from "../../containers/home/ScheduleView";
-import AssetView from "../../containers/home/AssetView";
+import ConsumptionAlert from "./components/HomeContainer/layout/ConsumptionAlert.tsx";
+import ScheduleViewMode from "./components/HomeContainer/layout/ScheduleViewMode";
+import ScheduleView from "./components/HomeContainer/view/ScheduleView.tsx";
+import AssetView from "./components/HomeContainer/view/AssetView.tsx";
 import { VIEW_MODE } from "../../constants/schedule";
 import { useAppDispatch, useAppSelector } from "@redux/hooks.ts";
 import { selectIsBudgetHidden } from "@redux/slices/settingSlice.ts";

@@ -11,7 +11,7 @@ import { useState } from "react";
 import SettingsIcon from "@mui/icons-material/Settings";
 import PaidIcon from "@mui/icons-material/Paid";
 import moment from "moment";
-import ScheduleDrawer from "@containers/home/ScheduleDrawer";
+import ScheduleDrawer from "../../ScheduleDrawer";
 import { INIT_SCHEDULE } from "@constants/schedule.tsx";
 import { changeViewMode, selectDate } from "@redux/slices/scheduleSlice.tsx";
 import { useAppDispatch, useAppSelector } from "@redux/hooks.ts";
