@@ -11,8 +11,8 @@ import { useState } from "react";
 import SettingsIcon from "@mui/icons-material/Settings";
 import PaidIcon from "@mui/icons-material/Paid";
 import moment from "moment";
-import ScheduleDrawer from "@containers/home/ScheduleDrawer";
-import { INIT_SCHEDULE } from "@constants/schedule.tsx";
+import ScheduleDrawer from "../../ScheduleDrawer";
+import { INIT_SCHEDULE } from "@constants/schedule.ts";
 import { changeViewMode, selectDate } from "@redux/slices/scheduleSlice.tsx";
 import { useAppDispatch, useAppSelector } from "@redux/hooks.ts";
 import {
@@ -22,7 +22,7 @@ import {
 } from "@redux/slices/commonSlice.tsx";
 import { Global } from "@emotion/react";
 import { PATH } from "@constants/path.ts";
-import useSchedule from "@hooks/useSchedule";
+import useSchedule from "@hooks/useSchedule.ts";
 
 const drawerBleeding = 56;
 

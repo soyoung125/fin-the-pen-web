@@ -3,9 +3,9 @@ import CenterBox from "../../components/layouts/CenterBox";
 import Header from "./Header.tsx";
 import SignInFields from "./SignInFields.tsx";
 import Footer from "./Footer.tsx";
-import useHeader from "../../hooks/useHeader";
+import useHeader from "@hooks/useHeader.ts";
 import { useEffect } from "react";
-import { HEADER_MODE } from "@type/common.tsx";
+import { HEADER_MODE } from "@app/types/common.ts";
 import { useAppDispatch } from "@redux/hooks.ts";
 import {
   setBottomBarOpenFalse,

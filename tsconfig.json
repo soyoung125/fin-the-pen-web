@@ -1,10 +1,13 @@
 {
   "compilerOptions": {
     "target": "ESNext",
-    "lib": ["DOM", "DOM.Iterable", "ESNext"],
+    "lib": [
+      "DOM",
+      "DOM.Iterable",
+      "ESNext"
+    ],
     "module": "ESNext",
     "skipLibCheck": true,
-
     /* Bundler mode */
     "moduleResolution": "bundler",
     "allowImportingTsExtensions": true,
@@ -12,33 +15,37 @@
     "isolatedModules": true,
     "noEmit": true,
     "jsx": "react-jsx",
-
     /* Linting */
     "strict": true,
     "noUnusedLocals": false,
     "noUnusedParameters": false,
     "noFallthroughCasesInSwitch": true,
-
     /* 절대 경로 관련 설정 */
     "baseUrl": "./src",
     "paths": {
-      "@api/*": ["app/api/*"],
-      "@app/*": ["app/*"],
-      "@assets/*": ["assets/*"],
-      "@components/*": ["components/*"],
-      "@constants/*": ["constants/*"],
-      "@containers/*": ["containers/*"],
-      "@domain/*": ["domain/*"],
-      "@hooks/*": ["hooks/*"],
-      "@mocks/*": ["mocks/*"],
-      "@pages/*": ["pages/*"],
-      "@recoil/*": ["app/recoil/*"],
-      "@redux/*": ["app/redux/*"], // 삭제 예정
-      "@routes/*": ["app/routes/*"],
-      "@type/*": ["types/*"],
-      "@utils/*": ["app/utils/*"]
-    },
+      "@*": [
+        "*"
+      ],
+      "@api/*": [
+        "app/api/*"
+      ],
+      "@redux/*": [
+        "app/redux/*"
+      ],
+      "@routes/*": [
+        "app/routes/*"
+      ],
+      "@utils/*": [
+        "app/utils/*"
+      ]
+    }
   },
-  "include": ["src"],
-  "references": [{ "path": "./tsconfig.node.json" }]
+  "include": [
+    "src"
+  ],
+  "references": [
+    {
+      "path": "./tsconfig.node.json"
+    }
+  ]
 }

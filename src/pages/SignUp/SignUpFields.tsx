@@ -10,7 +10,7 @@ import {
 } from "../../constants/messages.tsx";
 import { DOMAIN } from "@api/url.ts";
 import { FormEvent, useRef, useState } from "react";
-import { SignUp } from "@type/auth.tsx";
+import { SignUp } from "@app/types/auth.ts";
 
 function SignUpFields() {
   const navigate = useNavigate();

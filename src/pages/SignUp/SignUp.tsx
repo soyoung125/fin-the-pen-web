@@ -1,10 +1,10 @@
 import { Stack } from "@mui/material";
 import CenterBox from "../../components/layouts/CenterBox";
-import useHeader from "../../hooks/useHeader";
+import useHeader from "@hooks/useHeader.ts";
 import Header from "./Header.tsx";
 import SignUpFields from "./SignUpFields.tsx";
 import { useEffect } from "react";
-import { HEADER_MODE } from "@type/common.tsx";
+import { HEADER_MODE } from "@app/types/common.ts";
 import { useAppDispatch } from "@redux/hooks.ts";
 import {
   setBottomBarOpenFalse,
@@ -31,6 +31,7 @@ function SignUp() {
     </CenterBox>
   );
 }
+
 export default SignUp;
 /**
  * 회원가입 페이지

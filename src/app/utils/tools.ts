@@ -2,8 +2,8 @@
 /* eslint-disable array-callback-return */
 /* eslint-disable @typescript-eslint/naming-convention */
 
-import { EXPENDITURE } from "../../constants/categories.tsx";
-import { Schedule } from "@type/schedule.tsx";
+import { EXPENDITURE } from "../../constants/categories.ts";
+import { Schedule } from "@app/types/schedule.ts";
 
 /**
  * 유용한 함수들을 모아두는 곳.
@@ -27,7 +27,7 @@ export const isObjectValuesEmpty = (obj: object) =>
 export const calculateIncomeExpenditure = (
   schedules: Schedule[],
   expression: (s: Schedule) => boolean,
-  type: "+" | "-",
+  type: "+" | "-"
 ) => {
   let result = 0;
   if (type === "-") {
@@ -38,7 +38,7 @@ export const calculateIncomeExpenditure = (
           current.price_type === type
             ? sum - parseInt(current.amount, 10)
             : sum,
-        result,
+        result
       );
   } else {
     result = schedules
@@ -48,7 +48,7 @@ export const calculateIncomeExpenditure = (
           current.price_type === type
             ? sum + parseInt(current.amount, 10)
             : sum,
-        result,
+        result
       );
   }
   return Math.abs(result).toLocaleString("ko-KR");

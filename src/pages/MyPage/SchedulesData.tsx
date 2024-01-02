@@ -1,5 +1,5 @@
 import TestBox from "./box/TestBox";
-import useSchedule from "@hooks/useSchedule.tsx";
+import useSchedule from "@hooks/useSchedule.ts";
 
 function SchedulesData() {
   const { schedules } = useSchedule();
@@ -9,4 +9,5 @@ function SchedulesData() {
     </TestBox>
   );
 }
+
 export default SchedulesData;

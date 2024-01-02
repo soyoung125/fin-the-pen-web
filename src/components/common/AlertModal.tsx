@@ -8,20 +8,20 @@ import {
   Typography,
 } from "@mui/material";
 import ClearIcon from "@mui/icons-material/Clear";
-import { CONTROLLING_ALERT } from "../../constants/alerts";
+import { CONTROLLING_ALERT } from "../../constants/alerts.tsx";
 
 interface AlertModalProps {
   open: boolean;
   handleClose?: () => void;
   handleClickYes: () => void;
   mode:
-  | "setting"
-  | "modify"
-  | "reset"
-  | "delete"
-  | "hideBudget"
-  | "saveFilter"
-  | "confirmCloseFilter";
+    | "setting"
+    | "modify"
+    | "reset"
+    | "delete"
+    | "hideBudget"
+    | "saveFilter"
+    | "confirmCloseFilter";
   content?: string;
 }
 
@@ -53,11 +53,18 @@ function AlertModal(props: AlertModalProps) {
       </Box>
 
       <Box mx={3} my={2}>
-        <Box sx={{ textAlign: "center", fontWeight: "bold", my: 2, whiteSpace: 'pre-wrap' }}>
+        <Box
+          sx={{
+            textAlign: "center",
+            fontWeight: "bold",
+            my: 2,
+            whiteSpace: "pre-wrap",
+          }}
+        >
           {content ? content : CONTROLLING_ALERT[mode]}
         </Box>
         <Grid container spacing={1}>
-          {handleClose &&
+          {handleClose && (
             <Grid item xs={6}>
               <Button
                 fullWidth
@@ -68,7 +75,7 @@ function AlertModal(props: AlertModalProps) {
                 취소
               </Button>
             </Grid>
-          }
+          )}
           <Grid item xs>
             <Button fullWidth variant="contained" onClick={handleClickYes}>
               확인

@@ -1,17 +1,17 @@
 import AssetManagement from "../../pages/AssetManagement";
 import MyPage from "../../pages/MyPage";
 import Notification from "../../pages/Notification";
-import SettingsContainer from "../../containers/settings/SettingsContainer";
+import Settings from "@pages/Settings";
 import SignIn from "../../pages/SignIn";
 import SignUp from "../../pages/SignUp";
 import TestContainer from "@pages/MyPage/TestContainer.tsx";
 import { PATH } from "../../constants/path.ts";
-import Home from "../../pages/Home";
-import { RouterDOM } from "../../types/common";
-import DetailSetting from "../../containers/assetManagement/SavingsGoalContainer/DetailSetting";
-import FetchPaymentHistory from "../../containers/home/HomeContainer/view/FetchPaymentHistory";
-import SearchSchedule from "../../containers/home/HomeContainer/view/SearchSchedule";
-import MyData from "../../containers/settings/connection/MyData";
+import Home from "@pages/Home";
+import { RouterDOM } from "@app/types/common.ts";
+import DetailSetting from "../../legacies/assetManagement/SavingsGoalContainer/DetailSetting";
+import FetchPaymentHistory from "../../pages/Home/components/HomeContainer/view/FetchPaymentHistory";
+import SearchSchedule from "../../pages/Home/components/HomeContainer/view/SearchSchedule";
+import MyData from "@pages/Settings/connection/MyData";
 
 const HOME_ROUTES: RouterDOM[] = [
   {
@@ -52,7 +52,7 @@ const HOME_ROUTES: RouterDOM[] = [
   },
   {
     path: PATH.settings,
-    element: <SettingsContainer />,
+    element: <Settings />,
   },
   {
     path: PATH.myData,
