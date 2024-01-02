@@ -12,7 +12,7 @@ import SettingsIcon from "@mui/icons-material/Settings";
 import PaidIcon from "@mui/icons-material/Paid";
 import moment from "moment";
 import ScheduleDrawer from "../../ScheduleDrawer";
-import { INIT_SCHEDULE } from "@constants/schedule.tsx";
+import { INIT_SCHEDULE } from "@constants/schedule.ts";
 import { changeViewMode, selectDate } from "@redux/slices/scheduleSlice.tsx";
 import { useAppDispatch, useAppSelector } from "@redux/hooks.ts";
 import {

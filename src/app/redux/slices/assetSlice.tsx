@@ -3,7 +3,7 @@ import { createSlice } from "@reduxjs/toolkit";
 import moment from "moment";
 import { initAssetsByCategory } from "@utils/tools.ts";
 import { RootState } from "../store";
-import { AssetsByCategoryInterface } from "../../../types/common";
+import { AssetsByCategoryInterface } from "@app/types/common.ts";
 
 interface InitialState {
   goal: {

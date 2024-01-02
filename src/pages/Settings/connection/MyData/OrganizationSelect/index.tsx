@@ -2,9 +2,9 @@ import { Box, Button, Grid, Tab, Tabs } from "@mui/material";
 import {
   BANK_ORGANIZATION,
   CARD_ORGANIZATION,
-} from "@constants/organizations.tsx";
+} from "@constants/organizations.ts";
 import CustomListItem from "./CustomListItem.tsx";
-import { OrganizationInterface } from "@type/common.tsx";
+import { OrganizationInterface } from "@app/types/common.ts";
 
 interface OrganizationSelectProps {
   value: number;

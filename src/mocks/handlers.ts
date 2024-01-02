@@ -6,8 +6,8 @@ import {
 } from "@api/keys.ts";
 import { getLocalStorage, setLocalStorage } from "@utils/storage.ts";
 import { DOMAIN } from "@api/url.ts";
-import { MockUser, SignUp, User } from "@type/auth.tsx";
-import { Schedule } from "@type/schedule.tsx";
+import { MockUser, SignUp, User } from "@app/types/auth.ts";
+import { Schedule } from "@app/types/schedule.ts";
 import moment from "moment";
 
 export const handlers = [

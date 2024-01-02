@@ -14,7 +14,7 @@ import { selectAssetsByCategory } from "../../../../app/redux/slices/assetSlice"
 import {
   AssetCategories,
   AssetsByCategoryInterface,
-} from "../../../../types/common";
+} from "@app/types/common.ts";
 import AssetInput from "./AssetInput";
 import AlertModal from "../../../../components/common/AlertModal";
 import useModal from "@hooks/useModal.ts";

@@ -17,11 +17,11 @@ import { deleteSchedule } from "@redux/slices/scheduleSlice.tsx";
 import RoundedBorderBox from "@components/common/RoundedBorderBox.tsx";
 import moment from "moment";
 import "moment/locale/ko";
-import { Schedule } from "@type/schedule.tsx";
+import { Schedule } from "@app/types/schedule.ts";
 import useSchedule from "@hooks/useSchedule.ts";
 import { fetchFindSchedules } from "@api/API.ts";
 import useHeader from "@hooks/useHeader.ts";
-import { HEADER_MODE } from "@type/common.tsx";
+import { HEADER_MODE } from "@app/types/common.ts";
 import {
   setBottomBarOpenFalse,
   setBottomBarOpenTrue,

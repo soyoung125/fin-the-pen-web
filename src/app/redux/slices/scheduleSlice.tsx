@@ -9,10 +9,14 @@ import {
   fetchModifySchedule,
   fetchMonthSchedules,
 } from "@api/API.ts";
-import { GetScheduleQuery, Schedule, ViewModeValue } from "@type/schedule.tsx";
-import { ASYNC_THUNK_STATUS } from "../../../constants/common";
-import { AnalysisData, AsyncThunkStatusValue } from "@type/common.tsx";
-import { CATEGORIES, COLORLIST } from "../../../constants/categories";
+import {
+  GetScheduleQuery,
+  Schedule,
+  ViewModeValue,
+} from "@app/types/schedule.ts";
+import { ASYNC_THUNK_STATUS } from "../../../constants/common.ts";
+import { AnalysisData, AsyncThunkStatusValue } from "@app/types/common.ts";
+import { CATEGORIES, COLORLIST } from "../../../constants/categories.ts";
 import { RootState } from "../store.ts";
 
 interface InitialState {

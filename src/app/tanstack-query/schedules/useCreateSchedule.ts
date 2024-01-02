@@ -4,7 +4,7 @@ import { getSessionStorage } from "@app/utils/storage";
 import { QUERY_KEY_SCHEDULES } from "@constants/queryKeys";
 import { getSign } from "@components/ScheduleDrawer/hooks/useScheduleForm";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { RequestSchedule, Schedule } from "@type/schedule";
+import { RequestSchedule, Schedule } from "@app/types/schedule.ts";
 import moment from "moment";
 
 const fetchCreateSchedule = async (schedule: Schedule) => {

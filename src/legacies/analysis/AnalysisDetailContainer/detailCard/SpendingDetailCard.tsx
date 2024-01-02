@@ -1,7 +1,7 @@
 import { Box, Button, Grid, Paper, Stack, Typography } from "@mui/material";
 import AccessTimeIcon from "@mui/icons-material/AccessTime";
 import moment from "moment";
-import { Schedule } from "../../../../types/schedule";
+import { Schedule } from "@app/types/schedule.ts";
 
 interface SpendingDetailCardProps {
   schedule: Schedule;
@@ -60,7 +60,7 @@ function SpendingDetailCard({ schedule, bgColor }: SpendingDetailCardProps) {
             </Button>
             <Box sx={{ color: "primary.main" }}>{`${parseInt(
               schedule.amount,
-              10,
+              10
             ).toLocaleString("ko-KR")}원`}</Box>
           </Stack>
         </Grid>

@@ -7,7 +7,7 @@ import {
   Stack,
 } from "@mui/material";
 import RoundedPaper from "@components/common/RoundedPaper.tsx";
-import { OrganizationInterface } from "@type/common.tsx";
+import { OrganizationInterface } from "@app/types/common.ts";
 import styled from "@emotion/styled";
 
 interface AccountInputProps {

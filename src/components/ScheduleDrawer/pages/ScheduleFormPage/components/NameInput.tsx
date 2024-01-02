@@ -1,5 +1,5 @@
 import { Box, FormControl, InputAdornment, TextField } from "@mui/material";
-import { SCHEDULE_DRAWER } from "@constants/schedule.tsx";
+import { SCHEDULE_DRAWER } from "@constants/schedule.ts";
 import { useScheduleForm } from "../../../hooks/useScheduleForm.ts";
 
 interface NameInputProps {

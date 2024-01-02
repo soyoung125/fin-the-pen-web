@@ -1,5 +1,5 @@
-import { SCHEDULE_DRAWER_MODE, VIEW_MODE } from "../constants/schedule.tsx";
-import { UpdateStateInterface } from "./common.tsx";
+import { SCHEDULE_DRAWER_MODE, VIEW_MODE } from "@constants/schedule.ts";
+import { UpdateStateInterface } from "./common.ts";
 
 export interface Schedule {
   id?: string;

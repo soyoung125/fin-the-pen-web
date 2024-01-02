@@ -1,17 +1,22 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
+import { Box, Button, Typography } from "@mui/material";
+import { useSelector } from "react-redux";
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import PrioritySetting from "./PrioritySetting";
+import RemittanceSetting from "./RemittanceSetting";
+import PopupSetting from "./PopupSetting";
+import NotificationSetting from "./NotificationSetting";
 import {
-  Box, Typography, Button,
-} from '@mui/material';
-import { useSelector } from 'react-redux';
-import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import PrioritySetting from './PrioritySetting';
-import RemittanceSetting from './RemittanceSetting';
-import PopupSetting from './PopupSetting';
-import NotificationSetting from './NotificationSetting';
-import { selectSavingDetailSetting, setSavingDetailSetting } from '../../../../app/redux/slices/assetSlice';
-import { NotificationInterface, PopupInterface, RemittanceInterface } from '../../../../types/common';
-import { useAppDispatch } from '../../../../app/redux/hooks';
+  selectSavingDetailSetting,
+  setSavingDetailSetting,
+} from "../../../../app/redux/slices/assetSlice";
+import {
+  NotificationInterface,
+  PopupInterface,
+  RemittanceInterface,
+} from "@app/types/common.ts";
+import { useAppDispatch } from "../../../../app/redux/hooks";
 
 function DetailSetting() {
   const dispatch = useAppDispatch();
@@ -19,10 +24,12 @@ function DetailSetting() {
   const savingDetailSetting = useSelector(selectSavingDetailSetting);
   const [priority, setPriority] = useState(savingDetailSetting.priority);
   const [remittance, setRemittance] = useState(savingDetailSetting.remittance);
-  const [notification, setNotification] = useState(savingDetailSetting.notification);
+  const [notification, setNotification] = useState(
+    savingDetailSetting.notification
+  );
   const [popup, setPopup] = useState(savingDetailSetting.popup);
 
-  const handlePriority = (value: 'saving' | 'personal') => {
+  const handlePriority = (value: "saving" | "personal") => {
     setPriority(value);
   };
 
@@ -39,23 +46,24 @@ function DetailSetting() {
   };
 
   const handleSetting = () => {
-    dispatch(setSavingDetailSetting({
-      priority,
-      remittance,
-      notification,
-      popup,
-    }));
+    dispatch(
+      setSavingDetailSetting({
+        priority,
+        remittance,
+        notification,
+        popup,
+      })
+    );
     navigate(-1);
   };
 
   return (
     <Box sx={{ pt: 3, px: 2, mb: 2 }}>
-      <Typography variant="h6" sx={{ fontWeight: 'bold', textAlign: 'center' }}>저축 세부 설정</Typography>
+      <Typography variant="h6" sx={{ fontWeight: "bold", textAlign: "center" }}>
+        저축 세부 설정
+      </Typography>
 
-      <PrioritySetting
-        priority={priority}
-        handlePriority={handlePriority}
-      />
+      <PrioritySetting priority={priority} handlePriority={handlePriority} />
 
       <RemittanceSetting
         remittance={remittance}
@@ -67,12 +75,11 @@ function DetailSetting() {
         handleNotification={handleNotification}
       />
 
-      <PopupSetting
-        popup={popup}
-        handlePopup={handlePopup}
-      />
+      <PopupSetting popup={popup} handlePopup={handlePopup} />
 
-      <Button fullWidth variant="contained" onClick={() => handleSetting()}>저축 세부 설정하기</Button>
+      <Button fullWidth variant="contained" onClick={() => handleSetting()}>
+        저축 세부 설정하기
+      </Button>
     </Box>
   );
 }

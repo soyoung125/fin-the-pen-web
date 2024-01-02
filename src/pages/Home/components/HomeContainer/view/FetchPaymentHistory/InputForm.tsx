@@ -10,11 +10,11 @@ import { useEffect, useState } from "react";
 import {
   BANK_ORGANIZATION,
   CARD_ORGANIZATION,
-} from "@constants/organizations.tsx";
+} from "@constants/organizations.ts";
 import useHeader from "@hooks/useHeader.ts";
 import OrderByInput from "@components/fetchPaymentHistory/OrderByInput";
 import PeriodInput from "@components/fetchPaymentHistory/PeriodInput.tsx";
-import { HEADER_MODE } from "@type/common.tsx";
+import { HEADER_MODE } from "@app/types/common.ts";
 import {
   setBottomBarOpenFalse,
   setBottomBarOpenTrue,

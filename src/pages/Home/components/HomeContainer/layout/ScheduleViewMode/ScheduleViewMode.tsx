@@ -1,7 +1,7 @@
 import { Box, Button } from "@mui/material";
 import { grey } from "@mui/material/colors";
 import { useSelector } from "react-redux";
-import { VIEW_MODE } from "@constants/schedule.tsx";
+import { VIEW_MODE } from "@constants/schedule.ts";
 import {
   changeViewMode,
   selectViewMode,

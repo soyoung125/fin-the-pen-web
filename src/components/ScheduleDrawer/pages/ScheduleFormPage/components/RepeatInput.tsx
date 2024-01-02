@@ -1,6 +1,6 @@
 import { Box, Stack } from "@mui/material";
 import SwitchButton from "@components/common/SwitchButton.tsx";
-import { UpdateStateInterface } from "@type/common.tsx";
+import { UpdateStateInterface } from "@app/types/common.ts";
 import { useScheduleForm } from "../../../hooks/useScheduleForm.ts";
 import { MouseEventHandler } from "react";
 

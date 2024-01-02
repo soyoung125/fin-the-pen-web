@@ -9,7 +9,7 @@ import {
   setDrawerSchedule,
   setIsBottomDrawerOpen,
 } from "@redux/slices/scheduleSlice.tsx";
-import { Schedule } from "../types/schedule.tsx";
+import { Schedule } from "@app/types/schedule.ts";
 import { useAppDispatch } from "@redux/hooks.ts";
 import moment from "moment/moment";
 import { v4 as uuidv4 } from "uuid";
@@ -17,7 +17,7 @@ import { useCreateSchedule } from "@app/tanstack-query/schedules/useCreateSchedu
 import { useConfirm } from "@hooks/dialog/hooks/useConfirm.tsx";
 import { useUser } from "@app/tanstack-query/useUser.ts";
 import { useSchedules } from "@app/tanstack-query/schedules/useSchedules.ts";
-import { INIT_SCHEDULE } from "@constants/schedule.tsx";
+import { INIT_SCHEDULE } from "@constants/schedule.ts";
 import { useModifySchedule } from "@app/tanstack-query/schedules/useModifySchedule.ts";
 
 const useSchedule = () => {
@@ -45,12 +45,12 @@ const useSchedule = () => {
     schedules?.filter(
       (schedule) =>
         moment(date).isSameOrAfter(schedule.start_date) &&
-        moment(date).isSameOrBefore(schedule.end_date),
+        moment(date).isSameOrBefore(schedule.end_date)
     ) ?? [];
 
   const handleCreateSchedule = async (
     schedule: Schedule,
-    stringDate: string,
+    stringDate: string
   ) => {
     if (user === undefined) {
       return alert("로그인이 필요합니다.");
@@ -81,7 +81,7 @@ const useSchedule = () => {
           getMonthSchedules({
             user_id: user.user_id,
             date: date,
-          }),
+          })
         );
       }
     }

@@ -5,7 +5,7 @@ import {
 import DateButton from "@components/ScheduleDrawer/pages/ScheduleFormPage/components/RepeatPicker/containers/buttons/DateButton.tsx";
 import OptionButton from "@components/ScheduleDrawer/pages/ScheduleFormPage/components/RepeatPicker/containers/buttons/OptionButton.tsx";
 import { Grid } from "@mui/material";
-import { RepeatOptionProps } from "@type/schedule.tsx";
+import { RepeatOptionProps } from "@app/types/schedule.ts";
 import moment from "moment";
 import { useSelector } from "react-redux";
 

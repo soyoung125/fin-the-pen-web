@@ -5,7 +5,7 @@ import DetailSetting from "../../legacies/assetManagement/RegularDepositWithDraw
 import SavingsGoal from "../../legacies/assetManagement/SavingsGoalContainer";
 import ScheduleManagement from "../../legacies/assetManagement/ScheduleManagement";
 import { PATH } from "../../constants/path.ts";
-import { RouterDOM } from "../../types/common";
+import { RouterDOM } from "@app/types/common.ts";
 
 const MANAGEMENT_ROUTES: RouterDOM[] = [
   {

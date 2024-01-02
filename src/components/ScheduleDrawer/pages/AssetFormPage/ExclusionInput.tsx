@@ -1,5 +1,5 @@
 import { Stack, Typography } from "@mui/material";
-import { SCHEDULE_DRAWER } from "@constants/schedule.tsx";
+import { SCHEDULE_DRAWER } from "@constants/schedule.ts";
 import SwitchButton from "@components/common/SwitchButton.tsx";
 import { useScheduleForm } from "../../hooks/useScheduleForm.ts";
 

@@ -12,7 +12,7 @@ import {
   selectDate,
   updateAnalyzedData,
 } from "../../../app/redux/slices/scheduleSlice";
-import { AnalysisData, HEADER_MODE } from "../../../types/common";
+import { AnalysisData, HEADER_MODE } from "@app/types/common.ts";
 import { useAppDispatch } from "../../../app/redux/hooks";
 
 function AnalysisContainer() {

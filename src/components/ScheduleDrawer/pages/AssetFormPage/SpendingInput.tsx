@@ -7,9 +7,9 @@ import {
   Stack,
   Typography,
 } from "@mui/material";
-import { SCHEDULE_DRAWER } from "@constants/schedule.tsx";
+import { SCHEDULE_DRAWER } from "@constants/schedule.ts";
 import SwitchButton from "@components/common/SwitchButton.tsx";
-import { UpdateStateInterface } from "@type/common.tsx";
+import { UpdateStateInterface } from "@app/types/common.ts";
 import { useState } from "react";
 import AddRoundedIcon from "@mui/icons-material/AddRounded";
 import RemoveRoundedIcon from "@mui/icons-material/RemoveRounded";

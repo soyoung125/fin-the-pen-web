@@ -2,11 +2,12 @@ import { Box, Stack } from "@mui/material";
 import KeyboardArrowRightIcon from "@mui/icons-material/KeyboardArrowRight";
 import { useNavigate } from "react-router-dom";
 import RoundedPaper from "../../common/RoundedPaper";
-import { AssetManagement } from "../../../constants/managements";
+import { AssetManagement } from "../../../constants/managements.ts";
 
 interface SettingCardProps {
   setting: AssetManagement;
 }
+
 function SettingCard({ setting }: SettingCardProps) {
   const navigate = useNavigate();
 

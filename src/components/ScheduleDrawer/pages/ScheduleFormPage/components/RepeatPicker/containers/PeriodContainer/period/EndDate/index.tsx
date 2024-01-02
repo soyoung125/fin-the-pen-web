@@ -9,7 +9,7 @@ import RadioLabel from "@components/ScheduleDrawer/pages/ScheduleFormPage/compon
 import { useEffect, useState } from "react";
 import moment from "moment";
 import Input from "./Input.tsx";
-import { RepeatOptionProps } from "@type/schedule.tsx";
+import { RepeatOptionProps } from "@app/types/schedule.ts";
 
 function EndDate({ handleChangeOption }: RepeatOptionProps) {
   const schedule = useSelector(selectSchedule);

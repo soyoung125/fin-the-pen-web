@@ -1,6 +1,6 @@
 /* eslint-disable max-len */
 
-import { Category, EXPENDITURE, INCOME } from "@constants/categories.tsx";
+import { Category, EXPENDITURE, INCOME } from "@constants/categories.ts";
 
 interface DaySchedulesInterface {
   id?: string;

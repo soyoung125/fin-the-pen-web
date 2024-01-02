@@ -9,7 +9,7 @@ import {
 } from "@mui/material";
 import RoundedPaper from "../../../../../components/common/RoundedPaper";
 import CalendarTodayOutlinedIcon from "@mui/icons-material/CalendarTodayOutlined";
-import { RemittanceInterface } from "../../../../../types/common";
+import { RemittanceInterface } from "@app/types/common.ts";
 import { useEffect, useState } from "react";
 import ModalStaticBackdrop from "../../../../../components/layouts/ModalStaticBackdrop";
 import useModal from "@hooks/useModal.ts";

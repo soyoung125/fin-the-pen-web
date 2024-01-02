@@ -12,7 +12,7 @@ import {
   changeViewMode,
   selectViewMode,
 } from "@redux/slices/scheduleSlice.tsx";
-import { VIEW_MODE } from "@constants/schedule.tsx";
+import { VIEW_MODE } from "@constants/schedule.ts";
 import { useUser } from "@app/tanstack-query/useUser.ts";
 
 interface EasyAuthenticationProps {

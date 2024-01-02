@@ -11,7 +11,7 @@ import SpendingDetailCard from "./detailCard/SpendingDetailCard";
 import { selectDate } from "../../../app/redux/slices/scheduleSlice";
 import AssetManagement from "./detailCard/AssetManagement";
 import { selectAssetsByCategory } from "../../../app/redux/slices/assetSlice";
-import { AssetsByCategoryInterface } from "../../../types/common";
+import { AssetsByCategoryInterface } from "@app/types/common.ts";
 import useSchedule from "@hooks/useSchedule.ts";
 import moment from "moment";
 

@@ -1,4 +1,4 @@
-import { RouterDOM } from "@type/common.tsx";
+import { RouterDOM } from "@app/types/common.ts";
 import { PATH } from "@constants/path.ts";
 import Report from "@pages/reports/Report";
 import ReportMonthDetails from "pages/reports/ReportMonthDetails";

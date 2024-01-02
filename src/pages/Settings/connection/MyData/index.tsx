@@ -20,7 +20,7 @@ import AssetSelect from "./AssetSelect.tsx";
 import AssetFilter from "./AssetFilter.tsx";
 import useModal from "@hooks/useModal.ts";
 import AlertModal from "@components/common/AlertModal.tsx";
-import { OrganizationInterface } from "@type/common.tsx";
+import { OrganizationInterface } from "@app/types/common.ts";
 
 function MyData() {
   const businessType = ["BK", "CD", "ST", "IS"];

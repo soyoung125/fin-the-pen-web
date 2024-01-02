@@ -4,7 +4,7 @@ import useHeader from "@hooks/useHeader.ts";
 import Header from "./Header.tsx";
 import SignUpFields from "./SignUpFields.tsx";
 import { useEffect } from "react";
-import { HEADER_MODE } from "@type/common.tsx";
+import { HEADER_MODE } from "@app/types/common.ts";
 import { useAppDispatch } from "@redux/hooks.ts";
 import {
   setBottomBarOpenFalse,

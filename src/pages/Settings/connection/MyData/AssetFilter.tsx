@@ -7,7 +7,7 @@ import {
   OutlinedInput,
   Stack,
 } from "@mui/material";
-import { OrganizationInterface } from "@type/common.tsx";
+import { OrganizationInterface } from "@app/types/common.ts";
 import PeriodInput from "@components/fetchPaymentHistory/PeriodInput.tsx";
 import OrderByInput from "@components/fetchPaymentHistory/OrderByInput";
 import { useState } from "react";

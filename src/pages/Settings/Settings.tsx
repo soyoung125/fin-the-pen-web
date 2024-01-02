@@ -16,7 +16,7 @@ import {
   changeHeaderTitle,
   setIsAuthenticatedFalse,
 } from "@redux/slices/commonSlice.tsx";
-import { HEADER_MODE } from "@type/common.tsx";
+import { HEADER_MODE } from "@app/types/common.ts";
 
 export default function Settings() {
   const isHideBudgetMode = useAppSelector(selectIsBudgetHidden);

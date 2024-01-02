@@ -1,6 +1,6 @@
 import { Stack } from "@mui/material";
 import TimeOption from "./TimeOption.tsx";
-import { UpdateStateInterface } from "@type/common.tsx";
+import { UpdateStateInterface } from "@app/types/common.ts";
 import moment from "moment";
 import { InputDateTimeType } from "../../InputDateTime.tsx";
 

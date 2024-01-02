@@ -7,7 +7,7 @@ import SignUp from "../../pages/SignUp";
 import TestContainer from "@pages/MyPage/TestContainer.tsx";
 import { PATH } from "../../constants/path.ts";
 import Home from "@pages/Home";
-import { RouterDOM } from "../../types/common";
+import { RouterDOM } from "@app/types/common.ts";
 import DetailSetting from "../../legacies/assetManagement/SavingsGoalContainer/DetailSetting";
 import FetchPaymentHistory from "../../pages/Home/components/HomeContainer/view/FetchPaymentHistory";
 import SearchSchedule from "../../pages/Home/components/HomeContainer/view/SearchSchedule";

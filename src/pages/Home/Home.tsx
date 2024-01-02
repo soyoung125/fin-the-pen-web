@@ -11,11 +11,11 @@ import ConsumptionAlert from "./components/HomeContainer/layout/ConsumptionAlert
 import ScheduleViewMode from "./components/HomeContainer/layout/ScheduleViewMode";
 import ScheduleView from "./components/HomeContainer/view/ScheduleView.tsx";
 import AssetView from "./components/HomeContainer/view/AssetView.tsx";
-import { VIEW_MODE } from "../../constants/schedule";
+import { VIEW_MODE } from "@constants/schedule.ts";
 import { useAppDispatch, useAppSelector } from "@redux/hooks.ts";
 import { selectIsBudgetHidden } from "@redux/slices/settingSlice.ts";
-import { HEADER_MODE } from "@type/common.tsx";
 import { useUser } from "@app/tanstack-query/useUser.ts";
+import { HEADER_MODE } from "@app/types/common.ts";
 
 function Home() {
   const dispatch = useAppDispatch();

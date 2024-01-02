@@ -1,15 +1,15 @@
-import { UpdateStateInterface } from "@type/common.tsx";
+import { UpdateStateInterface } from "@app/types/common.ts";
 import {
   selectSchedule,
   setDrawerSchedule,
 } from "@redux/slices/scheduleSlice.tsx";
 import moment from "moment/moment";
-import { CATEGORIES, Category } from "@constants/categories.tsx";
+import { CATEGORIES, Category } from "@constants/categories.ts";
 import {
   INIT_PERIOD,
   INIT_REPEAT,
   SCHEDULE_DRAWER,
-} from "@constants/schedule.tsx";
+} from "@constants/schedule.ts";
 import { useAppDispatch } from "@redux/hooks.ts";
 import { useSelector } from "react-redux";
 

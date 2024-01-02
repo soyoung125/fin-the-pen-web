@@ -2,10 +2,10 @@
 import { Box } from "@mui/material";
 import { useLocation } from "react-router-dom";
 import { useEffect, useState } from "react";
-import { REGULAR_DEPOSIT_WITHDRAWAL_TYPE } from "../../../../../constants/schedule";
+import { REGULAR_DEPOSIT_WITHDRAWAL_TYPE } from "../../../../../constants/schedule.ts";
 import Title from "../../../../../components/common/Title";
 import SwipeableDetailCard from "./SwipeableDetailCard";
-import { Schedule } from "../../../../../types/schedule";
+import { Schedule } from "@app/types/schedule.ts";
 import useSchedule from "@hooks/useSchedule.ts";
 
 interface StateData {

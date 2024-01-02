@@ -3,7 +3,7 @@ import cashBook from "@assets/icons/cashbook.png";
 import card from "@assets/icons/card.png";
 import RoundedBorderBox from "@components/common/RoundedBorderBox.tsx";
 import useHeader from "@hooks/useHeader.ts";
-import { HEADER_MODE } from "@type/common.tsx";
+import { HEADER_MODE } from "@app/types/common.ts";
 
 interface OptionSelectorProps {
   selected: string | null;

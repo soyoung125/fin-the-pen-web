@@ -8,7 +8,7 @@ import Option from "./Option.tsx";
 import { useEffect, useState } from "react";
 import moment from "moment";
 import RepeatInputLabel from "../RepeatInputLabel.tsx";
-import { RepeatTypeProps } from "@type/schedule.tsx";
+import { RepeatTypeProps } from "@app/types/schedule.ts";
 
 function Year({ repeatType }: RepeatTypeProps) {
   const schedule = useSelector(selectSchedule);

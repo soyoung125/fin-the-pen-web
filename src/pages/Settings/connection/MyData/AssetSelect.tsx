@@ -10,7 +10,7 @@ import {
   Tab,
   Tabs,
 } from "@mui/material";
-import { OrganizationInterface } from "@type/common.tsx";
+import { OrganizationInterface } from "@app/types/common.ts";
 import moment from "moment";
 import "moment/locale/ko";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";

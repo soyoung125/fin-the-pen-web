@@ -1,6 +1,6 @@
 import { Box, InputAdornment } from "@mui/material";
-import { UpdateStateInterface } from "@type/common.tsx";
-import { SCHEDULE_DRAWER } from "@constants/schedule.tsx";
+import { UpdateStateInterface } from "@app/types/common.ts";
+import { SCHEDULE_DRAWER } from "@constants/schedule.ts";
 import moment from "moment";
 import "moment/dist/locale/ko";
 import { DateField, LocalizationProvider } from "@mui/x-date-pickers";

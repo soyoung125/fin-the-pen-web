@@ -1,9 +1,6 @@
-import {
-  Box,
-  List, Typography,
-} from '@mui/material';
-import AnalysisListItem from './AnalysisListItem';
-import { AnalysisData } from '../../../../types/common';
+import { Box, List, Typography } from "@mui/material";
+import AnalysisListItem from "./AnalysisListItem";
+import { AnalysisData } from "@app/types/common.ts";
 
 interface AnalysisListProps {
   data: AnalysisData[];
@@ -22,7 +19,7 @@ function AnalysisList({ data, clickListItem, hexToRGB }: AnalysisListProps) {
           <AnalysisListItem
             key={d.label}
             category={d}
-            rank={(index + 1)}
+            rank={index + 1}
             clickListItem={clickListItem}
             bgColor={hexToRGB(d.color, 0.5)}
           />

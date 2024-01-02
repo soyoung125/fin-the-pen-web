@@ -2,13 +2,13 @@ import useSchedule from "@hooks/useSchedule.ts";
 import { Box, CircularProgress, Stack, Typography } from "@mui/material";
 import moment from "moment";
 import ScheduleCard from "./ScheduleCard.tsx";
-import { CATEGORIES, Category } from "@constants/categories.tsx";
+import { CATEGORIES, Category } from "@constants/categories.ts";
 import { useState } from "react";
-import { Schedule } from "@type/schedule.tsx";
+import { Schedule } from "@app/types/schedule.ts";
 import EasyAuthentication from "@components/sign/EasyAuthentication.tsx";
 import { useAppDispatch } from "@redux/hooks.ts";
 import { changeHideBudgetMode } from "@redux/slices/settingSlice.ts";
-import { INIT_PERIOD, INIT_REPEAT } from "@constants/schedule.tsx";
+import { INIT_PERIOD, INIT_REPEAT } from "@constants/schedule.ts";
 
 function ScheduleList() {
   const dispatch = useAppDispatch();

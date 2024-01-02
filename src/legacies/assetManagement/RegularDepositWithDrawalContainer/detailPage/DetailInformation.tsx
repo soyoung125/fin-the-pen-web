@@ -6,7 +6,7 @@ import ArrowDropDownRoundedIcon from "@mui/icons-material/ArrowDropDownRounded";
 import { useEffect, useState } from "react";
 import Title from "../../../../components/common/Title";
 import RoundedBorderBox from "../../../../components/common/RoundedBorderBox";
-import { Schedule } from "../../../../types/schedule";
+import { Schedule } from "@app/types/schedule.ts";
 
 function DetailInformation() {
   const { state } = useLocation();
@@ -22,13 +22,13 @@ function DetailInformation() {
       setData([
         ...data.sort(
           (a: Schedule, b: Schedule) =>
-            +new Date(a.start_date) - +new Date(b.start_date),
+            +new Date(a.start_date) - +new Date(b.start_date)
         ),
       ]);
     } else {
       setData([
         ...data.sort((a: Schedule, b: Schedule) =>
-          b.amount > a.amount ? 1 : -1,
+          b.amount > a.amount ? 1 : -1
         ),
       ]);
     }
@@ -119,7 +119,7 @@ function DetailInformation() {
                   </Button>
                   <Box sx={{ color: "primary.main" }}>
                     {`${parseInt(schedule.amount, 10).toLocaleString(
-                      "ko-KR",
+                      "ko-KR"
                     )}원`}
                   </Box>
                 </Stack>

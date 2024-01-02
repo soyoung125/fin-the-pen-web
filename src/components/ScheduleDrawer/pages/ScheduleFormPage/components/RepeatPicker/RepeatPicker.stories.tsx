@@ -2,7 +2,7 @@ import type { Meta } from "@storybook/react";
 import RepeatContainer from "./index.tsx";
 import RepeatPicker from "./index.tsx";
 import { configureStore, createSlice } from "@reduxjs/toolkit";
-import { INIT_PERIOD, INIT_REPEAT } from "@constants/schedule.tsx";
+import { INIT_PERIOD, INIT_REPEAT } from "@constants/schedule.ts";
 import moment from "moment";
 import { Provider } from "react-redux";
 import { RepeatPickerProps } from "./RepeatPicker.tsx";

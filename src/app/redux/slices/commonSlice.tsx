@@ -1,6 +1,10 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { RootState } from "../store";
-import { HEADER_MODE, HeaderModeType, HeaderTitleType } from "@type/common.tsx";
+import {
+  HEADER_MODE,
+  HeaderModeType,
+  HeaderTitleType,
+} from "@app/types/common.ts";
 
 interface CommonState {
   headerOpen: boolean;
@@ -28,7 +32,7 @@ export const commonSlice = createSlice({
   reducers: {
     setHeaderOpenTrue: (
       state,
-      action: PayloadAction<HeaderModeType | undefined>,
+      action: PayloadAction<HeaderModeType | undefined>
     ) => {
       const mode = action.payload;
       if (mode !== undefined) {

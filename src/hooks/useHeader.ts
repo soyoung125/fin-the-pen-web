@@ -4,7 +4,7 @@ import {
   setHeaderOpenTrue,
 } from "@redux/slices/commonSlice.tsx";
 import { useAppDispatch } from "@redux/hooks.ts";
-import { HeaderModeType } from "@type/common.tsx";
+import { HeaderModeType } from "@app/types/common.ts";
 
 /**
  * 헤더를 관리해주는 customHook.

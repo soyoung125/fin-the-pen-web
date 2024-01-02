@@ -1,5 +1,5 @@
 import { Button, Stack, Typography } from "@mui/material";
-import { IMPORTANCES, SCHEDULE_DRAWER } from "@constants/schedule.tsx";
+import { IMPORTANCES, SCHEDULE_DRAWER } from "@constants/schedule.ts";
 import { useScheduleForm } from "../../hooks/useScheduleForm.ts";
 
 function ImportanceInput() {

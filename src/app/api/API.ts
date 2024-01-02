@@ -3,7 +3,7 @@ import {
   MonthScheduleQuery,
   RequestSchedule,
   Schedule,
-} from "@type/schedule.tsx";
+} from "@app/types/schedule.ts";
 import { DOMAIN } from "./url.ts";
 
 import { getSign } from "@components/ScheduleDrawer/hooks/useScheduleForm.ts";

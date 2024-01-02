@@ -1,13 +1,18 @@
 import {
-  Stack, Box, InputAdornment, FormControl, Select, MenuItem
-} from '@mui/material';
-import RoundedPaper from '../../../../components/common/RoundedPaper';
-import { PopupInterface } from '../../../../types/common';
-import SwitchButton from '../../../../components/common/SwitchButton';
+  Box,
+  FormControl,
+  InputAdornment,
+  MenuItem,
+  Select,
+  Stack,
+} from "@mui/material";
+import RoundedPaper from "../../../../components/common/RoundedPaper";
+import { PopupInterface } from "@app/types/common.ts";
+import SwitchButton from "../../../../components/common/SwitchButton";
 
 interface PopupSettingProps {
-  popup: PopupInterface,
-  handlePopup: (value: PopupInterface) => void,
+  popup: PopupInterface;
+  handlePopup: (value: PopupInterface) => void;
 }
 
 function PopupSetting({ popup, handlePopup }: PopupSettingProps) {
@@ -16,7 +21,7 @@ function PopupSetting({ popup, handlePopup }: PopupSettingProps) {
   const changePopupSettings = (id: string, value: string) => {
     handlePopup({
       ...popup,
-      settings: { ...popup.settings, [id]: value }
+      settings: { ...popup.settings, [id]: value },
     });
   };
 
@@ -31,45 +36,58 @@ function PopupSetting({ popup, handlePopup }: PopupSettingProps) {
       </Stack>
 
       {popup.isOn && (
-        <Stack
-          spacing={1}
-          mt={1}
-        >
+        <Stack spacing={1} mt={1}>
           {/* 표시 항목 */}
-          <FormControl
-            fullWidth
-            size="small"
-          >
+          <FormControl fullWidth size="small">
             <Select
               inputProps={{
                 IconComponent: () => null,
-                style: { textAlign: 'right' },
+                style: { textAlign: "right" },
               }}
-              startAdornment={<InputAdornment position="start">표시 항목</InputAdornment>}
-              sx={{ '.MuiSelect-select.MuiSelect-outlined': { textAlign: 'right', paddingRight: '14px' } }}
+              startAdornment={
+                <InputAdornment position="start">표시 항목</InputAdornment>
+              }
+              sx={{
+                ".MuiSelect-select.MuiSelect-outlined": {
+                  textAlign: "right",
+                  paddingRight: "14px",
+                },
+              }}
               value={popup.settings.display}
-              onChange={(e) => changePopupSettings('display', e.target.value)}
+              onChange={(e) => changePopupSettings("display", e.target.value)}
             >
-              {displayOptions.map((option) => <MenuItem key={Math.random()} value={option}>{option}</MenuItem>)}
+              {displayOptions.map((option) => (
+                <MenuItem key={Math.random()} value={option}>
+                  {option}
+                </MenuItem>
+              ))}
             </Select>
           </FormControl>
 
           {/* 클릭 시 연결 */}
-          <FormControl
-            fullWidth
-            size="small"
-          >
+          <FormControl fullWidth size="small">
             <Select
               inputProps={{
                 IconComponent: () => null,
-                style: { textAlign: 'right' },
+                style: { textAlign: "right" },
               }}
-              startAdornment={<InputAdornment position="start">클릭 시 연결</InputAdornment>}
-              sx={{ '.MuiSelect-select.MuiSelect-outlined': { textAlign: 'right', paddingRight: '14px' } }}
+              startAdornment={
+                <InputAdornment position="start">클릭 시 연결</InputAdornment>
+              }
+              sx={{
+                ".MuiSelect-select.MuiSelect-outlined": {
+                  textAlign: "right",
+                  paddingRight: "14px",
+                },
+              }}
               value={popup.settings.connect}
-              onChange={(e) => changePopupSettings('connect', e.target.value)}
+              onChange={(e) => changePopupSettings("connect", e.target.value)}
             >
-              {connectOptions.map((option) => <MenuItem key={Math.random()} value={option}>{option}</MenuItem>)}
+              {connectOptions.map((option) => (
+                <MenuItem key={Math.random()} value={option}>
+                  {option}
+                </MenuItem>
+              ))}
             </Select>
           </FormControl>
         </Stack>

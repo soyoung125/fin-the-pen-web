@@ -1,4 +1,4 @@
-import { SignIn, User } from "@type/auth.tsx";
+import { SignIn, User } from "@app/types/auth.ts";
 import { DOMAIN } from "@api/url.ts";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useNavigate } from "react-router-dom";

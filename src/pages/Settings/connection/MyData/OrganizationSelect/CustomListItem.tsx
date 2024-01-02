@@ -1,5 +1,5 @@
 import { Box, Grid, Stack } from "@mui/material";
-import { OrganizationInterface } from "@type/common.tsx";
+import { OrganizationInterface } from "@app/types/common.ts";
 import styled from "@emotion/styled";
 
 interface CustomListItemProps {

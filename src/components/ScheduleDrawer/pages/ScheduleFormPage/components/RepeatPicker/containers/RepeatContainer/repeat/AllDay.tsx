@@ -1,4 +1,4 @@
-import { RepeatTypeProps } from "@type/schedule.tsx";
+import { RepeatTypeProps } from "@app/types/schedule.ts";
 import RadioLabel from "@components/ScheduleDrawer/pages/ScheduleFormPage/components/RepeatPicker/containers/RepeatContainer/radio/RadioLabel";
 import RepeatInputLabel from "./RepeatInputLabel.tsx";
 

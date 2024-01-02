@@ -1,7 +1,7 @@
 import { Stack } from "@mui/material";
 import assetManagements, {
   AssetManagement,
-} from "../../../constants/managements";
+} from "../../../constants/managements.ts";
 import SettingCard from "./SettingCard";
 
 function SettingsPaper() {

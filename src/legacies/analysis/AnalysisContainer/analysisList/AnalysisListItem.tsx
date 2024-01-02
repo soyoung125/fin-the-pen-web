@@ -1,8 +1,6 @@
-import {
-  Box, Grid, ListItem, Stack,
-} from '@mui/material';
-import CategoryTypeBadge from '../../../../components/common/CategoryTypeBadge';
-import { AnalysisData } from '../../../../types/common';
+import { Box, Grid, ListItem, Stack } from "@mui/material";
+import CategoryTypeBadge from "../../../../components/common/CategoryTypeBadge";
+import { AnalysisData } from "@app/types/common.ts";
 
 interface AnalysisListItemProps {
   category: AnalysisData;
@@ -12,7 +10,10 @@ interface AnalysisListItemProps {
 }
 
 function AnalysisListItem({
-  category, rank, clickListItem, bgColor,
+  category,
+  rank,
+  clickListItem,
+  bgColor,
 }: AnalysisListItemProps) {
   return (
     <ListItem onClick={() => clickListItem(category)}>
@@ -38,7 +39,9 @@ function AnalysisListItem({
           </Stack>
         </Grid>
         <Grid xs={5} item>
-          <Box display="flex" justifyContent="flex-end" mr={2}>{category.value.toLocaleString('ko-KR')}</Box>
+          <Box display="flex" justifyContent="flex-end" mr={2}>
+            {category.value.toLocaleString("ko-KR")}
+          </Box>
         </Grid>
       </Grid>
     </ListItem>

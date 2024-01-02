@@ -1,7 +1,7 @@
 import { Box, Stack } from "@mui/material";
 import SwitchButton from "@components/common/SwitchButton.tsx";
 import InputDateTime from "./InputDateTime.tsx";
-import { SCHEDULE_DRAWER } from "@constants/schedule.tsx";
+import { SCHEDULE_DRAWER } from "@constants/schedule.ts";
 import { useScheduleForm } from "../../../../hooks/useScheduleForm.ts";
 
 interface DateInputProps {

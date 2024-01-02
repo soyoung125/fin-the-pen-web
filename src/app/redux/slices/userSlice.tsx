@@ -1,8 +1,8 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { AsyncThunkStatusValue } from "../../../types/common";
+import { AsyncThunkStatusValue } from "@app/types/common.ts";
 import { RootState } from "../store";
-import { ASYNC_THUNK_STATUS } from "../../../constants/common.tsx";
-import { User } from "@type/auth.tsx";
+import { ASYNC_THUNK_STATUS } from "../../../constants/common.ts";
+import { User } from "@app/types/auth.ts";
 
 interface UserState {
   user: User | null; // User가 null 인 경우 비로그인 상태

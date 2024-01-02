@@ -1,9 +1,9 @@
 import { useAppSelector } from "@redux/hooks.ts";
 import { selectSchedule } from "@redux/slices/scheduleSlice.tsx";
-import { SCHEDULE_DRAWER } from "@constants/schedule.tsx";
+import { SCHEDULE_DRAWER } from "@constants/schedule.ts";
 import useSchedule from "@hooks/useSchedule.ts";
 import { Button, Stack } from "@mui/material";
-import { Schedule } from "@type/schedule.tsx";
+import { Schedule } from "@app/types/schedule.ts";
 
 interface ModifyFooterInterface {
   handleSubmit: () => boolean;

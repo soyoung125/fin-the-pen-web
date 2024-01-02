@@ -17,8 +17,8 @@ import "swiper/css";
 import { useState } from "react";
 // import { useDispatch } from 'react-redux';
 import ModalStaticBackdrop from "../../../../../components/layouts/ModalStaticBackdrop";
-import { REGULAR_DEPOSIT_WITHDRAWAL_TYPE } from "../../../../../constants/schedule";
-import { Schedule } from "../../../../../types/schedule";
+import { REGULAR_DEPOSIT_WITHDRAWAL_TYPE } from "../../../../../constants/schedule.ts";
+import { Schedule } from "@app/types/schedule.ts";
 
 // import { modifySchedule } from '../../../../../../domain/redux/schedule/scheduleSlice';
 

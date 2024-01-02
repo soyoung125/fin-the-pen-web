@@ -13,7 +13,7 @@ import Calender from "./Calender";
 import MonthlyStatement from "./MonthlyStatement";
 import ScheduleStatusCard from "@components/assetManagement/ScheduleStatusCard";
 import useSchedule from "@hooks/useSchedule.ts";
-import { Schedule } from "@type/schedule.tsx";
+import { Schedule } from "@app/types/schedule.ts";
 
 function AssetPreview() {
   const { schedules, date } = useSchedule();

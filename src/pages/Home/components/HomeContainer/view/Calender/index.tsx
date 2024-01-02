@@ -9,7 +9,7 @@ import {
 import moment from "moment";
 import { useEffect } from "react";
 import { useSelector } from "react-redux";
-import { CATEGORIES } from "@constants/categories.tsx";
+import { CATEGORIES } from "@constants/categories.ts";
 import {
   selectDate,
   selectViewMode,

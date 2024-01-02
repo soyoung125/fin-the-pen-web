@@ -3,7 +3,7 @@ import Week from "./repeat/Week";
 import Month from "./repeat/Month";
 import Year from "./repeat/Year";
 import { useScheduleForm } from "../../../../../../hooks/useScheduleForm.ts";
-import { RepeatTypeProps } from "@type/schedule.tsx";
+import { RepeatTypeProps } from "@app/types/schedule.ts";
 import RepeatRadioGroup from "./radio/RepeatRadioGroup.tsx";
 
 interface RepeatContainerProps extends RepeatTypeProps {

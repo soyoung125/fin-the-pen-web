@@ -1,9 +1,9 @@
 import { useAppSelector } from "@redux/hooks.ts";
 import { selectDate, selectSchedule } from "@redux/slices/scheduleSlice.tsx";
-import { SCHEDULE_DRAWER } from "@constants/schedule.tsx";
+import { SCHEDULE_DRAWER } from "@constants/schedule.ts";
 import useSchedule from "@hooks/useSchedule.ts";
 import { Button, Stack, Tooltip } from "@mui/material";
-import { Schedule } from "@type/schedule.tsx";
+import { Schedule } from "@app/types/schedule.ts";
 import { useScheduleForm } from "../../hooks/useScheduleForm.ts";
 import { selectGuestMode } from "@redux/slices/commonSlice.tsx";
 import { useUser } from "@app/tanstack-query/useUser.ts";

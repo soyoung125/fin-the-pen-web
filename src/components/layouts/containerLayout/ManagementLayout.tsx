@@ -2,11 +2,11 @@
 import { Box, Typography } from "@mui/material";
 import { Outlet, useLocation, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
-import assetManagements from "../../../constants/managements";
+import assetManagements from "../../../constants/managements.ts";
 import SwitchingHeader from "../../common/SwitchingHeader";
 import EasyAuthentication from "@components/sign/EasyAuthentication";
 import useHeader from "@hooks/useHeader.ts";
-import { HEADER_MODE } from "@type/common.tsx";
+import { HEADER_MODE } from "@app/types/common.ts";
 import { useAppDispatch, useAppSelector } from "@redux/hooks.ts";
 import {
   changeHeaderTitle,

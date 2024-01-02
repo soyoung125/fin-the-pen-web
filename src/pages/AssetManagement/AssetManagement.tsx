@@ -7,7 +7,7 @@ import ScheduleStatusCard from "../../components/assetManagement/ScheduleStatusC
 import SettingsPaper from "../../components/assetManagement/SettingsPaper";
 import useSchedule from "@hooks/useSchedule.ts";
 import useHeader from "@hooks/useHeader.ts";
-import { HEADER_MODE } from "@type/common.tsx";
+import { HEADER_MODE } from "@app/types/common.ts";
 import { useAppDispatch } from "@redux/hooks.ts";
 import { setIsAuthenticatedFalse } from "@redux/slices/commonSlice.tsx";
 import { useUser } from "@app/tanstack-query/useUser.ts";
