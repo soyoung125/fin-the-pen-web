@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 import assetManagements from "../../../constants/managements";
 import SwitchingHeader from "../../common/SwitchingHeader";
 import EasyAuthentication from "@components/sign/EasyAuthentication";
-import useHeader from "@hooks/useHeader.tsx";
+import useHeader from "@hooks/useHeader.ts";
 import { HEADER_MODE } from "@type/common.tsx";
 import { useAppDispatch, useAppSelector } from "@redux/hooks.ts";
 import {

@@ -10,8 +10,8 @@ import RoundedBorderBox from "../../../../../components/common/RoundedBorderBox"
 import AlertModal from "../../../../../components/common/AlertModal";
 import { Schedule } from "@type/schedule.tsx";
 import { useAppDispatch } from "@redux/hooks.ts";
-import useModal from "../../../../../hooks/useModal";
-import useSchedule from "@hooks/useSchedule.tsx";
+import useModal from "@hooks/useModal.ts";
+import useSchedule from "@hooks/useSchedule.ts";
 
 interface SwipeableDetailCardProps {
   data: Schedule[];

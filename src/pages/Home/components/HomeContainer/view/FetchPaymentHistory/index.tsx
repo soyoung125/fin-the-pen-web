@@ -3,7 +3,7 @@ import moment from "moment";
 import { useState } from "react";
 import { useAppSelector } from "@redux/hooks.ts";
 import { selectGuestMode } from "@redux/slices/commonSlice.tsx";
-import { fetchGetTransavrionList } from "@api/API.tsx";
+import { fetchGetTransavrionList } from "@api/API.ts";
 import RoundedPaper from "@components/common/RoundedPaper.tsx";
 import InputForm from "./InputForm.tsx";
 import OptionSelector from "./OptionSelector.tsx";

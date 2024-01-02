@@ -6,7 +6,7 @@ import {
   selectViewMode,
 } from "@redux/slices/scheduleSlice.tsx";
 import { setIsAuthenticatedFalse } from "@redux/slices/commonSlice.tsx";
-import useHeader from "../../hooks/useHeader";
+import useHeader from "@hooks/useHeader.ts";
 import ConsumptionAlert from "./components/HomeContainer/layout/ConsumptionAlert.tsx";
 import ScheduleViewMode from "./components/HomeContainer/layout/ScheduleViewMode";
 import ScheduleView from "./components/HomeContainer/view/ScheduleView.tsx";

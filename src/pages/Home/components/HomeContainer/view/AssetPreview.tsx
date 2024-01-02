@@ -12,7 +12,7 @@ import { useState } from "react";
 import Calender from "./Calender";
 import MonthlyStatement from "./MonthlyStatement";
 import ScheduleStatusCard from "@components/assetManagement/ScheduleStatusCard";
-import useSchedule from "@hooks/useSchedule.tsx";
+import useSchedule from "@hooks/useSchedule.ts";
 import { Schedule } from "@type/schedule.tsx";
 
 function AssetPreview() {

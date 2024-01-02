@@ -20,7 +20,7 @@ import ScheduleCount from "./boxes/scheduleMarker/ScheduleCount.tsx";
 import "moment/locale/ko";
 import CalenderBox from "./boxes/CalenderBox.tsx";
 import { selectIsDarkMode } from "@redux/slices/settingSlice.ts";
-import useSchedule from "@hooks/useSchedule.tsx";
+import useSchedule from "@hooks/useSchedule.ts";
 import { useAppDispatch } from "@redux/hooks.ts";
 import { AdapterMoment } from "@mui/x-date-pickers/AdapterMoment";
 

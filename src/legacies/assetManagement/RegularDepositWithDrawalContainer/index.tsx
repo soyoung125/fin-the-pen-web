@@ -11,8 +11,8 @@ import { PATH } from "../../../constants/path.ts";
 import AlertModal from "../../../components/common/AlertModal";
 import ArrowTooltip from "../../../components/common/ArrowTooltip";
 import { Schedule } from "@type/schedule.tsx";
-import useSchedule from "../../../hooks/useSchedule";
-import useModal from "../../../hooks/useModal";
+import useSchedule from "@hooks/useSchedule.ts";
+import useModal from "@hooks/useModal.ts";
 import { useAppSelector } from "@redux/hooks.ts";
 import { selectBottomBarOpen } from "@redux/slices/commonSlice.tsx";
 

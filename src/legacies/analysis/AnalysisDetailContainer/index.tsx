@@ -12,7 +12,7 @@ import { selectDate } from "../../../app/redux/slices/scheduleSlice";
 import AssetManagement from "./detailCard/AssetManagement";
 import { selectAssetsByCategory } from "../../../app/redux/slices/assetSlice";
 import { AssetsByCategoryInterface } from "../../../types/common";
-import useSchedule from "../../../hooks/useSchedule";
+import useSchedule from "@hooks/useSchedule.ts";
 import moment from "moment";
 
 function AnalysisDetailContainer() {
@@ -22,13 +22,12 @@ function AnalysisDetailContainer() {
   const date = useSelector(selectDate);
   const momentDate = moment(date);
   const assetsByCategory: AssetsByCategoryInterface[] = useSelector(
-    selectAssetsByCategory,
+    selectAssetsByCategory
   );
   const [selectedItem, setSelectedItem] = useState(
     schedules?.filter(
-      (s) =>
-        momentDate.isSame(s.start_date, "month") && s.category === category,
-    ) ?? [],
+      (s) => momentDate.isSame(s.start_date, "month") && s.category === category
+    ) ?? []
   );
   const [spending, setSpending] = useState(0);
   const [sortByDate, setSortByDate] = useState(true);
@@ -51,7 +50,7 @@ function AnalysisDetailContainer() {
       schedules
         ?.filter(
           (s) =>
-            momentDate.isSame(s.start_date, "month") && s.category === category,
+            momentDate.isSame(s.start_date, "month") && s.category === category
         )
         .sort((a, b) => +new Date(a.start_date) - +new Date(b.start_date)) ??
       [];
@@ -59,8 +58,8 @@ function AnalysisDetailContainer() {
     setSpending(
       newData.reduce(
         (result, schedule) => result + parseInt(schedule.amount, 10),
-        0,
-      ),
+        0
+      )
     );
   }, [date]);
 
@@ -70,13 +69,13 @@ function AnalysisDetailContainer() {
         ...selectedItem.sort((a, b) =>
           +new Date(a.start_date) - +new Date(b.start_date)
             ? +!isAscending
-            : +isAscending,
+            : +isAscending
         ),
       ]);
     } else {
       setSelectedItem([
         ...selectedItem.sort((a, b) =>
-          b.amount > a.amount ? +!isAscending : +isAscending,
+          b.amount > a.amount ? +!isAscending : +isAscending
         ),
       ]);
     }

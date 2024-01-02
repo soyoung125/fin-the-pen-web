@@ -22,7 +22,7 @@ import {
 } from "@redux/slices/commonSlice.tsx";
 import { Global } from "@emotion/react";
 import { PATH } from "@constants/path.ts";
-import useSchedule from "@hooks/useSchedule";
+import useSchedule from "@hooks/useSchedule.ts";
 
 const drawerBleeding = 56;
 

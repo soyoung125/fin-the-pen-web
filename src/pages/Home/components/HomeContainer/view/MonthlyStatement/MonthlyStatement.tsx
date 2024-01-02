@@ -7,7 +7,7 @@ import StatusStack from "@components/assetManagement/ScheduleStatusCard/StatusSt
 import SwitchingHeader from "@components/common/SwitchingHeader.tsx";
 import RoundedPaper from "@components/common/RoundedPaper.tsx";
 import RoundedBorderBox from "@components/common/RoundedBorderBox.tsx";
-import useSchedule from "@hooks/useSchedule.tsx";
+import useSchedule from "@hooks/useSchedule.ts";
 import { Schedule } from "@type/schedule.tsx";
 import { useAppDispatch } from "@redux/hooks.ts";
 

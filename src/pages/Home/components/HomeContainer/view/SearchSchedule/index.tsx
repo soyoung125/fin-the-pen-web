@@ -18,9 +18,9 @@ import RoundedBorderBox from "@components/common/RoundedBorderBox.tsx";
 import moment from "moment";
 import "moment/locale/ko";
 import { Schedule } from "@type/schedule.tsx";
-import useSchedule from "@hooks/useSchedule.tsx";
-import { fetchFindSchedules } from "@api/API.tsx";
-import useHeader from "@hooks/useHeader.tsx";
+import useSchedule from "@hooks/useSchedule.ts";
+import { fetchFindSchedules } from "@api/API.ts";
+import useHeader from "@hooks/useHeader.ts";
 import { HEADER_MODE } from "@type/common.tsx";
 import {
   setBottomBarOpenFalse,

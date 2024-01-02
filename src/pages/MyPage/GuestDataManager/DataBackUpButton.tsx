@@ -3,7 +3,7 @@ import { useState } from "react";
 import { useSelector } from "react-redux";
 import ModalStaticBackdrop from "@components/layouts/ModalStaticBackdrop.tsx";
 import { selectSettings } from "@redux/slices/settingSlice.ts";
-import useSchedule from "@hooks/useSchedule.tsx";
+import useSchedule from "@hooks/useSchedule.ts";
 
 function DataBackUpButton() {
   const [open, setOpen] = useState(false);
@@ -68,4 +68,5 @@ function DataBackUpButton() {
     </>
   );
 }
+
 export default DataBackUpButton;

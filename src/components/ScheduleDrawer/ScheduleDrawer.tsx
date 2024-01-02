@@ -9,7 +9,7 @@ import { Swiper as SwiperType } from "swiper/types";
 import ScheduleFormPage from "./pages/ScheduleFormPage";
 import CategoryPicker from "./pages/ScheduleFormPage/components/CategoryPicker";
 import RepeatPicker from "./pages/ScheduleFormPage/components/RepeatPicker";
-import useSchedule from "@hooks/useSchedule.tsx";
+import useSchedule from "@hooks/useSchedule.ts";
 import { useConfirm } from "@hooks/dialog/hooks/useConfirm.tsx";
 
 function TransitionUp(props: SlideProps) {

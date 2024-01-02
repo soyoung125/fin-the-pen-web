@@ -5,8 +5,8 @@ import moment from "moment/moment";
 import { useEffect } from "react";
 import ScheduleStatusCard from "../../components/assetManagement/ScheduleStatusCard";
 import SettingsPaper from "../../components/assetManagement/SettingsPaper";
-import useSchedule from "../../hooks/useSchedule";
-import useHeader from "../../hooks/useHeader";
+import useSchedule from "@hooks/useSchedule.ts";
+import useHeader from "@hooks/useHeader.ts";
 import { HEADER_MODE } from "@type/common.tsx";
 import { useAppDispatch } from "@redux/hooks.ts";
 import { setIsAuthenticatedFalse } from "@redux/slices/commonSlice.tsx";
@@ -41,8 +41,8 @@ function AssetManagement() {
                 (s) =>
                   today.isSame(s.start_date, "month") &&
                   today.isSameOrBefore(
-                    moment(s.start_date + s.start_time, "YYYY-MM-DDhh:mm"),
-                  ),
+                    moment(s.start_date + s.start_time, "YYYY-MM-DDhh:mm")
+                  )
               ).length ?? 0
             }
           />

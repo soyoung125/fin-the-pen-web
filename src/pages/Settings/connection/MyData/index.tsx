@@ -12,13 +12,13 @@ import {
   fetchCreateAccount,
   fetchGetAccountList,
   fetchGetCardList,
-} from "@api/API.tsx";
+} from "@api/API.ts";
 import OrganizationSelect from "./OrganizationSelect";
 import AccountInput from "./AccountInput.tsx";
 import RoundedPaper from "@components/common/RoundedPaper.tsx";
 import AssetSelect from "./AssetSelect.tsx";
 import AssetFilter from "./AssetFilter.tsx";
-import useModal from "@hooks/useModal.tsx";
+import useModal from "@hooks/useModal.ts";
 import AlertModal from "@components/common/AlertModal.tsx";
 import { OrganizationInterface } from "@type/common.tsx";
 

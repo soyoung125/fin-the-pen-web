@@ -9,7 +9,7 @@ import AccordionSummary from "@components/common/accordions/AccordionSummary.tsx
 import AccordionDetails from "@components/common/accordions/AccordionDetails.tsx";
 import { useAppDispatch, useAppSelector } from "@redux/hooks.ts";
 import { selectIsBudgetHidden } from "@redux/slices/settingSlice.ts";
-import useHeader from "@hooks/useHeader.tsx";
+import useHeader from "@hooks/useHeader.ts";
 import { PATH } from "@constants/path.ts";
 import ClickableListItem from "@components/settings/ClickableListItem";
 import {

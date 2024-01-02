@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 import moment from "moment";
 import RoundedPaper from "../../../../components/common/RoundedPaper";
 import ArrowTooltip from "../../../../components/common/ArrowTooltip";
-import useSchedule from "../../../../hooks/useSchedule";
+import useSchedule from "@hooks/useSchedule.ts";
 
 interface MonthlyGoalProps {
   title: string;
@@ -35,11 +35,11 @@ function MonthlyGoal({
       const compareDate = moment().subtract(i, "months");
       const lastMonthSchedules =
         schedules?.filter(
-          (s) => compareDate.isSame(s.start_date, "M") && s.price_type === "-",
+          (s) => compareDate.isSame(s.start_date, "M") && s.price_type === "-"
         ) ?? [];
       spending += lastMonthSchedules.reduce(
         (preVal, current) => preVal + parseInt(current.amount, 10),
-        0,
+        0
       );
     }
     return Math.floor(spending / months);

@@ -16,9 +16,9 @@ import { Schedule } from "@type/schedule.tsx";
 import { Category } from "@constants/categories.tsx";
 import { useAppDispatch, useAppSelector } from "@redux/hooks.ts";
 import { selectIsBudgetHidden } from "@redux/slices/settingSlice.ts";
-import useModal from "@hooks/useModal.tsx";
+import useModal from "@hooks/useModal.ts";
 import AlertModal from "@components/common/AlertModal.tsx";
-import useSchedule from "@hooks/useSchedule.tsx";
+import useSchedule from "@hooks/useSchedule.ts";
 
 interface ScheduleCardProps {
   schedule: Schedule;

@@ -1,4 +1,4 @@
-import useSchedule from "@hooks/useSchedule.tsx";
+import useSchedule from "@hooks/useSchedule.ts";
 import { Box, CircularProgress, Stack, Typography } from "@mui/material";
 import moment from "moment";
 import ScheduleCard from "./ScheduleCard.tsx";

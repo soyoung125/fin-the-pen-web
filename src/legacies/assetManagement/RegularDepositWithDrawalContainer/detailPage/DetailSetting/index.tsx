@@ -6,8 +6,7 @@ import { REGULAR_DEPOSIT_WITHDRAWAL_TYPE } from "../../../../../constants/schedu
 import Title from "../../../../../components/common/Title";
 import SwipeableDetailCard from "./SwipeableDetailCard";
 import { Schedule } from "../../../../../types/schedule";
-import { makeGroupForRegularData } from "@utils/tools.ts";
-import useSchedule from "../../../../../hooks/useSchedule";
+import useSchedule from "@hooks/useSchedule.ts";
 
 interface StateData {
   type: "+" | "-";
@@ -19,7 +18,7 @@ function DetailSetting() {
   const { state } = useLocation();
   const { type, data }: StateData = state;
   const [detailData, setDetailData] = useState<{ [key: string]: Schedule[] }>(
-    {},
+    {}
   );
 
   // 추후 반복 일정에 대한 기획이 고정되면 살리기

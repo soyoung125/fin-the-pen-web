@@ -11,7 +11,7 @@ import {
   BANK_ORGANIZATION,
   CARD_ORGANIZATION,
 } from "@constants/organizations.tsx";
-import useHeader from "@hooks/useHeader.tsx";
+import useHeader from "@hooks/useHeader.ts";
 import OrderByInput from "@components/fetchPaymentHistory/OrderByInput";
 import PeriodInput from "@components/fetchPaymentHistory/PeriodInput.tsx";
 import { HEADER_MODE } from "@type/common.tsx";

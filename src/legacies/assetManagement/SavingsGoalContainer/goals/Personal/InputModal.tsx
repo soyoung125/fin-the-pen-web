@@ -20,7 +20,7 @@ import {
 } from "../../../../../app/redux/slices/assetSlice";
 import AlertModal from "../../../../../components/common/AlertModal";
 import { useAppDispatch } from "../../../../../app/redux/hooks";
-import useModal from "../../../../../hooks/useModal";
+import useModal from "@hooks/useModal.ts";
 import SwitchButton from "../../../../../components/common/SwitchButton";
 import ResetButton from "@components/common/ResetButton";
 
