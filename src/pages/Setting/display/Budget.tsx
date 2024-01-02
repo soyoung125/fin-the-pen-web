@@ -1,7 +1,10 @@
-import ToggleListItem from '../../../components/settings/ToggleListItem';
-import { useAppDispatch } from '../../../app/redux/hooks';
-import { useSelector } from 'react-redux';
-import { changeHideBudgetMode, selectIsBudgetHidden } from '../../../app/redux/slices/settingSlice';
+import ToggleListItem from "@components/settings/ToggleListItem";
+import { useAppDispatch } from "@redux/hooks.ts";
+import { useSelector } from "react-redux";
+import {
+  changeHideBudgetMode,
+  selectIsBudgetHidden,
+} from "@redux/slices/settingSlice.ts";
 
 function Budget() {
   const dispatch = useAppDispatch();
@@ -19,4 +22,5 @@ function Budget() {
     />
   );
 }
+
 export default Budget;

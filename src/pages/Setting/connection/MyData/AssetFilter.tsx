@@ -1,4 +1,4 @@
-import RoundedPaper from "@components/common/RoundedPaper";
+import RoundedPaper from "@components/common/RoundedPaper.tsx";
 import {
   Box,
   Button,
@@ -7,8 +7,8 @@ import {
   OutlinedInput,
   Stack,
 } from "@mui/material";
-import { OrganizationInterface } from "@type/common";
-import PeriodInput from "@components/fetchPaymentHistory/PeriodInput";
+import { OrganizationInterface } from "@type/common.tsx";
+import PeriodInput from "@components/fetchPaymentHistory/PeriodInput.tsx";
 import OrderByInput from "@components/fetchPaymentHistory/OrderByInput";
 import { useState } from "react";
 import moment from "moment";

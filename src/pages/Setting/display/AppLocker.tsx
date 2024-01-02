@@ -1,6 +1,6 @@
-import { useState } from 'react';
-import ToggleListItem from '../../../components/settings/ToggleListItem';
-import ClickableListItem from '../../../components/settings/ClickableListItem';
+import { useState } from "react";
+import ToggleListItem from "@components/settings/ToggleListItem";
+import ClickableListItem from "@components/settings/ClickableListItem";
 
 function AppLocker() {
   const [checked, setChecked] = useState(false);
@@ -15,12 +15,15 @@ function AppLocker() {
         checked={checked}
         setChecked={handleToggle}
       />
-      {
-        checked && (
-          <ClickableListItem to="/test" title="비밀번호 인증 단계" subTitle="1단계" />
-        )
-      }
+      {checked && (
+        <ClickableListItem
+          to="/test"
+          title="비밀번호 인증 단계"
+          subTitle="1단계"
+        />
+      )}
     </>
   );
 }
+
 export default AppLocker;

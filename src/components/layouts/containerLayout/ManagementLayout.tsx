@@ -4,7 +4,7 @@ import { Outlet, useLocation, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import assetManagements from "../../../constants/managements";
 import SwitchingHeader from "../../common/SwitchingHeader";
-import EasyAuthentication from "../../../containers/sign/EasyAuthentication";
+import EasyAuthentication from "@components/sign/EasyAuthentication";
 import useHeader from "@hooks/useHeader.tsx";
 import { HEADER_MODE } from "@type/common.tsx";
 import { useAppDispatch, useAppSelector } from "@redux/hooks.ts";

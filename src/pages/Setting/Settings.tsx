@@ -1,24 +1,24 @@
 import { Divider, Typography } from "@mui/material";
 import { useEffect } from "react";
-import AppLocker from "./display/AppLocker";
-import Budget from "./display/Budget";
-import ThemeMode from "./display/ThemeMode";
+import AppLocker from "./display/AppLocker.tsx";
+import Budget from "./display/Budget.tsx";
+import ThemeMode from "./display/ThemeMode.tsx";
 import Version from "./version/Version";
-import Accordion from "../../components/common/accordions/Accordion";
-import AccordionSummary from "../../components/common/accordions/AccordionSummary";
-import AccordionDetails from "../../components/common/accordions/AccordionDetails";
-import { useAppDispatch, useAppSelector } from "../../app/redux/hooks";
-import { selectIsBudgetHidden } from "../../app/redux/slices/settingSlice";
-import useHeader from "../../hooks/useHeader";
-import { PATH } from "../../constants/path.ts";
-import ClickableListItem from "../../components/settings/ClickableListItem";
+import Accordion from "@components/common/accordions/Accordion.tsx";
+import AccordionSummary from "@components/common/accordions/AccordionSummary.tsx";
+import AccordionDetails from "@components/common/accordions/AccordionDetails.tsx";
+import { useAppDispatch, useAppSelector } from "@redux/hooks.ts";
+import { selectIsBudgetHidden } from "@redux/slices/settingSlice.ts";
+import useHeader from "@hooks/useHeader.tsx";
+import { PATH } from "@constants/path.ts";
+import ClickableListItem from "@components/settings/ClickableListItem";
 import {
   changeHeaderTitle,
   setIsAuthenticatedFalse,
 } from "@redux/slices/commonSlice.tsx";
 import { HEADER_MODE } from "@type/common.tsx";
 
-export default function SettingsContainer() {
+export default function Settings() {
   const isHideBudgetMode = useAppSelector(selectIsBudgetHidden);
   const userAgent = navigator.userAgent.toLowerCase();
 

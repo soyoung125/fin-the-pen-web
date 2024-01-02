@@ -1,4 +1,4 @@
-import EasyAuthentication from "../sign/EasyAuthentication";
+import EasyAuthentication from "@components/sign/EasyAuthentication";
 import AssetPreview from "./HomeContainer/view/AssetPreview";
 import { useAppSelector } from "@redux/hooks.ts";
 import { selectIsAuthenticated } from "@redux/slices/commonSlice.tsx";
@@ -13,4 +13,5 @@ function AssetView() {
     </>
   );
 }
+
 export default AssetView;

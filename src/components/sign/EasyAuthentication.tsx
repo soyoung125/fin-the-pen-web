@@ -1,18 +1,18 @@
 import { Alert, Box, Button, Dialog, Grid, Stack } from "@mui/material";
 import { useState } from "react";
-import LogoCircle from "../../components/common/LogoCircle";
+import LogoCircle from "../common/LogoCircle.tsx";
 import { useAppDispatch, useAppSelector } from "@redux/hooks.ts";
 import {
   selectIsAuthenticated,
   setIsAuthenticatedTrue,
 } from "@redux/slices/commonSlice.tsx";
-import Keypad from "@containers/sign/Keypad.tsx";
-import BackButton from "@components/layouts/common/TopBar/buttons/BackButton";
+import Keypad from "@components/sign/Keypad.tsx";
+import BackButton from "@components/layouts/common/TopBar/buttons/BackButton.tsx";
 import {
   changeViewMode,
   selectViewMode,
-} from "@app/redux/slices/scheduleSlice";
-import { VIEW_MODE } from "constants/schedule";
+} from "@redux/slices/scheduleSlice.tsx";
+import { VIEW_MODE } from "@constants/schedule.tsx";
 import { useUser } from "@app/tanstack-query/useUser.ts";
 
 interface EasyAuthenticationProps {

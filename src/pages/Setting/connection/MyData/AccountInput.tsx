@@ -6,8 +6,8 @@ import {
   OutlinedInput,
   Stack,
 } from "@mui/material";
-import RoundedPaper from "../../../../components/common/RoundedPaper";
-import { OrganizationInterface } from "@type/common";
+import RoundedPaper from "@components/common/RoundedPaper.tsx";
+import { OrganizationInterface } from "@type/common.tsx";
 import styled from "@emotion/styled";
 
 interface AccountInputProps {

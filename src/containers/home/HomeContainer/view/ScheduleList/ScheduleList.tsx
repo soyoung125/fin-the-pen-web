@@ -5,7 +5,7 @@ import ScheduleCard from "./ScheduleCard";
 import { CATEGORIES, Category } from "@constants/categories";
 import { useState } from "react";
 import { Schedule } from "@type/schedule";
-import EasyAuthentication from "@containers/sign/EasyAuthentication";
+import EasyAuthentication from "@components/sign/EasyAuthentication";
 import { useAppDispatch } from "@app/redux/hooks";
 import { changeHideBudgetMode } from "@app/redux/slices/settingSlice";
 import { INIT_PERIOD, INIT_REPEAT } from "@constants/schedule";

@@ -1,7 +1,10 @@
-import { useSelector } from 'react-redux';
-import ToggleListItem from '../../../components/settings/ToggleListItem';
-import { changeThemeMode, selectIsDarkMode } from '../../../app/redux/slices/settingSlice';
-import { useAppDispatch } from '../../../app/redux/hooks';
+import { useSelector } from "react-redux";
+import ToggleListItem from "@components/settings/ToggleListItem";
+import {
+  changeThemeMode,
+  selectIsDarkMode,
+} from "@redux/slices/settingSlice.ts";
+import { useAppDispatch } from "@redux/hooks.ts";
 
 function ThemeMode() {
   const dispatch = useAppDispatch();
@@ -19,4 +22,5 @@ function ThemeMode() {
     />
   );
 }
+
 export default ThemeMode;

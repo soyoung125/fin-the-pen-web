@@ -1,26 +1,26 @@
 import { Box, Button, Stack } from "@mui/material";
 import AddRoundedIcon from "@mui/icons-material/AddRounded";
 import { useEffect, useState } from "react";
-import { useAppDispatch, useAppSelector } from "../../../../app/redux/hooks";
+import { useAppDispatch, useAppSelector } from "@redux/hooks.ts";
 import {
   changeHeaderTitle,
   selectGuestMode,
   setBottomBarOpenFalse,
   setBottomBarOpenTrue,
-} from "../../../../app/redux/slices/commonSlice";
+} from "@redux/slices/commonSlice.tsx";
 import {
   fetchCreateAccount,
   fetchGetAccountList,
   fetchGetCardList,
-} from "../../../../app/api/API";
+} from "@api/API.tsx";
 import OrganizationSelect from "./OrganizationSelect";
-import AccountInput from "./AccountInput";
-import RoundedPaper from "@components/common/RoundedPaper";
-import AssetSelect from "./AssetSelect";
-import AssetFilter from "./AssetFilter";
-import useModal from "@hooks/useModal";
-import AlertModal from "@components/common/AlertModal";
-import { OrganizationInterface } from "@type/common";
+import AccountInput from "./AccountInput.tsx";
+import RoundedPaper from "@components/common/RoundedPaper.tsx";
+import AssetSelect from "./AssetSelect.tsx";
+import AssetFilter from "./AssetFilter.tsx";
+import useModal from "@hooks/useModal.tsx";
+import AlertModal from "@components/common/AlertModal.tsx";
+import { OrganizationInterface } from "@type/common.tsx";
 
 function MyData() {
   const businessType = ["BK", "CD", "ST", "IS"];
@@ -56,7 +56,7 @@ function MyData() {
     if (step === 0) {
       dispatch(changeHeaderTitle("마이데이터"));
       setSelected({ name: "", value: "", icon: "", limit: 0 });
-    } 
+    }
 
     switch (step) {
       case 1:
@@ -78,7 +78,7 @@ function MyData() {
 
     return () => {
       backButton?.removeEventListener("click", handleClickBack);
-    }
+    };
   }, [step]);
 
   useEffect(() => {
@@ -86,7 +86,7 @@ function MyData() {
 
     return () => {
       dispatch(setBottomBarOpenTrue()) as unknown as void;
-    }
+    };
   }, []);
 
   const handleClickBack = (e: Event) => {
