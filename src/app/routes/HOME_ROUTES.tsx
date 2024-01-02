@@ -1,7 +1,7 @@
 import AssetManagement from "../../pages/AssetManagement";
 import MyPage from "../../pages/MyPage";
 import Notification from "../../pages/Notification";
-import Settings from "@pages/Setting/Settings.tsx";
+import Settings from "@pages/Settings";
 import SignIn from "../../pages/SignIn";
 import SignUp from "../../pages/SignUp";
 import TestContainer from "@pages/MyPage/TestContainer.tsx";
@@ -11,7 +11,7 @@ import { RouterDOM } from "../../types/common";
 import DetailSetting from "../../containers/assetManagement/SavingsGoalContainer/DetailSetting";
 import FetchPaymentHistory from "../../containers/home/HomeContainer/view/FetchPaymentHistory";
 import SearchSchedule from "../../containers/home/HomeContainer/view/SearchSchedule";
-import MyData from "@pages/Setting/connection/MyData";
+import MyData from "@pages/Settings/connection/MyData";
 
 const HOME_ROUTES: RouterDOM[] = [
   {

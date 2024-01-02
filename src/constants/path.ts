@@ -7,7 +7,7 @@ export const PATH = {
   fetchPaymentHistory: "/fetch-payment-history",
   searchSchedule: "/search=schedule",
   assetManagement: "/asset-management",
-  settings: "/Setting",
+  settings: "/Settings",
   test: "/test",
 
   analysis: "/analysis",
@@ -27,5 +27,5 @@ export const PATH = {
   scheduleManagement: "/management/schedule-management",
 
   // setting pages
-  myData: "/Setting/my-data",
+  myData: "/Settings/my-data",
 } as const;
