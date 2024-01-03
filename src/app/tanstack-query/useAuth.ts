@@ -7,8 +7,8 @@ import { setSessionStorage } from "@utils/storage.ts";
 import { SESSION_STORAGE_KEY_TOKEN } from "@api/keys.ts";
 import { useDispatch } from "react-redux";
 import { setUser } from "@redux/slices/userSlice.tsx";
-import { useAlert } from "@hooks/dialog/hooks/useAlert.tsx";
 import { QUERY_KEY_USER } from "@constants/queryKeys.ts";
+import { useDialog } from "@hooks/dialog/useDialog.tsx";
 
 const fetchSignIn = async (credentials: SignIn) => {
   return fetch(`${DOMAIN}/fin-the-pen-web/sign-in`, {
@@ -32,7 +32,7 @@ export const useAuth = () => {
   const queryClient = useQueryClient();
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const { openAlert } = useAlert();
+  const { openAlert } = useDialog();
 
   const { mutate, isPending } = useMutation({
     mutationFn: fetchSignIn,

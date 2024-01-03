@@ -14,11 +14,11 @@ import { useState } from "react";
 import AddRoundedIcon from "@mui/icons-material/AddRounded";
 import RemoveRoundedIcon from "@mui/icons-material/RemoveRounded";
 import { useScheduleForm } from "../../hooks/useScheduleForm.ts";
-import { useConfirm } from "@hooks/dialog/hooks/useConfirm.tsx";
+import { useDialog } from "@hooks/dialog/useDialog.tsx";
 
 function SpendingInput() {
   const { scheduleForm, updateSchedule } = useScheduleForm();
-  const { openConfirm } = useConfirm();
+  const { openConfirm } = useDialog();
   const expectedSpending = scheduleForm ? scheduleForm?.amount : "0";
   const [showError, setShowError] = useState(false);
 
