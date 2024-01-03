@@ -7,7 +7,6 @@ import { DateField, LocalizationProvider } from "@mui/x-date-pickers";
 import { AdapterMoment } from "@mui/x-date-pickers/AdapterMoment";
 import { useDatePicker } from "@hooks/date-picker/hooks/useDatePicker.tsx";
 import { useScheduleForm } from "../../../../hooks/useScheduleForm.ts";
-import { useTimePicker } from "@hooks/date-picker/hooks/useTimePicker.tsx";
 
 interface InputDateTimeProps {
   date?: string;
@@ -22,8 +21,7 @@ function InputDateTime({ date, time, type, showError }: InputDateTimeProps) {
   const { scheduleForm, updateSchedule } = useScheduleForm();
 
   const title = SCHEDULE_DRAWER[type];
-  const { openDayPicker } = useDatePicker();
-  const { openTimePicker } = useTimePicker();
+  const { openDayPicker, openTimePicker } = useDatePicker();
 
   const changeSchedule = (state: UpdateStateInterface) => {
     updateSchedule(state);
