@@ -2,9 +2,9 @@ import { Meta } from "@storybook/react";
 import { Stack } from "@mui/material";
 import ReportMonthTitle from "@pages/reports/ReportMonthDetails/components/ReportMonthTitle";
 import { useState } from "react";
-import { useMonthPicker } from "@hooks/date-picker/hooks/useMonthPicker.tsx";
 import ReportCard from "@pages/reports/ReportMonthDetails/components/ReportCard";
 import TopNavigationBar from "@components/layouts/common/TopNavigationBar";
+import { useDatePicker } from "@hooks/date-picker/hooks/useDatePicker.tsx";
 
 const meta = {
   title: "reports/ReportMonthDetails",
@@ -19,7 +19,7 @@ export default meta;
 const useStorybookMonth = () => {
   const [yearMonth, setYearMonth] = useState("2023-5");
   const [year, month] = yearMonth.split("-").map((s) => Number(s));
-  const { openMonthPicker } = useMonthPicker();
+  const { openMonthPicker } = useDatePicker();
   const addMonth = () => {
     setYearMonth(month >= 12 ? `${year + 1}-${1}` : `${year}-${month + 1}`);
   };

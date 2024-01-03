@@ -1,5 +1,7 @@
 import { useOverlay } from "@hooks/use-overlay/useOverlay.tsx";
 import DatePicker from "@hooks/date-picker/components/DatePicker.tsx";
+import moment from "moment/moment";
+import MonthPicker from "@hooks/date-picker/components/MonthPicker.tsx";
 
 export const useDatePicker = () => {
   const { openOverlay, closeOverlay } = useOverlay();
@@ -20,5 +22,23 @@ export const useDatePicker = () => {
     });
   };
 
-  return { openDayPicker, closeDatePicker: closeOverlay };
+  const openMonthPicker = (defaultDate: string): Promise<moment.Moment> => {
+    return new Promise((resolve) => {
+      openOverlay(
+        <MonthPicker
+          defaultDate={defaultDate}
+          onClickApprove={(answer) => {
+            resolve(answer);
+            closeOverlay();
+          }}
+          onClickReject={(answer) => {
+            resolve(answer);
+            closeOverlay();
+          }}
+        />
+      );
+    });
+  };
+
+  return { openDayPicker, openMonthPicker, closeDatePicker: closeOverlay };
 };
