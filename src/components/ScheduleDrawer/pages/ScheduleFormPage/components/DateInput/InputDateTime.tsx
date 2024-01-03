@@ -22,7 +22,7 @@ function InputDateTime({ date, time, type, showError }: InputDateTimeProps) {
   const { scheduleForm, updateSchedule } = useScheduleForm();
 
   const title = SCHEDULE_DRAWER[type];
-  const { openDatePicker } = useDatePicker();
+  const { openDayPicker } = useDatePicker();
   const { openTimePicker } = useTimePicker();
 
   const changeSchedule = (state: UpdateStateInterface) => {
@@ -30,7 +30,7 @@ function InputDateTime({ date, time, type, showError }: InputDateTimeProps) {
   };
 
   const onClickDateField = async () => {
-    const date = await openDatePicker();
+    const date = await openDayPicker();
     if (date) {
       changeSchedule({
         target: {

@@ -3,7 +3,7 @@ import DatePicker from "@hooks/date-picker/components/DatePicker.tsx";
 
 export const useDatePicker = () => {
   const { openOverlay, closeOverlay } = useOverlay();
-  const openDatePicker = (): Promise<string> => {
+  const openDayPicker = (): Promise<string> => {
     return new Promise((resolve) => {
       openOverlay(
         <DatePicker
@@ -20,5 +20,5 @@ export const useDatePicker = () => {
     });
   };
 
-  return { openDatePicker, closeDatePicker: closeOverlay };
+  return { openDayPicker, closeDatePicker: closeOverlay };
 };

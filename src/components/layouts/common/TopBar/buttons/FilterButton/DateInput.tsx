@@ -9,10 +9,10 @@ interface DateInputProps {
 }
 
 function DateInput({ updateDate, date, dateType }: DateInputProps) {
-  const { openDatePicker } = useDatePicker();
+  const { openDayPicker } = useDatePicker();
   const onClick: MouseEventHandler<HTMLInputElement> = async (event) => {
     event.preventDefault();
-    const answer = await openDatePicker();
+    const answer = await openDayPicker();
     updateDate(dateType, answer);
   };
 
