@@ -1,5 +1,5 @@
 import { Meta } from "@storybook/react";
-import { useDatePicker } from "@hooks/date-picker/hooks/useDatePicker.tsx";
+import { useDatePicker } from "./hooks/useDatePicker.tsx";
 import { useState } from "react";
 import { Button, Typography } from "@mui/material";
 
