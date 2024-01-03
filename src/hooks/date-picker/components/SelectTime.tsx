@@ -9,13 +9,13 @@ interface SelectTimeProps {
 function SelectTime({ timeState, setValue }: SelectTimeProps) {
   const { meridiem, minute, hour } = timeState;
   const updateHour = (value: string) => {
-    const numberValue = Number(value);
+    const numberValue = Number(value.replace(/\D/g, ""));
     if (numberValue < 0 || numberValue > 12) return;
     setValue("hour", numberValue);
   };
 
   const updateMinute = (value: string) => {
-    const numberValue = Number(value);
+    const numberValue = Number(value.replace(/\D/g, ""));
     if (numberValue < 0 || numberValue > 59) return;
     setValue("minute", numberValue);
   };
