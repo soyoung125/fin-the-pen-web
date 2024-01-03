@@ -22,15 +22,15 @@ const preview: Preview = {
       const persistor = persistStore(store);
       return (
         <MemoryRouter initialEntries={["/"]}>
-          <OverlayProvider>
-            <Provider store={store}>
-              <PersistGate loading={null} persistor={persistor}>
-                <CustomThemeProvider>
+          <Provider store={store}>
+            <PersistGate loading={null} persistor={persistor}>
+              <CustomThemeProvider>
+                <OverlayProvider>
                   <Story />
-                </CustomThemeProvider>
-              </PersistGate>
-            </Provider>
-          </OverlayProvider>
+                </OverlayProvider>
+              </CustomThemeProvider>
+            </PersistGate>
+          </Provider>
         </MemoryRouter>
       );
     },

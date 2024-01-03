@@ -8,16 +8,19 @@ export const Example = () => {
   const [value, setValue] = useState("버튼을 눌러 업데이트 해주세요");
   const handleMonthPicker = async () => {
     const newDate = await openMonthPicker("2021-10");
+    if (!newDate) return;
     setValue(newDate.format("YYYY-MM"));
   };
 
   const handleDayPicker = async () => {
     const newDate = await openDayPicker();
+    if (!newDate) return;
     setValue(newDate);
   };
 
   const handleTimePicker = async () => {
     const newDate = await openTimePicker({ defaultTime: "12:00" });
+    if (!newDate) return;
     setValue(newDate);
   };
 
