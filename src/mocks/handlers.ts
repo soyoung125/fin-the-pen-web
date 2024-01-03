@@ -2,9 +2,9 @@
 import { rest } from "msw";
 import {
   LOCAL_STORAGE_KEY_SCHEDULES,
-  LOCAL_STORAGE_KEY_USERS,
+  LOCAL_STORAGE_KEY_USERS, SESSION_STORAGE_KEY_TOKEN,
 } from "@api/keys.ts";
-import { getLocalStorage, setLocalStorage } from "@utils/storage.ts";
+import {getLocalStorage, setLocalStorage, setSessionStorage} from "@utils/storage.ts";
 import { DOMAIN } from "@api/url.ts";
 import { MockUser, SignUp, User } from "@app/types/auth.ts";
 import { Schedule } from "@app/types/schedule.ts";
@@ -39,11 +39,17 @@ export const handlers = [
     if (user === undefined) {
       return res(ctx.delay(1000), ctx.status(200), ctx.json(""));
     }
-    return res(ctx.delay(1000), ctx.status(200), ctx.json(user));
+
+    const randomEightDigit = Math.floor(
+        10000000 + Math.random() * 90000000
+    ).toString();
+
+    return res(ctx.delay(1000), ctx.status(200), ctx.json({...user, token: randomEightDigit}));
   }),
 
   rest.post(`${DOMAIN}/createSchedule`, async (req, res, ctx) => {
     const schedule = await req.json();
+    console.log(schedule);
     const prevSchedules = getLocalStorage<Schedule[]>(
       LOCAL_STORAGE_KEY_SCHEDULES,
       []
