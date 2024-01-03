@@ -7,12 +7,12 @@ import {
 } from "../../app/redux/slices/scheduleSlice";
 import SwitchingHeader from "../../components/common/SwitchingHeader";
 import { useAppDispatch } from "../../app/redux/hooks";
-import { useMonthPicker } from "@hooks/date-picker/hooks/useMonthPicker.tsx";
+import { useDatePicker } from "@hooks/date-picker/hooks/useDatePicker.tsx";
 
 function AnalysisHeader() {
   const dispatch = useAppDispatch();
   const date = useSelector(selectDate);
-  const { openMonthPicker } = useMonthPicker();
+  const { openMonthPicker } = useDatePicker();
   const handleDate = async () => {
     const newDate = await openMonthPicker(date);
     if (newDate) {

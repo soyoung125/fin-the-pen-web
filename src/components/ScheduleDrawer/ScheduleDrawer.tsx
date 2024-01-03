@@ -10,7 +10,7 @@ import ScheduleFormPage from "./pages/ScheduleFormPage";
 import CategoryPicker from "./pages/ScheduleFormPage/components/CategoryPicker";
 import RepeatPicker from "./pages/ScheduleFormPage/components/RepeatPicker";
 import useSchedule from "@hooks/useSchedule.ts";
-import { useConfirm } from "@hooks/dialog/hooks/useConfirm.tsx";
+import { useDialog } from "@hooks/dialog/useDialog.tsx";
 
 function TransitionUp(props: SlideProps) {
   return <Slide {...props} direction="right" />;
@@ -33,7 +33,7 @@ function ScheduleDrawer({ setDrawerWidth, handleClose }: ScheduleDrawerProps) {
   const [isRepeatPickerOpen, setIsRepeatPickerOpen] = useState(false);
 
   const { resetSchedule } = useSchedule();
-  const { openConfirm } = useConfirm();
+  const { openConfirm } = useDialog();
 
   const handleChange = (event: React.SyntheticEvent, newValue: number) => {
     swiper?.slideTo(newValue);

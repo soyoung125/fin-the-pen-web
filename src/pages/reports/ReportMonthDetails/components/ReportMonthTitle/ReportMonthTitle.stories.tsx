@@ -3,7 +3,7 @@ import ReportMonthTitle, {
   ReportMonthTitleProps,
 } from "./ReportMonthTitle.tsx";
 import { useState } from "react";
-import { useMonthPicker } from "@hooks/date-picker/hooks/useMonthPicker.tsx";
+import { useDatePicker } from "@hooks/date-picker/hooks/useDatePicker.tsx";
 
 const meta = {
   title: "reports/ReportMonthDetails/ReportMonthTitle",
@@ -28,7 +28,7 @@ export const Default = (args: ReportMonthTitleProps) => {
 export const State = () => {
   const [yearMonth, setYearMonth] = useState("2023-5");
   const [year, month] = yearMonth.split("-").map((s) => Number(s));
-  const { openMonthPicker } = useMonthPicker();
+  const { openMonthPicker } = useDatePicker();
   const addMonth = () => {
     setYearMonth(month >= 12 ? `${year + 1}-${1}` : `${year}-${month + 1}`);
   };

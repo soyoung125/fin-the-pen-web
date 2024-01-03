@@ -7,7 +7,7 @@ import FilterLayout from "@components/layouts/common/TopBar/buttons/FilterButton
 import DateInput from "@components/layouts/common/TopBar/buttons/FilterButton/DateInput.tsx";
 import RefreshIcon from "@mui/icons-material/Refresh";
 import TopNavigationBar from "@components/layouts/common/TopNavigationBar";
-import { useConfirm } from "@hooks/dialog/hooks/useConfirm.tsx";
+import { useDialog } from "@hooks/dialog/useDialog.tsx";
 
 interface FilterDrawerProps {
   bottomDrawerOpen: boolean;
@@ -18,7 +18,7 @@ function FilterDrawer({
   bottomDrawerOpen,
   setBottomDrawerOpen,
 }: FilterDrawerProps) {
-  const { openConfirm } = useConfirm();
+  const { openConfirm } = useDialog();
   const {
     selectedCategories,
     onClickCheckFilterButton,
