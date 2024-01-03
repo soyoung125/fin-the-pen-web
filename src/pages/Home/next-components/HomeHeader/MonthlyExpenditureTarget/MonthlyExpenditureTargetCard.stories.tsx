@@ -6,7 +6,10 @@ import MonthlyExpenditureTargetCard, {
 const meta = {
   title: "Home/HomeHeader/MonthlyExpenditureTargetCard",
   component: MonthlyExpenditureTargetCard,
-  args: {},
+  args: {
+    amount: 1200000,
+    userName: "오민하",
+  },
   argTypes: {},
 } satisfies Meta<typeof MonthlyExpenditureTargetCard>;
 
