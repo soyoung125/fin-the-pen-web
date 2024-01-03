@@ -21,9 +21,10 @@ function SelectTime({ timeState, setValue }: SelectTimeProps) {
   };
 
   return (
-    <Stack direction="row" justifyContent="space-between">
-      <Stack width="30%">
+    <Stack direction="row" justifyContent="space-between" gap="8px" p="8px">
+      <Stack width="30%" gap="4px">
         <Button
+          size="small"
           fullWidth
           variant={meridiem === "오전" ? "contained" : "outlined"}
           onClick={() => setValue("meridiem", "오전")}
@@ -31,6 +32,7 @@ function SelectTime({ timeState, setValue }: SelectTimeProps) {
           오전
         </Button>
         <Button
+          size="small"
           fullWidth
           variant={meridiem === "오후" ? "contained" : "outlined"}
           onClick={() => setValue("meridiem", "오후")}
@@ -39,15 +41,12 @@ function SelectTime({ timeState, setValue }: SelectTimeProps) {
         </Button>
       </Stack>
       <Stack direction="row" alignItems="center" gap={1} width="70%">
-        <TextField
-          value={hour}
-          onChange={(e) => updateHour(e.target.value)}
-        ></TextField>
+        <TextField value={hour} onChange={(e) => updateHour(e.target.value)} />
         <Typography>:</Typography>
         <TextField
           value={minute}
           onChange={(e) => updateMinute(e.target.value)}
-        ></TextField>
+        />
       </Stack>
     </Stack>
   );
