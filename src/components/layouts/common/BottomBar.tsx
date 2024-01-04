@@ -7,7 +7,6 @@ import { useNavigate } from "react-router-dom";
 import CalendarMonthIcon from "@mui/icons-material/CalendarMonth";
 import DataSaverOffIcon from "@mui/icons-material/DataSaverOff";
 import AddCircleIcon from "@mui/icons-material/AddCircle";
-import { useState } from "react";
 import SettingsIcon from "@mui/icons-material/Settings";
 import PaidIcon from "@mui/icons-material/Paid";
 import moment from "moment";
@@ -20,11 +19,8 @@ import {
   selectBottomDrawerTabMenu,
   setBottomDrawerTabMenu,
 } from "@redux/slices/commonSlice.tsx";
-import { Global } from "@emotion/react";
 import { PATH } from "@constants/path.ts";
 import useSchedule from "@hooks/useSchedule.ts";
-
-const drawerBleeding = 56;
 
 function BottomBar() {
   const navigate = useNavigate();
@@ -34,8 +30,6 @@ function BottomBar() {
   const date = useAppSelector(selectDate);
   const bottomTabMenu = useAppSelector(selectBottomDrawerTabMenu);
   const bottomBarOpen = useAppSelector(selectBottomBarOpen);
-
-  const [drawerWidth, setDrawerWidth] = useState(0);
 
   const toggleDrawer = (newOpen: boolean) => () => {
     !newOpen && closeDrawer();
@@ -90,20 +84,6 @@ function BottomBar() {
         />
       </BottomNavigation>
 
-      <Global
-        styles={{
-          ".MuiDrawer-root > .MuiPaper-root": {
-            position: "absolute",
-            height: `calc(100% - ${drawerBleeding}px)`,
-            maxWidth: "425px",
-            left:
-              drawerWidth === 425 ? `calc((100dvw - ${drawerWidth}px)/2)` : 0,
-            borderTopLeftRadius: "20px",
-            borderTopRightRadius: "20px",
-          },
-        }}
-      />
-
       <SwipeableDrawer
         anchor="bottom"
         open={isBottomDrawerOpen}
@@ -114,10 +94,7 @@ function BottomBar() {
           keepMounted: true,
         }}
       >
-        <ScheduleDrawer
-          setDrawerWidth={setDrawerWidth}
-          handleClose={closeDrawer}
-        />
+        <ScheduleDrawer handleClose={closeDrawer} />
       </SwipeableDrawer>
     </>
   );
