@@ -1,28 +1,23 @@
 name: "Chromatic Deployment"
 
 on:
-  # 원하는 브랜치 명으로 바꿔주시면 됩니다.
   push:
     branches: [ "develop" ]
 
 jobs:
-  test:
+  chromatic:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - name: Checkout code
+        uses: actions/checkout@v4
         with:
           fetch-depth: 0
 
-#      - name: Clean Caches and Reinstall Dependencies
-#        run: |
-#          yarn cache clean --all
-#          npm install -g npm@latest
-#          npm install -g yarn@latest
-#          rm -rf node_modules/ yarn.lock package-lock.json
-#          yarn set version stable
+      - name: Install dependencies
+        run: yarn install --immutable --immutable-cache --check-cache
 
-      - run: yarn
-      - uses: chromaui/action@v1
+      - name: Publish to Chromatic
+        uses: chromaui/action@latest
         with:
+          # ⚠️ Make sure to configure a `CHROMATIC_PROJECT_TOKEN` repository secret
           projectToken: ${{ secrets.CHROMATIC_PROJECT_TOKEN }}
-          token: ${{ secrets.GITHUB_TOKEN }}
