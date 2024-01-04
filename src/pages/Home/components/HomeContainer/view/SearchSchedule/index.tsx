@@ -13,7 +13,6 @@ import RoundedPaper from "@components/common/RoundedPaper.tsx";
 import SearchIcon from "@mui/icons-material/Search";
 import { useEffect, useRef, useState } from "react";
 import { useAppDispatch } from "@redux/hooks.ts";
-import { deleteSchedule } from "@redux/slices/scheduleSlice.tsx";
 import RoundedBorderBox from "@components/common/RoundedBorderBox.tsx";
 import moment from "moment";
 import "moment/locale/ko";
@@ -78,7 +77,10 @@ function SearchSchedule() {
 
   const handleDelete = () => {
     if (window.confirm("선택 일정을 삭제 하시겠습니까?")) {
-      checkedSchedules.map((s) => dispatch(deleteSchedule(s?.id || "")));
+      alert("아직 기능이 완성되지 않았습니다...");
+      checkedSchedules.map((s) => {
+        console.log(s?.id);
+      });
     }
   };
 

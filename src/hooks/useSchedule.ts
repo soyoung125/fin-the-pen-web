@@ -1,11 +1,8 @@
 import { useSelector } from "react-redux";
 import {
-  deleteSchedule,
-  getMonthSchedules,
   selectDate,
   selectIsBottomDrawerOpen,
   selectMonth,
-  selectStatus,
   setDrawerSchedule,
   setIsBottomDrawerOpen,
 } from "@redux/slices/scheduleSlice.tsx";
@@ -23,7 +20,6 @@ import { useDialog } from "@hooks/dialog/useDialog.tsx";
 const useSchedule = () => {
   const dispatch = useAppDispatch();
 
-  const status = useSelector(selectStatus);
   const date = useSelector(selectDate);
   const month = useSelector(selectMonth);
   const isBottomDrawerOpen = useSelector(selectIsBottomDrawerOpen);
@@ -75,15 +71,10 @@ const useSchedule = () => {
     });
     if (answer) {
       console.log(scheduleId);
-      const result = await dispatch(deleteSchedule(scheduleId));
-      if (result && user) {
-        dispatch(
-          getMonthSchedules({
-            user_id: user.user_id,
-            date: date,
-          })
-        );
-      }
+      alert(
+        "아직 구현 안됨. useMutation으로 수정해주세요. scheduleId: " +
+          scheduleId
+      );
     }
   };
 
