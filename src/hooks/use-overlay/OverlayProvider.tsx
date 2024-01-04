@@ -1,5 +1,6 @@
 import { PropsWithChildren, ReactNode, useState } from "react";
 import { OverlayContext } from "./OverlayContext.ts";
+import { createPortal } from "react-dom";
 
 function OverlayProvider({ children }: PropsWithChildren) {
   const [overlay, setOverlay] = useState<ReactNode>(null);
@@ -20,7 +21,7 @@ function OverlayProvider({ children }: PropsWithChildren) {
       }}
     >
       {children}
-      {overlay}
+      {overlay && createPortal(overlay, document.body)}
     </OverlayContext.Provider>
   );
 }
