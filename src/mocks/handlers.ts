@@ -66,7 +66,7 @@ export const handlers = [
 
   rest.post(`${DOMAIN}/getMonthSchedules`, async (req, res, ctx) => {
     const { user_id, date } = await req.json();
-    console.log(user_id, date);
+
     const schedules = getLocalStorage<Schedule[]>(
       LOCAL_STORAGE_KEY_SCHEDULES,
       []
@@ -103,7 +103,7 @@ export const handlers = [
 
     rest.post(`${DOMAIN}/modifySchedule`, async (req, res, ctx) => {
       const schedule = await req.json();
-      console.log(schedule);
+
       const prevSchedules = getLocalStorage<Schedule[]>(
           LOCAL_STORAGE_KEY_SCHEDULES,
           []
