@@ -26,7 +26,7 @@ function ScheduleList() {
     );
   }
 
-  if (!todaySchedules || isError) {
+  if (todaySchedules.length === 0 || isError) {
     return (
       <Stack justifyContent="center" alignItems="center">
         <Box my={5}>
@@ -58,7 +58,7 @@ function ScheduleList() {
 
   return (
     <>
-      {todaySchedules.map((schedule) => (
+      {todaySchedules.map((schedule, i) => (
         <ScheduleCard
           schedule={schedule}
           category={
@@ -66,7 +66,7 @@ function ScheduleList() {
             CATEGORIES.find((c) => c.title === schedule.category) ||
             ({ color: "#C8A2C8" } as Category)
           }
-          key={Math.random()}
+          key={schedule.id}
           handleModal={handleModal}
           openAuthenticationPage={() => setAuthenticationPageOpen(true)}
         />
