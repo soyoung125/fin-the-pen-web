@@ -93,4 +93,16 @@ export const handlers = [
     setLocalStorage(LOCAL_STORAGE_KEY_SCHEDULES, newSchedules);
     return res(ctx.delay(1000), ctx.status(200), ctx.json(true));
   }),
+
+    rest.post(`${DOMAIN}/modifySchedule`, async (req, res, ctx) => {
+      const schedule = await req.json();
+      console.log(schedule);
+      const prevSchedules = getLocalStorage<Schedule[]>(
+          LOCAL_STORAGE_KEY_SCHEDULES,
+          []
+      );
+      const newSchedules = prevSchedules.map((s) => s.id === schedule.schedule_id ? {...schedule, price_type: getSign(schedule.price_type)} : s);
+      setLocalStorage(LOCAL_STORAGE_KEY_SCHEDULES, newSchedules);
+      return res(ctx.delay(1000), ctx.status(200), ctx.json(true));
+    }),
 ];
