@@ -19,7 +19,7 @@ import {
   setSavingGoal,
 } from "../../../../../app/redux/slices/assetSlice";
 import { useAppDispatch } from "../../../../../app/redux/hooks";
-import useModal from "@hooks/useModal.ts";
+import useModal_deprecated from "@hooks/useModal_deprecated.ts";
 import SwitchButton from "../../../../../components/common/SwitchButton";
 import ResetButton from "@components/common/ResetButton";
 
@@ -32,7 +32,7 @@ function InputModal({ closeSavingGoalModal }: InputModalProps) {
     modalOpen: alertModalOpen,
     openModal: openAlertModal,
     closeModal: closeAlertModal,
-  } = useModal();
+  } = useModal_deprecated();
   const [form, setForm] = useState({
     year: 0,
     month: 0,

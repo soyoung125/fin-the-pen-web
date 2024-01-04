@@ -10,7 +10,7 @@ import RoundedBorderBox from "../../../../../components/common/RoundedBorderBox"
 import AlertModal from "../../../../../components/common/AlertModal";
 import { Schedule } from "@app/types/schedule.ts";
 import { useAppDispatch } from "@redux/hooks.ts";
-import useModal from "@hooks/useModal.ts";
+import useModal_deprecated from "@hooks/useModal_deprecated.ts";
 import useSchedule from "@hooks/useSchedule.ts";
 
 interface SwipeableDetailCardProps {
@@ -25,7 +25,7 @@ function SwipeableDetailCard({ data }: SwipeableDetailCardProps) {
     modalOpen: alertModalOpen,
     openModal: openAlertModal,
     closeModal: closeAlertModal,
-  } = useModal();
+  } = useModal_deprecated();
   const { handleDeleteSchedule, handleModifySchedule } = useSchedule();
 
   // const handleCloseAlert = () => {

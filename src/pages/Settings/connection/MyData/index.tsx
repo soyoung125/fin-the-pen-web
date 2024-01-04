@@ -18,7 +18,7 @@ import AccountInput from "./AccountInput.tsx";
 import RoundedPaper from "@components/common/RoundedPaper.tsx";
 import AssetSelect from "./AssetSelect.tsx";
 import AssetFilter from "./AssetFilter.tsx";
-import useModal from "@hooks/useModal.ts";
+import useModal_deprecated from "@hooks/useModal_deprecated.ts";
 import AlertModal from "@components/common/AlertModal.tsx";
 import { OrganizationInterface } from "@app/types/common.ts";
 
@@ -32,7 +32,7 @@ function MyData() {
     modalOpen: alertModalOpen,
     openModal: openAlertModal,
     closeModal: closeAlertModal,
-  } = useModal();
+  } = useModal_deprecated();
 
   const [step, setStep] = useState(0);
   const [value, setValue] = useState(0);
