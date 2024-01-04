@@ -1,8 +1,8 @@
 import { createContext, ReactNode } from "react";
 
 export const OverlayContext = createContext<{
-  mount: (node: ReactNode) => void;
-  unmount: () => void;
+  mount: (id: string, node: ReactNode) => void;
+  unmount: (id: string) => void;
 }>({
   mount: () => {},
   unmount: () => {},

@@ -1,13 +1,8 @@
 import { useSelector } from "react-redux";
 import {
-  deleteSchedule,
-  getMonthSchedules,
   selectDate,
-  selectIsBottomDrawerOpen,
   selectMonth,
-  selectStatus,
-  setDrawerSchedule,
-  setIsBottomDrawerOpen,
+  setDrawerScheduleForm,
 } from "@redux/slices/scheduleSlice.tsx";
 import { Schedule } from "@app/types/schedule.ts";
 import { useAppDispatch } from "@redux/hooks.ts";
@@ -23,10 +18,8 @@ import { useDialog } from "@hooks/dialog/useDialog.tsx";
 const useSchedule = () => {
   const dispatch = useAppDispatch();
 
-  const status = useSelector(selectStatus);
   const date = useSelector(selectDate);
   const month = useSelector(selectMonth);
-  const isBottomDrawerOpen = useSelector(selectIsBottomDrawerOpen);
 
   const { data: user } = useUser();
   const { openConfirm } = useDialog();
@@ -75,15 +68,10 @@ const useSchedule = () => {
     });
     if (answer) {
       console.log(scheduleId);
-      const result = await dispatch(deleteSchedule(scheduleId));
-      if (result && user) {
-        dispatch(
-          getMonthSchedules({
-            user_id: user.user_id,
-            date: date,
-          })
-        );
-      }
+      alert(
+        "아직 구현 안됨. useMutation으로 수정해주세요. scheduleId: " +
+          scheduleId
+      );
     }
   };
 
@@ -91,33 +79,20 @@ const useSchedule = () => {
     modifySchedule(schedule);
   };
 
-  const openDrawer = (data: Schedule) => {
-    dispatch(setIsBottomDrawerOpen(true));
-    dispatch(setDrawerSchedule(data));
-  };
-
-  const closeDrawer = () => {
-    dispatch(setIsBottomDrawerOpen(false));
-  };
-
   const resetSchedule = () => {
-    dispatch(setDrawerSchedule(INIT_SCHEDULE(date)));
+    dispatch(setDrawerScheduleForm(INIT_SCHEDULE(date)));
   };
 
   return {
-    status,
     schedules,
     isPending,
     isError,
-    isBottomDrawerOpen,
     todaySchedules,
     date,
     month,
     handleDeleteSchedule,
     handleCreateSchedule,
     handleModifySchedule,
-    openDrawer,
-    closeDrawer,
     resetSchedule,
   };
 };

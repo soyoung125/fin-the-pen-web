@@ -9,11 +9,12 @@ import EasyAuthentication from "@components/sign/EasyAuthentication.tsx";
 import { useAppDispatch } from "@redux/hooks.ts";
 import { changeHideBudgetMode } from "@redux/slices/settingSlice.ts";
 import { INIT_PERIOD, INIT_REPEAT } from "@constants/schedule.ts";
+import { useScheduleDrawer } from "@hooks/useScheduleDrawer.tsx";
 
 function ScheduleList() {
   const dispatch = useAppDispatch();
-  const { date, todaySchedules, isPending, isError, openDrawer } =
-    useSchedule(); // redux가 직접 하도록 개선 예정
+  const { date, todaySchedules, isPending, isError } = useSchedule(); // redux가 직접 하도록 개선 예정
+  const { openScheduleDrawer } = useScheduleDrawer();
   const [authenticationPageOpen, setAuthenticationPageOpen] = useState(false);
 
   if (isPending) {
@@ -26,7 +27,7 @@ function ScheduleList() {
     );
   }
 
-  if (!todaySchedules || isError) {
+  if (todaySchedules.length === 0 || isError) {
     return (
       <Stack justifyContent="center" alignItems="center">
         <Box my={5}>
@@ -48,7 +49,7 @@ function ScheduleList() {
     // setBottomDrawerOpen(true); // 수정 drawer는 bottombar의 drawer를 공유할 수 있도록 수정 예정
     if (schedule) {
       const start = moment(schedule.start_date); // getMonthSchedule api 수정 후 제거 예정
-      openDrawer({
+      openScheduleDrawer({
         ...schedule,
         repeat: INIT_REPEAT(start),
         period: INIT_PERIOD(start),
@@ -58,7 +59,7 @@ function ScheduleList() {
 
   return (
     <>
-      {todaySchedules.map((schedule) => (
+      {todaySchedules.map((schedule, i) => (
         <ScheduleCard
           schedule={schedule}
           category={
@@ -66,7 +67,7 @@ function ScheduleList() {
             CATEGORIES.find((c) => c.title === schedule.category) ||
             ({ color: "#C8A2C8" } as Category)
           }
-          key={Math.random()}
+          key={schedule.id}
           handleModal={handleModal}
           openAuthenticationPage={() => setAuthenticationPageOpen(true)}
         />

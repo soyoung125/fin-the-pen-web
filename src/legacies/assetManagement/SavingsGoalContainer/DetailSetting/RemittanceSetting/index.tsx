@@ -12,7 +12,7 @@ import CalendarTodayOutlinedIcon from "@mui/icons-material/CalendarTodayOutlined
 import { RemittanceInterface } from "@app/types/common.ts";
 import { useEffect, useState } from "react";
 import ModalStaticBackdrop from "../../../../../components/layouts/ModalStaticBackdrop";
-import useModal from "@hooks/useModal.ts";
+import useModal_deprecated from "@hooks/useModal_deprecated.ts";
 import InputModal from "./InputModal";
 import SwitchButton from "../../../../../components/common/SwitchButton";
 
@@ -37,7 +37,7 @@ function RemittanceSetting({
     modalOpen: transferDateModalOpen,
     openModal: openTransferDateModal,
     closeModal: closeTransferDateModal,
-  } = useModal();
+  } = useModal_deprecated();
 
   useEffect(() => {
     if (remittance.settings.date === "직접 설정") {
@@ -137,13 +137,13 @@ function RemittanceSetting({
               }
             >
               {options.map((option) => (
-                <MenuItem key={Math.random()} value={option}>
+                <MenuItem key={option} value={option}>
                   {option}
                 </MenuItem>
               ))}
               {!options.includes(remittance.settings.date) && (
                 <MenuItem
-                  key={Math.random()}
+                  key={remittance.settings.date}
                   disabled
                   value={remittance.settings.date}
                 >

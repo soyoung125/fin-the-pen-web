@@ -1,7 +1,7 @@
 import { UpdateStateInterface } from "@app/types/common.ts";
 import {
-  selectSchedule,
-  setDrawerSchedule,
+  selectScheduleForm,
+  setDrawerScheduleForm,
 } from "@redux/slices/scheduleSlice.tsx";
 import moment from "moment/moment";
 import { CATEGORIES, Category } from "@constants/categories.ts";
@@ -55,7 +55,7 @@ const getRepeatEndDate = (
 
 export const useScheduleForm = () => {
   const dispatch = useAppDispatch();
-  const scheduleForm = useSelector(selectSchedule);
+  const scheduleForm = useSelector(selectScheduleForm);
 
   const setRandomGeneratedSchedule = (stringDate: string) => {
     const date = moment(stringDate);
@@ -88,7 +88,7 @@ export const useScheduleForm = () => {
       importance: importances[Math.floor(Math.random() * 3)],
       exclude: Math.floor(Math.random() * 2) === 0,
     };
-    dispatch(setDrawerSchedule(randomSchedule));
+    dispatch(setDrawerScheduleForm(randomSchedule));
   };
 
   const updateSchedule = (
@@ -102,7 +102,7 @@ export const useScheduleForm = () => {
           .add(2, "hours")
           .format("HH:mm");
         dispatch(
-          setDrawerSchedule({
+          setDrawerScheduleForm({
             ...scheduleForm,
             [state.target.id]: state.target.value,
             end_time: endTime,
@@ -121,7 +121,7 @@ export const useScheduleForm = () => {
           moment(scheduleForm?.start_date).isAfter(state.target.value as string)
         ) {
           dispatch(
-            setDrawerSchedule({
+            setDrawerScheduleForm({
               ...scheduleForm,
               start_date: state.target.value,
               [state.target.id]: state.target.value,
@@ -129,7 +129,7 @@ export const useScheduleForm = () => {
           );
         } else {
           dispatch(
-            setDrawerSchedule({
+            setDrawerScheduleForm({
               ...scheduleForm,
               [state.target.id]: state.target.value,
             })
@@ -138,7 +138,7 @@ export const useScheduleForm = () => {
         break;
       default:
         dispatch(
-          setDrawerSchedule({
+          setDrawerScheduleForm({
             ...scheduleForm,
             [state.target.id]: state.target.value,
           })
@@ -174,7 +174,7 @@ export const useScheduleForm = () => {
     };
 
     dispatch(
-      setDrawerSchedule({
+      setDrawerScheduleForm({
         ...scheduleForm,
         end_date: startDate,
         start_date: startDate,
@@ -188,7 +188,7 @@ export const useScheduleForm = () => {
     target: { value: boolean; name: string };
   }) => {
     dispatch(
-      setDrawerSchedule({
+      setDrawerScheduleForm({
         ...scheduleForm,
         [state.target.name]: state.target.value,
       })
@@ -206,7 +206,7 @@ export const useScheduleForm = () => {
         ),
       };
       dispatch(
-        setDrawerSchedule({
+        setDrawerScheduleForm({
           ...scheduleForm,
           repeat: {
             ...scheduleForm?.repeat,
@@ -226,7 +226,7 @@ export const useScheduleForm = () => {
         [id]: value,
       };
       dispatch(
-        setDrawerSchedule({
+        setDrawerScheduleForm({
           ...scheduleForm,
           repeat: {
             ...scheduleForm?.repeat,
@@ -238,14 +238,14 @@ export const useScheduleForm = () => {
   };
 
   const updateExclusion = (state: boolean) => {
-    dispatch(setDrawerSchedule({ ...scheduleForm, exclude: state }));
+    dispatch(setDrawerScheduleForm({ ...scheduleForm, exclude: state }));
   };
 
   const updatePeriod = (state: UpdateStateInterface) => {
     const { id, value } = state.target;
     if (id === "period") {
       dispatch(
-        setDrawerSchedule({
+        setDrawerScheduleForm({
           ...scheduleForm,
           period: {
             ...scheduleForm?.period,
@@ -260,7 +260,7 @@ export const useScheduleForm = () => {
     const type = scheduleForm?.period.kind_type ?? "";
     if (type !== "") {
       dispatch(
-        setDrawerSchedule({
+        setDrawerScheduleForm({
           ...scheduleForm,
           period: {
             ...scheduleForm?.period,
@@ -274,7 +274,7 @@ export const useScheduleForm = () => {
   const updateYearRepeat = (event: React.MouseEvent) => {
     const { id, textContent } = event.currentTarget;
     dispatch(
-      setDrawerSchedule({
+      setDrawerScheduleForm({
         ...scheduleForm,
         repeat: {
           ...scheduleForm?.repeat,

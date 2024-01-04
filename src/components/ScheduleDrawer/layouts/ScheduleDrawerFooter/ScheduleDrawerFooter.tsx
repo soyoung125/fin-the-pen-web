@@ -1,5 +1,5 @@
 import { Box, Divider } from "@mui/material";
-import { selectSchedule } from "@redux/slices/scheduleSlice.tsx";
+import { selectScheduleForm } from "@redux/slices/scheduleSlice.tsx";
 import { Schedule } from "@app/types/schedule.ts";
 import { useAppSelector } from "@redux/hooks.ts";
 import Save from "@assets/icons/save_icon.svg";
@@ -15,7 +15,7 @@ function ScheduleDrawerFooter({
   handleClose,
   setShowError,
 }: ScheduleDrawerFooterProps) {
-  const schedule = useAppSelector(selectSchedule) as Schedule;
+  const schedule = useAppSelector(selectScheduleForm) as Schedule;
 
   const handleSubmit = () => {
     if (

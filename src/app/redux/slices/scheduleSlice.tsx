@@ -1,33 +1,21 @@
 /* eslint-disable array-callback-return */
 /* eslint-disable max-len */
 /* eslint-disable no-param-reassign */
-import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import moment from "moment";
-import {
-  fetchCreateSchedule,
-  fetchDeleteSchedule,
-  fetchModifySchedule,
-  fetchMonthSchedules,
-} from "@api/API.ts";
-import {
-  GetScheduleQuery,
-  Schedule,
-  ViewModeValue,
-} from "@app/types/schedule.ts";
-import { ASYNC_THUNK_STATUS } from "../../../constants/common.ts";
-import { AnalysisData, AsyncThunkStatusValue } from "@app/types/common.ts";
+import { Schedule, ViewModeValue } from "@app/types/schedule.ts";
+import { AnalysisData } from "@app/types/common.ts";
 import { CATEGORIES, COLORLIST } from "../../../constants/categories.ts";
 import { RootState } from "../store.ts";
 
 interface InitialState {
   // 메인
   date: moment.Moment;
-  status: AsyncThunkStatusValue; // 타입 유니온 필요
   viewMode: ViewModeValue;
   // 전체 일정 데이터
   schedules: Schedule[];
   // 서랍에 표시될 일정 1개
-  schedule: Schedule | null;
+  scheduleForm: Schedule | null;
   // 분석 페이지에 표시될 데이터
   analyzedData: {
     data: AnalysisData[];
@@ -40,15 +28,13 @@ interface InitialState {
     // end: string;
     [key: string]: string;
   };
-  isBottomDrawerOpen: boolean;
 }
 
 const initialState: InitialState = {
   date: moment(new Date()),
-  status: "idle",
   viewMode: "asset",
   schedules: [],
-  schedule: null,
+  scheduleForm: null,
   analyzedData: {
     data: [],
     total: 0,
@@ -58,42 +44,7 @@ const initialState: InitialState = {
     start: "",
     end: "",
   },
-  isBottomDrawerOpen: false,
 };
-
-// 06-07 typescript 적용
-// tanstack query 적용 후 제거 예정
-export const getMonthSchedules = createAsyncThunk(
-  "schedule/getMonthSchedules",
-  async ({ user_id, date }: GetScheduleQuery) => {
-    const schedules = await fetchMonthSchedules({ user_id, date });
-    return schedules || [];
-  }
-);
-
-export const createSchedule = createAsyncThunk<Schedule, Schedule>(
-  "schedule/createSchedule",
-  async (scheduleWithUuid) => {
-    const response = await fetchCreateSchedule(scheduleWithUuid);
-    return response.data;
-  }
-);
-
-export const deleteSchedule = createAsyncThunk<string, string>(
-  "schedule/deleteSchedule",
-  async (id) => {
-    const response = await fetchDeleteSchedule(id);
-    return response.data;
-  }
-);
-
-export const modifySchedule = createAsyncThunk<Schedule, Schedule>(
-  "schedule/modifySchedule",
-  async (schedule) => {
-    const response = await fetchModifySchedule(schedule);
-    return response;
-  }
-);
 
 export const scheduleSlice = createSlice({
   name: "schedule",
@@ -102,8 +53,8 @@ export const scheduleSlice = createSlice({
     setSchedules: (state, action) => {
       state.schedules = action.payload;
     },
-    setDrawerSchedule: (state, action) => {
-      state.schedule = action.payload;
+    setDrawerScheduleForm: (state, action) => {
+      state.scheduleForm = action.payload;
     },
     setSelectedDate: (state, action) => {
       state.date = action.payload;
@@ -223,37 +174,11 @@ export const scheduleSlice = createSlice({
     changeViewMode: (state, action) => {
       state.viewMode = action.payload;
     },
-    setIsBottomDrawerOpen: (state, action) => {
-      state.isBottomDrawerOpen = action.payload;
-    },
-  },
-  extraReducers: (builder) => {
-    builder
-      .addCase(getMonthSchedules.pending, (state) => {
-        // getMonthSchedules 가 진행중일 때
-        state.status = ASYNC_THUNK_STATUS.pending;
-      })
-      .addCase(
-        getMonthSchedules.fulfilled,
-        (state, action: PayloadAction<Schedule[] | undefined>) => {
-          // getMonthSchedules 가 끝나면
-          state.status = ASYNC_THUNK_STATUS.fulfilled;
-          state.schedules = action.payload ?? [];
-        }
-      )
-      .addCase(deleteSchedule.fulfilled, (state, action) => {
-        // deleteSchedule 가 끝나면
-        if (action.payload !== null) {
-          state.schedules = state.schedules.filter(
-            (s: Schedule) => s.id !== action.payload
-          );
-        }
-      });
   },
 });
 export const {
   setSchedules,
-  setDrawerSchedule,
+  setDrawerScheduleForm,
   setSelectedDate,
   updateAnalyzedData,
   updateFilter,
@@ -262,16 +187,7 @@ export const {
   revertFilter,
   initFilter,
   changeViewMode,
-  setIsBottomDrawerOpen,
 } = scheduleSlice.actions;
-
-export const selectSchedules = (state: RootState) => {
-  return state.schedule.schedules
-    ? [...state.schedule.schedules].sort((a, b) =>
-        a.start_time.localeCompare(b.start_time)
-      )
-    : [];
-};
 
 export const selectDate = (state: RootState) => {
   const date = moment((state.schedule as InitialState).date);
@@ -288,17 +204,13 @@ export const selectFilteredDate = (state: RootState) =>
   (state.schedule as InitialState).filtered_date;
 export const selectViewMode = (state: RootState) =>
   (state.schedule as InitialState).viewMode;
-export const selectSchedule = (state: RootState) =>
-  (state.schedule as InitialState).schedule;
-export const selectStatus = (state: RootState) =>
-  (state.schedule as InitialState).status;
+export const selectScheduleForm = (state: RootState) =>
+  (state.schedule as InitialState).scheduleForm;
 export const selectAnalyzedData = (state: RootState) =>
   (state.schedule as InitialState).analyzedData;
 export const selectStartDate = (state: RootState) =>
-  (state.schedule as InitialState).schedule?.start_date;
+  (state.schedule as InitialState).scheduleForm?.start_date;
 export const selectRepeatEndDate = (state: RootState) =>
-  (state.schedule as InitialState).schedule?.period.repeat_end_line;
-export const selectIsBottomDrawerOpen = (state: RootState) =>
-  (state.schedule as InitialState).isBottomDrawerOpen;
+  (state.schedule as InitialState).scheduleForm?.period.repeat_end_line;
 
 export default scheduleSlice.reducer;

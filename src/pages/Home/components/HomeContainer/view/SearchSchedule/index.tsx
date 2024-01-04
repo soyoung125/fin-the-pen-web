@@ -13,7 +13,6 @@ import RoundedPaper from "@components/common/RoundedPaper.tsx";
 import SearchIcon from "@mui/icons-material/Search";
 import { useEffect, useRef, useState } from "react";
 import { useAppDispatch } from "@redux/hooks.ts";
-import { deleteSchedule } from "@redux/slices/scheduleSlice.tsx";
 import RoundedBorderBox from "@components/common/RoundedBorderBox.tsx";
 import moment from "moment";
 import "moment/locale/ko";
@@ -26,6 +25,7 @@ import {
   setBottomBarOpenFalse,
   setBottomBarOpenTrue,
 } from "@redux/slices/commonSlice.tsx";
+import { useScheduleDrawer } from "@hooks/useScheduleDrawer.tsx";
 
 function SearchSchedule() {
   const dispatch = useAppDispatch();
@@ -35,7 +35,8 @@ function SearchSchedule() {
   const [drawerWidth, setDrawerWidth] = useState(0);
   const [resultSchedules, setResultSchedules] = useState<Schedule[]>([]);
 
-  const { schedules, openDrawer } = useSchedule();
+  const { schedules } = useSchedule();
+  const { openScheduleDrawer } = useScheduleDrawer();
 
   useHeader(true, HEADER_MODE.search);
 
@@ -78,7 +79,10 @@ function SearchSchedule() {
 
   const handleDelete = () => {
     if (window.confirm("선택 일정을 삭제 하시겠습니까?")) {
-      checkedSchedules.map((s) => dispatch(deleteSchedule(s?.id || "")));
+      alert("아직 기능이 완성되지 않았습니다...");
+      checkedSchedules.map((s) => {
+        console.log(s?.id);
+      });
     }
   };
 
@@ -121,8 +125,8 @@ function SearchSchedule() {
           </FormControl>
           {resultSchedules.map((schedule, index) => (
             <CardActionArea
-              key={Math.random()}
-              onClick={() => openDrawer(schedule)}
+              key={schedule.id}
+              onClick={() => openScheduleDrawer(schedule)}
             >
               <Box pb={1} />
               <RoundedBorderBox greyBorder={true}>

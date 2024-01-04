@@ -1,5 +1,5 @@
 import {
-  selectSchedule,
+  selectScheduleForm,
   selectStartDate,
 } from "@redux/slices/scheduleSlice.tsx";
 import { useSelector } from "react-redux";
@@ -11,7 +11,7 @@ import RepeatInputLabel from "../RepeatInputLabel.tsx";
 import { RepeatTypeProps } from "@app/types/schedule.ts";
 
 function Year({ repeatType }: RepeatTypeProps) {
-  const schedule = useSelector(selectSchedule);
+  const schedule = useSelector(selectScheduleForm);
   const startDate = useSelector(selectStartDate);
   const week = ["첫", "두", "세", "네", "다섯", "여섯"];
 
