@@ -3,7 +3,7 @@ import {
   selectDate,
   selectIsBottomDrawerOpen,
   selectMonth,
-  setDrawerSchedule,
+  setDrawerScheduleForm,
   setIsBottomDrawerOpen,
 } from "@redux/slices/scheduleSlice.tsx";
 import { Schedule } from "@app/types/schedule.ts";
@@ -84,7 +84,7 @@ const useSchedule = () => {
 
   const openDrawer = (data: Schedule) => {
     dispatch(setIsBottomDrawerOpen(true));
-    dispatch(setDrawerSchedule(data));
+    dispatch(setDrawerScheduleForm(data));
   };
 
   const closeDrawer = () => {
@@ -92,7 +92,7 @@ const useSchedule = () => {
   };
 
   const resetSchedule = () => {
-    dispatch(setDrawerSchedule(INIT_SCHEDULE(date)));
+    dispatch(setDrawerScheduleForm(INIT_SCHEDULE(date)));
   };
 
   return {

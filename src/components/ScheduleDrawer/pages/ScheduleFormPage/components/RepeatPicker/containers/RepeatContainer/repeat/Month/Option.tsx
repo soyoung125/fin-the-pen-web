@@ -1,5 +1,5 @@
 import {
-  selectSchedule,
+  selectScheduleForm,
   selectStartDate,
 } from "@redux/slices/scheduleSlice.tsx";
 import DateButton from "@components/ScheduleDrawer/pages/ScheduleFormPage/components/RepeatPicker/containers/buttons/DateButton.tsx";
@@ -10,7 +10,7 @@ import moment from "moment";
 import { useSelector } from "react-redux";
 
 function Option({ handleChangeOption }: RepeatOptionProps) {
-  const schedule = useSelector(selectSchedule);
+  const schedule = useSelector(selectScheduleForm);
   const startDate = useSelector(selectStartDate);
   const months = Array.from({ length: 31 }, (_, i) => (i + 1).toString());
   const todayRepeat = schedule?.repeat.month_type.today_repeat ?? true;

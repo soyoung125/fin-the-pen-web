@@ -1,5 +1,8 @@
 import { useAppSelector } from "@redux/hooks.ts";
-import { selectDate, selectSchedule } from "@redux/slices/scheduleSlice.tsx";
+import {
+  selectDate,
+  selectScheduleForm,
+} from "@redux/slices/scheduleSlice.tsx";
 import { SCHEDULE_DRAWER } from "@constants/schedule.ts";
 import useSchedule from "@hooks/useSchedule.ts";
 import { Button, Stack, Tooltip } from "@mui/material";
@@ -16,7 +19,7 @@ interface CreateFooterInterface {
 
 function CreateFooter({ handleSubmit, handleClose }: CreateFooterInterface) {
   const date = useAppSelector(selectDate);
-  const schedule = useAppSelector(selectSchedule) as Schedule;
+  const schedule = useAppSelector(selectScheduleForm) as Schedule;
   const guestMode = useAppSelector(selectGuestMode);
   const { data: user } = useUser();
   const { handleCreateSchedule } = useSchedule();

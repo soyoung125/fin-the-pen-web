@@ -1,5 +1,5 @@
 import { useAppSelector } from "@redux/hooks.ts";
-import { selectSchedule } from "@redux/slices/scheduleSlice.tsx";
+import { selectScheduleForm } from "@redux/slices/scheduleSlice.tsx";
 import { SCHEDULE_DRAWER } from "@constants/schedule.ts";
 import useSchedule from "@hooks/useSchedule.ts";
 import { Button, Stack } from "@mui/material";
@@ -11,7 +11,7 @@ interface ModifyFooterInterface {
 }
 
 function ModifyFooter({ handleSubmit, handleClose }: ModifyFooterInterface) {
-  const schedule = useAppSelector(selectSchedule) as Schedule;
+  const schedule = useAppSelector(selectScheduleForm) as Schedule;
   const { handleModifySchedule, handleDeleteSchedule } = useSchedule();
 
   const handleModify = () => {

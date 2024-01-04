@@ -15,7 +15,7 @@ interface InitialState {
   // 전체 일정 데이터
   schedules: Schedule[];
   // 서랍에 표시될 일정 1개
-  schedule: Schedule | null;
+  scheduleForm: Schedule | null;
   // 분석 페이지에 표시될 데이터
   analyzedData: {
     data: AnalysisData[];
@@ -35,7 +35,7 @@ const initialState: InitialState = {
   date: moment(new Date()),
   viewMode: "asset",
   schedules: [],
-  schedule: null,
+  scheduleForm: null,
   analyzedData: {
     data: [],
     total: 0,
@@ -55,8 +55,8 @@ export const scheduleSlice = createSlice({
     setSchedules: (state, action) => {
       state.schedules = action.payload;
     },
-    setDrawerSchedule: (state, action) => {
-      state.schedule = action.payload;
+    setDrawerScheduleForm: (state, action) => {
+      state.scheduleForm = action.payload;
     },
     setSelectedDate: (state, action) => {
       state.date = action.payload;
@@ -183,7 +183,7 @@ export const scheduleSlice = createSlice({
 });
 export const {
   setSchedules,
-  setDrawerSchedule,
+  setDrawerScheduleForm,
   setSelectedDate,
   updateAnalyzedData,
   updateFilter,
@@ -218,14 +218,14 @@ export const selectFilteredDate = (state: RootState) =>
   (state.schedule as InitialState).filtered_date;
 export const selectViewMode = (state: RootState) =>
   (state.schedule as InitialState).viewMode;
-export const selectSchedule = (state: RootState) =>
-  (state.schedule as InitialState).schedule;
+export const selectScheduleForm = (state: RootState) =>
+  (state.schedule as InitialState).scheduleForm;
 export const selectAnalyzedData = (state: RootState) =>
   (state.schedule as InitialState).analyzedData;
 export const selectStartDate = (state: RootState) =>
-  (state.schedule as InitialState).schedule?.start_date;
+  (state.schedule as InitialState).scheduleForm?.start_date;
 export const selectRepeatEndDate = (state: RootState) =>
-  (state.schedule as InitialState).schedule?.period.repeat_end_line;
+  (state.schedule as InitialState).scheduleForm?.period.repeat_end_line;
 export const selectIsBottomDrawerOpen = (state: RootState) =>
   (state.schedule as InitialState).isBottomDrawerOpen;
 
