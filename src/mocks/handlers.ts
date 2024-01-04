@@ -76,6 +76,13 @@ export const handlers = [
         schedule.user_id === user_id &&
         moment(date).isSame(schedule.start_date, "month")
     );
+    if (monthSchedules.length === 0) {
+      return res(
+          ctx.delay(1000),
+          ctx.status(200),
+          ctx.json({ data: undefined })
+      );
+    }
     return res(
       ctx.delay(1000),
       ctx.status(200),
