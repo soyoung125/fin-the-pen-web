@@ -1,6 +1,5 @@
 import {
   Button,
-  Dialog as MuiDialog,
   DialogActions,
   DialogContent,
   DialogTitle,
@@ -9,6 +8,7 @@ import { DateCalendar, LocalizationProvider } from "@mui/x-date-pickers";
 import { AdapterMoment } from "@mui/x-date-pickers/AdapterMoment";
 import { useState } from "react";
 import moment from "moment/moment";
+import Modal from "@hooks/modal/Modal.tsx";
 
 interface MonthPickerProps {
   defaultDate: string;
@@ -22,21 +22,16 @@ function MonthPicker({
   onClickReject,
 }: MonthPickerProps) {
   const [newDate, setNewDate] = useState(moment(defaultDate));
-  const handleCloseModal = () => {
-    onClickReject(moment(defaultDate));
-  };
+  // const handleCloseModal = () => {
+  //   onClickReject(moment(defaultDate));
+  // };
 
   const handleSetDate = () => {
     onClickApprove(moment(newDate));
   };
 
   return (
-    <MuiDialog
-      open={true}
-      onClose={handleCloseModal}
-      aria-labelledby="alert-dialog-title"
-      aria-describedby="alert-dialog-description"
-    >
+    <Modal>
       <DialogTitle id="alert-dialog-title">날짜 선택</DialogTitle>
       <DialogContent>
         <LocalizationProvider dateAdapter={AdapterMoment}>
@@ -55,7 +50,7 @@ function MonthPicker({
           설정
         </Button>
       </DialogActions>
-    </MuiDialog>
+    </Modal>
   );
 }
 

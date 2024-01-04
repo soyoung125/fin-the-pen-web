@@ -15,7 +15,11 @@ function Modal({ children, onClickClose }: ModalProps) {
       open={true}
       onClick={onClickClose}
     >
-      <Box bgcolor="white" borderRadius="8px">
+      <Box
+        bgcolor="white"
+        borderRadius="8px"
+        onClick={(e) => e.stopPropagation()}
+      >
         {children}
       </Box>
     </Backdrop>
