@@ -2,9 +2,9 @@
 import { rest } from "msw";
 import {
   LOCAL_STORAGE_KEY_SCHEDULES,
-  LOCAL_STORAGE_KEY_USERS, SESSION_STORAGE_KEY_TOKEN,
+  LOCAL_STORAGE_KEY_USERS,
 } from "@api/keys.ts";
-import {getLocalStorage, setLocalStorage, setSessionStorage} from "@utils/storage.ts";
+import {getLocalStorage, setLocalStorage} from "@utils/storage.ts";
 import { DOMAIN } from "@api/url.ts";
 import { MockUser, SignUp, User } from "@app/types/auth.ts";
 import { Schedule } from "@app/types/schedule.ts";
