@@ -45,7 +45,7 @@ function DatePicker({ onClickApprove, onClickReject }: DatePickerProps) {
             onClick={() => onClickReject("")}
             fullWidth
           >
-            초기화
+            취소
           </Button>
           <Button
             variant="contained"

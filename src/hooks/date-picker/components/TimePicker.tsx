@@ -70,10 +70,10 @@ function TimePicker({
         <Stack direction="row" gap="10px">
           <Button
             variant="outlined"
-            onClick={() => onClickReject("00:00")}
+            onClick={() => onClickReject(defaultTime)}
             fullWidth
           >
-            초기화
+            취소
           </Button>
           <Button
             variant="contained"

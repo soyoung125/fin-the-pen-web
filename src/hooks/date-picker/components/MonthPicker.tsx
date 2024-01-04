@@ -33,27 +33,9 @@ function MonthPicker({
   return (
     <MuiDialog
       open={true}
-      onClose={() => handleCloseModal()}
+      onClose={handleCloseModal}
       aria-labelledby="alert-dialog-title"
       aria-describedby="alert-dialog-description"
-      sx={{
-        ".MuiDialogContent-root": {
-          padding: 0,
-        },
-        "& > div > div, & > div > div > div, & .MuiCalendarPicker-root": {
-          width: "100%",
-        },
-        ".MuiPickerStaticWrapper-content": {
-          minWidth: "100%",
-        },
-        ".MuiCalendarOrClockPicker-root > div": {
-          width: "100%",
-          margin: "0",
-        },
-        ".MuiMonthPicker-root": {
-          margin: 0,
-        },
-      }}
     >
       <DialogTitle id="alert-dialog-title">날짜 선택</DialogTitle>
       <DialogContent>

@@ -14,11 +14,11 @@ import { useAppDispatch } from "@redux/hooks.ts";
 import moment from "moment/moment";
 import { v4 as uuidv4 } from "uuid";
 import { useCreateSchedule } from "@app/tanstack-query/schedules/useCreateSchedule.ts";
-import { useConfirm } from "@hooks/dialog/hooks/useConfirm.tsx";
 import { useUser } from "@app/tanstack-query/useUser.ts";
 import { useSchedules } from "@app/tanstack-query/schedules/useSchedules.ts";
 import { INIT_SCHEDULE } from "@constants/schedule.ts";
 import { useModifySchedule } from "@app/tanstack-query/schedules/useModifySchedule.ts";
+import { useDialog } from "@hooks/dialog/useDialog.tsx";
 
 const useSchedule = () => {
   const dispatch = useAppDispatch();
@@ -29,7 +29,7 @@ const useSchedule = () => {
   const isBottomDrawerOpen = useSelector(selectIsBottomDrawerOpen);
 
   const { data: user } = useUser();
-  const { openConfirm } = useConfirm();
+  const { openConfirm } = useDialog();
   const { createSchedule } = useCreateSchedule();
   const { modifySchedule } = useModifySchedule();
   const {
