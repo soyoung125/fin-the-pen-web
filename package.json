@@ -77,5 +77,6 @@
   },
   "msw": {
     "workerDirectory": "public"
-  }
+  },
+  "packageManager": "yarn@4.0.2"
 }
