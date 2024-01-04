@@ -13,13 +13,13 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: Clean Caches and Reinstall Dependencies
-        run: |
-          yarn cache clean --all
-          npm install -g npm@latest
-          npm install -g yarn@latest
-          rm -rf node_modules/ yarn.lock package-lock.json
-          yarn set version stable
+#      - name: Clean Caches and Reinstall Dependencies
+#        run: |
+#          yarn cache clean --all
+#          npm install -g npm@latest
+#          npm install -g yarn@latest
+#          rm -rf node_modules/ yarn.lock package-lock.json
+#          yarn set version stable
 
       - run: yarn
       - uses: chromaui/action@v1
