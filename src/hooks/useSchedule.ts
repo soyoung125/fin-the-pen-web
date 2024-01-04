@@ -1,10 +1,8 @@
 import { useSelector } from "react-redux";
 import {
   selectDate,
-  selectIsBottomDrawerOpen,
   selectMonth,
   setDrawerScheduleForm,
-  setIsBottomDrawerOpen,
 } from "@redux/slices/scheduleSlice.tsx";
 import { Schedule } from "@app/types/schedule.ts";
 import { useAppDispatch } from "@redux/hooks.ts";
@@ -22,7 +20,6 @@ const useSchedule = () => {
 
   const date = useSelector(selectDate);
   const month = useSelector(selectMonth);
-  const isBottomDrawerOpen = useSelector(selectIsBottomDrawerOpen);
 
   const { data: user } = useUser();
   const { openConfirm } = useDialog();
@@ -82,15 +79,6 @@ const useSchedule = () => {
     modifySchedule(schedule);
   };
 
-  const openDrawer = (data: Schedule) => {
-    dispatch(setIsBottomDrawerOpen(true));
-    dispatch(setDrawerScheduleForm(data));
-  };
-
-  const closeDrawer = () => {
-    dispatch(setIsBottomDrawerOpen(false));
-  };
-
   const resetSchedule = () => {
     dispatch(setDrawerScheduleForm(INIT_SCHEDULE(date)));
   };
@@ -99,15 +87,12 @@ const useSchedule = () => {
     schedules,
     isPending,
     isError,
-    isBottomDrawerOpen,
     todaySchedules,
     date,
     month,
     handleDeleteSchedule,
     handleCreateSchedule,
     handleModifySchedule,
-    openDrawer,
-    closeDrawer,
     resetSchedule,
   };
 };

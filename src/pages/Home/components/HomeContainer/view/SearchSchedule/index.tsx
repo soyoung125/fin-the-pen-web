@@ -25,6 +25,7 @@ import {
   setBottomBarOpenFalse,
   setBottomBarOpenTrue,
 } from "@redux/slices/commonSlice.tsx";
+import { useScheduleDrawer } from "@hooks/useScheduleDrawer.tsx";
 
 function SearchSchedule() {
   const dispatch = useAppDispatch();
@@ -34,7 +35,8 @@ function SearchSchedule() {
   const [drawerWidth, setDrawerWidth] = useState(0);
   const [resultSchedules, setResultSchedules] = useState<Schedule[]>([]);
 
-  const { schedules, openDrawer } = useSchedule();
+  const { schedules } = useSchedule();
+  const { openScheduleDrawer } = useScheduleDrawer();
 
   useHeader(true, HEADER_MODE.search);
 
@@ -124,7 +126,7 @@ function SearchSchedule() {
           {resultSchedules.map((schedule, index) => (
             <CardActionArea
               key={schedule.id}
-              onClick={() => openDrawer(schedule)}
+              onClick={() => openScheduleDrawer(schedule)}
             >
               <Box pb={1} />
               <RoundedBorderBox greyBorder={true}>

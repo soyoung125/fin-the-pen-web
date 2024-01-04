@@ -28,7 +28,6 @@ interface InitialState {
     // end: string;
     [key: string]: string;
   };
-  isBottomDrawerOpen: boolean;
 }
 
 const initialState: InitialState = {
@@ -45,7 +44,6 @@ const initialState: InitialState = {
     start: "",
     end: "",
   },
-  isBottomDrawerOpen: false,
 };
 
 export const scheduleSlice = createSlice({
@@ -176,9 +174,6 @@ export const scheduleSlice = createSlice({
     changeViewMode: (state, action) => {
       state.viewMode = action.payload;
     },
-    setIsBottomDrawerOpen: (state, action) => {
-      state.isBottomDrawerOpen = action.payload;
-    },
   },
 });
 export const {
@@ -192,16 +187,7 @@ export const {
   revertFilter,
   initFilter,
   changeViewMode,
-  setIsBottomDrawerOpen,
 } = scheduleSlice.actions;
-
-export const selectSchedules = (state: RootState) => {
-  return state.schedule.schedules
-    ? [...state.schedule.schedules].sort((a, b) =>
-        a.start_time.localeCompare(b.start_time)
-      )
-    : [];
-};
 
 export const selectDate = (state: RootState) => {
   const date = moment((state.schedule as InitialState).date);
@@ -226,7 +212,5 @@ export const selectStartDate = (state: RootState) =>
   (state.schedule as InitialState).scheduleForm?.start_date;
 export const selectRepeatEndDate = (state: RootState) =>
   (state.schedule as InitialState).scheduleForm?.period.repeat_end_line;
-export const selectIsBottomDrawerOpen = (state: RootState) =>
-  (state.schedule as InitialState).isBottomDrawerOpen;
 
 export default scheduleSlice.reducer;
