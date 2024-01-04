@@ -96,7 +96,6 @@ const useSchedule = () => {
   };
 
   return {
-    status,
     schedules,
     isPending,
     isError,
