@@ -49,11 +49,14 @@ export const handlers = [
 
   rest.post(`${DOMAIN}/createSchedule`, async (req, res, ctx) => {
     const schedule = await req.json();
-    console.log(schedule);
     const prevSchedules = getLocalStorage<Schedule[]>(
       LOCAL_STORAGE_KEY_SCHEDULES,
       []
     );
+    const isExist = prevSchedules.find(s => s.id === schedule.id);
+    if (isExist) {
+      return res(ctx.delay(1000), ctx.status(500), ctx.json(false));
+    }
     const newSchedules: Schedule[] = [...prevSchedules, schedule];
     setLocalStorage(LOCAL_STORAGE_KEY_SCHEDULES, newSchedules);
     return res(ctx.delay(1000), ctx.status(200), ctx.json(true));
