@@ -137,13 +137,13 @@ function RemittanceSetting({
               }
             >
               {options.map((option) => (
-                <MenuItem key={Math.random()} value={option}>
+                <MenuItem key={option} value={option}>
                   {option}
                 </MenuItem>
               ))}
               {!options.includes(remittance.settings.date) && (
                 <MenuItem
-                  key={Math.random()}
+                  key={remittance.settings.date}
                   disabled
                   value={remittance.settings.date}
                 >

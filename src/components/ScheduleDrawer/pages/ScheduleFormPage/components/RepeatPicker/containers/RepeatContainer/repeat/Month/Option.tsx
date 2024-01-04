@@ -58,14 +58,14 @@ function Option({ handleChangeOption }: RepeatOptionProps) {
       </Grid>
 
       {!todayRepeat &&
-        months.map((d) => (
+        months.map((d, i) => (
           <Grid
             item
             xs={2}
             display="flex"
             mt={2.5}
             justifyContent="center"
-            key={Math.random()}
+            key={i}
           >
             <DateButton
               value={d}

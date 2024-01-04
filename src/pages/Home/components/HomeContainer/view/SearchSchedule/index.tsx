@@ -121,7 +121,7 @@ function SearchSchedule() {
           </FormControl>
           {resultSchedules.map((schedule, index) => (
             <CardActionArea
-              key={Math.random()}
+              key={schedule.id}
               onClick={() => openDrawer(schedule)}
             >
               <Box pb={1} />

@@ -119,8 +119,8 @@ function InputForm({
           })
         }
       >
-        {organizations.map((organization) => (
-          <MenuItem key={Math.random()} value={organization.value}>
+        {organizations.map((organization, i) => (
+          <MenuItem key={i} value={organization.value}>
             {organization.name}
           </MenuItem>
         ))}
