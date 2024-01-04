@@ -10,6 +10,8 @@ import { MockUser, SignUp, User } from "@app/types/auth.ts";
 import { Schedule } from "@app/types/schedule.ts";
 import moment from "moment";
 
+const getSign = (type: string) => (type === "Plus" ? "+" : "-");
+
 export const handlers = [
   rest.post(`${DOMAIN}/fin-the-pen-web/sign-up`, async (req, res, ctx) => {
     type MockUser = User & { password: string };
@@ -57,7 +59,7 @@ export const handlers = [
     if (isExist) {
       return res(ctx.delay(1000), ctx.status(500), ctx.json(false));
     }
-    const newSchedules: Schedule[] = [...prevSchedules, schedule];
+    const newSchedules: Schedule[] = [...prevSchedules, {...schedule, price_type: getSign(schedule.price_type)}];
     setLocalStorage(LOCAL_STORAGE_KEY_SCHEDULES, newSchedules);
     return res(ctx.delay(1000), ctx.status(200), ctx.json(true));
   }),
