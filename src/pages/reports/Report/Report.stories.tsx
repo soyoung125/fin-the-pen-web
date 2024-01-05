@@ -26,7 +26,7 @@ export const PageExample = () => {
                 title="월간 소비 리포트"
             />
             <Stack bgcolor="#F7F7F8" px="20px" py="24px" gap="24px">
-                <ReportTitle year="2023" month="5" amount={333000000}/>
+                <ReportTitle year={2023} month={5} amount={333000000}/>
                 <Stack direction="row" gap="10px">
                     <PredictBox
                         title="이번 달 목표 지출"
