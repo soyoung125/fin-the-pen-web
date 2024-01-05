@@ -7,6 +7,7 @@ const meta = {
   title: "Home/HomeHeader/MonthlyExpenditureTargetCard",
   component: MonthlyExpenditureTargetCard,
   args: {
+    yyyyMM: "2021-10",
     amount: 1200000,
     userName: "오민하",
   },

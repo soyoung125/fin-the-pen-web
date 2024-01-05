@@ -4,11 +4,13 @@ import { useModal } from "@hooks/modal/useModal.tsx";
 import MonthlyExpenditureTargetModal from "@pages/Home/next-components/HomeHeader/MonthlyExpenditureTarget/MonthlyExpenditureTargetModal.tsx";
 
 export interface MonthlyExpenditureTargetCardProps {
+  yyyyMM: `${number}-${number}`;
   amount: number;
   userName: string;
 }
 
 export default function MonthlyExpenditureTargetCard({
+  yyyyMM,
   amount,
   userName,
 }: MonthlyExpenditureTargetCardProps) {
@@ -18,7 +20,7 @@ export default function MonthlyExpenditureTargetCard({
       isBackdropClickable: true,
       modalElement: (
         <MonthlyExpenditureTargetModal
-          yyyyMM={"2021-12"}
+          yyyyMM={yyyyMM}
           closeModal={closeModal}
         />
       ),
