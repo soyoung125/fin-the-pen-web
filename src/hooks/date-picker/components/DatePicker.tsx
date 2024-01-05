@@ -1,15 +1,10 @@
-import {
-  Button,
-  Dialog as MuiDialog,
-  Divider,
-  Stack,
-  Typography,
-} from "@mui/material";
+import { Button, Divider, Stack, Typography } from "@mui/material";
 import SelectDate from "@hooks/date-picker/components/SelectDate.tsx";
 import { AdapterMoment } from "@mui/x-date-pickers/AdapterMoment";
 import { LocalizationProvider } from "@mui/x-date-pickers";
 import { useState } from "react";
 import moment from "moment";
+import Modal from "@hooks/modal/Modal.tsx";
 
 export interface DatePickerProps {
   onClickApprove: (answer: string) => void;
@@ -19,12 +14,8 @@ export interface DatePickerProps {
 function DatePicker({ onClickApprove, onClickReject }: DatePickerProps) {
   const [value, setValue] = useState(moment().format("YYYY-MM-DD"));
   return (
-    <MuiDialog
-      sx={{ "& .MuiDialog-paper": { borderRadius: "1rem", width: "100%" } }}
-      open={true}
-      scroll="body"
-    >
-      <Stack p="20px">
+    <Modal>
+      <Stack p="10px">
         <Stack
           direction="row"
           alignItems="center"
@@ -56,7 +47,7 @@ function DatePicker({ onClickApprove, onClickReject }: DatePickerProps) {
           </Button>
         </Stack>
       </Stack>
-    </MuiDialog>
+    </Modal>
   );
 }
 

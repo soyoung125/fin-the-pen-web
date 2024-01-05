@@ -1,15 +1,25 @@
-import { PropsWithChildren, ReactNode, useState } from "react";
+import React, { PropsWithChildren, ReactNode, useState } from "react";
 import { OverlayContext } from "./OverlayContext.ts";
 
 function OverlayProvider({ children }: PropsWithChildren) {
-  const [overlay, setOverlay] = useState<ReactNode>(null);
+  const [overlayById, setOverlayById] = useState<Map<string, ReactNode>>(
+    new Map()
+  );
 
-  const mount = (node: ReactNode) => {
-    setOverlay(node);
+  const mount = (id: string, node: ReactNode) => {
+    setOverlayById((overlayById) => {
+      const cloned = new Map(overlayById);
+      cloned.set(id, node);
+      return cloned;
+    });
   };
 
-  const unmount = () => {
-    setOverlay(null);
+  const unmount = (id: string) => {
+    setOverlayById((overlayById) => {
+      const cloned = new Map(overlayById);
+      cloned.delete(id);
+      return cloned;
+    });
   };
 
   return (
@@ -20,7 +30,15 @@ function OverlayProvider({ children }: PropsWithChildren) {
       }}
     >
       {children}
-      {overlay}
+      {
+        // createPortal(
+        [...overlayById.entries()].map(([id, element]) => (
+          <React.Fragment key={id}>{element}</React.Fragment>
+        ))
+        // ,
+        // document.body
+        // )
+      }
     </OverlayContext.Provider>
   );
 }

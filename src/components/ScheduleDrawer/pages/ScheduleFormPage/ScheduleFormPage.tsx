@@ -5,7 +5,7 @@ import ThickDivider from "@components/common/ThickDivider.tsx";
 import DateInput from "./components/DateInput";
 import RepeatInput from "./components/RepeatInput.tsx";
 import { useSelector } from "react-redux";
-import { selectSchedule } from "@redux/slices/scheduleSlice.tsx";
+import { selectScheduleForm } from "@redux/slices/scheduleSlice.tsx";
 import { Dispatch, SetStateAction } from "react";
 
 export interface ScheduleFormPageProps {
@@ -19,7 +19,7 @@ function ScheduleFormPage({
   setIsCategoryPickerOpen,
   setIsRepeatPickerOpen,
 }: ScheduleFormPageProps) {
-  const schedule = useSelector(selectSchedule);
+  const schedule = useSelector(selectScheduleForm);
   if (schedule) {
     return (
       <Stack spacing={2} pt={2}>

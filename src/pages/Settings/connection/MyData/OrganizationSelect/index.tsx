@@ -37,18 +37,18 @@ function OrganizationSelect({
 
       <Grid container spacing={2} paddingY={2}>
         {value === 0
-          ? BANK_ORGANIZATION.map((b) => (
+          ? BANK_ORGANIZATION.map((b, i) => (
               <CustomListItem
-                key={Math.random()}
+                key={i}
                 item={b}
                 isChecked={selected === b}
                 opacity={selected.name === "" ? 1 : 0.7}
                 handleSelectOrganization={handleSelectOrganization}
               />
             ))
-          : CARD_ORGANIZATION.map((c) => (
+          : CARD_ORGANIZATION.map((c, i) => (
               <CustomListItem
-                key={Math.random()}
+                key={i}
                 item={c}
                 isChecked={selected === c}
                 opacity={selected.name === "" ? 1 : 0.7}

@@ -7,11 +7,11 @@ import RoundedBorderBox from "../../../../../components/common/RoundedBorderBox"
 import InputModal from "./InputModal";
 import { selectPersonalGoal } from "../../../../../app/redux/slices/assetSlice";
 import AlertModal from "../../../../../components/common/AlertModal";
-import useModal from "@hooks/useModal.ts";
+import useModal_deprecated from "@hooks/useModal_deprecated.ts";
 
 function Personal() {
   const [personalGoalModalOpen, setPersonalGoalModalOpen] = useState(false);
-  const { modalOpen, openModal, closeModal } = useModal();
+  const { modalOpen, openModal, closeModal } = useModal_deprecated();
   const personal = useSelector(selectPersonalGoal);
 
   const openPersonalGoalModal = () => {

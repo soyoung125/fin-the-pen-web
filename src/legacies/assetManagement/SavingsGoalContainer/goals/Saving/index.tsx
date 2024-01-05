@@ -7,19 +7,19 @@ import RoundedBorderBox from "../../../../../components/common/RoundedBorderBox"
 import { selectSavingGoal } from "../../../../../app/redux/slices/assetSlice";
 import InputModal from "./InputModal";
 import AlertModal from "../../../../../components/common/AlertModal";
-import useModal from "@hooks/useModal.ts";
+import useModal_deprecated from "@hooks/useModal_deprecated.ts";
 
 function Saving() {
   const {
     modalOpen: savingGoalModalOpen,
     openModal: openSavingGoalModal,
     closeModal: closeSavingGoalModal,
-  } = useModal();
+  } = useModal_deprecated();
   const {
     modalOpen: alertModalOpen,
     openModal: openAlertModal,
     closeModal: closeAlertModal,
-  } = useModal();
+  } = useModal_deprecated();
 
   const saving = useSelector(selectSavingGoal);
 
