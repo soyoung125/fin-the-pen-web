@@ -1,6 +1,6 @@
 import {
   selectRepeatEndDate,
-  selectSchedule,
+  selectScheduleForm,
   selectStartDate,
 } from "@redux/slices/scheduleSlice.tsx";
 import { Box, Stack } from "@mui/material";
@@ -12,7 +12,7 @@ import Input from "./Input.tsx";
 import { RepeatOptionProps } from "@app/types/schedule.ts";
 
 function EndDate({ handleChangeOption }: RepeatOptionProps) {
-  const schedule = useSelector(selectSchedule);
+  const schedule = useSelector(selectScheduleForm);
   const startDate = useSelector(selectStartDate);
   const repeatEndDate = useSelector(selectRepeatEndDate);
 

@@ -15,9 +15,9 @@ const fetchMonthSchedules = async (query: MonthScheduleQuery) => {
       Authorization: "Bearer " + token,
     },
     body: JSON.stringify(query),
-  }).then<Schedule[] | undefined>(async (res) => {
+  }).then<Schedule[]>(async (res) => {
     const response = await res.json();
-    return response.data;
+    return response.data === undefined ? [] : response.data;
   });
 };
 

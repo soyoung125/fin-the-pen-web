@@ -1,12 +1,7 @@
-import {
-  Button,
-  Dialog as MuiDialog,
-  Divider,
-  Stack,
-  Typography,
-} from "@mui/material";
+import { Button, Divider, Stack, Typography } from "@mui/material";
 import { useState } from "react";
 import SelectTime from "@hooks/date-picker/components/SelectTime.tsx";
+import Modal from "@hooks/modal/Modal.tsx";
 
 export interface TimePickerProps {
   defaultTime: string;
@@ -47,11 +42,7 @@ function TimePicker({
   };
 
   return (
-    <MuiDialog
-      sx={{ "& .MuiDialog-paper": { borderRadius: "1rem", width: "100%" } }}
-      open={true}
-      scroll="body"
-    >
+    <Modal>
       <Stack p="20px">
         <Stack
           direction="row"
@@ -84,7 +75,7 @@ function TimePicker({
           </Button>
         </Stack>
       </Stack>
-    </MuiDialog>
+    </Modal>
   );
 }
 

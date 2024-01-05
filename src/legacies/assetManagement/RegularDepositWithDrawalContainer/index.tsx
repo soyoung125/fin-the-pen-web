@@ -12,7 +12,7 @@ import AlertModal from "../../../components/common/AlertModal";
 import ArrowTooltip from "../../../components/common/ArrowTooltip";
 import { Schedule } from "@app/types/schedule.ts";
 import useSchedule from "@hooks/useSchedule.ts";
-import useModal from "@hooks/useModal.ts";
+import useModal_deprecated from "@hooks/useModal_deprecated.ts";
 import { useAppSelector } from "@redux/hooks.ts";
 import { selectBottomBarOpen } from "@redux/slices/commonSlice.tsx";
 
@@ -31,7 +31,7 @@ function RegularDepositWithdrawal() {
     modalOpen: alertModalOpen,
     openModal: openAlertModal,
     closeModal: closeAlertModal,
-  } = useModal();
+  } = useModal_deprecated();
   const { schedules } = useSchedule();
   const [deposits, setDeposits] = useState<DataInterface>({});
   const [withdrawals, setWithdrawals] = useState<DataInterface>({});

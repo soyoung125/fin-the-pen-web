@@ -25,7 +25,6 @@ function CustomListItem({
     <Grid
       item
       xs={6}
-      key={Math.random()}
       onClick={() => handleSelectOrganization(item)}
       sx={{
         color: isChecked ? "#735BF2" : "#43464C",

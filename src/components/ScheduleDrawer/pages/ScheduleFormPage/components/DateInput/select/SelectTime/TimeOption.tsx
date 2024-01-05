@@ -60,7 +60,7 @@ function TimeOption({
       <SwiperSlide />
       <SwiperSlide />
       {timeOption.map((i) => (
-        <SwiperSlide key={Math.random()}>
+        <SwiperSlide key={i}>
           {({ isActive }) => (
             <div
               style={{

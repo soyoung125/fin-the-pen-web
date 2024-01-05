@@ -17,7 +17,7 @@ import {
 } from "@app/types/common.ts";
 import AssetInput from "./AssetInput";
 import AlertModal from "../../../../components/common/AlertModal";
-import useModal from "@hooks/useModal.ts";
+import useModal_deprecated from "@hooks/useModal_deprecated.ts";
 import { useAppDispatch } from "../../../../app/redux/hooks";
 
 interface CategoryListProps {
@@ -37,7 +37,7 @@ function CategoryList({
     modalOpen: modifyModalOpen,
     openModal: openModifyModal,
     closeModal: closeModifyModal,
-  } = useModal();
+  } = useModal_deprecated();
 
   const [newAssets, setNewAssets] = useState(assets);
   const [selectedCategory, setSelectedCategory] = useState<"" | number>("");

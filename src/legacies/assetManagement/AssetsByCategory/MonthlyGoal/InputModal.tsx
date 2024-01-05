@@ -18,7 +18,7 @@ import {
 } from "../../../../app/redux/slices/assetSlice";
 import AlertModal from "../../../../components/common/AlertModal";
 import { useAppDispatch } from "../../../../app/redux/hooks";
-import useModal from "@hooks/useModal.ts";
+import useModal_deprecated from "@hooks/useModal_deprecated.ts";
 
 interface InputModalProps {
   setMonthlyGoalModalOpen: React.Dispatch<React.SetStateAction<boolean>>;
@@ -29,7 +29,7 @@ function InputModal({ setMonthlyGoalModalOpen }: InputModalProps) {
     modalOpen: alertModalOpen,
     openModal: openAlertModal,
     closeModal: closeAlertModal,
-  } = useModal();
+  } = useModal_deprecated();
 
   const month = moment().format("M월");
   const [goal, setGoal] = useState(0);

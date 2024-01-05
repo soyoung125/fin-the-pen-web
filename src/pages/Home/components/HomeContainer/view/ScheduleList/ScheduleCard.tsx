@@ -16,7 +16,7 @@ import { Schedule } from "@app/types/schedule.ts";
 import { Category } from "@constants/categories.ts";
 import { useAppDispatch, useAppSelector } from "@redux/hooks.ts";
 import { selectIsBudgetHidden } from "@redux/slices/settingSlice.ts";
-import useModal from "@hooks/useModal.ts";
+import useModal_deprecated from "@hooks/useModal_deprecated.ts";
 import AlertModal from "@components/common/AlertModal.tsx";
 import useSchedule from "@hooks/useSchedule.ts";
 
@@ -44,7 +44,7 @@ function ScheduleCard({
     modalOpen: alertModalOpen,
     openModal: openAlertModal,
     closeModal: closeAlertModal,
-  } = useModal();
+  } = useModal_deprecated();
 
   const { handleDeleteSchedule, handleModifySchedule } = useSchedule();
 
