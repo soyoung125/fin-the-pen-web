@@ -1,5 +1,7 @@
 import { Stack, Typography } from "@mui/material";
 import SettingsIcon from "@mui/icons-material/Settings";
+import { useModal } from "@hooks/modal/useModal.tsx";
+import MonthlyExpenditureTargetModal from "@pages/Home/next-components/HomeHeader/MonthlyExpenditureTarget/MonthlyExpenditureTargetModal.tsx";
 
 export interface MonthlyExpenditureTargetCardProps {
   amount: number;
@@ -10,6 +12,19 @@ export default function MonthlyExpenditureTargetCard({
   amount,
   userName,
 }: MonthlyExpenditureTargetCardProps) {
+  const { openModal, closeModal } = useModal();
+  const changeMonthlyExpenditureTarget = () => {
+    openModal({
+      isBackdropClickable: true,
+      modalElement: (
+        <MonthlyExpenditureTargetModal
+          yyyyMM={"2021-12"}
+          closeModal={closeModal}
+        />
+      ),
+    });
+  };
+
   return (
     <Stack>
       <Typography fontSize="15px">
@@ -21,7 +36,7 @@ export default function MonthlyExpenditureTargetCard({
         </Typography>
         <SettingsIcon
           sx={{ color: "#735BF2" }}
-          onClick={() => alert("open goal picker")}
+          onClick={changeMonthlyExpenditureTarget}
         />
       </Stack>
     </Stack>
