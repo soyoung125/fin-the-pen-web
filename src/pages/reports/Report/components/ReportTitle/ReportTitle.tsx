@@ -1,8 +1,8 @@
 import {Stack, Typography} from "@mui/material";
 
 export interface ReportTitleProps {
-    year: string;
-    month: string;
+    year: number;
+    month: number;
     amount: number;
 }
 

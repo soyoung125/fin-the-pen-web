@@ -5,7 +5,7 @@ const meta = {
     title: "reports/Report/ReportTitle",
     component: ReportTitle,
     tags: ["autodocs"],
-    args: {year: "2023", month: "5", amount: 1000000},
+    args: {year: 2023, month: 5, amount: 1000000},
     argTypes: {},
 } satisfies Meta<typeof ReportTitle>;
 
