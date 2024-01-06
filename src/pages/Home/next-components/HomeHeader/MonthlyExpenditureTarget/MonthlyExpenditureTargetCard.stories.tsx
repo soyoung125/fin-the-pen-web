@@ -3,6 +3,7 @@ import MonthlyExpenditureTargetCard, {
   MonthlyExpenditureTargetCardProps,
 } from "./MonthlyExpenditureTargetCard.tsx";
 import MonthlyExpenditureTargetCardSkeleton from "@pages/Home/next-components/HomeHeader/MonthlyExpenditureTarget/MonthlyExpenditureTargetCardSkeleton.tsx";
+import { useState } from "react";
 
 const meta = {
   title: "Home/HomeHeader/MonthlyExpenditureTargetCard",
@@ -22,4 +23,20 @@ export const Default = (args: MonthlyExpenditureTargetCardProps) => (
   <MonthlyExpenditureTargetCard {...args} />
 );
 
-export const Skeleton = () => <MonthlyExpenditureTargetCardSkeleton />;
+export const Skeleton = () => {
+  const [isLoaded, setIsLoaded] = useState(false);
+  return (
+    <>
+      {isLoaded ? (
+        <MonthlyExpenditureTargetCard
+          amount={10000}
+          yyyyMM={"2020-02"}
+          userName={"오민하"}
+        />
+      ) : (
+        <MonthlyExpenditureTargetCardSkeleton />
+      )}
+      <button onClick={() => setIsLoaded(!isLoaded)}>로딩 상태 전환하기</button>
+    </>
+  );
+};

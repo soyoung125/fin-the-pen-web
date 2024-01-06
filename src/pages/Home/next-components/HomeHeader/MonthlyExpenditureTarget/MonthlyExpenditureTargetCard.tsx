@@ -34,7 +34,7 @@ export default function MonthlyExpenditureTargetCard({
       </Typography>
       <Stack direction="row">
         <Typography fontSize="20px" fontWeight={700}>
-          {amount}원
+          {amount.toLocaleString()}원
         </Typography>
         <SettingsIcon
           sx={{ color: "#735BF2" }}
