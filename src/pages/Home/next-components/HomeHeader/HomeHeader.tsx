@@ -1,5 +1,5 @@
 function HomeHeader() {
-  return <></>;
+  return <>home-header</>;
 }
 
 export default HomeHeader;
