@@ -27,9 +27,7 @@ function ReportMonthDetails() {
       <ReportMonthTitle
         year={year}
         month={month}
-        onClickLeftIcon={subtractMonth}
         onClickMonth={pickMonth}
-        onClickRightIcon={addMonth}
       />
       <Stack gap="14px">
         {reportList.map((l, i) => (
