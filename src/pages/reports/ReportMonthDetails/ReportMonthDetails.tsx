@@ -1,22 +1,15 @@
 import TopNavigationBar from "@components/layouts/common/TopNavigationBar";
 import {Stack} from "@mui/material";
 import ReportMonthTitle from "@pages/reports/ReportMonthDetails/components/ReportMonthTitle";
-import ReportCard from "@pages/reports/ReportMonthDetails/components/ReportCard";
 import useReport from "@hooks/useReport.ts";
 import useHeader from "@hooks/useHeader.ts";
 import {useNavigate} from "react-router-dom";
+import ReportList from "@pages/reports/ReportMonthDetails/components/ReportList";
 
 function ReportMonthDetails() {
   useHeader(false);
   const navigate = useNavigate();
-  const {year, month, addMonth, subtractMonth, pickMonth, reportList, isPending, isError, maxPercent} = useReport();
-
-  if (isPending) {
-    return <>loading</>;
-  }
-  if (!reportList || isError) {
-    return <>소비 데이터가 없습니다.</>
-  }
+  const {year, month, pickMonth, isPending, reportList, maxPercent} = useReport();
 
   return <>
     <TopNavigationBar
@@ -29,18 +22,8 @@ function ReportMonthDetails() {
         month={month}
         onClickMonth={pickMonth}
       />
-      <Stack gap="14px">
-        {reportList.map((l, i) => (
-          <ReportCard
-            key={i}
-            rank={i + 1}
-            amount={l.amount}
-            maxPercent={maxPercent}
-            title={l.category}
-            percent={Number(l.rate)}
-          />
-        ))}
-      </Stack>
+
+      <ReportList isPending={isPending} reportList={reportList} maxPercent={maxPercent}/>
     </Stack>
   </>;
 }
