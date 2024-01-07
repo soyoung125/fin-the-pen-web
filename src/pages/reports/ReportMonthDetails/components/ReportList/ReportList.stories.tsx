@@ -12,7 +12,8 @@ const meta = {
   args: {
     isPending: false,
     reportList: [{category: "음식", amount: 8000, rate: "80"}, {category: "자동차", amount: 2000, rate: "20"}],
-    maxPercent: 80
+    maxPercent: 80,
+    handleClickAddSchedule: () => alert("add schedule")
   },
   argTypes: {},
 } satisfies Meta<typeof ReportList>;
@@ -74,9 +75,12 @@ export const FullReportList = () => {
   const {maxrate, list} = useStorybookFullReportList();
 
   return (
-    <>
-      <ReportList isPending={false} reportList={list} maxPercent={maxrate}/>
-    </>
+    <ReportList
+      isPending={false}
+      reportList={list}
+      maxPercent={maxrate}
+      handleClickAddSchedule={() => alert("add schedule")}
+    />
   );
 };
 
@@ -87,7 +91,12 @@ export const Skeleton = () => {
 
   return (
     <>
-      <ReportList isPending={isPending} reportList={list} maxPercent={maxrate}/>
+      <ReportList
+        isPending={isPending}
+        reportList={list}
+        maxPercent={maxrate}
+        handleClickAddSchedule={() => alert("add schedule")}
+      />
       <Button onClick={() => setIsPending((prevState) => !prevState)}>로딩 상태 전환</Button>
     </>
   );
@@ -99,8 +108,11 @@ export const EmptyReportList = () => {
   const list: Report[] = [];
 
   return (
-    <>
-      <ReportList isPending={false} reportList={list} maxPercent={maxrate}/>
-    </>
+    <ReportList
+      isPending={false}
+      reportList={list}
+      maxPercent={maxrate}
+      handleClickAddSchedule={() => alert("add schedule")}
+    />
   );
 };

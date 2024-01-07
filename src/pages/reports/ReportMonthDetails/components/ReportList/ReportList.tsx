@@ -9,9 +9,10 @@ export interface ReportListProps {
   isPending: boolean;
   reportList?: Report[];
   maxPercent: number;
+  handleClickAddSchedule: () => void;
 }
 
-function ReportList({isPending, reportList, maxPercent}: ReportListProps) {
+function ReportList({isPending, reportList, maxPercent, handleClickAddSchedule}: ReportListProps) {
   const [visibleItems, setVisibleItems] = useState(5);
   const [isExpanded, setIsExpanded] = useState(false);
 
@@ -19,7 +20,7 @@ function ReportList({isPending, reportList, maxPercent}: ReportListProps) {
     return <Stack gap="14px">{Array.from(new Array(5)).map(() => <ReportCardSkeleton/>)}</Stack>
   }
   if (!reportList || reportList.length === 0) {
-    return <ReportEmptyBox/>
+    return <ReportEmptyBox handleClickAddSchedule={handleClickAddSchedule}/>
   }
 
   if (reportList.length < 6) {

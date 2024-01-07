@@ -5,11 +5,20 @@ import useReport from "@hooks/useReport.ts";
 import useHeader from "@hooks/useHeader.ts";
 import {useNavigate} from "react-router-dom";
 import ReportList from "@pages/reports/ReportMonthDetails/components/ReportList";
+import {useScheduleDrawer} from "@hooks/useScheduleDrawer.tsx";
+import {INIT_SCHEDULE} from "@constants/schedule.ts";
+import moment from "moment";
 
 function ReportMonthDetails() {
   useHeader(false);
   const navigate = useNavigate();
-  const {year, month, pickMonth, isPending, reportList, maxPercent} = useReport();
+  const {yearMonth, year, month, pickMonth, isPending, reportList, maxPercent} = useReport();
+  const {openScheduleDrawer} = useScheduleDrawer();
+
+  const handleClickAddSchedule = () => {
+    const date = moment(yearMonth, "YYYY-MM");
+    openScheduleDrawer(INIT_SCHEDULE(date.format("YYYY-MM-DD")))
+  }
 
   return <>
     <TopNavigationBar
@@ -23,7 +32,8 @@ function ReportMonthDetails() {
         onClickMonth={pickMonth}
       />
 
-      <ReportList isPending={isPending} reportList={reportList} maxPercent={maxPercent}/>
+      <ReportList isPending={isPending} reportList={reportList} maxPercent={maxPercent}
+                  handleClickAddSchedule={handleClickAddSchedule}/>
     </Stack>
   </>;
 }
