@@ -6472,14 +6472,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"chromatic@npm:^6.17.4":
-  version: 6.24.1
-  resolution: "chromatic@npm:6.24.1"
+"chromatic@npm:^10.2.0":
+  version: 10.2.0
+  resolution: "chromatic@npm:10.2.0"
   bin:
     chroma: dist/bin.js
     chromatic: dist/bin.js
     chromatic-cli: dist/bin.js
-  checksum: b65ad05fa38c54693f670a5c4ad1f104d60ff1023282976135c3a537529829bf15fda877a29278b95385fa8c51971dc4b20f418a77b501c5c18367fcaad39e7c
+  checksum: e7716fc7a7fbd33b525c48888ccd3ee75ec56c4f360eba2972eb7a9d42efff025fbb4a1877173eb0d916f0bc9cdab1a8e8dac615c5b35ac270cd5a8ab5f931eb
   languageName: node
   linkType: hard
 
@@ -8148,7 +8148,7 @@ __metadata:
     "@vitejs/plugin-react": "npm:^4.0.0"
     axios: "npm:^1.2.2"
     babel-plugin-named-exports-order: "npm:^0.0.2"
-    chromatic: "npm:^6.17.4"
+    chromatic: "npm:^10.2.0"
     eslint: "npm:^8.38.0"
     eslint-plugin-react-hooks: "npm:^4.6.0"
     eslint-plugin-react-refresh: "npm:^0.3.4"
