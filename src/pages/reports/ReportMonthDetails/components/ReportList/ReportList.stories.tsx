@@ -1,7 +1,8 @@
 import {Meta} from "@storybook/react";
 import {useState} from "react";
-import ReportList from "@pages/reports/ReportMonthDetails/components/ReportList/ReportList.tsx";
+import ReportList from "@pages/reports/ReportMonthDetails/components/ReportList";
 import {Button} from "@mui/material";
+import {Report} from "@app/types/report.ts";
 
 const meta = {
   title: "reports/ReportMonthDetails/ReportList",
@@ -17,7 +18,7 @@ const meta = {
 
 export default meta;
 
-const useStorybookReportList = () => {
+const useStorybookFullReportList = () => {
   // 이후에 list는 tanstack query에서 비동기적으로 호출 하면 됩니다.
   const list = [
     {
@@ -63,15 +64,70 @@ const useStorybookReportList = () => {
   };
 };
 
-export const PageExample = () => {
+const useStorybookSmallReportList = () => {
+  // 이후에 list는 tanstack query에서 비동기적으로 호출 하면 됩니다.
+  const list = [
+    {
+      amount: 71000,
+      rate: "88",
+      category: "식비",
+    },
+    {
+      amount: 71000,
+      rate: "12",
+      category: "미용",
+    },
+  ];
+  const maxrate = Math.max(...list.map((l) => Number(l.rate)));
+  return {
+    list,
+    maxrate,
+  };
+};
+
+export const Default = () => {
+  // 이 예제는 단순히 스토리북 적용 목적입니다. 나중에 전역 상태 관리 라이브러리 + 커스텀 훅 조합해서 잘 활용하세요
+  const {maxrate, list} = useStorybookFullReportList();
+
+  return (
+    <>
+      <ReportList isPending={false} reportList={list} maxPercent={maxrate}/>
+    </>
+  );
+};
+
+export const Skeleton = () => {
   // 이 예제는 단순히 스토리북 적용 목적입니다. 나중에 전역 상태 관리 라이브러리 + 커스텀 훅 조합해서 잘 활용하세요
   const [isPending, setIsPending] = useState(true);
-  const {maxrate, list} = useStorybookReportList();
+  const {maxrate, list} = useStorybookFullReportList();
 
   return (
     <>
       <ReportList isPending={isPending} reportList={list} maxPercent={maxrate}/>
       <Button onClick={() => setIsPending((prevState) => !prevState)}>로딩 상태 전환</Button>
+    </>
+  );
+};
+
+export const LessReportList = () => {
+  // 이 예제는 단순히 스토리북 적용 목적입니다. 나중에 전역 상태 관리 라이브러리 + 커스텀 훅 조합해서 잘 활용하세요
+  const {maxrate, list} = useStorybookSmallReportList();
+
+  return (
+    <>
+      <ReportList isPending={false} reportList={list} maxPercent={maxrate}/>
+    </>
+  );
+};
+
+export const EmptyReportList = () => {
+  // 이 예제는 단순히 스토리북 적용 목적입니다. 나중에 전역 상태 관리 라이브러리 + 커스텀 훅 조합해서 잘 활용하세요
+  const maxrate = 0;
+  const list: Report[] = [];
+
+  return (
+    <>
+      <ReportList isPending={false} reportList={list} maxPercent={maxrate}/>
     </>
   );
 };
