@@ -3,8 +3,9 @@ import ReportCardSkeleton from "@pages/reports/ReportMonthDetails/components/Rep
 import {Button, Stack} from "@mui/material";
 import {Report} from "@app/types/report.ts";
 import {useState} from "react";
+import ReportEmptyBox from "@pages/reports/ReportMonthDetails/components/ReportEmptyBox";
 
-interface ReportListProps {
+export interface ReportListProps {
   isPending: boolean;
   reportList?: Report[];
   maxPercent: number;
@@ -18,7 +19,7 @@ function ReportList({isPending, reportList, maxPercent}: ReportListProps) {
     return <Stack gap="14px">{Array.from(new Array(5)).map(() => <ReportCardSkeleton/>)}</Stack>
   }
   if (!reportList || reportList.length === 0) {
-    return <>소비 데이터가 없습니다.</>
+    return <ReportEmptyBox/>
   }
 
   if (reportList.length < 6) {
