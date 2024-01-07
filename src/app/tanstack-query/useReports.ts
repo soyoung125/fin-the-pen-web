@@ -7,24 +7,24 @@ import {MonthScheduleQuery,} from "@app/types/schedule.ts";
 import {Report} from "@app/types/report.ts";
 
 const fetchReport = async (query: MonthScheduleQuery) => {
-    const token = getSessionStorage(SESSION_STORAGE_KEY_TOKEN, "");
+  const token = getSessionStorage(SESSION_STORAGE_KEY_TOKEN, "");
 
-    return fetch(`${DOMAIN}/report`, {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json",
-            Authorization: "Bearer " + token,
-        },
-        body: JSON.stringify(query),
-    }).then<Report[] | undefined>(async (res) => {
-        const response = await res.json();
-        return response.data;
-    });
+  return fetch(`${DOMAIN}/report`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: "Bearer " + token,
+    },
+    body: JSON.stringify(query),
+  }).then<Report[]>(async (res) => {
+    const response = await res.json();
+    return response.data;
+  });
 };
 
 export const useReports = (query: MonthScheduleQuery) => {
-    return useQuery({
-        queryKey: [QUERY_KEY_REPORT, query.date],
-        queryFn: () => fetchReport(query),
-    });
+  return useQuery({
+    queryKey: [QUERY_KEY_REPORT, query.date],
+    queryFn: () => fetchReport(query),
+  });
 };
