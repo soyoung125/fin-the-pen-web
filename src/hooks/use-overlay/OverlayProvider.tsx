@@ -1,5 +1,6 @@
 import React, { PropsWithChildren, ReactNode, useState } from "react";
 import { OverlayContext } from "./OverlayContext.ts";
+import { createPortal } from "react-dom";
 
 function OverlayProvider({ children }: PropsWithChildren) {
   const [overlayById, setOverlayById] = useState<Map<string, ReactNode>>(
@@ -30,15 +31,12 @@ function OverlayProvider({ children }: PropsWithChildren) {
       }}
     >
       {children}
-      {
-        // createPortal(
+      {createPortal(
         [...overlayById.entries()].map(([id, element]) => (
           <React.Fragment key={id}>{element}</React.Fragment>
-        ))
-        // ,
-        // document.body
-        // )
-      }
+        )),
+        document.body
+      )}
     </OverlayContext.Provider>
   );
 }
