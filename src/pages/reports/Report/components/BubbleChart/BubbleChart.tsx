@@ -29,11 +29,19 @@ function BubbleChart({ bubbles, isBordered }: BubbleChartProps) {
           $background={bubble.background}
         >
           <Stack alignItems="center">
-            <Typography fontSize={`${bubble.r / 15}rem`} lineHeight={1}>
+            <Typography
+              fontSize={`${bubble.r / 20}rem`}
+              lineHeight={1}
+              textAlign={"center"}
+            >
               {bubble.title}
             </Typography>
             {bubble.subtitle && (
-              <Typography fontSize={`${bubble.r / 20}rem`} lineHeight={1}>
+              <Typography
+                fontSize={`${bubble.r / 25}rem`}
+                lineHeight={1}
+                textAlign={"center"}
+              >
                 {bubble.subtitle}
               </Typography>
             )}
