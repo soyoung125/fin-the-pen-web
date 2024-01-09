@@ -6,22 +6,19 @@ export interface PredictBoxProps {
   title: string;
   titleIcon: ReactNode;
   amount: number;
-  navigateIcon?: ReactNode;
-  navigateTo?: `/${string}`;
+  navigateIcon: ReactNode;
+  handleClick: () => void;
 }
 
 function PredictBox({
-  navigateTo,
+  handleClick,
   navigateIcon,
   titleIcon,
   title,
   amount,
 }: PredictBoxProps) {
-  const navigate = useNavigate();
-
   return (
     <Stack
-      onClick={() => navigateTo && navigate(navigateTo)}
       p="16px"
       bgcolor="#735BF21A"
       borderRadius="8px"
@@ -35,7 +32,9 @@ function PredictBox({
           <Typography fontSize="18px" color="#735BF2">
             {amount.toLocaleString()}원
           </Typography>
-          <Box color="#735BF2">{navigateIcon}</Box>
+          <Box color="#735BF2" onClick={handleClick}>
+            {navigateIcon}
+          </Box>
         </Stack>
       </Stack>
     </Stack>

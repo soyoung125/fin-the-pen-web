@@ -14,7 +14,8 @@ const meta = {
     amount: 0,
     title: "제목제목",
     titleIcon: <ScatterPlotIcon />,
-    navigateTo: "/somewhere",
+    navigateIcon: <ScatterPlotIcon />,
+    handleClick: () => alert("click!"),
   },
   argTypes: {},
 } satisfies Meta<typeof PredictBox>;
@@ -33,11 +34,14 @@ export const Example = () => {
         titleIcon={<AccountBalanceWalletIcon />}
         amount={1200000}
         navigateIcon={<SettingsIcon />}
+        handleClick={() => alert("setting")}
       />
       <PredictBox
         title="사용 가능 금액"
         titleIcon={<InfoOutlinedIcon />}
         amount={579000}
+        navigateIcon={<InfoOutlinedIcon />}
+        handleClick={() => alert("info")}
       />
     </Stack>
   );
