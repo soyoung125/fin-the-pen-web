@@ -31,7 +31,7 @@ const StyledMenu = styled((props: MenuProps) => (
     boxShadow:
       "rgb(255, 255, 255) 0px 0px 0px 0px, rgba(0, 0, 0, 0.05) 0px 0px 0px 1px, rgba(0, 0, 0, 0.1) 0px 10px 15px -3px, rgba(0, 0, 0, 0.05) 0px 4px 6px -2px",
     "& .MuiMenu-list": {
-      padding: "4px 0",
+      padding: "0",
     },
     "& .MuiMenuItem-root": {
       "& .MuiSvgIcon-root": {
@@ -83,7 +83,16 @@ export default function SelectMenus({
         variant="text"
         disableElevation
         onClick={handleClick}
-        endIcon={open ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
+        endIcon={
+          open ? (
+            <KeyboardArrowUpIcon sx={{ fontSize: "12px" }} />
+          ) : (
+            <KeyboardArrowDownIcon sx={{ fontSize: "12px" }} />
+          )
+        }
+        sx={{
+          fontSize: "13px",
+        }}
       >
         {selectedOption}
       </Button>
@@ -101,7 +110,10 @@ export default function SelectMenus({
             key={index}
             onClick={() => handleSelect(option)}
             disableRipple
-            sx={{ background: selectedOption === option ? "#EDEAFF" : "white" }}
+            sx={{
+              background: selectedOption === option ? "#EDEAFF" : "white",
+              fontSize: "13px",
+            }}
           >
             {option}
           </MenuItem>
