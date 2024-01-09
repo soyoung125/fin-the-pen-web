@@ -11,12 +11,11 @@ import {
 import RestartAltRoundedIcon from "@mui/icons-material/RestartAltRounded";
 import CloseRoundedIcon from "@mui/icons-material/CloseRounded";
 import { ChangeEvent, useState } from "react";
-import { useNavigate } from "react-router-dom";
 
 export interface GoalSettingModalProps {
   closeModal: () => void;
   handleSubmit: (value: number) => void;
-  navigateTo?: string;
+  navigateTo?: () => void;
 }
 
 function GoalSettingModal({
@@ -24,7 +23,6 @@ function GoalSettingModal({
   handleSubmit,
   navigateTo,
 }: GoalSettingModalProps) {
-  const navigate = useNavigate();
   const [amount, setAmount] = useState(0);
 
   const changeAmount = (e: ChangeEvent<HTMLInputElement>) => {
@@ -75,7 +73,7 @@ function GoalSettingModal({
         지출 목표액 설정
       </Button>
 
-      <Link onClick={() => navigateTo && navigate(navigateTo)}>
+      <Link component="button" onClick={navigateTo}>
         구체적인 지출 목표액을 변경하고 싶어요.
       </Link>
     </Stack>

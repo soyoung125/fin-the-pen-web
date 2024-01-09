@@ -12,21 +12,23 @@ import { HEADER_MODE } from "@app/types/common.ts";
 import { generateRandomBubbles2 } from "@pages/reports/Report/components/BubbleChart/utils.ts";
 import BubbleChart from "@pages/reports/Report/components/BubbleChart";
 import { useModal } from "@hooks/modal/useModal.tsx";
+import GoalSettingModal from "@pages/reports/Report/components/modals/GoalSettingModal";
+import { useNavigate } from "react-router-dom";
 
 function Report() {
   const { year, month, reportList, isPending, isError } = useReport();
   useHeader(true, HEADER_MODE.analysis);
   const { openModal, closeModal } = useModal();
+  const navigate = useNavigate();
 
   const handleClickAccountSetting = () => {
     openModal({
       modalElement: (
-        <Box p={5}>
-          <div>account setting</div>
-          <Button variant="contained" color="error" onClick={closeModal}>
-            모달 닫기
-          </Button>
-        </Box>
+        <GoalSettingModal
+          closeModal={closeModal}
+          handleSubmit={(v) => alert(v)}
+          navigateTo={() => navigate("/somewhere")}
+        />
       ),
       isBackdropClickable: true,
     });
