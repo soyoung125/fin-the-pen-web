@@ -25,14 +25,14 @@ function PredictBox({
       gap="16px"
       width="100%"
     >
-      <Box color="#735BF2">{titleIcon}</Box>
+      <Box color="primary.main">{titleIcon}</Box>
       <Stack gap="18x">
         <Typography fontSize="16px">{title}</Typography>
-        <Stack direction="row" gap="4px">
-          <Typography fontSize="18px" color="#735BF2">
+        <Stack direction="row" gap="4px" alignItems="center">
+          <Typography fontSize="18px" color="primary">
             {amount.toLocaleString()}원
           </Typography>
-          <Box color="#735BF2" onClick={handleClick}>
+          <Box color="primary.main" onClick={handleClick} display="flex">
             {navigateIcon}
           </Box>
         </Stack>

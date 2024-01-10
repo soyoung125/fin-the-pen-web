@@ -57,14 +57,14 @@ function Report() {
           title="이번 달 목표 지출"
           titleIcon={<AccountBalanceWalletIcon />}
           amount={1200000}
-          navigateIcon={<SettingsIcon />}
+          navigateIcon={<SettingsIcon fontSize="small" />}
           handleClick={handleClickAccountSetting}
         />
         <PredictBox
           title="사용 가능 금액"
           titleIcon={<InfoOutlinedIcon />}
           amount={579000}
-          navigateIcon={<InfoOutlinedIcon />}
+          navigateIcon={<InfoOutlinedIcon fontSize="small" />}
           handleClick={handleClickAccountInfo}
         />
       </Stack>
