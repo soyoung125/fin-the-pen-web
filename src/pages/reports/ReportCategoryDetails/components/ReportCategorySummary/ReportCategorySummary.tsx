@@ -4,7 +4,6 @@ import ArrowForwardIosSharpIcon from "@mui/icons-material/ArrowForwardIosSharp";
 export interface ReportCategorySummaryProps {
   year: number;
   month: number;
-  day: number;
   category: string;
   amount: number;
   goal: number;
@@ -13,7 +12,6 @@ export interface ReportCategorySummaryProps {
 
 function ReportCategorySummary({
   category,
-  day,
   amount,
   goal,
   year,
@@ -21,11 +19,11 @@ function ReportCategorySummary({
   onClickDateButton,
 }: ReportCategorySummaryProps) {
   return (
-    <Stack border="1px solid #DEE0E3" borderRadius="12px" p="16px">
+    <Stack border="1px solid #DEE0E3" borderRadius="12px" p={2.5}>
       <Stack>
         <Stack direction="row" alignItems="center" gap="8px">
           <Typography color="#222B45" fontSize="16px">
-            {year}년 {month}월 {day}일
+            {year}년 {month}월
           </Typography>
           <ArrowForwardIosSharpIcon
             onClick={onClickDateButton}
