@@ -5081,20 +5081,20 @@ __metadata:
   linkType: hard
 
 "@types/node@npm:*":
-  version: 20.10.7
-  resolution: "@types/node@npm:20.10.7"
+  version: 20.10.8
+  resolution: "@types/node@npm:20.10.8"
   dependencies:
     undici-types: "npm:~5.26.4"
-  checksum: d626cea1b7da4784ee7b335dcc54e64adba9725dab7ca51a690167de502ef89fec07b05ad8e25845d188d7ad7f72c192ec92964d456321ed5b9452113bf9351f
+  checksum: 93268c33c3bf0194427d696658160c77ab8661aa57107df5b248ff952898a372bf92cf0ba7fc07788fa35e59c69b6619cce63d45e4e67fca806e37da7ea42512
   languageName: node
   linkType: hard
 
 "@types/node@npm:^18.0.0, @types/node@npm:^18.15.0":
-  version: 18.19.5
-  resolution: "@types/node@npm:18.19.5"
+  version: 18.19.6
+  resolution: "@types/node@npm:18.19.6"
   dependencies:
     undici-types: "npm:~5.26.4"
-  checksum: 8ad59db82b08cb34b2e891e2193aad1081db082178e16189857ffff6619180b9dc74cb14f6e0449007c6797cf0a818a3929a7575b9816267b3d1d858f9fa7be1
+  checksum: 6cfffb738124d43bc240d21f3196270c15b9a4137644eee35a7e75460fda8df881630e350d00fcfd66caa37bf1ed80771f2da0d4c7cd0016c9f616934a2377c5
   languageName: node
   linkType: hard
 
@@ -6840,20 +6840,20 @@ __metadata:
   linkType: hard
 
 "css-loader@npm:^6.7.1":
-  version: 6.8.1
-  resolution: "css-loader@npm:6.8.1"
+  version: 6.9.0
+  resolution: "css-loader@npm:6.9.0"
   dependencies:
     icss-utils: "npm:^5.1.0"
-    postcss: "npm:^8.4.21"
+    postcss: "npm:^8.4.31"
     postcss-modules-extract-imports: "npm:^3.0.0"
     postcss-modules-local-by-default: "npm:^4.0.3"
-    postcss-modules-scope: "npm:^3.0.0"
+    postcss-modules-scope: "npm:^3.1.0"
     postcss-modules-values: "npm:^4.0.0"
     postcss-value-parser: "npm:^4.2.0"
-    semver: "npm:^7.3.8"
+    semver: "npm:^7.5.4"
   peerDependencies:
     webpack: ^5.0.0
-  checksum: a6e23de4ec1d2832f10b8ca3cfec6b6097a97ca3c73f64338ae5cd110ac270f1b218ff0273d39f677a7a561f1a9d9b0d332274664d0991bcfafaae162c2669c4
+  checksum: dded9ddbf3d7d2befe6a6c8fc861a46790626219a732ada3e52d02833dd2731d81b5f9ac7be51d3871b48d1a4b840668598e033f5f82790e892c6942139dbf9c
   languageName: node
   linkType: hard
 
@@ -7366,9 +7366,9 @@ __metadata:
   linkType: hard
 
 "electron-to-chromium@npm:^1.4.601":
-  version: 1.4.625
-  resolution: "electron-to-chromium@npm:1.4.625"
-  checksum: 81df3118f944307f0f7ddc2933bcd966f3aecf2a71e45b6609a9618d06c7a5cdaeef4dd04f1d0874d214fabc59ecd356ae1b171147fc477be133400def403d4d
+  version: 1.4.626
+  resolution: "electron-to-chromium@npm:1.4.626"
+  checksum: 6214900f04e749b5cb3c36dee38c4fea6587ae7bae5b89913811784f2f8bdeebf5b4dace665f1be35a0a6412c3e007f9d65ebbf9d2a84f9e670c320b33fe3d9f
   languageName: node
   linkType: hard
 
@@ -8285,9 +8285,9 @@ __metadata:
   linkType: hard
 
 "flow-parser@npm:0.*":
-  version: 0.225.1
-  resolution: "flow-parser@npm:0.225.1"
-  checksum: 6932c209289a6ac86181804bad44a6a394484928a84ee65c380a11a20cea5ac7a2d72dcfc79f9436e4e2851d950ad99a24e4688f0f8f03ac4b45d32b0627c55e
+  version: 0.226.0
+  resolution: "flow-parser@npm:0.226.0"
+  checksum: 668d39f88597600b6411096cfb514f87e8909d53dad4279534baa43f5037a50b23a04e83da4996b3d6c6673a8ac953efd26b2481b7c64f0309e3a453ac32d530
   languageName: node
   linkType: hard
 
@@ -11618,7 +11618,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"postcss-modules-scope@npm:^3.0.0":
+"postcss-modules-scope@npm:^3.1.0":
   version: 3.1.0
   resolution: "postcss-modules-scope@npm:3.1.0"
   dependencies:
@@ -11657,7 +11657,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"postcss@npm:^8.4.21, postcss@npm:^8.4.27":
+"postcss@npm:^8.4.27, postcss@npm:^8.4.31":
   version: 8.4.33
   resolution: "postcss@npm:8.4.33"
   dependencies:
@@ -12635,7 +12635,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"semver@npm:^7.3.5, semver@npm:^7.3.7, semver@npm:^7.3.8, semver@npm:^7.5.3":
+"semver@npm:^7.3.5, semver@npm:^7.3.7, semver@npm:^7.5.3, semver@npm:^7.5.4":
   version: 7.5.4
   resolution: "semver@npm:7.5.4"
   dependencies:
@@ -13093,11 +13093,11 @@ __metadata:
   linkType: hard
 
 "style-loader@npm:^3.3.1":
-  version: 3.3.3
-  resolution: "style-loader@npm:3.3.3"
+  version: 3.3.4
+  resolution: "style-loader@npm:3.3.4"
   peerDependencies:
     webpack: ^5.0.0
-  checksum: 104bae8abd0627579dc14f3917cf65f1117e8098e3529872f09c26b5eee07933567b7be5c8ebf94d16e322b6e726dc569c5787111bf3786915850db4e351ef33
+  checksum: 8f8027fc5c6e91400cbb60066e7db3315810f8eaa0d19b2a254936eb0bec399ba8a7043b1789da9d05ab7c3ba50faf9267765ae0bf3571e48aa34ecdc774be37
   languageName: node
   linkType: hard
 
