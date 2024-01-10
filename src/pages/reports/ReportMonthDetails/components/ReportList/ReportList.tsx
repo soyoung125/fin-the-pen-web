@@ -1,9 +1,10 @@
 import ReportCard from "@pages/reports/ReportMonthDetails/components/ReportCard";
 import ReportCardSkeleton from "@pages/reports/ReportMonthDetails/components/ReportCard/ReportCardSkeleton.tsx";
-import {Button, Stack} from "@mui/material";
-import {Report} from "@app/types/report.ts";
-import {useState} from "react";
+import { Button, Stack } from "@mui/material";
+import { Report } from "@app/types/report.ts";
+import { useState } from "react";
 import ReportEmptyBox from "@pages/reports/ReportMonthDetails/components/ReportEmptyBox";
+import { PATH } from "@constants/path.ts";
 
 export interface ReportListProps {
   isPending: boolean;
@@ -12,15 +13,26 @@ export interface ReportListProps {
   handleClickAddSchedule: () => void;
 }
 
-function ReportList({isPending, reportList, maxPercent, handleClickAddSchedule}: ReportListProps) {
+function ReportList({
+  isPending,
+  reportList,
+  maxPercent,
+  handleClickAddSchedule,
+}: ReportListProps) {
   const [visibleItems, setVisibleItems] = useState(5);
   const [isExpanded, setIsExpanded] = useState(false);
 
   if (isPending) {
-    return <Stack gap="14px">{Array.from(new Array(5)).map(() => <ReportCardSkeleton/>)}</Stack>
+    return (
+      <Stack gap="14px">
+        {Array.from(new Array(5)).map(() => (
+          <ReportCardSkeleton />
+        ))}
+      </Stack>
+    );
   }
   if (!reportList || reportList.length === 0) {
-    return <ReportEmptyBox handleClickAddSchedule={handleClickAddSchedule}/>
+    return <ReportEmptyBox handleClickAddSchedule={handleClickAddSchedule} />;
   }
 
   if (reportList.length < 6) {
@@ -34,6 +46,10 @@ function ReportList({isPending, reportList, maxPercent, handleClickAddSchedule}:
             maxPercent={maxPercent}
             title={l.category}
             percent={Number(l.rate)}
+            navigateTo={`${PATH.reportCategoryDetail}/${l.category.replaceAll(
+              "/",
+              "-"
+            )}`}
           />
         ))}
       </Stack>
@@ -59,11 +75,19 @@ function ReportList({isPending, reportList, maxPercent, handleClickAddSchedule}:
           maxPercent={maxPercent}
           title={l.category}
           percent={Number(l.rate)}
+          navigateTo={`${PATH.reportCategoryDetail}/${l.category.replaceAll(
+            "/",
+            "-"
+          )}`}
         />
       ))}
 
-      <Button variant="outlined" color="secondary" onClick={handleToggleVisibility}>
-        {isExpanded ? '접기' : '더보기'}
+      <Button
+        variant="outlined"
+        color="secondary"
+        onClick={handleToggleVisibility}
+      >
+        {isExpanded ? "접기" : "더보기"}
       </Button>
     </Stack>
   );
