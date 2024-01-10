@@ -22,6 +22,7 @@ export const BubbleComponent = styled.div<{
   display: flex;
   justify-content: center;
   align-items: center;
+  word-break: keep-all;
   left: ${({ $x }) => $x}%;
   top: ${({ $y }) => $y}%;
   width: ${({ $r }) => $r}%;

@@ -14,6 +14,7 @@ import BubbleChart from "@pages/reports/Report/components/BubbleChart";
 import { useModal } from "@hooks/modal/useModal.tsx";
 import GoalSettingModal from "@pages/reports/Report/components/modals/GoalSettingModal";
 import { useNavigate } from "react-router-dom";
+import UseableInfoModal from "@pages/reports/Report/components/modals/UseableInfoModal";
 
 function Report() {
   const { year, month, reportList, isPending, isError } = useReport();
@@ -36,14 +37,7 @@ function Report() {
 
   const handleClickAccountInfo = () => {
     openModal({
-      modalElement: (
-        <Box p={5}>
-          <div>account info</div>
-          <Button variant="contained" color="error" onClick={closeModal}>
-            모달 닫기
-          </Button>
-        </Box>
-      ),
+      modalElement: <UseableInfoModal closeModal={closeModal} />,
       isBackdropClickable: true,
     });
   };
