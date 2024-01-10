@@ -17,7 +17,8 @@ import { useNavigate } from "react-router-dom";
 import UseableInfoModal from "@pages/reports/Report/components/modals/UseableInfoModal";
 
 function Report() {
-  const { year, month, reportList, isPending, isError } = useReport();
+  const { year, month, reportList, isPending, isError, pickMonth } =
+    useReport();
   useHeader(true, HEADER_MODE.analysis);
   const { openModal, closeModal } = useModal();
   const navigate = useNavigate();
@@ -51,7 +52,12 @@ function Report() {
 
   return (
     <Stack bgcolor="#F7F7F8" px="20px" py="24px" gap="24px">
-      <ReportTitle year={year} month={month} amount={333000000} />
+      <ReportTitle
+        year={year}
+        month={month}
+        amount={333000000}
+        pickMonth={pickMonth}
+      />
       <Stack direction="row" gap="10px">
         <PredictBox
           title="이번 달 목표 지출"
