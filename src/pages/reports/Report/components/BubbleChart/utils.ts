@@ -1,4 +1,5 @@
 import { Bubble } from "./BubbleChart.tsx";
+import { Report } from "@app/types/report.ts";
 
 /**
  * 서로 겹치지 않게 랜덤으로 버블을 생성합니다.
@@ -47,3 +48,65 @@ export const generateRandomBubbles = (
   }
   return generatedBubbles;
 };
+
+export const generateRandomBubbles2 = (bubbleItems: Report[]) => {
+  const generatedBubbles: Bubble[] = [];
+
+  bubbleItems.forEach((bubbleItem, index) => {
+    const bubbleTemplate = bubble[index];
+
+    const { background, color, r, x, y } = bubbleTemplate;
+    const title = bubbleItem.category;
+    const subtitle = bubbleItem.rate;
+    generatedBubbles.push({
+      x,
+      y,
+      r,
+      title,
+      subtitle,
+      background,
+      color,
+    });
+  });
+
+  return generatedBubbles;
+};
+
+export const bubble: Pick<Bubble, "x" | "y" | "r" | "background" | "color">[] =
+  [
+    {
+      x: 5,
+      y: 10,
+      r: 44,
+      background: "linear-gradient(140deg, #E4E0FF 13.75%, #B4A8FF 86.75%)",
+      color: "#280EB1",
+    },
+    {
+      x: 35,
+      y: 50,
+      r: 37,
+      background: "linear-gradient(140deg, #CFEBFF 13.75%, #7BC8FF 86.75%)",
+      color: "#004FAC",
+    },
+    {
+      x: 52,
+      y: 13,
+      r: 30,
+      background: "linear-gradient(140deg, #D4FFE7 13.75%, #6DFFAE 86.75%)",
+      color: "#047223",
+    },
+    {
+      x: 8,
+      y: 57,
+      r: 24,
+      background: "linear-gradient(140deg, #FFF4C6 13.75%, #FFE36D 86.75%)",
+      color: "#CE4911",
+    },
+    {
+      x: 71,
+      y: 40,
+      r: 24,
+      background: "linear-gradient(140deg, #FFE7F4 13.75%, #FFBFE2 86.75%)",
+      color: "#B20000",
+    },
+  ];

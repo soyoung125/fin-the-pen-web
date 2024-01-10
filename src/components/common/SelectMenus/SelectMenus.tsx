@@ -92,6 +92,8 @@ export default function SelectMenus({
         }
         sx={{
           fontSize: "13px",
+          color: "#131416",
+          fontWeight: 500,
         }}
       >
         {selectedOption}

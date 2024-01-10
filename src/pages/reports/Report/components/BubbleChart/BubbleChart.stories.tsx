@@ -1,7 +1,11 @@
 import { Meta } from "@storybook/react";
 import BubbleChart, { Bubble, BubbleChartProps } from "./BubbleChart.tsx";
 import { useState } from "react";
-import { generateRandomBubbles } from "@pages/reports/Report/components/BubbleChart/utils.ts";
+import {
+  generateRandomBubbles,
+  generateRandomBubbles2,
+} from "@pages/reports/Report/components/BubbleChart/utils.ts";
+import { Report } from "@app/types/report.ts";
 
 const meta = {
   title: "reports/Report/BubbleChart",
@@ -99,6 +103,56 @@ export const MultipleBubbles = () => {
               0,
               Math.random() * 5 + 1
             ),
+          ])
+        }
+      >
+        1~5개의 버블을 랜덤 생성하기
+      </button>
+      <div>{JSON.stringify(bubbles)}</div>
+    </>
+  );
+};
+
+export const MultipleBubbles2 = () => {
+  const list: Report[] = [
+    {
+      amount: 71000,
+      rate: "20",
+      category: "식비",
+    },
+    {
+      amount: 71000,
+      rate: "12",
+      category: "미용",
+    },
+    {
+      amount: 71000,
+      rate: "8",
+      category: "자동차",
+    },
+    {
+      amount: 71000,
+      rate: "7",
+      category: "패션/쇼핑",
+    },
+    {
+      amount: 71000,
+      rate: "6",
+      category: "카페",
+    },
+  ];
+
+  const [bubbles, setBubbles] = useState<Bubble[]>(
+    generateRandomBubbles2(list)
+  );
+
+  return (
+    <>
+      <BubbleChart bubbles={bubbles} isBordered />
+      <button
+        onClick={() =>
+          setBubbles([
+            ...generateRandomBubbles2(list).slice(0, Math.random() * 5 + 1),
           ])
         }
       >

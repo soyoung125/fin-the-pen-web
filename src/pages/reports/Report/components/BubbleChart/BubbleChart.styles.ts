@@ -3,8 +3,8 @@ import { Bubble } from "./BubbleChart.tsx";
 
 export const BubbleChartContainer = styled.div<{ $isBordered?: boolean }>`
   ${({ $isBordered }) => $isBordered && `border: 1px solid #e6e6e6;`}
-  width: 100vw;
-  height: 100vw;
+  width: calc(100vw - 72px);
+  height: calc(100vw - 72px);
   position: relative;
 `;
 
@@ -22,6 +22,7 @@ export const BubbleComponent = styled.div<{
   display: flex;
   justify-content: center;
   align-items: center;
+  word-break: keep-all;
   left: ${({ $x }) => $x}%;
   top: ${({ $y }) => $y}%;
   width: ${({ $r }) => $r}%;

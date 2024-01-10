@@ -14,7 +14,7 @@ const REPORT_ROUTES: RouterDOM[] = [
     element: <ReportMonthDetails />,
   },
   {
-    path: PATH.reportCategoryDetail,
+    path: `${PATH.reportCategoryDetail}/:category`,
     element: <ReportCategoryDetails />,
   },
 ];
