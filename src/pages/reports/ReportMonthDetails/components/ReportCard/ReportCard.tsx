@@ -24,8 +24,6 @@ function ReportCard({
   const { color, bgColor } = colorOfRank(rank);
   const navigate = useNavigate();
 
-  console.log(navigateTo);
-
   return (
     <Stack>
       <Stack direction="row" justifyContent="space-between" alignItems="center">
