@@ -4,19 +4,24 @@ import * as React from "react";
 
 export interface ReportListHeaderProps {
   count: number;
+  options: string[];
   selectedOption: string;
   setSelectedOption: React.Dispatch<React.SetStateAction<string>>;
 }
 
 function ReportListHeader({
   count,
+  options,
   selectedOption,
   setSelectedOption,
-}: ReportListHeader) {
-  const options = ["최신순", "과거순", "높은 금액순", "낮은 금액순"];
-
+}: ReportListHeaderProps) {
   return (
-    <Stack direction="row" justifyContent="space-between" alignItems="center">
+    <Stack
+      direction="row"
+      justifyContent="space-between"
+      alignItems="center"
+      p={2.5}
+    >
       <Typography>총 {count}건</Typography>
       <SelectMenus
         options={options}
