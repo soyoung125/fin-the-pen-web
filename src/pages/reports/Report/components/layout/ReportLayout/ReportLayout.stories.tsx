@@ -1,9 +1,8 @@
 import { Meta } from "@storybook/react";
-import { Box } from "@mui/material";
 import ReportLayout, { ReportLayoutProps } from "./ReportLayout.tsx";
 
 const meta = {
-  title: "reports/Report/ReportLayout",
+  title: "reports/Report/layout/ReportLayout",
   component: ReportLayout,
   tags: ["autodocs"],
   args: {

@@ -4,7 +4,7 @@ import PredictBox from "@pages/reports/Report/components/PredictBox";
 import AccountBalanceWalletIcon from "@mui/icons-material/AccountBalanceWallet";
 import SettingsIcon from "@mui/icons-material/Settings";
 import InfoOutlinedIcon from "@mui/icons-material/InfoOutlined";
-import ReportBox from "@pages/reports/Report/components/ReportBox";
+import ReportBox from "pages/reports/Report/components/layout/ReportBox";
 import { PATH } from "@constants/path.ts";
 import useReport from "@hooks/useReport.ts";
 import useHeader from "@hooks/useHeader.ts";

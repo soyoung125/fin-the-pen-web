@@ -1,12 +1,13 @@
 import { Meta } from "@storybook/react";
 import { Stack } from "@mui/material";
 import ReportTitle from "@pages/reports/Report/components/ReportTitle";
-import ReportBox from "@pages/reports/Report/components/ReportBox";
+import ReportBox from "pages/reports/Report/components/layout/ReportBox";
 import PredictBox from "@pages/reports/Report/components/PredictBox";
 import AccountBalanceWalletIcon from "@mui/icons-material/AccountBalanceWallet";
 import SettingsIcon from "@mui/icons-material/Settings";
 import InfoOutlinedIcon from "@mui/icons-material/InfoOutlined";
 import TopNavigationBar from "@components/layouts/common/TopNavigationBar";
+import ReportLayout from "@pages/reports/Report/components/layout/ReportLayout";
 
 const meta = {
   title: "reports/Report",
@@ -46,14 +47,31 @@ export const PageExample = () => {
           />
         </Stack>
         <ReportBox
-          title="월간 소비 리포트"
-          navigateTo="/somewhere"
-          content={<div>원형 그래프 미구현</div>}
+          content={
+            <ReportLayout
+              title="월간 소비 리포트"
+              navigateTo="/somewhere"
+              content={<div>원형 그래프 미구현</div>}
+            />
+          }
         />
         <ReportBox
-          title="소비 예측 리포트"
-          navigateTo="/somewhere"
-          content={<div>막대 그래프 미구현</div>}
+          content={
+            <Stack spacing={5}>
+              <ReportLayout
+                title="소비 예측 리포트"
+                content={<div>막대 그래프 미구현</div>}
+              />
+              <ReportLayout
+                title="N월 고정 입출금"
+                content={<div>카드 미구현</div>}
+              />
+              <ReportLayout
+                title="월별 소비 리포트"
+                content={<div>선 그래프 미구현</div>}
+              />
+            </Stack>
+          }
         />
       </Stack>
     </>

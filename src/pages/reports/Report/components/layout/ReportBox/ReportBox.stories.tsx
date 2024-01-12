@@ -3,7 +3,7 @@ import ReportBox, { ReportBoxProps } from "./ReportBox.tsx";
 import { Box } from "@mui/material";
 
 const meta = {
-  title: "reports/Report/ReportBox",
+  title: "reports/Report/layout/ReportBox",
   component: ReportBox,
   tags: ["autodocs"],
   args: {
