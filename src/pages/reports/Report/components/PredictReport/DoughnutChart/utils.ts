@@ -3,6 +3,7 @@ import { getAmount } from "@pages/reports/Report/components/PredictReport/utils.
 export const OPTIONS = {
   events: ["click" as const, "blur" as const],
   responsive: true,
+  cutout: 60,
   plugins: {
     legend: {
       display: false,

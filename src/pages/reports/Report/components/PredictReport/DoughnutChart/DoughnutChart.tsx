@@ -69,7 +69,7 @@ function DoughnutChart({
   };
 
   return (
-    <Box px={3}>
+    <Box px={5}>
       <Doughnut
         ref={chartRef}
         data={data}
