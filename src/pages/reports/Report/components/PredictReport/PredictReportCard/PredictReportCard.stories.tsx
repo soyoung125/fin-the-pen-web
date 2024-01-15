@@ -13,7 +13,7 @@ const meta = {
   args: {
     month: 5,
     type: {
-      type: "goal",
+      type: "used",
       color: "#735BF2",
       title: "월 지출 금액",
     },
@@ -46,7 +46,7 @@ export const Default = (args: PredictReportCardProps) => {
 
 export const Example = () => {
   const month = 5;
-  const [selected, setSelected] = useState("goal");
+  const [selected, setSelected] = useState("used");
   const [isOver, setIsOver] = useState(false);
 
   return (

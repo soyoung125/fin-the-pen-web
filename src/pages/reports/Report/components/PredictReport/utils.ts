@@ -7,7 +7,7 @@ export interface ReportTypeInterface {
 
 export const REPORTTYPE: ReportTypeInterface[] = [
   {
-    type: "goal",
+    type: "used",
     color: "#735BF2",
     title: "월 지출 금액",
   },

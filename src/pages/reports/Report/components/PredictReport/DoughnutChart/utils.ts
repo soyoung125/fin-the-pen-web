@@ -46,7 +46,7 @@ export const OPTIONS = {
 
 const getTitle = (label: string) => {
   switch (label) {
-    case "goal":
+    case "used":
       return "지출 금액";
     case "predict":
       return "지출 예정";
@@ -59,7 +59,7 @@ const getTitle = (label: string) => {
 
 export const getColors = (label: string) => {
   switch (label) {
-    case "goal":
+    case "used":
       return ["#735BF2", "#AEAEAE", "#ECECEC"];
     case "predict":
       return ["#C8CBD0", "#FF769F", "#ECECEC"];

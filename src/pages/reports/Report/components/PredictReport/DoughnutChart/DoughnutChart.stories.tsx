@@ -32,6 +32,7 @@ export const Example = () => {
       labels={LABELS}
       datas={datas}
       bgColors={colors}
+      selected={selected}
       setSelected={setSelected}
     />
   );

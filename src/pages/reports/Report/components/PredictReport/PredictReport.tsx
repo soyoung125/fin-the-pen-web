@@ -1,12 +1,33 @@
 import { Box, Stack, Typography } from "@mui/material";
+import {
+  LABELS,
+  REPORTTYPE,
+} from "@pages/reports/Report/components/PredictReport/utils.ts";
+import DoughnutChart from "@pages/reports/Report/components/PredictReport/DoughnutChart";
+import { getColors } from "@pages/reports/Report/components/PredictReport/DoughnutChart/utils.ts";
+import * as React from "react";
+import PredictReportCard from "@pages/reports/Report/components/PredictReport/PredictReportCard";
 
 export interface PredictReportProps {
+  selected: string;
+  setSelected: React.Dispatch<React.SetStateAction<string>>;
+  month: number;
   goal: number;
-  predict?: number;
   used: number;
+  predict: number;
+  useable: number;
 }
 
-function PredictReport({ goal, predict, used }: PredictReportProps) {
+function PredictReport({
+  selected,
+  setSelected,
+  month,
+  goal,
+  used,
+  predict,
+  useable,
+}: PredictReportProps) {
+  const colors = getColors(selected);
   return (
     <Stack spacing={3}>
       <Typography fontSize="18px">
@@ -16,9 +37,24 @@ function PredictReport({ goal, predict, used }: PredictReportProps) {
         </span>
       </Typography>
 
-      <Box>그래프</Box>
+      <DoughnutChart
+        labels={LABELS}
+        datas={[used, predict, useable]}
+        bgColors={colors}
+        selected={selected}
+        setSelected={setSelected}
+      />
 
-      <Box>리스트</Box>
+      {REPORTTYPE.map((type) => (
+        <PredictReportCard
+          month={month}
+          type={type}
+          amount={99999999}
+          selected={selected === type.type}
+          over={useable === 0}
+          setSelected={setSelected}
+        />
+      ))}
     </Stack>
   );
 }
