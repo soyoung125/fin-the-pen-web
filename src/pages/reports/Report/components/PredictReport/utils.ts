@@ -17,9 +17,11 @@ export const REPORTTYPE: ReportTypeInterface[] = [
     title: "월 지출 예정 금액",
   },
   {
-    type: "used",
+    type: "useable",
     color: "#0075FF",
     title: "월 사용 가능 금액",
     overTitle: "목표 지출 초과 금액",
   },
 ];
+
+export const LABELS = REPORTTYPE.map((type) => type.type);
