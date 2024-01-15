@@ -8,6 +8,7 @@ import { OPTIONS } from "@pages/reports/Report/components/PredictReport/Doughnut
 import { useRef, MouseEvent, useEffect } from "react";
 import * as React from "react";
 import { LABELS } from "@pages/reports/Report/components/PredictReport/utils.ts";
+import { Box } from "@mui/material";
 
 ChartJS.register(ArcElement, Tooltip, Legend);
 
@@ -68,7 +69,14 @@ function DoughnutChart({
   };
 
   return (
-    <Doughnut ref={chartRef} data={data} options={OPTIONS} onClick={onClick} />
+    <Box px={3}>
+      <Doughnut
+        ref={chartRef}
+        data={data}
+        options={OPTIONS}
+        onClick={onClick}
+      />
+    </Box>
   );
 }
 

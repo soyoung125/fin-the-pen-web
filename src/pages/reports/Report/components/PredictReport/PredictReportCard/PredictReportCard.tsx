@@ -1,5 +1,8 @@
 import { Box, Stack, Typography } from "@mui/material";
-import { ReportTypeInterface } from "@pages/reports/Report/components/PredictReport/utils.ts";
+import {
+  getAmount,
+  ReportTypeInterface,
+} from "@pages/reports/Report/components/PredictReport/utils.ts";
 import * as React from "react";
 
 export interface PredictReportCardProps {
@@ -45,7 +48,7 @@ function PredictReportCard({
         color={over && type.overTitle ? "error" : "inherit"}
         variant="subtitle2"
       >
-        {amount.toLocaleString()}원
+        {getAmount(amount)}원
       </Typography>
     </Stack>
   );

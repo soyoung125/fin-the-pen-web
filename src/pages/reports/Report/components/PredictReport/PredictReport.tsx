@@ -1,5 +1,6 @@
 import { Box, Stack, Typography } from "@mui/material";
 import {
+  getAmount,
   LABELS,
   REPORTTYPE,
 } from "@pages/reports/Report/components/PredictReport/utils.ts";
@@ -33,7 +34,7 @@ function PredictReport({
       <Typography fontSize="18px">
         이번 달 지출 목표액{" "}
         <span style={{ color: "#735BF2", fontWeight: 700 }}>
-          {goal.toLocaleString()}
+          {getAmount(goal)}
         </span>
       </Typography>
 
@@ -45,16 +46,18 @@ function PredictReport({
         setSelected={setSelected}
       />
 
-      {REPORTTYPE.map((type) => (
-        <PredictReportCard
-          month={month}
-          type={type}
-          amount={99999999}
-          selected={selected === type.type}
-          over={useable === 0}
-          setSelected={setSelected}
-        />
-      ))}
+      <Stack>
+        {REPORTTYPE.map((type) => (
+          <PredictReportCard
+            month={month}
+            type={type}
+            amount={99999999}
+            selected={selected === type.type}
+            over={useable === 0}
+            setSelected={setSelected}
+          />
+        ))}
+      </Stack>
     </Stack>
   );
 }

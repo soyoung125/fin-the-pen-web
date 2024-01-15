@@ -25,3 +25,20 @@ export const REPORTTYPE: ReportTypeInterface[] = [
 ];
 
 export const LABELS = REPORTTYPE.map((type) => type.type);
+
+export const getAmount = (amount: number) => {
+  if (amount >= 10000000000) return "99억원+";
+  const hundredMillion = Math.trunc(amount / 100000000);
+  const tenThousand = Math.trunc(amount / 10000) % 10000;
+  const thousand = amount % 10000;
+
+  if (hundredMillion > 0) {
+    return `${hundredMillion}억${` ` + tenThousand.toLocaleString()}만원`;
+  }
+  if (tenThousand > 0) {
+    return `${tenThousand.toLocaleString()}만${
+      ` ` + thousand.toLocaleString()
+    }원`;
+  }
+  return `${thousand.toLocaleString()}원`;
+};

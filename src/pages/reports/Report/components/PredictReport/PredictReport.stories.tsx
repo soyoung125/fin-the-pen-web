@@ -43,10 +43,10 @@ export const Example = () => {
       selected={selected}
       setSelected={setSelected}
       month={5}
-      goal={9999999}
-      predict={99999}
-      used={9999}
-      useable={999}
+      goal={99999999}
+      predict={99999999}
+      used={99999999}
+      useable={99999999}
     />
   );
 };

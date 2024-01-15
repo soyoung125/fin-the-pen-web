@@ -1,3 +1,5 @@
+import { getAmount } from "@pages/reports/Report/components/PredictReport/utils.ts";
+
 export const OPTIONS = {
   events: ["click" as const, "blur" as const],
   responsive: true,
@@ -34,7 +36,7 @@ export const OPTIONS = {
         },
         label: (item: any) => {
           const count = item.dataset.data[item.dataIndex];
-          return `${count.toLocaleString()}원`;
+          return getAmount(count);
         },
         labelTextColor: () => {
           return "#000";
