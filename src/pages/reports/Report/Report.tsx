@@ -74,20 +74,20 @@ function Report() {
           handleClick={handleClickAccountInfo}
         />
       </Stack>
-      <ReportBox
-        title="월간 소비 리포트"
-        navigateTo={PATH.reportMonthDetail}
-        content={
-          <BubbleChart
-            bubbles={generateRandomBubbles2(reportList.slice(0, 5))}
-          />
-        }
-      />
-      <ReportBox
-        title="소비 예측 리포트"
-        navigateTo="/somewhere"
-        content={<div>막대 그래프 미구현</div>}
-      />
+      {/*<ReportBox*/}
+      {/*  title="월간 소비 리포트"*/}
+      {/*  navigateTo={PATH.reportMonthDetail}*/}
+      {/*  content={*/}
+      {/*    <BubbleChart*/}
+      {/*      bubbles={generateRandomBubbles2(reportList.slice(0, 5))}*/}
+      {/*    />*/}
+      {/*  }*/}
+      {/*/>*/}
+      {/*<ReportBox*/}
+      {/*  title="소비 예측 리포트"*/}
+      {/*  navigateTo="/somewhere"*/}
+      {/*  content={<div>막대 그래프 미구현</div>}*/}
+      {/*/>*/}
     </Stack>
   );
 }
