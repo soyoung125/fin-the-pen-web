@@ -1,10 +1,9 @@
 import { Meta } from "@storybook/react";
-import ReportBox, { ReportBoxProps } from "./ReportBox.tsx";
-import { Box } from "@mui/material";
+import ReportLayout, { ReportLayoutProps } from "./ReportLayout.tsx";
 
 const meta = {
-  title: "reports/Report/ReportBox",
-  component: ReportBox,
+  title: "reports/Report/layout/ReportLayout",
+  component: ReportLayout,
   tags: ["autodocs"],
   args: {
     title: "리포트 이름",
@@ -21,14 +20,10 @@ const meta = {
         "컴포넌트가 올 자리입니다. 실제 환경에서는 텍스트가 오지 않습니다. ",
     },
   },
-} satisfies Meta<typeof ReportBox>;
+} satisfies Meta<typeof ReportLayout>;
 
 export default meta;
 
-export const Default = (args: ReportBoxProps) => {
-  return (
-    <Box bgcolor="#F7F7F8" px="20px" py="24px">
-      <ReportBox {...args} />
-    </Box>
-  );
+export const Default = (args: ReportLayoutProps) => {
+  return <ReportLayout {...args} />;
 };
