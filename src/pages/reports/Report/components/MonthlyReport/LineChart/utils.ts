@@ -20,7 +20,11 @@ export const getOptions = (max: number, min: number) => {
     },
     plugins: {
       datalabels: {
-        backgroundColor: "#43464C",
+        backgroundColor: (context: any) => {
+          const data = context.dataset.data[context.dataIndex];
+          if (data === 0) return "#A9ACB2";
+          return "#43464C";
+        },
         color: "#fff",
         borderRadius: 8,
         font: {
@@ -30,8 +34,7 @@ export const getOptions = (max: number, min: number) => {
         padding: 6,
         offset: 10,
         formatter: (value: any) => {
-          if (value === max) return "최대";
-          if (value === min) return "최저";
+          if (value === 0) return "데이터 없음";
           return `${value.toLocaleString()}원`;
         },
         align: (context: any) => {
