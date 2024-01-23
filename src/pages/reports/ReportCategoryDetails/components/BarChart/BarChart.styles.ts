@@ -1,5 +1,4 @@
 import styled from "@emotion/styled";
-import { Bubble } from "@pages/reports/Report/components/BubbleChart/BubbleChart.tsx";
 import { Bar } from "@pages/reports/ReportCategoryDetails/components/BarChart/BarChart.tsx";
 
 export const BarChartContainer = styled.div`

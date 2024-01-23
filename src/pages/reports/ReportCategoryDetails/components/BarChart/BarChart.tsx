@@ -2,6 +2,7 @@ import {
   BarChartContainer,
   BarComponent,
 } from "@pages/reports/ReportCategoryDetails/components/BarChart/BarChart.styles.ts";
+import { Dispatch, SetStateAction } from "react";
 
 export interface Bar {
   label: string;
@@ -10,18 +11,29 @@ export interface Bar {
 }
 
 export interface BarChartProps {
-  labels: string[];
+  values: string[];
   data: number[];
   colors: string[];
-  selected: number;
+  selected: string;
+  setSelected: Dispatch<SetStateAction<string>>;
 }
 
-function BarChart({ labels, colors, data, selected }: BarChartProps) {
+function BarChart({
+  values,
+  colors,
+  data,
+  selected,
+  setSelected,
+}: BarChartProps) {
   return (
     <BarChartContainer>
       {data.map((d, idx) => (
-        <BarComponent $color={colors[idx]} $width={d}>
-          {selected === idx && `${d}%`}
+        <BarComponent
+          $color={colors[idx]}
+          $width={d}
+          onClick={() => setSelected(values[idx])}
+        >
+          {selected === values[idx] && `${d}%`}
         </BarComponent>
       ))}
     </BarChartContainer>
