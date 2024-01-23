@@ -1,37 +1,42 @@
 import { Box, Stack, Typography } from "@mui/material";
+import RepeatRoundedIcon from "@mui/icons-material/RepeatRounded";
 
 export interface ConsumptionCardProps {
   name: string;
   price: number;
-  date: string;
-  balance: number;
-  cardCompany: string; // 이거 필요한건가요?
+  startTime: string;
+  endTime: string;
+  type: string;
+  isRepeat: boolean;
 }
 
 function ConsumptionCard({
-  balance,
+  type,
   price,
   name,
-  date,
-  cardCompany,
+  startTime,
+  endTime,
+  isRepeat,
 }: ConsumptionCardProps) {
   return (
-    <Box px="20px" py="16px">
+    <Stack spacing={1} px={2.5} py={2}>
       <Stack direction="row" justifyContent="space-between" alignItems="center">
-        <Typography fontSize="15px">{name}</Typography>
-        <Typography fontSize="15px" color="#735BF2">
-          - {price.toLocaleString()}원
+        <Stack direction="row" alignItems="center" spacing={0.5}>
+          <Typography fontSize="13px" fontWeight={500}>
+            {startTime}-{endTime}
+          </Typography>
+          {isRepeat && <RepeatRoundedIcon color="success" fontSize="small" />}
+        </Stack>
+        <Typography
+          variant="subtitle2"
+          color={type === "-" ? "error.main" : "info.main"}
+        >
+          {type}
+          {price.toLocaleString()}
         </Typography>
       </Stack>
-      <Stack direction="row" justifyContent="space-between" alignItems="center">
-        <Typography fontSize="12px" color="#5B5F67">
-          {date} | {cardCompany}
-        </Typography>
-        <Typography fontSize="14px" color="#8C919C">
-          {balance.toLocaleString()}원
-        </Typography>
-      </Stack>
-    </Box>
+      <Typography variant="h4">{name}</Typography>
+    </Stack>
   );
 }
 
