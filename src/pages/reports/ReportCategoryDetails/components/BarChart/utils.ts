@@ -1,4 +1,4 @@
-const getTitle = (label: string) => {
+export const getTitle = (label: string) => {
   switch (label) {
     case "used":
       return "현재";

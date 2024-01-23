@@ -1,7 +1,7 @@
 import BarChart, { BarChartProps } from "./BarChart.tsx";
 import { Meta } from "@storybook/react";
 import { useState } from "react";
-import { getColors } from "@pages/reports/ReportCategoryDetails/components/BarChart/utils.ts";
+import { getColors } from "./utils.ts";
 
 const meta = {
   title: "reports/ReportCategoryDetails/BarChart",
