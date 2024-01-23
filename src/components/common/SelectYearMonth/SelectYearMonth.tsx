@@ -15,20 +15,22 @@ function SelectYearMonth({
   month,
   lastMonth,
   nextMonth,
+  changeYearAndMonth,
 }: SelectYearMonthProps) {
   return (
     <Stack
       direction="row"
       justifyContent="space-between"
       alignItems="center"
-      spacing={1}
+      spacing={2}
     >
-      <ArrowBackIosRoundedIcon onClick={lastMonth} />
+      <ArrowBackIosRoundedIcon onClick={lastMonth} fontSize={"small"} />
       <Typography
         variant="h2"
         sx={{ textDecoration: "underline", textDecorationThickness: 2 }}
+        onClick={changeYearAndMonth}
       >{`${year}년 ${month}월`}</Typography>
-      <ArrowForwardIosRoundedIcon onClick={nextMonth} />
+      <ArrowForwardIosRoundedIcon onClick={nextMonth} fontSize={"small"} />
     </Stack>
   );
 }
