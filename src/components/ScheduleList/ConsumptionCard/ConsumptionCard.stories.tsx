@@ -2,7 +2,7 @@ import { Meta } from "@storybook/react";
 import ConsumptionCard, { ConsumptionCardProps } from "./ConsumptionCard.tsx";
 
 const meta = {
-  title: "reports/ReportCategoryDetails/ConsumptionCard",
+  title: "ScheduleList/ConsumptionCard",
   component: ConsumptionCard,
   tags: ["autodocs"],
   args: {

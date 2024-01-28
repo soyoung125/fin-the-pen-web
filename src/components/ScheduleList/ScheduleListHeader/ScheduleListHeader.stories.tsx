@@ -1,11 +1,11 @@
 import { Meta } from "@storybook/react";
-import ReportCategoryHeader, {
-  ReportCategoryHeaderProps,
-} from "./ReportCategoryHeader";
+import ScheduleListHeader, {
+  ScheduleListHeaderProps,
+} from "./ScheduleListHeader.tsx";
 
 const meta = {
-  title: "reports/ReportCategoryDetails/ReportCategoryHeader",
-  component: ReportCategoryHeader,
+  title: "ScheduleList/ScheduleListHeader",
+  component: ScheduleListHeader,
   tags: ["autodocs"],
   args: {
     year: 2023,
@@ -24,10 +24,10 @@ const meta = {
       description: "필터 아이콘을 클릭했을 떄 동작하는 이벤트입니다.",
     },
   },
-} satisfies Meta<typeof ReportCategoryHeader>;
+} satisfies Meta<typeof ScheduleListHeader>;
 
 export default meta;
 
-export const Default = (args: ReportCategoryHeaderProps) => {
-  return <ReportCategoryHeader {...args} />;
+export const Default = (args: ScheduleListHeaderProps) => {
+  return <ScheduleListHeader {...args} />;
 };

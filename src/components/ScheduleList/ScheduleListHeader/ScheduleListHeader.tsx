@@ -6,7 +6,7 @@ import HeaderBox from "./HeaderBox";
 import { useNavigate } from "react-router-dom";
 import SelectYearMonth from "@components/common/SelectYearMonth";
 
-export interface ReportCategoryHeaderProps {
+export interface ScheduleListHeaderProps {
   year: number;
   month: number;
   addMonth: () => void;
@@ -16,7 +16,7 @@ export interface ReportCategoryHeaderProps {
   handleClickFilter: () => void;
 }
 
-function ReportCategoryHeader({
+function ScheduleListHeader({
   year,
   month,
   changeMonth,
@@ -24,7 +24,7 @@ function ReportCategoryHeader({
   addMonth,
   handleClickSearch,
   handleClickFilter,
-}: ReportCategoryHeaderProps) {
+}: ScheduleListHeaderProps) {
   const navigate = useNavigate();
   return (
     <>
@@ -64,4 +64,4 @@ function ReportCategoryHeader({
   );
 }
 
-export default ReportCategoryHeader;
+export default ScheduleListHeader;

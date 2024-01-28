@@ -1,8 +1,8 @@
 import { Meta } from "@storybook/react";
-import HeaderBox from "./HeaderBox";
+import HeaderBox from "./HeaderBox.tsx";
 
 const meta = {
-  title: "reports/ReportCategoryDetails/ReportCategoryHeader/HeaderBox",
+  title: "ScheduleList/ScheduleListHeader/HeaderBox",
   component: HeaderBox,
   tags: ["autodocs"],
   args: {},

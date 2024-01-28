@@ -1,12 +1,12 @@
 import ReportCategoryDetails from "@pages/reports/ReportCategoryDetails/ReportCategoryDetails.tsx";
 import { Meta } from "@storybook/react";
-import TopNavigationBar from "@components/layouts/common/TopNavigationBar";
 import ReportListHeader from "@pages/reports/ReportCategoryDetails/components/ReportListHeader";
-import ReportCategoryHeader from "@pages/reports/ReportCategoryDetails/components/ReportCategoryHeader";
 import ReportCategorySummary from "@pages/reports/ReportCategoryDetails/components/ReportCategorySummary";
 import ThickDivider from "@components/common/ThickDivider.tsx";
 import { useState } from "react";
-import ConsumptionCard from "@pages/reports/ReportCategoryDetails/components/ConsumptionCard";
+import ConsumptionCard from "components/ScheduleList/ConsumptionCard";
+import ScheduleListHeader from "@components/ScheduleList/ScheduleListHeader";
+import ConsumptionHeader from "@components/ScheduleList/ConsumptionHeader/ConsumptionHeader.tsx";
 
 const meta = {
   title: "reports/ReportCategoryDetails",
@@ -50,7 +50,7 @@ export const ExamplePage = () => {
 
   return (
     <>
-      <ReportCategoryHeader
+      <ScheduleListHeader
         year={2024}
         month={5}
         addMonth={() => alert("add month")}
@@ -76,6 +76,7 @@ export const ExamplePage = () => {
         setSelectedOption={setSelectedOption}
       />
 
+      <ConsumptionHeader date="2023-10-06" />
       {schedules.map((schedule) => (
         <ConsumptionCard
           name={schedule.event_name}
