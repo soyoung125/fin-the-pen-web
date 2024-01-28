@@ -8,6 +8,7 @@ const meta = {
   args: {
     name: "커피",
     type: "-",
+    date: "2023-10-06",
     price: 3000,
     startTime: "08:00",
     endTime: "11:00",

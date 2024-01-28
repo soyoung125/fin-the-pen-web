@@ -1,9 +1,12 @@
 import { Box, Stack, Typography } from "@mui/material";
 import RepeatRoundedIcon from "@mui/icons-material/RepeatRounded";
+import { AmountComponent, AmountType } from "./ConsumptionCard.styles.ts";
+import moment from "moment";
 
 export interface ConsumptionCardProps {
   name: string;
   price: number;
+  date: string;
   startTime: string;
   endTime: string;
   type: string;
@@ -14,10 +17,14 @@ function ConsumptionCard({
   type,
   price,
   name,
+  date,
   startTime,
   endTime,
   isRepeat,
 }: ConsumptionCardProps) {
+  const isPredict = moment().isBefore(date, "day");
+  const isSpend = type === "-";
+
   return (
     <Stack spacing={1} px={2.5} py={2}>
       <Stack direction="row" justifyContent="space-between" alignItems="center">
@@ -27,13 +34,19 @@ function ConsumptionCard({
           </Typography>
           {isRepeat && <RepeatRoundedIcon color="success" fontSize="small" />}
         </Stack>
-        <Typography
-          variant="subtitle2"
-          color={type === "-" ? "error.main" : "info.main"}
-        >
-          {type}
+        {/*<Typography*/}
+        {/*  variant="subtitle2"*/}
+        {/*  color={type === "-" ? "error.main" : "info.main"}*/}
+        {/*>*/}
+        {/*  {type}*/}
+        {/*  {price.toLocaleString()}*/}
+        {/*</Typography>*/}
+        <AmountComponent $isPredict={isPredict}>
+          <AmountType $isPredict={isPredict} $isSpend={isSpend}>
+            {type}
+          </AmountType>
           {price.toLocaleString()}
-        </Typography>
+        </AmountComponent>
       </Stack>
       <Typography variant="h4">{name}</Typography>
     </Stack>
