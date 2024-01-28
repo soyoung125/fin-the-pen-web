@@ -1,23 +1,26 @@
 import { Stack, Typography } from "@mui/material";
 import ArrowForwardIosSharpIcon from "@mui/icons-material/ArrowForwardIosSharp";
+import BarChart from "@pages/reports/ReportCategoryDetails/components/BarChart/BarChart.tsx";
+import { useState } from "react";
+import { getColors } from "@pages/reports/ReportCategoryDetails/components/BarChart/utils.ts";
 
 export interface ReportCategorySummaryProps {
   category: string;
   amount: number;
   goal: number;
-  used: number;
-  predict: number;
-  useable: number;
+  data: number[];
 }
 
 function ReportCategorySummary({
   category,
   amount,
   goal,
-  used,
-  predict,
-  useable,
+  data,
 }: ReportCategorySummaryProps) {
+  const [selected, setSelected] = useState("used");
+  const values = ["used", "predict", "useable"];
+  const colors = getColors(selected);
+
   return (
     <Stack py={3} px={2} spacing={2.5}>
       <Stack px={1} direction="row" justifyContent="space-between">
@@ -28,7 +31,13 @@ function ReportCategorySummary({
       </Stack>
 
       <Stack spacing={0.5}>
-        <progress value="75" max="100" style={{ width: "100%" }} />
+        <BarChart
+          values={values}
+          data={data}
+          colors={colors}
+          selected={selected}
+          setSelected={setSelected}
+        />
         <Stack direction="row" justifyContent="space-between">
           <Typography variant="caption" fontWeight={400}>
             지출 {amount.toLocaleString()}원
