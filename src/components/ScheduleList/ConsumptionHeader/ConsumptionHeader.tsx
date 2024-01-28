@@ -6,7 +6,6 @@ export interface ConsumptionHeaderProps {
 }
 
 function ConsumptionHeader({ date }: ConsumptionHeaderProps) {
-  console.log(moment().isSame(date, "day"));
   return (
     <Stack direction="row" spacing={1} alignItems="center" px={2.5} py={1}>
       <Typography variant="h2">{moment(date).format("M월 D일")}</Typography>
