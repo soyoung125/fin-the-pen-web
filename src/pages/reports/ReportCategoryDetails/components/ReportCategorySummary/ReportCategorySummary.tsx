@@ -3,6 +3,7 @@ import ArrowForwardIosSharpIcon from "@mui/icons-material/ArrowForwardIosSharp";
 import BarChart from "@pages/reports/ReportCategoryDetails/components/BarChart/BarChart.tsx";
 import { useState } from "react";
 import { getColors } from "@pages/reports/ReportCategoryDetails/components/BarChart/utils.ts";
+import { getSelectedType } from "@pages/reports/ReportCategoryDetails/components/ReportCategorySummary/utils.ts";
 
 export interface ReportCategorySummaryProps {
   category: string;
@@ -40,7 +41,7 @@ function ReportCategorySummary({
         />
         <Stack direction="row" justifyContent="space-between">
           <Typography variant="caption" fontWeight={400}>
-            지출 {amount.toLocaleString()}원
+            {`${getSelectedType(selected)} ${amount.toLocaleString()}원`}
           </Typography>
           <Typography variant="caption" color="secondary.dark">
             목표 {goal.toLocaleString()}원
