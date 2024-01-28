@@ -81,6 +81,7 @@ export const ExamplePage = () => {
         <ConsumptionCard
           name={schedule.event_name}
           price={schedule.price}
+          date="2023-10-06"
           startTime={schedule.start_time}
           endTime={schedule.end_time}
           type={schedule.type}
