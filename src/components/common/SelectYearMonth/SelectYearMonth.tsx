@@ -1,6 +1,7 @@
 import { Stack, Typography } from "@mui/material";
 import ArrowBackIosRoundedIcon from "@mui/icons-material/ArrowBackIosRounded";
 import ArrowForwardIosRoundedIcon from "@mui/icons-material/ArrowForwardIosRounded";
+import ExpandMoreRoundedIcon from "@mui/icons-material/ExpandMoreRounded";
 
 export interface SelectYearMonthProps {
   year: number;
@@ -25,11 +26,10 @@ function SelectYearMonth({
       spacing={2}
     >
       <ArrowBackIosRoundedIcon onClick={lastMonth} fontSize={"small"} />
-      <Typography
-        variant="h2"
-        sx={{ textDecoration: "underline", textDecorationThickness: 2 }}
-        onClick={changeYearAndMonth}
-      >{`${year}년 ${month}월`}</Typography>
+      <Stack direction="row" alignItems="center" onClick={changeYearAndMonth}>
+        <Typography variant="h2">{`${year}년 ${month}월`}</Typography>
+        <ExpandMoreRoundedIcon />
+      </Stack>
       <ArrowForwardIosRoundedIcon onClick={nextMonth} fontSize={"small"} />
     </Stack>
   );
