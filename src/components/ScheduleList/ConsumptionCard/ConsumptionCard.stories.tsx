@@ -2,15 +2,17 @@ import { Meta } from "@storybook/react";
 import ConsumptionCard, { ConsumptionCardProps } from "./ConsumptionCard.tsx";
 
 const meta = {
-  title: "reports/ReportCategoryDetails/ConsumptionCard",
+  title: "ScheduleList/ConsumptionCard",
   component: ConsumptionCard,
   tags: ["autodocs"],
   args: {
     name: "커피",
+    type: "-",
+    date: "2023-10-06",
     price: 3000,
-    date: "2023.1.10. 12:35",
-    balance: 10000,
-    cardCompany: "신한카드",
+    startTime: "08:00",
+    endTime: "11:00",
+    isRepeat: true,
   },
   argTypes: {},
 } satisfies Meta<typeof ConsumptionCard>;

@@ -15,7 +15,7 @@ const meta = {
     title: "제목제목",
     titleIcon: <ScatterPlotIcon />,
     navigateIcon: <ScatterPlotIcon fontSize="small" />,
-    navigateTo: "/somewhere",
+    handleClick: () => alert("click!"),
   },
   argTypes: {},
 } satisfies Meta<typeof PredictBox>;

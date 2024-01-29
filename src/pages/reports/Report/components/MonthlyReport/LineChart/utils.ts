@@ -12,6 +12,9 @@ export const getOptions = (max: number, min: number) => {
         border: {
           display: false,
         },
+        ticks: {
+          color: (context: any) => (context.index === 2 ? "blue" : "black"),
+        },
       },
       y: {
         beginAtZero: false,
@@ -19,6 +22,9 @@ export const getOptions = (max: number, min: number) => {
       },
     },
     plugins: {
+      legend: {
+        display: false,
+      },
       datalabels: {
         backgroundColor: (context: any) => {
           const data = context.dataset.data[context.dataIndex];

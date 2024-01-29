@@ -13,9 +13,7 @@ const meta = {
     goal: 1000000,
     amount: 750000,
     category: "식비",
-    month: 5,
-    year: 2023,
-    onClickDateButton: () => alert("hello"),
+    data: [10, 55, 35],
   },
   argTypes: {},
 } satisfies Meta<typeof ReportCategorySummary>;
@@ -41,9 +39,7 @@ export const Example = () => {
       goal={1000000}
       amount={750000}
       category="식비"
-      year={year}
-      month={month}
-      onClickDateButton={pickMonth}
+      data={[10, 55, 35]}
     />
   );
 };

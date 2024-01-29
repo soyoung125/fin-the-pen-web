@@ -7,7 +7,7 @@ export interface PredictBoxProps {
   titleIcon: ReactNode;
   amount: number;
   navigateIcon?: ReactNode;
-  navigateTo?: `/${string}`;
+  handleClick?: () => void;
 }
 
 function PredictBox({
@@ -15,10 +15,8 @@ function PredictBox({
   titleIcon,
   title,
   amount,
-  navigateTo,
+  handleClick,
 }: PredictBoxProps) {
-  const navigate = useNavigate();
-
   return (
     <Stack p="16px" borderRadius="8px" gap="16px" width="100%">
       <Box color="primary.main">{titleIcon}</Box>
@@ -28,7 +26,7 @@ function PredictBox({
           <IconButton
             sx={{ color: "secondary.dark" }}
             size="small"
-            onClick={() => navigateTo && navigate(navigateTo)}
+            onClick={handleClick}
           >
             {navigateIcon}
           </IconButton>
