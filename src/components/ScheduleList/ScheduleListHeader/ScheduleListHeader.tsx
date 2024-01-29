@@ -2,9 +2,9 @@ import { Typography, Stack } from "@mui/material";
 import ClearRoundedIcon from "@mui/icons-material/ClearRounded";
 import SearchIcon from "@mui/icons-material/Search";
 import TuneRoundedIcon from "@mui/icons-material/TuneRounded";
-import HeaderBox from "./HeaderBox";
 import { useNavigate } from "react-router-dom";
 import SelectYearMonth from "@components/common/SelectYearMonth";
+import { HeaderBox } from "./ScheduleListHeader.styles";
 
 export interface ScheduleListHeaderProps {
   year: number;
