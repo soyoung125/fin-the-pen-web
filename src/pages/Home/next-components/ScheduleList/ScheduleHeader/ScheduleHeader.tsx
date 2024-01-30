@@ -8,7 +8,7 @@ export interface ScheduleHeaderProps {
 
 function ScheduleHeader({ show, handleChange }: ScheduleHeaderProps) {
   return (
-    <Stack direction="row" alignItems="center" spacing={1}>
+    <Stack direction="row" alignItems="center" spacing={1} py={2} px={2.5}>
       <Typography variant="h2">오늘 일정</Typography>
       <Typography
         variant="subtitle2"
