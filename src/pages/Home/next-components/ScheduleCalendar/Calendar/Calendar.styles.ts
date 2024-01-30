@@ -14,8 +14,17 @@ export const CalendarBox = styled.div`
     margin: 0;
   }
 
+  & .MuiDayCalendar-header :first-child {
+    color: #e82a2a;
+  }
+
+  & .MuiDayCalendar-header :last-child {
+    color: #0075ff;
+  }
+
   & .MuiPickersDay-root {
     margin: 0 auto;
+    border-radius: 12px;
   }
 
   & .MuiPickersSlideTransition-root {
@@ -26,10 +35,6 @@ export const CalendarBox = styled.div`
     display: flex;
     flex-direction: column;
     gap: 20px;
-  }
-
-  & .MuiPickersDay-root {
-    border-radius: 12px;
   }
 
   & .MuiButtonBase-root.MuiPickersDay-root {
