@@ -1,4 +1,5 @@
-import { Stack, Typography } from "@mui/material";
+import { SummaryContainer, SummaryItem } from "./MonthBudgetSummary.styles.ts";
+import SummaryCard from "@pages/Home/next-components/HomeHeader/MonthlyBudgetSummary/SummaryCard";
 
 export interface MonthlyBudgetSummaryProps {
   income: number;
@@ -20,24 +21,24 @@ function MonthlyBudgetSummary({
       title: "지출",
       amount: expenditure,
     },
-    {
-      title: "사용 가능 금액",
-      amount: availableAmount,
-    },
   ];
+  const useable = {
+    title: "사용 가능 금액",
+    amount: availableAmount,
+  };
+
   return (
-    <Stack bgcolor="#735BF2" borderRadius="12px" p="16px" gap="6px">
-      {budgetList.map(({ title, amount }) => (
-        <Stack key={title} direction="row" justifyContent="space-between">
-          <Typography fontSize="14px" color="#FFFFFF">
-            {title}
-          </Typography>
-          <Typography fontSize="16px" color="#FFFFFF">
-            {amount.toLocaleString()}원
-          </Typography>
-        </Stack>
-      ))}
-    </Stack>
+    <SummaryContainer>
+      <SummaryItem>
+        {budgetList.map(({ title, amount }) => (
+          <SummaryCard title={title} amount={amount} />
+        ))}
+      </SummaryItem>
+
+      <SummaryItem $useable={true}>
+        <SummaryCard title={useable.title} amount={useable.amount} />
+      </SummaryItem>
+    </SummaryContainer>
   );
 }
 

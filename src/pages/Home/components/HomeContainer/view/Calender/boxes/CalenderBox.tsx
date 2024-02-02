@@ -6,6 +6,7 @@ interface CalendarBoxProps {
   children: JSX.Element;
   week: number;
 }
+
 function CalenderBox({
   dateHeight,
   dateSize,
@@ -72,7 +73,7 @@ function CalenderBox({
           height: DATE_SIZE,
           marginX: "auto",
         },
-        "& .Mui-selected": {
+        ".Mui-selected": {
           borderRadius: 2,
           backgroundColor: "primary.main",
           color: "white",
@@ -84,4 +85,5 @@ function CalenderBox({
     </Box>
   );
 }
+
 export default CalenderBox;
