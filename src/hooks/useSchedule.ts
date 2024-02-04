@@ -45,14 +45,10 @@ const useSchedule = () => {
         moment(date).isSameOrBefore(schedule.end_date)
     ) ?? [];
 
-  const handleCreateSchedule = async (
-    schedule: Schedule,
-    stringDate: string
-  ) => {
+  const handleCreateSchedule = async (schedule: Schedule) => {
     if (user === undefined) {
       return alert("로그인이 필요합니다.");
     }
-    const date = moment(stringDate);
 
     const scheduleWithUuid = {
       ...schedule,
@@ -64,21 +60,10 @@ const useSchedule = () => {
   };
 
   const handleDeleteSchedule = async (schedule: Schedule) => {
-    // const answer = await openConfirm({
-    //   title: "일정 삭제",
-    //   content: "정말로 삭제 하시겠습니까?",
-    //   approveText: "삭제",
-    //   rejectText: "취소",
-    // });
     const answer = await openModal({
       changeMode: "삭제",
     });
     if (answer && user) {
-      // console.log(scheduleId);
-      // alert(
-      //   "아직 구현 안됨. useMutation으로 수정해주세요. scheduleId: " +
-      //     scheduleId
-      // );
       deleteSchedule(schedule, answer as string, user.user_id);
     }
   };
