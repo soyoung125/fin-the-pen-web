@@ -14,6 +14,7 @@ import { useSchedules } from "@app/tanstack-query/schedules/useSchedules.ts";
 import { INIT_SCHEDULE } from "@constants/schedule.ts";
 import { useModifySchedule } from "@app/tanstack-query/schedules/useModifySchedule.ts";
 import { useDialog } from "@hooks/dialog/useDialog.tsx";
+import { useScheduleChangeModal } from "@components/ScheduleDrawer/hooks/ScheduleChangeModal/useScheduleChangeModal.tsx";
 
 const useSchedule = () => {
   const dispatch = useAppDispatch();
@@ -23,6 +24,7 @@ const useSchedule = () => {
 
   const { data: user } = useUser();
   const { openConfirm } = useDialog();
+  const { openModal } = useScheduleChangeModal();
   const { createSchedule } = useCreateSchedule();
   const { modifySchedule } = useModifySchedule();
   const {
@@ -75,8 +77,13 @@ const useSchedule = () => {
     }
   };
 
-  const handleModifySchedule = async (schedule: Schedule, option: string) => {
-    modifySchedule(schedule, option);
+  const handleModifySchedule = async (schedule: Schedule) => {
+    const answer = await openModal({
+      changeMode: "수정",
+    });
+    if (answer) {
+      modifySchedule(schedule, answer as string);
+    }
   };
 
   const resetSchedule = () => {

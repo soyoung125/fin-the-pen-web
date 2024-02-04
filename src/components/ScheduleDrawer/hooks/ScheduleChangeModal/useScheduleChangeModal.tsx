@@ -8,13 +8,13 @@ export const useScheduleChangeModal = () => {
     changeMode,
   }: {
     changeMode: "수정" | "삭제";
-  }): Promise<string> => {
+  }): Promise<string | boolean> => {
     return new Promise((resolve) => {
       openOverlay(
         <ScheduleChangeModal
           changeMode={changeMode}
           onClickReject={() => {
-            resolve("");
+            resolve(false);
             closeOverlay();
           }}
           onClickOnlyNow={() => {

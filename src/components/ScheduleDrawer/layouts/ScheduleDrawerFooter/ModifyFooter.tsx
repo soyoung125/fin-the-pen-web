@@ -16,12 +16,9 @@ function ModifyFooter({ handleSubmit, handleClose }: ModifyFooterInterface) {
   const { handleModifySchedule, handleDeleteSchedule } = useSchedule();
   const { openModal } = useScheduleChangeModal();
 
-  const handleModify = async () => {
+  const handleModify = () => {
     if (handleSubmit()) {
-      const answer = await openModal({
-        changeMode: "수정",
-      });
-      handleModifySchedule(schedule, answer);
+      handleModifySchedule(schedule);
       handleClose();
     }
   };
