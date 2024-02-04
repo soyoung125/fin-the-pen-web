@@ -24,7 +24,7 @@ function ModifyFooter({ handleSubmit, handleClose }: ModifyFooterInterface) {
   };
 
   const handleDelete = () => {
-    handleDeleteSchedule(schedule.id ?? "");
+    handleDeleteSchedule(schedule);
     handleClose();
   };
 

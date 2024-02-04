@@ -15,6 +15,7 @@ import { INIT_SCHEDULE } from "@constants/schedule.ts";
 import { useModifySchedule } from "@app/tanstack-query/schedules/useModifySchedule.ts";
 import { useDialog } from "@hooks/dialog/useDialog.tsx";
 import { useScheduleChangeModal } from "@components/ScheduleDrawer/hooks/ScheduleChangeModal/useScheduleChangeModal.tsx";
+import { useDeleteSchedule } from "@app/tanstack-query/schedules/useDeleteSchedule.ts";
 
 const useSchedule = () => {
   const dispatch = useAppDispatch();
@@ -27,6 +28,7 @@ const useSchedule = () => {
   const { openModal } = useScheduleChangeModal();
   const { createSchedule } = useCreateSchedule();
   const { modifySchedule } = useModifySchedule();
+  const { deleteSchedule } = useDeleteSchedule();
   const {
     data: schedules,
     isPending,
@@ -61,19 +63,23 @@ const useSchedule = () => {
     createSchedule(scheduleWithUuid);
   };
 
-  const handleDeleteSchedule = async (scheduleId: string) => {
-    const answer = await openConfirm({
-      title: "일정 삭제",
-      content: "정말로 삭제 하시겠습니까?",
-      approveText: "삭제",
-      rejectText: "취소",
+  const handleDeleteSchedule = async (schedule: Schedule) => {
+    // const answer = await openConfirm({
+    //   title: "일정 삭제",
+    //   content: "정말로 삭제 하시겠습니까?",
+    //   approveText: "삭제",
+    //   rejectText: "취소",
+    // });
+    const answer = await openModal({
+      changeMode: "삭제",
     });
-    if (answer) {
-      console.log(scheduleId);
-      alert(
-        "아직 구현 안됨. useMutation으로 수정해주세요. scheduleId: " +
-          scheduleId
-      );
+    if (answer && user) {
+      // console.log(scheduleId);
+      // alert(
+      //   "아직 구현 안됨. useMutation으로 수정해주세요. scheduleId: " +
+      //     scheduleId
+      // );
+      deleteSchedule(schedule, answer as string, user.user_id);
     }
   };
 
