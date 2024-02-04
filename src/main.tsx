@@ -18,7 +18,7 @@ const queryClient = new QueryClient();
 const ReactQueryDevtoolsProduction = React.lazy(() =>
   import("@tanstack/react-query-devtools/production").then((d) => ({
     default: d.ReactQueryDevtools,
-  })),
+  }))
 );
 
 async function main() {
@@ -34,7 +34,7 @@ async function main() {
   // msw 세팅 끝
 
   const root = ReactDOM.createRoot(
-    document.getElementById("root") as HTMLElement,
+    document.getElementById("root") as HTMLElement
   );
   const persistor = persistStore(store);
 
@@ -52,7 +52,7 @@ async function main() {
         </Provider>
         <ReactQueryDevtools initialIsOpen={false} />
       </QueryClientProvider>
-    </React.StrictMode>,
+    </React.StrictMode>
   );
 }
 

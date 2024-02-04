@@ -9,25 +9,20 @@ import moment from "moment";
 
 interface PropsInterface {
   schedule: Schedule;
-  option: string;
+  delete_options: string;
+  user_id: string;
 }
 
-const fetchModifySchedule = async ({ schedule, option }: PropsInterface) => {
+const fetchDeleteSchedule = async ({
+  schedule,
+  delete_options,
+  user_id,
+}: PropsInterface) => {
   const token = getSessionStorage(SESSION_STORAGE_KEY_TOKEN, "");
-  const data = {
-    // 다른 방법을 생각해 봐야 할 것 같음
-    ...schedule,
-    is_all_day: schedule.all_day,
-    set_amount: schedule.amount,
-    exclusion: schedule.exclude,
-    price_type: getSign(schedule.price_type),
-    schedule_id: schedule.id,
-    repeat: { ...schedule.repeat }, // api 수정 후 삭제
-    modify_options: option, // all:모두 , nowFromOption: 이후 일정, exceptNowAfter: 현재 일정 제외 이후 일정
-  };
+  const data = { schedule_id: schedule.id, delete_options, user_id };
 
-  return fetch(`${DOMAIN}/modifySchedule`, {
-    method: "POST",
+  return fetch(`${DOMAIN}/deleteSchedule`, {
+    method: "DELETE",
     headers: {
       "Content-Type": "application/json",
       Authorization: "Bearer " + token,
@@ -36,11 +31,10 @@ const fetchModifySchedule = async ({ schedule, option }: PropsInterface) => {
   });
 };
 
-export const useModifySchedule = () => {
+export const useDeleteSchedule = () => {
   const queryClient = useQueryClient();
   const { mutate } = useMutation({
-    mutationFn: ({ schedule, option }: PropsInterface) =>
-      fetchModifySchedule({ schedule, option }),
+    mutationFn: fetchDeleteSchedule,
     onSuccess: async (data, variables) => {
       const date = moment(variables.schedule.start_date);
       queryClient.invalidateQueries({
@@ -49,9 +43,13 @@ export const useModifySchedule = () => {
     },
   });
 
-  const modifySchedule = (schedule: Schedule, option: string) => {
-    mutate({ schedule, option });
+  const deleteSchedule = (
+    schedule: Schedule,
+    delete_options: string,
+    user_id: string
+  ) => {
+    mutate({ schedule, delete_options, user_id });
   };
 
-  return { modifySchedule };
+  return { deleteSchedule };
 };

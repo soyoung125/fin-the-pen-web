@@ -27,7 +27,7 @@ function CreateFooter({ handleSubmit, handleClose }: CreateFooterInterface) {
 
   const handleCreate = () => {
     if (handleSubmit()) {
-      handleCreateSchedule(schedule, date);
+      handleCreateSchedule(schedule);
       handleClose();
     }
   };
