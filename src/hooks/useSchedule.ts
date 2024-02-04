@@ -13,7 +13,6 @@ import { useUser } from "@app/tanstack-query/useUser.ts";
 import { useSchedules } from "@app/tanstack-query/schedules/useSchedules.ts";
 import { INIT_SCHEDULE } from "@constants/schedule.ts";
 import { useModifySchedule } from "@app/tanstack-query/schedules/useModifySchedule.ts";
-import { useDialog } from "@hooks/dialog/useDialog.tsx";
 import { useScheduleChangeModal } from "@components/ScheduleDrawer/hooks/ScheduleChangeModal/useScheduleChangeModal.tsx";
 import { useDeleteSchedule } from "@app/tanstack-query/schedules/useDeleteSchedule.ts";
 
@@ -24,7 +23,6 @@ const useSchedule = () => {
   const month = useSelector(selectMonth);
 
   const { data: user } = useUser();
-  const { openConfirm } = useDialog();
   const { openModal } = useScheduleChangeModal();
   const { createSchedule } = useCreateSchedule();
   const { modifySchedule } = useModifySchedule();
