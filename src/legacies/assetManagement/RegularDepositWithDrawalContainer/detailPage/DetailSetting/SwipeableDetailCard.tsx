@@ -33,20 +33,20 @@ function SwipeableDetailCard({ data }: SwipeableDetailCardProps) {
   // };
 
   const deleteData = () => {
-    data.map((d) => {
-      handleDeleteSchedule(d.id as string);
-      closeAlertModal();
-    });
+    // data.map((d) => {
+    //   handleDeleteSchedule(d.id as string);
+    //   closeAlertModal();
+    // });
   };
 
   const modifyData = (form: Schedule) => {
-    data.map((d) => {
-      if (moment().isBefore(d.start_date)) {
-        handleModifySchedule(form);
-      } else {
-        handleModifySchedule(form);
-      }
-    });
+    // data.map((d) => {
+    //   if (moment().isBefore(d.start_date)) {
+    //     handleModifySchedule(form);
+    //   } else {
+    //     handleModifySchedule(form);
+    //   }
+    // });
   };
 
   return (
