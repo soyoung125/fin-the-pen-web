@@ -11,6 +11,7 @@ interface PropsInterface {
   schedule: Schedule;
   option: string;
 }
+
 const fetchModifySchedule = async ({ schedule, option }: PropsInterface) => {
   const token = getSessionStorage(SESSION_STORAGE_KEY_TOKEN, "");
   const data = {
@@ -21,7 +22,7 @@ const fetchModifySchedule = async ({ schedule, option }: PropsInterface) => {
     exclusion: schedule.exclude,
     price_type: getSign(schedule.price_type),
     schedule_id: schedule.id,
-    repeat: { ...schedule.repeat, kind_type: "day" }, // api 수정 후 삭제
+    repeat: { ...schedule.repeat }, // api 수정 후 삭제
     modify_options: option, // all:모두 , nowFromOption: 이후 일정, exceptNowAfter: 현재 일정 제외 이후 일정
   };
 
