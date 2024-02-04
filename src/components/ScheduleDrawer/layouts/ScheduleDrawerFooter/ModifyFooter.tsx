@@ -4,6 +4,7 @@ import { SCHEDULE_DRAWER } from "@constants/schedule.ts";
 import useSchedule from "@hooks/useSchedule.ts";
 import { Button, Stack } from "@mui/material";
 import { Schedule } from "@app/types/schedule.ts";
+import { useScheduleChangeModal } from "@components/ScheduleDrawer/hooks/ScheduleChangeModal/useScheduleChangeModal.tsx";
 
 interface ModifyFooterInterface {
   handleSubmit: () => boolean;
@@ -13,10 +14,14 @@ interface ModifyFooterInterface {
 function ModifyFooter({ handleSubmit, handleClose }: ModifyFooterInterface) {
   const schedule = useAppSelector(selectScheduleForm) as Schedule;
   const { handleModifySchedule, handleDeleteSchedule } = useSchedule();
+  const { openModal } = useScheduleChangeModal();
 
-  const handleModify = () => {
+  const handleModify = async () => {
     if (handleSubmit()) {
-      handleModifySchedule(schedule);
+      const answer = await openModal({
+        changeMode: "수정",
+      });
+      handleModifySchedule(schedule, answer);
       handleClose();
     }
   };

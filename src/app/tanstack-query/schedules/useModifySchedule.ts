@@ -7,7 +7,11 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { Schedule } from "@app/types/schedule.ts";
 import moment from "moment";
 
-const fetchModifySchedule = async (schedule: Schedule) => {
+interface PropsInterface {
+  schedule: Schedule;
+  option: string;
+}
+const fetchModifySchedule = async ({ schedule, option }: PropsInterface) => {
   const token = getSessionStorage(SESSION_STORAGE_KEY_TOKEN, "");
   const data = {
     // 다른 방법을 생각해 봐야 할 것 같음
@@ -18,7 +22,7 @@ const fetchModifySchedule = async (schedule: Schedule) => {
     price_type: getSign(schedule.price_type),
     schedule_id: schedule.id,
     repeat: { ...schedule.repeat, kind_type: "day" }, // api 수정 후 삭제
-    modify_options: "nowFromAfter", // all:모두 , nowFromOption: 이후 일정, exceptNowAfter: 현재 일정 제외 이후 일정
+    modify_options: option, // all:모두 , nowFromOption: 이후 일정, exceptNowAfter: 현재 일정 제외 이후 일정
   };
 
   return fetch(`${DOMAIN}/modifySchedule`, {
@@ -34,17 +38,18 @@ const fetchModifySchedule = async (schedule: Schedule) => {
 export const useModifySchedule = () => {
   const queryClient = useQueryClient();
   const { mutate } = useMutation({
-    mutationFn: fetchModifySchedule,
+    mutationFn: ({ schedule, option }: PropsInterface) =>
+      fetchModifySchedule({ schedule, option }),
     onSuccess: async (data, variables) => {
-      const date = moment(variables.start_date);
+      const date = moment(variables.schedule.start_date);
       queryClient.invalidateQueries({
         queryKey: [QUERY_KEY_SCHEDULES, date.format("YYYY-MM")],
       });
     },
   });
 
-  const modifySchedule = (schedule: Schedule) => {
-    mutate(schedule);
+  const modifySchedule = (schedule: Schedule, option: string) => {
+    mutate({ schedule, option });
   };
 
   return { modifySchedule };

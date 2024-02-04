@@ -75,8 +75,8 @@ const useSchedule = () => {
     }
   };
 
-  const handleModifySchedule = async (schedule: Schedule) => {
-    modifySchedule(schedule);
+  const handleModifySchedule = async (schedule: Schedule, option: string) => {
+    modifySchedule(schedule, option);
   };
 
   const resetSchedule = () => {
