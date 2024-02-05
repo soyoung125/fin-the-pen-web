@@ -1,28 +1,34 @@
-import {useState} from "react";
-import {useDatePicker} from "@hooks/date-picker/hooks/useDatePicker.tsx";
-import {useUser} from "@app/tanstack-query/useUser.ts";
-import {useReports} from "@app/tanstack-query/useReports.ts";
+import { useState } from "react";
+import { useDatePicker } from "@hooks/date-picker/hooks/useDatePicker.tsx";
+import { useUser } from "@app/tanstack-query/useUser.ts";
+import { useReports } from "@app/tanstack-query/reports/useReports.ts";
 import moment from "moment";
 
 const useReport = () => {
   const [yearMonth, setYearMonth] = useState("2024-01");
   const [year, month] = yearMonth.split("-").map((s) => Number(s));
-  const {data: user} = useUser();
-  const {data: reportList, isPending, isError} = useReports({
+  const { data: user } = useUser();
+  const {
+    data: reportList,
+    isPending,
+    isError,
+  } = useReports({
     user_id: user?.user_id ?? "",
-    date: yearMonth,
+    date: moment(yearMonth, "YYYY-MM").format("YYYY-MM-DD"),
   });
-  const {openMonthPicker} = useDatePicker();
+  const { openMonthPicker } = useDatePicker();
 
-  const maxPercent = Math.max(...reportList?.map((l) => Number(l.rate)) ?? []);
+  const maxPercent = Math.max(
+    ...(reportList?.map((l) => Number(l.rate)) ?? [])
+  );
 
   const addMonth = () => {
-    const date = moment(yearMonth, "YYYY-MM")
+    const date = moment(yearMonth, "YYYY-MM");
     setYearMonth(date.add(1, "month").format("YYYY-MM"));
   };
 
   const subtractMonth = () => {
-    const date = moment(yearMonth, "YYYY-MM")
+    const date = moment(yearMonth, "YYYY-MM");
     setYearMonth(date.subtract(1, "month").format("YYYY-MM"));
   };
 
@@ -42,8 +48,8 @@ const useReport = () => {
     maxPercent,
     addMonth,
     subtractMonth,
-    pickMonth
-  }
-}
+    pickMonth,
+  };
+};
 
 export default useReport;
