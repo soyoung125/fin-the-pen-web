@@ -61,7 +61,7 @@ function ScheduleCard({
           <Button
             variant="contained"
             onClick={() => {
-              handleDeleteSchedule(schedule.id as string);
+              // handleDeleteSchedule(schedule.id as string);
             }}
           >
             <DeleteForeverIcon fontSize="large" />
