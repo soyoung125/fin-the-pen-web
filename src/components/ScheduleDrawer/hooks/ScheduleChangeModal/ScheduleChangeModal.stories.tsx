@@ -14,14 +14,18 @@ export const Example = () => {
     const answer = await openModal({
       changeMode: "삭제",
     });
-    setDeleteValue(answer);
+    if (answer) {
+      setDeleteValue(answer as string);
+    }
   };
 
   const handleModify = async () => {
     const answer = await openModal({
       changeMode: "수정",
     });
-    setModifyValue(answer);
+    if (answer) {
+      setModifyValue(answer as string);
+    }
   };
 
   return (
