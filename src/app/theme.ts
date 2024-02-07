@@ -84,6 +84,7 @@ export const lightThemeOptions: ThemeOptions = {
       styleOverrides: {
         root: {
           borderRadius: 4,
+          boxShadow: "none",
         },
         outlined: {
           border: "1.4px solid",
