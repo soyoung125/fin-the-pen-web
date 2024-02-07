@@ -2,6 +2,7 @@ import { Box, FormControl, InputAdornment, TextField } from "@mui/material";
 import { MouseEventHandler } from "react";
 import { SCHEDULE_DRAWER } from "@constants/schedule.ts";
 import ArrowForwardIos from "@mui/icons-material/ArrowForwardIos";
+import KeyboardArrowDownRoundedIcon from "@mui/icons-material/KeyboardArrowDownRounded";
 
 interface CategoryInputProps {
   selectedCategory: string;
@@ -25,6 +26,7 @@ export default function CategoryInput({
         }}
         value={selectedCategory}
         variant="standard"
+        placeholder={"카테고리 선택"}
         InputProps={{
           startAdornment: (
             <InputAdornment position="start">
@@ -33,7 +35,9 @@ export default function CategoryInput({
               </Box>
             </InputAdornment>
           ),
-          endAdornment: <ArrowForwardIos sx={{ fontSize: "16px" }} />,
+          endAdornment: (
+            <KeyboardArrowDownRoundedIcon sx={{ fontSize: "24px" }} />
+          ),
         }}
         inputProps={{
           style: { textAlign: "right", padding: "12px 0px" },
