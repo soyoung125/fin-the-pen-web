@@ -16,7 +16,12 @@ function NameInput({ showError }: NameInputProps) {
   return (
     <FormControl fullWidth>
       <TextField
-        sx={{ px: 2.5 }}
+        sx={{
+          px: 2.5,
+          ".MuiInputBase-root.MuiInput-root:before": {
+            borderBottomColor: "#F7F7F8",
+          },
+        }}
         error={showError && scheduleForm?.event_name === ""}
         id="event_name"
         variant="standard"

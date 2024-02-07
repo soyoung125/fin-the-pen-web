@@ -17,7 +17,12 @@ export default function CategoryInput({
   return (
     <FormControl fullWidth onClick={onClick}>
       <TextField
-        sx={{ px: 2.5 }}
+        sx={{
+          px: 2.5,
+          ".MuiInputBase-root.MuiInput-root:before": {
+            borderBottomColor: "#F7F7F8",
+          },
+        }}
         value={selectedCategory}
         variant="standard"
         InputProps={{
