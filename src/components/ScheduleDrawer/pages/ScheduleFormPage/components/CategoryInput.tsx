@@ -31,7 +31,7 @@ export default function CategoryInput({
           endAdornment: <ArrowForwardIos sx={{ fontSize: "16px" }} />,
         }}
         inputProps={{
-          style: { textAlign: "right" },
+          style: { textAlign: "right", padding: "12px 0px" },
         }}
       />
     </FormControl>

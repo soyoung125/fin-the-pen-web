@@ -28,7 +28,7 @@ function NameInput({ showError }: NameInputProps) {
             : ""
         }
         inputProps={{
-          style: { textAlign: "right" },
+          style: { textAlign: "right", padding: "12px 0px" },
         }}
         InputProps={{
           startAdornment: (
