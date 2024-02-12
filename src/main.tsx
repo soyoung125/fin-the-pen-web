@@ -23,7 +23,7 @@ const ReactQueryDevtoolsProduction = React.lazy(() =>
 
 async function main() {
   // msw 세팅 시작
-  if (import.meta.env.VITE_LOCAL_MODE === "true") {
+  if (import.meta.env.VITE_LOCAL_MODE !== "true") {
     await worker.start({
       serviceWorker: {
         url: "/fin-the-pen-web/mockServiceWorker.js",
