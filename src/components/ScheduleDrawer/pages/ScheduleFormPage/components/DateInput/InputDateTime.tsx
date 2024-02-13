@@ -55,11 +55,11 @@ function InputDateTime({ date, time, type, showError }: InputDateTimeProps) {
   };
 
   return (
-    <Box sx={{ px: 2.5 }}>
+    <Box sx={{ py: 1 }}>
       <Typography variant="subtitle1" color="primary">
         {title}
       </Typography>
-      
+
       <Grid container spacing={2}>
         <Grid item xs={6}>
           <SelectDateTime
