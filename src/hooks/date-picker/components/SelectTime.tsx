@@ -43,7 +43,9 @@ function SelectTime({ timeState, setValue }: SelectTimeProps) {
         exclusive
         size="small"
         sx={{ flexGrow: 1 }}
-        onChange={(e, newAlignment) => setValue("meridiem", newAlignment)}
+        onChange={(e, newAlignment) =>
+          newAlignment && setValue("meridiem", newAlignment)
+        }
       >
         <ToggleButton value="오전">오전</ToggleButton>
         <ToggleButton value="오후">오후</ToggleButton>
