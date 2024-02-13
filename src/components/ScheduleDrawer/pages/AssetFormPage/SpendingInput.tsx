@@ -58,17 +58,29 @@ function SpendingInput() {
   };
 
   return (
-    <Stack spacing={2} px={2.5}>
-      <Box sx={{ typography: "h4", color: "primary.main" }}>
+    <Stack px={2.5} pt={2}>
+      <Box
+        py={1.5}
+        sx={{
+          typography: "h4",
+          color: "primary.main",
+          borderBottom: "1px solid #F7F7F8",
+        }}
+      >
         {SCHEDULE_DRAWER.set_spending_title}
       </Box>
 
-      <Stack direction="row" spacing={1.5}>
+      <Stack direction="row" spacing={1.5} py={1}>
         <Button
           variant={
             scheduleForm?.price_type === SCHEDULE_DRAWER.type_minus
               ? "contained"
               : "outlined"
+          }
+          color={
+            scheduleForm?.price_type === SCHEDULE_DRAWER.type_minus
+              ? "primary"
+              : "secondary"
           }
           fullWidth
           id="price_type"
@@ -87,6 +99,11 @@ function SpendingInput() {
               ? "contained"
               : "outlined"
           }
+          color={
+            scheduleForm?.price_type === SCHEDULE_DRAWER.type_plus
+              ? "primary"
+              : "secondary"
+          }
           fullWidth
           id="price_type"
           value={SCHEDULE_DRAWER.type_plus}
@@ -99,7 +116,7 @@ function SpendingInput() {
         </Button>
       </Stack>
 
-      <Box>
+      <Box py={1.5}>
         <FormControl fullWidth>
           <Stack
             direction="row"
@@ -152,7 +169,12 @@ function SpendingInput() {
         </FormControl>
       </Box>
 
-      <Stack direction="row" justifyContent="space-between" alignItems="center">
+      <Stack
+        direction="row"
+        justifyContent="space-between"
+        alignItems="center"
+        py={1}
+      >
         <Typography variant="h4" sx={{ color: "primary.main" }}>
           {SCHEDULE_DRAWER.fix_amount}
         </Typography>
