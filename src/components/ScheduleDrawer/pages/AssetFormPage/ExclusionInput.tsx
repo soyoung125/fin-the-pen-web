@@ -18,6 +18,7 @@ function ExclusionInput() {
       justifyContent="space-between"
       alignItems="center"
       px={2.5}
+      py={1}
     >
       <Typography variant="h4" sx={{ color: "primary.main" }}>
         {SCHEDULE_DRAWER.exclusion_title}
