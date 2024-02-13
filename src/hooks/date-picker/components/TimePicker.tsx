@@ -43,18 +43,18 @@ function TimePicker({
 
   return (
     <Modal>
-      <Stack p="20px">
-        <Stack
-          direction="row"
-          alignItems="center"
-          justifyContent="center"
-          mb={2}
+      <Stack p="20px" spacing={3}>
+        <Typography
+          variant="h1"
+          sx={{
+            fontWeight: "bold",
+            textAlign: "center",
+            pb: "12px",
+            borderBottom: "1px solid #C8CBD0",
+          }}
         >
-          <Typography variant="h1" sx={{ fontWeight: "bold" }}>
-            시간을 선택하세요.
-          </Typography>
-        </Stack>
-        <Divider sx={{ backgroundColor: "black", height: "1px" }} />
+          시간 설정
+        </Typography>
         <div>
           <SelectTime timeState={time} setValue={setValue} />
         </div>
