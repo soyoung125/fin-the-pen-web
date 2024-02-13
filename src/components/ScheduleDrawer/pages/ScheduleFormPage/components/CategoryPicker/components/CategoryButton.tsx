@@ -13,7 +13,6 @@ function CategoryButton({ category, selected, onClick }: CategoryButtonProps) {
   return (
     <Button
       sx={{
-        // borderTop: "1px solid #E0E0E0",
         borderBottom: "1px solid #E0E0E0",
         borderRadius: 0,
         p: 0,

@@ -17,7 +17,6 @@ function CategorySideTabButton({
   return (
     <Button
       sx={{
-        // borderTop: "1px solid #E0E0E0",
         borderBottom: "1px solid #E0E0E0",
         borderRadius: 0,
         backgroundColor: isSelected ? "rgba(115, 91, 242, 0.15)" : "#F7F7F8",
