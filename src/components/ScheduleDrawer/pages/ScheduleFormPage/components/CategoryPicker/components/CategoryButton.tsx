@@ -16,22 +16,23 @@ function CategoryButton({ category, selected, onClick }: CategoryButtonProps) {
         // borderTop: "1px solid #E0E0E0",
         borderBottom: "1px solid #E0E0E0",
         borderRadius: 0,
+        p: 0,
       }}
       fullWidth
       onClick={onClick}
     >
       <Stack
-        p="16px"
+        py={2}
         color={selected ? "black" : "#8C919C"}
         justifyContent="space-between"
         direction="row"
-        sx={{ width: "100%" }}
+        sx={{ width: "100%", paddingLeft: "16px", paddingRight: "20px" }}
       >
         <Typography>{category}</Typography>
         {selected ? (
           <CheckCircleIcon sx={{ color: "#735BF2" }} />
         ) : (
-          <CheckCircleOutlineIcon />
+          <CheckCircleOutlineIcon sx={{ color: "#C8CBD0" }} />
         )}
       </Stack>
     </Button>
