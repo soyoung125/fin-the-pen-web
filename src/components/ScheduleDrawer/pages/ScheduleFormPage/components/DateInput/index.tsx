@@ -1,4 +1,4 @@
-import { Box, Stack } from "@mui/material";
+import { Box, Stack, Typography } from "@mui/material";
 import SwitchButton from "@components/common/SwitchButton.tsx";
 import InputDateTime from "./InputDateTime.tsx";
 import { SCHEDULE_DRAWER } from "@constants/schedule.ts";
@@ -18,7 +18,7 @@ function DateInput({ showError }: DateInputProps) {
   };
 
   return (
-    <>
+    <Stack sx={{ px: 2.5 }}>
       <InputDateTime
         date={scheduleForm?.start_date}
         time={scheduleForm?.start_time}
@@ -33,10 +33,13 @@ function DateInput({ showError }: DateInputProps) {
         showError={showError}
       />
 
-      <Stack direction="row" justifyContent="space-between" sx={{ px: 2.5 }}>
-        <Box sx={{ fontSize: 13, fontWeight: 500 }}>
-          {SCHEDULE_DRAWER.all_day}
-        </Box>
+      <Stack
+        direction="row"
+        justifyContent="space-between"
+        alignItems="center"
+        sx={{ height: "34px", py: 1 }}
+      >
+        <Typography variant="h4">{SCHEDULE_DRAWER.all_day}</Typography>
         <SwitchButton
           checked={scheduleForm?.all_day ?? true}
           handleChange={() =>
@@ -49,7 +52,7 @@ function DateInput({ showError }: DateInputProps) {
           }
         />
       </Stack>
-    </>
+    </Stack>
   );
 }
 

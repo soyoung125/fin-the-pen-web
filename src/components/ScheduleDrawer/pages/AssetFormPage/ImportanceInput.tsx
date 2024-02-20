@@ -12,8 +12,11 @@ function ImportanceInput() {
   };
 
   return (
-    <Stack spacing={2} px={2.5}>
-      <Typography variant="h4" sx={{ color: "primary.main" }}>
+    <Stack spacing="10px" px={2.5}>
+      <Typography
+        variant="h4"
+        sx={{ color: "primary.main", py: 1, borderBottom: "1px solid #F7F7F8" }}
+      >
         {SCHEDULE_DRAWER.set_importance_title}
       </Typography>
 

@@ -50,7 +50,7 @@ export const SCHEDULE_DRAWER = {
   repeat: "반복",
   period: "기간",
   all_day: "하루종일",
-  category_title: "일정 카테고리",
+  category_title: "카테고리",
   add_category: "+ 카테고리 추가",
   set_finance_title: "자산 설정하기",
   set_spending_title: "금액 설정",
