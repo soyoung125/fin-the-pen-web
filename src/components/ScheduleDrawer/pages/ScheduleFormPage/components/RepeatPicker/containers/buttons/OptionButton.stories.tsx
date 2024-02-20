@@ -6,7 +6,7 @@ const meta = {
   title: "ui/ScheduleDrawer/repeat-picker/button/OptionButton",
   component: OptionButton,
   tags: ["autodocs"],
-  args: { value: "21일마다 반복", isSelected: false, id: "todayRepeat" },
+  args: { contents: "21일마다 반복", isSelected: false, id: "todayRepeat" },
   argTypes: {},
 } satisfies Meta<typeof OptionButton>;
 
@@ -25,7 +25,7 @@ export const Dynamic = () => {
   return (
     <div style={{ width: "200px" }}>
       <OptionButton
-        value="반복할 날짜 선택"
+        contents="반복할 날짜 선택"
         isSelected={selected}
         handleClick={() => setSelected(!selected)}
       />
@@ -42,7 +42,7 @@ export const Dynamics = () => {
         <OptionButton
           key={index}
           id={option}
-          value={option}
+          contents={option}
           isSelected={selectedList.includes(option)}
           handleClick={() => setSelectedList(option)}
         />
