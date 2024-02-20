@@ -271,8 +271,7 @@ export const useScheduleForm = () => {
     }
   };
 
-  const updateYearRepeat = (event: React.MouseEvent) => {
-    const { id, textContent } = event.currentTarget;
+  const updateYearRepeat = (id: string, value: string) => {
     dispatch(
       setDrawerScheduleForm({
         ...scheduleForm,
@@ -281,7 +280,7 @@ export const useScheduleForm = () => {
           year_type: {
             ...scheduleForm?.repeat.year_type,
             year_category: id,
-            year_repeat: textContent,
+            year_repeat: value,
           },
         },
       })

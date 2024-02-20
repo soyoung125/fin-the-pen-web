@@ -16,11 +16,11 @@ export const INIT_REPEAT = (date: moment.Moment): ScheduleRepeat => {
     },
     month_type: {
       today_repeat: true,
-      select_date: date.format("D"),
+      select_date: date.format("DD"),
       repeat_value: "1",
     },
     year_type: {
-      year_repeat: date.format("M월 D일"),
+      year_repeat: date.format("MM-DD"),
       repeat_value: "1",
       year_category: "MonthAndDay",
     },
