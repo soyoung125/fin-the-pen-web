@@ -55,9 +55,6 @@ function Year({ repeatType }: RepeatTypeProps) {
       {repeatType === "year" && (
         <Option
           date={date}
-          // MonthAndDay={`${date.month}-${date.date}`}
-          // NthDayOfMonth={`${date.month}월 ${date.week}번째 ${date.day}`}
-          // LastDayOfMonth={`${date.month}월 마지막 ${date.day}`}
           isLastDay={lastDate.diff(schedule?.start_date, "day") < 7}
         />
       )}
