@@ -1,13 +1,13 @@
 // src/mocks/handlers.js
-import {rest} from "msw";
+import { rest } from "msw";
 import {
   LOCAL_STORAGE_KEY_SCHEDULES,
   LOCAL_STORAGE_KEY_USERS,
 } from "@api/keys.ts";
-import {getLocalStorage, setLocalStorage} from "@utils/storage.ts";
-import {DOMAIN} from "@api/url.ts";
-import {MockUser, SignUp, User} from "@app/types/auth.ts";
-import {Schedule} from "@app/types/schedule.ts";
+import { getLocalStorage, setLocalStorage } from "@utils/storage.ts";
+import { DOMAIN } from "@api/url.ts";
+import { MockUser, SignUp, User } from "@app/types/auth.ts";
+import { Schedule } from "@app/types/schedule.ts";
 import moment from "moment";
 
 const getSign = (type: string) => (type === "Plus" ? "+" : "-");
@@ -46,7 +46,11 @@ export const handlers = [
       10000000 + Math.random() * 90000000
     ).toString();
 
-    return res(ctx.delay(1000), ctx.status(200), ctx.json({...user, token: randomEightDigit}));
+    return res(
+      ctx.delay(1000),
+      ctx.status(200),
+      ctx.json({ ...user, token: randomEightDigit })
+    );
   }),
 
   rest.post(`${DOMAIN}/createSchedule`, async (req, res, ctx) => {
@@ -55,17 +59,20 @@ export const handlers = [
       LOCAL_STORAGE_KEY_SCHEDULES,
       []
     );
-    const isExist = prevSchedules.find(s => s.id === schedule.id);
+    const isExist = prevSchedules.find((s) => s.id === schedule.id);
     if (isExist) {
       return res(ctx.delay(1000), ctx.status(500), ctx.json(false));
     }
-    const newSchedules: Schedule[] = [...prevSchedules, {...schedule, price_type: getSign(schedule.price_type)}];
+    const newSchedules: Schedule[] = [
+      ...prevSchedules,
+      { ...schedule, price_type: getSign(schedule.price_type) },
+    ];
     setLocalStorage(LOCAL_STORAGE_KEY_SCHEDULES, newSchedules);
     return res(ctx.delay(1000), ctx.status(200), ctx.json(true));
   }),
 
-  rest.post(`${DOMAIN}/getMonthSchedules`, async (req, res, ctx) => {
-    const {user_id, date} = await req.json();
+  rest.post(`${DOMAIN}/home/getMonthSchedules`, async (req, res, ctx) => {
+    const { user_id, date } = await req.json();
 
     const schedules = getLocalStorage<Schedule[]>(
       LOCAL_STORAGE_KEY_SCHEDULES,
@@ -80,18 +87,18 @@ export const handlers = [
       return res(
         ctx.delay(1000),
         ctx.status(200),
-        ctx.json({data: undefined})
+        ctx.json({ data: undefined })
       );
     }
     return res(
       ctx.delay(1000),
       ctx.status(200),
-      ctx.json({data: monthSchedules})
+      ctx.json({ data: monthSchedules })
     );
   }),
 
   rest.post(`${DOMAIN}/deleteSchedule`, async (req, res, ctx) => {
-    const {id} = await req.json();
+    const { id } = await req.json();
     const prevSchedules = getLocalStorage<Schedule[]>(
       LOCAL_STORAGE_KEY_SCHEDULES,
       []
@@ -108,16 +115,20 @@ export const handlers = [
       LOCAL_STORAGE_KEY_SCHEDULES,
       []
     );
-    const newSchedules = prevSchedules.map((s) => s.id === schedule.schedule_id ? {
-      ...schedule,
-      price_type: getSign(schedule.price_type)
-    } : s);
+    const newSchedules = prevSchedules.map((s) =>
+      s.id === schedule.schedule_id
+        ? {
+            ...schedule,
+            price_type: getSign(schedule.price_type),
+          }
+        : s
+    );
     setLocalStorage(LOCAL_STORAGE_KEY_SCHEDULES, newSchedules);
     return res(ctx.delay(1000), ctx.status(200), ctx.json(true));
   }),
 
   rest.post(`${DOMAIN}/report`, async (req, res, ctx) => {
-    const {user_id, date} = await req.json();
+    const { user_id, date } = await req.json();
     const schedules = getLocalStorage<Schedule[]>(
       LOCAL_STORAGE_KEY_SCHEDULES,
       []
@@ -129,7 +140,7 @@ export const handlers = [
     );
 
     if (monthSchedules.length === 0) {
-      return res(ctx.delay(1000), ctx.status(200), ctx.json({data: []}));
+      return res(ctx.delay(1000), ctx.status(200), ctx.json({ data: [] }));
     }
 
     const data = [
@@ -168,7 +179,7 @@ export const handlers = [
         rate: "4",
         category: "식비",
       },
-    ]
-    return res(ctx.delay(1000), ctx.status(200), ctx.json({data: data}));
-  })
+    ];
+    return res(ctx.delay(1000), ctx.status(200), ctx.json({ data: data }));
+  }),
 ];
