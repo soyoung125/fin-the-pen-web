@@ -3,7 +3,6 @@ import { Button } from "@mui/material";
 export interface OptionButtonProps {
   isSelected: boolean;
   id?: string;
-  value: string;
   contents: string;
   handleClick: (e: React.MouseEvent) => void;
 }
@@ -11,7 +10,6 @@ export interface OptionButtonProps {
 function OptionButton({
   isSelected,
   id,
-  value,
   contents,
   handleClick,
 }: OptionButtonProps) {
@@ -19,7 +17,6 @@ function OptionButton({
     <Button
       fullWidth
       id={id}
-      value={value}
       variant={isSelected ? "contained" : "outlined"}
       color={isSelected ? "primary" : "secondary"}
       sx={{ borderRadius: "20px" }}

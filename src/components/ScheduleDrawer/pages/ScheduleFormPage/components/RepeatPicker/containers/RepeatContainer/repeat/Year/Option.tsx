@@ -22,7 +22,6 @@ function Option({ date, isLastDay }: Option) {
       <OptionButton
         id="MonthAndDay"
         isSelected={yearRepeat === "MonthAndDay"}
-        value={`${date.month}-${date.date}`}
         contents={`${date.month}월 ${date.date}일`}
         handleClick={() =>
           changeYearRepeat("MonthAndDay", `${date.month}-${date.date}`)
@@ -32,7 +31,6 @@ function Option({ date, isLastDay }: Option) {
       <OptionButton
         id="NthDayOfMonth"
         isSelected={yearRepeat === "NthDayOfMonth"}
-        value={`${date.month}월 ${date.week + 1}번째 ${date.day}`}
         contents={`${date.month}월 ${week[date.week]}번째 ${date.day}`}
         handleClick={() =>
           changeYearRepeat(
@@ -46,7 +44,6 @@ function Option({ date, isLastDay }: Option) {
         <OptionButton
           id="LastDayOfMonth"
           isSelected={yearRepeat === "LastDayOfMonth"}
-          value={`${date.month}월 마지막 ${date.day}`}
           contents={`${date.month}월 마지막 ${date.day}`}
           handleClick={() =>
             changeYearRepeat(
