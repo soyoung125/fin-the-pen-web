@@ -3,7 +3,11 @@
 /* eslint-disable no-param-reassign */
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import moment from "moment";
-import { Schedule, ViewModeValue } from "@app/types/schedule.ts";
+import {
+  RequestSchedule,
+  Schedule,
+  ViewModeValue,
+} from "@app/types/schedule.ts";
 import { AnalysisData } from "@app/types/common.ts";
 import { CATEGORIES, COLORLIST } from "../../../constants/categories.ts";
 import { RootState } from "../store.ts";
@@ -15,7 +19,7 @@ interface InitialState {
   // 전체 일정 데이터
   schedules: Schedule[];
   // 서랍에 표시될 일정 1개
-  scheduleForm: Schedule | null;
+  scheduleForm: RequestSchedule | null;
   // 분석 페이지에 표시될 데이터
   analyzedData: {
     data: AnalysisData[];

@@ -59,7 +59,7 @@ export const handlers = [
       LOCAL_STORAGE_KEY_SCHEDULES,
       []
     );
-    const isExist = prevSchedules.find((s) => s.id === schedule.id);
+    const isExist = prevSchedules.find((s) => s.schedule_id === schedule.id);
     if (isExist) {
       return res(ctx.delay(1000), ctx.status(500), ctx.json(false));
     }
@@ -103,7 +103,9 @@ export const handlers = [
       LOCAL_STORAGE_KEY_SCHEDULES,
       []
     );
-    const newSchedules = prevSchedules.filter((schedule) => schedule.id !== id);
+    const newSchedules = prevSchedules.filter(
+      (schedule) => schedule.schedule_id !== id
+    );
     setLocalStorage(LOCAL_STORAGE_KEY_SCHEDULES, newSchedules);
     return res(ctx.delay(1000), ctx.status(200), ctx.json(true));
   }),
@@ -116,7 +118,7 @@ export const handlers = [
       []
     );
     const newSchedules = prevSchedules.map((s) =>
-      s.id === schedule.schedule_id
+      s.schedule_id === schedule.schedule_id
         ? {
             ...schedule,
             price_type: getSign(schedule.price_type),

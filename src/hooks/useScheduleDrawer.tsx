@@ -1,5 +1,5 @@
 import { useOverlay } from "@hooks/use-overlay/useOverlay.tsx";
-import { Schedule } from "@app/types/schedule.ts";
+import { RequestSchedule, Schedule } from "@app/types/schedule.ts";
 import { styled, SwipeableDrawer } from "@mui/material";
 import ScheduleDrawer from "@components/ScheduleDrawer";
 import { setDrawerScheduleForm } from "@redux/slices/scheduleSlice.tsx";
@@ -18,7 +18,7 @@ export const useScheduleDrawer = () => {
     height: "100%",
   }));
 
-  const openScheduleDrawer = (data: Schedule) => {
+  const openScheduleDrawer = (data: RequestSchedule) => {
     dispatch(setDrawerScheduleForm(data));
     openOverlay(
       <Root>

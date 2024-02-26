@@ -26,6 +26,7 @@ import {
   setBottomBarOpenTrue,
 } from "@redux/slices/commonSlice.tsx";
 import { useScheduleDrawer } from "@hooks/useScheduleDrawer.tsx";
+import { INIT_PERIOD, INIT_REPEAT } from "@constants/schedule.ts";
 
 function SearchSchedule() {
   const dispatch = useAppDispatch();
@@ -81,7 +82,7 @@ function SearchSchedule() {
     if (window.confirm("선택 일정을 삭제 하시겠습니까?")) {
       alert("아직 기능이 완성되지 않았습니다...");
       checkedSchedules.map((s) => {
-        console.log(s?.id);
+        console.log(s?.schedule_id);
       });
     }
   };
@@ -90,6 +91,21 @@ function SearchSchedule() {
   //   setBottomDrawerOpen(true);
   //   setSelectedSchedule(schedule);
   // };
+
+  const handleModal = (schedule: Schedule) => {
+    // setBottomDrawerOpen(true); // 수정 drawer는 bottombar의 drawer를 공유할 수 있도록 수정 예정
+    if (schedule) {
+      const start = moment(schedule.start_date); // getMonthSchedule api 수정 후 제거 예정
+      openScheduleDrawer({
+        ...schedule,
+        is_all_day: schedule.all_day,
+        set_amount: schedule.amount,
+        exclusion: schedule.exclude,
+        repeat: INIT_REPEAT(start),
+        period: INIT_PERIOD(start),
+      });
+    }
+  };
 
   return (
     <>
@@ -125,8 +141,8 @@ function SearchSchedule() {
           </FormControl>
           {resultSchedules.map((schedule, index) => (
             <CardActionArea
-              key={schedule.id}
-              onClick={() => openScheduleDrawer(schedule)}
+              key={schedule.schedule_id}
+              onClick={() => handleModal(schedule)}
             >
               <Box pb={1} />
               <RoundedBorderBox greyBorder={true}>

@@ -46,11 +46,13 @@ function ScheduleList() {
   }
 
   const handleModal = (schedule: Schedule) => {
-    // setBottomDrawerOpen(true); // 수정 drawer는 bottombar의 drawer를 공유할 수 있도록 수정 예정
     if (schedule) {
       const start = moment(schedule.start_date); // getMonthSchedule api 수정 후 제거 예정
       openScheduleDrawer({
         ...schedule,
+        is_all_day: schedule.all_day,
+        set_amount: schedule.amount,
+        exclusion: schedule.exclude,
         repeat: INIT_REPEAT(start),
         period: INIT_PERIOD(start),
       });
@@ -67,7 +69,7 @@ function ScheduleList() {
             CATEGORIES.find((c) => c.title === schedule.category) ||
             ({ color: "#C8A2C8" } as Category)
           }
-          key={schedule.id}
+          key={schedule.schedule_id}
           handleModal={handleModal}
           openAuthenticationPage={() => setAuthenticationPageOpen(true)}
         />

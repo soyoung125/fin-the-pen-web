@@ -6,7 +6,7 @@ import {
 import { SCHEDULE_DRAWER } from "@constants/schedule.ts";
 import useSchedule from "@hooks/useSchedule.ts";
 import { Button, Stack, Tooltip } from "@mui/material";
-import { Schedule } from "@app/types/schedule.ts";
+import { RequestSchedule, Schedule } from "@app/types/schedule.ts";
 import { useScheduleForm } from "../../hooks/useScheduleForm.ts";
 import { selectGuestMode } from "@redux/slices/commonSlice.tsx";
 import { useUser } from "@app/tanstack-query/useUser.ts";
@@ -19,14 +19,14 @@ interface CreateFooterInterface {
 
 function CreateFooter({ handleSubmit, handleClose }: CreateFooterInterface) {
   const date = useAppSelector(selectDate);
-  const schedule = useAppSelector(selectScheduleForm) as Schedule;
+  const schedule = useAppSelector(selectScheduleForm);
   const guestMode = useAppSelector(selectGuestMode);
   const { data: user } = useUser();
   const { handleCreateSchedule } = useSchedule();
   const { setRandomGeneratedSchedule } = useScheduleForm();
 
   const handleCreate = () => {
-    if (handleSubmit()) {
+    if (handleSubmit() && schedule) {
       handleCreateSchedule(schedule);
       handleClose();
     }

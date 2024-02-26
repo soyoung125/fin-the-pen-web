@@ -4,7 +4,7 @@ import {
   selectMonth,
   setDrawerScheduleForm,
 } from "@redux/slices/scheduleSlice.tsx";
-import { Schedule } from "@app/types/schedule.ts";
+import { RequestSchedule, Schedule } from "@app/types/schedule.ts";
 import { useAppDispatch } from "@redux/hooks.ts";
 import moment from "moment/moment";
 import { v4 as uuidv4 } from "uuid";
@@ -43,21 +43,21 @@ const useSchedule = () => {
         moment(date).isSameOrBefore(schedule.end_date)
     ) ?? [];
 
-  const handleCreateSchedule = async (schedule: Schedule) => {
+  const handleCreateSchedule = async (schedule: RequestSchedule) => {
     if (user === undefined) {
       return alert("로그인이 필요합니다.");
     }
 
     const scheduleWithUuid = {
       ...schedule,
-      id: uuidv4(),
+      schedule_id: uuidv4(),
       user_id: user.user_id,
     };
 
     createSchedule(scheduleWithUuid);
   };
 
-  const handleDeleteSchedule = async (schedule: Schedule) => {
+  const handleDeleteSchedule = async (schedule: RequestSchedule) => {
     const answer = await openModal({
       changeMode: "삭제",
     });
@@ -66,7 +66,7 @@ const useSchedule = () => {
     }
   };
 
-  const handleModifySchedule = async (schedule: Schedule) => {
+  const handleModifySchedule = async (schedule: RequestSchedule) => {
     const answer = await openModal({
       changeMode: "수정",
     });

@@ -41,11 +41,11 @@ function DateInput({ showError }: DateInputProps) {
       >
         <Typography variant="h4">{SCHEDULE_DRAWER.all_day}</Typography>
         <SwitchButton
-          checked={scheduleForm?.all_day ?? true}
+          checked={scheduleForm?.is_all_day ?? true}
           handleChange={() =>
             changeAllDay({
               target: {
-                value: !scheduleForm?.all_day,
+                value: !scheduleForm?.is_all_day,
                 name: "all_day",
               },
             })

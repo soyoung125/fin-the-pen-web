@@ -8,64 +8,6 @@ import { DOMAIN } from "./url.ts";
 
 import { getSign } from "@components/ScheduleDrawer/hooks/useScheduleForm.ts";
 
-export const fetchCreateSchedule = async (schedule: Schedule) => {
-  try {
-    const data = {
-      ...schedule,
-      is_all_day: schedule.all_day,
-      set_amount: schedule.amount,
-      exclusion: schedule.exclude,
-      price_type: getSign(schedule.price_type),
-    } as RequestSchedule;
-    const response = await axios.post(`${DOMAIN}/createSchedule`, data);
-    return response.data;
-  } catch (err) {
-    alert(err);
-  }
-};
-
-export const fetchDeleteSchedule = async (id: string) => {
-  try {
-    console.log({ id });
-    const response = await axios.post(`${DOMAIN}/deleteSchedule`, { id });
-    return response.data;
-  } catch (err) {
-    alert(err);
-  }
-};
-
-export const fetchModifySchedule = async (schedule: Schedule) => {
-  try {
-    const data = {
-      ...schedule,
-      is_all_day: schedule.all_day,
-      set_amount: schedule.amount,
-      exclusion: schedule.exclude,
-      price_type: getSign(schedule.price_type),
-    } as RequestSchedule;
-    const response = await axios.post(`${DOMAIN}/modifySchedule`, { ...data });
-    return response.data;
-  } catch (err) {
-    alert(err);
-  }
-};
-
-export const fetchMonthSchedules = async (
-  query: MonthScheduleQuery
-): Promise<Schedule[] | undefined> => {
-  try {
-    const response = await axios.post<{ data: Schedule[] }>(
-      `${DOMAIN}/getMonthSchedules`,
-      query
-    );
-    const schedules: Schedule[] = response.data.data ?? [];
-    console.log(schedules);
-    return schedules;
-  } catch (err) {
-    console.log(err);
-  }
-};
-
 export const fetchGetTransavrionList = async (data: any) => {
   try {
     const response: AxiosResponse<any[]> = await axios.post<any[]>(

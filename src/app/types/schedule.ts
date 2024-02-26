@@ -2,7 +2,7 @@ import { SCHEDULE_DRAWER_MODE, VIEW_MODE } from "@constants/schedule.ts";
 import { UpdateStateInterface } from "./common.ts";
 
 export interface Schedule {
-  id?: string;
+  schedule_id?: string;
   user_id?: string;
   event_name: string;
   category: string;
@@ -11,7 +11,7 @@ export interface Schedule {
   start_time: string;
   end_time: string;
   all_day: boolean;
-  repeat: ScheduleRepeat;
+  repeat_options: { value: string; options: string };
   period: SchedulePeriod;
   price_type: string;
   amount: string;
@@ -21,6 +21,7 @@ export interface Schedule {
 }
 
 export interface RequestSchedule {
+  schedule_id?: string;
   user_id?: string;
   event_name: string;
   category: string;

@@ -42,7 +42,10 @@ function DetailSetting() {
       </Title>
 
       {Object.keys(detailData).map((d) => (
-        <SwipeableDetailCard data={detailData[d]} key={detailData[d][0].id} />
+        <SwipeableDetailCard
+          data={detailData[d]}
+          key={detailData[d][0].schedule_id}
+        />
       ))}
     </>
   );

@@ -92,7 +92,7 @@ function ScheduleCard({
                     onClick={(e) => {
                       e.stopPropagation();
                       console.log("소비추천금액 적용하기");
-                      handleModifySchedule(schedule);
+                      // handleModifySchedule(schedule);
                     }}
                   >
                     <Box>

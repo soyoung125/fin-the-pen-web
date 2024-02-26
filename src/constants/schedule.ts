@@ -1,5 +1,6 @@
 import moment from "moment";
 import {
+  RequestSchedule,
   Schedule,
   SchedulePeriod,
   ScheduleRepeat,
@@ -97,7 +98,7 @@ export const NEED_CATEGORY = "카테고리를 선택해야 합니다.";
 export const WRONG_TIME_ORDER =
   "종료 시각이 시작 시각보다 빠르지 않았으면 좋겠어요.";
 
-export const INIT_SCHEDULE = (date: string): Schedule => {
+export const INIT_SCHEDULE = (date: string): RequestSchedule => {
   const startDate = moment(date);
   const endDate = moment(date);
   if (moment().isSame(date, "day")) {
@@ -115,14 +116,14 @@ export const INIT_SCHEDULE = (date: string): Schedule => {
     start_time: startDate.format("HH:00"),
     end_time: endDate.format("HH:00"),
     category: "",
-    all_day: false,
+    is_all_day: false,
     repeat: INIT_REPEAT(moment(date)),
     period: INIT_PERIOD(moment(date)),
     price_type: SCHEDULE_DRAWER.type_minus,
-    amount: "0",
+    set_amount: "0",
     fix_amount: false,
     importance: SCHEDULE_DRAWER.importance_middle,
-    exclude: false, // false면 포함
+    exclusion: false, // false면 포함
   };
 };
 
