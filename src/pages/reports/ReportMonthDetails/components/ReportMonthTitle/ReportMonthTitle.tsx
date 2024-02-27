@@ -12,12 +12,18 @@ export interface ReportMonthTitleProps {
   year: number;
   month: number;
   onClickMonth: () => void;
+  onSubmit: (amount: number) => void;
+  goal?: string;
+  spent?: string;
 }
 
 function ReportMonthTitle({
   month,
   year,
   onClickMonth,
+  onSubmit,
+  goal,
+  spent,
 }: ReportMonthTitleProps) {
   const navigate = useNavigate();
   const { openModal, closeModal } = useModal();
@@ -27,7 +33,7 @@ function ReportMonthTitle({
       modalElement: (
         <GoalSettingModal
           closeModal={closeModal}
-          handleSubmit={(v) => alert(v)}
+          handleSubmit={(v) => onSubmit(v)}
           navigateTo={() => navigate("/somewhere")}
         />
       ),
@@ -47,7 +53,7 @@ function ReportMonthTitle({
         <PredictBox
           title="지출 목표액"
           titleIcon={<AccountBalanceWalletIcon />}
-          amount={1200000}
+          amount={Number(goal)}
           navigateIcon={<SettingsIcon fontSize="small" />}
           handleClick={handleClickAccountSetting}
         />
@@ -55,7 +61,7 @@ function ReportMonthTitle({
         <PredictBox
           title="지출 금액"
           titleIcon={<MoneyIcon />}
-          amount={579000}
+          amount={Number(spent)}
         />
       </Stack>
     </Stack>

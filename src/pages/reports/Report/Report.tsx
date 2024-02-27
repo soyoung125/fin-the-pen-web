@@ -11,15 +11,12 @@ import { useModal } from "@hooks/modal/useModal.tsx";
 import GoalSettingModal from "@pages/reports/Report/components/modals/GoalSettingModal";
 import { useNavigate } from "react-router-dom";
 import UseableInfoModal from "@pages/reports/Report/components/modals/UseableInfoModal";
-import TopNavigationBar from "@components/layouts/common/TopNavigationBar";
 import ReportBox from "@pages/reports/Report/components/layout/ReportBox";
 import ReportLayout from "@pages/reports/Report/components/layout/ReportLayout";
-import BubbleChart from "@pages/reports/Report/components/BubbleChart";
-import { generateRandomBubbles2 } from "@pages/reports/Report/components/BubbleChart/utils.ts";
-import PredictReport from "@pages/reports/Report/components/PredictReport";
 import FixedTransaction from "@pages/reports/Report/components/FixedTransaction";
 import MonthlyReport from "@pages/reports/Report/components/MonthlyReport";
 import moment from "moment";
+import { PATH } from "@constants/path.ts";
 
 function Report() {
   const {
@@ -90,7 +87,7 @@ function Report() {
         content={
           <ReportLayout
             title="월간 소비 리포트"
-            navigateTo="/somewhere"
+            navigateTo={PATH.reportMonthDetail}
             content={<>서버 구현 중</>}
           />
         }

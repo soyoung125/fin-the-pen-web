@@ -18,8 +18,10 @@ function ReportMonthDetails() {
     month,
     pickMonth,
     isPending,
-    reportList,
-    maxPercent,
+    report,
+    setExpenditureGoal,
+    // reportList,
+    // maxPercent,
   } = useReport();
   const { openScheduleDrawer } = useScheduleDrawer();
 
@@ -35,14 +37,22 @@ function ReportMonthDetails() {
         title="카테고리 소비 리포트"
       />
       <Stack px="20px" py="24px" gap="24px">
-        <ReportMonthTitle year={year} month={month} onClickMonth={pickMonth} />
-
-        <ReportList
-          isPending={isPending}
-          reportList={reportList}
-          maxPercent={maxPercent}
-          handleClickAddSchedule={handleClickAddSchedule}
+        <ReportMonthTitle
+          year={year}
+          month={month}
+          onClickMonth={pickMonth}
+          onSubmit={setExpenditureGoal}
+          goal={report?.expenseGoalAmount}
+          spent={report?.totalSpentToday}
         />
+
+        <>서버 준비 중</>
+        {/*<ReportList*/}
+        {/*  isPending={isPending}*/}
+        {/*  reportList={reportList}*/}
+        {/*  maxPercent={maxPercent}*/}
+        {/*  handleClickAddSchedule={handleClickAddSchedule}*/}
+        {/*/>*/}
       </Stack>
     </>
   );
