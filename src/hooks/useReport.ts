@@ -5,22 +5,22 @@ import { useReports } from "@app/tanstack-query/reports/useReports.ts";
 import moment from "moment";
 
 const useReport = () => {
-  const [yearMonth, setYearMonth] = useState("2024-01");
+  const [yearMonth, setYearMonth] = useState("2024-02");
   const [year, month] = yearMonth.split("-").map((s) => Number(s));
   const { data: user } = useUser();
   const {
-    data: reportList,
+    data: report,
     isPending,
     isError,
   } = useReports({
     user_id: user?.user_id ?? "",
-    date: moment(yearMonth, "YYYY-MM").format("YYYY-MM-DD"),
+    date: `${yearMonth}-${moment().date()}`,
   });
   const { openMonthPicker } = useDatePicker();
 
-  const maxPercent = Math.max(
-    ...(reportList?.map((l) => Number(l.rate)) ?? [])
-  );
+  // const maxPercent = Math.max(
+  //   ...(reportList?.map((l) => Number(l.rate)) ?? [])
+  // );
 
   const addMonth = () => {
     const date = moment(yearMonth, "YYYY-MM");
@@ -41,11 +41,11 @@ const useReport = () => {
     yearMonth,
     year,
     month,
-    reportList,
+    report,
     isPending,
     isError,
     openMonthPicker,
-    maxPercent,
+    // maxPercent,
     addMonth,
     subtractMonth,
     pickMonth,

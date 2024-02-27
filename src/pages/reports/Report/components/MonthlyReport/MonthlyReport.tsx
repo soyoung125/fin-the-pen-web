@@ -2,6 +2,7 @@ import { Box, Stack, Typography } from "@mui/material";
 import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
 import ArrowDropUpIcon from "@mui/icons-material/ArrowDropUp";
 import LineChart from "@pages/reports/Report/components/MonthlyReport/LineChart";
+import moment from "moment";
 
 export interface MonthlyReportProps {
   month: number;
@@ -17,9 +18,8 @@ function MonthlyReport({
   twoMonthsAgoSpending,
 }: MonthlyReportProps) {
   const difference = spending - previousSpending;
-  const labels = Array.from(
-    { length: 3 },
-    (_, i) => `${month - i}월`
+  const labels = Array.from({ length: 3 }, (_, i) =>
+    moment(month, "M").subtract(i, "month").format("M월")
   ).reverse();
   const datas = [twoMonthsAgoSpending, previousSpending, spending];
 
@@ -27,7 +27,7 @@ function MonthlyReport({
     <>
       <Typography variant="subtitle2">최근 3개월간 소비 리포트</Typography>
       <Stack direction="row" alignItems="center">
-        <Typography variant="subtitle2">{month - 1}대비</Typography>
+        <Typography variant="subtitle2">{labels[1]}대비</Typography>
         {difference < 0 ? (
           <ArrowDropDownIcon color="info" />
         ) : (
@@ -44,6 +44,7 @@ function MonthlyReport({
             fontWeight: 400,
           }}
         >
+          {difference > 0 && "+"}
           {difference.toLocaleString()}원
         </Box>
       </Stack>

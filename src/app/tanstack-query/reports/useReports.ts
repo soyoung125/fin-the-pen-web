@@ -16,7 +16,7 @@ const fetchReport = async (query: MonthScheduleQuery) => {
       Authorization: "Bearer " + token,
     },
     body: JSON.stringify(query),
-  }).then<Report[]>(async (res) => {
+  }).then<Report>(async (res) => {
     const response = await res.json();
     return response.data;
   });
