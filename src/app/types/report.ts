@@ -33,3 +33,9 @@ export interface CategoryReport {
   rate: string;
   category: string;
 }
+
+export interface GoalResponse {
+  user_id: string;
+  date: string;
+  expenditure_amount: string;
+}

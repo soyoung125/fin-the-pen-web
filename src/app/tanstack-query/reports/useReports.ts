@@ -24,7 +24,7 @@ const fetchReport = async (query: MonthScheduleQuery) => {
 
 export const useReports = (query: MonthScheduleQuery) => {
   return useQuery({
-    queryKey: [QUERY_KEY_REPORT, query.date],
+    queryKey: [QUERY_KEY_REPORT, query.date.slice(0, 7)],
     queryFn: () => fetchReport(query),
   });
 };

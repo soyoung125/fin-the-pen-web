@@ -3,6 +3,7 @@ import { useDatePicker } from "@hooks/date-picker/hooks/useDatePicker.tsx";
 import { useUser } from "@app/tanstack-query/useUser.ts";
 import { useReports } from "@app/tanstack-query/reports/useReports.ts";
 import moment from "moment";
+import { useSetGoal } from "@app/tanstack-query/reports/useSetGoal.ts";
 
 const useReport = () => {
   const [yearMonth, setYearMonth] = useState("2024-02");
@@ -17,6 +18,7 @@ const useReport = () => {
     date: `${yearMonth}-${moment().date()}`,
   });
   const { openMonthPicker } = useDatePicker();
+  const { setGoal } = useSetGoal();
 
   // const maxPercent = Math.max(
   //   ...(reportList?.map((l) => Number(l.rate)) ?? [])
@@ -37,6 +39,16 @@ const useReport = () => {
     setYearMonth(newMonth.format("YYYY-MM"));
   };
 
+  const setExpenditureGoal = (amount: number) => {
+    if (user) {
+      setGoal({
+        user_id: user.user_id,
+        date: yearMonth,
+        expenditure_amount: amount.toString(),
+      });
+    }
+  };
+
   return {
     yearMonth,
     year,
@@ -49,6 +61,7 @@ const useReport = () => {
     addMonth,
     subtractMonth,
     pickMonth,
+    setExpenditureGoal,
   };
 };
 

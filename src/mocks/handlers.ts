@@ -1,6 +1,7 @@
 // src/mocks/handlers.js
 import { rest } from "msw";
 import {
+  LOCAL_STORAGE_KEY_GOAL,
   LOCAL_STORAGE_KEY_SCHEDULES,
   LOCAL_STORAGE_KEY_USERS,
 } from "@api/keys.ts";
@@ -133,6 +134,7 @@ export const handlers = [
       LOCAL_STORAGE_KEY_SCHEDULES,
       []
     );
+    const goal = getLocalStorage<string>(LOCAL_STORAGE_KEY_GOAL, "1200000");
     const monthSchedules = schedules.filter(
       (schedule) =>
         schedule.user_id === user_id &&
@@ -146,7 +148,7 @@ export const handlers = [
     const data = {
       date: "2024-02-02",
       totalSpentToday: "3330000000", // 총 지출 금액
-      expenseGoalAmount: "1200000", // 지출 목표
+      expenseGoalAmount: goal, // 지출 목표
       availableAmount: "579000", //사용 가능 금액
       category_consume_report: "0", // 카테고리 소비
       expenditure_this_month: {
@@ -173,6 +175,12 @@ export const handlers = [
       },
     };
     return res(ctx.delay(1000), ctx.status(200), ctx.json({ data: data }));
+  }),
+
+  rest.post(`${DOMAIN}/report/set-amount`, async (req, res, ctx) => {
+    const { expenditure_amount } = await req.json();
+    setLocalStorage(LOCAL_STORAGE_KEY_GOAL, expenditure_amount);
+    return res(ctx.delay(1000), ctx.status(200), ctx.json(true));
   }),
 
   rest.post(`${DOMAIN}/report/inquiry`, async (req, res, ctx) => {

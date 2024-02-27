@@ -22,7 +22,15 @@ import MonthlyReport from "@pages/reports/Report/components/MonthlyReport";
 import moment from "moment";
 
 function Report() {
-  const { year, month, report, isPending, isError, pickMonth } = useReport();
+  const {
+    year,
+    month,
+    report,
+    isPending,
+    isError,
+    pickMonth,
+    setExpenditureGoal,
+  } = useReport();
   useHeader(true, HEADER_MODE.analysis);
   const { openModal, closeModal } = useModal();
   const navigate = useNavigate();
@@ -32,7 +40,7 @@ function Report() {
       modalElement: (
         <GoalSettingModal
           closeModal={closeModal}
-          handleSubmit={(v) => alert(v)}
+          handleSubmit={(v) => setExpenditureGoal(v)}
           navigateTo={() => navigate("/somewhere")}
         />
       ),
