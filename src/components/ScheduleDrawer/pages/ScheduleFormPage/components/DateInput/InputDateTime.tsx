@@ -1,4 +1,4 @@
-import { Box, InputAdornment } from "@mui/material";
+import { Box, Grid, InputAdornment, Typography } from "@mui/material";
 import { UpdateStateInterface } from "@app/types/common.ts";
 import { SCHEDULE_DRAWER } from "@constants/schedule.ts";
 import moment from "moment";
@@ -7,6 +7,7 @@ import { DateField, LocalizationProvider } from "@mui/x-date-pickers";
 import { AdapterMoment } from "@mui/x-date-pickers/AdapterMoment";
 import { useDatePicker } from "@hooks/date-picker/hooks/useDatePicker.tsx";
 import { useScheduleForm } from "../../../../hooks/useScheduleForm.ts";
+import SelectDateTime from "@components/ScheduleDrawer/pages/ScheduleFormPage/components/DateInput/select/SelectDateTime/SelectDateTime.tsx";
 
 interface InputDateTimeProps {
   date?: string;
@@ -54,39 +55,26 @@ function InputDateTime({ date, time, type, showError }: InputDateTimeProps) {
   };
 
   return (
-    <Box sx={{ px: 2.5 }}>
-      <LocalizationProvider dateAdapter={AdapterMoment}>
-        <DateField
-          onClick={onClickDateField}
-          fullWidth
-          variant="standard"
-          format="YYYY-MM-DD"
-          maxDate={moment().add(18, "M")}
-          minDate={moment().subtract(18, "M")}
-          InputProps={{
-            startAdornment: (
-              <InputAdornment position="start">
-                <Box sx={{ color: "primary.main", fontWeight: 500 }}>
-                  {title}
-                </Box>
-              </InputAdornment>
-            ),
-            endAdornment: !scheduleForm?.all_day && (
-              <InputAdornment position="start">
-                <Box
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    onClickTimeField();
-                  }}
-                >
-                  {moment(time, "hh:mm").format("LT")}
-                </Box>
-              </InputAdornment>
-            ),
-          }}
-          value={moment(date)}
-        />
-      </LocalizationProvider>
+    <Box sx={{ py: 1 }}>
+      <Typography variant="subtitle1" color="primary">
+        {title}
+      </Typography>
+
+      <Grid container spacing={2}>
+        <Grid item xs={6}>
+          <SelectDateTime
+            dateTime={moment(date).format("YYYY/MM/DD dddd")}
+            onClick={onClickDateField}
+          />
+        </Grid>
+        <Grid item xs={6}>
+          <SelectDateTime
+            dateTime={moment(time, "hh:mm").format("LT")}
+            paddingLeft
+            onClick={onClickTimeField}
+          />
+        </Grid>
+      </Grid>
     </Box>
   );
 }

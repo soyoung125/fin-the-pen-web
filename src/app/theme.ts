@@ -1,36 +1,7 @@
 /* eslint-disable */
 import { ThemeOptions } from "@mui/material/styles";
 
-export const lightThemeOptions: ThemeOptions = {
-  palette: {
-    mode: "light",
-    primary: {
-      main: "#735BF2",
-    },
-    secondary: {
-      main: "#C8CBD0",
-      light: "#DEE0E3",
-      dark: "#8C919C",
-      contrastText: "#FFFFFF",
-    },
-    error: {
-      main: "#E82A2A",
-    },
-    warning: {
-      main: "#FFBE16",
-    },
-    success: {
-      main: "#0E9B35",
-    },
-    info: {
-      main: "#0075FF",
-    },
-    divider: "#F7F7F8",
-    text: {
-      primary: "#131416",
-      secondary: "#A9ACB2",
-    },
-  },
+const commonThemeOptions: ThemeOptions = {
   // props: {
   //   MuiTooltip: {
   //     arrow: true,
@@ -84,6 +55,7 @@ export const lightThemeOptions: ThemeOptions = {
       styleOverrides: {
         root: {
           borderRadius: 4,
+          boxShadow: "none",
         },
         outlined: {
           border: "1.4px solid",
@@ -100,6 +72,39 @@ export const lightThemeOptions: ThemeOptions = {
       },
     },
   },
+};
+
+export const lightThemeOptions: ThemeOptions = {
+  palette: {
+    mode: "light",
+    primary: {
+      main: "#735BF2",
+    },
+    secondary: {
+      main: "#C8CBD0",
+      light: "#DEE0E3",
+      dark: "#8C919C",
+      contrastText: "#FFFFFF",
+    },
+    error: {
+      main: "#E82A2A",
+    },
+    warning: {
+      main: "#FFBE16",
+    },
+    success: {
+      main: "#0E9B35",
+    },
+    info: {
+      main: "#0075FF",
+    },
+    divider: "#F7F7F8",
+    text: {
+      primary: "#131416",
+      secondary: "#A9ACB2",
+    },
+  },
+  ...commonThemeOptions,
 };
 
 export const darkThemeOptions: ThemeOptions = {
@@ -120,7 +125,5 @@ export const darkThemeOptions: ThemeOptions = {
       secondary: "#44b9d6",
     },
   },
-  typography: {
-    fontFamily: "Noto Sans KR",
-  },
+  ...commonThemeOptions,
 };

@@ -1,4 +1,13 @@
-import { Button, Stack, TextField, Typography } from "@mui/material";
+import {
+  Box,
+  Button,
+  InputBase,
+  Stack,
+  TextField,
+  ToggleButton,
+  ToggleButtonGroup,
+  Typography,
+} from "@mui/material";
 import { TimeState } from "@hooks/date-picker/components/TimePicker.tsx";
 
 interface SelectTimeProps {
@@ -21,32 +30,67 @@ function SelectTime({ timeState, setValue }: SelectTimeProps) {
   };
 
   return (
-    <Stack direction="row" justifyContent="space-between" gap="8px" p="8px">
-      <Stack width="30%" gap="4px">
-        <Button
-          size="small"
-          fullWidth
-          variant={meridiem === "오전" ? "contained" : "outlined"}
-          onClick={() => setValue("meridiem", "오전")}
-        >
-          오전
-        </Button>
-        <Button
-          size="small"
-          fullWidth
-          variant={meridiem === "오후" ? "contained" : "outlined"}
-          onClick={() => setValue("meridiem", "오후")}
-        >
-          오후
-        </Button>
-      </Stack>
+    <Stack
+      direction="row"
+      justifyContent="space-between"
+      gap="8px"
+      alignItems="stretch"
+    >
+      <ToggleButtonGroup
+        color="primary"
+        orientation="vertical"
+        value={meridiem}
+        exclusive
+        size="small"
+        sx={{ flexGrow: 1 }}
+        onChange={(e, newAlignment) =>
+          newAlignment && setValue("meridiem", newAlignment)
+        }
+      >
+        <ToggleButton value="오전">오전</ToggleButton>
+        <ToggleButton value="오후">오후</ToggleButton>
+      </ToggleButtonGroup>
+
       <Stack direction="row" alignItems="center" gap={1} width="70%">
-        <TextField value={hour} onChange={(e) => updateHour(e.target.value)} />
+        <Box
+          sx={{
+            height: "100%",
+            border: "1px solid #C8CBD0",
+            borderRadius: "4px",
+            display: "flex",
+          }}
+        >
+          <InputBase
+            value={hour}
+            onChange={(e) => updateHour(e.target.value)}
+            sx={{
+              my: "auto",
+            }}
+            inputProps={{
+              style: { textAlign: "center", fontSize: "24px", fontWeight: 500 },
+            }}
+          />
+        </Box>
         <Typography>:</Typography>
-        <TextField
-          value={minute}
-          onChange={(e) => updateMinute(e.target.value)}
-        />
+        <Box
+          sx={{
+            height: "100%",
+            border: "1px solid #C8CBD0",
+            borderRadius: "4px",
+            display: "flex",
+          }}
+        >
+          <InputBase
+            value={minute}
+            onChange={(e) => updateMinute(e.target.value)}
+            sx={{
+              my: "auto",
+            }}
+            inputProps={{
+              style: { textAlign: "center", fontSize: "24px", fontWeight: 500 },
+            }}
+          />
+        </Box>
       </Stack>
     </Stack>
   );

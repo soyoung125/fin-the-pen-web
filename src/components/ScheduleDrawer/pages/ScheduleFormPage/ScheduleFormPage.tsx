@@ -23,15 +23,17 @@ function ScheduleFormPage({
   if (schedule) {
     return (
       <Stack spacing={2} pt={2}>
-        {/* 이벤트 제목 */}
-        <NameInput showError={showError} />
+        <Stack spacing="10px">
+          {/* 이벤트 제목 */}
+          <NameInput showError={showError} />
 
-        {/* 이벤트 카테고리 */}
-        <CategoryInput
-          selectedCategory={schedule.category}
-          showError={showError}
-          onClick={() => setIsCategoryPickerOpen((prev) => !prev)}
-        />
+          {/* 이벤트 카테고리 */}
+          <CategoryInput
+            selectedCategory={schedule.category}
+            showError={showError}
+            onClick={() => setIsCategoryPickerOpen((prev) => !prev)}
+          />
+        </Stack>
         <ThickDivider />
 
         {/* 이벤트 일정 */}
