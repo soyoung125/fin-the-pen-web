@@ -19,10 +19,11 @@ const useReport = () => {
   });
   const { openMonthPicker } = useDatePicker();
   const { setGoal } = useSetGoal();
+  const reportList = report?.category_consume_report;
 
-  // const maxPercent = Math.max(
-  //   ...(reportList?.map((l) => Number(l.rate)) ?? [])
-  // );
+  const maxPercent = Math.max(
+    ...(reportList?.map((l) => parseFloat(l.rate)) ?? [])
+  );
 
   const addMonth = () => {
     const date = moment(yearMonth, "YYYY-MM");
@@ -57,7 +58,8 @@ const useReport = () => {
     isPending,
     isError,
     openMonthPicker,
-    // maxPercent,
+    reportList,
+    maxPercent,
     addMonth,
     subtractMonth,
     pickMonth,

@@ -7,7 +7,6 @@ export interface FixedTransactionProps {
   amount: number;
   month: string;
   difference: number;
-  type: "+" | "-";
 }
 
 function FixedTransaction({
@@ -15,7 +14,6 @@ function FixedTransaction({
   amount,
   month,
   difference,
-  type,
 }: FixedTransactionProps) {
   return (
     <Stack
@@ -40,14 +38,15 @@ function FixedTransaction({
       <Stack>
         <Stack direction="row" alignItems="center">
           <Typography variant="subtitle2">{month}월 보다 </Typography>
-          {type === "+" ? (
+          {difference < 0 ? (
             <ArrowDropDownIcon color="info" />
           ) : (
             <ArrowDropUpIcon color="error" />
           )}
         </Stack>
         <Typography variant="subtitle2">
-          {`${type} ${difference.toLocaleString()}원`}
+          {difference > 0 && "+"}
+          {difference.toLocaleString()}원
         </Typography>
       </Stack>
     </Stack>

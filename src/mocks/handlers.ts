@@ -147,31 +147,43 @@ export const handlers = [
 
     const data = {
       date: "2024-02-02",
-      totalSpentToday: "3330000000", // 총 지출 금액
-      expenseGoalAmount: goal, // 지출 목표
-      availableAmount: "579000", //사용 가능 금액
-      category_consume_report: "0", // 카테고리 소비
+      availableAmount: -440000,
+      expenseGoalAmount: 100000,
+      totalSpentToday: 540000,
+      category_consume_report: [
+        {
+          // 카테고리
+          category: "카페",
+          // 금액
+          amount: 100000,
+          // 비율
+          rate: "73%",
+        },
+        {
+          category: "수정",
+          amount: 35552,
+          rate: "26%",
+        },
+      ],
       expenditure_this_month: {
-        // 이번달 소비?
-        last_month_Amount: "0",
-        "1st_month_Amount": "0",
-        goal_amount: "0",
-        result_amount: "0",
+        // 소비 예측 리포트
+        last_month_Amount: 450000, // 지출 예정 금액
+        "1st_month_Amount": 90000, // 지출 금액
+        goal_amount: 100000, // 지출 목표
+        result_amount: 10000, // 사용 가능 금액
       },
       Nmonth_fixed: {
-        // 고정 입출금
-        previous_diff_plus: "200000", // 수입 차이
-        fixed_deposit: "1200000", // 고정 입금
-        fixed_withdraw: "579000", // 고정 출금
-        previous_diff_minus: "200000", // 출금 차이
-        current_month: "2024-02-02", // 이달
-        previous_month: "2024-01-02", // 전달
+        previous_diff_plus: "+0",
+        fixed_deposit: 0,
+        fixed_withdraw: 360000,
+        previous_diff_minus: "-360000",
+        current_month: "2024-02-02",
+        previous_month: "2024-01-02",
       },
       month_report: {
-        // 월별 소비 리포트
-        current: "500000", // 이달 소비
-        second_previous: "400000", // 지난 달 소비
-        previous: "300000", // 두달 전 소비
+        current: 90000,
+        second_previous: 0,
+        previous: 0,
       },
     };
     return res(ctx.delay(1000), ctx.status(200), ctx.json({ data: data }));

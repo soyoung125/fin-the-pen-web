@@ -20,8 +20,8 @@ function ReportMonthDetails() {
     isPending,
     report,
     setExpenditureGoal,
-    // reportList,
-    // maxPercent,
+    reportList,
+    maxPercent,
   } = useReport();
   const { openScheduleDrawer } = useScheduleDrawer();
 
@@ -42,17 +42,17 @@ function ReportMonthDetails() {
           month={month}
           onClickMonth={pickMonth}
           onSubmit={setExpenditureGoal}
-          goal={report?.expenseGoalAmount}
-          spent={report?.totalSpentToday}
+          goal={report?.expenseGoalAmount ?? 0}
+          spent={report?.totalSpentToday ?? 0}
         />
 
-        <>서버 준비 중</>
-        {/*<ReportList*/}
-        {/*  isPending={isPending}*/}
-        {/*  reportList={reportList}*/}
-        {/*  maxPercent={maxPercent}*/}
-        {/*  handleClickAddSchedule={handleClickAddSchedule}*/}
-        {/*/>*/}
+        {/*<>서버 준비 중</>*/}
+        <ReportList
+          isPending={isPending}
+          reportList={reportList}
+          maxPercent={maxPercent}
+          handleClickAddSchedule={handleClickAddSchedule}
+        />
       </Stack>
     </>
   );

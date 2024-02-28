@@ -1,14 +1,14 @@
 import ReportCard from "@pages/reports/ReportMonthDetails/components/ReportCard";
 import ReportCardSkeleton from "@pages/reports/ReportMonthDetails/components/ReportCard/ReportCardSkeleton.tsx";
 import { Button, Stack } from "@mui/material";
-import { Report } from "@app/types/report.ts";
+import { CategoryReport, Report } from "@app/types/report.ts";
 import { useState } from "react";
 import ReportEmptyBox from "@pages/reports/ReportMonthDetails/components/ReportEmptyBox";
 import { PATH } from "@constants/path.ts";
 
 export interface ReportListProps {
   isPending: boolean;
-  reportList?: Report[];
+  reportList?: CategoryReport[];
   maxPercent: number;
   handleClickAddSchedule: () => void;
 }
@@ -45,7 +45,7 @@ function ReportList({
             amount={l.amount}
             maxPercent={maxPercent}
             title={l.category}
-            percent={Number(l.rate)}
+            percent={parseFloat(l.rate)}
             navigateTo={`${PATH.reportCategoryDetail}/${l.category.replaceAll(
               "/",
               "-"

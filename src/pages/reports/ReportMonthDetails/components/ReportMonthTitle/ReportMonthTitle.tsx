@@ -13,8 +13,8 @@ export interface ReportMonthTitleProps {
   month: number;
   onClickMonth: () => void;
   onSubmit: (amount: number) => void;
-  goal?: string;
-  spent?: string;
+  goal: number;
+  spent: number;
 }
 
 function ReportMonthTitle({
@@ -42,9 +42,9 @@ function ReportMonthTitle({
   };
 
   return (
-    <Stack bgcolor="#F7F7F8" borderRadius="12px" p="14px" gap="10px">
-      <Stack direction="row" alignItems="center" spacing={1}>
-        <Typography fontSize="16px">
+    <Stack bgcolor="#F7F7F8" borderRadius="12px" p={2} gap="10px">
+      <Stack direction="row" alignItems="center" py={0.5} spacing={1}>
+        <Typography variant="h2">
           {year}년 {month}월
         </Typography>
         <CalendarTodayIcon sx={{ fontSize: 16 }} onClick={onClickMonth} />
@@ -52,16 +52,16 @@ function ReportMonthTitle({
       <Stack direction="row">
         <PredictBox
           title="지출 목표액"
-          titleIcon={<AccountBalanceWalletIcon />}
-          amount={Number(goal)}
-          navigateIcon={<SettingsIcon fontSize="small" />}
-          handleClick={handleClickAccountSetting}
+          titleIcon={<AccountBalanceWalletIcon sx={{ fontSize: "28px" }} />}
+          amount={goal}
+          // navigateIcon={<SettingsIcon fontSize="small" />}
+          // handleClick={handleClickAccountSetting}
         />
 
         <PredictBox
           title="지출 금액"
-          titleIcon={<MoneyIcon />}
-          amount={Number(spent)}
+          titleIcon={<MoneyIcon sx={{ fontSize: "28px" }} />}
+          amount={spent}
         />
       </Stack>
     </Stack>
