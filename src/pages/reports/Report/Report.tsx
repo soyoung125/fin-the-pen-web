@@ -2,14 +2,11 @@ import ReportTitle from "@pages/reports/Report/components/ReportTitle";
 import { Stack } from "@mui/material";
 import PredictBox from "@pages/reports/Report/components/PredictBox";
 import AccountBalanceWalletIcon from "@mui/icons-material/AccountBalanceWallet";
-import SettingsIcon from "@mui/icons-material/Settings";
 import InfoOutlinedIcon from "@mui/icons-material/InfoOutlined";
 import useReport from "@hooks/useReport.ts";
 import useHeader from "@hooks/useHeader.ts";
 import { HEADER_MODE } from "@app/types/common.ts";
 import { useModal } from "@hooks/modal/useModal.tsx";
-import GoalSettingModal from "@pages/reports/Report/components/modals/GoalSettingModal";
-import { useNavigate } from "react-router-dom";
 import UseableInfoModal from "@pages/reports/Report/components/modals/UseableInfoModal";
 import ReportBox from "@pages/reports/Report/components/layout/ReportBox";
 import ReportLayout from "@pages/reports/Report/components/layout/ReportLayout";
@@ -23,32 +20,10 @@ import PredictReport from "@pages/reports/Report/components/PredictReport";
 import { useState } from "react";
 
 function Report() {
-  const {
-    year,
-    month,
-    report,
-    isPending,
-    isError,
-    pickMonth,
-    setExpenditureGoal,
-  } = useReport();
+  const { year, month, report, isPending, isError, pickMonth } = useReport();
   useHeader(true, HEADER_MODE.analysis);
   const { openModal, closeModal } = useModal();
-  const navigate = useNavigate();
   const [selected, setSelected] = useState("used");
-
-  const handleClickAccountSetting = () => {
-    openModal({
-      modalElement: (
-        <GoalSettingModal
-          closeModal={closeModal}
-          handleSubmit={(v) => setExpenditureGoal(v)}
-          navigateTo={() => navigate("/somewhere")}
-        />
-      ),
-      isBackdropClickable: true,
-    });
-  };
 
   const handleClickAccountInfo = () => {
     openModal({
