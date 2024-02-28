@@ -17,8 +17,7 @@ const fetchReport = async (query: MonthScheduleQuery) => {
     },
     body: JSON.stringify(query),
   }).then<Report>(async (res) => {
-    const response = await res.json();
-    return response.data;
+    return res.json();
   });
 };
 

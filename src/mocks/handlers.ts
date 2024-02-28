@@ -186,7 +186,7 @@ export const handlers = [
         previous: 0,
       },
     };
-    return res(ctx.delay(1000), ctx.status(200), ctx.json({ data: data }));
+    return res(ctx.delay(1000), ctx.status(200), ctx.json(data));
   }),
 
   rest.post(`${DOMAIN}/report/set-amount`, async (req, res, ctx) => {
