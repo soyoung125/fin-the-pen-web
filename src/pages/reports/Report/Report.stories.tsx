@@ -168,13 +168,13 @@ export const PageExample = () => {
                     <FixedTransaction
                       title={"고정 수입"}
                       amount={12000000}
-                      month={month}
+                      month={month.toString()}
                       difference={-200000}
                     />
                     <FixedTransaction
                       title={"고정 지출"}
                       amount={579000}
-                      month={month}
+                      month={month.toString()}
                       difference={200000}
                     />
                   </Stack>

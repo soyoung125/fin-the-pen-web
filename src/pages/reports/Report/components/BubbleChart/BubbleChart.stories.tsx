@@ -5,7 +5,7 @@ import {
   generateRandomBubbles,
   generateRandomBubbles2,
 } from "@pages/reports/Report/components/BubbleChart/utils.ts";
-import { Report } from "@app/types/report.ts";
+import { CategoryReport, Report } from "@app/types/report.ts";
 
 const meta = {
   title: "reports/Report/BubbleChart",
@@ -114,7 +114,7 @@ export const MultipleBubbles = () => {
 };
 
 export const MultipleBubbles2 = () => {
-  const list: Report[] = [
+  const list: CategoryReport[] = [
     {
       amount: 71000,
       rate: "20",

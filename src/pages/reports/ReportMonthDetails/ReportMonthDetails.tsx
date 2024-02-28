@@ -19,7 +19,6 @@ function ReportMonthDetails() {
     pickMonth,
     isPending,
     report,
-    setExpenditureGoal,
     reportList,
     maxPercent,
   } = useReport();
@@ -41,7 +40,6 @@ function ReportMonthDetails() {
           year={year}
           month={month}
           onClickMonth={pickMonth}
-          onSubmit={setExpenditureGoal}
           goal={report?.expenseGoalAmount ?? 0}
           spent={report?.totalSpentToday ?? 0}
         />
