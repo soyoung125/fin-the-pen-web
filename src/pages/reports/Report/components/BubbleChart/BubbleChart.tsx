@@ -28,17 +28,14 @@ function BubbleChart({ bubbles, isBordered }: BubbleChartProps) {
           $color={bubble.color}
           $background={bubble.background}
         >
-          <Stack alignItems="center">
-            <Typography
-              fontSize={`${bubble.r / 20}rem`}
-              lineHeight={1}
-              textAlign={"center"}
-            >
+          <Stack alignItems="center" spacing={"2px"}>
+            <Typography variant="h1" lineHeight={1} textAlign={"center"}>
               {bubble.title}
             </Typography>
             {bubble.subtitle && (
               <Typography
-                fontSize={`${bubble.r / 25}rem`}
+                fontSize={`12px`}
+                fontWeight={600}
                 lineHeight={1}
                 textAlign={"center"}
               >

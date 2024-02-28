@@ -1,9 +1,9 @@
-import {Meta} from "@storybook/react";
-import {useState} from "react";
+import { Meta } from "@storybook/react";
+import { useState } from "react";
 import ReportList from "@pages/reports/ReportMonthDetails/components/ReportList";
-import {Button} from "@mui/material";
-import {Report} from "@app/types/report.ts";
-import {ReportListProps} from "@pages/reports/ReportMonthDetails/components/ReportList/ReportList.tsx";
+import { Button } from "@mui/material";
+import { CategoryReport } from "@app/types/report.ts";
+import { ReportListProps } from "@pages/reports/ReportMonthDetails/components/ReportList/ReportList.tsx";
 
 const meta = {
   title: "reports/ReportMonthDetails/ReportList",
@@ -11,9 +11,12 @@ const meta = {
   tags: ["autodocs"],
   args: {
     isPending: false,
-    reportList: [{category: "음식", amount: 8000, rate: "80"}, {category: "자동차", amount: 2000, rate: "20"}],
+    reportList: [
+      { category: "음식", amount: 8000, rate: "80" },
+      { category: "자동차", amount: 2000, rate: "20" },
+    ],
     maxPercent: 80,
-    handleClickAddSchedule: () => alert("add schedule")
+    handleClickAddSchedule: () => alert("add schedule"),
   },
   argTypes: {},
 } satisfies Meta<typeof ReportList>;
@@ -67,12 +70,12 @@ const useStorybookFullReportList = () => {
 };
 
 export const Default = (args: ReportListProps) => {
-  return <ReportList {...args}/>
+  return <ReportList {...args} />;
 };
 
 export const FullReportList = () => {
   // 이 예제는 단순히 스토리북 적용 목적입니다. 나중에 전역 상태 관리 라이브러리 + 커스텀 훅 조합해서 잘 활용하세요
-  const {maxrate, list} = useStorybookFullReportList();
+  const { maxrate, list } = useStorybookFullReportList();
 
   return (
     <ReportList
@@ -87,7 +90,7 @@ export const FullReportList = () => {
 export const Skeleton = () => {
   // 이 예제는 단순히 스토리북 적용 목적입니다. 나중에 전역 상태 관리 라이브러리 + 커스텀 훅 조합해서 잘 활용하세요
   const [isPending, setIsPending] = useState(true);
-  const {maxrate, list} = useStorybookFullReportList();
+  const { maxrate, list } = useStorybookFullReportList();
 
   return (
     <>
@@ -97,7 +100,9 @@ export const Skeleton = () => {
         maxPercent={maxrate}
         handleClickAddSchedule={() => alert("add schedule")}
       />
-      <Button onClick={() => setIsPending((prevState) => !prevState)}>로딩 상태 전환</Button>
+      <Button onClick={() => setIsPending((prevState) => !prevState)}>
+        로딩 상태 전환
+      </Button>
     </>
   );
 };
@@ -105,7 +110,7 @@ export const Skeleton = () => {
 export const EmptyReportList = () => {
   // 이 예제는 단순히 스토리북 적용 목적입니다. 나중에 전역 상태 관리 라이브러리 + 커스텀 훅 조합해서 잘 활용하세요
   const maxrate = 0;
-  const list: Report[] = [];
+  const list: CategoryReport[] = [];
 
   return (
     <ReportList

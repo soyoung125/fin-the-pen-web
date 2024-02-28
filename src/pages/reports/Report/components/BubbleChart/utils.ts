@@ -1,5 +1,5 @@
 import { Bubble } from "./BubbleChart.tsx";
-import { Report } from "@app/types/report.ts";
+import { CategoryReport } from "@app/types/report.ts";
 
 /**
  * 서로 겹치지 않게 랜덤으로 버블을 생성합니다.
@@ -49,7 +49,7 @@ export const generateRandomBubbles = (
   return generatedBubbles;
 };
 
-export const generateRandomBubbles2 = (bubbleItems: Report[]) => {
+export const generateRandomBubbles2 = (bubbleItems: CategoryReport[]) => {
   const generatedBubbles: Bubble[] = [];
 
   bubbleItems.forEach((bubbleItem, index) => {

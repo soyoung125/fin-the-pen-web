@@ -15,6 +15,7 @@ export const ProgressBar = styled.progress<ProgressBarProps>`
   appearance: none;
 
   // 배경
+
   &::-webkit-progress-bar {
     background-color: #f7f7f8;
 
@@ -22,6 +23,7 @@ export const ProgressBar = styled.progress<ProgressBarProps>`
   }
 
   // 실제
+
   &::-webkit-progress-value {
     background: ${({ bgColor }) => bgColor};
 
@@ -30,10 +32,12 @@ export const ProgressBar = styled.progress<ProgressBarProps>`
 
   &::after {
     content: "${({ value }) => value}%";
+    //height: 24px;
     font-size: 12px;
+    font-weight: 600;
     position: relative;
-    top: -22px;
-    left: calc(${({ value, max }) => (value / max) * 100}% - 30px);
+    top: -26px;
+    left: calc(${({ value, max }) => (value / max) * 100}% - 40px);
     color: ${({ color }) => color};
   }
 `;

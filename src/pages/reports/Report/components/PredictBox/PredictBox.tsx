@@ -6,8 +6,8 @@ export interface PredictBoxProps {
   title: string;
   titleIcon: ReactNode;
   amount: number;
-  navigateIcon: ReactNode;
-  handleClick: () => void;
+  navigateIcon?: ReactNode;
+  handleClick?: () => void;
 }
 
 function PredictBox({

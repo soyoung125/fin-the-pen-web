@@ -12,33 +12,21 @@ export interface ReportMonthTitleProps {
   year: number;
   month: number;
   onClickMonth: () => void;
+  goal: number;
+  spent: number;
 }
 
 function ReportMonthTitle({
   month,
   year,
   onClickMonth,
+  goal,
+  spent,
 }: ReportMonthTitleProps) {
-  const navigate = useNavigate();
-  const { openModal, closeModal } = useModal();
-
-  const handleClickAccountSetting = () => {
-    openModal({
-      modalElement: (
-        <GoalSettingModal
-          closeModal={closeModal}
-          handleSubmit={(v) => alert(v)}
-          navigateTo={() => navigate("/somewhere")}
-        />
-      ),
-      isBackdropClickable: true,
-    });
-  };
-
   return (
-    <Stack bgcolor="#F7F7F8" borderRadius="12px" p="14px" gap="10px">
-      <Stack direction="row" alignItems="center" spacing={1}>
-        <Typography fontSize="16px">
+    <Stack bgcolor="#F7F7F8" borderRadius="12px" p={2} gap="10px">
+      <Stack direction="row" alignItems="center" py={0.5} spacing={1}>
+        <Typography variant="h2">
           {year}년 {month}월
         </Typography>
         <CalendarTodayIcon sx={{ fontSize: 16 }} onClick={onClickMonth} />
@@ -46,16 +34,14 @@ function ReportMonthTitle({
       <Stack direction="row">
         <PredictBox
           title="지출 목표액"
-          titleIcon={<AccountBalanceWalletIcon />}
-          amount={1200000}
-          navigateIcon={<SettingsIcon fontSize="small" />}
-          handleClick={handleClickAccountSetting}
+          titleIcon={<AccountBalanceWalletIcon sx={{ fontSize: "28px" }} />}
+          amount={goal}
         />
 
         <PredictBox
           title="지출 금액"
-          titleIcon={<MoneyIcon />}
-          amount={579000}
+          titleIcon={<MoneyIcon sx={{ fontSize: "28px" }} />}
+          amount={spent}
         />
       </Stack>
     </Stack>

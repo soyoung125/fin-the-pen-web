@@ -1,9 +1,9 @@
-import {Meta} from "@storybook/react";
+import { Meta } from "@storybook/react";
 import ReportMonthTitle, {
   ReportMonthTitleProps,
 } from "./ReportMonthTitle.tsx";
-import {useState} from "react";
-import {useDatePicker} from "@hooks/date-picker/hooks/useDatePicker.tsx";
+import { useState } from "react";
+import { useDatePicker } from "@hooks/date-picker/hooks/useDatePicker.tsx";
 
 const meta = {
   title: "reports/ReportMonthDetails/ReportMonthTitle",
@@ -26,7 +26,7 @@ export const Default = (args: ReportMonthTitleProps) => {
 export const State = () => {
   const [yearMonth, setYearMonth] = useState("2023-5");
   const [year, month] = yearMonth.split("-").map((s) => Number(s));
-  const {openMonthPicker} = useDatePicker();
+  const { openMonthPicker } = useDatePicker();
 
   const pickMonth = async () => {
     const newMonth = await openMonthPicker(yearMonth);
@@ -38,6 +38,8 @@ export const State = () => {
       year={year}
       month={month}
       onClickMonth={pickMonth}
+      goal={100000}
+      spent={100000}
     />
   );
 };

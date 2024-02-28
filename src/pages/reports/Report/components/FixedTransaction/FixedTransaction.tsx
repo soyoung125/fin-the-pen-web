@@ -5,7 +5,7 @@ import ArrowDropUpIcon from "@mui/icons-material/ArrowDropUp";
 export interface FixedTransactionProps {
   title: string;
   amount: number;
-  month: number;
+  month: string;
   difference: number;
 }
 
@@ -37,7 +37,7 @@ function FixedTransaction({
 
       <Stack>
         <Stack direction="row" alignItems="center">
-          <Typography variant="subtitle2">{month - 1}월 보다 </Typography>
+          <Typography variant="subtitle2">{month}월 보다 </Typography>
           {difference < 0 ? (
             <ArrowDropDownIcon color="info" />
           ) : (
@@ -45,6 +45,7 @@ function FixedTransaction({
           )}
         </Stack>
         <Typography variant="subtitle2">
+          {difference > 0 && "+"}
           {difference.toLocaleString()}원
         </Typography>
       </Stack>
