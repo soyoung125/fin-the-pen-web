@@ -26,7 +26,7 @@ function MonthlyReport({
   return (
     <>
       <Typography variant="subtitle2">최근 3개월간 소비 리포트</Typography>
-      <Stack direction="row" alignItems="center">
+      <Stack direction="row" alignItems="center" mt={0.5} mb={1}>
         <Typography variant="subtitle2">{labels[1]}대비</Typography>
         {difference < 0 ? (
           <ArrowDropDownIcon color="info" />

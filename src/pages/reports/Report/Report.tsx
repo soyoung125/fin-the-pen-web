@@ -121,7 +121,7 @@ function Report() {
             <ReportLayout
               title={`${month}월 고정 입출금`}
               content={
-                <Stack spacing={2}>
+                <Stack spacing={1.5} pt={3}>
                   <FixedTransaction
                     title={"고정 수입"}
                     amount={report.Nmonth_fixed.fixed_deposit}
