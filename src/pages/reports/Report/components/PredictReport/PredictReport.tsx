@@ -29,6 +29,7 @@ function PredictReport({
   useable,
 }: PredictReportProps) {
   const colors = getColors(selected);
+  const datas = [used, predict, useable];
   return (
     <Stack spacing={3}>
       <Typography fontSize="18px">
@@ -40,18 +41,18 @@ function PredictReport({
 
       <DoughnutChart
         labels={LABELS}
-        datas={[used, predict, useable]}
+        datas={datas}
         bgColors={colors}
         selected={selected}
         setSelected={setSelected}
       />
 
       <Stack>
-        {REPORTTYPE.map((type) => (
+        {REPORTTYPE.map((type, idx) => (
           <PredictReportCard
             month={month}
             type={type}
-            amount={99999999}
+            amount={datas[idx]}
             selected={selected === type.type}
             over={useable === 0}
             setSelected={setSelected}
