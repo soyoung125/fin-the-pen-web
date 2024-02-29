@@ -33,9 +33,11 @@ export const getAmount = (amount: number) => {
   const thousand = amount % 10000;
 
   if (hundredMillion > 0) {
+    if (tenThousand === 0) return `${hundredMillion}억원`;
     return `${hundredMillion}억${` ` + tenThousand.toLocaleString()}만원`;
   }
   if (tenThousand > 0) {
+    if (thousand === 0) return `${tenThousand.toLocaleString()}만원`;
     return `${tenThousand.toLocaleString()}만${
       ` ` + thousand.toLocaleString()
     }원`;

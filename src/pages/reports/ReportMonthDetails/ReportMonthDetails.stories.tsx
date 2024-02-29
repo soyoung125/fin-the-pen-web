@@ -92,7 +92,13 @@ export const PageExample = () => {
         title="카테고리 상세 내역"
       />
       <Stack px="20px" py="24px" gap="24px">
-        <ReportMonthTitle year={year} month={month} onClickMonth={pickMonth} />
+        <ReportMonthTitle
+          year={year}
+          month={month}
+          onClickMonth={pickMonth}
+          goal={100000}
+          spent={10000}
+        />
         <ReportList
           isPending={false}
           reportList={list}

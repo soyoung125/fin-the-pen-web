@@ -1,4 +1,4 @@
-import { Typography, Stack } from "@mui/material";
+import { Typography, Stack, Box } from "@mui/material";
 import ClearRoundedIcon from "@mui/icons-material/ClearRounded";
 import SearchIcon from "@mui/icons-material/Search";
 import TuneRoundedIcon from "@mui/icons-material/TuneRounded";
@@ -27,7 +27,7 @@ function ScheduleListHeader({
 }: ScheduleListHeaderProps) {
   const navigate = useNavigate();
   return (
-    <>
+    <Box bgcolor="#735bf2">
       <HeaderBox>
         <Stack
           direction="row"
@@ -60,7 +60,7 @@ function ScheduleListHeader({
           <TuneRoundedIcon onClick={handleClickFilter} />
         </Stack>
       </HeaderBox>
-    </>
+    </Box>
   );
 }
 

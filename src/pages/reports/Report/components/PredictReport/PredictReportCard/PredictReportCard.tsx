@@ -48,7 +48,7 @@ function PredictReportCard({
         color={over && type.overTitle ? "error" : "inherit"}
         variant="subtitle2"
       >
-        {getAmount(amount)}원
+        {getAmount(amount)}
       </Typography>
     </Stack>
   );

@@ -8,7 +8,7 @@ import SettingsIcon from "@mui/icons-material/Settings";
 import InfoOutlinedIcon from "@mui/icons-material/InfoOutlined";
 import TopNavigationBar from "@components/layouts/common/TopNavigationBar";
 import ReportLayout from "@pages/reports/Report/components/layout/ReportLayout";
-import { Report } from "@app/types/report.ts";
+import { CategoryReport, Report } from "@app/types/report.ts";
 import { generateRandomBubbles2 } from "@pages/reports/Report/components/BubbleChart/utils.ts";
 import BubbleChart from "@pages/reports/Report/components/BubbleChart";
 import { useState } from "react";
@@ -80,10 +80,8 @@ export const PageExample = () => {
     predict,
     useable,
     pickMonth,
-    addMonth,
-    subtractMonth,
   } = useReport();
-  const list: Report[] = [
+  const list: CategoryReport[] = [
     {
       amount: 71000,
       rate: "20",
@@ -170,13 +168,13 @@ export const PageExample = () => {
                     <FixedTransaction
                       title={"고정 수입"}
                       amount={12000000}
-                      month={month}
+                      month={month.toString()}
                       difference={-200000}
                     />
                     <FixedTransaction
                       title={"고정 지출"}
                       amount={579000}
-                      month={month}
+                      month={month.toString()}
                       difference={200000}
                     />
                   </Stack>

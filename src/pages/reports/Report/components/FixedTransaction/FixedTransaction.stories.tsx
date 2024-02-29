@@ -7,7 +7,12 @@ const meta = {
   title: "reports/Report/FixedTransaction",
   component: FixedTransaction,
   tags: ["autodocs"],
-  args: { title: "고정수입", amount: 12000000, month: 5, difference: -200000 },
+  args: {
+    title: "고정수입",
+    amount: 12000000,
+    month: "5",
+    difference: -200000,
+  },
   argTypes: {},
 } satisfies Meta<typeof FixedTransaction>;
 

@@ -18,6 +18,7 @@ function ReportMonthDetails() {
     month,
     pickMonth,
     isPending,
+    report,
     reportList,
     maxPercent,
   } = useReport();
@@ -35,8 +36,15 @@ function ReportMonthDetails() {
         title="카테고리 소비 리포트"
       />
       <Stack px="20px" py="24px" gap="24px">
-        <ReportMonthTitle year={year} month={month} onClickMonth={pickMonth} />
+        <ReportMonthTitle
+          year={year}
+          month={month}
+          onClickMonth={pickMonth}
+          goal={report?.expenseGoalAmount ?? 0}
+          spent={report?.totalSpentToday ?? 0}
+        />
 
+        {/*<>서버 준비 중</>*/}
         <ReportList
           isPending={isPending}
           reportList={reportList}
