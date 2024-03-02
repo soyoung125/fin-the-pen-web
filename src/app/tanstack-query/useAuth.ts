@@ -2,7 +2,7 @@ import { SignIn, User } from "@app/types/auth.ts";
 import { DOMAIN } from "@api/url.ts";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useNavigate } from "react-router-dom";
-import { PATH } from "../../constants/path.ts";
+import { PATH } from "@constants/path.ts";
 import { setSessionStorage } from "@utils/storage.ts";
 import { SESSION_STORAGE_KEY_TOKEN } from "@api/keys.ts";
 import { useDispatch } from "react-redux";
