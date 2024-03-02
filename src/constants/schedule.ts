@@ -4,6 +4,7 @@ import {
   Schedule,
   SchedulePeriod,
   ScheduleRepeat,
+  YearCategory,
 } from "@app/types/schedule.ts";
 
 export const INIT_REPEAT = (date: moment.Moment): ScheduleRepeat => {
@@ -27,6 +28,83 @@ export const INIT_REPEAT = (date: moment.Moment): ScheduleRepeat => {
     },
     kind_type: "none",
   };
+};
+
+export const SCHEDULE_REQUEST = (schedule: Schedule) => {
+  const { value, options } = schedule.repeat_options;
+  const start = moment(schedule.start_date);
+  let repeat = INIT_REPEAT(start);
+
+  switch (schedule.repeat_kind) {
+    case "DAY":
+      repeat = {
+        ...repeat,
+        kind_type: "day",
+        day_type: { repeat_value: value },
+      };
+      break;
+    case "WEEK":
+      repeat = {
+        ...repeat,
+        kind_type: "week",
+        week_type: { repeat_value: value, repeat_day_of_week: options },
+      };
+      break;
+    case "MONTH":
+      repeat = {
+        ...repeat,
+        kind_type: "month",
+        month_type: {
+          repeat_value: value,
+          today_repeat: !options,
+          select_date: options ?? "",
+        },
+      };
+      break;
+    case "YEAR":
+      repeat = {
+        ...repeat,
+        kind_type: "year",
+        year_type: {
+          repeat_value: value,
+          year_repeat: YEAR_REPEAT(schedule.start_date, options as YearCategory)
+            .value,
+          year_category: options as YearCategory,
+        },
+      };
+      break;
+  }
+  return {
+    ...schedule,
+    is_all_day: schedule.all_day,
+    set_amount: schedule.amount,
+    exclusion: schedule.exclude,
+    repeat: repeat,
+  };
+};
+
+export const YEAR_REPEAT = (startDate: string, type: YearCategory) => {
+  const week = ["첫", "두", "세", "네", "다섯", "여섯"];
+  const start = moment(startDate);
+  const month = start.month() + 1;
+  const firstWeek = moment(startDate).startOf("month").week();
+  const thisWeek = month === 12 && start.week() === 1 ? 53 : start.week();
+  const weekIdx = thisWeek - firstWeek;
+
+  switch (type) {
+    case "MonthAndDay":
+      return { label: start.format("MM월 DD일"), value: start.format("MM-DD") };
+    case "NthDayOfMonth":
+      return {
+        label: start.format(`MM월 ${week[weekIdx]}번째 dddd`),
+        value: start.format(`MM월 ${weekIdx + 1}번째 dddd`),
+      };
+    case "LastDayOfMonth":
+      return {
+        label: start.format("MM월 마지막 dddd"),
+        value: start.format("MM월 마지막 dddd"),
+      };
+  }
 };
 
 export const INIT_PERIOD = (date: moment.Moment): SchedulePeriod => {

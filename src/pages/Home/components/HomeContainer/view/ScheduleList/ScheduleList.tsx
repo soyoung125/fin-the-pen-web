@@ -8,7 +8,11 @@ import { Schedule } from "@app/types/schedule.ts";
 import EasyAuthentication from "@components/sign/EasyAuthentication.tsx";
 import { useAppDispatch } from "@redux/hooks.ts";
 import { changeHideBudgetMode } from "@redux/slices/settingSlice.ts";
-import { INIT_PERIOD, INIT_REPEAT } from "@constants/schedule.ts";
+import {
+  INIT_PERIOD,
+  INIT_REPEAT,
+  SCHEDULE_REQUEST,
+} from "@constants/schedule.ts";
 import { useScheduleDrawer } from "@hooks/useScheduleDrawer.tsx";
 
 function ScheduleList() {
@@ -48,14 +52,7 @@ function ScheduleList() {
   const handleModal = (schedule: Schedule) => {
     if (schedule) {
       const start = moment(schedule.start_date); // getMonthSchedule api 수정 후 제거 예정
-      openScheduleDrawer({
-        ...schedule,
-        is_all_day: schedule.all_day,
-        set_amount: schedule.amount,
-        exclusion: schedule.exclude,
-        repeat: INIT_REPEAT(start),
-        period: INIT_PERIOD(start),
-      });
+      openScheduleDrawer(SCHEDULE_REQUEST(schedule));
     }
   };
 

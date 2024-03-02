@@ -11,7 +11,8 @@ export interface Schedule {
   start_time: string;
   end_time: string;
   all_day: boolean;
-  repeat_options: { value: string; options: string };
+  repeat_kind: "NONE" | "DAY" | "WEEK" | "MONTH" | "YEAR";
+  repeat_options: { value: string; options: string | YearCategory };
   period: SchedulePeriod;
   price_type: string;
   amount: string;
@@ -55,10 +56,12 @@ export interface ScheduleRepeat {
   year_type: {
     year_repeat: string;
     repeat_value: string;
-    year_category: "MonthAndDay" | "NthDayOfMonth" | "LastDayOfMonth";
+    year_category: YearCategory; //"MonthAndDay" | "NthDayOfMonth" | "LastDayOfMonth"
   };
   kind_type: "day" | "week" | "month" | "year" | "none";
 }
+
+export type YearCategory = "MonthAndDay" | "NthDayOfMonth" | "LastDayOfMonth";
 
 export interface SchedulePeriod {
   is_repeat_again: boolean;

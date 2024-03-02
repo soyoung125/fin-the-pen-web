@@ -79,14 +79,14 @@ export const useScheduleForm = () => {
       start_time: `0${Math.floor(Math.random() * 9 + 1)}:00`,
       end_time: `2${Math.floor(Math.random() * 4)}:00`,
       category: category.title,
-      all_day: false,
+      is_all_day: false,
       repeat: INIT_REPEAT(date),
       period: INIT_PERIOD(date),
       price_type: getType(category),
-      amount: Math.floor(Math.random() * 1000) * 100,
-      is_fix_amount: false,
+      set_amount: Math.floor(Math.random() * 1000) * 100,
+      fix_amount: false,
       importance: importances[Math.floor(Math.random() * 3)],
-      exclude: Math.floor(Math.random() * 2) === 0,
+      exclusion: Math.floor(Math.random() * 2) === 0,
     };
     dispatch(setDrawerScheduleForm(randomSchedule));
   };
