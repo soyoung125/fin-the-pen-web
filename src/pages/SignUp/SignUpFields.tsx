@@ -24,7 +24,7 @@ function SignUpFields() {
       : setIsSamePassword(false);
 
   const signUp = async (user: SignUp) => {
-    await fetch(`${DOMAIN}/fin-the-pen-web/sign-up`, {
+    await fetch(`${DOMAIN}/sign-up`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
