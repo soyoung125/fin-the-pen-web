@@ -128,7 +128,7 @@ export const handlers = [
     return res(ctx.delay(1000), ctx.status(200), ctx.json(true));
   }),
 
-  rest.post(`${DOMAIN}/report/home`, async (req, res, ctx) => {
+  rest.get(`${DOMAIN}/report/home`, async (req, res, ctx) => {
     const { user_id, date } = await req.json();
     const schedules = getLocalStorage<Schedule[]>(
       LOCAL_STORAGE_KEY_SCHEDULES,
@@ -142,11 +142,42 @@ export const handlers = [
     );
 
     if (monthSchedules.length === 0) {
-      return res(ctx.delay(1000), ctx.status(200), ctx.json({ data: null }));
+      return res(
+        ctx.delay(1000),
+        ctx.status(200),
+        ctx.json({
+          data: {
+            date: date,
+            expenditure_this_month: {
+              last_month_Amount: "0",
+              "1st_month_Amount": "0",
+              goal_amount: "0",
+              result_amount: "0",
+            },
+            availableAmount: "0",
+            expenseGoalAmount: "0",
+            month_report: {
+              current: "0",
+              second_previous: "0",
+              previous: "0",
+            },
+            category_consume_report: "0",
+            Nmonth_fixed: {
+              previous_diff_plus: "0",
+              fixed_deposit: "0",
+              fixed_withdraw: "0",
+              previous_diff_minus: "0",
+              current_month: date,
+              previous_month: "2024-01-29",
+            },
+            totalSpentToday: "0",
+          },
+        })
+      );
     }
 
     const data = {
-      date: "2024-02-02",
+      date: date,
       availableAmount: -440000,
       expenseGoalAmount: 100000,
       totalSpentToday: 540000,
@@ -177,7 +208,7 @@ export const handlers = [
         fixed_deposit: 0,
         fixed_withdraw: 360000,
         previous_diff_minus: "-360000",
-        current_month: "2024-02-02",
+        current_month: date,
         previous_month: "2024-01-02",
       },
       month_report: {

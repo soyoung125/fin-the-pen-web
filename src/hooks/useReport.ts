@@ -6,7 +6,7 @@ import moment from "moment";
 import { useSetGoal } from "@app/tanstack-query/reports/useSetGoal.ts";
 
 const useReport = () => {
-  const [yearMonth, setYearMonth] = useState("2024-02");
+  const [yearMonth, setYearMonth] = useState(moment().format("YYYY-MM"));
   const [year, month] = yearMonth.split("-").map((s) => Number(s));
   const { data: user } = useUser();
   const {
@@ -15,11 +15,14 @@ const useReport = () => {
     isError,
   } = useReports({
     user_id: user?.user_id ?? "",
-    date: `${yearMonth}-${moment().date()}`,
+    date: `${yearMonth}-${moment().format("DD")}`,
   });
   const { openMonthPicker } = useDatePicker();
   const { setGoal } = useSetGoal();
-  const reportList = report?.category_consume_report;
+  const reportList =
+    report?.category_consume_report === "0"
+      ? []
+      : report?.category_consume_report;
 
   const maxPercent = Math.max(
     ...(reportList?.map((l) => parseFloat(l.rate)) ?? [])

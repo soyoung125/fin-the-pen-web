@@ -11,7 +11,7 @@ import { QUERY_KEY_USER } from "@constants/queryKeys.ts";
 import { useDialog } from "@hooks/dialog/useDialog.tsx";
 
 const fetchSignIn = async (credentials: SignIn) => {
-  return fetch(`${DOMAIN}/fin-the-pen-web/sign-in`, {
+  return fetch(`${DOMAIN}/sign-in`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",

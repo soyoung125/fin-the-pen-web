@@ -20,10 +20,13 @@ import PredictReport from "@pages/reports/Report/components/PredictReport";
 import { useState } from "react";
 
 function Report() {
-  const { year, month, report, isPending, isError, pickMonth } = useReport();
+  const { year, month, report, reportList, isPending, isError, pickMonth } =
+    useReport();
   useHeader(true, HEADER_MODE.analysis);
   const { openModal, closeModal } = useModal();
   const [selected, setSelected] = useState("used");
+  console.log(1, !report?.date);
+  console.log(2, report);
 
   const handleClickAccountInfo = () => {
     openModal({
@@ -35,7 +38,7 @@ function Report() {
   if (isPending) {
     return <>loading</>;
   }
-  if (!report || isError) {
+  if (!report?.date || isError) {
     return <>소비 데이터가 없습니다.</>;
   }
 
@@ -44,21 +47,21 @@ function Report() {
       <ReportTitle
         year={year}
         month={month}
-        amount={report.totalSpentToday}
+        amount={Number(report.totalSpentToday)}
         pickMonth={pickMonth}
       />
       <Stack direction="row" gap="10px">
         <PredictBox
           title="이번 달 목표 지출"
           titleIcon={<AccountBalanceWalletIcon sx={{ fontSize: "28px" }} />}
-          amount={report.expenseGoalAmount}
+          amount={Number(report.expenseGoalAmount)}
           // navigateIcon={<SettingsIcon />}
           // handleClick={handleClickAccountSetting}
         />
         <PredictBox
           title="사용 가능 금액"
           titleIcon={<InfoOutlinedIcon sx={{ fontSize: "28px" }} />}
-          amount={Math.abs(report.availableAmount)}
+          amount={Math.abs(Number(report.availableAmount))}
           navigateIcon={<InfoOutlinedIcon sx={{ fontSize: "20px" }} />}
           handleClick={handleClickAccountInfo}
         />
@@ -69,9 +72,7 @@ function Report() {
             title="월간 소비 리포트"
             navigateTo={PATH.reportMonthDetail}
             content={
-              <BubbleChart
-                bubbles={generateRandomBubbles2(report.category_consume_report)}
-              />
+              <BubbleChart bubbles={generateRandomBubbles2(reportList)} />
             }
           />
         }
@@ -86,10 +87,14 @@ function Report() {
                   selected={selected}
                   setSelected={setSelected}
                   month={month}
-                  goal={report.expenditure_this_month.goal_amount}
-                  predict={report.expenditure_this_month.last_month_Amount}
-                  used={report.expenditure_this_month["1st_month_Amount"]}
-                  useable={report.expenditure_this_month.result_amount}
+                  goal={Number(report.expenditure_this_month.goal_amount)}
+                  predict={Number(
+                    report.expenditure_this_month.last_month_Amount
+                  )}
+                  used={Number(
+                    report.expenditure_this_month["1st_month_Amount"]
+                  )}
+                  useable={Number(report.expenditure_this_month.result_amount)}
                 />
               }
             />
@@ -99,7 +104,7 @@ function Report() {
                 <Stack spacing={1.5} pt={3}>
                   <FixedTransaction
                     title={"고정 수입"}
-                    amount={report.Nmonth_fixed.fixed_deposit}
+                    amount={Number(report.Nmonth_fixed.fixed_deposit)}
                     month={moment(report.Nmonth_fixed.previous_month).format(
                       "M"
                     )}
@@ -107,7 +112,7 @@ function Report() {
                   />
                   <FixedTransaction
                     title={"고정 지출"}
-                    amount={report.Nmonth_fixed.fixed_withdraw}
+                    amount={Number(report.Nmonth_fixed.fixed_withdraw)}
                     month={moment(report.Nmonth_fixed.previous_month).format(
                       "M"
                     )}
