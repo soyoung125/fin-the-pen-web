@@ -30,6 +30,9 @@ function PredictReport({
 }: PredictReportProps) {
   const colors = getColors(selected);
   const datas = [used, predict, useable];
+
+  if (datas.reduce((a, b) => a + b, 0) === 0)
+    return <>소비 데이터가 존재하지 않습니다.</>;
   return (
     <Stack spacing={3}>
       <Typography fontSize="18px">

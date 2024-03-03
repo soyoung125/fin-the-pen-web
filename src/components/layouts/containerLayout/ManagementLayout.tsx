@@ -26,8 +26,6 @@ function ManagementLayout() {
     setManagement(
       assetManagements.findIndex((s) => s.path === location.pathname)
     );
-    // changeBackAction(() => () => navigate(-1));
-    navigate(-1);
     dispatch(changeHeaderTitle(""));
   }, []);
 

@@ -17,6 +17,8 @@ export interface BubbleChartProps {
 }
 
 function BubbleChart({ bubbles, isBordered }: BubbleChartProps) {
+  if (bubbles.length === 0) return <>소비 데이터가 존재하지 않습니다.</>;
+
   return (
     <BubbleChartContainer $isBordered={isBordered}>
       {bubbles.map((bubble, index) => (
