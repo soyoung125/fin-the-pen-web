@@ -41,7 +41,6 @@ function Home() {
   const labels = ["월 별", "주 별", "일 별"];
   const [value, setValue] = useState(0);
   const [show, setShow] = useState(false);
-  console.log(monthData);
 
   const handleChangeShow = () => setShow((prevState) => !prevState);
   const handleChangeTab = (event: SyntheticEvent, newValue: number) => {

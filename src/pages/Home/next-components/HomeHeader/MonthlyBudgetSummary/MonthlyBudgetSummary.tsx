@@ -31,7 +31,7 @@ function MonthlyBudgetSummary({
     <SummaryContainer>
       <SummaryItem>
         {budgetList.map(({ title, amount }) => (
-          <SummaryCard title={title} amount={amount} />
+          <SummaryCard key={title} title={title} amount={amount} />
         ))}
       </SummaryItem>
 

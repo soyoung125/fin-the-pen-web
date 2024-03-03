@@ -8,7 +8,6 @@ function ExclusionInput() {
   const exclusion = Boolean(scheduleForm?.exclusion);
 
   const changeExclusion = () => {
-    console.log(exclusion);
     updateExclusion(!exclusion);
   };
 

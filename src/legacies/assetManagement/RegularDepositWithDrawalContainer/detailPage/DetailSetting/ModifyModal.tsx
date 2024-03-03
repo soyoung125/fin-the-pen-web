@@ -39,7 +39,6 @@ function ModifyModal({
   const type = data.price_type === "+" ? "+" : "-";
   const typeContent = REGULAR_DEPOSIT_WITHDRAWAL_TYPE[type];
   const [form, setForm] = useState(data);
-  console.log(form);
 
   const changeDetailInfo = (state: React.ChangeEvent<HTMLInputElement>) => {
     setForm({ ...form, [state.target.id]: state.target.value });

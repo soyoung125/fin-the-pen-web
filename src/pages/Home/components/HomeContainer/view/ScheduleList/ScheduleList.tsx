@@ -51,7 +51,6 @@ function ScheduleList() {
 
   const handleModal = (schedule: Schedule) => {
     if (schedule) {
-      const start = moment(schedule.start_date); // getMonthSchedule api 수정 후 제거 예정
       openScheduleDrawer(SCHEDULE_REQUEST(schedule));
     }
   };

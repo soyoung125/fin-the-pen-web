@@ -22,7 +22,7 @@ function MenuTab({ labels, value, handleChange }: MenuTabProps) {
       sx={{ px: "20px" }}
     >
       {labels.map((label) => (
-        <Tab label={label} />
+        <Tab key={label} label={label} />
       ))}
     </Tabs>
   );
