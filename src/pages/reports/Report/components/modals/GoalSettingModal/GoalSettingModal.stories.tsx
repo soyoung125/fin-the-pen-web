@@ -7,12 +7,7 @@ export const Example = () => {
   const { openModal, closeModal } = useModal();
   const handleClickableBackdropModalOpen = () => {
     openModal({
-      modalElement: (
-        <GoalSettingModal
-          closeModal={closeModal}
-          handleSubmit={(v) => alert(v)}
-        />
-      ),
+      modalElement: <GoalSettingModal closeModal={closeModal} />,
       isBackdropClickable: true,
     });
   };
