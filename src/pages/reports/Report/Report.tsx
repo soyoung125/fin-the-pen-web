@@ -1,5 +1,6 @@
 import ReportTitle from "@pages/reports/Report/components/ReportTitle";
 import { Stack } from "@mui/material";
+import SettingsIcon from "@mui/icons-material/Settings";
 import PredictBox from "@pages/reports/Report/components/PredictBox";
 import AccountBalanceWalletIcon from "@mui/icons-material/AccountBalanceWallet";
 import InfoOutlinedIcon from "@mui/icons-material/InfoOutlined";
@@ -18,6 +19,8 @@ import { generateRandomBubbles2 } from "@pages/reports/Report/components/BubbleC
 import BubbleChart from "@pages/reports/Report/components/BubbleChart";
 import PredictReport from "@pages/reports/Report/components/PredictReport";
 import { useState } from "react";
+import GoalSettingModal from "@pages/reports/Report/components/modals/GoalSettingModal";
+import { useNavigate } from "react-router-dom";
 
 function Report() {
   const { year, month, report, reportList, isPending, isError, pickMonth } =
@@ -25,12 +28,26 @@ function Report() {
   useHeader(true, HEADER_MODE.analysis);
   const { openModal, closeModal } = useModal();
   const [selected, setSelected] = useState("used");
-  console.log(1, !report?.date);
-  console.log(2, report);
+  const navigate = useNavigate();
 
   const handleClickAccountInfo = () => {
     openModal({
       modalElement: <UseableInfoModal closeModal={closeModal} />,
+      isBackdropClickable: true,
+    });
+  };
+
+  const handleClickAccountSetting = () => {
+    openModal({
+      modalElement: (
+        <GoalSettingModal
+          closeModal={closeModal}
+          navigateTo={() => {
+            closeModal();
+            navigate(PATH.savingsGoal);
+          }}
+        />
+      ),
       isBackdropClickable: true,
     });
   };
@@ -55,8 +72,8 @@ function Report() {
           title="이번 달 목표 지출"
           titleIcon={<AccountBalanceWalletIcon sx={{ fontSize: "28px" }} />}
           amount={Number(report.expenseGoalAmount)}
-          // navigateIcon={<SettingsIcon />}
-          // handleClick={handleClickAccountSetting}
+          navigateIcon={<SettingsIcon />}
+          handleClick={handleClickAccountSetting}
         />
         <PredictBox
           title="사용 가능 금액"
