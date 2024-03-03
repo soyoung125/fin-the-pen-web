@@ -40,8 +40,8 @@ function ReportMonthDetails() {
           year={year}
           month={month}
           onClickMonth={pickMonth}
-          goal={report?.expenseGoalAmount ?? 0}
-          spent={report?.totalSpentToday ?? 0}
+          goal={Number(report?.expenseGoalAmount)}
+          spent={Number(report?.totalSpentToday)}
         />
 
         {/*<>서버 준비 중</>*/}

@@ -49,10 +49,10 @@ export const generateRandomBubbles = (
   return generatedBubbles;
 };
 
-export const generateRandomBubbles2 = (bubbleItems: CategoryReport[]) => {
+export const generateRandomBubbles2 = (bubbleItems?: CategoryReport[]) => {
   const generatedBubbles: Bubble[] = [];
 
-  bubbleItems.forEach((bubbleItem, index) => {
+  bubbleItems?.forEach((bubbleItem, index) => {
     const bubbleTemplate = bubble[index];
 
     const { background, color, r, x, y } = bubbleTemplate;

@@ -8,14 +8,15 @@ import { Report } from "@app/types/report.ts";
 
 const fetchReport = async (query: MonthScheduleQuery) => {
   const token = getSessionStorage(SESSION_STORAGE_KEY_TOKEN, "");
+  const { date, user_id } = query;
 
-  return fetch(`${DOMAIN}/report/home`, {
-    method: "POST",
+  return fetch(`${DOMAIN}/report/month?date=${date}&user_id=${user_id}`, {
+    method: "GET",
     headers: {
       "Content-Type": "application/json",
       Authorization: "Bearer " + token,
     },
-    body: JSON.stringify(query),
+    // body: JSON.stringify(query),
   }).then<Report>(async (res) => {
     return res.json();
   });
