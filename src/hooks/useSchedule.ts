@@ -4,7 +4,7 @@ import {
   selectMonth,
   setDrawerScheduleForm,
 } from "@redux/slices/scheduleSlice.tsx";
-import { RequestSchedule, Schedule } from "@app/types/schedule.ts";
+import { RequestSchedule } from "@app/types/schedule.ts";
 import { useAppDispatch } from "@redux/hooks.ts";
 import moment from "moment/moment";
 import { v4 as uuidv4 } from "uuid";

@@ -1,7 +1,7 @@
 import { SCHEDULE_DRAWER_MODE, VIEW_MODE } from "@constants/schedule.ts";
 import { UpdateStateInterface } from "./common.ts";
 
-export interface Schedule {
+interface ScheduleBase {
   schedule_id?: string;
   user_id?: string;
   event_name: string;
@@ -10,33 +10,25 @@ export interface Schedule {
   end_date: string;
   start_time: string;
   end_time: string;
+  period: SchedulePeriod;
+  price_type: string;
+  importance: string;
+}
+
+export interface Schedule extends ScheduleBase {
   all_day: boolean;
   repeat_kind: "NONE" | "DAY" | "WEEK" | "MONTH" | "YEAR";
   repeat_options: { value: string; options: string | YearCategory };
-  period: SchedulePeriod;
-  price_type: string;
   amount: string;
   fix_amount: boolean;
-  importance: string;
   exclude: boolean;
 }
 
-export interface RequestSchedule {
-  schedule_id?: string;
-  user_id?: string;
-  event_name: string;
-  category: string;
-  start_date: string;
-  end_date: string;
-  start_time: string;
-  end_time: string;
+export interface RequestSchedule extends ScheduleBase {
   is_all_day: boolean;
   repeat: ScheduleRepeat;
-  period: SchedulePeriod;
-  price_type: string;
   set_amount: string;
   fix_amount: boolean;
-  importance: string;
   exclusion: boolean;
 }
 
@@ -87,6 +79,12 @@ export interface MonthScheduleQuery {
   date: string;
 }
 
+export interface HomeMonthQuery {
+  user_id: string;
+  main_month: string;
+  calendar_date: string;
+}
+
 export interface RepeatTypeProps {
   repeatType: string;
 }
@@ -96,3 +94,14 @@ export interface RepeatOptionProps {
 }
 
 export interface RepeatProps extends RepeatTypeProps, RepeatOptionProps {}
+
+export interface TodaySchedule extends Omit<Schedule, "schedule_id"> {
+  id: string;
+}
+
+export interface MonthSchedule {
+  income: string;
+  available: string;
+  today_schedule: TodaySchedule[];
+  expense: string;
+}

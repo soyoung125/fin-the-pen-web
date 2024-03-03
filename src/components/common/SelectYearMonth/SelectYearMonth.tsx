@@ -27,7 +27,7 @@ function SelectYearMonth({
     >
       <ArrowBackIosRoundedIcon onClick={lastMonth} fontSize={"small"} />
       <Stack direction="row" alignItems="center" onClick={changeYearAndMonth}>
-        <Typography variant="h2">{`${year}년 ${month}월`}</Typography>
+        <Typography variant="h4">{`${year}년 ${month}월`}</Typography>
         <ExpandMoreRoundedIcon />
       </Stack>
       <ArrowForwardIosRoundedIcon onClick={nextMonth} fontSize={"small"} />

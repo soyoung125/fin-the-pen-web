@@ -3,6 +3,7 @@ import styled from "@emotion/styled";
 export const SummaryContainer = styled.div`
   border-radius: 12px;
   overflow: hidden;
+  margin: 24px 16px;
 `;
 
 export const SummaryItem = styled.div<{
