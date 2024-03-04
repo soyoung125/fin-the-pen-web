@@ -17,7 +17,7 @@ const fetchDaySchedules = async (query: HomeQuery) => {
     body: JSON.stringify(query),
   }).then<DaySchedule>(async (res) => {
     if (!res.ok) {
-      throw new Error("Network response was not ok");
+      return init_data;
     }
     return res.json();
   });
@@ -28,4 +28,12 @@ export const useDaySchedules = (query: HomeQuery) => {
     queryKey: [QUERY_KEY_DAY, query.calendar_date],
     queryFn: () => fetchDaySchedules(query),
   });
+};
+
+const init_data = {
+  income: "0",
+  expect: "0",
+  dayExpense: "0",
+  schedule_count: 0,
+  available: "0",
 };

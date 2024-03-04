@@ -3,7 +3,11 @@ import { DOMAIN } from "@api/url.ts";
 import { getSessionStorage } from "@utils/storage.ts";
 import { QUERY_KEY_SCHEDULES } from "@constants/queryKeys.ts";
 import { useQuery } from "@tanstack/react-query";
-import { HomeQuery, MonthSchedule } from "@app/types/schedule.ts";
+import {
+  HomeQuery,
+  MonthSchedule,
+  TodaySchedule,
+} from "@app/types/schedule.ts";
 
 const fetchMonthSchedules = async (query: HomeQuery) => {
   const token = getSessionStorage(SESSION_STORAGE_KEY_TOKEN, "");
@@ -16,6 +20,9 @@ const fetchMonthSchedules = async (query: HomeQuery) => {
     },
     body: JSON.stringify(query),
   }).then<MonthSchedule>(async (res) => {
+    if (!res.ok) {
+      return init_data;
+    }
     return res.json();
   });
 };
@@ -25,4 +32,11 @@ export const useMonthSchedules = (query: HomeQuery) => {
     queryKey: [QUERY_KEY_SCHEDULES, query.calendar_date],
     queryFn: () => fetchMonthSchedules(query),
   });
+};
+
+const init_data = {
+  income: "0",
+  available: "0",
+  today_schedule: [],
+  expense: "0",
 };
