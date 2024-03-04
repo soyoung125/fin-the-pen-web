@@ -8,6 +8,7 @@ import ScheduleList from "@pages/Home/next-components/ScheduleList";
 import { useState } from "react";
 import useMonthSchedule from "@hooks/home/useMonthSchedule.ts";
 import MonthlyBudgetSummarySkeleton from "@pages/Home/next-components/HomeHeader/MonthlyBudgetSummary/MonthlyBudgetSummarySkeleton.tsx";
+import CalendarHeaderSkeleton from "@pages/Home/next-components/ScheduleCalendar/CalendarHeader/CalendarHeaderSkeleton.tsx";
 
 function MonthSchedulePage() {
   const { date, monthData, isError, isPending, changeDate } =
@@ -16,7 +17,15 @@ function MonthSchedulePage() {
   const showPredict = moment().isSameOrBefore(date, "month");
 
   if (isPending) {
-    return <MonthlyBudgetSummarySkeleton showPredict={showPredict} />;
+    return (
+      <>
+        <MonthlyBudgetSummarySkeleton showPredict={showPredict} />
+        <ThickDivider />
+        <CalendarHeaderSkeleton date={date} />
+        <Calendar value={date} handleChange={changeDate} />
+        <ThickDivider />
+      </>
+    );
   }
 
   return (
@@ -40,12 +49,6 @@ function MonthSchedulePage() {
       <Calendar value={date} handleChange={changeDate} />
 
       <ThickDivider />
-
-      {/*<ScheduleHeader*/}
-      {/*  show={show}*/}
-      {/*  handleChange={handleChangeShow}*/}
-      {/*  isToday={moment().isSame(date, "date")}*/}
-      {/*/>*/}
 
       <ScheduleList
         date={date}
