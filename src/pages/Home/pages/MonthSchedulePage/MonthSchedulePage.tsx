@@ -2,10 +2,8 @@ import MonthlyBudgetSummary from "@pages/Home/next-components/HomeHeader/Monthly
 import ThickDivider from "@components/common/ThickDivider.tsx";
 import CalendarHeader from "@pages/Home/next-components/ScheduleCalendar/CalendarHeader";
 import Calendar from "@pages/Home/next-components/ScheduleCalendar/Calendar";
-import ScheduleHeader from "@pages/Home/next-components/ScheduleList/ScheduleHeader";
 import moment from "moment/moment";
 import ScheduleList from "@pages/Home/next-components/ScheduleList";
-import { useState } from "react";
 import useMonthSchedule from "@hooks/home/useMonthSchedule.ts";
 import MonthlyBudgetSummarySkeleton from "@pages/Home/next-components/HomeHeader/MonthlyBudgetSummary/MonthlyBudgetSummarySkeleton.tsx";
 import CalendarHeaderSkeleton from "@pages/Home/next-components/ScheduleCalendar/CalendarHeader/CalendarHeaderSkeleton.tsx";
