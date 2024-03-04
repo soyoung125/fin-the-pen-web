@@ -13,7 +13,7 @@ export const Example = () => {
   };
 
   const handleDayPicker = async () => {
-    const newDate = await openDayPicker();
+    const newDate = await openDayPicker("2021-10-11");
     if (!newDate) return;
     setValue(newDate);
   };

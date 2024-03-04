@@ -4,16 +4,14 @@ import ArrowForwardIosRoundedIcon from "@mui/icons-material/ArrowForwardIosRound
 import ExpandMoreRoundedIcon from "@mui/icons-material/ExpandMoreRounded";
 
 export interface SelectYearMonthProps {
-  year: number;
-  month: number;
+  date: string;
   lastMonth: () => void;
   nextMonth: () => void;
   changeYearAndMonth?: () => void;
 }
 
 function SelectYearMonth({
-  year,
-  month,
+  date,
   lastMonth,
   nextMonth,
   changeYearAndMonth,
@@ -27,7 +25,7 @@ function SelectYearMonth({
     >
       <ArrowBackIosRoundedIcon onClick={lastMonth} fontSize={"small"} />
       <Stack direction="row" alignItems="center" onClick={changeYearAndMonth}>
-        <Typography variant="h4">{`${year}년 ${month}월`}</Typography>
+        <Typography variant="h4">{date}</Typography>
         <ExpandMoreRoundedIcon />
       </Stack>
       <ArrowForwardIosRoundedIcon onClick={nextMonth} fontSize={"small"} />

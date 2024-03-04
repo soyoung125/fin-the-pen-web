@@ -9,10 +9,15 @@ import Modal from "@hooks/modal/Modal.tsx";
 export interface DatePickerProps {
   onClickApprove: (answer: string) => void;
   onClickReject: (answer: string) => void;
+  defaultDate: string;
 }
 
-function DatePicker({ onClickApprove, onClickReject }: DatePickerProps) {
-  const [value, setValue] = useState(moment().format("YYYY-MM-DD"));
+function DatePicker({
+  onClickApprove,
+  onClickReject,
+  defaultDate,
+}: DatePickerProps) {
+  const [value, setValue] = useState(defaultDate);
   return (
     <Modal>
       <Stack p="10px">

@@ -16,17 +16,7 @@ const useHome = () => {
   const date = useSelector(selectDate);
   const month = useSelector(selectMonth);
 
-  const { data: user } = useUser();
-  const { openMonthPicker } = useDatePicker();
-  const {
-    data: monthData,
-    isPending,
-    isError,
-  } = useMonthSchedules({
-    user_id: user?.user_id ?? "",
-    main_month: month,
-    calendar_date: date,
-  });
+  const { openMonthPicker, openDayPicker } = useDatePicker();
 
   const addMonth = () => {
     dispatch(
@@ -40,23 +30,38 @@ const useHome = () => {
     );
   };
 
+  const addDay = () => {
+    dispatch(setSelectedDate(moment(date).add(1, "day").format("YYYY-MM-DD")));
+  };
+
+  const subtractDay = () => {
+    dispatch(
+      setSelectedDate(moment(date).subtract(1, "day").format("YYYY-MM-DD"))
+    );
+  };
+
   const pickMonth = async () => {
     const newMonth = await openMonthPicker(moment(date).format("YYYY-MM"));
     dispatch(setSelectedDate(newMonth.format("YYYY-MM-DD")));
+  };
+
+  const pickDay = async () => {
+    const newDay = await openDayPicker(date);
+    dispatch(setSelectedDate(newDay));
   };
 
   const changeDate = (value: moment.Moment | null) =>
     value && dispatch(setSelectedDate(value.format("YYYY-MM-DD")));
 
   return {
-    monthData,
-    isPending,
-    isError,
     date,
     month,
     addMonth,
     subtractMonth,
+    addDay,
+    subtractDay,
     pickMonth,
+    pickDay,
     changeDate,
   };
 };

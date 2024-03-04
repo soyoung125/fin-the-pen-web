@@ -29,12 +29,13 @@ function InputDateTime({ date, time, type, showError }: InputDateTimeProps) {
   };
 
   const onClickDateField = async () => {
-    const date = await openDayPicker();
-    if (date) {
+    if (!date) return;
+    const newDate = await openDayPicker(date);
+    if (newDate) {
       changeSchedule({
         target: {
           id: type + "_date",
-          value: date,
+          value: newDate,
         },
       });
     }

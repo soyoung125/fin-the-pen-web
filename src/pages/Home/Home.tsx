@@ -21,7 +21,15 @@ import DaySchedulePage from "@pages/Home/pages/DaySchedulePage/DaySchedulePage.t
 function Home() {
   const dispatch = useAppDispatch();
   const isHideBudgetMode = useAppSelector(selectIsBudgetHidden);
-  const { date, subtractMonth, addMonth, pickMonth } = useHome();
+  const {
+    date,
+    subtractMonth,
+    addMonth,
+    pickMonth,
+    addDay,
+    subtractDay,
+    pickDay,
+  } = useHome();
   const labels = ["월 별", "주 별", "일 별"];
   const [value, setValue] = useState(0);
   const [swiper, setSwiper] = useState<SwiperType>();
@@ -43,13 +51,21 @@ function Home() {
   return (
     <>
       <Box my={1} mx={2.5}>
-        <SelectYearMonth
-          year={moment(date).year()}
-          month={moment(date).month() + 1}
-          lastMonth={subtractMonth}
-          nextMonth={addMonth}
-          changeYearAndMonth={pickMonth}
-        />
+        {value === 2 ? (
+          <SelectYearMonth
+            date={moment(date).format("YYYY년 M월 D일")}
+            lastMonth={subtractDay}
+            nextMonth={addDay}
+            changeYearAndMonth={pickDay}
+          />
+        ) : (
+          <SelectYearMonth
+            date={moment(date).format("YYYY년 M월")}
+            lastMonth={subtractMonth}
+            nextMonth={addMonth}
+            changeYearAndMonth={pickMonth}
+          />
+        )}
       </Box>
 
       <MenuTab labels={labels} value={value} handleChange={handleChangeTab} />

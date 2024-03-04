@@ -51,8 +51,7 @@ function ScheduleListHeader({
           alignItems="center"
         >
           <SelectYearMonth
-            year={year}
-            month={month}
+            date={`${year}년 ${month}월`}
             lastMonth={subtractMonth}
             nextMonth={addMonth}
             changeYearAndMonth={changeMonth}

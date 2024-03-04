@@ -11,8 +11,7 @@ const meta = {
   component: SelectYearMonth,
   tags: ["autodocs"],
   args: {
-    year: 2023,
-    month: 5,
+    date: "2023년 5월",
     lastMonth: () => alert("last month"),
     nextMonth: () => alert("next month"),
   },
@@ -60,8 +59,7 @@ export const Example = () => {
 
   return (
     <SelectYearMonth
-      year={year}
-      month={month}
+      date={`${year}년 ${month}월`}
       lastMonth={subtractMonth}
       nextMonth={addMonth}
       changeYearAndMonth={pickMonth}
