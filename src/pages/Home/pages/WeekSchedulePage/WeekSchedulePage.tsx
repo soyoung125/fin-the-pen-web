@@ -9,6 +9,7 @@ function WeekSchedulePage() {
   const { date, weekData, isError, isPending } = useWeekSchedule();
   const weeks = Array.from({ length: 6 }, (_, i) => (i + 1).toString());
   const isThisMonth = moment().isSame(date, "month");
+  const showPredict = moment().isSameOrBefore(date, "month");
 
   if (isError) return <>no data</>;
 
@@ -18,6 +19,7 @@ function WeekSchedulePage() {
         income={parseInt(weekData?.income ?? "")}
         expenditure={parseInt(weekData?.expense ?? "")}
         availableAmount={parseInt(weekData?.available ?? "")}
+        showPredict={showPredict}
       />
 
       <ThickDivider />

@@ -12,10 +12,7 @@ function MonthSchedulePage() {
   const { date, monthData, isError, isPending, changeDate } =
     useMonthSchedule();
   const TodaySchedules = monthData?.today_schedule ?? [];
-
-  const [show, setShow] = useState(false);
-
-  const handleChangeShow = () => setShow((prevState) => !prevState);
+  const showPredict = moment().isSameOrBefore(date, "month");
 
   return (
     <>
@@ -23,6 +20,7 @@ function MonthSchedulePage() {
         income={parseInt(monthData?.income ?? "")}
         expenditure={parseInt(monthData?.expense ?? "")}
         availableAmount={parseInt(monthData?.available ?? "")}
+        showPredict={showPredict}
       />
 
       <ThickDivider />
