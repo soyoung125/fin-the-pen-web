@@ -2,7 +2,6 @@ import useDaySchedule from "@hooks/home/useDaySchedule.ts";
 import MonthlyBudgetSummary from "@pages/Home/next-components/HomeHeader/MonthlyBudgetSummary";
 import ThickDivider from "@components/common/ThickDivider.tsx";
 import useSchedule from "@hooks/useSchedule.ts";
-import ConsumptionCard from "@components/ScheduleList/ConsumptionCard";
 import CalendarHeader from "@pages/Home/next-components/ScheduleCalendar/CalendarHeader";
 import moment from "moment";
 import MonthlyBudgetSummarySkeleton from "@pages/Home/next-components/HomeHeader/MonthlyBudgetSummary/MonthlyBudgetSummarySkeleton.tsx";
