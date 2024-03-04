@@ -7,12 +7,17 @@ import moment from "moment/moment";
 import ScheduleList from "@pages/Home/next-components/ScheduleList";
 import { useState } from "react";
 import useMonthSchedule from "@hooks/home/useMonthSchedule.ts";
+import MonthlyBudgetSummarySkeleton from "@pages/Home/next-components/HomeHeader/MonthlyBudgetSummary/MonthlyBudgetSummarySkeleton.tsx";
 
 function MonthSchedulePage() {
   const { date, monthData, isError, isPending, changeDate } =
     useMonthSchedule();
   const TodaySchedules = monthData?.today_schedule ?? [];
   const showPredict = moment().isSameOrBefore(date, "month");
+
+  if (isPending) {
+    return <MonthlyBudgetSummarySkeleton showPredict={showPredict} />;
+  }
 
   return (
     <>

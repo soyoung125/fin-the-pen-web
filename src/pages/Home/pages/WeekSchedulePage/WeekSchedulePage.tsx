@@ -4,6 +4,7 @@ import CalendarHeader from "@pages/Home/next-components/ScheduleCalendar/Calenda
 import useWeekSchedule from "@hooks/home/useWeekSchedule.ts";
 import WeeklyCard from "@pages/Home/pages/WeekSchedulePage/components/WeeklyCard";
 import moment from "moment/moment";
+import MonthlyBudgetSummarySkeleton from "@pages/Home/next-components/HomeHeader/MonthlyBudgetSummary/MonthlyBudgetSummarySkeleton.tsx";
 
 function WeekSchedulePage() {
   const { date, weekData, isError, isPending } = useWeekSchedule();
@@ -11,7 +12,9 @@ function WeekSchedulePage() {
   const isThisMonth = moment().isSame(date, "month");
   const showPredict = moment().isSameOrBefore(date, "month");
 
-  if (isError) return <>no data</>;
+  if (isPending) {
+    return <MonthlyBudgetSummarySkeleton showPredict={showPredict} />;
+  }
 
   return (
     <>
