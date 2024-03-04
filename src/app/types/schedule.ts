@@ -79,7 +79,7 @@ export interface MonthScheduleQuery {
   date: string;
 }
 
-export interface HomeMonthQuery {
+export interface HomeQuery {
   user_id: string;
   main_month: string;
   calendar_date: string;
@@ -104,4 +104,23 @@ export interface MonthSchedule {
   available: string;
   today_schedule: TodaySchedule[];
   expense: string;
+}
+
+export type WeekSchedule = {
+  [key: string]: WeeklySchedule;
+} & {
+  income: string;
+  available: string;
+  expense: string;
+};
+
+export interface WeeklySchedule {
+  // 몇번째 주차인지
+  week_of_number: "1주차" | "2주차" | "3주차" | "4주차" | "5주차" | "6주차";
+  // 해당 주차의 기간
+  period: string;
+  // 해당 주의 수입
+  plus: number;
+  // 해당 주의 지출
+  minus: number;
 }
