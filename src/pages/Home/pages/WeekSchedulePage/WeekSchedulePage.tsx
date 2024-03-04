@@ -5,6 +5,7 @@ import useWeekSchedule from "@hooks/home/useWeekSchedule.ts";
 import WeeklyCard from "@pages/Home/pages/WeekSchedulePage/components/WeeklyCard";
 import moment from "moment/moment";
 import MonthlyBudgetSummarySkeleton from "@pages/Home/next-components/HomeHeader/MonthlyBudgetSummary/MonthlyBudgetSummarySkeleton.tsx";
+import WeeklyCardSkeleton from "@pages/Home/pages/WeekSchedulePage/components/WeeklyCard/WeeklyCardSkeleton.tsx";
 
 function WeekSchedulePage() {
   const { date, weekData, isError, isPending } = useWeekSchedule();
@@ -13,7 +14,15 @@ function WeekSchedulePage() {
   const showPredict = moment().isSameOrBefore(date, "month");
 
   if (isPending) {
-    return <MonthlyBudgetSummarySkeleton showPredict={showPredict} />;
+    return (
+      <>
+        <MonthlyBudgetSummarySkeleton showPredict={showPredict} />{" "}
+        <ThickDivider />
+        {weeks.map((w) => (
+          <WeeklyCardSkeleton week={w} />
+        ))}
+      </>
+    );
   }
 
   return (
