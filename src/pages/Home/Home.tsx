@@ -8,12 +8,13 @@ import { useAppDispatch, useAppSelector } from "@redux/hooks.ts";
 import { selectIsBudgetHidden } from "@redux/slices/settingSlice.ts";
 import { HEADER_MODE } from "@app/types/common.ts";
 import SelectYearMonth from "@components/common/SelectYearMonth";
-import useSchedule from "@hooks/useSchedule.ts";
 import moment from "moment";
 import MenuTab from "@pages/Home/next-components/HomeHeader/MenuTab";
 import useHome from "@hooks/useHome.ts";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Swiper as SwiperType } from "swiper/types";
+import "swiper/css";
+import "./style.css";
 import WeekSchedulePage from "@pages/Home/pages/WeekSchedulePage/WeekSchedulePage.tsx";
 import MonthSchedulePage from "@pages/Home/pages/MonthSchedulePage/MonthSchedulePage.tsx";
 import DaySchedulePage from "@pages/Home/pages/DaySchedulePage/DaySchedulePage.tsx";
@@ -73,6 +74,7 @@ function Home() {
       <Swiper
         className="mySwiper"
         spaceBetween={50}
+        autoHeight={true}
         onSlideChange={(e) => setValue(e.activeIndex)}
         onSwiper={(swiper) => setSwiper(swiper)}
       >
