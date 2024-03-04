@@ -7,6 +7,7 @@ import CalendarHeader from "@pages/Home/next-components/ScheduleCalendar/Calenda
 import moment from "moment";
 import MonthlyBudgetSummarySkeleton from "@pages/Home/next-components/HomeHeader/MonthlyBudgetSummary/MonthlyBudgetSummarySkeleton.tsx";
 import CalendarHeaderSkeleton from "@pages/Home/next-components/ScheduleCalendar/CalendarHeader/CalendarHeaderSkeleton.tsx";
+import ScheduleList from "@pages/Home/next-components/ScheduleList";
 
 function DaySchedulePage() {
   const { date, dayData, isError, isPending } = useDaySchedule();
@@ -49,18 +50,24 @@ function DaySchedulePage() {
         isToday={moment().isSame(date, "day")}
       />
 
-      {todaySchedules.map((s) => (
-        <ConsumptionCard
-          name={s.event_name}
-          price={Number(s.amount)}
-          date={s.start_date}
-          startTime={s.start_time}
-          endTime={s.end_time}
-          type={s.price_type}
-          isRepeat={s.repeat_kind !== "NONE"}
-          onClick={() => alert("click")}
-        />
-      ))}
+      <ScheduleList
+        date={date}
+        todaySchedules={todaySchedules}
+        isError={isError}
+      />
+
+      {/*{todaySchedules.map((s) => (*/}
+      {/*  <ConsumptionCard*/}
+      {/*    name={s.event_name}*/}
+      {/*    price={Number(s.amount)}*/}
+      {/*    date={s.start_date}*/}
+      {/*    startTime={s.start_time}*/}
+      {/*    endTime={s.end_time}*/}
+      {/*    type={s.price_type}*/}
+      {/*    isRepeat={s.repeat_kind !== "NONE"}*/}
+      {/*    onClick={() => alert("click")}*/}
+      {/*  />*/}
+      {/*))}*/}
     </>
   );
 }

@@ -8,7 +8,7 @@ import { useScheduleDrawer } from "@hooks/useScheduleDrawer.tsx";
 
 interface ScheduleListProps {
   date: string;
-  todaySchedules: TodaySchedule[];
+  todaySchedules: TodaySchedule[] | Schedule[];
   isError: boolean;
 }
 
@@ -26,11 +26,18 @@ function ScheduleList({ date, todaySchedules, isError }: ScheduleListProps) {
     );
   }
 
-  const handleModal = (schedule: TodaySchedule) => {
+  const handleModal = (schedule: TodaySchedule | Schedule) => {
     if (schedule && !isHideBudgetMode) {
-      openScheduleDrawer(
-        SCHEDULE_REQUEST({ ...schedule, schedule_id: schedule.id } as Schedule)
-      );
+      if ("id" in schedule) {
+        openScheduleDrawer(
+          SCHEDULE_REQUEST({
+            ...schedule,
+            schedule_id: schedule.id,
+          } as Schedule)
+        );
+      } else {
+        openScheduleDrawer(SCHEDULE_REQUEST(schedule));
+      }
     }
   };
 
