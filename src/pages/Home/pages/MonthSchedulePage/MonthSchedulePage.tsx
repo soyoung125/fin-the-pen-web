@@ -6,10 +6,11 @@ import ScheduleHeader from "@pages/Home/next-components/ScheduleList/ScheduleHea
 import moment from "moment/moment";
 import ScheduleList from "@pages/Home/next-components/ScheduleList";
 import { useState } from "react";
-import useHome from "@hooks/useHome.ts";
+import useMonthSchedule from "@hooks/home/useMonthSchedule.ts";
 
 function MonthSchedulePage() {
-  const { date, monthData, isError, isPending, changeDate } = useHome();
+  const { date, monthData, isError, isPending, changeDate } =
+    useMonthSchedule();
   const TodaySchedules = monthData?.today_schedule ?? [];
 
   const [show, setShow] = useState(false);
@@ -30,17 +31,18 @@ function MonthSchedulePage() {
         date={date}
         count={TodaySchedules.length}
         handleClick={() => alert("list")}
+        isToday={moment().isSame(date, "date")}
       />
 
       <Calendar value={date} handleChange={changeDate} />
 
       <ThickDivider />
 
-      <ScheduleHeader
-        show={show}
-        handleChange={handleChangeShow}
-        isToday={moment().isSame(date, "date")}
-      />
+      {/*<ScheduleHeader*/}
+      {/*  show={show}*/}
+      {/*  handleChange={handleChangeShow}*/}
+      {/*  isToday={moment().isSame(date, "date")}*/}
+      {/*/>*/}
 
       <ScheduleList
         date={date}
