@@ -5,12 +5,29 @@ import useSchedule from "@hooks/useSchedule.ts";
 import ConsumptionCard from "@components/ScheduleList/ConsumptionCard";
 import CalendarHeader from "@pages/Home/next-components/ScheduleCalendar/CalendarHeader";
 import moment from "moment";
+import MonthlyBudgetSummarySkeleton from "@pages/Home/next-components/HomeHeader/MonthlyBudgetSummary/MonthlyBudgetSummarySkeleton.tsx";
+import CalendarHeaderSkeleton from "@pages/Home/next-components/ScheduleCalendar/CalendarHeader/CalendarHeaderSkeleton.tsx";
 
 function DaySchedulePage() {
   const { date, dayData, isError, isPending } = useDaySchedule();
   const { todaySchedules } = useSchedule();
   const isToday = moment().isSame(date, "day");
   const showPredict = moment().isSameOrBefore(date, "day");
+
+  if (isPending) {
+    return (
+      <>
+        <MonthlyBudgetSummarySkeleton
+          expect={true}
+          dayTitle={isToday ? "오늘의" : moment(date).format("M월D일")}
+          showPredict={showPredict}
+        />
+        <ThickDivider />
+
+        <CalendarHeaderSkeleton date={date} />
+      </>
+    );
+  }
 
   return (
     <>
