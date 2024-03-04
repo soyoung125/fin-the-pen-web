@@ -1,8 +1,7 @@
-import { Box, Stack, Typography } from "@mui/material";
+import { Avatar, Box, Stack, Typography } from "@mui/material";
 import RepeatRoundedIcon from "@mui/icons-material/RepeatRounded";
 import { AmountComponent, AmountType } from "./ConsumptionCard.styles.ts";
 import moment from "moment";
-import { TodaySchedule } from "@app/types/schedule.ts";
 
 export interface ConsumptionCardProps {
   name: string;
@@ -29,29 +28,43 @@ function ConsumptionCard({
   const isSpend = type === "-";
 
   return (
-    <Stack spacing={1} px={2.5} py={2} onClick={onClick}>
-      <Stack direction="row" justifyContent="space-between" alignItems="center">
+    <Stack
+      direction="row"
+      justifyContent="space-between"
+      alignItems="center"
+      spacing={1.5}
+      p={2}
+      onClick={onClick}
+    >
+      <Avatar
+        // alt="Remy Sharp"
+        // src="/static/images/avatar/1.jpg"
+        sx={{ width: 36, height: 36 }}
+      >
+        category
+      </Avatar>
+      <Stack
+        justifyContent="space-between"
+        sx={{ flexGrow: 1, height: "48px" }}
+      >
         <Stack direction="row" alignItems="center" spacing={0.5}>
           <Typography fontSize="13px" fontWeight={500}>
             {startTime}-{endTime}
           </Typography>
           {isRepeat && <RepeatRoundedIcon color="success" fontSize="small" />}
         </Stack>
-        {/*<Typography*/}
-        {/*  variant="subtitle2"*/}
-        {/*  color={type === "-" ? "error.main" : "info.main"}*/}
-        {/*>*/}
-        {/*  {type}*/}
-        {/*  {price.toLocaleString()}*/}
-        {/*</Typography>*/}
+
+        <Typography variant="h4">{name}</Typography>
+      </Stack>
+
+      <Box height={48}>
         <AmountComponent $isPredict={isPredict}>
           <AmountType $isPredict={isPredict} $isSpend={isSpend}>
             {type}
           </AmountType>
           {price.toLocaleString()}
         </AmountComponent>
-      </Stack>
-      <Typography variant="h4">{name}</Typography>
+      </Box>
     </Stack>
   );
 }

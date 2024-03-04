@@ -54,20 +54,8 @@ function DaySchedulePage() {
         date={date}
         todaySchedules={todaySchedules}
         isError={isError}
+        isPending={isPending}
       />
-
-      {/*{todaySchedules.map((s) => (*/}
-      {/*  <ConsumptionCard*/}
-      {/*    name={s.event_name}*/}
-      {/*    price={Number(s.amount)}*/}
-      {/*    date={s.start_date}*/}
-      {/*    startTime={s.start_time}*/}
-      {/*    endTime={s.end_time}*/}
-      {/*    type={s.price_type}*/}
-      {/*    isRepeat={s.repeat_kind !== "NONE"}*/}
-      {/*    onClick={() => alert("click")}*/}
-      {/*  />*/}
-      {/*))}*/}
     </>
   );
 }

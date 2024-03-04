@@ -54,6 +54,7 @@ function MonthSchedulePage() {
         date={date}
         todaySchedules={TodaySchedules}
         isError={isError}
+        isPending={isPending}
       />
     </>
   );
