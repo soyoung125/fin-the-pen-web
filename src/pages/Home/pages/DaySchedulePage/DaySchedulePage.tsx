@@ -11,7 +11,7 @@ import ScheduleListSkeleton from "@pages/Home/next-components/ScheduleList/Sched
 import { HomePageProps } from "@pages/Home/Home.tsx";
 import { useEffect } from "react";
 
-function DaySchedulePage({ updateHeight }: HomePageProps) {
+function DaySchedulePage({ updateHeight, navigateTo }: HomePageProps) {
   const { date, dayData, isError, isPending } = useDaySchedule();
   const { todaySchedules } = useSchedule();
   const isToday = moment().isSame(date, "day");
@@ -52,7 +52,7 @@ function DaySchedulePage({ updateHeight }: HomePageProps) {
       <CalendarHeader
         date={date}
         count={todaySchedules.length}
-        handleClick={() => alert("list")}
+        handleClick={navigateTo}
         isToday={moment().isSame(date, "day")}
       />
 

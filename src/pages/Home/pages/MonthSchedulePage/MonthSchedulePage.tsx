@@ -12,7 +12,7 @@ import { Box } from "@mui/material";
 import { HomePageProps } from "@pages/Home/Home.tsx";
 import { useEffect } from "react";
 
-function MonthSchedulePage({ updateHeight }: HomePageProps) {
+function MonthSchedulePage({ updateHeight, navigateTo }: HomePageProps) {
   const { date, monthData, isError, isPending, changeDate } =
     useMonthSchedule();
   const TodaySchedules = monthData?.today_schedule ?? [];
@@ -54,7 +54,7 @@ function MonthSchedulePage({ updateHeight }: HomePageProps) {
       <CalendarHeader
         date={date}
         count={TodaySchedules.length}
-        handleClick={() => alert("list")}
+        handleClick={navigateTo}
         isToday={moment().isSame(date, "date")}
       />
 

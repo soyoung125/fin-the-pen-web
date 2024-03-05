@@ -10,7 +10,7 @@ import { Box } from "@mui/material";
 import { useEffect } from "react";
 import { HomePageProps } from "@pages/Home/Home.tsx";
 
-function WeekSchedulePage({ updateHeight }: HomePageProps) {
+function WeekSchedulePage({ updateHeight, navigateTo }: HomePageProps) {
   const { date, weekData, isPending } = useWeekSchedule();
   const weeks = Array.from({ length: 6 }, (_, i) => (i + 1).toString());
   const isThisMonth = moment().isSame(date, "month");
@@ -47,9 +47,7 @@ function WeekSchedulePage({ updateHeight }: HomePageProps) {
 
       <ThickDivider />
 
-      {isThisMonth && (
-        <CalendarHeader date={date} handleClick={() => alert("list")} />
-      )}
+      {isThisMonth && <CalendarHeader date={date} handleClick={navigateTo} />}
 
       {weekData &&
         weeks.map((w) => {
@@ -64,7 +62,11 @@ function WeekSchedulePage({ updateHeight }: HomePageProps) {
               key={weeklyData.week_of_number}
               weeklyData={weeklyData}
               isThisWeek={isThisWeek}
-              isThisMonth={isThisMonth}
+              navigateTo={
+                !isThisMonth && weeklyData.week_of_number === "1주차"
+                  ? navigateTo
+                  : undefined
+              }
             />
           );
         })}

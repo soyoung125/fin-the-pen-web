@@ -18,13 +18,17 @@ import WeekSchedulePage from "@pages/Home/pages/WeekSchedulePage/WeekSchedulePag
 import MonthSchedulePage from "@pages/Home/pages/MonthSchedulePage/MonthSchedulePage.tsx";
 import DaySchedulePage from "@pages/Home/pages/DaySchedulePage/DaySchedulePage.tsx";
 import TodayButton from "@pages/Home/pages/DaySchedulePage/components/TodayButton/TodayButton.tsx";
+import { useNavigate } from "react-router-dom";
+import { PATH } from "@constants/path.ts";
 
 export interface HomePageProps {
   updateHeight: () => void;
+  navigateTo: () => void;
 }
 
 function Home() {
   const dispatch = useAppDispatch();
+  const navigate = useNavigate();
   const isHideBudgetMode = useAppSelector(selectIsBudgetHidden);
   const {
     date,
@@ -47,6 +51,8 @@ function Home() {
   };
 
   const updateHeight = () => swiper?.updateAutoHeight(10);
+
+  const handleNavigate = () => navigate(PATH.scheduleList);
 
   useEffect(() => {
     dispatch(changeViewMode(VIEW_MODE.schedule));
@@ -87,13 +93,22 @@ function Home() {
         onSwiper={(swiper) => setSwiper(swiper)}
       >
         <SwiperSlide style={{ overflow: "scroll" }}>
-          <MonthSchedulePage updateHeight={updateHeight} />
+          <MonthSchedulePage
+            updateHeight={updateHeight}
+            navigateTo={handleNavigate}
+          />
         </SwiperSlide>
         <SwiperSlide>
-          <WeekSchedulePage updateHeight={updateHeight} />
+          <WeekSchedulePage
+            updateHeight={updateHeight}
+            navigateTo={handleNavigate}
+          />
         </SwiperSlide>
         <SwiperSlide>
-          <DaySchedulePage updateHeight={updateHeight} />
+          <DaySchedulePage
+            updateHeight={updateHeight}
+            navigateTo={handleNavigate}
+          />
         </SwiperSlide>
       </Swiper>
 
