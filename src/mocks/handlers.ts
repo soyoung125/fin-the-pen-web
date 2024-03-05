@@ -203,18 +203,19 @@ export const handlers = [
         schedule.user_id === user_id &&
         moment(calendar_date).isSame(schedule.start_date, "month")
     );
-    if (monthSchedules.length === 0) {
-      return res(ctx.delay(1000), ctx.status(400));
-    }
-    return res(
-      ctx.delay(1000),
-      ctx.status(200),
-      ctx.json({
-        income: "10000",
-        available: "2000",
-        expense: "8000",
-      })
-    );
+    // if (monthSchedules.length === 0) {
+    //   return res(ctx.delay(1000), ctx.status(400));
+    // }
+    // return res(
+    //   ctx.delay(1000),
+    //   ctx.status(200),
+    //   ctx.json({
+    //     income: "10000",
+    //     available: "2000",
+    //     expense: "8000",
+    //   })
+    // );
+    return res(ctx.delay(1000), ctx.status(400));
   }),
 
   rest.post(`${DOMAIN}/home/day`, async (req, res, ctx) => {
@@ -247,7 +248,7 @@ export const handlers = [
       ctx.json({
         income: "10000",
         available: "1000",
-        expense: "8000",
+        dayExpense: "8000",
         expect: "1000",
         schedule_count: monthSchedules.length,
       })
