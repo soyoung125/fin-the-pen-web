@@ -38,7 +38,7 @@ function DatePicker({
         <Stack direction="row" gap="10px">
           <Button
             variant="outlined"
-            onClick={() => onClickReject("")}
+            onClick={() => onClickReject(defaultDate)}
             fullWidth
           >
             취소
