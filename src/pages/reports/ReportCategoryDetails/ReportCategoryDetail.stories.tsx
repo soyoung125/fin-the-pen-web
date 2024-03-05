@@ -14,7 +14,7 @@ const meta = {
   tags: ["autodocs"],
   args: {},
   argTypes: {},
-} satisfies Meta<typeof ReportCategoryDetails>;
+} satisfies Meta<typeof ExamplePage>;
 
 export default meta;
 
@@ -86,6 +86,7 @@ export const ExamplePage = () => {
           endTime={schedule.end_time}
           type={schedule.type}
           isRepeat={schedule.repeat}
+          onClick={() => alert("click")}
         />
       ))}
     </>
