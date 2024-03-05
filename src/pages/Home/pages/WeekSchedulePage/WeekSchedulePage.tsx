@@ -8,7 +8,7 @@ import MonthlyBudgetSummarySkeleton from "@pages/Home/next-components/HomeHeader
 import WeeklyCardSkeleton from "@pages/Home/pages/WeekSchedulePage/components/WeeklyCard/WeeklyCardSkeleton.tsx";
 
 function WeekSchedulePage() {
-  const { date, weekData, isError, isPending } = useWeekSchedule();
+  const { date, weekData, isPending } = useWeekSchedule();
   const weeks = Array.from({ length: 6 }, (_, i) => (i + 1).toString());
   const isThisMonth = moment().isSame(date, "month");
   const showPredict = moment().isSameOrBefore(date, "month");
