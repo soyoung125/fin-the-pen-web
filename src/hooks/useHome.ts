@@ -53,6 +53,10 @@ const useHome = () => {
   const changeDate = (value: moment.Moment | null) =>
     value && dispatch(setSelectedDate(value.format("YYYY-MM-DD")));
 
+  const changeToToday = () => {
+    dispatch(setSelectedDate(moment().format("YYYY-MM-DD")));
+  };
+
   return {
     date,
     month,
@@ -63,6 +67,7 @@ const useHome = () => {
     pickMonth,
     pickDay,
     changeDate,
+    changeToToday,
   };
 };
 

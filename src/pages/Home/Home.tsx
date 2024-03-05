@@ -17,6 +17,7 @@ import "swiper/css";
 import WeekSchedulePage from "@pages/Home/pages/WeekSchedulePage/WeekSchedulePage.tsx";
 import MonthSchedulePage from "@pages/Home/pages/MonthSchedulePage/MonthSchedulePage.tsx";
 import DaySchedulePage from "@pages/Home/pages/DaySchedulePage/DaySchedulePage.tsx";
+import TodayButton from "@pages/Home/pages/DaySchedulePage/components/TodayButton/TodayButton.tsx";
 
 function Home() {
   const dispatch = useAppDispatch();
@@ -29,8 +30,10 @@ function Home() {
     addDay,
     subtractDay,
     pickDay,
+    changeToToday,
   } = useHome();
   const labels = ["월 별", "주 별", "일 별"];
+  const isToday = moment().isSame(date, "day");
   const [value, setValue] = useState(0);
   const [swiper, setSwiper] = useState<SwiperType>();
 
@@ -87,6 +90,8 @@ function Home() {
           <DaySchedulePage />
         </SwiperSlide>
       </Swiper>
+
+      {!isToday && value === 2 && <TodayButton goToday={changeToToday} />}
     </>
   );
 }

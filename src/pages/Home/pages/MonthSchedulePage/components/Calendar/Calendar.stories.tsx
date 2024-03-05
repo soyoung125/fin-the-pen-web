@@ -4,7 +4,7 @@ import { useState } from "react";
 import moment from "moment";
 
 const meta = {
-  title: "Home/ScheduleCalendar/Calendar",
+  title: "Home/MonthSchedulePage/Calendar",
   component: Calendar,
   tags: ["autodocs"],
   args: { value: "2024-01-30" },
