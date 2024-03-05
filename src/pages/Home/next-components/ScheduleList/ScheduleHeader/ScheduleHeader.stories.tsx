@@ -6,7 +6,7 @@ const meta = {
   title: "Home/ScheduleList/ScheduleHeader",
   component: ScheduleHeader,
   tags: ["autodocs"],
-  args: { show: false },
+  args: { show: false, isToday: false },
   argTypes: {},
 } satisfies Meta<typeof ScheduleHeader>;
 
@@ -21,5 +21,7 @@ export const Example = () => {
 
   const handleChange = () => setShow((prevState) => !prevState);
 
-  return <ScheduleHeader show={show} handleChange={handleChange} />;
+  return (
+    <ScheduleHeader show={show} handleChange={handleChange} isToday={false} />
+  );
 };

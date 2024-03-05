@@ -12,7 +12,7 @@ function DateInput({ updateDate, date, dateType }: DateInputProps) {
   const { openDayPicker } = useDatePicker();
   const onClick: MouseEventHandler<HTMLInputElement> = async (event) => {
     event.preventDefault();
-    const answer = await openDayPicker();
+    const answer = await openDayPicker(date);
     updateDate(dateType, answer);
   };
 

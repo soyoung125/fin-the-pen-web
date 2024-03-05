@@ -73,7 +73,7 @@ function DetailInformation() {
           <Box
             p={1}
             sx={index !== 0 ? listDividerStyle : null}
-            key={schedule.id}
+            key={schedule.schedule_id}
           >
             <Stack direction="row" justifyContent="space-between">
               <Typography sx={{ fontWeight: "bold" }}>

@@ -14,7 +14,7 @@ const meta = {
   tags: ["autodocs"],
   args: {},
   argTypes: {},
-} satisfies Meta<typeof ReportCategoryDetails>;
+} satisfies Meta<typeof ExamplePage>;
 
 export default meta;
 
@@ -51,8 +51,7 @@ export const ExamplePage = () => {
   return (
     <>
       <ScheduleListHeader
-        year={2024}
-        month={5}
+        date="2024년 5월"
         addMonth={() => alert("add month")}
         subtractMonth={() => alert("subtract month")}
         changeMonth={() => alert("change month")}
@@ -86,6 +85,7 @@ export const ExamplePage = () => {
           endTime={schedule.end_time}
           type={schedule.type}
           isRepeat={schedule.repeat}
+          onClick={() => alert("click")}
         />
       ))}
     </>

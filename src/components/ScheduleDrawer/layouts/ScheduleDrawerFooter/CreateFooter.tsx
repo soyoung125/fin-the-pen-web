@@ -6,11 +6,11 @@ import {
 import { SCHEDULE_DRAWER } from "@constants/schedule.ts";
 import useSchedule from "@hooks/useSchedule.ts";
 import { Button, Stack, Tooltip } from "@mui/material";
-import { Schedule } from "@app/types/schedule.ts";
 import { useScheduleForm } from "../../hooks/useScheduleForm.ts";
 import { selectGuestMode } from "@redux/slices/commonSlice.tsx";
 import { useUser } from "@app/tanstack-query/useUser.ts";
 import { NEED_SIGN_IN } from "@constants/messages.tsx";
+import { useDialog } from "@hooks/dialog/useDialog.tsx";
 
 interface CreateFooterInterface {
   handleSubmit: () => boolean;
@@ -19,16 +19,25 @@ interface CreateFooterInterface {
 
 function CreateFooter({ handleSubmit, handleClose }: CreateFooterInterface) {
   const date = useAppSelector(selectDate);
-  const schedule = useAppSelector(selectScheduleForm) as Schedule;
+  const schedule = useAppSelector(selectScheduleForm);
   const guestMode = useAppSelector(selectGuestMode);
   const { data: user } = useUser();
   const { handleCreateSchedule } = useSchedule();
   const { setRandomGeneratedSchedule } = useScheduleForm();
+  const { openConfirm } = useDialog();
 
-  const handleCreate = () => {
-    if (handleSubmit()) {
-      handleCreateSchedule(schedule);
-      handleClose();
+  const handleCreate = async () => {
+    if (handleSubmit() && schedule) {
+      const answer = await openConfirm({
+        title: "알림",
+        content: "현재 정보로 설정하시겠습니까?",
+        approveText: "네",
+        rejectText: "아니오",
+      });
+      if (answer) {
+        handleCreateSchedule(schedule);
+        handleClose();
+      }
     }
   };
 

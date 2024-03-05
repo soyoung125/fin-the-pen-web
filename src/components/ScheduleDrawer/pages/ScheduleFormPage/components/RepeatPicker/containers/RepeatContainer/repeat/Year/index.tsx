@@ -13,14 +13,13 @@ import { RepeatTypeProps } from "@app/types/schedule.ts";
 function Year({ repeatType }: RepeatTypeProps) {
   const schedule = useSelector(selectScheduleForm);
   const startDate = useSelector(selectStartDate);
-  const week = ["첫", "두", "세", "네", "다섯", "여섯"];
 
+  const [lastDate, setLastDate] = useState(moment());
   const [date, setDate] = useState({
-    month: 1,
-    date: 1,
+    month: "01",
+    date: "01",
     day: "월요일",
     week: 0,
-    lastDate: moment(),
   });
 
   useEffect(() => {
@@ -30,12 +29,12 @@ function Year({ repeatType }: RepeatTypeProps) {
     const thisWeek = month === 12 && start.week() === 1 ? 53 : start.week();
 
     setDate({
-      month: month,
-      date: start.date(),
+      month: start.format("MM"),
+      date: start.format("DD"),
       day: start.format("dddd"),
       week: thisWeek - firstWeek,
-      lastDate: start.endOf("month"),
     });
+    setLastDate(start.endOf("month"));
   }, [startDate]);
 
   return (
@@ -55,10 +54,8 @@ function Year({ repeatType }: RepeatTypeProps) {
 
       {repeatType === "year" && (
         <Option
-          MonthAndDay={`${date.month}월 ${date.date}일`}
-          NthDayOfMonth={`${date.month}월 ${week[date.week]}번째 ${date.day}`}
-          LastDayOfMonth={`${date.month}월 마지막 ${date.day}`}
-          isLastDay={date.lastDate.diff(schedule?.start_date, "day") < 7}
+          date={date}
+          isLastDay={lastDate.diff(schedule?.start_date, "day") < 7}
         />
       )}
     </>

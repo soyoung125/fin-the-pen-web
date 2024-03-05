@@ -60,19 +60,36 @@ export const handlers = [
       LOCAL_STORAGE_KEY_SCHEDULES,
       []
     );
-    const isExist = prevSchedules.find((s) => s.id === schedule.id);
+    const isExist = prevSchedules.find(
+      (s) => s.schedule_id === schedule.schedule_id
+    );
     if (isExist) {
-      return res(ctx.delay(1000), ctx.status(500), ctx.json(false));
+      return res(ctx.delay(1000), ctx.status(400), ctx.json(false));
     }
+    const repeatType = schedule.repeat.kind_type;
     const newSchedules: Schedule[] = [
       ...prevSchedules,
-      { ...schedule, price_type: getSign(schedule.price_type) },
+      {
+        ...schedule,
+        price_type: getSign(schedule.price_type),
+        all_day: schedule.is_all_day,
+        repeat_kind: repeatType.toLocaleUpperCase(),
+        repeat_options: {
+          value:
+            repeatType !== "none"
+              ? schedule.repeat[`${repeatType}_type`].repeat_value
+              : null,
+          options: null,
+        },
+        amount: schedule.set_amount,
+        exclude: schedule.exclusion,
+      },
     ];
     setLocalStorage(LOCAL_STORAGE_KEY_SCHEDULES, newSchedules);
     return res(ctx.delay(1000), ctx.status(200), ctx.json(true));
   }),
 
-  rest.post(`${DOMAIN}/getMonthSchedules`, async (req, res, ctx) => {
+  rest.post(`${DOMAIN}/home/getMonthSchedules`, async (req, res, ctx) => {
     const { user_id, date } = await req.json();
 
     const schedules = getLocalStorage<Schedule[]>(
@@ -98,13 +115,15 @@ export const handlers = [
     );
   }),
 
-  rest.post(`${DOMAIN}/deleteSchedule`, async (req, res, ctx) => {
-    const { id } = await req.json();
+  rest.delete(`${DOMAIN}/deleteSchedule`, async (req, res, ctx) => {
+    const { schedule_id } = await req.json();
     const prevSchedules = getLocalStorage<Schedule[]>(
       LOCAL_STORAGE_KEY_SCHEDULES,
       []
     );
-    const newSchedules = prevSchedules.filter((schedule) => schedule.id !== id);
+    const newSchedules = prevSchedules.filter(
+      (schedule) => schedule.schedule_id !== schedule_id
+    );
     setLocalStorage(LOCAL_STORAGE_KEY_SCHEDULES, newSchedules);
     return res(ctx.delay(1000), ctx.status(200), ctx.json(true));
   }),
@@ -116,16 +135,126 @@ export const handlers = [
       LOCAL_STORAGE_KEY_SCHEDULES,
       []
     );
+    const repeatType = schedule.repeat.kind_type;
     const newSchedules = prevSchedules.map((s) =>
-      s.id === schedule.schedule_id
+      s.schedule_id === schedule.schedule_id
         ? {
             ...schedule,
             price_type: getSign(schedule.price_type),
+            all_day: schedule.is_all_day,
+            repeat_kind: repeatType.toLocaleUpperCase(),
+            repeat_options: {
+              value:
+                repeatType !== "none"
+                  ? schedule.repeat[`${repeatType}_type`].repeat_value
+                  : null,
+              options: null,
+            },
+            amount: schedule.set_amount,
+            exclude: schedule.exclusion,
           }
         : s
     );
     setLocalStorage(LOCAL_STORAGE_KEY_SCHEDULES, newSchedules);
     return res(ctx.delay(1000), ctx.status(200), ctx.json(true));
+  }),
+
+  rest.post(`${DOMAIN}/home/month`, async (req, res, ctx) => {
+    const { user_id, calendar_date } = await req.json();
+    const schedules = getLocalStorage<Schedule[]>(
+      LOCAL_STORAGE_KEY_SCHEDULES,
+      []
+    );
+    const monthSchedules = schedules.filter(
+      (schedule) =>
+        schedule.user_id === user_id &&
+        moment(calendar_date).isSame(schedule.start_date, "month")
+    );
+    if (monthSchedules.length === 0) {
+      return res(
+        ctx.delay(1000),
+        ctx.status(200),
+        ctx.json({
+          income: "0",
+          available: "0",
+          today_schedule: [],
+          expense: "0",
+        })
+      );
+    }
+    return res(
+      ctx.delay(1000),
+      ctx.status(200),
+      ctx.json({
+        income: "10000",
+        available: "2000",
+        today_schedule: monthSchedules,
+        expense: "8000",
+      })
+    );
+  }),
+
+  rest.post(`${DOMAIN}/home/week`, async (req, res, ctx) => {
+    // const { user_id, calendar_date } = await req.json();
+    // const schedules = getLocalStorage<Schedule[]>(
+    //   LOCAL_STORAGE_KEY_SCHEDULES,
+    //   []
+    // );
+    // const monthSchedules = schedules.filter(
+    //   (schedule) =>
+    //     schedule.user_id === user_id &&
+    //     moment(calendar_date).isSame(schedule.start_date, "month")
+    // );
+    // if (monthSchedules.length === 0) {
+    //   return res(ctx.delay(1000), ctx.status(400));
+    // }
+    // return res(
+    //   ctx.delay(1000),
+    //   ctx.status(200),
+    //   ctx.json({
+    //     income: "10000",
+    //     available: "2000",
+    //     expense: "8000",
+    //   })
+    // );
+    return res(ctx.delay(1000), ctx.status(400));
+  }),
+
+  rest.post(`${DOMAIN}/home/day`, async (req, res, ctx) => {
+    const { user_id, calendar_date } = await req.json();
+    const schedules = getLocalStorage<Schedule[]>(
+      LOCAL_STORAGE_KEY_SCHEDULES,
+      []
+    );
+    const monthSchedules = schedules.filter(
+      (schedule) =>
+        schedule.user_id === user_id &&
+        moment(calendar_date).isSame(schedule.start_date, "month")
+    );
+    if (monthSchedules.length === 0) {
+      return res(
+        ctx.delay(1000),
+        ctx.status(200),
+        ctx.json({
+          income: "0",
+          available: "0",
+          dayExpense: "0",
+          expect: "0",
+          schedule_count: 0,
+        })
+      );
+    }
+    return res(
+      ctx.delay(1000),
+      ctx.status(200),
+      ctx.json({
+        income: "10000",
+        available: "1000",
+        dayExpense: "8000",
+        expect: "1000",
+        schedule_count: monthSchedules.length,
+      })
+    );
   }),
 
   rest.get(`${DOMAIN}/report/month`, async (req, res, ctx) => {

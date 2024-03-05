@@ -20,9 +20,12 @@ function ReportListHeader({
       direction="row"
       justifyContent="space-between"
       alignItems="center"
-      p={2.5}
+      py={1}
+      px={2.5}
     >
-      <Typography>총 {count}건</Typography>
+      <Typography>
+        총&nbsp;<span style={{ color: "#735BF2" }}>{count}</span>건
+      </Typography>
       <SelectMenus
         options={options}
         selectedOption={selectedOption}

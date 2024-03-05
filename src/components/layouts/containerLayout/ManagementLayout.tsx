@@ -30,7 +30,6 @@ function ManagementLayout() {
   }, []);
 
   const handleMovement = (type: "+" | "-") => {
-    console.log(assetManagements[management].title);
     if (type === "-" && management !== 0) {
       setManagement(management - 1);
       navigate(assetManagements[management - 1].path, { replace: true });

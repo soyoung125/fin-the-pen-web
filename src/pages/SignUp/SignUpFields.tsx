@@ -1,13 +1,13 @@
 import { Box, Button, InputAdornment, TextField } from "@mui/material";
 import { useNavigate } from "react-router-dom";
-import { PATH } from "../../constants/path.ts";
+import { PATH } from "@constants/path.ts";
 import { isObjectValuesEmpty } from "@utils/tools.ts";
 import {
   NO_BLANKS,
   NO_DUPLICATION_ID,
   NO_SIGNAL_FROM_SERVER,
   SIGN_UP_SUCCESS,
-} from "../../constants/messages.tsx";
+} from "@constants/messages.tsx";
 import { DOMAIN } from "@api/url.ts";
 import { FormEvent, useRef, useState } from "react";
 import { SignUp } from "@app/types/auth.ts";
@@ -24,7 +24,7 @@ function SignUpFields() {
       : setIsSamePassword(false);
 
   const signUp = async (user: SignUp) => {
-    await fetch(`${DOMAIN}/fin-the-pen-web/sign-up`, {
+    await fetch(`${DOMAIN}/sign-up`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

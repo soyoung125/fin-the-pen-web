@@ -92,7 +92,7 @@ function RegularDepositWithdrawal() {
       </Title>
 
       {Object.keys(deposits).map((d) => (
-        <DetailCard data={deposits[d]} key={deposits[d][0].id} />
+        <DetailCard data={deposits[d]} key={deposits[d][0].schedule_id} />
       ))}
 
       <Title
@@ -112,7 +112,7 @@ function RegularDepositWithdrawal() {
       </Title>
 
       {Object.keys(withdrawals).map((w) => (
-        <DetailCard data={withdrawals[w]} key={withdrawals[w][0].id} />
+        <DetailCard data={withdrawals[w]} key={withdrawals[w][0].schedule_id} />
       ))}
 
       <AlertModal

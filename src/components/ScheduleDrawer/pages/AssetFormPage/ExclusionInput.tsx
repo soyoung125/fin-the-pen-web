@@ -5,10 +5,9 @@ import { useScheduleForm } from "../../hooks/useScheduleForm.ts";
 
 function ExclusionInput() {
   const { scheduleForm, updateExclusion } = useScheduleForm();
-  const exclusion = Boolean(scheduleForm?.exclude);
+  const exclusion = Boolean(scheduleForm?.exclusion);
 
   const changeExclusion = () => {
-    console.log(exclusion);
     updateExclusion(!exclusion);
   };
 

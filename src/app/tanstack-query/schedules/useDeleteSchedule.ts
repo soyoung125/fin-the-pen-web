@@ -4,11 +4,11 @@ import { getSessionStorage } from "@app/utils/storage";
 import { QUERY_KEY_SCHEDULES } from "@constants/queryKeys";
 import { getSign } from "@components/ScheduleDrawer/hooks/useScheduleForm";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { Schedule } from "@app/types/schedule.ts";
+import { RequestSchedule, Schedule } from "@app/types/schedule.ts";
 import moment from "moment";
 
 interface PropsInterface {
-  schedule: Schedule;
+  schedule: RequestSchedule;
   delete_options: string;
   user_id: string;
 }
@@ -19,7 +19,7 @@ const fetchDeleteSchedule = async ({
   user_id,
 }: PropsInterface) => {
   const token = getSessionStorage(SESSION_STORAGE_KEY_TOKEN, "");
-  const data = { schedule_id: schedule.id, delete_options, user_id };
+  const data = { schedule_id: schedule.schedule_id, delete_options, user_id };
 
   return fetch(`${DOMAIN}/deleteSchedule`, {
     method: "DELETE",
@@ -44,7 +44,7 @@ export const useDeleteSchedule = () => {
   });
 
   const deleteSchedule = (
-    schedule: Schedule,
+    schedule: RequestSchedule,
     delete_options: string,
     user_id: string
   ) => {

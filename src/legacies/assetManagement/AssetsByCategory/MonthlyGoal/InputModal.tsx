@@ -46,7 +46,6 @@ function InputModal({ setMonthlyGoalModalOpen }: InputModalProps) {
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const value = event.target.value.replaceAll(",", "");
     if (+value >= 0) {
-      console.log(value);
       setGoal(parseInt(value, 10));
     } else {
       alert("숫자는 0 이하일 수 없습니다.");

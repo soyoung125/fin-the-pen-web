@@ -1,5 +1,6 @@
 export const PATH = {
   home: "/",
+  scheduleList: "schedule-list",
   signIn: "/sign-in",
   signUp: "/sign-up",
   myPage: "/myPage",

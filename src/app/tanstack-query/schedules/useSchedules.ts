@@ -8,7 +8,7 @@ import { MonthScheduleQuery, Schedule } from "@app/types/schedule.ts";
 const fetchMonthSchedules = async (query: MonthScheduleQuery) => {
   const token = getSessionStorage(SESSION_STORAGE_KEY_TOKEN, "");
 
-  return fetch(`${DOMAIN}/getMonthSchedules`, {
+  return fetch(`${DOMAIN}/home/getMonthSchedules`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",

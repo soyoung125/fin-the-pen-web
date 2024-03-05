@@ -8,8 +8,7 @@ const meta = {
   component: ScheduleListHeader,
   tags: ["autodocs"],
   args: {
-    year: 2023,
-    month: 5,
+    date: `2023년 5월`,
     subtractMonth: () => alert("last month"),
     addMonth: () => alert("next month"),
     changeMonth: () => alert("change year and month"),

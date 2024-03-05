@@ -128,7 +128,11 @@ function AnalysisDetailContainer() {
       </Title>
       <Stack sx={{ borderRadius: 3, marginBottom: 2 }}>
         {selectedItem.map((s) => (
-          <SpendingDetailCard schedule={s} key={s.id} bgColor={color} />
+          <SpendingDetailCard
+            schedule={s}
+            key={s.schedule_id}
+            bgColor={color}
+          />
         ))}
       </Stack>
 

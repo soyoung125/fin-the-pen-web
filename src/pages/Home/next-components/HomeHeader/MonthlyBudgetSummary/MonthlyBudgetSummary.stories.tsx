@@ -11,6 +11,7 @@ const meta = {
     income: 1200000,
     expenditure: 1000000,
     availableAmount: 200000,
+    dayTitle: "이번달",
   },
   argTypes: {
     income: {

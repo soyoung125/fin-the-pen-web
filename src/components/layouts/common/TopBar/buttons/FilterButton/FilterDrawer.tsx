@@ -96,7 +96,7 @@ function FilterDrawer({
 
           {categories.map((category) => {
             return (
-              <>
+              <Box key={category.type}>
                 <FilterHeader
                   title={category.type}
                   isCheckAll={isAllSubCategoriesSelected(category.type)}
@@ -105,6 +105,7 @@ function FilterDrawer({
                 <FilterLayout>
                   {category.subCategories.map((subCategory) => (
                     <Button
+                      key={subCategory}
                       variant={
                         isSubCategorySelected(category.type, subCategory)
                           ? "contained"
@@ -120,7 +121,7 @@ function FilterDrawer({
                     </Button>
                   ))}
                 </FilterLayout>
-              </>
+              </Box>
             );
           })}
         </Box>

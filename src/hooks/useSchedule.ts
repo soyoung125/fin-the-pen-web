@@ -4,7 +4,7 @@ import {
   selectMonth,
   setDrawerScheduleForm,
 } from "@redux/slices/scheduleSlice.tsx";
-import { Schedule } from "@app/types/schedule.ts";
+import { RequestSchedule } from "@app/types/schedule.ts";
 import { useAppDispatch } from "@redux/hooks.ts";
 import moment from "moment/moment";
 import { v4 as uuidv4 } from "uuid";
@@ -13,7 +13,6 @@ import { useUser } from "@app/tanstack-query/useUser.ts";
 import { useSchedules } from "@app/tanstack-query/schedules/useSchedules.ts";
 import { INIT_SCHEDULE } from "@constants/schedule.ts";
 import { useModifySchedule } from "@app/tanstack-query/schedules/useModifySchedule.ts";
-import { useScheduleChangeModal } from "@components/ScheduleDrawer/hooks/ScheduleChangeModal/useScheduleChangeModal.tsx";
 import { useDeleteSchedule } from "@app/tanstack-query/schedules/useDeleteSchedule.ts";
 
 const useSchedule = () => {
@@ -23,7 +22,6 @@ const useSchedule = () => {
   const month = useSelector(selectMonth);
 
   const { data: user } = useUser();
-  const { openModal } = useScheduleChangeModal();
   const { createSchedule } = useCreateSchedule();
   const { modifySchedule } = useModifySchedule();
   const { deleteSchedule } = useDeleteSchedule();
@@ -43,36 +41,34 @@ const useSchedule = () => {
         moment(date).isSameOrBefore(schedule.end_date)
     ) ?? [];
 
-  const handleCreateSchedule = async (schedule: Schedule) => {
+  const handleCreateSchedule = async (schedule: RequestSchedule) => {
     if (user === undefined) {
       return alert("로그인이 필요합니다.");
     }
 
     const scheduleWithUuid = {
       ...schedule,
-      id: uuidv4(),
+      schedule_id: uuidv4(),
       user_id: user.user_id,
     };
 
     createSchedule(scheduleWithUuid);
   };
 
-  const handleDeleteSchedule = async (schedule: Schedule) => {
-    const answer = await openModal({
-      changeMode: "삭제",
-    });
-    if (answer && user) {
-      deleteSchedule(schedule, answer as string, user.user_id);
+  const handleDeleteSchedule = async (
+    schedule: RequestSchedule,
+    answer: string
+  ) => {
+    if (user) {
+      deleteSchedule(schedule, answer, user.user_id);
     }
   };
 
-  const handleModifySchedule = async (schedule: Schedule) => {
-    const answer = await openModal({
-      changeMode: "수정",
-    });
-    if (answer) {
-      modifySchedule(schedule, answer as string);
-    }
+  const handleModifySchedule = async (
+    schedule: RequestSchedule,
+    answer: string
+  ) => {
+    modifySchedule(schedule, answer);
   };
 
   const resetSchedule = () => {

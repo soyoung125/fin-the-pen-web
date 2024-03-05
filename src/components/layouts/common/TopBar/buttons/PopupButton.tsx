@@ -50,7 +50,6 @@ function PopupButton({ handleClickPopup }: PopupButtonProps) {
   };
 
   const handleMouseUp = (event: React.TouchEvent | React.MouseEvent) => {
-    console.log(3);
     setIsDragging(false);
   };
 

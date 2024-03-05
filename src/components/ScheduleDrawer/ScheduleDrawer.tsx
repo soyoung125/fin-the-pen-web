@@ -12,9 +12,9 @@ import RepeatPicker from "./pages/ScheduleFormPage/components/RepeatPicker";
 import useSchedule from "@hooks/useSchedule.ts";
 import { useDialog } from "@hooks/dialog/useDialog.tsx";
 
-function TransitionUp(props: SlideProps) {
-  return <Slide {...props} direction="right" />;
-}
+// function TransitionUp(props: SlideProps) {
+//   return <Slide {...props} direction="right" />;
+// }
 
 interface ScheduleDrawerProps {
   handleClose: () => void;
@@ -22,9 +22,9 @@ interface ScheduleDrawerProps {
 
 function ScheduleDrawer({ handleClose }: ScheduleDrawerProps) {
   // 추후 삭제 예정
-  const random = Math.floor(Math.random() * 4); // 현재 CONSUMPTION_ALERTS의 길이가 4임
-
-  const [snackbarOpen, setSnackbarOpen] = useState(true);
+  // const random = Math.floor(Math.random() * 4); // 현재 CONSUMPTION_ALERTS의 길이가 4임
+  //
+  // const [snackbarOpen, setSnackbarOpen] = useState(true);
   const [showError, setShowError] = useState(false);
   const [value, setValue] = useState(0);
   const [swiper, setSwiper] = useState<SwiperType>();
@@ -42,7 +42,7 @@ function ScheduleDrawer({ handleClose }: ScheduleDrawerProps) {
   const handleReset = async () => {
     const answer = await openConfirm({
       title: "알림",
-      content: "입력 정보를 초기화하시겠습니까?",
+      content: "모든 정보를 초기화하시겠습니까?",
       approveText: "네",
       rejectText: "아니오",
     });
@@ -62,23 +62,23 @@ function ScheduleDrawer({ handleClose }: ScheduleDrawerProps) {
   return (
     <div>
       <Box sx={{ height: "100%", pt: 1, mb: 3 }}>
-        <Snackbar
-          anchorOrigin={{ vertical: "top", horizontal: "center" }}
-          autoHideDuration={5000}
-          open={snackbarOpen}
-          onClose={() => {
-            setSnackbarOpen(false);
-          }}
-          TransitionComponent={TransitionUp}
-        >
-          <Alert
-            color={CONSUMPTION_ALERTS[random].color}
-            sx={{ width: "100%" }}
-            icon={CONSUMPTION_ALERTS[random].icon}
-          >
-            {CONSUMPTION_ALERTS[random].message}
-          </Alert>
-        </Snackbar>
+        {/*<Snackbar*/}
+        {/*  anchorOrigin={{ vertical: "top", horizontal: "center" }}*/}
+        {/*  autoHideDuration={5000}*/}
+        {/*  open={snackbarOpen}*/}
+        {/*  onClose={() => {*/}
+        {/*    setSnackbarOpen(false);*/}
+        {/*  }}*/}
+        {/*  TransitionComponent={TransitionUp}*/}
+        {/*>*/}
+        {/*  <Alert*/}
+        {/*    color={CONSUMPTION_ALERTS[random].color}*/}
+        {/*    sx={{ width: "100%" }}*/}
+        {/*    icon={CONSUMPTION_ALERTS[random].icon}*/}
+        {/*  >*/}
+        {/*    {CONSUMPTION_ALERTS[random].message}*/}
+        {/*  </Alert>*/}
+        {/*</Snackbar>*/}
 
         <ScheduleDrawerHeader
           value={value}

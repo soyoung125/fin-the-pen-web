@@ -7,15 +7,12 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { RequestSchedule, Schedule } from "@app/types/schedule.ts";
 import moment from "moment";
 
-const fetchCreateSchedule = async (schedule: Schedule) => {
+const fetchCreateSchedule = async (schedule: RequestSchedule) => {
   const token = getSessionStorage(SESSION_STORAGE_KEY_TOKEN, "");
   const data = {
     ...schedule,
-    is_all_day: schedule.all_day,
-    set_amount: schedule.amount,
-    exclusion: schedule.exclude,
     price_type: getSign(schedule.price_type),
-  } as RequestSchedule;
+  };
 
   return fetch(`${DOMAIN}/createSchedule`, {
     method: "POST",
@@ -39,7 +36,7 @@ export const useCreateSchedule = () => {
     },
   });
 
-  const createSchedule = (schedule: Schedule) => {
+  const createSchedule = (schedule: RequestSchedule) => {
     mutate(schedule);
   };
 

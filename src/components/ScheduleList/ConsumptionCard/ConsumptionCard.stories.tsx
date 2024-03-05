@@ -1,5 +1,6 @@
 import { Meta } from "@storybook/react";
 import ConsumptionCard, { ConsumptionCardProps } from "./ConsumptionCard.tsx";
+import ConsumptionCardSkeleton from "./ConsumptionCardSkeleton.tsx";
 
 const meta = {
   title: "ScheduleList/ConsumptionCard",
@@ -22,3 +23,7 @@ export default meta;
 export const Default = (args: ConsumptionCardProps) => {
   return <ConsumptionCard {...args} />;
 };
+
+export const Skeleton = () => {
+  return <ConsumptionCardSkeleton />
+}

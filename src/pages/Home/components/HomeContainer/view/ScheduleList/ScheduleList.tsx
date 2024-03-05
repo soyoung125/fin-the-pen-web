@@ -8,7 +8,11 @@ import { Schedule } from "@app/types/schedule.ts";
 import EasyAuthentication from "@components/sign/EasyAuthentication.tsx";
 import { useAppDispatch } from "@redux/hooks.ts";
 import { changeHideBudgetMode } from "@redux/slices/settingSlice.ts";
-import { INIT_PERIOD, INIT_REPEAT } from "@constants/schedule.ts";
+import {
+  INIT_PERIOD,
+  INIT_REPEAT,
+  SCHEDULE_REQUEST,
+} from "@constants/schedule.ts";
 import { useScheduleDrawer } from "@hooks/useScheduleDrawer.tsx";
 
 function ScheduleList() {
@@ -46,14 +50,8 @@ function ScheduleList() {
   }
 
   const handleModal = (schedule: Schedule) => {
-    // setBottomDrawerOpen(true); // 수정 drawer는 bottombar의 drawer를 공유할 수 있도록 수정 예정
     if (schedule) {
-      const start = moment(schedule.start_date); // getMonthSchedule api 수정 후 제거 예정
-      openScheduleDrawer({
-        ...schedule,
-        repeat: INIT_REPEAT(start),
-        period: INIT_PERIOD(start),
-      });
+      openScheduleDrawer(SCHEDULE_REQUEST(schedule));
     }
   };
 
@@ -67,7 +65,7 @@ function ScheduleList() {
             CATEGORIES.find((c) => c.title === schedule.category) ||
             ({ color: "#C8A2C8" } as Category)
           }
-          key={schedule.id}
+          key={schedule.schedule_id}
           handleModal={handleModal}
           openAuthenticationPage={() => setAuthenticationPageOpen(true)}
         />

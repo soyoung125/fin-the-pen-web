@@ -5,18 +5,23 @@ import Settings from "@pages/Settings";
 import SignIn from "../../pages/SignIn";
 import SignUp from "../../pages/SignUp";
 import TestContainer from "@pages/MyPage/TestContainer.tsx";
-import { PATH } from "../../constants/path.ts";
+import { PATH } from "@constants/path.ts";
 import Home from "@pages/Home";
 import { RouterDOM } from "@app/types/common.ts";
 import DetailSetting from "../../legacies/assetManagement/SavingsGoalContainer/DetailSetting";
 import FetchPaymentHistory from "../../pages/Home/components/HomeContainer/view/FetchPaymentHistory";
 import SearchSchedule from "../../pages/Home/components/HomeContainer/view/SearchSchedule";
 import MyData from "@pages/Settings/connection/MyData";
+import ScheduleListPage from "@pages/Home/pages/ScheduleListPage/ScheduleListPage.tsx";
 
 const HOME_ROUTES: RouterDOM[] = [
   {
     path: PATH.home,
-    element: <Home />, // <Main />
+    element: <Home />,
+  },
+  {
+    path: PATH.scheduleList,
+    element: <ScheduleListPage />,
   },
   {
     path: PATH.signIn,

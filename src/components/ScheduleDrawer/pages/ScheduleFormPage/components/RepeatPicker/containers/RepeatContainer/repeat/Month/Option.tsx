@@ -43,7 +43,7 @@ function Option({ handleChangeOption }: RepeatOptionProps) {
         <OptionButton
           id="todayRepeat"
           isSelected={todayRepeat}
-          value={`${moment(startDate).date()}일마다 반복`}
+          contents={`${moment(startDate).date()}일마다 반복`}
           handleClick={changeTodayRepeat}
         />
       </Grid>
@@ -52,7 +52,7 @@ function Option({ handleChangeOption }: RepeatOptionProps) {
         <OptionButton
           id="selectDate"
           isSelected={!todayRepeat}
-          value="반복할 날짜 선택"
+          contents="반복할 날짜 선택"
           handleClick={changeTodayRepeat}
         />
       </Grid>

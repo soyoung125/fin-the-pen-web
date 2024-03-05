@@ -1,5 +1,5 @@
-import {Box, Stack} from "@mui/material";
-import {useEffect} from "react";
+import { Box, Stack } from "@mui/material";
+import { useEffect } from "react";
 import {
   selectHeaderMode,
   selectHeaderOpen,
@@ -8,21 +8,21 @@ import {
 } from "@redux/slices/commonSlice.tsx";
 import AnalysisMode from "./headerMode/AnalysisMode.tsx";
 import HomeMode from "./headerMode/HomeMode.tsx";
-import {useAppDispatch, useAppSelector} from "@redux/hooks.ts";
-import {selectSavingPopUpSetting} from "@redux/slices/assetSlice.tsx";
+import { useAppDispatch, useAppSelector } from "@redux/hooks.ts";
+import { selectSavingPopUpSetting } from "@redux/slices/assetSlice.tsx";
 import PopupButton from "./buttons/PopupButton.tsx";
-import {useNavigate} from "react-router-dom";
-import {PATH} from "@constants/path.ts";
+import { useNavigate } from "react-router-dom";
+import { PATH } from "@constants/path.ts";
 import SettingsMode from "./headerMode/SettingsMode.tsx";
 import SignMode from "./headerMode/SignMode.tsx";
 import SearchMode from "./headerMode/SearchMode.tsx";
 import AssetMode from "./headerMode/AssetMode.tsx";
-import {useUser} from "@app/tanstack-query/useUser.ts";
+import { useUser } from "@app/tanstack-query/useUser.ts";
 
 function TopBar() {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
-  const {data: user} = useUser();
+  const { data: user } = useUser();
   const isHeaderOpen = useAppSelector(selectHeaderOpen);
   const headerMode = useAppSelector(selectHeaderMode);
   const popupSetting = useAppSelector(selectSavingPopUpSetting);
@@ -39,7 +39,6 @@ function TopBar() {
   }, [user]);
 
   const handleClickPopup = () => {
-    console.log(2);
     if (popupSetting.settings.connect === "적금 계좌 APP") {
       console.log("계좌 열기");
     } else {
@@ -50,26 +49,27 @@ function TopBar() {
   return (
     isHeaderOpen && (
       <>
-        <Box sx={{position: "relative", height: 70, zIndex: 1000}}>
+        <Box sx={{ position: "relative", height: 70, zIndex: 1000 }}>
           <Stack
             direction="row"
             justifyContent="space-between"
             alignItems="flex-end"
-            sx={{height: 70, paddingX: "12px"}}
+            sx={{ height: 70, paddingX: "12px" }}
           >
-            {headerMode === "home" && <HomeMode/>}
-            {headerMode === "analysis" && <AnalysisMode/>}
-            {headerMode === "settings" && <SettingsMode/>}
-            {headerMode === "sign" && <SignMode/>}
-            {headerMode === "search" && <SearchMode/>}
-            {headerMode === "assetManagement" && <AssetMode/>}
+            {headerMode === "home" && <HomeMode />}
+            {headerMode === "analysis" && <AnalysisMode />}
+            {headerMode === "settings" && <SettingsMode />}
+            {headerMode === "sign" && <SignMode />}
+            {headerMode === "search" && <SearchMode />}
+            {headerMode === "assetManagement" && <AssetMode />}
           </Stack>
           {popupSetting.isOn && (
-            <PopupButton handleClickPopup={handleClickPopup}/>
+            <PopupButton handleClickPopup={handleClickPopup} />
           )}
         </Box>
       </>
-    ));
+    )
+  );
 }
 
 export default TopBar;

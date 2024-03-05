@@ -7,8 +7,8 @@ import SelectYearMonth from "@components/common/SelectYearMonth";
 import { HeaderBox } from "./ScheduleListHeader.styles";
 
 export interface ScheduleListHeaderProps {
-  year: number;
-  month: number;
+  date: string;
+  title?: string;
   addMonth: () => void;
   subtractMonth: () => void;
   changeMonth: () => void;
@@ -17,8 +17,8 @@ export interface ScheduleListHeaderProps {
 }
 
 function ScheduleListHeader({
-  year,
-  month,
+  date,
+  title,
   changeMonth,
   subtractMonth,
   addMonth,
@@ -37,7 +37,7 @@ function ScheduleListHeader({
         >
           <ClearRoundedIcon onClick={() => navigate(-1)} />
           <Typography variant="h4" component="div" sx={{ flexGrow: 1 }}>
-            식비 소비 리포트
+            {title}
           </Typography>
           <SearchIcon onClick={handleClickSearch} />
         </Stack>
@@ -51,8 +51,7 @@ function ScheduleListHeader({
           alignItems="center"
         >
           <SelectYearMonth
-            year={year}
-            month={month}
+            date={date}
             lastMonth={subtractMonth}
             nextMonth={addMonth}
             changeYearAndMonth={changeMonth}

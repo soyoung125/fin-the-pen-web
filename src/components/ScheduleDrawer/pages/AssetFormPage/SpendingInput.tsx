@@ -19,7 +19,7 @@ import { useDialog } from "@hooks/dialog/useDialog.tsx";
 function SpendingInput() {
   const { scheduleForm, updateSchedule } = useScheduleForm();
   const { openConfirm } = useDialog();
-  const expectedSpending = scheduleForm ? scheduleForm?.amount : "0";
+  const expectedSpending = scheduleForm ? scheduleForm?.set_amount : "0";
   const [showError, setShowError] = useState(false);
 
   const changeSchedule = (state: React.MouseEvent<HTMLButtonElement>) => {

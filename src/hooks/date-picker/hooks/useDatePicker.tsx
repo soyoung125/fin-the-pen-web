@@ -6,10 +6,11 @@ import TimePicker from "@hooks/date-picker/components/TimePicker.tsx";
 
 export const useDatePicker = () => {
   const { openOverlay, closeOverlay } = useOverlay();
-  const openDayPicker = (): Promise<string> => {
+  const openDayPicker = (defaultDate: string): Promise<string> => {
     return new Promise((resolve) => {
       openOverlay(
         <DatePicker
+          defaultDate={defaultDate}
           onClickApprove={(answer) => {
             resolve(answer);
             closeOverlay();

@@ -4,13 +4,19 @@ import SummaryCard from "@pages/Home/next-components/HomeHeader/MonthlyBudgetSum
 export interface MonthlyBudgetSummaryProps {
   income: number;
   expenditure: number;
-  availableAmount: number;
+  expect?: number;
+  availableAmount?: number;
+  dayTitle: string;
+  showPredict?: boolean;
 }
 
 function MonthlyBudgetSummary({
   expenditure,
   income,
+  expect,
   availableAmount,
+  dayTitle,
+  showPredict,
 }: MonthlyBudgetSummaryProps) {
   const budgetList = [
     {
@@ -22,22 +28,43 @@ function MonthlyBudgetSummary({
       amount: expenditure,
     },
   ];
-  const useable = {
-    title: "사용 가능 금액",
-    amount: availableAmount,
+
+  const predict = {
+    availableAmount: "사용가능액",
+    expect: "지출예정액",
   };
 
   return (
     <SummaryContainer>
       <SummaryItem>
         {budgetList.map(({ title, amount }) => (
-          <SummaryCard title={title} amount={amount} />
+          <SummaryCard
+            key={title}
+            title={`${dayTitle} ${title}`}
+            amount={amount}
+          />
         ))}
       </SummaryItem>
 
-      <SummaryItem $useable={true}>
-        <SummaryCard title={useable.title} amount={useable.amount} />
-      </SummaryItem>
+      {/*<SummaryItem $useable={true}>*/}
+      {/*  /!*{expect && <SummaryCard title={predict.expect} amount={expect ?? 0} />}*!/*/}
+      {/*  <SummaryCard*/}
+      {/*    title={predict.availableAmount}*/}
+      {/*    amount={availableAmount ?? 0}*/}
+      {/*  />*/}
+      {/*</SummaryItem>*/}
+
+      {showPredict && (
+        <SummaryItem $useable={true}>
+          {expect !== undefined && (
+            <SummaryCard title={predict.expect} amount={expect} />
+          )}
+          <SummaryCard
+            title={predict.availableAmount}
+            amount={availableAmount ?? 0}
+          />
+        </SummaryItem>
+      )}
     </SummaryContainer>
   );
 }
