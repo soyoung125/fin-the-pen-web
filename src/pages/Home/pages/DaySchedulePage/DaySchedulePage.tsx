@@ -7,6 +7,7 @@ import moment from "moment";
 import MonthlyBudgetSummarySkeleton from "@pages/Home/next-components/HomeHeader/MonthlyBudgetSummary/MonthlyBudgetSummarySkeleton.tsx";
 import CalendarHeaderSkeleton from "@pages/Home/next-components/ScheduleCalendar/CalendarHeader/CalendarHeaderSkeleton.tsx";
 import ScheduleList from "@pages/Home/next-components/ScheduleList";
+import ScheduleListSkeleton from "@pages/Home/next-components/ScheduleList/ScheduleListSkeleton.tsx";
 
 function DaySchedulePage() {
   const { date, dayData, isError, isPending } = useDaySchedule();
@@ -23,8 +24,8 @@ function DaySchedulePage() {
           showPredict={showPredict}
         />
         <ThickDivider />
-
         <CalendarHeaderSkeleton date={date} />
+        <ScheduleListSkeleton />
       </>
     );
   }
@@ -53,7 +54,6 @@ function DaySchedulePage() {
         date={date}
         todaySchedules={todaySchedules}
         isError={isError}
-        isPending={isPending}
       />
     </>
   );

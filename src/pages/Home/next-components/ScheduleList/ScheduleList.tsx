@@ -5,27 +5,16 @@ import { useAppSelector } from "@redux/hooks.ts";
 import { selectIsBudgetHidden } from "@redux/slices/settingSlice.ts";
 import { SCHEDULE_REQUEST } from "@constants/schedule.ts";
 import { useScheduleDrawer } from "@hooks/useScheduleDrawer.tsx";
-import ConsumptionCardSkeleton from "@components/ScheduleList/ConsumptionCard/ConsumptionCardSkeleton";
 
 interface ScheduleListProps {
   date: string;
   todaySchedules: TodaySchedule[] | Schedule[];
   isError: boolean;
-  isPending: boolean;
 }
 
-function ScheduleList({
-  date,
-  todaySchedules,
-  isError,
-  isPending,
-}: ScheduleListProps) {
+function ScheduleList({ date, todaySchedules, isError }: ScheduleListProps) {
   const isHideBudgetMode = useAppSelector(selectIsBudgetHidden);
   const { openScheduleDrawer } = useScheduleDrawer();
-
-  if (isPending) {
-    return Array(3).map(() => <ConsumptionCardSkeleton />);
-  }
 
   if (todaySchedules.length === 0 || isError) {
     return (

@@ -14,7 +14,6 @@ import useHome from "@hooks/useHome.ts";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Swiper as SwiperType } from "swiper/types";
 import "swiper/css";
-import "./style.css";
 import WeekSchedulePage from "@pages/Home/pages/WeekSchedulePage/WeekSchedulePage.tsx";
 import MonthSchedulePage from "@pages/Home/pages/MonthSchedulePage/MonthSchedulePage.tsx";
 import DaySchedulePage from "@pages/Home/pages/DaySchedulePage/DaySchedulePage.tsx";

@@ -7,6 +7,7 @@ import ScheduleList from "@pages/Home/next-components/ScheduleList";
 import useMonthSchedule from "@hooks/home/useMonthSchedule.ts";
 import MonthlyBudgetSummarySkeleton from "@pages/Home/next-components/HomeHeader/MonthlyBudgetSummary/MonthlyBudgetSummarySkeleton.tsx";
 import CalendarHeaderSkeleton from "@pages/Home/next-components/ScheduleCalendar/CalendarHeader/CalendarHeaderSkeleton.tsx";
+import ScheduleListSkeleton from "@pages/Home/next-components/ScheduleList/ScheduleListSkeleton.tsx";
 
 function MonthSchedulePage() {
   const { date, monthData, isError, isPending, changeDate } =
@@ -22,6 +23,7 @@ function MonthSchedulePage() {
         <CalendarHeaderSkeleton date={date} />
         <Calendar value={date} handleChange={changeDate} />
         <ThickDivider />
+        <ScheduleListSkeleton />
       </>
     );
   }
@@ -52,7 +54,6 @@ function MonthSchedulePage() {
         date={date}
         todaySchedules={TodaySchedules}
         isError={isError}
-        isPending={isPending}
       />
     </>
   );
