@@ -13,6 +13,7 @@ interface ScheduleBase {
   period: SchedulePeriod;
   price_type: string;
   importance: string;
+  fix_amount: boolean;
 }
 
 export interface Schedule extends ScheduleBase {
@@ -20,7 +21,6 @@ export interface Schedule extends ScheduleBase {
   repeat_kind: "NONE" | "DAY" | "WEEK" | "MONTH" | "YEAR";
   repeat_options: { value: string; options: string | YearCategory };
   amount: string;
-  fix_amount: boolean;
   exclude: boolean;
 }
 
@@ -28,7 +28,6 @@ export interface RequestSchedule extends ScheduleBase {
   is_all_day: boolean;
   repeat: ScheduleRepeat;
   set_amount: string;
-  fix_amount: boolean;
   exclusion: boolean;
 }
 
