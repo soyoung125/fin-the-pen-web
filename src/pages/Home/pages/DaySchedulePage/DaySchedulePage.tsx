@@ -8,16 +8,22 @@ import MonthlyBudgetSummarySkeleton from "@pages/Home/next-components/HomeHeader
 import CalendarHeaderSkeleton from "@pages/Home/next-components/ScheduleCalendar/CalendarHeader/CalendarHeaderSkeleton.tsx";
 import ScheduleList from "@pages/Home/next-components/ScheduleList";
 import ScheduleListSkeleton from "@pages/Home/next-components/ScheduleList/ScheduleListSkeleton.tsx";
+import { HomePageProps } from "@pages/Home/Home.tsx";
+import { useEffect } from "react";
 
-function DaySchedulePage() {
+function DaySchedulePage({ updateHeight }: HomePageProps) {
   const { date, dayData, isError, isPending } = useDaySchedule();
   const { todaySchedules } = useSchedule();
   const isToday = moment().isSame(date, "day");
   const showPredict = moment().isSameOrBefore(date, "day");
 
+  useEffect(() => {
+    updateHeight();
+  }, [dayData]);
+
   if (isPending) {
     return (
-      <>
+      <div>
         <MonthlyBudgetSummarySkeleton
           expect={true}
           dayTitle={isToday ? "오늘의" : moment(date).format("M월D일")}
@@ -26,12 +32,12 @@ function DaySchedulePage() {
         <ThickDivider />
         <CalendarHeaderSkeleton date={date} />
         <ScheduleListSkeleton />
-      </>
+      </div>
     );
   }
 
   return (
-    <>
+    <div>
       <MonthlyBudgetSummary
         income={Number(dayData?.income)}
         expenditure={Number(dayData?.dayExpense)}
@@ -55,7 +61,7 @@ function DaySchedulePage() {
         todaySchedules={todaySchedules}
         isError={isError}
       />
-    </>
+    </div>
   );
 }
 

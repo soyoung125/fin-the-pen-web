@@ -6,16 +6,23 @@ import WeeklyCard from "@pages/Home/pages/WeekSchedulePage/components/WeeklyCard
 import moment from "moment/moment";
 import MonthlyBudgetSummarySkeleton from "@pages/Home/next-components/HomeHeader/MonthlyBudgetSummary/MonthlyBudgetSummarySkeleton.tsx";
 import WeeklyCardSkeleton from "@pages/Home/pages/WeekSchedulePage/components/WeeklyCard/WeeklyCardSkeleton.tsx";
+import { Box } from "@mui/material";
+import { useEffect } from "react";
+import { HomePageProps } from "@pages/Home/Home.tsx";
 
-function WeekSchedulePage() {
+function WeekSchedulePage({ updateHeight }: HomePageProps) {
   const { date, weekData, isPending } = useWeekSchedule();
   const weeks = Array.from({ length: 6 }, (_, i) => (i + 1).toString());
   const isThisMonth = moment().isSame(date, "month");
   const showPredict = moment().isSameOrBefore(date, "month");
 
+  useEffect(() => {
+    updateHeight();
+  }, [weekData]);
+
   if (isPending) {
     return (
-      <>
+      <Box>
         <MonthlyBudgetSummarySkeleton
           showPredict={showPredict}
           dayTitle={isThisMonth ? "이번달" : moment(date).format("M월")}
@@ -24,12 +31,12 @@ function WeekSchedulePage() {
         {weeks.map((w) => (
           <WeeklyCardSkeleton week={w} />
         ))}
-      </>
+      </Box>
     );
   }
 
   return (
-    <>
+    <Box>
       <MonthlyBudgetSummary
         income={parseInt(weekData?.income ?? "")}
         expenditure={parseInt(weekData?.expense ?? "")}
@@ -61,7 +68,7 @@ function WeekSchedulePage() {
             />
           );
         })}
-    </>
+    </Box>
   );
 }
 

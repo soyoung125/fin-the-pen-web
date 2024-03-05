@@ -19,6 +19,10 @@ import MonthSchedulePage from "@pages/Home/pages/MonthSchedulePage/MonthSchedule
 import DaySchedulePage from "@pages/Home/pages/DaySchedulePage/DaySchedulePage.tsx";
 import TodayButton from "@pages/Home/pages/DaySchedulePage/components/TodayButton/TodayButton.tsx";
 
+export interface HomePageProps {
+  updateHeight: () => void;
+}
+
 function Home() {
   const dispatch = useAppDispatch();
   const isHideBudgetMode = useAppSelector(selectIsBudgetHidden);
@@ -41,6 +45,12 @@ function Home() {
     swiper?.slideTo(newValue);
     setValue(newValue);
   };
+
+  const handleChangeIndex = (index: number) => {
+    setValue(index);
+  };
+
+  const updateHeight = () => swiper?.updateAutoHeight(10);
 
   useEffect(() => {
     dispatch(changeViewMode(VIEW_MODE.schedule));
@@ -81,13 +91,13 @@ function Home() {
         onSwiper={(swiper) => setSwiper(swiper)}
       >
         <SwiperSlide style={{ overflow: "scroll" }}>
-          <MonthSchedulePage />
+          <MonthSchedulePage updateHeight={updateHeight} />
         </SwiperSlide>
         <SwiperSlide>
-          <WeekSchedulePage />
+          <WeekSchedulePage updateHeight={updateHeight} />
         </SwiperSlide>
         <SwiperSlide>
-          <DaySchedulePage />
+          <DaySchedulePage updateHeight={updateHeight} />
         </SwiperSlide>
       </Swiper>
 

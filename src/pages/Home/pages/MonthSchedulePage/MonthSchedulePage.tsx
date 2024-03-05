@@ -8,17 +8,24 @@ import useMonthSchedule from "@hooks/home/useMonthSchedule.ts";
 import MonthlyBudgetSummarySkeleton from "@pages/Home/next-components/HomeHeader/MonthlyBudgetSummary/MonthlyBudgetSummarySkeleton.tsx";
 import CalendarHeaderSkeleton from "@pages/Home/next-components/ScheduleCalendar/CalendarHeader/CalendarHeaderSkeleton.tsx";
 import ScheduleListSkeleton from "@pages/Home/next-components/ScheduleList/ScheduleListSkeleton.tsx";
+import { Box } from "@mui/material";
+import { HomePageProps } from "@pages/Home/Home.tsx";
+import { useEffect } from "react";
 
-function MonthSchedulePage() {
+function MonthSchedulePage({ updateHeight }: HomePageProps) {
   const { date, monthData, isError, isPending, changeDate } =
     useMonthSchedule();
   const TodaySchedules = monthData?.today_schedule ?? [];
   const showPredict = moment().isSameOrBefore(date, "month");
   const isThisMonth = moment().isSame(date, "month");
 
+  useEffect(() => {
+    updateHeight();
+  }, [monthData]);
+
   if (isPending) {
     return (
-      <>
+      <Box>
         <MonthlyBudgetSummarySkeleton
           showPredict={showPredict}
           dayTitle={isThisMonth ? "이번달" : moment(date).format("M월")}
@@ -28,12 +35,12 @@ function MonthSchedulePage() {
         <Calendar value={date} handleChange={changeDate} />
         <ThickDivider />
         <ScheduleListSkeleton />
-      </>
+      </Box>
     );
   }
 
   return (
-    <>
+    <Box>
       <MonthlyBudgetSummary
         income={parseInt(monthData?.income ?? "")}
         expenditure={parseInt(monthData?.expense ?? "")}
@@ -60,7 +67,7 @@ function MonthSchedulePage() {
         todaySchedules={TodaySchedules}
         isError={isError}
       />
-    </>
+    </Box>
   );
 }
 
