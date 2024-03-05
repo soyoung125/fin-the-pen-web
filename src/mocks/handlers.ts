@@ -8,7 +8,7 @@ import {
 import { getLocalStorage, setLocalStorage } from "@utils/storage.ts";
 import { DOMAIN } from "@api/url.ts";
 import { MockUser, SignUp, User } from "@app/types/auth.ts";
-import { Schedule, TodaySchedule } from "@app/types/schedule.ts";
+import { Schedule } from "@app/types/schedule.ts";
 import moment from "moment";
 
 const getSign = (type: string) => (type === "Plus" ? "+" : "-");
@@ -124,7 +124,6 @@ export const handlers = [
     const newSchedules = prevSchedules.filter(
       (schedule) => schedule.schedule_id !== schedule_id
     );
-    console.log(newSchedules);
     setLocalStorage(LOCAL_STORAGE_KEY_SCHEDULES, newSchedules);
     return res(ctx.delay(1000), ctx.status(200), ctx.json(true));
   }),
@@ -161,7 +160,7 @@ export const handlers = [
   }),
 
   rest.post(`${DOMAIN}/home/month`, async (req, res, ctx) => {
-    const { user_id, main_month, calendar_date } = await req.json();
+    const { user_id, calendar_date } = await req.json();
     const schedules = getLocalStorage<Schedule[]>(
       LOCAL_STORAGE_KEY_SCHEDULES,
       []
@@ -196,16 +195,16 @@ export const handlers = [
   }),
 
   rest.post(`${DOMAIN}/home/week`, async (req, res, ctx) => {
-    const { user_id, main_month, calendar_date } = await req.json();
-    const schedules = getLocalStorage<Schedule[]>(
-      LOCAL_STORAGE_KEY_SCHEDULES,
-      []
-    );
-    const monthSchedules = schedules.filter(
-      (schedule) =>
-        schedule.user_id === user_id &&
-        moment(calendar_date).isSame(schedule.start_date, "month")
-    );
+    // const { user_id, calendar_date } = await req.json();
+    // const schedules = getLocalStorage<Schedule[]>(
+    //   LOCAL_STORAGE_KEY_SCHEDULES,
+    //   []
+    // );
+    // const monthSchedules = schedules.filter(
+    //   (schedule) =>
+    //     schedule.user_id === user_id &&
+    //     moment(calendar_date).isSame(schedule.start_date, "month")
+    // );
     // if (monthSchedules.length === 0) {
     //   return res(ctx.delay(1000), ctx.status(400));
     // }
@@ -222,7 +221,7 @@ export const handlers = [
   }),
 
   rest.post(`${DOMAIN}/home/day`, async (req, res, ctx) => {
-    const { user_id, main_month, calendar_date } = await req.json();
+    const { user_id, calendar_date } = await req.json();
     const schedules = getLocalStorage<Schedule[]>(
       LOCAL_STORAGE_KEY_SCHEDULES,
       []
