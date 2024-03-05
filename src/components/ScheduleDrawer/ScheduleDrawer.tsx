@@ -42,7 +42,7 @@ function ScheduleDrawer({ handleClose }: ScheduleDrawerProps) {
   const handleReset = async () => {
     const answer = await openConfirm({
       title: "알림",
-      content: "입력 정보를 초기화하시겠습니까?",
+      content: "모든 정보를 초기화하시겠습니까?",
       approveText: "네",
       rejectText: "아니오",
     });

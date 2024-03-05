@@ -11,6 +11,7 @@ import { useScheduleForm } from "../../hooks/useScheduleForm.ts";
 import { selectGuestMode } from "@redux/slices/commonSlice.tsx";
 import { useUser } from "@app/tanstack-query/useUser.ts";
 import { NEED_SIGN_IN } from "@constants/messages.tsx";
+import { useDialog } from "@hooks/dialog/useDialog.tsx";
 
 interface CreateFooterInterface {
   handleSubmit: () => boolean;
@@ -24,11 +25,20 @@ function CreateFooter({ handleSubmit, handleClose }: CreateFooterInterface) {
   const { data: user } = useUser();
   const { handleCreateSchedule } = useSchedule();
   const { setRandomGeneratedSchedule } = useScheduleForm();
+  const { openConfirm } = useDialog();
 
-  const handleCreate = () => {
+  const handleCreate = async () => {
     if (handleSubmit() && schedule) {
-      handleCreateSchedule(schedule);
-      handleClose();
+      const answer = await openConfirm({
+        title: "알림",
+        content: "현재 정보로 설정하시겠습니까?",
+        approveText: "네",
+        rejectText: "아니오",
+      });
+      if (answer) {
+        handleCreateSchedule(schedule);
+        handleClose();
+      }
     }
   };
 
