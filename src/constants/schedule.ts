@@ -80,6 +80,7 @@ export const SCHEDULE_REQUEST = (schedule: Schedule) => {
     set_amount: schedule.amount,
     exclusion: schedule.exclude,
     repeat: repeat,
+    repeat_kind: schedule.repeat_kind,
   };
 };
 

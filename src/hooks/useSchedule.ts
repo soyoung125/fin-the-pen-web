@@ -57,22 +57,20 @@ const useSchedule = () => {
     createSchedule(scheduleWithUuid);
   };
 
-  const handleDeleteSchedule = async (schedule: RequestSchedule) => {
-    const answer = await openModal({
-      changeMode: "삭제",
-    });
-    if (answer && user) {
-      deleteSchedule(schedule, answer as string, user.user_id);
+  const handleDeleteSchedule = async (
+    schedule: RequestSchedule,
+    answer: string
+  ) => {
+    if (user) {
+      deleteSchedule(schedule, answer, user.user_id);
     }
   };
 
-  const handleModifySchedule = async (schedule: RequestSchedule) => {
-    const answer = await openModal({
-      changeMode: "수정",
-    });
-    if (answer) {
-      modifySchedule(schedule, answer as string);
-    }
+  const handleModifySchedule = async (
+    schedule: RequestSchedule,
+    answer: string
+  ) => {
+    modifySchedule(schedule, answer);
   };
 
   const resetSchedule = () => {

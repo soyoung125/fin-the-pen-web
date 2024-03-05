@@ -26,6 +26,7 @@ export interface Schedule extends ScheduleBase {
 
 export interface RequestSchedule extends ScheduleBase {
   is_all_day: boolean;
+  repeat_kind?: "NONE" | "DAY" | "WEEK" | "MONTH" | "YEAR";
   repeat: ScheduleRepeat;
   set_amount: string;
   exclusion: boolean;
