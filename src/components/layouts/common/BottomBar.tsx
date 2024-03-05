@@ -7,7 +7,11 @@ import SettingsIcon from "@mui/icons-material/Settings";
 import PaidIcon from "@mui/icons-material/Paid";
 import moment from "moment";
 import { INIT_SCHEDULE } from "@constants/schedule.ts";
-import { changeViewMode, selectDate } from "@redux/slices/scheduleSlice.tsx";
+import {
+  changeViewMode,
+  selectDate,
+  selectScheduleForm,
+} from "@redux/slices/scheduleSlice.tsx";
 import { useAppDispatch, useAppSelector } from "@redux/hooks.ts";
 import {
   selectBottomBarOpen,
