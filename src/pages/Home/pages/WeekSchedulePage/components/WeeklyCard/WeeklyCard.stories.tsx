@@ -15,7 +15,6 @@ const meta = {
       minus: 1000,
     },
     isThisWeek: true,
-    isThisMonth: true,
   },
   argTypes: {},
 } satisfies Meta<typeof WeeklyCard>;

@@ -33,8 +33,7 @@ function ReportCategoryDetails() {
     // </>
     <>
       <ScheduleListHeader
-        year={2024}
-        month={5}
+        date={"2024년 3월"}
         addMonth={() => alert("add month")}
         subtractMonth={() => alert("subtract month")}
         changeMonth={() => alert("change month")}
