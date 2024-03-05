@@ -64,19 +64,21 @@ export const handlers = [
       (s) => s.schedule_id === schedule.schedule_id
     );
     if (isExist) {
-      return res(ctx.delay(1000), ctx.status(500), ctx.json(false));
+      return res(ctx.delay(1000), ctx.status(400), ctx.json(false));
     }
+    const repeatType = schedule.repeat.kind_type;
     const newSchedules: Schedule[] = [
       ...prevSchedules,
       {
         ...schedule,
         price_type: getSign(schedule.price_type),
         all_day: schedule.is_all_day,
-        repeat_kind: schedule.repeat.repeat_kind.toUpperCase(),
+        repeat_kind: repeatType.toLocaleUpperCase(),
         repeat_options: {
           value:
-            schedule.repeat[`${schedule.repeat.repeat_kind}_type`].value ??
-            null,
+            repeatType !== "none"
+              ? schedule.repeat[`${repeatType}_type`].repeat_value
+              : null,
           options: null,
         },
         amount: schedule.set_amount,

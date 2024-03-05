@@ -11,9 +11,6 @@ const fetchCreateSchedule = async (schedule: RequestSchedule) => {
   const token = getSessionStorage(SESSION_STORAGE_KEY_TOKEN, "");
   const data = {
     ...schedule,
-    // is_all_day: schedule.all_day,
-    // set_amount: schedule.amount,
-    // exclusion: schedule.exclude,
     price_type: getSign(schedule.price_type),
   };
 
