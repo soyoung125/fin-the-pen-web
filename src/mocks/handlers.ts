@@ -115,7 +115,7 @@ export const handlers = [
     );
   }),
 
-  rest.post(`${DOMAIN}/deleteSchedule`, async (req, res, ctx) => {
+  rest.delete(`${DOMAIN}/deleteSchedule`, async (req, res, ctx) => {
     const { schedule_id } = await req.json();
     const prevSchedules = getLocalStorage<Schedule[]>(
       LOCAL_STORAGE_KEY_SCHEDULES,
@@ -124,6 +124,7 @@ export const handlers = [
     const newSchedules = prevSchedules.filter(
       (schedule) => schedule.schedule_id !== schedule_id
     );
+    console.log(newSchedules);
     setLocalStorage(LOCAL_STORAGE_KEY_SCHEDULES, newSchedules);
     return res(ctx.delay(1000), ctx.status(200), ctx.json(true));
   }),
@@ -135,17 +136,19 @@ export const handlers = [
       LOCAL_STORAGE_KEY_SCHEDULES,
       []
     );
+    const repeatType = schedule.repeat.kind_type;
     const newSchedules = prevSchedules.map((s) =>
       s.schedule_id === schedule.schedule_id
         ? {
             ...schedule,
             price_type: getSign(schedule.price_type),
             all_day: schedule.is_all_day,
-            repeat_kind: schedule.repeat.repeat_kind.toUpperCase(),
+            repeat_kind: repeatType.toLocaleUpperCase(),
             repeat_options: {
               value:
-                schedule.repeat[`${schedule.repeat.repeat_kind}_type`].value ??
-                null,
+                repeatType !== "none"
+                  ? schedule.repeat[`${repeatType}_type`].repeat_value
+                  : null,
               options: null,
             },
             amount: schedule.set_amount,
