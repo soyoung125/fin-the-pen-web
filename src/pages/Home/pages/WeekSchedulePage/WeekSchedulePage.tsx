@@ -16,7 +16,10 @@ function WeekSchedulePage() {
   if (isPending) {
     return (
       <>
-        <MonthlyBudgetSummarySkeleton showPredict={showPredict} />{" "}
+        <MonthlyBudgetSummarySkeleton
+          showPredict={showPredict}
+          dayTitle={isThisMonth ? "이번달" : moment(date).format("M월")}
+        />
         <ThickDivider />
         {weeks.map((w) => (
           <WeeklyCardSkeleton week={w} />
@@ -32,6 +35,7 @@ function WeekSchedulePage() {
         expenditure={parseInt(weekData?.expense ?? "")}
         availableAmount={parseInt(weekData?.available ?? "")}
         showPredict={showPredict}
+        dayTitle={isThisMonth ? "이번달" : moment(date).format("M월")}
       />
 
       <ThickDivider />

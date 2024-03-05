@@ -14,11 +14,15 @@ function MonthSchedulePage() {
     useMonthSchedule();
   const TodaySchedules = monthData?.today_schedule ?? [];
   const showPredict = moment().isSameOrBefore(date, "month");
+  const isThisMonth = moment().isSame(date, "month");
 
   if (isPending) {
     return (
       <>
-        <MonthlyBudgetSummarySkeleton showPredict={showPredict} />
+        <MonthlyBudgetSummarySkeleton
+          showPredict={showPredict}
+          dayTitle={isThisMonth ? "이번달" : moment(date).format("M월")}
+        />
         <ThickDivider />
         <CalendarHeaderSkeleton date={date} />
         <Calendar value={date} handleChange={changeDate} />
@@ -35,6 +39,7 @@ function MonthSchedulePage() {
         expenditure={parseInt(monthData?.expense ?? "")}
         availableAmount={parseInt(monthData?.available ?? "")}
         showPredict={showPredict}
+        dayTitle={isThisMonth ? "이번달" : moment(date).format("M월")}
       />
 
       <ThickDivider />

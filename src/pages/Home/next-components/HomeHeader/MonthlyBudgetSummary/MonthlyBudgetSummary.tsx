@@ -6,7 +6,7 @@ export interface MonthlyBudgetSummaryProps {
   expenditure: number;
   expect?: number;
   availableAmount?: number;
-  dayTitle?: string;
+  dayTitle: string;
   showPredict?: boolean;
 }
 
@@ -40,7 +40,7 @@ function MonthlyBudgetSummary({
         {budgetList.map(({ title, amount }) => (
           <SummaryCard
             key={title}
-            title={`${dayTitle ? dayTitle : "이번달"} ${title}`}
+            title={`${dayTitle} ${title}`}
             amount={amount}
           />
         ))}
