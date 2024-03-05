@@ -172,11 +172,6 @@ export const SCHEDULE_DRAWER_MODE = {
   create: "create",
 } as const;
 
-export const NEED_TITLE = "제목을 입력해야 합니다.";
-export const NEED_CATEGORY = "카테고리를 선택해야 합니다.";
-export const WRONG_TIME_ORDER =
-  "종료 시각이 시작 시각보다 빠르지 않았으면 좋겠어요.";
-
 export const INIT_SCHEDULE = (date: string): RequestSchedule => {
   const startDate = moment(date);
   const endDate = moment(date);
@@ -205,13 +200,6 @@ export const INIT_SCHEDULE = (date: string): RequestSchedule => {
     exclusion: false, // false면 포함
   };
 };
-
-export const REPEAT_CYCLE = {
-  일간: "days",
-  주간: "weeks",
-  월간: "months",
-  연간: "years",
-} as const;
 
 export const VIEW_MODE = {
   asset: "asset",

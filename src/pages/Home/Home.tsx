@@ -46,10 +46,6 @@ function Home() {
     setValue(newValue);
   };
 
-  const handleChangeIndex = (index: number) => {
-    setValue(index);
-  };
-
   const updateHeight = () => swiper?.updateAutoHeight(10);
 
   useEffect(() => {
