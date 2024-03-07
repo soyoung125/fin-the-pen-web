@@ -12,6 +12,7 @@ export interface ConsumptionCardProps {
   type: string;
   isRepeat: boolean;
   onClick: () => void;
+  icon?: boolean;
 }
 
 function ConsumptionCard({
@@ -23,6 +24,7 @@ function ConsumptionCard({
   endTime,
   isRepeat,
   onClick,
+  icon,
 }: ConsumptionCardProps) {
   const isPredict = moment().isBefore(date, "day");
   const isSpend = type === "-";
@@ -36,13 +38,15 @@ function ConsumptionCard({
       p={2}
       onClick={onClick}
     >
-      <Avatar
-        // alt="Remy Sharp"
-        // src="/static/images/avatar/1.jpg"
-        sx={{ width: 36, height: 36 }}
-      >
-        category
-      </Avatar>
+      {icon && (
+        <Avatar
+          // alt="Remy Sharp"
+          // src="/static/images/avatar/1.jpg"
+          sx={{ width: 36, height: 36 }}
+        >
+          category
+        </Avatar>
+      )}
       <Stack
         justifyContent="space-between"
         sx={{ flexGrow: 1, height: "48px" }}

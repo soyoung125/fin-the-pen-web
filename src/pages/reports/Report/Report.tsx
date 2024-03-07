@@ -4,7 +4,7 @@ import SettingsIcon from "@mui/icons-material/Settings";
 import PredictBox from "@pages/reports/Report/components/PredictBox";
 import AccountBalanceWalletIcon from "@mui/icons-material/AccountBalanceWallet";
 import InfoOutlinedIcon from "@mui/icons-material/InfoOutlined";
-import useReport from "@hooks/useReport.ts";
+import useReport from "@hooks/report/useReport.ts";
 import useHeader from "@hooks/useHeader.ts";
 import { HEADER_MODE } from "@app/types/common.ts";
 import { useModal } from "@hooks/modal/useModal.tsx";

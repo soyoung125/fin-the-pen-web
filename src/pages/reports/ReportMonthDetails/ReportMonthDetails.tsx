@@ -1,13 +1,14 @@
 import TopNavigationBar from "@components/layouts/common/TopNavigationBar";
-import { Stack } from "@mui/material";
+import { Button, Stack } from "@mui/material";
 import ReportMonthTitle from "@pages/reports/ReportMonthDetails/components/ReportMonthTitle";
-import useReport from "@hooks/useReport.ts";
+import useReport from "@hooks/report/useReport.ts";
 import useHeader from "@hooks/useHeader.ts";
 import { useNavigate } from "react-router-dom";
 import ReportList from "@pages/reports/ReportMonthDetails/components/ReportList";
 import { useScheduleDrawer } from "@hooks/useScheduleDrawer.tsx";
 import { INIT_SCHEDULE } from "@constants/schedule.ts";
 import moment from "moment";
+import { PATH } from "@constants/path.ts";
 
 function ReportMonthDetails() {
   useHeader(false);
@@ -51,6 +52,9 @@ function ReportMonthDetails() {
           maxPercent={maxPercent}
           handleClickAddSchedule={handleClickAddSchedule}
         />
+        <Button onClick={() => navigate(`${PATH.reportCategoryDetail}/외식`)}>
+          test
+        </Button>
       </Stack>
     </>
   );

@@ -53,6 +53,7 @@ function ScheduleList({ date, todaySchedules, isError }: ScheduleListProps) {
           price={Number(s.amount)}
           isRepeat={s.repeat_kind !== "NONE"}
           onClick={() => handleModal(s)}
+          icon
         />
       ))}
     </>

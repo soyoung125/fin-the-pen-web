@@ -9,6 +9,7 @@ import ThickDivider from "@components/common/ThickDivider.tsx";
 import ConsumptionHeader from "@components/ScheduleList/ConsumptionHeader";
 import ConsumptionCard from "@components/ScheduleList/ConsumptionCard";
 import { Schedule } from "@app/types/schedule.ts";
+import useCategoryReport from "@hooks/report/useCategoryReport.ts";
 
 function ReportCategoryDetails() {
   useHeader(false);
@@ -16,27 +17,24 @@ function ReportCategoryDetails() {
   const count = 10; // tanstack query 연동 예정
   const options = ["최신순", "과거순", "높은 금액순", "낮은 금액순"];
   const [selectedOption, setSelectedOption] = useState(options[0]);
-  const schedules: Schedule[] = [];
+  const {
+    report,
+    isError,
+    isPending,
+    year,
+    month,
+    addMonth,
+    subtractMonth,
+    pickMonth,
+  } = useCategoryReport();
 
   return (
-    // <>
-    //   <TopNavigationBar
-    //     onClick={() => navigate(-1)}
-    //     title="카테고리 소비 상세 내역"
-    //   />
-    //   <ReportListHeader
-    //     count={count}
-    //     options={options}
-    //     selectedOption={selectedOption}
-    //     setSelectedOption={setSelectedOption}
-    //   />
-    // </>
     <>
       <ScheduleListHeader
-        date={"2024년 3월"}
-        addMonth={() => alert("add month")}
-        subtractMonth={() => alert("subtract month")}
-        changeMonth={() => alert("change month")}
+        date={`${year}년 ${month}월`}
+        addMonth={addMonth}
+        subtractMonth={subtractMonth}
+        changeMonth={pickMonth}
         handleClickSearch={() => alert("search")}
         handleClickFilter={() => alert("filter")}
       />
@@ -57,20 +55,23 @@ function ReportCategoryDetails() {
         setSelectedOption={setSelectedOption}
       />
 
-      <>api 미연동</>
-
-      {/*<ConsumptionHeader date="2023-10-06" />*/}
-      {/*{schedules.map((schedule) => (*/}
-      {/*  <ConsumptionCard*/}
-      {/*    name={schedule.event_name}*/}
-      {/*    price={Number(schedule.amount)}*/}
-      {/*    date="2023-10-06"*/}
-      {/*    startTime={schedule.start_time}*/}
-      {/*    endTime={schedule.end_time}*/}
-      {/*    type={schedule.price_type}*/}
-      {/*    isRepeat={false}*/}
-      {/*  />*/}
-      {/*))}*/}
+      {Object.keys(report?.month_schedule ?? {}).map((date) => (
+        <>
+          <ConsumptionHeader date={date} />
+          {report?.month_schedule[date].map((schedule) => (
+            <ConsumptionCard
+              name={schedule.event_name}
+              price={Number(schedule.amount)}
+              date="2023-10-06"
+              startTime={schedule.start_time}
+              endTime={schedule.end_time}
+              type={schedule.price_type}
+              isRepeat={schedule.repeat_kind !== "NONE"}
+              onClick={() => alert("click")}
+            />
+          ))}
+        </>
+      ))}
     </>
   );
 }
