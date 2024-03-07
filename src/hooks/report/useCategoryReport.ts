@@ -1,9 +1,7 @@
 import { useState } from "react";
 import { useDatePicker } from "@hooks/date-picker/hooks/useDatePicker.tsx";
 import { useUser } from "@app/tanstack-query/useUser.ts";
-import { useReports } from "@app/tanstack-query/reports/useReports.ts";
 import moment from "moment";
-import { useSetGoal } from "@app/tanstack-query/reports/useSetGoal.ts";
 import { useCategoryDetail } from "@app/tanstack-query/reports/useCategoryDetail.ts";
 import { useParams } from "react-router-dom";
 
