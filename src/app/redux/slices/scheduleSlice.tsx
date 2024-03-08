@@ -11,6 +11,7 @@ import {
 import { AnalysisData } from "@app/types/common.ts";
 import { CATEGORIES, COLORLIST } from "../../../constants/categories.ts";
 import { RootState } from "../store.ts";
+import { INIT_SCHEDULE } from "@constants/schedule.ts";
 
 interface InitialState {
   // 메인
@@ -38,7 +39,7 @@ const initialState: InitialState = {
   date: moment(new Date()),
   viewMode: "asset",
   schedules: [],
-  scheduleForm: null,
+  scheduleForm: INIT_SCHEDULE(moment().format("YYYY=MM-DD")),
   analyzedData: {
     data: [],
     total: 0,

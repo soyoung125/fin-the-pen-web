@@ -18,9 +18,10 @@ import { useDialog } from "@hooks/dialog/useDialog.tsx";
 
 interface ScheduleDrawerProps {
   handleClose: () => void;
+  resetSchedule: () => void;
 }
 
-function ScheduleDrawer({ handleClose }: ScheduleDrawerProps) {
+function ScheduleDrawer({ handleClose, resetSchedule }: ScheduleDrawerProps) {
   // 추후 삭제 예정
   // const random = Math.floor(Math.random() * 4); // 현재 CONSUMPTION_ALERTS의 길이가 4임
   //
@@ -31,7 +32,7 @@ function ScheduleDrawer({ handleClose }: ScheduleDrawerProps) {
   const [isCategoryPickerOpen, setIsCategoryPickerOpen] = useState(false);
   const [isRepeatPickerOpen, setIsRepeatPickerOpen] = useState(false);
 
-  const { resetSchedule } = useSchedule();
+  // const { resetSchedule } = useSchedule();
   const { openConfirm } = useDialog();
 
   const handleChange = (event: React.SyntheticEvent, newValue: number) => {

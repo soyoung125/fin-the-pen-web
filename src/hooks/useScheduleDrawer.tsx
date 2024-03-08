@@ -25,6 +25,11 @@ export const useScheduleDrawer = () => {
   const openScheduleDrawer = (data: RequestSchedule) => {
     if (schedule?.schedule_id !== data.schedule_id)
       dispatch(setDrawerScheduleForm(data));
+    if (!schedule?.schedule_id && data.start_date !== schedule?.start_date)
+      dispatch(setDrawerScheduleForm(data));
+
+    const resetSchedule = () => dispatch(setDrawerScheduleForm(data));
+
     openOverlay(
       <Root>
         <CssBaseline />
@@ -38,7 +43,10 @@ export const useScheduleDrawer = () => {
             keepMounted: true,
           }}
         >
-          <ScheduleDrawer handleClose={closeOverlay} />
+          <ScheduleDrawer
+            handleClose={closeOverlay}
+            resetSchedule={resetSchedule}
+          />
         </SwipeableDrawer>
       </Root>
     );
