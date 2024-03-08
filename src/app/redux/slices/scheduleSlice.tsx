@@ -9,7 +9,7 @@ import {
   ViewModeValue,
 } from "@app/types/schedule.ts";
 import { AnalysisData } from "@app/types/common.ts";
-import { CATEGORIES, COLORLIST } from "../../../constants/categories.ts";
+import { CATEGORIES, COLORLIST } from "@constants/categories.ts";
 import { RootState } from "../store.ts";
 import { INIT_SCHEDULE } from "@constants/schedule.ts";
 

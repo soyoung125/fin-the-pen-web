@@ -1,8 +1,7 @@
 import { Meta } from "@storybook/react";
 import ConsumptionCard, { ConsumptionCardProps } from "./ConsumptionCard.tsx";
 import ConsumptionCardSkeleton from "./ConsumptionCardSkeleton.tsx";
-import { INIT_PERIOD, INIT_REPEAT } from "@constants/schedule.ts";
-import { getType } from "@components/ScheduleDrawer/hooks/useScheduleForm.ts";
+import { INIT_PERIOD } from "@constants/schedule.ts";
 import moment from "moment";
 
 const meta = {

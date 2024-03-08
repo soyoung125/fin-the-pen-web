@@ -18,7 +18,6 @@ function ReportCategoryDetails() {
   const options = ["최신순", "과거순"];
   const {
     report,
-    isError,
     isPending,
     year,
     month,
