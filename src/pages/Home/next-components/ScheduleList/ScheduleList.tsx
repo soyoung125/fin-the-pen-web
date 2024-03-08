@@ -45,12 +45,7 @@ function ScheduleList({ date, todaySchedules, isError }: ScheduleListProps) {
     <>
       {todaySchedules.map((s) => (
         <ConsumptionCard
-          name={s.event_name}
-          date={s.start_date}
-          endTime={s.end_time}
-          startTime={s.start_time}
-          type={s.price_type}
-          price={Number(s.amount)}
+          schedule={s}
           isRepeat={s.repeat_kind !== "NONE"}
           onClick={() => handleModal(s)}
           icon

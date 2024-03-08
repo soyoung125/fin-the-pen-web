@@ -2,32 +2,23 @@ import { Avatar, Box, Stack, Typography } from "@mui/material";
 import RepeatRoundedIcon from "@mui/icons-material/RepeatRounded";
 import { AmountComponent, AmountType } from "./ConsumptionCard.styles.ts";
 import moment from "moment";
+import { Schedule } from "@app/types/schedule.ts";
 
 export interface ConsumptionCardProps {
-  name: string;
-  price: number;
-  date: string;
-  startTime: string;
-  endTime: string;
-  type: string;
+  schedule: Schedule;
   isRepeat: boolean;
   onClick: () => void;
   icon?: boolean;
 }
 
 function ConsumptionCard({
-  type,
-  price,
-  name,
-  date,
-  startTime,
-  endTime,
+  schedule,
   isRepeat,
   onClick,
   icon,
 }: ConsumptionCardProps) {
-  const isPredict = moment().isBefore(date, "day");
-  const isSpend = type === "-";
+  const isPredict = moment().isBefore(schedule.end_date, "day");
+  const isSpend = schedule.price_type === "-";
 
   return (
     <Stack
@@ -53,20 +44,20 @@ function ConsumptionCard({
       >
         <Stack direction="row" alignItems="center" spacing={0.5}>
           <Typography fontSize="13px" fontWeight={500}>
-            {startTime}-{endTime}
+            {schedule.start_date}-{schedule.end_date}
           </Typography>
           {isRepeat && <RepeatRoundedIcon color="success" fontSize="small" />}
         </Stack>
 
-        <Typography variant="h4">{name}</Typography>
+        <Typography variant="h4">{schedule.event_name}</Typography>
       </Stack>
 
       <Box height={48}>
         <AmountComponent $isPredict={isPredict}>
           <AmountType $isPredict={isPredict} $isSpend={isSpend}>
-            {type}
+            {schedule.price_type}
           </AmountType>
-          {price.toLocaleString()}
+          {schedule.amount.toLocaleString()}
         </AmountComponent>
       </Box>
     </Stack>

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import useHeader from "@hooks/useHeader.ts";
 import TopNavigationBar from "@components/layouts/common/TopNavigationBar";
 import { useNavigate } from "react-router-dom";
@@ -13,8 +13,7 @@ import useCategoryReport from "@hooks/report/useCategoryReport.ts";
 
 function ReportCategoryDetails() {
   useHeader(false);
-  const options = ["최신순", "과거순", "높은 금액순", "낮은 금액순"];
-  const [selectedOption, setSelectedOption] = useState(options[0]);
+  const options = ["최신순", "과거순"];
   const {
     report,
     isError,
@@ -25,6 +24,26 @@ function ReportCategoryDetails() {
     subtractMonth,
     pickMonth,
   } = useCategoryReport();
+  const [selectedOption, setSelectedOption] = useState(options[0]);
+  const [scheduleDates, setScheduleDates] = useState<string[]>([]);
+
+  useEffect(() => {
+    const keys = Object.keys(report?.month_schedule ?? {});
+    console.log(keys);
+    if (selectedOption === "최신순") {
+      setScheduleDates(keys);
+    } else {
+      setScheduleDates(keys.reverse());
+    }
+  }, [report, selectedOption]);
+
+  if (isPending) {
+    return <>loading</>;
+  }
+
+  if (!report) {
+    return <>데이터가 없습니다.</>;
+  }
 
   return (
     <>
@@ -53,23 +72,21 @@ function ReportCategoryDetails() {
         setSelectedOption={setSelectedOption}
       />
 
-      {Object.keys(report?.month_schedule ?? {}).map((date) => (
-        <>
-          <ConsumptionHeader date={date} />
-          {report?.month_schedule[date].map((schedule) => (
-            <ConsumptionCard
-              name={schedule.event_name}
-              price={Number(schedule.amount)}
-              date="2023-10-06"
-              startTime={schedule.start_time}
-              endTime={schedule.end_time}
-              type={schedule.price_type}
-              isRepeat={schedule.repeat_kind !== "NONE"}
-              onClick={() => alert("click")}
-            />
-          ))}
-        </>
-      ))}
+      {scheduleDates.map(
+        (date) =>
+          report.month_schedule[date] && (
+            <>
+              <ConsumptionHeader date={date} />
+              {report.month_schedule[date].map((schedule) => (
+                <ConsumptionCard
+                  schedule={schedule}
+                  isRepeat={schedule.repeat_kind !== "NONE"}
+                  onClick={() => alert("click")}
+                />
+              ))}
+            </>
+          )
+      )}
     </>
   );
 }
