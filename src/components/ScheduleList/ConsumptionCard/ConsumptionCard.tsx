@@ -3,6 +3,7 @@ import RepeatRoundedIcon from "@mui/icons-material/RepeatRounded";
 import { AmountComponent, AmountType } from "./ConsumptionCard.styles.ts";
 import moment from "moment";
 import { Schedule } from "@app/types/schedule.ts";
+import { getPriceTypeSign } from "@components/ScheduleDrawer/hooks/useScheduleForm.ts";
 
 export interface ConsumptionCardProps {
   schedule: Schedule;
@@ -55,9 +56,9 @@ function ConsumptionCard({
       <Box height={48}>
         <AmountComponent $isPredict={isPredict}>
           <AmountType $isPredict={isPredict} $isSpend={isSpend}>
-            {schedule.price_type}
+            {getPriceTypeSign(schedule.price_type)}
           </AmountType>
-          {schedule.amount.toLocaleString()}
+          {Number(schedule.amount).toLocaleString()}
         </AmountComponent>
       </Box>
     </Stack>

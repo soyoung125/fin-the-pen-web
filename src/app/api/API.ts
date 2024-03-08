@@ -6,8 +6,6 @@ import {
 } from "@app/types/schedule.ts";
 import { DOMAIN } from "./url.ts";
 
-import { getSign } from "@components/ScheduleDrawer/hooks/useScheduleForm.ts";
-
 export const fetchGetTransavrionList = async (data: any) => {
   try {
     const response: AxiosResponse<any[]> = await axios.post<any[]>(
