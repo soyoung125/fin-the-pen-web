@@ -42,7 +42,11 @@ const fetchCategoryDetail = async (query: CategoryDetailQuery) => {
       }
     }, Promise.resolve(init));
 
-    return { ...response, month_schedule: schedules };
+    return {
+      ...response,
+      month_schedule: schedules,
+      count: response.month_schedule.length,
+    };
   });
 };
 

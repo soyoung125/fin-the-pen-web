@@ -13,8 +13,6 @@ import useCategoryReport from "@hooks/report/useCategoryReport.ts";
 
 function ReportCategoryDetails() {
   useHeader(false);
-  const navigate = useNavigate();
-  const count = 10; // tanstack query 연동 예정
   const options = ["최신순", "과거순", "높은 금액순", "낮은 금액순"];
   const [selectedOption, setSelectedOption] = useState(options[0]);
   const {
@@ -42,14 +40,14 @@ function ReportCategoryDetails() {
       <ReportCategorySummary
         goal={1000000}
         amount={750000}
-        category="식비"
+        category={report?.category ?? ""}
         data={[10, 55, 35]}
       />
 
       <ThickDivider />
 
       <ReportListHeader
-        count={10}
+        count={report?.count ?? 0}
         options={options}
         selectedOption={selectedOption}
         setSelectedOption={setSelectedOption}

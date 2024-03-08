@@ -60,4 +60,5 @@ export interface CategoryDetail {
   category_expense: string;
   category: string;
   category_expect: string;
+  count: number;
 }
