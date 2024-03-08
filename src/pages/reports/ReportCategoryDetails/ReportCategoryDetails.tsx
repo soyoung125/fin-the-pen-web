@@ -10,6 +10,8 @@ import ConsumptionHeader from "@components/ScheduleList/ConsumptionHeader";
 import ConsumptionCard from "@components/ScheduleList/ConsumptionCard";
 import { Schedule } from "@app/types/schedule.ts";
 import useCategoryReport from "@hooks/report/useCategoryReport.ts";
+import ScheduleList from "@pages/Home/next-components/ScheduleList";
+import { Box, Stack, Typography } from "@mui/material";
 
 function ReportCategoryDetails() {
   useHeader(false);
@@ -29,7 +31,7 @@ function ReportCategoryDetails() {
 
   useEffect(() => {
     const keys = Object.keys(report?.month_schedule ?? {});
-    console.log(keys);
+    console.log(report);
     if (selectedOption === "최신순") {
       setScheduleDates(keys);
     } else {
@@ -39,10 +41,6 @@ function ReportCategoryDetails() {
 
   if (isPending) {
     return <>loading</>;
-  }
-
-  if (!report) {
-    return <>데이터가 없습니다.</>;
   }
 
   return (
@@ -72,21 +70,22 @@ function ReportCategoryDetails() {
         setSelectedOption={setSelectedOption}
       />
 
-      {scheduleDates.map(
-        (date) =>
-          report.month_schedule[date] && (
-            <>
-              <ConsumptionHeader date={date} />
-              {report.month_schedule[date].map((schedule) => (
-                <ConsumptionCard
-                  schedule={schedule}
-                  isRepeat={schedule.repeat_kind !== "NONE"}
-                  onClick={() => alert("click")}
-                />
-              ))}
-            </>
-          )
+      {scheduleDates.length === 0 && (
+        <Stack justifyContent="center" alignItems="center">
+          <Box my={5}>
+            <Typography>등록된 일정이 없습니다!</Typography>
+          </Box>
+        </Stack>
       )}
+
+      {scheduleDates.map((date) => (
+        <ScheduleList
+          showHeader
+          date={date}
+          todaySchedules={report?.month_schedule[date] ?? []}
+          isError={!report?.month_schedule[date]}
+        />
+      ))}
     </>
   );
 }

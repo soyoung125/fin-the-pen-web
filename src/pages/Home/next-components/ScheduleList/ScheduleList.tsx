@@ -5,14 +5,21 @@ import { useAppSelector } from "@redux/hooks.ts";
 import { selectIsBudgetHidden } from "@redux/slices/settingSlice.ts";
 import { SCHEDULE_REQUEST } from "@constants/schedule.ts";
 import { useScheduleDrawer } from "@hooks/useScheduleDrawer.tsx";
+import ConsumptionHeader from "@components/ScheduleList/ConsumptionHeader";
 
 interface ScheduleListProps {
+  showHeader?: boolean;
   date: string;
   todaySchedules: TodaySchedule[] | Schedule[];
   isError: boolean;
 }
 
-function ScheduleList({ date, todaySchedules, isError }: ScheduleListProps) {
+function ScheduleList({
+  showHeader,
+  date,
+  todaySchedules,
+  isError,
+}: ScheduleListProps) {
   const isHideBudgetMode = useAppSelector(selectIsBudgetHidden);
   const { openScheduleDrawer } = useScheduleDrawer();
 
@@ -43,6 +50,7 @@ function ScheduleList({ date, todaySchedules, isError }: ScheduleListProps) {
 
   return (
     <>
+      {showHeader && <ConsumptionHeader date={date} />}
       {todaySchedules.map((s) => (
         <ConsumptionCard
           schedule={s}
