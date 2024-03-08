@@ -8,6 +8,7 @@ import DoughnutChart from "@pages/reports/Report/components/PredictReport/Doughn
 import { getColors } from "@pages/reports/Report/components/PredictReport/DoughnutChart/utils.ts";
 import * as React from "react";
 import PredictReportCard from "@pages/reports/Report/components/PredictReport/PredictReportCard";
+import EmptyPredictReport from "@pages/reports/Report/components/PredictReport/EmptyPredictReport.tsx";
 
 export interface PredictReportProps {
   selected: string;
@@ -32,7 +33,8 @@ function PredictReport({
   const datas = [used, predict, useable];
 
   if (datas.reduce((a, b) => a + b, 0) === 0)
-    return <>소비 데이터가 존재하지 않습니다.</>;
+    return <EmptyPredictReport month={month} />;
+
   return (
     <Stack spacing={3}>
       <Typography fontSize="18px">
