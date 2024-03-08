@@ -9,9 +9,11 @@ import { useScheduleDrawer } from "@hooks/useScheduleDrawer.tsx";
 import { INIT_SCHEDULE } from "@constants/schedule.ts";
 import moment from "moment";
 import { PATH } from "@constants/path.ts";
+import useBottomBar from "@hooks/useBottomBar.ts";
 
 function ReportMonthDetails() {
   useHeader(false);
+  useBottomBar(false);
   const navigate = useNavigate();
   const {
     yearMonth,
