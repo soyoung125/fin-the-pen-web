@@ -33,26 +33,35 @@ function BarChart({
   return (
     <>
       <BarLabelContainer>
-        {values.map((v, idx) => (
-          <BarLabelComponent $width={data[idx]} onClick={() => setSelected(v)}>
-            <BarLabelBox $isSelected={selected === v}>
-              {getTitle(v)}
-            </BarLabelBox>
-            <LabelLine $isSelected={selected === v} />
-          </BarLabelComponent>
-        ))}
+        {values.map(
+          (v, idx) =>
+            data[idx] !== 0 && (
+              <BarLabelComponent
+                $width={data[idx]}
+                onClick={() => setSelected(v)}
+              >
+                <BarLabelBox $isSelected={selected === v}>
+                  {getTitle(v)}
+                </BarLabelBox>
+                <LabelLine $isSelected={selected === v} />
+              </BarLabelComponent>
+            )
+        )}
       </BarLabelContainer>
 
       <BarChartContainer>
-        {data.map((d, idx) => (
-          <BarComponent
-            $color={colors[idx]}
-            $width={d}
-            onClick={() => setSelected(values[idx])}
-          >
-            {selected === values[idx] && `${d}%`}
-          </BarComponent>
-        ))}
+        {data.map(
+          (d, idx) =>
+            d !== 0 && (
+              <BarComponent
+                $color={colors[idx]}
+                $width={d}
+                onClick={() => setSelected(values[idx])}
+              >
+                {selected === values[idx] && `${d}%`}
+              </BarComponent>
+            )
+        )}
       </BarChartContainer>
     </>
   );

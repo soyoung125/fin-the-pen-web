@@ -5,11 +5,12 @@ import ReportCategorySummary from "@pages/reports/ReportCategoryDetails/componen
 import ThickDivider from "@components/common/ThickDivider.tsx";
 import { useState } from "react";
 import ConsumptionCard from "components/ScheduleList/ConsumptionCard";
-import ScheduleListHeader from "@components/ScheduleList/ScheduleListHeader";
+import ScheduleListHeader from "components/ScheduleList/ScheduleListPageHeader";
 import ConsumptionHeader from "@components/ScheduleList/ConsumptionHeader/ConsumptionHeader.tsx";
 import { INIT_PERIOD } from "@constants/schedule.ts";
 import moment from "moment/moment";
 import { Schedule } from "@app/types/schedule.ts";
+import ReportCategoryBody from "@pages/reports/ReportCategoryDetails/components/ReportCategoryBody";
 
 const meta = {
   title: "reports/ReportCategoryDetails",
@@ -88,6 +89,8 @@ export const ExamplePage = () => {
         handleClickSearch={() => alert("search")}
         handleClickFilter={() => alert("filter")}
       />
+
+      <ThickDivider />
 
       <ReportCategorySummary
         goal={1000000}

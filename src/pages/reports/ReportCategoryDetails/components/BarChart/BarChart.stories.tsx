@@ -2,6 +2,7 @@ import BarChart, { BarChartProps } from "./BarChart.tsx";
 import { Meta } from "@storybook/react";
 import { useState } from "react";
 import { getColors } from "./utils.ts";
+import { Skeleton } from "@mui/material";
 
 const meta = {
   title: "reports/ReportCategoryDetails/BarChart",
