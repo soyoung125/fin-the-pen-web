@@ -1,6 +1,6 @@
 import { Avatar, Box, Stack, Typography } from "@mui/material";
 import RepeatRoundedIcon from "@mui/icons-material/RepeatRounded";
-import { AmountComponent, AmountType } from "./ConsumptionCard.styles.ts";
+import { AmountComponent, AmountType } from "./ScheduleCard.styles.ts";
 import moment from "moment";
 import { Schedule } from "@app/types/schedule.ts";
 import { getPriceTypeSign } from "@components/ScheduleDrawer/hooks/useScheduleForm.ts";
@@ -12,7 +12,7 @@ export interface ConsumptionCardProps {
   icon?: boolean;
 }
 
-function ConsumptionCard({
+function ScheduleCard({
   schedule,
   isRepeat,
   onClick,
@@ -65,4 +65,4 @@ function ConsumptionCard({
   );
 }
 
-export default ConsumptionCard;
+export default ScheduleCard;

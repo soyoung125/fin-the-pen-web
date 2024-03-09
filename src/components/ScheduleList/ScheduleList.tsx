@@ -1,11 +1,11 @@
 import { Box, Stack, Typography } from "@mui/material";
 import { Schedule, TodaySchedule } from "@app/types/schedule.ts";
-import ConsumptionCard from "@components/ScheduleList/ConsumptionCard";
+import ScheduleCard from "components/ScheduleList/ScheduleCard";
 import { useAppSelector } from "@redux/hooks.ts";
 import { selectIsBudgetHidden } from "@redux/slices/settingSlice.ts";
 import { SCHEDULE_REQUEST } from "@constants/schedule.ts";
 import { useScheduleDrawer } from "@hooks/useScheduleDrawer.tsx";
-import ConsumptionHeader from "@components/ScheduleList/ConsumptionHeader";
+import ScheduleDateBox from "components/ScheduleList/ScheduleDateBox";
 
 interface ScheduleListProps {
   showHeader?: boolean;
@@ -50,9 +50,9 @@ function ScheduleList({
 
   return (
     <>
-      {showHeader && <ConsumptionHeader date={date} />}
+      {showHeader && <ScheduleDateBox date={date} />}
       {todaySchedules.map((s) => (
-        <ConsumptionCard
+        <ScheduleCard
           schedule={s}
           isRepeat={s.repeat_kind !== "NONE"}
           onClick={() => handleModal(s)}

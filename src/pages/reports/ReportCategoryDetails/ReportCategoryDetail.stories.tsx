@@ -1,12 +1,12 @@
 import ReportCategoryDetails from "@pages/reports/ReportCategoryDetails/ReportCategoryDetails.tsx";
 import { Meta } from "@storybook/react";
-import ReportListHeader from "@pages/reports/ReportCategoryDetails/components/ReportListHeader";
+import ScheduleListHeader from "components/ScheduleList/ScheduleListHeader";
 import ReportCategorySummary from "@pages/reports/ReportCategoryDetails/components/ReportCategorySummary";
 import ThickDivider from "@components/common/ThickDivider.tsx";
 import { useState } from "react";
-import ConsumptionCard from "components/ScheduleList/ConsumptionCard";
-import ScheduleListHeader from "components/ScheduleList/ScheduleListPageHeader";
-import ConsumptionHeader from "@components/ScheduleList/ConsumptionHeader/ConsumptionHeader.tsx";
+import ScheduleCard from "components/ScheduleList/ScheduleCard";
+import ScheduleListPageHeader from "components/ScheduleList/ScheduleListPageHeader";
+import ScheduleDateBox from "@components/ScheduleList/ScheduleDateBox/ScheduleDateBox.tsx";
 import { INIT_PERIOD } from "@constants/schedule.ts";
 import moment from "moment/moment";
 import { Schedule } from "@app/types/schedule.ts";
@@ -81,7 +81,7 @@ export const ExamplePage = () => {
 
   return (
     <>
-      <ScheduleListHeader
+      <ScheduleListPageHeader
         date="2024년 5월"
         addMonth={() => alert("add month")}
         subtractMonth={() => alert("subtract month")}
@@ -101,16 +101,16 @@ export const ExamplePage = () => {
 
       <ThickDivider />
 
-      <ReportListHeader
+      <ScheduleListHeader
         count={10}
         options={options}
         selectedOption={selectedOption}
         setSelectedOption={setSelectedOption}
       />
 
-      <ConsumptionHeader date="2023-10-06" />
+      <ScheduleDateBox date="2023-10-06" />
       {schedules.map((schedule) => (
-        <ConsumptionCard
+        <ScheduleCard
           schedule={schedule}
           isRepeat={schedule.repeat_kind !== "NONE"}
           onClick={() => alert("click")}

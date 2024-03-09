@@ -5,10 +5,10 @@ import moment from "moment";
 import { INIT_SCHEDULE } from "@constants/schedule.ts";
 import ReportCategorySummary from "@pages/reports/ReportCategoryDetails/components/ReportCategorySummary";
 import ThickDivider from "@components/common/ThickDivider.tsx";
-import ReportListHeader from "@pages/reports/ReportCategoryDetails/components/ReportListHeader";
-import ScheduleList from "@pages/Home/next-components/ScheduleList";
+import ScheduleListHeader from "components/ScheduleList/ScheduleListHeader";
+import ScheduleList from "@components/ScheduleList";
 import ReportCategorySummarySkeleton from "@pages/reports/ReportCategoryDetails/components/ReportCategorySummary/ReportCategorySummarySkeleton.tsx";
-import ScheduleListSkeleton from "@pages/Home/next-components/ScheduleList/ScheduleListSkeleton.tsx";
+import ScheduleListSkeleton from "@components/ScheduleList/ScheduleListSkeleton.tsx";
 
 export interface ReportCategoryBodyProps {
   report?: CategoryDetail;
@@ -40,7 +40,7 @@ function ReportCategoryBody({
       <>
         <ReportCategorySummarySkeleton />
         <ThickDivider />
-        <ReportListHeader
+        <ScheduleListHeader
           count={0}
           options={options}
           selectedOption={selectedOption}
@@ -64,7 +64,7 @@ function ReportCategoryBody({
         data={[20, 10, 70]}
       />
       <ThickDivider />
-      <ReportListHeader
+      <ScheduleListHeader
         count={report?.count ?? 0}
         options={options}
         selectedOption={selectedOption}

@@ -1,7 +1,7 @@
 import { Box, Skeleton, Stack, Typography } from "@mui/material";
-import { AmountComponent } from "@components/ScheduleList/ConsumptionCard/ConsumptionCard.styles.ts";
+import { AmountComponent } from "@components/ScheduleList/ScheduleCard/ScheduleCard.styles.ts";
 
-function ConsumptionCardSkeleton() {
+function ScheduleCardSkeleton() {
   return (
     <Stack
       direction="row"
@@ -35,4 +35,4 @@ function ConsumptionCardSkeleton() {
   );
 }
 
-export default ConsumptionCardSkeleton;
+export default ScheduleCardSkeleton;

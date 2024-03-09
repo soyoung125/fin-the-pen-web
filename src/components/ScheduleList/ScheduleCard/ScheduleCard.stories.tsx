@@ -1,12 +1,12 @@
 import { Meta } from "@storybook/react";
-import ConsumptionCard, { ConsumptionCardProps } from "./ConsumptionCard.tsx";
-import ConsumptionCardSkeleton from "./ConsumptionCardSkeleton.tsx";
+import ScheduleCard, { ConsumptionCardProps } from "./ScheduleCard.tsx";
+import ScheduleCardSkeleton from "./ScheduleCardSkeleton.tsx";
 import { INIT_PERIOD } from "@constants/schedule.ts";
 import moment from "moment";
 
 const meta = {
-  title: "ScheduleList/ConsumptionCard",
-  component: ConsumptionCard,
+  title: "ScheduleList/ScheduleCard",
+  component: ScheduleCard,
   tags: ["autodocs"],
   args: {
     schedule: {
@@ -29,14 +29,14 @@ const meta = {
     isRepeat: false,
   },
   argTypes: {},
-} satisfies Meta<typeof ConsumptionCard>;
+} satisfies Meta<typeof ScheduleCard>;
 
 export default meta;
 
 export const Default = (args: ConsumptionCardProps) => {
-  return <ConsumptionCard {...args} />;
+  return <ScheduleCard {...args} />;
 };
 
 export const Skeleton = () => {
-  return <ConsumptionCardSkeleton />;
+  return <ScheduleCardSkeleton />;
 };
