@@ -23,7 +23,12 @@ export const getType = (category: Category) => {
   }
 };
 
-export const getSign = (type: string) => (type === "+" ? "Plus" : "Minus");
+export const getPriceType = (type: string) => (type === "+" ? "Plus" : "Minus");
+export const getPriceTypeSign = (type: string) => {
+  if (type === "Plus") return "+";
+  else if (type === "Minus") return "-";
+  return type;
+};
 
 const getRepeatEndDate = (
   startDate: string | undefined,

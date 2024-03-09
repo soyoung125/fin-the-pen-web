@@ -4,6 +4,8 @@ import ReportCategorySummary, {
 } from "./ReportCategorySummary.tsx";
 import { useState } from "react";
 import { useDatePicker } from "@hooks/date-picker/hooks/useDatePicker.tsx";
+import ReportCategorySummarySkeleton from "@pages/reports/ReportCategoryDetails/components/ReportCategorySummary/ReportCategorySummarySkeleton.tsx";
+import { Button } from "@mui/material";
 
 const meta = {
   title: "reports/ReportCategoryDetails/ReportCategorySummary",
@@ -24,22 +26,24 @@ export const Default = (args: ReportCategorySummaryProps) => {
   return <ReportCategorySummary {...args} />;
 };
 
-export const Example = () => {
-  const [yearMonth, setYearMonth] = useState("2023-5");
-  const [year, month] = yearMonth.split("-").map((s) => Number(s));
-  const { openMonthPicker } = useDatePicker();
-
-  const pickMonth = async () => {
-    const newMonth = await openMonthPicker(yearMonth);
-    setYearMonth(newMonth.format("YYYY-MM"));
-  };
+export const Skeleton = () => {
+  const [isPending, setIsPending] = useState(true);
 
   return (
-    <ReportCategorySummary
-      goal={1000000}
-      amount={750000}
-      category="식비"
-      data={[10, 55, 35]}
-    />
+    <>
+      {isPending ? (
+        <ReportCategorySummarySkeleton />
+      ) : (
+        <ReportCategorySummary
+          goal={1000000}
+          amount={750000}
+          category="식비"
+          data={[10, 55, 35]}
+        />
+      )}
+      <Button onClick={() => setIsPending((prevState) => !prevState)}>
+        로딩상태 변경
+      </Button>
+    </>
   );
 };

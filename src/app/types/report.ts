@@ -1,3 +1,5 @@
+import { Schedule } from "@app/types/schedule.ts";
+
 export interface Report {
   date: string;
   totalSpentToday: number | "0"; // 총 지출 금액
@@ -36,4 +38,27 @@ export interface GoalResponse {
   user_id: string;
   date: string;
   expenditure_amount: string;
+}
+
+export interface CategoryDetailResponse {
+  month_schedule: Schedule[];
+  current_date: string;
+  category_expense: string;
+  category: string;
+  category_expect: string;
+}
+
+export interface CategoryDetailQuery {
+  user_id: string;
+  date: string;
+  category: string;
+}
+
+export interface CategoryDetail {
+  month_schedule: { [key: string]: Schedule[] };
+  current_date: string;
+  category_expense: string;
+  category: string;
+  category_expect: string;
+  count: number;
 }

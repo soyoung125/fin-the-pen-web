@@ -2,9 +2,9 @@ import { SESSION_STORAGE_KEY_TOKEN } from "@api/keys";
 import { DOMAIN } from "@api/url";
 import { getSessionStorage } from "@app/utils/storage";
 import { QUERY_KEY_SCHEDULES } from "@constants/queryKeys";
-import { getSign } from "@components/ScheduleDrawer/hooks/useScheduleForm";
+import { getPriceType } from "@components/ScheduleDrawer/hooks/useScheduleForm";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { RequestSchedule, Schedule } from "@app/types/schedule.ts";
+import { RequestSchedule } from "@app/types/schedule.ts";
 import moment from "moment";
 
 interface PropsInterface {
@@ -17,11 +17,7 @@ const fetchModifySchedule = async ({ schedule, option }: PropsInterface) => {
   const data = {
     // 다른 방법을 생각해 봐야 할 것 같음
     ...schedule,
-    // is_all_day: schedule.all_day,
-    // set_amount: schedule.amount,
-    // exclusion: schedule.exclude,
-    price_type: getSign(schedule.price_type),
-    // repeat: { ...schedule.repeat }, // api 수정 후 삭제
+    price_type: getPriceType(schedule.price_type),
     modify_options: option, // all:모두 , nowFromOption: 이후 일정, exceptNowAfter: 현재 일정 제외 이후 일정
   };
 

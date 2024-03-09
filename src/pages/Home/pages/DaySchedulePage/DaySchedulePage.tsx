@@ -6,8 +6,8 @@ import CalendarHeader from "@pages/Home/next-components/ScheduleCalendar/Calenda
 import moment from "moment";
 import MonthlyBudgetSummarySkeleton from "@pages/Home/next-components/HomeHeader/MonthlyBudgetSummary/MonthlyBudgetSummarySkeleton.tsx";
 import CalendarHeaderSkeleton from "@pages/Home/next-components/ScheduleCalendar/CalendarHeader/CalendarHeaderSkeleton.tsx";
-import ScheduleList from "@pages/Home/next-components/ScheduleList";
-import ScheduleListSkeleton from "@pages/Home/next-components/ScheduleList/ScheduleListSkeleton.tsx";
+import ScheduleList from "@components/ScheduleList";
+import ScheduleListSkeleton from "@components/ScheduleList/ScheduleListSkeleton.tsx";
 import { HomePageProps } from "@pages/Home/Home.tsx";
 import { useEffect } from "react";
 

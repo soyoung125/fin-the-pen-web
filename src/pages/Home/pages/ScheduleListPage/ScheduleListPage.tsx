@@ -1,10 +1,10 @@
-import ScheduleListHeader from "@components/ScheduleList/ScheduleListHeader";
+import ScheduleListPageHeader from "components/ScheduleList/ScheduleListPageHeader";
 import useHome from "@hooks/useHome.ts";
 import moment from "moment";
 import { Stack } from "@mui/material";
 import SummaryCard from "@pages/Home/next-components/HomeHeader/MonthlyBudgetSummary/SummaryCard";
 import useHeader from "@hooks/useHeader.ts";
-import ReportListHeader from "@pages/reports/ReportCategoryDetails/components/ReportListHeader";
+import ScheduleListHeader from "components/ScheduleList/ScheduleListHeader";
 import { useState } from "react";
 
 function ScheduleListPage() {
@@ -17,7 +17,7 @@ function ScheduleListPage() {
 
   return (
     <>
-      <ScheduleListHeader
+      <ScheduleListPageHeader
         date={moment(date).format("YYYY년 M월")}
         addMonth={addMonth}
         subtractMonth={subtractMonth}
@@ -37,7 +37,7 @@ function ScheduleListPage() {
         <SummaryCard title="지출" amount={-35000} />
       </Stack>
 
-      <ReportListHeader
+      <ScheduleListHeader
         count={0}
         options={options}
         selectedOption={selectedOption}

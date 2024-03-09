@@ -5,6 +5,8 @@ import PredictReportCard, {
 import { useState } from "react";
 import { REPORTTYPE } from "@pages/reports/Report/components/PredictReport/utils.ts";
 import { Button } from "@mui/material";
+import EmptyPredictReportCard from "@pages/reports/Report/components/PredictReport/PredictReportCard/EmptyPredictReportCard.tsx";
+import * as React from "react";
 
 const meta = {
   title: "reports/Report/PredictReport/PredictReportCard",
@@ -65,6 +67,23 @@ export const Example = () => {
       <Button onClick={() => setIsOver((prevState) => !prevState)}>
         예산 초과 여부 변경
       </Button>
+    </>
+  );
+};
+
+export const Empty = () => {
+  const month = 5;
+  const selected = "used";
+
+  return (
+    <>
+      {REPORTTYPE.map((type) => (
+        <EmptyPredictReportCard
+          month={month}
+          type={type}
+          selected={selected === type.type}
+        />
+      ))}
     </>
   );
 };

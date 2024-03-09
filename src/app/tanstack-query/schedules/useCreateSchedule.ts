@@ -2,16 +2,16 @@ import { SESSION_STORAGE_KEY_TOKEN } from "@api/keys";
 import { DOMAIN } from "@api/url";
 import { getSessionStorage } from "@app/utils/storage";
 import { QUERY_KEY_SCHEDULES } from "@constants/queryKeys";
-import { getSign } from "@components/ScheduleDrawer/hooks/useScheduleForm";
+import { getPriceType } from "@components/ScheduleDrawer/hooks/useScheduleForm";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { RequestSchedule, Schedule } from "@app/types/schedule.ts";
+import { RequestSchedule } from "@app/types/schedule.ts";
 import moment from "moment";
 
 const fetchCreateSchedule = async (schedule: RequestSchedule) => {
   const token = getSessionStorage(SESSION_STORAGE_KEY_TOKEN, "");
   const data = {
     ...schedule,
-    price_type: getSign(schedule.price_type),
+    price_type: getPriceType(schedule.price_type),
   };
 
   return fetch(`${DOMAIN}/createSchedule`, {

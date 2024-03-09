@@ -3,6 +3,8 @@ import DoughnutChart, { DoughnutChartProps } from "./DoughnutChart.tsx";
 import { useState } from "react";
 import { getColors } from "@pages/reports/Report/components/PredictReport/DoughnutChart/utils.ts";
 import { LABELS } from "@pages/reports/Report/components/PredictReport/utils.ts";
+import EmptyDoughnutChart from "@pages/reports/Report/components/PredictReport/DoughnutChart/EmptyDoughnutChart.tsx";
+import * as React from "react";
 
 const meta = {
   title: "reports/Report/PredictReport/DoughnutChart",
@@ -36,4 +38,8 @@ export const Example = () => {
       setSelected={setSelected}
     />
   );
+};
+
+export const Empty = () => {
+  return <EmptyDoughnutChart />;
 };

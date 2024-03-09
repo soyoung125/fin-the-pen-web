@@ -6,9 +6,9 @@ export interface ConsumptionHeaderProps {
   date: string;
 }
 
-function ConsumptionHeader({ date }: ConsumptionHeaderProps) {
+function ScheduleDateBox({ date }: ConsumptionHeaderProps) {
   return (
-    <Stack direction="row" spacing={1} alignItems="center" px={2.5} py={1}>
+    <Stack direction="row" spacing={1} alignItems="center" px={2.5} py={2}>
       <Typography variant="h2">{moment(date).format("M월 D일")}</Typography>
 
       {moment().isSame(date, "day") && <TodayBadge />}
@@ -16,4 +16,4 @@ function ConsumptionHeader({ date }: ConsumptionHeaderProps) {
   );
 }
 
-export default ConsumptionHeader;
+export default ScheduleDateBox;

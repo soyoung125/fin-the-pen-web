@@ -1,6 +1,7 @@
 import PredictReport, { PredictReportProps } from "./PredictReport.tsx";
 import { Meta } from "@storybook/react";
 import { useState } from "react";
+import EmptyPredictReport from "@pages/reports/Report/components/PredictReport/EmptyPredictReport.tsx";
 
 const meta = {
   title: "reports/Report/PredictReport",
@@ -49,4 +50,8 @@ export const Example = () => {
       useable={99999999}
     />
   );
+};
+
+export const Empty = () => {
+  return <EmptyPredictReport month={5} />;
 };

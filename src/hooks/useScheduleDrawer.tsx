@@ -1,5 +1,5 @@
 import { useOverlay } from "@hooks/use-overlay/useOverlay.tsx";
-import { RequestSchedule, Schedule } from "@app/types/schedule.ts";
+import { RequestSchedule } from "@app/types/schedule.ts";
 import { styled, SwipeableDrawer } from "@mui/material";
 import ScheduleDrawer from "@components/ScheduleDrawer";
 import {
@@ -8,7 +8,6 @@ import {
 } from "@redux/slices/scheduleSlice.tsx";
 import { useAppDispatch, useAppSelector } from "@redux/hooks.ts";
 import CssBaseline from "@mui/material/CssBaseline";
-import { grey } from "@mui/material/colors";
 
 export const useScheduleDrawer = () => {
   const { openOverlay, closeOverlay } = useOverlay();
@@ -18,13 +17,18 @@ export const useScheduleDrawer = () => {
     !newOpen && closeOverlay();
   };
 
-  const Root = styled("div")(({ theme }) => ({
+  const Root = styled("div")(() => ({
     height: "100%",
   }));
 
   const openScheduleDrawer = (data: RequestSchedule) => {
     if (schedule?.schedule_id !== data.schedule_id)
       dispatch(setDrawerScheduleForm(data));
+    if (!schedule?.schedule_id && data.start_date !== schedule?.start_date)
+      dispatch(setDrawerScheduleForm(data));
+
+    const resetSchedule = () => dispatch(setDrawerScheduleForm(data));
+
     openOverlay(
       <Root>
         <CssBaseline />
@@ -38,7 +42,10 @@ export const useScheduleDrawer = () => {
             keepMounted: true,
           }}
         >
-          <ScheduleDrawer handleClose={closeOverlay} />
+          <ScheduleDrawer
+            handleClose={closeOverlay}
+            resetSchedule={resetSchedule}
+          />
         </SwipeableDrawer>
       </Root>
     );
