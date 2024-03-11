@@ -1,34 +1,47 @@
 import { Box, Grid, IconButton, Stack } from "@mui/material";
 import BorderColorIcon from "@mui/icons-material/BorderColor";
-import { useState } from "react";
-import { useSelector } from "react-redux";
-import ModalStaticBackdrop from "../../../../../components/layouts/ModalStaticBackdrop";
 import RoundedBorderBox from "../../../../../components/common/RoundedBorderBox";
 import InputModal from "./InputModal";
-import { selectPersonalGoal } from "../../../../../app/redux/slices/assetSlice";
-import AlertModal from "../../../../../components/common/AlertModal";
-import useModal_deprecated from "@hooks/useModal_deprecated.ts";
-import { PersonalGoal } from "@app/types/asset.ts";
+import { PersonalGoal, SetPersonalGoalQuery } from "@app/types/asset.ts";
 import { getAmount } from "@legacies/assetManagement/SavingsGoalContainer/utils.ts";
+import { useDialog } from "@hooks/dialog/useDialog.tsx";
+import { useModal } from "@hooks/modal/useModal.tsx";
 
 interface PersonalProps {
   personal?: PersonalGoal;
+  handleSetPersonalGoal: (data: SetPersonalGoalQuery) => void;
 }
 
-function Personal({ personal }: PersonalProps) {
-  const [personalGoalModalOpen, setPersonalGoalModalOpen] = useState(false);
-  const { modalOpen, openModal, closeModal } = useModal_deprecated();
+function Personal({ personal, handleSetPersonalGoal }: PersonalProps) {
+  const { openConfirm } = useDialog();
+  const { openModal, closeModal } = useModal();
 
-  const openPersonalGoalModal = () => {
-    closeModal();
-    setPersonalGoalModalOpen(true);
+  const handleModify = async () => {
+    const answer = await openConfirm({
+      title: "알림",
+      content: "정보를 수정하시겠습니까?",
+      approveText: "네",
+      rejectText: "아니오",
+    });
+    if (answer) {
+      openModal({
+        modalElement: (
+          <InputModal
+            closeModal={closeModal}
+            personal={personal}
+            handleSetPersonalGoal={handleSetPersonalGoal}
+          />
+        ),
+        isBackdropClickable: true,
+      });
+    }
   };
 
   return (
     <>
       <Stack direction="row" justifyContent="space-between" alignItems="center">
         <Box sx={{ fontWeight: "bold" }}>당신의 또 다른 목표는 무엇인가요?</Box>
-        <IconButton color="primary" onClick={() => openModal()}>
+        <IconButton color="primary" onClick={handleModify}>
           <BorderColorIcon fontSize="small" />
         </IconButton>
       </Stack>
@@ -70,21 +83,6 @@ function Personal({ personal }: PersonalProps) {
           </RoundedBorderBox>
         </Grid>
       </Grid>
-
-      <ModalStaticBackdrop
-        keepMounted
-        width="xs"
-        open={personalGoalModalOpen}
-        component={
-          <InputModal setPersonalGoalModalOpen={setPersonalGoalModalOpen} />
-        }
-      />
-      <AlertModal
-        open={modalOpen}
-        handleClose={() => closeModal()}
-        handleClickYes={() => openPersonalGoalModal()}
-        mode="modify"
-      />
     </>
   );
 }
