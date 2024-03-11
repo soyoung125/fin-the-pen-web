@@ -16,6 +16,9 @@ const fetchMonthSchedules = async (query: MonthScheduleQuery) => {
     },
     body: JSON.stringify(query),
   }).then<Schedule[]>(async (res) => {
+    if (!res.ok) {
+      return [];
+    }
     const response = await res.json();
     return response.data === undefined ? [] : response.data;
   });
