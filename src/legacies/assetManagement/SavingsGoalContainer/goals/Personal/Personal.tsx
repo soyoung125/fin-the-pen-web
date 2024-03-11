@@ -1,32 +1,50 @@
 import { Box, Grid, IconButton, Stack } from "@mui/material";
 import BorderColorIcon from "@mui/icons-material/BorderColor";
-import { useState } from "react";
-import { useSelector } from "react-redux";
-import ModalStaticBackdrop from "../../../../../components/layouts/ModalStaticBackdrop";
 import RoundedBorderBox from "../../../../../components/common/RoundedBorderBox";
 import InputModal from "./InputModal";
-import { selectPersonalGoal } from "../../../../../app/redux/slices/assetSlice";
-import AlertModal from "../../../../../components/common/AlertModal";
-import useModal_deprecated from "@hooks/useModal_deprecated.ts";
+import { PersonalGoal, SetPersonalGoalQuery } from "@app/types/asset.ts";
+import { getAmount } from "@legacies/assetManagement/SavingsGoalContainer/utils.ts";
+import { useDialog } from "@hooks/dialog/useDialog.tsx";
+import { useModal } from "@hooks/modal/useModal.tsx";
 
-function Personal() {
-  const [personalGoalModalOpen, setPersonalGoalModalOpen] = useState(false);
-  const { modalOpen, openModal, closeModal } = useModal_deprecated();
-  const personal = useSelector(selectPersonalGoal);
+interface PersonalProps {
+  personal?: PersonalGoal;
+  handleSetPersonalGoal: (data: SetPersonalGoalQuery) => void;
+}
 
-  const openPersonalGoalModal = () => {
-    closeModal();
-    setPersonalGoalModalOpen(true);
+function Personal({ personal, handleSetPersonalGoal }: PersonalProps) {
+  const { openConfirm } = useDialog();
+  const { openModal, closeModal } = useModal();
+
+  const handleModify = async () => {
+    const answer = await openConfirm({
+      title: "알림",
+      content: "정보를 수정하시겠습니까?",
+      approveText: "네",
+      rejectText: "아니오",
+    });
+    if (answer) {
+      openModal({
+        modalElement: (
+          <InputModal
+            closeModal={closeModal}
+            personal={personal}
+            handleSetPersonalGoal={handleSetPersonalGoal}
+          />
+        ),
+        isBackdropClickable: true,
+      });
+    }
   };
+
   return (
     <>
       <Stack direction="row" justifyContent="space-between" alignItems="center">
         <Box sx={{ fontWeight: "bold" }}>당신의 또 다른 목표는 무엇인가요?</Box>
-        <IconButton color="primary" onClick={() => openModal()}>
+        <IconButton color="primary" onClick={handleModify}>
           <BorderColorIcon fontSize="small" />
         </IconButton>
       </Stack>
-
       <Grid container spacing={1} textAlign="center" mt={0}>
         <Grid item xs={6}>
           <Stack
@@ -40,8 +58,8 @@ function Personal() {
             }}
           >
             <Box mb={2}>나의 목표</Box>
-            <Box>{personal.name}</Box>
-            <Box>{personal.money.toLocaleString("ko-KR")}원</Box>
+            <Box>{personal?.goal_name}</Box>
+            <Box>{getAmount(personal?.goal_amount)}원</Box>
           </Stack>
         </Grid>
 
@@ -49,7 +67,7 @@ function Personal() {
           <RoundedBorderBox>
             <Stack direction="row" justifyContent="space-between" p={2}>
               <Box>기간</Box>
-              <Box sx={{ color: "primary.main" }}>{personal.deadline}</Box>
+              <Box sx={{ color: "primary.main" }}>{personal?.period}</Box>
             </Stack>
           </RoundedBorderBox>
 
@@ -58,27 +76,13 @@ function Personal() {
           <RoundedBorderBox>
             <Box p={2}>
               <Box mb={1}>핀더펜 MONEY</Box>
-              <Box sx={{ color: "primary.main" }}>xxxxxxx원</Box>
+              <Box sx={{ color: "primary.main" }}>
+                {getAmount(personal?.goal_amount)}원
+              </Box>
             </Box>
           </RoundedBorderBox>
         </Grid>
       </Grid>
-
-      <ModalStaticBackdrop
-        keepMounted
-        width="xs"
-        open={personalGoalModalOpen}
-        component={
-          <InputModal setPersonalGoalModalOpen={setPersonalGoalModalOpen} />
-        }
-      />
-
-      <AlertModal
-        open={modalOpen}
-        handleClose={() => closeModal()}
-        handleClickYes={() => openPersonalGoalModal()}
-        mode="modify"
-      />
     </>
   );
 }

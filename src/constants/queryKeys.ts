@@ -9,3 +9,5 @@ export const QUERY_KEY_MONTH = "month";
 export const QUERY_KEY_WEEK = "week";
 
 export const QUERY_KEY_DAY = "day";
+
+export const QUERY_KEY_GOAL = "goal";
