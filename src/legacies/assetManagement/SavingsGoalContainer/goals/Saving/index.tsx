@@ -1,15 +1,19 @@
 import { Box, IconButton, Stack } from "@mui/material";
 import BorderColorIcon from "@mui/icons-material/BorderColor";
-import { useSelector } from "react-redux";
 import RoundedPaper from "../../../../../components/common/RoundedPaper";
 import ModalStaticBackdrop from "../../../../../components/layouts/ModalStaticBackdrop";
 import RoundedBorderBox from "../../../../../components/common/RoundedBorderBox";
-import { selectSavingGoal } from "../../../../../app/redux/slices/assetSlice";
 import InputModal from "./InputModal";
 import AlertModal from "../../../../../components/common/AlertModal";
 import useModal_deprecated from "@hooks/useModal_deprecated.ts";
+import { SavingGoal } from "@app/types/asset.ts";
+import { getAmount } from "@legacies/assetManagement/SavingsGoalContainer/utils.ts";
 
-function Saving() {
+interface SavingProps {
+  saving?: SavingGoal;
+}
+
+function Saving({ saving }: SavingProps) {
   const {
     modalOpen: savingGoalModalOpen,
     openModal: openSavingGoalModal,
@@ -21,7 +25,7 @@ function Saving() {
     closeModal: closeAlertModal,
   } = useModal_deprecated();
 
-  const saving = useSelector(selectSavingGoal);
+  // const saving = useSelector(selectSavingGoal);
 
   const foo = () => {
     closeAlertModal();
@@ -52,7 +56,7 @@ function Saving() {
               p: 2,
             }}
           >
-            {saving.year.toLocaleString("ko-KR")}원
+            {getAmount(saving?.years_goal_amount)}원
           </Box>
         </RoundedBorderBox>
         <Stack
@@ -77,7 +81,7 @@ function Saving() {
               p: 2,
             }}
           >
-            {saving.month.toLocaleString("ko-KR")}원
+            {getAmount(saving?.months_goal_amount)}원
           </Box>
         </RoundedBorderBox>
       </RoundedPaper>

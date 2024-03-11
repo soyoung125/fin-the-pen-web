@@ -3,12 +3,14 @@ import SettingsIcon from "@mui/icons-material/Settings";
 import { useNavigate } from "react-router-dom";
 import Saving from "./goals/Saving";
 import Personal from "./goals/Personal";
-import { PATH } from "../../../constants/path.ts";
+import { PATH } from "@constants/path.ts";
 import { useUser } from "@app/tanstack-query/useUser.ts";
+import useSavingGoal from "@hooks/assetManagement/useSavingGoal.ts";
 
 function SavingsGoal() {
   const { data: user } = useUser();
   const navigate = useNavigate();
+  const { goal } = useSavingGoal();
 
   return (
     <>
@@ -25,9 +27,9 @@ function SavingsGoal() {
         </IconButton>
       </Stack>
 
-      <Saving />
+      <Saving saving={goal?.goal_amount} />
 
-      <Personal />
+      <Personal personal={goal?.personal_goal} />
     </>
   );
 }
