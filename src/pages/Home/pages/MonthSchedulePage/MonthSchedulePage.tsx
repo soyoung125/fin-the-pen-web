@@ -11,11 +11,13 @@ import ScheduleListSkeleton from "@components/ScheduleList/ScheduleListSkeleton.
 import { Box } from "@mui/material";
 import { HomePageProps } from "@pages/Home/Home.tsx";
 import { useEffect } from "react";
+import useSchedule from "@hooks/useSchedule.ts";
 
 function MonthSchedulePage({ updateHeight, navigateTo }: HomePageProps) {
   const { date, monthData, isError, isPending, changeDate } =
     useMonthSchedule();
-  const TodaySchedules = monthData?.today_schedule ?? [];
+  const { todaySchedules } = useSchedule();
+  // const TodaySchedules = monthData?.today_schedule ?? [];
   const showPredict = moment().isSameOrBefore(date, "month");
   const isThisMonth = moment().isSame(date, "month");
 
@@ -53,7 +55,7 @@ function MonthSchedulePage({ updateHeight, navigateTo }: HomePageProps) {
 
       <CalendarHeader
         date={date}
-        count={TodaySchedules.length}
+        count={todaySchedules.length}
         handleClick={navigateTo}
         isToday={moment().isSame(date, "date")}
       />
@@ -64,7 +66,7 @@ function MonthSchedulePage({ updateHeight, navigateTo }: HomePageProps) {
 
       <ScheduleList
         date={date}
-        todaySchedules={TodaySchedules}
+        todaySchedules={todaySchedules}
         isError={isError}
       />
     </Box>
