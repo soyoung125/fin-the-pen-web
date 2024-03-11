@@ -1,5 +1,6 @@
-export interface GoalQuery {
+export interface setSavingGoalQuery {
   user_id: string;
+  years_goal_amount: string;
 }
 
 export interface Goal {
