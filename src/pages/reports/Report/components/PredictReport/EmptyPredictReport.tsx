@@ -22,6 +22,7 @@ function EmptyPredictReport({ month }: EmptyPredictReportProps) {
       <Stack>
         {REPORTTYPE.map((type) => (
           <EmptyPredictReportCard
+            key={type.type}
             month={month}
             type={type}
             selected={selected === type.type}

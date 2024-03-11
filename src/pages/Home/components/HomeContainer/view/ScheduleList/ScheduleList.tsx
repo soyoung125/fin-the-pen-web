@@ -59,6 +59,7 @@ function ScheduleList() {
     <>
       {todaySchedules.map((schedule, i) => (
         <ScheduleCard
+          key={schedule.schedule_id}
           schedule={schedule}
           category={
             // 추후 제거 예정
