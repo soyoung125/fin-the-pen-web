@@ -1,6 +1,5 @@
 import useSchedule from "@hooks/useSchedule.ts";
 import { Box, CircularProgress, Stack, Typography } from "@mui/material";
-import moment from "moment";
 import ScheduleCard from "./ScheduleCard.tsx";
 import { CATEGORIES, Category } from "@constants/categories.ts";
 import { useState } from "react";
@@ -8,11 +7,7 @@ import { Schedule } from "@app/types/schedule.ts";
 import EasyAuthentication from "@components/sign/EasyAuthentication.tsx";
 import { useAppDispatch } from "@redux/hooks.ts";
 import { changeHideBudgetMode } from "@redux/slices/settingSlice.ts";
-import {
-  INIT_PERIOD,
-  INIT_REPEAT,
-  SCHEDULE_REQUEST,
-} from "@constants/schedule.ts";
+import { SCHEDULE_REQUEST } from "@constants/schedule.ts";
 import { useScheduleDrawer } from "@hooks/useScheduleDrawer.tsx";
 
 function ScheduleList() {
@@ -66,7 +61,6 @@ function ScheduleList() {
             CATEGORIES.find((c) => c.title === schedule.category) ||
             ({ color: "#C8A2C8" } as Category)
           }
-          key={schedule.schedule_id}
           handleModal={handleModal}
           openAuthenticationPage={() => setAuthenticationPageOpen(true)}
         />

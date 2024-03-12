@@ -4,7 +4,6 @@ import { getSessionStorage } from "@utils/storage.ts";
 import { QUERY_KEY_WEEK } from "@constants/queryKeys.ts";
 import { useQuery } from "@tanstack/react-query";
 import {
-  DailySchedule,
   HomeQuery,
   WeeklySchedule,
   WeekSchedule,
