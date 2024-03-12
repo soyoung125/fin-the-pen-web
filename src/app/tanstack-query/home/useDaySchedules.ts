@@ -1,7 +1,7 @@
 import { SESSION_STORAGE_KEY_TOKEN } from "@api/keys.ts";
 import { DOMAIN } from "@api/url.ts";
 import { getSessionStorage } from "@utils/storage.ts";
-import { QUERY_KEY_DAY } from "@constants/queryKeys.ts";
+import { QUERY_KEY_DAY, QUERY_KEY_SCHEDULES } from "@constants/queryKeys.ts";
 import { useQuery } from "@tanstack/react-query";
 import { HomeQuery, DaySchedule } from "@app/types/schedule.ts";
 
@@ -25,7 +25,12 @@ const fetchDaySchedules = async (query: HomeQuery) => {
 
 export const useDaySchedules = (query: HomeQuery) => {
   return useQuery({
-    queryKey: [QUERY_KEY_DAY, query.calendar_date],
+    queryKey: [
+      QUERY_KEY_SCHEDULES,
+      query.main_month,
+      QUERY_KEY_DAY,
+      query.calendar_date,
+    ],
     queryFn: () => fetchDaySchedules(query),
   });
 };
