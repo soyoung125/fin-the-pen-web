@@ -106,13 +106,12 @@ export interface MonthSchedule {
   expense: string;
 }
 
-export type WeekSchedule = {
-  [key: string]: WeeklySchedule;
-} & {
+export interface WeekSchedule {
   income: string;
   available: string;
   expense: string;
-};
+  week_schedule: WeeklySchedule[];
+}
 
 export interface WeeklySchedule {
   // 몇번째 주차인지
