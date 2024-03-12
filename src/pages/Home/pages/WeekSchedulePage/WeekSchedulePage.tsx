@@ -29,7 +29,7 @@ function WeekSchedulePage({ updateHeight, navigateTo }: HomePageProps) {
         />
         <ThickDivider />
         {weeks.map((w) => (
-          <WeeklyCardSkeleton week={w} />
+          <WeeklyCardSkeleton key={w} week={w} />
         ))}
       </Box>
     );
@@ -49,27 +49,24 @@ function WeekSchedulePage({ updateHeight, navigateTo }: HomePageProps) {
 
       {isThisMonth && <CalendarHeader date={date} handleClick={navigateTo} />}
 
-      {weekData &&
-        weeks.map((w) => {
-          const weeklyData = weekData[w];
-          if (!weeklyData) return;
-          const [start, end] = weeklyData.period.split("~");
-          const isThisWeek =
-            moment().isSameOrAfter(start, "day") &&
-            moment().isSameOrBefore(end, "day");
-          return (
-            <WeeklyCard
-              key={weeklyData.week_of_number}
-              weeklyData={weeklyData}
-              isThisWeek={isThisWeek}
-              navigateTo={
-                !isThisMonth && weeklyData.week_of_number === "1주차"
-                  ? navigateTo
-                  : undefined
-              }
-            />
-          );
-        })}
+      {weekData?.week_schedule.map((schedule) => {
+        const [start, end] = schedule.period.split("~");
+        const isThisWeek =
+          moment().isSameOrAfter(start, "day") &&
+          moment().isSameOrBefore(end, "day");
+        return (
+          <WeeklyCard
+            key={schedule.week_of_number}
+            weeklyData={schedule}
+            isThisWeek={isThisWeek}
+            navigateTo={
+              !isThisMonth && schedule.week_of_number === "1주차"
+                ? navigateTo
+                : undefined
+            }
+          />
+        );
+      })}
     </Box>
   );
 }
