@@ -65,25 +65,33 @@ function Home() {
 
   return (
     <>
-      <Box my={1} mx={2.5}>
-        {value === 2 ? (
-          <SelectYearMonth
-            date={moment(date).format("YYYY년 M월 D일")}
-            lastMonth={subtractDay}
-            nextMonth={addDay}
-            changeYearAndMonth={pickDay}
-          />
-        ) : (
-          <SelectYearMonth
-            date={moment(date).format("YYYY년 M월")}
-            lastMonth={subtractMonth}
-            nextMonth={addMonth}
-            changeYearAndMonth={pickMonth}
-          />
-        )}
+      <Box
+        sx={{
+          position: "sticky",
+          top: 40,
+          zIndex: 100,
+          backgroundColor: "#FFF",
+        }}
+      >
+        <Box py={1} px={2.5}>
+          {value === 2 ? (
+            <SelectYearMonth
+              date={moment(date).format("YYYY년 M월 D일")}
+              lastMonth={subtractDay}
+              nextMonth={addDay}
+              changeYearAndMonth={pickDay}
+            />
+          ) : (
+            <SelectYearMonth
+              date={moment(date).format("YYYY년 M월")}
+              lastMonth={subtractMonth}
+              nextMonth={addMonth}
+              changeYearAndMonth={pickMonth}
+            />
+          )}
+        </Box>
+        <MenuTab labels={labels} value={value} handleChange={handleChangeTab} />
       </Box>
-
-      <MenuTab labels={labels} value={value} handleChange={handleChangeTab} />
 
       <Swiper
         className="mySwiper"
