@@ -22,6 +22,7 @@ function ScheduleListHeader({
       alignItems="center"
       py={1}
       px={2.5}
+      // sx={{ backgroundColor: "#FFF", zIndex: 1000 }}
     >
       <Typography>
         총&nbsp;<span style={{ color: "#735BF2" }}>{count}</span>건

@@ -1,7 +1,7 @@
 import ScheduleListPageHeader from "components/ScheduleList/ScheduleListPageHeader";
 import useHome from "@hooks/useHome.ts";
 import moment from "moment";
-import { Stack } from "@mui/material";
+import { Box, Stack } from "@mui/material";
 import SummaryCard from "@pages/Home/next-components/HomeHeader/MonthlyBudgetSummary/SummaryCard";
 import useHeader from "@hooks/useHeader.ts";
 import ScheduleListHeader from "components/ScheduleList/ScheduleListHeader";
@@ -50,12 +50,21 @@ function ScheduleListPage() {
         <SummaryCard title="지출" amount={data?.withdraw ?? 0} />
       </Stack>
 
-      <ScheduleListHeader
-        count={data?.count ?? 0}
-        options={options}
-        selectedOption={selectedOption}
-        setSelectedOption={setSelectedOption}
-      />
+      <Box
+        sx={{
+          position: "sticky",
+          top: 96,
+          backgroundColor: "#FFF",
+          zIndex: 1000,
+        }}
+      >
+        <ScheduleListHeader
+          count={data?.count ?? 0}
+          options={options}
+          selectedOption={selectedOption}
+          setSelectedOption={setSelectedOption}
+        />
+      </Box>
 
       {scheduleDates.map((date) => {
         const schedules = monthSchedules[date] ?? [];
