@@ -40,21 +40,24 @@ const init_data = (date: string) => {
   const format = "M/D";
   const lastDay = moment(`${date}-01`).endOf("month").format("YYYY-MM-DD");
   let count = 1;
-  const result: { [key: string]: WeeklySchedule } = {};
+  let result: WeeklySchedule[] = [];
 
   while (!selected.isSameOrAfter(lastDay, "date")) {
     const first = selected.day(1).format(format);
     const last = selected.day(7).format(format);
-    result[count.toString()] = {
-      week_of_number: `${count}주차`,
-      period: `${first}~${last}`,
-      plus: 0,
-      minus: 0,
-    };
+    result = [
+      ...result,
+      {
+        week_of_number: `${count}주차`,
+        period: `${first}~${last}`,
+        plus: 0,
+        minus: 0,
+      },
+    ];
     count += 1;
   }
   return {
-    ...result,
+    week_schedule: result,
     income: "0",
     available: "0",
     expense: "0",
