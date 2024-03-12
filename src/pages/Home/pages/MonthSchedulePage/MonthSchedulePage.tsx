@@ -8,7 +8,8 @@ import useMonthSchedule from "@hooks/home/useMonthSchedule.ts";
 import MonthlyBudgetSummarySkeleton from "@pages/Home/next-components/HomeHeader/MonthlyBudgetSummary/MonthlyBudgetSummarySkeleton.tsx";
 import CalendarHeaderSkeleton from "@pages/Home/next-components/ScheduleCalendar/CalendarHeader/CalendarHeaderSkeleton.tsx";
 import ScheduleListSkeleton from "@components/ScheduleList/ScheduleListSkeleton.tsx";
-import { Box } from "@mui/material";
+import { Box, Stack, Typography } from "@mui/material";
+import KeyboardArrowRightIcon from "@mui/icons-material/KeyboardArrowRight";
 import { HomePageProps } from "@pages/Home/Home.tsx";
 import { useEffect } from "react";
 import useSchedule from "@hooks/useSchedule.ts";
@@ -66,9 +67,29 @@ function MonthSchedulePage({ updateHeight, navigateTo }: HomePageProps) {
 
       <ScheduleList
         date={date}
-        todaySchedules={todaySchedules}
+        todaySchedules={todaySchedules.slice(0, 3)}
         isError={isError}
+        isPending={isPending}
       />
+
+      {todaySchedules.length > 3 && (
+        <Stack
+          p={2}
+          direction="row"
+          justifyContent="center"
+          alignItems="center"
+          spacing={1.5}
+          onClick={navigateTo}
+        >
+          <Typography>
+            <span style={{ color: "#735BF2", fontWeight: 700 }}>
+              {todaySchedules.length - 3}건
+            </span>
+            &nbsp;일정 더보기
+          </Typography>
+          <KeyboardArrowRightIcon sx={{ color: "#8C919C" }} />
+        </Stack>
+      )}
     </Box>
   );
 }

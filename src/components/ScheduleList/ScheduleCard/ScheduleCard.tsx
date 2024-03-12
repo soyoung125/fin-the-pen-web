@@ -28,6 +28,7 @@ function ScheduleCard({
       alignItems="center"
       spacing={1.5}
       p={2}
+      sx={{ borderBottom: "1px solid #F7F7F8" }}
       onClick={onClick}
     >
       {icon && (
