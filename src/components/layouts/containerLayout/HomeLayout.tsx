@@ -72,7 +72,7 @@ export default function HomeLayout() {
   // }, [value, setMessages]);
 
   return (
-    <Box sx={{ pb: 7 }} ref={ref}>
+    <Box sx={{ pb: "82px" }} ref={ref}>
       <CssBaseline />
       <TopBar />
       <Box>
