@@ -5,15 +5,28 @@ import { Stack } from "@mui/material";
 import SummaryCard from "@pages/Home/next-components/HomeHeader/MonthlyBudgetSummary/SummaryCard";
 import useHeader from "@hooks/useHeader.ts";
 import ScheduleListHeader from "components/ScheduleList/ScheduleListHeader";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import useSchedule from "@hooks/useSchedule.ts";
+import ScheduleList from "@components/ScheduleList";
 
 function ScheduleListPage() {
   useHeader(false);
   const options = ["최신순", "과거순"];
 
   const { date, subtractMonth, addMonth, pickMonth } = useHome();
+  const { data, monthSchedules, isError, isPending } = useSchedule();
 
   const [selectedOption, setSelectedOption] = useState(options[0]);
+  const [scheduleDates, setScheduleDates] = useState<string[]>([]);
+
+  useEffect(() => {
+    const keys = Object.keys(monthSchedules ?? {});
+    if (selectedOption === "최신순") {
+      setScheduleDates(keys);
+    } else {
+      setScheduleDates(keys.reverse());
+    }
+  }, [data, selectedOption]);
 
   return (
     <>
@@ -33,16 +46,31 @@ function ScheduleListPage() {
         bgcolor="primary.main"
         sx={{ color: "#FFF" }}
       >
-        <SummaryCard title="수입" amount={350000} />
-        <SummaryCard title="지출" amount={-35000} />
+        <SummaryCard title="수입" amount={data?.deposit ?? 0} />
+        <SummaryCard title="지출" amount={data?.withdraw ?? 0} />
       </Stack>
 
       <ScheduleListHeader
-        count={0}
+        count={data?.count ?? 0}
         options={options}
         selectedOption={selectedOption}
         setSelectedOption={setSelectedOption}
       />
+
+      {scheduleDates.map((date) => {
+        const schedules = monthSchedules[date] ?? [];
+        const todaySchedules =
+          selectedOption === "과거순" ? schedules.reverse() : schedules;
+        return (
+          <ScheduleList
+            key={date}
+            showHeader
+            date={date}
+            todaySchedules={todaySchedules}
+            isError={isError}
+          />
+        );
+      })}
     </>
   );
 }

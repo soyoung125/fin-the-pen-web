@@ -99,6 +99,13 @@ export interface TodaySchedule extends Omit<Schedule, "schedule_id"> {
   id: string;
 }
 
+export interface ScheduleResponse {
+  count: number;
+  data: Schedule[];
+  deposit: number;
+  withdraw: number;
+}
+
 export interface MonthSchedule {
   income: string;
   available: string;
@@ -124,9 +131,7 @@ export interface WeeklySchedule {
   minus: number;
 }
 
-export type DaySchedule = {
-  [key: string]: DailySchedule;
-} & {
+export interface DaySchedule {
   // 하루동안의 전체 수입
   income: string;
   // 지출 예정
@@ -137,15 +142,4 @@ export type DaySchedule = {
   schedule_count: number;
   // 사용가능 금액 = 지출 목표액 - 지출 - 지출예정
   available?: string | number;
-};
-
-export interface DailySchedule {
-  // 등록된 일정의 이름
-  event_name: string;
-  // 일정의 시작 시간
-  start_time: string;
-  // 일정의 종료 시간
-  end_time: string;
-  // 설정된 금액 (수입 -> + / 지출 -> -)
-  amount: string;
 }

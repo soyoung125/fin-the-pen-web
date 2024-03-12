@@ -45,7 +45,7 @@ function ScheduleCard({
       >
         <Stack direction="row" alignItems="center" spacing={0.5}>
           <Typography fontSize="13px" fontWeight={500}>
-            {schedule.start_date}-{schedule.end_date}
+            {schedule.start_time}-{schedule.end_time}
           </Typography>
           {isRepeat && <RepeatRoundedIcon color="success" fontSize="small" />}
         </Stack>
