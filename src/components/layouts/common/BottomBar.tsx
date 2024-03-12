@@ -30,7 +30,7 @@ function BottomBar() {
     <BottomNavigation
       showLabels
       value={bottomTabMenu}
-      onChange={(event: React.SyntheticEvent, newValue: any) => {
+      onChange={(event: React.SyntheticEvent, newValue: number) => {
         dispatch(setBottomDrawerTabMenu(newValue));
       }}
       sx={{

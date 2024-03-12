@@ -1,13 +1,10 @@
 import { Stack } from "@mui/material";
-import { useNavigate } from "react-router-dom";
 import LogoButton from "../buttons/LogoButton.tsx";
 import PersonalButton from "../buttons/PersonalButton.tsx";
-import FilterButton from "../buttons/FilterButton";
 import SearchButton from "../buttons/SearchButton";
 import NotificationButton from "../buttons/NotificationButton.tsx";
 
 function HomeMode() {
-  const navigate = useNavigate();
   return (
     <>
       {/* 헤더 좌측 메뉴 */}

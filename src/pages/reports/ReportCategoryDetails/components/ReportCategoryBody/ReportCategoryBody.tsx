@@ -1,8 +1,6 @@
 import { CategoryDetail } from "@app/types/report.ts";
 import { useEffect, useState } from "react";
 import ReportEmptyBox from "@pages/reports/ReportMonthDetails/components/ReportEmptyBox";
-import moment from "moment";
-import { INIT_SCHEDULE } from "@constants/schedule.ts";
 import ReportCategorySummary from "@pages/reports/ReportCategoryDetails/components/ReportCategorySummary";
 import ThickDivider from "@components/common/ThickDivider.tsx";
 import ScheduleListHeader from "components/ScheduleList/ScheduleListHeader";

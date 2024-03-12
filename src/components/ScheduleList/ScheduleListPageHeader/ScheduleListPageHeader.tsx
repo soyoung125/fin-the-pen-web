@@ -5,7 +5,6 @@ import TuneRoundedIcon from "@mui/icons-material/TuneRounded";
 import { useNavigate } from "react-router-dom";
 import SelectYearMonth from "@components/common/SelectYearMonth";
 import { HeaderBox } from "./ScheduleListPageHeader.styles.ts";
-import FilterButton from "@components/layouts/common/TopBar/buttons/FilterButton";
 
 export interface ScheduleListPageHeaderProps {
   date: string;
