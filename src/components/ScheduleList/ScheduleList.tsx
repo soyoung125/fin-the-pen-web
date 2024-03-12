@@ -12,6 +12,7 @@ interface ScheduleListProps {
   date: string;
   todaySchedules: TodaySchedule[] | Schedule[];
   isError: boolean;
+  count?: number;
 }
 
 function ScheduleList({
@@ -19,6 +20,7 @@ function ScheduleList({
   date,
   todaySchedules,
   isError,
+  count,
 }: ScheduleListProps) {
   const isHideBudgetMode = useAppSelector(selectIsBudgetHidden);
   const { openScheduleDrawer } = useScheduleDrawer();
@@ -50,7 +52,7 @@ function ScheduleList({
 
   return (
     <>
-      {showHeader && <ScheduleDateBox date={date} />}
+      {showHeader && <ScheduleDateBox count={count} date={date} />}
       {todaySchedules.map((s) => (
         <ScheduleCard
           schedule={s}

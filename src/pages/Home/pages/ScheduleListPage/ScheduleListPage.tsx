@@ -67,6 +67,7 @@ function ScheduleListPage() {
             showHeader
             date={date}
             todaySchedules={todaySchedules}
+            count={todaySchedules.length}
             isError={isError}
           />
         );
