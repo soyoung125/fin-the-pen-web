@@ -71,14 +71,21 @@ function ReportCategoryBody({
         setSelectedOption={setSelectedOption}
       />
 
-      {scheduleDates.map((date) => (
-        <ScheduleList
-          showHeader
-          date={date}
-          todaySchedules={report?.month_schedule[date] ?? []}
-          isError={!report?.month_schedule[date]}
-        />
-      ))}
+      {scheduleDates.map((date) => {
+        const schedules = report?.month_schedule[date] ?? [];
+        const todaySchedules =
+          selectedOption === "과거순" ? schedules.reverse() : schedules;
+        return (
+          <ScheduleList
+            key={date}
+            showHeader
+            date={date}
+            todaySchedules={todaySchedules}
+            isError={!todaySchedules}
+            isPending={isPending}
+          />
+        );
+      })}
     </>
   );
 }

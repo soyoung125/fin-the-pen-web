@@ -106,7 +106,7 @@ function ScheduleListPage() {
               date={date}
               todaySchedules={todaySchedules}
               count={todaySchedules.length}
-              isError={isError}
+              isError={!todaySchedules}
               isPending={isPending}
             />
           </div>
