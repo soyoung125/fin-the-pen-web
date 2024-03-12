@@ -13,7 +13,7 @@ function HomeMode() {
       {/* 헤더 좌측 메뉴 */}
       <Stack direction="row" justifyContent="space-between" alignItems="center">
         <LogoButton />
-        <FilterButton />
+        {/*<FilterButton />*/}
       </Stack>
 
       {/* 헤더 중앙 메뉴 */}
@@ -24,7 +24,12 @@ function HomeMode() {
       />
 
       {/* 헤더 우측 메뉴 */}
-      <Stack direction="row" justifyContent="space-between" alignItems="center">
+      <Stack
+        direction="row"
+        justifyContent="space-between"
+        alignItems="center"
+        spacing={2}
+      >
         <NotificationButton />
         <PersonalButton />
         <SearchButton />

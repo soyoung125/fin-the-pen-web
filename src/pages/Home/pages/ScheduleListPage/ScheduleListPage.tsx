@@ -5,10 +5,11 @@ import { Box, Stack } from "@mui/material";
 import SummaryCard from "@pages/Home/next-components/HomeHeader/MonthlyBudgetSummary/SummaryCard";
 import useHeader from "@hooks/useHeader.ts";
 import ScheduleListHeader from "components/ScheduleList/ScheduleListHeader";
-import { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import useSchedule from "@hooks/useSchedule.ts";
 import ScheduleList from "@components/ScheduleList";
 import TodayButton from "@pages/Home/pages/DaySchedulePage/components/TodayButton/TodayButton.tsx";
+import FilterDrawer from "@components/layouts/common/TopBar/buttons/FilterButton/FilterDrawer.tsx";
 
 function ScheduleListPage() {
   useHeader(false);
@@ -21,6 +22,7 @@ function ScheduleListPage() {
   const [selectedOption, setSelectedOption] = useState(options[0]);
   const [scheduleDates, setScheduleDates] = useState<string[]>([]);
   const [isVisible, setIsVisible] = useState(false);
+  const [bottomDrawerOpen, setBottomDrawerOpen] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -62,7 +64,7 @@ function ScheduleListPage() {
         date={moment(date).format("YYYY년 M월")}
         addMonth={addMonth}
         subtractMonth={subtractMonth}
-        handleClickFilter={() => alert("filter")}
+        handleClickFilter={() => setBottomDrawerOpen(true)}
         handleClickSearch={() => alert("search")}
         changeMonth={pickMonth}
       />
@@ -114,6 +116,10 @@ function ScheduleListPage() {
       })}
 
       {isVisible && <TodayButton goToday={scrollToToday} />}
+      <FilterDrawer
+        bottomDrawerOpen={bottomDrawerOpen}
+        setBottomDrawerOpen={setBottomDrawerOpen}
+      />
     </>
   );
 }

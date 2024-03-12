@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import FilterAltIcon from "@mui/icons-material/FilterAlt";
 import RoundedButton from "../../../../../common/RoundedButton.tsx";
 import FilterDrawer from "@components/layouts/common/TopBar/buttons/FilterButton/FilterDrawer.tsx";
+import TuneRoundedIcon from "@mui/icons-material/TuneRounded";
 
 function FilterButton() {
   const [bottomDrawerOpen, setBottomDrawerOpen] = useState(false);
@@ -9,7 +9,7 @@ function FilterButton() {
   return (
     <>
       <RoundedButton value="user" onClick={() => setBottomDrawerOpen(true)}>
-        <FilterAltIcon />
+        <TuneRoundedIcon />
       </RoundedButton>
       <FilterDrawer
         bottomDrawerOpen={bottomDrawerOpen}
