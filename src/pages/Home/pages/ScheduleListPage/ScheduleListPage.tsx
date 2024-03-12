@@ -5,19 +5,37 @@ import { Box, Stack } from "@mui/material";
 import SummaryCard from "@pages/Home/next-components/HomeHeader/MonthlyBudgetSummary/SummaryCard";
 import useHeader from "@hooks/useHeader.ts";
 import ScheduleListHeader from "components/ScheduleList/ScheduleListHeader";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import useSchedule from "@hooks/useSchedule.ts";
 import ScheduleList from "@components/ScheduleList";
+import TodayButton from "@pages/Home/pages/DaySchedulePage/components/TodayButton/TodayButton.tsx";
 
 function ScheduleListPage() {
   useHeader(false);
   const options = ["최신순", "과거순"];
+  const todayRef = useRef<HTMLDivElement>(null);
 
   const { date, subtractMonth, addMonth, pickMonth } = useHome();
   const { data, monthSchedules, isError, isPending } = useSchedule();
 
   const [selectedOption, setSelectedOption] = useState(options[0]);
   const [scheduleDates, setScheduleDates] = useState<string[]>([]);
+  const [isVisible, setIsVisible] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (todayRef.current) {
+        const rect = todayRef.current.getBoundingClientRect();
+        setIsVisible(rect.top > window.innerHeight || rect.bottom < 146);
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll);
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
 
   useEffect(() => {
     const keys = Object.keys(monthSchedules ?? {});
@@ -26,7 +44,17 @@ function ScheduleListPage() {
     } else {
       setScheduleDates(keys.reverse());
     }
+    setTimeout(() => scrollToToday(), 10);
   }, [data, selectedOption]);
+
+  const scrollToToday = () => {
+    if (todayRef.current) {
+      todayRef.current.scrollIntoView({
+        behavior: "smooth",
+        block: "center",
+      });
+    }
+  };
 
   return (
     <>
@@ -71,16 +99,20 @@ function ScheduleListPage() {
         const todaySchedules =
           selectedOption === "과거순" ? schedules.reverse() : schedules;
         return (
-          <ScheduleList
-            key={date}
-            showHeader
-            date={date}
-            todaySchedules={todaySchedules}
-            count={todaySchedules.length}
-            isError={isError}
-          />
+          <div ref={moment().isSame(date, "date") ? todayRef : undefined}>
+            <ScheduleList
+              key={date}
+              showHeader
+              date={date}
+              todaySchedules={todaySchedules}
+              count={todaySchedules.length}
+              isError={isError}
+            />
+          </div>
         );
       })}
+
+      {isVisible && <TodayButton goToday={scrollToToday} />}
     </>
   );
 }
