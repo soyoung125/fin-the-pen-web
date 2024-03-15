@@ -1,6 +1,5 @@
 import { Box, Button, InputAdornment, TextField } from "@mui/material";
 import { useNavigate } from "react-router-dom";
-import { PATH } from "@constants/path.ts";
 import { isObjectValuesEmpty } from "@utils/tools.ts";
 import {
   NO_BLANKS,

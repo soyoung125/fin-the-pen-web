@@ -1,8 +1,8 @@
 import { Box, Button, IconButton, TextField } from "@mui/material";
 import { FormEvent, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { NO_BLANKS } from "../../constants/messages.tsx";
-import { PATH } from "../../constants/path.ts";
+import { NO_BLANKS } from "@constants/messages.tsx";
+import { PATH } from "@constants/path.ts";
 import { isObjectValuesEmpty } from "@utils/tools.ts";
 import { useAuth } from "@app/tanstack-query/useAuth.ts";
 import MockSignIn from "@pages/SignIn/MockSignIn.tsx";
@@ -30,7 +30,7 @@ function SignInFields() {
   };
 
   const handleMouseDownPassword = (
-    event: React.MouseEvent<HTMLButtonElement>,
+    event: React.MouseEvent<HTMLButtonElement>
   ) => {
     event.preventDefault();
   };
@@ -80,7 +80,7 @@ function SignInFields() {
           sx={{ pl: 0 }}
           onClick={() =>
             alert(
-              "You forget a thousand things every day. Make sure this is one of them :)",
+              "You forget a thousand things every day. Make sure this is one of them :)"
             )
           }
         >

@@ -2,7 +2,7 @@ import { Box, Stack } from "@mui/material";
 import "swiper/css";
 import { useNavigate } from "react-router-dom";
 import RoundedBorderBox from "../../../components/common/RoundedBorderBox";
-import { PATH } from "../../../constants/path.ts";
+import { PATH } from "@constants/path.ts";
 import { Schedule } from "@app/types/schedule.ts";
 
 interface DetailCardProps {
