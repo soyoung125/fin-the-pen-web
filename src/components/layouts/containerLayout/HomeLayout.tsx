@@ -4,6 +4,8 @@ import { useRef } from "react";
 import { Outlet } from "react-router-dom";
 import BottomBar from "../common/BottomBar.tsx";
 import TopBar from "../common/TopBar";
+import { useAppSelector } from "@redux/hooks.ts";
+import { selectBottomBarOpen } from "@redux/slices/commonSlice.tsx";
 
 // const messageExamples = [
 //   {
@@ -57,6 +59,7 @@ import TopBar from "../common/TopBar";
 
 export default function HomeLayout() {
   const ref = useRef(null);
+  const bottomBarOpen = useAppSelector(selectBottomBarOpen);
   // const [messages, setMessages] = React.useState(() => refreshMessages());
 
   /**
@@ -72,7 +75,7 @@ export default function HomeLayout() {
   // }, [value, setMessages]);
 
   return (
-    <Box sx={{ pb: "82px" }} ref={ref}>
+    <Box sx={{ pb: bottomBarOpen ? "82px" : 0 }} ref={ref}>
       <CssBaseline />
       <TopBar />
       <Box>

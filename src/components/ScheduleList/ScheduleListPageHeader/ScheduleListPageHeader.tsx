@@ -27,7 +27,7 @@ function ScheduleListPageHeader({
 }: ScheduleListPageHeaderProps) {
   const navigate = useNavigate();
   return (
-    <Box bgcolor="#735bf2" sx={{ position: "sticky", top: 0, zIndex: 100 }}>
+    <Box bgcolor="#735bf2" sx={{ position: "sticky", top: 0, zIndex: 1000 }}>
       <HeaderBox>
         <Stack
           direction="row"
