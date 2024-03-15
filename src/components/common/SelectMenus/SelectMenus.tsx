@@ -94,6 +94,8 @@ export default function SelectMenus({
           fontSize: "13px",
           color: "#131416",
           fontWeight: 500,
+          padding: 0,
+          height: "22px",
         }}
       >
         {selectedOption}

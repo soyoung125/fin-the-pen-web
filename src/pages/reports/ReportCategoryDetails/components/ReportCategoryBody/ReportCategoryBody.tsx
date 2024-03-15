@@ -9,6 +9,7 @@ import ReportCategorySummarySkeleton from "@pages/reports/ReportCategoryDetails/
 import ScheduleListSkeleton from "@components/ScheduleList/ScheduleListSkeleton.tsx";
 import TodayButton from "@pages/Home/pages/DaySchedulePage/components/TodayButton/TodayButton.tsx";
 import moment from "moment/moment";
+import { Box } from "@mui/material";
 
 export interface ReportCategoryBodyProps {
   report?: CategoryDetail;
@@ -22,26 +23,31 @@ function ReportCategoryBody({
   handleClickAddSchedule,
 }: ReportCategoryBodyProps) {
   const options = ["최신순", "과거순"];
-  // const todayRef = useRef<HTMLDivElement>(null);
+  const todayRef = useRef<HTMLDivElement>(null);
 
   const [selectedOption, setSelectedOption] = useState(options[0]);
   const [scheduleDates, setScheduleDates] = useState<string[]>([]);
-  // const [isVisible, setIsVisible] = useState(false);
-  //
-  // useEffect(() => {
-  //   const handleScroll = () => {
-  //     if (todayRef.current) {
-  //       const rect = todayRef.current.getBoundingClientRect();
-  //       setIsVisible(rect.top > window.innerHeight || rect.bottom < 146);
-  //     }
-  //   };
-  //
-  //   window.addEventListener("scroll", handleScroll);
-  //
-  //   return () => {
-  //     window.removeEventListener("scroll", handleScroll);
-  //   };
-  // }, []);
+  const [isVisible, setIsVisible] = useState(false);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        setIsVisible(entry.isIntersecting);
+      },
+      { threshold: 0 }
+    );
+
+    const targetRef = todayRef.current;
+    if (targetRef) {
+      observer.observe(targetRef);
+    }
+
+    return () => {
+      if (targetRef) {
+        observer.unobserve(targetRef);
+      }
+    };
+  }, []);
 
   useEffect(() => {
     const keys = Object.keys(report?.month_schedule ?? {});
@@ -50,7 +56,6 @@ function ReportCategoryBody({
     } else {
       setScheduleDates(keys.reverse());
     }
-    // setTimeout(() => scrollToToday(), 10);
   }, [report, selectedOption]);
 
   if (isPending) {
@@ -73,14 +78,14 @@ function ReportCategoryBody({
     return <ReportEmptyBox handleClickAddSchedule={handleClickAddSchedule} />;
   }
 
-  // const scrollToToday = () => {
-  //   if (todayRef.current) {
-  //     todayRef.current.scrollIntoView({
-  //       behavior: "smooth",
-  //       block: "center",
-  //     });
-  //   }
-  // };
+  const scrollToToday = () => {
+    if (todayRef.current) {
+      window.scrollTo({
+        top: todayRef.current.offsetTop - 134,
+        behavior: "smooth",
+      });
+    }
+  };
 
   return (
     <>
@@ -91,31 +96,40 @@ function ReportCategoryBody({
         data={[20, 10, 70]}
       />
       <ThickDivider />
-      <ScheduleListHeader
-        count={report?.count ?? 0}
-        options={options}
-        selectedOption={selectedOption}
-        setSelectedOption={setSelectedOption}
-      />
+      <Box
+        sx={{
+          position: "sticky",
+          top: 96,
+          backgroundColor: "#FFF",
+          zIndex: 1000,
+        }}
+      >
+        <ScheduleListHeader
+          count={report?.count ?? 0}
+          options={options}
+          selectedOption={selectedOption}
+          setSelectedOption={setSelectedOption}
+        />
+      </Box>
 
       {scheduleDates.map((date) => {
         const schedules = report?.month_schedule[date] ?? [];
         const todaySchedules =
           selectedOption === "과거순" ? schedules.reverse() : schedules;
         return (
-          // <div ref={moment().isSame(date, "date") ? todayRef : undefined}>
-          <ScheduleList
-            key={date}
-            showHeader
-            date={date}
-            todaySchedules={todaySchedules}
-            isError={!todaySchedules}
-            isPending={isPending}
-          />
-          // </div>
+          <div ref={moment().isSame(date, "date") ? todayRef : undefined}>
+            <ScheduleList
+              key={date}
+              showHeader
+              date={date}
+              todaySchedules={todaySchedules}
+              isError={!todaySchedules}
+              isPending={isPending}
+            />
+          </div>
         );
       })}
-      {/*{isVisible && <TodayButton goToday={scrollToToday} />}*/}
+      {!isVisible && <TodayButton goToday={scrollToToday} />}
     </>
   );
 }
