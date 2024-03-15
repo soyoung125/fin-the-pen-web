@@ -7,11 +7,7 @@ import SettingsIcon from "@mui/icons-material/Settings";
 import PaidIcon from "@mui/icons-material/Paid";
 import moment from "moment";
 import { INIT_SCHEDULE } from "@constants/schedule.ts";
-import {
-  changeViewMode,
-  selectDate,
-  selectScheduleForm,
-} from "@redux/slices/scheduleSlice.tsx";
+import { changeViewMode, selectDate } from "@redux/slices/scheduleSlice.tsx";
 import { useAppDispatch, useAppSelector } from "@redux/hooks.ts";
 import {
   selectBottomBarOpen,
@@ -32,8 +28,9 @@ function BottomBar() {
 
   return (
     <BottomNavigation
+      showLabels
       value={bottomTabMenu}
-      onChange={(event: React.SyntheticEvent, newValue: any) => {
+      onChange={(event: React.SyntheticEvent, newValue: number) => {
         dispatch(setBottomDrawerTabMenu(newValue));
       }}
       sx={{
@@ -41,9 +38,13 @@ function BottomBar() {
         bottom: 0,
         left: 0,
         right: 0,
-        py: 2,
+        pt: 1.5,
+        pb: "22px",
+        px: 4,
         zIndex: 10,
         display: bottomBarOpen ? "flex" : "none",
+        backgroundColor: "#FFF",
+        height: "auto",
       }}
     >
       <BottomNavigationAction
@@ -61,7 +62,9 @@ function BottomBar() {
       />
       <BottomNavigationAction
         label=""
-        icon={<AddCircleIcon />}
+        icon={
+          <AddCircleIcon sx={{ fontSize: "48px", color: "primary.main" }} />
+        }
         onClick={() =>
           openScheduleDrawer(INIT_SCHEDULE(moment(date).format("YYYY-MM-DD")))
         }

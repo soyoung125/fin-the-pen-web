@@ -6,22 +6,50 @@ import { selectIsBudgetHidden } from "@redux/slices/settingSlice.ts";
 import { SCHEDULE_REQUEST } from "@constants/schedule.ts";
 import { useScheduleDrawer } from "@hooks/useScheduleDrawer.tsx";
 import ScheduleDateBox from "components/ScheduleList/ScheduleDateBox";
+import ScheduleCardSkeleton from "@components/ScheduleList/ScheduleCard/ScheduleCardSkeleton.tsx";
+import ScheduleDateBoxSkeleton from "@components/ScheduleList/ScheduleDateBox/ScheduleDateBoxSkeleton.tsx";
 
 interface ScheduleListProps {
   showHeader?: boolean;
   date: string;
   todaySchedules: TodaySchedule[] | Schedule[];
+  isPending: boolean;
   isError: boolean;
+  count?: number;
 }
 
 function ScheduleList({
   showHeader,
   date,
   todaySchedules,
+  isPending,
   isError,
+  count,
 }: ScheduleListProps) {
   const isHideBudgetMode = useAppSelector(selectIsBudgetHidden);
   const { openScheduleDrawer } = useScheduleDrawer();
+
+  if (isPending) {
+    return (
+      <>
+        {showHeader && <ScheduleDateBoxSkeleton count={0} date={date} />}
+        {Array.from({ length: 6 }, () => 0).map(() => (
+          <ScheduleCardSkeleton />
+        ))}
+      </>
+    );
+  }
+
+  if (showHeader && todaySchedules.length === 0) {
+    return (
+      <>
+        <ScheduleDateBoxSkeleton count={0} date={date} />
+        {Array.from({ length: 2 }, () => 0).map(() => (
+          <ScheduleCardSkeleton />
+        ))}
+      </>
+    );
+  }
 
   if (todaySchedules.length === 0 || isError) {
     return (
@@ -50,7 +78,7 @@ function ScheduleList({
 
   return (
     <>
-      {showHeader && <ScheduleDateBox date={date} />}
+      {showHeader && <ScheduleDateBox count={count} date={date} />}
       {todaySchedules.map((s) => (
         <ScheduleCard
           schedule={s}

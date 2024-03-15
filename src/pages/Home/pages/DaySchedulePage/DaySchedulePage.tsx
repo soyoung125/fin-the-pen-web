@@ -60,6 +60,7 @@ function DaySchedulePage({ updateHeight, navigateTo }: HomePageProps) {
         date={date}
         todaySchedules={todaySchedules}
         isError={isError}
+        isPending={isPending}
       />
     </div>
   );

@@ -49,12 +49,19 @@ function TopBar() {
   return (
     isHeaderOpen && (
       <>
-        <Box sx={{ position: "relative", height: 70, zIndex: 1000 }}>
+        <Box
+          sx={{
+            position: "sticky",
+            top: 0,
+            backgroundColor: "#FFF",
+            zIndex: 1000,
+          }}
+        >
           <Stack
             direction="row"
             justifyContent="space-between"
-            alignItems="flex-end"
-            sx={{ height: 70, paddingX: "12px" }}
+            alignItems="center"
+            sx={{ paddingX: "20px" }}
           >
             {headerMode === "home" && <HomeMode />}
             {headerMode === "analysis" && <AnalysisMode />}

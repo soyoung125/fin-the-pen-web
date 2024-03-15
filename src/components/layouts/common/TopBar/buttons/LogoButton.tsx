@@ -11,7 +11,7 @@ function LogoButton() {
   const guestMode = useAppSelector(selectGuestMode);
   return (
     <RoundedButton value="user" onClick={() => navigate(PATH.home)}>
-      <img src={logo} alt="" width="26px" height="26px" />
+      <img src={logo} alt="" width="40px" height="40px" />
       {guestMode && <Typography ml={1}>GUEST MODE</Typography>}
     </RoundedButton>
   );

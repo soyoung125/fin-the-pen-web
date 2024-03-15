@@ -3,7 +3,7 @@ import ScheduleCardSkeleton from "@components/ScheduleList/ScheduleCard/Schedule
 function ScheduleListSkeleton() {
   return Array(3)
     .fill(0)
-    .map(() => <ScheduleCardSkeleton />);
+    .map((_, index) => <ScheduleCardSkeleton key={index} />);
 }
 
 export default ScheduleListSkeleton;

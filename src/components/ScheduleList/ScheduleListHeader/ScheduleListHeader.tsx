@@ -22,8 +22,9 @@ function ScheduleListHeader({
       alignItems="center"
       py={1}
       px={2.5}
+      sx={{ height: "38px" }}
     >
-      <Typography>
+      <Typography fontSize="13px">
         총&nbsp;<span style={{ color: "#735BF2" }}>{count}</span>건
       </Typography>
       <SelectMenus

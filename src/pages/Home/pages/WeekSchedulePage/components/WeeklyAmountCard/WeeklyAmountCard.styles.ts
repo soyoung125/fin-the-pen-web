@@ -6,7 +6,7 @@ export const AmountBox = styled.div<{ $isTitle?: boolean }>`
   padding: 12px;
 `;
 
-export const AmountText = styled.text`
+export const AmountText = styled.div`
   height: 24px;
   font-size: 16px;
   font-weight: 500;

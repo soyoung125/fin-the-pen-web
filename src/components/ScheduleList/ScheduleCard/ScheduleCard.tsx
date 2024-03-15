@@ -28,6 +28,7 @@ function ScheduleCard({
       alignItems="center"
       spacing={1.5}
       p={2}
+      sx={{ borderBottom: "1px solid #F7F7F8" }}
       onClick={onClick}
     >
       {icon && (
@@ -45,7 +46,7 @@ function ScheduleCard({
       >
         <Stack direction="row" alignItems="center" spacing={0.5}>
           <Typography fontSize="13px" fontWeight={500}>
-            {schedule.start_date}-{schedule.end_date}
+            {schedule.start_time}-{schedule.end_time}
           </Typography>
           {isRepeat && <RepeatRoundedIcon color="success" fontSize="small" />}
         </Stack>

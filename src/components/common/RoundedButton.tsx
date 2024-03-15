@@ -17,7 +17,7 @@ function RoundedButton({ children, onClick, value }: RoundedButtonProps) {
         color: "primary.main",
         borderRadius: 30,
         borderWidth: 0,
-        padding: "8px",
+        padding: "0px",
       }}
       onClick={onClick}
     >

@@ -27,7 +27,7 @@ function ScheduleListPageHeader({
 }: ScheduleListPageHeaderProps) {
   const navigate = useNavigate();
   return (
-    <Box bgcolor="#735bf2">
+    <Box bgcolor="#735bf2" sx={{ position: "sticky", top: 0, zIndex: 1000 }}>
       <HeaderBox>
         <Stack
           direction="row"
@@ -49,6 +49,7 @@ function ScheduleListPageHeader({
           spacing={1}
           justifyContent="space-between"
           alignItems="center"
+          sx={{ color: "#FFF" }}
         >
           <SelectYearMonth
             date={date}
@@ -57,6 +58,7 @@ function ScheduleListPageHeader({
             changeYearAndMonth={changeMonth}
           />
           <TuneRoundedIcon onClick={handleClickFilter} />
+          {/*<FilterButton />*/}
         </Stack>
       </HeaderBox>
     </Box>

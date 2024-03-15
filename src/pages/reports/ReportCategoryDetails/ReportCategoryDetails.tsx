@@ -1,5 +1,5 @@
 import useHeader from "@hooks/useHeader.ts";
-import ScheduleListHeader from "components/ScheduleList/ScheduleListPageHeader";
+import ScheduleListPageHeader from "components/ScheduleList/ScheduleListPageHeader";
 import useCategoryReport from "@hooks/report/useCategoryReport.ts";
 import { useScheduleDrawer } from "@hooks/useScheduleDrawer.tsx";
 import moment from "moment/moment";
@@ -29,7 +29,7 @@ function ReportCategoryDetails() {
 
   return (
     <>
-      <ScheduleListHeader
+      <ScheduleListPageHeader
         date={`${year}년 ${month}월`}
         addMonth={addMonth}
         subtractMonth={subtractMonth}
