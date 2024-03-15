@@ -60,12 +60,10 @@ function CreateFooter({ handleSubmit, handleClose }: CreateFooterInterface) {
         <Button
           variant="contained"
           fullWidth
-          disabled={user === undefined}
+          disabled={!user}
           onClick={handleCreate}
         >
-          {user === undefined
-            ? NEED_SIGN_IN
-            : `${SCHEDULE_DRAWER.add_schedule}`}
+          {!user ? NEED_SIGN_IN : `${SCHEDULE_DRAWER.add_schedule}`}
         </Button>
       </Tooltip>
     </Stack>

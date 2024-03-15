@@ -60,7 +60,7 @@ const useSchedule = () => {
   }, init);
 
   const handleCreateSchedule = async (schedule: RequestSchedule) => {
-    if (user === undefined) {
+    if (!user) {
       return alert("로그인이 필요합니다.");
     }
 

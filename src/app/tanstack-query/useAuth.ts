@@ -44,7 +44,6 @@ export const useAuth = () => {
           user_id: variable.user_id?.toString() ?? "",
         };
         queryClient.setQueryData([QUERY_KEY_USER], useUser);
-        dispatch(setUser(useUser)); // 수정예정 (제거 필요)
         setSessionStorage(SESSION_STORAGE_KEY_TOKEN, user.token);
         navigate("//");
       } else {
@@ -58,7 +57,7 @@ export const useAuth = () => {
   };
 
   const signOut = () => {
-    window.location.href = "/";
+    queryClient.setQueryData([QUERY_KEY_USER], null);
     sessionStorage.clear();
   };
 
