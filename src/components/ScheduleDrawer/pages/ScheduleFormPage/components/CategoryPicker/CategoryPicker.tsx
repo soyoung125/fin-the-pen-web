@@ -11,7 +11,7 @@ export interface CategoryPickerProps {
 
 function CategoryPicker({ setIsCategoryPickerOpen }: CategoryPickerProps) {
   const [activeTabIndex, setActiveTabIndex] = useState(0);
-  const { scheduleForm, updateSchedule } = useScheduleForm();
+  const { scheduleForm, updateCategory } = useScheduleForm();
   const [selectedCategory, setSelectedCategory] = useState<string>(
     scheduleForm ? scheduleForm.category : ""
   );
@@ -68,12 +68,7 @@ function CategoryPicker({ setIsCategoryPickerOpen }: CategoryPickerProps) {
           variant="contained"
           disabled={!isCategorySelected}
           onClick={() => {
-            updateSchedule({
-              target: {
-                id: "category",
-                value: selectedCategory,
-              },
-            });
+            updateCategory(selectedCategory);
             setIsCategoryPickerOpen(false);
           }}
         >
