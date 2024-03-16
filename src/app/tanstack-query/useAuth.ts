@@ -9,6 +9,7 @@ import { useDispatch } from "react-redux";
 import { setUser } from "@redux/slices/userSlice.tsx";
 import { QUERY_KEY_USER } from "@constants/queryKeys.ts";
 import { useDialog } from "@hooks/dialog/useDialog.tsx";
+import { setIsAuthenticatedFalse } from "@redux/slices/commonSlice.tsx";
 
 const fetchSignIn = async (credentials: SignIn) => {
   return fetch(`${DOMAIN}/sign-in`, {
@@ -57,7 +58,8 @@ export const useAuth = () => {
   };
 
   const signOut = () => {
-    queryClient.setQueryData([QUERY_KEY_USER], null);
+    dispatch(setIsAuthenticatedFalse());
+    queryClient.removeQueries({ queryKey: [QUERY_KEY_USER] });
     sessionStorage.clear();
   };
 
