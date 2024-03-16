@@ -5,7 +5,7 @@ import { useScheduleForm } from "../../../hooks/useScheduleForm.ts";
 
 interface RepeatInputProps {
   repeatType: string;
-  onClick: () => void;
+  onClick?: () => void;
   handleChange?: (value: string) => void;
 }
 
@@ -16,7 +16,9 @@ function RepeatInput({ repeatType, onClick, handleChange }: RepeatInputProps) {
     handleChange
       ? handleChange(state.target.value as string)
       : updateRepeat(state);
-    if (state.target.value !== "none") onClick();
+    if (onClick && state.target.value !== "none") {
+      onClick();
+    }
   };
 
   return (
