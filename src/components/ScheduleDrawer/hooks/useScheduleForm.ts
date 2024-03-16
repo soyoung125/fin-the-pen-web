@@ -245,7 +245,7 @@ export const useScheduleForm = () => {
   };
 
   const updateExclusion = (state: boolean) => {
-    dispatch(setDrawerScheduleForm({ ...scheduleForm, exclude: state }));
+    dispatch(setDrawerScheduleForm({ ...scheduleForm, exclusion: state }));
   };
 
   const updatePeriod = (state: UpdateStateInterface) => {
