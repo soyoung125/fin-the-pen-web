@@ -1,6 +1,5 @@
 import { Box, Button, InputAdornment, TextField } from "@mui/material";
 import { useNavigate } from "react-router-dom";
-import { PATH } from "@constants/path.ts";
 import { isObjectValuesEmpty } from "@utils/tools.ts";
 import {
   NO_BLANKS,
@@ -33,9 +32,9 @@ function SignUpFields() {
     })
       .then(async (res) => {
         const data = await res.json();
-        if (data === true) {
+        if (data.user_id === user.user_id) {
           alert(SIGN_UP_SUCCESS);
-          navigate(PATH.signIn);
+          navigate(-1);
         } else {
           alert(NO_DUPLICATION_ID);
         }

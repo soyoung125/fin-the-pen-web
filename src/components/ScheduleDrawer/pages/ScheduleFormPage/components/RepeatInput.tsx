@@ -2,11 +2,10 @@ import { Box, Stack } from "@mui/material";
 import SwitchButton from "@components/common/SwitchButton.tsx";
 import { UpdateStateInterface } from "@app/types/common.ts";
 import { useScheduleForm } from "../../../hooks/useScheduleForm.ts";
-import { MouseEventHandler } from "react";
 
 interface RepeatInputProps {
   repeatType: string;
-  onClick?: MouseEventHandler<HTMLElement>;
+  onClick?: () => void;
   handleChange?: (value: string) => void;
 }
 
@@ -17,6 +16,9 @@ function RepeatInput({ repeatType, onClick, handleChange }: RepeatInputProps) {
     handleChange
       ? handleChange(state.target.value as string)
       : updateRepeat(state);
+    if (onClick && state.target.value !== "none") {
+      onClick();
+    }
   };
 
   return (

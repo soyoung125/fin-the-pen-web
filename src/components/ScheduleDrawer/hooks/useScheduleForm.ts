@@ -4,7 +4,7 @@ import {
   setDrawerScheduleForm,
 } from "@redux/slices/scheduleSlice.tsx";
 import moment from "moment/moment";
-import { CATEGORIES, Category } from "@constants/categories.ts";
+// import { CATEGORIES, Category } from "@constants/categories.ts";
 import {
   INIT_PERIOD,
   INIT_REPEAT,
@@ -12,11 +12,13 @@ import {
 } from "@constants/schedule.ts";
 import { useAppDispatch } from "@redux/hooks.ts";
 import { useSelector } from "react-redux";
+import {
+  CATEGORIES,
+  INCOME_CATEGORY,
+} from "@components/ScheduleDrawer/pages/ScheduleFormPage/components/CategoryPicker/constants.ts";
 
-export const getType = (category: Category) => {
-  const type = category.type;
-  const nestedType = category.nestedType;
-  if (type === "수입" || nestedType === "입금") {
+export const getType = (category: string) => {
+  if (INCOME_CATEGORY.includes(category)) {
     return SCHEDULE_DRAWER.type_plus;
   } else {
     return SCHEDULE_DRAWER.type_minus;
@@ -83,7 +85,7 @@ export const useScheduleForm = () => {
       end_date: date.format("YYYY-MM-DD"),
       start_time: `0${Math.floor(Math.random() * 9 + 1)}:00`,
       end_time: `2${Math.floor(Math.random() * 4)}:00`,
-      category: category.title,
+      category: category,
       is_all_day: false,
       repeat: INIT_REPEAT(date),
       period: INIT_PERIOD(date),
@@ -243,7 +245,7 @@ export const useScheduleForm = () => {
   };
 
   const updateExclusion = (state: boolean) => {
-    dispatch(setDrawerScheduleForm({ ...scheduleForm, exclude: state }));
+    dispatch(setDrawerScheduleForm({ ...scheduleForm, exclusion: state }));
   };
 
   const updatePeriod = (state: UpdateStateInterface) => {
@@ -292,6 +294,16 @@ export const useScheduleForm = () => {
     );
   };
 
+  const updateCategory = (value: string) => {
+    dispatch(
+      setDrawerScheduleForm({
+        ...scheduleForm,
+        category: value,
+        price_type: getType(value),
+      })
+    );
+  };
+
   return {
     scheduleForm,
     updateSchedule,
@@ -301,5 +313,6 @@ export const useScheduleForm = () => {
     setRandomGeneratedSchedule,
     updatePeriod,
     updateYearRepeat,
+    updateCategory,
   };
 };

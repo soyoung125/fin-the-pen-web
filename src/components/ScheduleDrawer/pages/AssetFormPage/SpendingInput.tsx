@@ -37,7 +37,7 @@ function SpendingInput() {
     }
     updateSchedule({
       target: {
-        id: "amount",
+        id: "set_amount",
         value: state.target.value.replaceAll(",", ""),
       },
     });

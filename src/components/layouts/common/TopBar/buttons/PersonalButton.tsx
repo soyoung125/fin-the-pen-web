@@ -10,7 +10,7 @@ function PersonalButton() {
   const navigate = useNavigate();
   const { data: user } = useUser();
 
-  if (user === undefined) {
+  if (!user) {
     return (
       <RoundedButton value="login" onClick={() => navigate(PATH.signIn)}>
         <LoginIcon />

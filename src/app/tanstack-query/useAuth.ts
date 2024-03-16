@@ -9,6 +9,7 @@ import { useDispatch } from "react-redux";
 import { setUser } from "@redux/slices/userSlice.tsx";
 import { QUERY_KEY_USER } from "@constants/queryKeys.ts";
 import { useDialog } from "@hooks/dialog/useDialog.tsx";
+import { setIsAuthenticatedFalse } from "@redux/slices/commonSlice.tsx";
 
 const fetchSignIn = async (credentials: SignIn) => {
   return fetch(`${DOMAIN}/sign-in`, {
@@ -44,7 +45,6 @@ export const useAuth = () => {
           user_id: variable.user_id?.toString() ?? "",
         };
         queryClient.setQueryData([QUERY_KEY_USER], useUser);
-        dispatch(setUser(useUser)); // 수정예정 (제거 필요)
         setSessionStorage(SESSION_STORAGE_KEY_TOKEN, user.token);
         navigate("//");
       } else {
@@ -58,7 +58,8 @@ export const useAuth = () => {
   };
 
   const signOut = () => {
-    window.location.href = "/";
+    dispatch(setIsAuthenticatedFalse());
+    queryClient.removeQueries({ queryKey: [QUERY_KEY_USER] });
     sessionStorage.clear();
   };
 

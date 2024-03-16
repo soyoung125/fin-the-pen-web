@@ -5,15 +5,15 @@ import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import AnalysisGraph from "./AnalysisGraph";
 import AnalysisList from "./analysisList/AnalysisList";
-import { PATH } from "../../../constants/path.ts";
+import { PATH } from "@constants/path.ts";
 import useHeader from "@hooks/useHeader.ts";
 import {
   selectAnalyzedData,
   selectDate,
   updateAnalyzedData,
-} from "../../../app/redux/slices/scheduleSlice";
+} from "@redux/slices/scheduleSlice.tsx";
 import { AnalysisData, HEADER_MODE } from "@app/types/common.ts";
-import { useAppDispatch } from "../../../app/redux/hooks";
+import { useAppDispatch } from "@redux/hooks.ts";
 
 function AnalysisContainer() {
   const dispatch = useAppDispatch();

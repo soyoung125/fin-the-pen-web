@@ -8,7 +8,7 @@ const commonThemeOptions: ThemeOptions = {
   //   },
   // },
   typography: {
-    fontFamily: "Noto Sans KR",
+    fontFamily: "Pretendard",
     fontSize: 14,
     button: {
       fontSize: 16,

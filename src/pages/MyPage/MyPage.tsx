@@ -1,6 +1,6 @@
 import { Box, Button, Stack, Typography } from "@mui/material";
 import { useNavigate } from "react-router-dom";
-import { PATH } from "../../constants/path.ts";
+import { PATH } from "@constants/path.ts";
 import GuestMode from "./GuestMode.tsx";
 import ScheduleFilterData from "./ScheduleFilterData.tsx";
 import { useAppDispatch, useAppSelector } from "@redux/hooks.ts";
@@ -11,11 +11,13 @@ import SchedulesData from "@pages/MyPage/SchedulesData.tsx";
 import GuestDataManager from "pages/MyPage/GuestDataManager";
 import { logOut } from "@redux/slices/userSlice.tsx";
 import { useUser } from "@app/tanstack-query/useUser.ts";
+import { useAuth } from "@app/tanstack-query/useAuth.ts";
 
 function MyPage() {
   const navigate = useNavigate();
   const guestMode = useAppSelector(selectGuestMode);
   const { data: user } = useUser();
+  const { signOut } = useAuth();
   const dispatch = useAppDispatch();
 
   const userLogOut = () => {
@@ -25,13 +27,14 @@ function MyPage() {
       )
     ) {
       dispatch(logOut());
-      navigate(PATH.signIn);
+      signOut();
+      navigate(PATH.signIn, { replace: true });
     }
   };
 
   return (
     <>
-      {user === undefined ? (
+      {!user ? (
         <div>로그인이 되어있지 않습니다.</div>
       ) : (
         <Box>
