@@ -1,4 +1,4 @@
-import { Divider, Typography } from "@mui/material";
+import { Divider, Stack, Typography } from "@mui/material";
 import { useEffect } from "react";
 import AppLocker from "@pages/Settings/components/display/AppLocker.tsx";
 import Budget from "@pages/Settings/components/display/Budget.tsx";
@@ -17,6 +17,7 @@ import {
   setIsAuthenticatedFalse,
 } from "@redux/slices/commonSlice.tsx";
 import { HEADER_MODE } from "@app/types/common.ts";
+import PersonalCard from "@pages/Settings/components/PersonalCard";
 
 export default function Settings() {
   const isHideBudgetMode = useAppSelector(selectIsBudgetHidden);
@@ -82,6 +83,9 @@ export default function Settings() {
 
   return (
     <>
+      <Stack spacing={1.5} px={2.5} py={3}>
+        <PersonalCard />
+      </Stack>
       <Accordion>
         <AccordionSummary aria-controls="panel1a-content" id="panel1a-header">
           <Typography>화면 설정</Typography>
