@@ -1,4 +1,4 @@
-import ToggleListItem from "@components/settings/ToggleListItem";
+import ToggleListItem from "pages/Settings/components/ToggleListItem";
 import { useAppDispatch } from "@redux/hooks.ts";
 import { useSelector } from "react-redux";
 import {

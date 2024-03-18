@@ -1,9 +1,9 @@
 import { Divider, Typography } from "@mui/material";
 import { useEffect } from "react";
-import AppLocker from "./display/AppLocker.tsx";
-import Budget from "./display/Budget.tsx";
-import ThemeMode from "./display/ThemeMode.tsx";
-import Version from "./version/Version";
+import AppLocker from "@pages/Settings/components/display/AppLocker.tsx";
+import Budget from "@pages/Settings/components/display/Budget.tsx";
+import ThemeMode from "@pages/Settings/components/display/ThemeMode.tsx";
+import Version from "./components/version/Version";
 import Accordion from "@components/common/accordions/Accordion.tsx";
 import AccordionSummary from "@components/common/accordions/AccordionSummary.tsx";
 import AccordionDetails from "@components/common/accordions/AccordionDetails.tsx";
@@ -11,7 +11,7 @@ import { useAppDispatch, useAppSelector } from "@redux/hooks.ts";
 import { selectIsBudgetHidden } from "@redux/slices/settingSlice.ts";
 import useHeader from "@hooks/useHeader.ts";
 import { PATH } from "@constants/path.ts";
-import ClickableListItem from "@components/settings/ClickableListItem";
+import ClickableListItem from "pages/Settings/components/ClickableListItem";
 import {
   changeHeaderTitle,
   setIsAuthenticatedFalse,
