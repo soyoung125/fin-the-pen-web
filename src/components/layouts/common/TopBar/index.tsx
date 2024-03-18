@@ -61,7 +61,7 @@ function TopBar() {
             direction="row"
             justifyContent="space-between"
             alignItems="center"
-            sx={{ paddingX: "20px" }}
+            sx={{ paddingX: "20px", height: 40 }}
           >
             {headerMode === "home" && <HomeMode />}
             {headerMode === "analysis" && <AnalysisMode />}
