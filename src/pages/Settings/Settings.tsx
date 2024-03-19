@@ -18,10 +18,11 @@ import {
 } from "@redux/slices/commonSlice.tsx";
 import { HEADER_MODE } from "@app/types/common.ts";
 import PersonalCard from "@pages/Settings/components/PersonalCard";
+import { useUser } from "@app/tanstack-query/useUser.ts";
 
 export default function Settings() {
   const isHideBudgetMode = useAppSelector(selectIsBudgetHidden);
-  const userAgent = navigator.userAgent.toLowerCase();
+  const { data: user } = useUser();
 
   const dispatch = useAppDispatch();
 
@@ -34,58 +35,12 @@ export default function Settings() {
     dispatch(changeHeaderTitle("설정"));
   }, []);
 
-  const clickBank = () => {
-    if (userAgent.indexOf("android") > -1) {
-      // 안드로이드
-      // kbbank://
-      window.location.href =
-        "intent://main/#Intent;package=com.kbstar.kbbank;scheme=kbbank;end";
-    } else if (
-      userAgent.indexOf("iphone") > -1 ||
-      userAgent.indexOf("ipad") > -1 ||
-      userAgent.indexOf("ipod") > -1
-    ) {
-      // IOS
-      const url = "kbbank://home";
-      setTimeout(() => {
-        window.open(
-          "https://itunes.apple.com/kr/app/kb스타뱅킹/id373742138?mt=8"
-        );
-      }, 1000);
-      window.location.href = url;
-    } else {
-      // 아이폰, 안드로이드 외 모바일 또는 pc
-      window.location.href = "https://www.kbstar.com/";
-    }
-  };
-
-  const clickInstagram = () => {
-    if (userAgent.indexOf("android") > -1) {
-      // 안드로이드
-      window.location.href =
-        "intent://instagram.com/#Intent;package=com.instagram.android;scheme=https;end";
-    } else if (
-      userAgent.indexOf("iphone") > -1 ||
-      userAgent.indexOf("ipad") > -1 ||
-      userAgent.indexOf("ipod") > -1
-    ) {
-      // IOS
-      const url = "https://instagram.com";
-      setTimeout(() => {
-        window.open("https://itunes.apple.com/kr/app/instagram/id389801252");
-      }, 1000);
-      window.location.href = url;
-    } else {
-      // 아이폰, 안드로이드 외 모바일 또는 pc
-      window.location.href = "https://www.instagram.com/";
-    }
-  };
-
   return (
     <>
       <Stack spacing={1.5} px={2.5} py={3}>
-        <PersonalCard />
+        <PersonalCard name={user?.name} />
       </Stack>
+
       <Accordion>
         <AccordionSummary aria-controls="panel1a-content" id="panel1a-header">
           <Typography>화면 설정</Typography>
@@ -98,19 +53,6 @@ export default function Settings() {
           <Budget />
         </AccordionDetails>
       </Accordion>
-
-      {/* <Accordion>
-        <AccordionSummary
-          // expandIcon={<ExpandMoreIcon />}
-          aria-controls="panel1a-content"
-          id="panel1a-header"
-        >
-          <Typography>일정</Typography>
-        </AccordionSummary>
-        <AccordionDetails>
-          <Schedule />
-        </AccordionDetails>
-      </Accordion> */}
 
       <Accordion>
         <AccordionSummary aria-controls="panel1a-content" id="panel1a-header">
