@@ -1,16 +1,13 @@
-import {
-  ListItem, ListItemButton, ListItemText,
-} from '@mui/material';
-import SwitchButton from '../../common/SwitchButton';
+import { ListItem, ListItemButton, ListItemText } from "@mui/material";
+import SwitchButton from "../../../../components/common/SwitchButton.tsx";
 
 interface ToggleListItemProps {
   title: string;
   checked: boolean;
   setChecked: () => void;
 }
-function ToggleListItem({
-  title, checked, setChecked,
-}: ToggleListItemProps) {
+
+function ToggleListItem({ title, checked, setChecked }: ToggleListItemProps) {
   return (
     <ListItemButton onClick={setChecked} sx={{ px: 0 }}>
       <ListItem>
@@ -26,4 +23,5 @@ function ToggleListItem({
     </ListItemButton>
   );
 }
+
 export default ToggleListItem;

@@ -1,4 +1,4 @@
-import ClickableListItem from "@components/settings/ClickableListItem";
+import ClickableListItem from "pages/Settings/components/ClickableListItem";
 
 function Schedule() {
   return <ClickableListItem to="/test" title="일정관리" subTitle="" />;

@@ -1,5 +1,5 @@
 import { Box } from "@mui/material";
-import ClickableListItem from "@components/settings/ClickableListItem";
+import ClickableListItem from "pages/Settings/components/ClickableListItem";
 
 function Version() {
   return (

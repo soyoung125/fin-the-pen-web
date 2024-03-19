@@ -1,6 +1,6 @@
 import { useState } from "react";
-import ToggleListItem from "@components/settings/ToggleListItem";
-import ClickableListItem from "@components/settings/ClickableListItem";
+import ToggleListItem from "pages/Settings/components/ToggleListItem";
+import ClickableListItem from "pages/Settings/components/ClickableListItem";
 
 function AppLocker() {
   const [checked, setChecked] = useState(false);
