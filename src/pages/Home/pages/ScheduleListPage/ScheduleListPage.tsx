@@ -8,7 +8,7 @@ import ScheduleListHeader from "components/ScheduleList/ScheduleListHeader";
 import React, { useEffect, useRef, useState } from "react";
 import useSchedule from "@hooks/useSchedule.ts";
 import ScheduleList from "@components/ScheduleList";
-import TodayButton from "@pages/Home/pages/DaySchedulePage/components/TodayButton/TodayButton.tsx";
+import TodayButton from "@components/common/TodayButton/TodayButton.tsx";
 import FilterDrawer from "@components/layouts/common/TopBar/buttons/FilterButton/FilterDrawer.tsx";
 
 function ScheduleListPage() {
@@ -115,7 +115,7 @@ function ScheduleListPage() {
         );
       })}
 
-      {isVisible && <TodayButton goToday={scrollToToday} />}
+      {isVisible && <TodayButton goToday={scrollToToday} type="day" />}
       <FilterDrawer
         bottomDrawerOpen={bottomDrawerOpen}
         setBottomDrawerOpen={setBottomDrawerOpen}

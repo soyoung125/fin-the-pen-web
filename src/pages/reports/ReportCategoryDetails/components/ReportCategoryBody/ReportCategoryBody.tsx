@@ -7,7 +7,7 @@ import ScheduleListHeader from "components/ScheduleList/ScheduleListHeader";
 import ScheduleList from "@components/ScheduleList";
 import ReportCategorySummarySkeleton from "@pages/reports/ReportCategoryDetails/components/ReportCategorySummary/ReportCategorySummarySkeleton.tsx";
 import ScheduleListSkeleton from "@components/ScheduleList/ScheduleListSkeleton.tsx";
-import TodayButton from "@pages/Home/pages/DaySchedulePage/components/TodayButton/TodayButton.tsx";
+import TodayButton from "@components/common/TodayButton/TodayButton.tsx";
 import moment from "moment/moment";
 import { Box } from "@mui/material";
 
@@ -129,7 +129,7 @@ function ReportCategoryBody({
           </div>
         );
       })}
-      {!isVisible && <TodayButton goToday={scrollToToday} />}
+      {!isVisible && <TodayButton goToday={scrollToToday} type="day" />}
     </>
   );
 }
