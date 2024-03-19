@@ -23,7 +23,7 @@ function UseableInfoModal({ closeModal }: UseableInfoModalProps) {
       <UseableAmountCard />
 
       <Typography variant={"h5"} pt={2}>
-        이번 달 목표 지출에서 이번 달 오늘까지의 지출 금액과 지출 예정 금액을
+        이번 달 지출목표액에서 이번 달 오늘까지의 지출금액과 지출 예정금액을
         제외한 금액입니다.
       </Typography>
 
@@ -32,7 +32,7 @@ function UseableInfoModal({ closeModal }: UseableInfoModalProps) {
           사용 가능 금액이 음수일 경우?
         </Typography>
         <Typography>
-          한 달 간의 목표 지출액을 초과 했을 경우, 초과된 금액만큼 음수로
+          이번 달의 지출목표액을 초과 했을 경우, 초과된 금액만큼 음수로
           표시됩니다.
         </Typography>
       </Box>

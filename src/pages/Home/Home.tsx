@@ -17,9 +17,10 @@ import "swiper/css";
 import WeekSchedulePage from "@pages/Home/pages/WeekSchedulePage/WeekSchedulePage.tsx";
 import MonthSchedulePage from "@pages/Home/pages/MonthSchedulePage/MonthSchedulePage.tsx";
 import DaySchedulePage from "@pages/Home/pages/DaySchedulePage/DaySchedulePage.tsx";
-import TodayButton from "@pages/Home/pages/DaySchedulePage/components/TodayButton/TodayButton.tsx";
+import TodayButton from "@components/common/TodayButton/TodayButton.tsx";
 import { useNavigate } from "react-router-dom";
 import { PATH } from "@constants/path.ts";
+import MoveToday from "@pages/Home/next-components/MoveToday";
 
 export interface HomePageProps {
   updateHeight: () => void;
@@ -41,7 +42,6 @@ function Home() {
     changeToToday,
   } = useHome();
   const labels = ["월 별", "주 별", "일 별"];
-  const isToday = moment().isSame(date, "day");
   const [value, setValue] = useState(0);
   const [swiper, setSwiper] = useState<SwiperType>();
 
@@ -120,7 +120,7 @@ function Home() {
         </SwiperSlide>
       </Swiper>
 
-      {!isToday && value === 2 && <TodayButton goToday={changeToToday} />}
+      <MoveToday date={date} value={value} changeToToday={changeToToday} />
     </>
   );
 }

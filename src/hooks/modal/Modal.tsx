@@ -11,6 +11,7 @@ function Modal({ children, onClickClose }: ModalProps) {
     <Backdrop
       sx={{
         zIndex: (theme) => theme.zIndex.drawer + 1,
+        paddingX: 4,
       }}
       open={true}
       onClick={onClickClose}
