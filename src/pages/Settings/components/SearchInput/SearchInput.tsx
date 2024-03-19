@@ -6,6 +6,7 @@ export interface SearchInputProps {
   value: string;
   handleChange: (e: ChangeEvent<HTMLInputElement>) => void;
   SearchIcon?: ReactNode;
+  handleClickSearch?: () => void;
 }
 
 function SearchInput({
@@ -13,6 +14,7 @@ function SearchInput({
   value,
   handleChange,
   SearchIcon,
+  handleClickSearch,
 }: SearchInputProps) {
   return (
     <TextField
@@ -25,7 +27,9 @@ function SearchInput({
       onChange={handleChange}
       InputProps={{
         endAdornment: (
-          <InputAdornment position="end">{SearchIcon}</InputAdornment>
+          <InputAdornment position="end" onClick={handleClickSearch}>
+            {SearchIcon}
+          </InputAdornment>
         ),
       }}
       inputProps={{

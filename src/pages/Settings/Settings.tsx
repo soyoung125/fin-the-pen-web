@@ -21,6 +21,7 @@ import PersonalCard from "@pages/Settings/components/PersonalCard";
 import { useUser } from "@app/tanstack-query/useUser.ts";
 import SearchInput from "@pages/Settings/components/SearchInput";
 import SearchRoundedIcon from "@mui/icons-material/SearchRounded";
+import { findMenu } from "@pages/Settings/utils.ts";
 
 export default function Settings() {
   const isHideBudgetMode = useAppSelector(selectIsBudgetHidden);
@@ -29,10 +30,6 @@ export default function Settings() {
 
   const [expends, setExpends] = useState<string[]>([]);
   const [value, setValue] = useState("");
-
-  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
-    setValue(e.target.value);
-  };
 
   useHeader(true, HEADER_MODE.settings);
 
@@ -43,6 +40,8 @@ export default function Settings() {
     dispatch(changeHeaderTitle("설정"));
   }, []);
 
+  const isInclude = (value: string) => expends.includes(value);
+
   const handleClickAccordion = (value: string) => {
     if (isInclude(value)) {
       setExpends(expends.filter((e) => e !== value));
@@ -51,7 +50,11 @@ export default function Settings() {
     }
   };
 
-  const isInclude = (value: string) => expends.includes(value);
+  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
+    setValue(e.target.value);
+  };
+
+  const handleClickSearch = () => setExpends(findMenu(value));
 
   return (
     <>
@@ -61,6 +64,7 @@ export default function Settings() {
           value={value}
           handleChange={handleChange}
           SearchIcon={<SearchRoundedIcon color="primary" />}
+          handleClickSearch={handleClickSearch}
         />
         <PersonalCard name={user?.name} />
       </Stack>
