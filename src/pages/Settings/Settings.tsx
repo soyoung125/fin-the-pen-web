@@ -1,5 +1,5 @@
 import { Divider, Stack, Typography } from "@mui/material";
-import { useEffect } from "react";
+import { ChangeEvent, useEffect, useState } from "react";
 import AppLocker from "@pages/Settings/components/display/AppLocker.tsx";
 import Budget from "@pages/Settings/components/display/Budget.tsx";
 import ThemeMode from "@pages/Settings/components/display/ThemeMode.tsx";
@@ -19,12 +19,20 @@ import {
 import { HEADER_MODE } from "@app/types/common.ts";
 import PersonalCard from "@pages/Settings/components/PersonalCard";
 import { useUser } from "@app/tanstack-query/useUser.ts";
+import SearchInput from "@pages/Settings/components/SearchInput";
+import SearchRoundedIcon from "@mui/icons-material/SearchRounded";
 
 export default function Settings() {
   const isHideBudgetMode = useAppSelector(selectIsBudgetHidden);
   const { data: user } = useUser();
-
   const dispatch = useAppDispatch();
+
+  const [expends, setExpends] = useState<string[]>([]);
+  const [value, setValue] = useState("");
+
+  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
+    setValue(e.target.value);
+  };
 
   useHeader(true, HEADER_MODE.settings);
 
@@ -35,14 +43,33 @@ export default function Settings() {
     dispatch(changeHeaderTitle("설정"));
   }, []);
 
+  const handleClickAccordion = (value: string) => {
+    if (isInclude(value)) {
+      setExpends(expends.filter((e) => e !== value));
+    } else {
+      setExpends(expends.concat(value));
+    }
+  };
+
+  const isInclude = (value: string) => expends.includes(value);
+
   return (
     <>
       <Stack spacing={1.5} px={2.5} py={3}>
+        <SearchInput
+          placeholder="필요한 기능을 검색하세요."
+          value={value}
+          handleChange={handleChange}
+          SearchIcon={<SearchRoundedIcon color="primary" />}
+        />
         <PersonalCard name={user?.name} />
       </Stack>
 
-      <Accordion>
-        <AccordionSummary aria-controls="panel1a-content" id="panel1a-header">
+      <Accordion
+        expanded={isInclude("display")}
+        onChange={() => handleClickAccordion("display")}
+      >
+        <AccordionSummary>
           <Typography>화면 설정</Typography>
         </AccordionSummary>
         <AccordionDetails>
@@ -54,8 +81,11 @@ export default function Settings() {
         </AccordionDetails>
       </Accordion>
 
-      <Accordion>
-        <AccordionSummary aria-controls="panel1a-content" id="panel1a-header">
+      <Accordion
+        expanded={isInclude("secure")}
+        onChange={() => handleClickAccordion("secure")}
+      >
+        <AccordionSummary>
           <Typography>보안</Typography>
         </AccordionSummary>
         <AccordionDetails>
@@ -65,8 +95,11 @@ export default function Settings() {
         </AccordionDetails>
       </Accordion>
 
-      <Accordion>
-        <AccordionSummary aria-controls="panel1a-content" id="panel1a-header">
+      <Accordion
+        expanded={isInclude("alarm")}
+        onChange={() => handleClickAccordion("alarm")}
+      >
+        <AccordionSummary>
           <Typography>알림</Typography>
         </AccordionSummary>
         <AccordionDetails>
@@ -74,13 +107,14 @@ export default function Settings() {
         </AccordionDetails>
       </Accordion>
 
-      <Accordion>
-        <AccordionSummary aria-controls="panel1a-content" id="panel1a-header">
+      <Accordion
+        expanded={isInclude("connect")}
+        onChange={() => handleClickAccordion("connect")}
+      >
+        <AccordionSummary>
           <Typography>연결관리</Typography>
         </AccordionSummary>
         <AccordionDetails>
-          {/* <Button onClick={() => clickBank()}>국민은행</Button>
-          <Button onClick={() => clickInstagram()}>instagram</Button> */}
           <ClickableListItem
             to={PATH.myData}
             title="마이데이터[은행/카드]"
@@ -91,8 +125,11 @@ export default function Settings() {
         </AccordionDetails>
       </Accordion>
 
-      <Accordion>
-        <AccordionSummary aria-controls="panel1a-content" id="panel1a-header">
+      <Accordion
+        expanded={isInclude("info")}
+        onChange={() => handleClickAccordion("info")}
+      >
+        <AccordionSummary>
           <Typography>핀더팬 정보</Typography>
         </AccordionSummary>
         <AccordionDetails>
@@ -105,20 +142,6 @@ export default function Settings() {
           <Version />
         </AccordionDetails>
       </Accordion>
-
-      {/* <Accordion>
-        <AccordionSummary
-          // expandIcon={<ExpandMoreIcon />}
-          aria-controls="panel1a-content"
-          id="panel1a-header"
-        >
-          <Typography>앱 버전</Typography>
-        </AccordionSummary>
-        <AccordionDetails>
-          <Version />
-          <Change />
-        </AccordionDetails>
-      </Accordion> */}
     </>
   );
 }
