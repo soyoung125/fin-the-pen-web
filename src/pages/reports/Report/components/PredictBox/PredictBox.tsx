@@ -22,13 +22,13 @@ function PredictBox({
       p="16px"
       bgcolor="#735BF21A"
       borderRadius="8px"
-      gap="16px"
+      spacing={2}
       width="100%"
     >
       <Box color="primary.main">{titleIcon}</Box>
-      <Stack gap="18x">
+      <Stack spacing="18x">
         <Typography fontSize="16px">{title}</Typography>
-        <Stack direction="row" gap="4px" alignItems="center">
+        <Stack direction="row" spacing="4px" alignItems="center">
           <Typography fontSize="18px" color="primary">
             {amount.toLocaleString()}원
           </Typography>

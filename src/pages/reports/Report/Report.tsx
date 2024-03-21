@@ -12,6 +12,9 @@ import UseableInfoModal from "@pages/reports/Report/components/modals/UseableInf
 import ReportBox from "@pages/reports/Report/components/layout/ReportBox";
 import ReportLayout from "@pages/reports/Report/components/layout/ReportLayout";
 import FixedTransaction from "@pages/reports/Report/components/FixedTransaction";
+import setting_icon from "@assets/icons/setting.svg";
+import info_icon from "@assets/icons/infomation.svg";
+import asset_icon from "@assets/icons/asset.svg";
 import MonthlyReport from "@pages/reports/Report/components/MonthlyReport";
 import moment from "moment";
 import { PATH } from "@constants/path.ts";
@@ -70,16 +73,20 @@ function Report() {
       <Stack direction="row" gap="10px">
         <PredictBox
           title="이번 달 목표 지출"
-          titleIcon={<AccountBalanceWalletIcon sx={{ fontSize: "28px" }} />}
+          titleIcon={
+            <img src={asset_icon} alt="asset" width="28px" height="28px" />
+          }
           amount={Number(report.expenseGoalAmount)}
-          navigateIcon={<SettingsIcon />}
+          navigateIcon={<img src={setting_icon} alt="setting" />}
           handleClick={handleClickAccountSetting}
         />
         <PredictBox
           title="사용 가능 금액"
-          titleIcon={<InfoOutlinedIcon sx={{ fontSize: "28px" }} />}
+          titleIcon={
+            <img src={info_icon} alt="info" width="28px" height="28px" />
+          }
           amount={Math.abs(Number(report.availableAmount))}
-          navigateIcon={<InfoOutlinedIcon sx={{ fontSize: "20px" }} />}
+          navigateIcon={<img src={info_icon} alt="info" />}
           handleClick={handleClickAccountInfo}
         />
       </Stack>
