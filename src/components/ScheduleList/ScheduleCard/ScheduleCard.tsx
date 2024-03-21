@@ -4,6 +4,7 @@ import { AmountComponent, AmountType } from "./ScheduleCard.styles.ts";
 import moment from "moment";
 import { Schedule } from "@app/types/schedule.ts";
 import { getPriceTypeSign } from "@components/ScheduleDrawer/hooks/useScheduleForm.ts";
+import { CATEGORY_ICONS } from "@components/ScheduleList/constants.ts";
 
 export interface ConsumptionCardProps {
   schedule: Schedule;
@@ -33,8 +34,8 @@ function ScheduleCard({
     >
       {icon && (
         <Avatar
-          // alt="Remy Sharp"
-          // src="/static/images/avatar/1.jpg"
+          alt="category icon"
+          src={CATEGORY_ICONS[schedule.category]}
           sx={{ width: 36, height: 36 }}
         >
           category
