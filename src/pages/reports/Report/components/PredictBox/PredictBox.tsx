@@ -25,7 +25,9 @@ function PredictBox({
       spacing={2}
       width="100%"
     >
-      <Box color="primary.main">{titleIcon}</Box>
+      <Box color="primary.main" height="28px">
+        {titleIcon}
+      </Box>
       <Stack spacing="18x">
         <Typography fontSize="16px">{title}</Typography>
         <Stack direction="row" spacing="4px" alignItems="center">

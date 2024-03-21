@@ -1,9 +1,6 @@
 import ReportTitle from "@pages/reports/Report/components/ReportTitle";
 import { Stack } from "@mui/material";
-import SettingsIcon from "@mui/icons-material/Settings";
 import PredictBox from "@pages/reports/Report/components/PredictBox";
-import AccountBalanceWalletIcon from "@mui/icons-material/AccountBalanceWallet";
-import InfoOutlinedIcon from "@mui/icons-material/InfoOutlined";
 import useReport from "@hooks/report/useReport.ts";
 import useHeader from "@hooks/useHeader.ts";
 import { HEADER_MODE } from "@app/types/common.ts";
@@ -15,6 +12,7 @@ import FixedTransaction from "@pages/reports/Report/components/FixedTransaction"
 import setting_icon from "@assets/icons/setting.svg";
 import info_icon from "@assets/icons/infomation.svg";
 import asset_icon from "@assets/icons/asset.svg";
+import money_icon from "@assets/icons/money.svg";
 import MonthlyReport from "@pages/reports/Report/components/MonthlyReport";
 import moment from "moment";
 import { PATH } from "@constants/path.ts";
@@ -83,7 +81,7 @@ function Report() {
         <PredictBox
           title="사용 가능 금액"
           titleIcon={
-            <img src={info_icon} alt="info" width="28px" height="28px" />
+            <img src={money_icon} alt="info" width="28px" height="28px" />
           }
           amount={Math.abs(Number(report.availableAmount))}
           navigateIcon={<img src={info_icon} alt="info" />}
