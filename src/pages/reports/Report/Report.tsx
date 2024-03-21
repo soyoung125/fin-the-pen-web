@@ -10,7 +10,7 @@ import ReportBox from "@pages/reports/Report/components/layout/ReportBox";
 import ReportLayout from "@pages/reports/Report/components/layout/ReportLayout";
 import FixedTransaction from "@pages/reports/Report/components/FixedTransaction";
 import setting_icon from "@assets/icons/setting.svg";
-import info_icon from "@assets/icons/infomation.svg";
+import info_icon from "@assets/icons/information.svg";
 import asset_icon from "@assets/icons/asset.svg";
 import money_icon from "@assets/icons/money.svg";
 import MonthlyReport from "@pages/reports/Report/components/MonthlyReport";

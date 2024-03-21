@@ -1,8 +1,8 @@
 import { Stack, Typography } from "@mui/material";
-import CalendarTodayIcon from "@mui/icons-material/CalendarToday";
 import PredictBox from "@pages/reports/ReportMonthDetails/components/PredictBox";
 import MoneyIcon from "@mui/icons-material/Money";
 import asset_icon from "@assets/icons/asset.svg";
+import calendar_icon from "@assets/icons/calendar.svg";
 
 export interface ReportMonthTitleProps {
   year: number;
@@ -25,7 +25,7 @@ function ReportMonthTitle({
         <Typography variant="h2">
           {year}년 {month}월
         </Typography>
-        <CalendarTodayIcon sx={{ fontSize: 16 }} onClick={onClickMonth} />
+        <img src={calendar_icon} alt="calander" />
       </Stack>
       <Stack direction="row">
         <PredictBox
