@@ -25,8 +25,8 @@ function ReportList({
   if (isPending) {
     return (
       <Stack gap="14px">
-        {Array.from(new Array(5)).map(() => (
-          <ReportCardSkeleton />
+        {Array.from(new Array(5)).map((num) => (
+          <ReportCardSkeleton key={num} />
         ))}
       </Stack>
     );

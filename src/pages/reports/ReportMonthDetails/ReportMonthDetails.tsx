@@ -47,7 +47,6 @@ function ReportMonthDetails() {
           spent={Number(report?.totalSpentToday)}
         />
 
-        {/*<>서버 준비 중</>*/}
         <ReportList
           isPending={isPending}
           reportList={reportList}

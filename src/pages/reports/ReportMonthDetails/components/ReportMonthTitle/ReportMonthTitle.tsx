@@ -1,12 +1,8 @@
-import { Box, Stack, Typography } from "@mui/material";
+import { Stack, Typography } from "@mui/material";
 import CalendarTodayIcon from "@mui/icons-material/CalendarToday";
-import AccountBalanceWalletIcon from "@mui/icons-material/AccountBalanceWallet";
-import SettingsIcon from "@mui/icons-material/Settings";
 import PredictBox from "@pages/reports/ReportMonthDetails/components/PredictBox";
 import MoneyIcon from "@mui/icons-material/Money";
-import GoalSettingModal from "@pages/reports/Report/components/modals/GoalSettingModal";
-import { useModal } from "@hooks/modal/useModal.tsx";
-import { useNavigate } from "react-router-dom";
+import asset_icon from "@assets/icons/asset.svg";
 
 export interface ReportMonthTitleProps {
   year: number;
@@ -34,7 +30,9 @@ function ReportMonthTitle({
       <Stack direction="row">
         <PredictBox
           title="지출 목표액"
-          titleIcon={<AccountBalanceWalletIcon sx={{ fontSize: "28px" }} />}
+          titleIcon={
+            <img src={asset_icon} alt="asset" width="28px" height="28px" />
+          }
           amount={goal}
         />
 
