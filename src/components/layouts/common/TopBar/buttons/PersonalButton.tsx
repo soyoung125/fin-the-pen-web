@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import LoginIcon from "@mui/icons-material/Login";
-import userIcon from "@assets/icons/user.svg";
+import userIcon from "@assets/icons/header/user.svg";
 import RoundedButton from "../../../../common/RoundedButton.tsx";
 import { PATH } from "@constants/path.ts";
 import { useUser } from "@app/tanstack-query/useUser.ts";

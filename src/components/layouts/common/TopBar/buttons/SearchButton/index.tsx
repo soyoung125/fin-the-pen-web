@@ -5,7 +5,7 @@ import OptionList from "./popover/OptionList.tsx";
 import { useNavigate } from "react-router-dom";
 import { PATH } from "@constants/path.ts";
 import { useUser } from "@app/tanstack-query/useUser.ts";
-import search from "@assets/icons/search.svg";
+import search from "@assets/icons/header/search.svg";
 
 function SearchButton() {
   const { data: user } = useUser();

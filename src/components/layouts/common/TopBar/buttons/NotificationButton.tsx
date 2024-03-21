@@ -3,7 +3,7 @@ import NotificationsOutlinedIcon from "@mui/icons-material/NotificationsOutlined
 import RoundedButton from "../../../../common/RoundedButton.tsx";
 import { PATH } from "@constants/path.ts";
 import React from "react";
-import alarm from "@assets/icons/alarm.svg";
+import alarm from "@assets/icons/header/alarm.svg";
 
 function NotificationButton() {
   const navigate = useNavigate();

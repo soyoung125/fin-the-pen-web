@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import RoundedButton from "../../../../../common/RoundedButton.tsx";
 import FilterDrawer from "@components/layouts/common/TopBar/buttons/FilterButton/FilterDrawer.tsx";
-import filter_main from "@assets/icons/filter_main.svg";
+import filter_main from "@assets/icons/header/filter_main.svg";
 
 function FilterButton() {
   const [bottomDrawerOpen, setBottomDrawerOpen] = useState(false);
