@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import RoundedButton from "../../../../../common/RoundedButton.tsx";
 import FilterDrawer from "@components/layouts/common/TopBar/buttons/FilterButton/FilterDrawer.tsx";
-import TuneRoundedIcon from "@mui/icons-material/TuneRounded";
+import filter_main from "@assets/icons/filter_main.svg";
 
 function FilterButton() {
   const [bottomDrawerOpen, setBottomDrawerOpen] = useState(false);
@@ -9,7 +9,7 @@ function FilterButton() {
   return (
     <>
       <RoundedButton value="user" onClick={() => setBottomDrawerOpen(true)}>
-        <TuneRoundedIcon />
+        <img src={filter_main} alt="filter" />
       </RoundedButton>
       <FilterDrawer
         bottomDrawerOpen={bottomDrawerOpen}
