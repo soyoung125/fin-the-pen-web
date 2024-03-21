@@ -21,7 +21,13 @@ function ReportMonthTitle({
 }: ReportMonthTitleProps) {
   return (
     <Stack bgcolor="#F7F7F8" borderRadius="12px" p={2} gap="10px">
-      <Stack direction="row" alignItems="center" py={0.5} spacing={1}>
+      <Stack
+        direction="row"
+        alignItems="center"
+        py={0.5}
+        spacing={1}
+        onClick={onClickMonth}
+      >
         <Typography variant="h2">
           {year}년 {month}월
         </Typography>
