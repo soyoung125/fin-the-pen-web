@@ -44,7 +44,7 @@ function ScheduleDrawerFooter({
           mb: 0.5,
         }}
       >
-        <img src={Save} />
+        <img src={Save} alt="save" />
         입력 정보는 자동으로 저장됩니다.
       </Box>
 
