@@ -33,8 +33,8 @@ function ScheduleList({
     return (
       <>
         {showHeader && <ScheduleDateBoxSkeleton count={0} date={date} />}
-        {Array.from({ length: 6 }, () => 0).map(() => (
-          <ScheduleCardSkeleton />
+        {Array.from({ length: 6 }, () => 0).map((num) => (
+          <ScheduleCardSkeleton key={num} />
         ))}
       </>
     );
@@ -44,8 +44,8 @@ function ScheduleList({
     return (
       <>
         <ScheduleDateBoxSkeleton count={0} date={date} />
-        {Array.from({ length: 2 }, () => 0).map(() => (
-          <ScheduleCardSkeleton />
+        {Array.from({ length: 2 }, () => 0).map((num) => (
+          <ScheduleCardSkeleton key={num} />
         ))}
       </>
     );
@@ -79,8 +79,9 @@ function ScheduleList({
   return (
     <>
       {showHeader && <ScheduleDateBox count={count} date={date} />}
-      {todaySchedules.map((s) => (
+      {todaySchedules.map((s, index) => (
         <ScheduleCard
+          key={index}
           schedule={s}
           isRepeat={s.repeat_kind !== "NONE"}
           onClick={() => handleModal(s)}
