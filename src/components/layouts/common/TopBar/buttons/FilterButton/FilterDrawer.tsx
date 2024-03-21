@@ -5,7 +5,7 @@ import { useSelectCategory } from "@components/layouts/common/TopBar/buttons/Fil
 import { useSelectDate } from "@components/layouts/common/TopBar/buttons/FilterButton/hooks/useSelectDate.ts";
 import FilterLayout from "@components/layouts/common/TopBar/buttons/FilterButton/FilterLayout.tsx";
 import DateInput from "@components/layouts/common/TopBar/buttons/FilterButton/DateInput.tsx";
-import RefreshIcon from "@mui/icons-material/Refresh";
+import reset from "@assets/icons/reset.svg";
 import TopNavigationBar from "@components/layouts/common/TopNavigationBar";
 import { useDialog } from "@hooks/dialog/useDialog.tsx";
 
@@ -134,7 +134,7 @@ function FilterDrawer({
           py="10px"
           onClick={() => initFilter()}
         >
-          <RefreshIcon sx={{ width: "14px", height: "14px" }} />
+          <img src={reset} alt="reset" width="14px" height="14px" />
           <Typography fontSize="14px">초기화</Typography>
         </Stack>
 
