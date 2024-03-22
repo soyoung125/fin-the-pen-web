@@ -1,13 +1,8 @@
 import { BottomNavigation, BottomNavigationAction } from "@mui/material";
 import { useNavigate } from "react-router-dom";
-import CalendarMonthIcon from "@mui/icons-material/CalendarMonth";
-import DataSaverOffIcon from "@mui/icons-material/DataSaverOff";
-import AddCircleIcon from "@mui/icons-material/AddCircle";
-import SettingsIcon from "@mui/icons-material/Settings";
-import PaidIcon from "@mui/icons-material/Paid";
 import moment from "moment";
 import { INIT_SCHEDULE } from "@constants/schedule.ts";
-import { changeViewMode, selectDate } from "@redux/slices/scheduleSlice.tsx";
+import { selectDate } from "@redux/slices/scheduleSlice.tsx";
 import { useAppDispatch, useAppSelector } from "@redux/hooks.ts";
 import {
   selectBottomBarOpen,
@@ -16,6 +11,11 @@ import {
 } from "@redux/slices/commonSlice.tsx";
 import { PATH } from "@constants/path.ts";
 import { useScheduleDrawer } from "@hooks/useScheduleDrawer.tsx";
+import add_button from "@assets/icons/bottom/add_button.svg";
+import CalendarIcon from "@components/layouts/common/BottomBar/buttons/Calendar.tsx";
+import ReportIcon from "@components/layouts/common/BottomBar/buttons/Report.tsx";
+import AssetIcon from "@components/layouts/common/BottomBar/buttons/asset.tsx";
+import SettingIcon from "@components/layouts/common/BottomBar/buttons/setting.tsx";
 
 function BottomBar() {
   const navigate = useNavigate();
@@ -49,34 +49,31 @@ function BottomBar() {
     >
       <BottomNavigationAction
         label="홈"
-        icon={<CalendarMonthIcon />}
+        icon={<CalendarIcon selected={bottomTabMenu === 0} />}
         onClick={() => {
-          dispatch(changeViewMode("schedule"));
           navigate(PATH.home);
         }}
       />
       <BottomNavigationAction
         label="리포트"
-        icon={<DataSaverOffIcon />}
+        icon={<ReportIcon selected={bottomTabMenu === 1} />}
         onClick={() => navigate(PATH.report)}
       />
       <BottomNavigationAction
         label=""
-        icon={
-          <AddCircleIcon sx={{ fontSize: "48px", color: "primary.main" }} />
-        }
+        icon={<img src={add_button} alt="add schedule" />}
         onClick={() =>
           openScheduleDrawer(INIT_SCHEDULE(moment(date).format("YYYY-MM-DD")))
         }
       />
       <BottomNavigationAction
         label="자산관리"
-        icon={<PaidIcon />}
+        icon={<AssetIcon selected={bottomTabMenu === 3} />}
         onClick={() => navigate(PATH.assetManagement)}
       />
       <BottomNavigationAction
         label="설정"
-        icon={<SettingsIcon />}
+        icon={<SettingIcon selected={bottomTabMenu === 4} />}
         onClick={() => navigate(PATH.settings)}
       />
     </BottomNavigation>
