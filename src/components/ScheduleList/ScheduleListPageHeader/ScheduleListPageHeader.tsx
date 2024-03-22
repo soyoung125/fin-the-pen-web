@@ -1,10 +1,10 @@
 import { Typography, Stack, Box } from "@mui/material";
 import ClearRoundedIcon from "@mui/icons-material/ClearRounded";
 import SearchIcon from "@mui/icons-material/Search";
-import TuneRoundedIcon from "@mui/icons-material/TuneRounded";
 import { useNavigate } from "react-router-dom";
 import SelectYearMonth from "@components/common/SelectYearMonth";
 import { HeaderBox } from "./ScheduleListPageHeader.styles.ts";
+import filter_white from "@assets/icons/header/filter_white.svg";
 
 export interface ScheduleListPageHeaderProps {
   date: string;
@@ -57,8 +57,9 @@ function ScheduleListPageHeader({
             nextMonth={addMonth}
             changeYearAndMonth={changeMonth}
           />
-          <TuneRoundedIcon onClick={handleClickFilter} />
-          {/*<FilterButton />*/}
+          <Box onClick={handleClickFilter} height="24px">
+            <img src={filter_white} alt={"filter"} width="24px" height="24px" />
+          </Box>
         </Stack>
       </HeaderBox>
     </Box>

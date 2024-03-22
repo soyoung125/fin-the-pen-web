@@ -1,7 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import LoginIcon from "@mui/icons-material/Login";
-// import PersonIcon from '@mui/icons-material/Person';
-import PersonOutlineOutlinedIcon from "@mui/icons-material/PersonOutlineOutlined";
+import userIcon from "@assets/icons/header/user.svg";
 import RoundedButton from "../../../../common/RoundedButton.tsx";
 import { PATH } from "@constants/path.ts";
 import { useUser } from "@app/tanstack-query/useUser.ts";
@@ -20,7 +19,7 @@ function PersonalButton() {
 
   return (
     <RoundedButton value="user" onClick={() => navigate(PATH.myPage)}>
-      <PersonOutlineOutlinedIcon />
+      <img src={userIcon} alt="user" />
     </RoundedButton>
   );
 }

@@ -1,5 +1,5 @@
 import { Button } from "@mui/material";
-import RefreshIcon from "@mui/icons-material/Refresh";
+import reset from "@assets/icons/reset.svg";
 
 interface ResetButtonProps {
   handleClick: () => void;
@@ -16,7 +16,7 @@ function ResetButton({ handleClick }: ResetButtonProps) {
       }}
       onClick={handleClick}
     >
-      <RefreshIcon sx={{ fontSize: "16px" }} />
+      <img src={reset} alt="reset" width="16px" height="16px" />
       초기화
     </Button>
   );
