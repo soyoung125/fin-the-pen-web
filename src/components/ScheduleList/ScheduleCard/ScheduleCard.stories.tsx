@@ -20,7 +20,7 @@ const meta = {
       category: "외식",
       all_day: false,
       repeat_kind: "NONE",
-      repeat_options: { value: "1", options: "" },
+      repeat_options: { term: "1", options: "" },
       period: INIT_PERIOD(moment("2023-10-06")),
       fix_amount: false,
       importance: "상",
