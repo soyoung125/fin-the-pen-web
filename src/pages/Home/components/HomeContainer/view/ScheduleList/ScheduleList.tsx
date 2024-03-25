@@ -1,4 +1,3 @@
-import useSchedule from "@hooks/useSchedule.ts";
 import { Box, CircularProgress, Stack, Typography } from "@mui/material";
 import ScheduleCard from "./ScheduleCard.tsx";
 import { CATEGORIES, Category } from "@constants/categories.ts";
@@ -9,10 +8,11 @@ import { useAppDispatch } from "@redux/hooks.ts";
 import { changeHideBudgetMode } from "@redux/slices/settingSlice.ts";
 import { SCHEDULE_REQUEST } from "@constants/schedule.ts";
 import { useScheduleDrawer } from "@hooks/useScheduleDrawer.tsx";
+import useMonthSchedule from "@hooks/home/useMonthSchedule.ts";
 
 function ScheduleList() {
   const dispatch = useAppDispatch();
-  const { date, todaySchedules, isPending, isError } = useSchedule(); // redux가 직접 하도록 개선 예정
+  const { date, todaySchedules, isPending, isError } = useMonthSchedule(); // redux가 직접 하도록 개선 예정
   const { openScheduleDrawer } = useScheduleDrawer();
   const [authenticationPageOpen, setAuthenticationPageOpen] = useState(false);
 
@@ -52,7 +52,7 @@ function ScheduleList() {
 
   return (
     <>
-      {todaySchedules.map((schedule, i) => (
+      {todaySchedules.map((schedule) => (
         <ScheduleCard
           key={schedule.schedule_id}
           schedule={schedule}

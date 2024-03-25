@@ -75,9 +75,9 @@ export const handlers = [
         all_day: schedule.is_all_day,
         repeat_kind: repeatType.toLocaleUpperCase(),
         repeat_options: {
-          value:
+          term:
             repeatType !== "none"
-              ? schedule.repeat[`${repeatType}_type`].repeat_value
+              ? schedule.repeat[`${repeatType}_type`].repeat_term
               : null,
           options: null,
         },
@@ -144,9 +144,9 @@ export const handlers = [
             all_day: schedule.is_all_day,
             repeat_kind: repeatType.toLocaleUpperCase(),
             repeat_options: {
-              value:
+              term:
                 repeatType !== "none"
-                  ? schedule.repeat[`${repeatType}_type`].repeat_value
+                  ? schedule.repeat[`${repeatType}_type`].repeat_term
                   : null,
               options: null,
             },

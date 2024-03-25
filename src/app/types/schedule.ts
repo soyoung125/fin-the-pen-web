@@ -19,7 +19,7 @@ interface ScheduleBase {
 export interface Schedule extends ScheduleBase {
   all_day: boolean;
   repeat_kind: "NONE" | "DAY" | "WEEK" | "MONTH" | "YEAR";
-  repeat_options: { value: string; options: string | YearCategory };
+  repeat_options: { term: string; options: string | YearCategory };
   amount: string;
   exclude: boolean;
 }
@@ -34,20 +34,20 @@ export interface RequestSchedule extends ScheduleBase {
 
 export interface ScheduleRepeat {
   day_type: {
-    repeat_value: string;
+    repeat_term: string;
   };
   week_type: {
     repeat_day_of_week: string;
-    repeat_value: string;
+    repeat_term: string;
   };
   month_type: {
     today_repeat: boolean;
     select_date: string;
-    repeat_value: string;
+    repeat_term: string;
   };
   year_type: {
     year_repeat: string;
-    repeat_value: string;
+    repeat_term: string;
     year_category: YearCategory; //"MonthAndDay" | "NthDayOfMonth" | "LastDayOfMonth"
   };
   kind_type: "day" | "week" | "month" | "year" | "none";
@@ -95,10 +95,6 @@ export interface RepeatOptionProps {
 
 export interface RepeatProps extends RepeatTypeProps, RepeatOptionProps {}
 
-export interface TodaySchedule extends Omit<Schedule, "schedule_id"> {
-  id: string;
-}
-
 export interface ScheduleResponse {
   count: number;
   data: Schedule[];
@@ -107,10 +103,11 @@ export interface ScheduleResponse {
 }
 
 export interface MonthSchedule {
-  income: string;
   available: string;
-  today_schedule: TodaySchedule[];
+  count: number;
+  data: Schedule[];
   expense: string;
+  income: string;
 }
 
 export interface WeekSchedule {

@@ -1,7 +1,6 @@
 import useDaySchedule from "@hooks/home/useDaySchedule.ts";
 import MonthlyBudgetSummary from "@pages/Home/next-components/HomeHeader/MonthlyBudgetSummary";
 import ThickDivider from "@components/common/ThickDivider.tsx";
-import useSchedule from "@hooks/useSchedule.ts";
 import CalendarHeader from "@pages/Home/next-components/ScheduleCalendar/CalendarHeader";
 import moment from "moment";
 import MonthlyBudgetSummarySkeleton from "@pages/Home/next-components/HomeHeader/MonthlyBudgetSummary/MonthlyBudgetSummarySkeleton.tsx";
@@ -10,10 +9,11 @@ import ScheduleList from "@components/ScheduleList";
 import ScheduleListSkeleton from "@components/ScheduleList/ScheduleListSkeleton.tsx";
 import { HomePageProps } from "@pages/Home/Home.tsx";
 import { useEffect } from "react";
+import useMonthSchedule from "@hooks/home/useMonthSchedule.ts";
 
 function DaySchedulePage({ updateHeight, navigateTo }: HomePageProps) {
   const { date, dayData, isError, isPending } = useDaySchedule();
-  const { todaySchedules } = useSchedule();
+  const { todaySchedules } = useMonthSchedule();
   const isToday = moment().isSame(date, "day");
   const showPredict = moment().isSameOrBefore(date, "day");
 

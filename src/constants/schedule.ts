@@ -10,20 +10,20 @@ import {
 export const INIT_REPEAT = (date: moment.Moment): ScheduleRepeat => {
   return {
     day_type: {
-      repeat_value: "1",
+      repeat_term: "1",
     },
     week_type: {
       repeat_day_of_week: date.locale("en").format("dddd").toUpperCase(),
-      repeat_value: "1",
+      repeat_term: "1",
     },
     month_type: {
       today_repeat: true,
       select_date: date.format("DD"),
-      repeat_value: "1",
+      repeat_term: "1",
     },
     year_type: {
       year_repeat: date.format("MM-DD"),
-      repeat_value: "1",
+      repeat_term: "1",
       year_category: "MonthAndDay",
     },
     kind_type: "none",
@@ -31,7 +31,7 @@ export const INIT_REPEAT = (date: moment.Moment): ScheduleRepeat => {
 };
 
 export const SCHEDULE_REQUEST = (schedule: Schedule) => {
-  const { value, options } = schedule.repeat_options;
+  const { term, options } = schedule.repeat_options;
   const start = moment(schedule.start_date);
   let repeat = INIT_REPEAT(start);
 
@@ -40,14 +40,14 @@ export const SCHEDULE_REQUEST = (schedule: Schedule) => {
       repeat = {
         ...repeat,
         kind_type: "day",
-        day_type: { repeat_value: value },
+        day_type: { repeat_term: term },
       };
       break;
     case "WEEK":
       repeat = {
         ...repeat,
         kind_type: "week",
-        week_type: { repeat_value: value, repeat_day_of_week: options },
+        week_type: { repeat_term: term, repeat_day_of_week: options },
       };
       break;
     case "MONTH":
@@ -55,7 +55,7 @@ export const SCHEDULE_REQUEST = (schedule: Schedule) => {
         ...repeat,
         kind_type: "month",
         month_type: {
-          repeat_value: value,
+          repeat_term: term,
           today_repeat: !options,
           select_date: options ?? "",
         },
@@ -66,7 +66,7 @@ export const SCHEDULE_REQUEST = (schedule: Schedule) => {
         ...repeat,
         kind_type: "year",
         year_type: {
-          repeat_value: value,
+          repeat_term: term,
           year_repeat: YEAR_REPEAT(schedule.start_date, options as YearCategory)
             .value,
           year_category: options as YearCategory,

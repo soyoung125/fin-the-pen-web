@@ -6,10 +6,10 @@ import SummaryCard from "@pages/Home/next-components/HomeHeader/MonthlyBudgetSum
 import useHeader from "@hooks/useHeader.ts";
 import ScheduleListHeader from "components/ScheduleList/ScheduleListHeader";
 import React, { useEffect, useRef, useState } from "react";
-import useSchedule from "@hooks/useSchedule.ts";
 import ScheduleList from "@components/ScheduleList";
 import TodayButton from "@components/common/TodayButton/TodayButton.tsx";
 import FilterDrawer from "@components/layouts/common/TopBar/buttons/FilterButton/FilterDrawer.tsx";
+import useMonthSchedule from "@hooks/home/useMonthSchedule.ts";
 
 function ScheduleListPage() {
   useHeader(false);
@@ -17,7 +17,7 @@ function ScheduleListPage() {
   const todayRef = useRef<HTMLDivElement>(null);
 
   const { date, subtractMonth, addMonth, pickMonth } = useHome();
-  const { data, monthSchedules, isError, isPending } = useSchedule();
+  const { monthData: data, monthSchedules, isPending } = useMonthSchedule();
 
   const [selectedOption, setSelectedOption] = useState(options[0]);
   const [scheduleDates, setScheduleDates] = useState<string[]>([]);
@@ -76,8 +76,8 @@ function ScheduleListPage() {
         bgcolor="primary.main"
         sx={{ color: "#FFF" }}
       >
-        <SummaryCard title="수입" amount={data?.deposit ?? 0} />
-        <SummaryCard title="지출" amount={data?.withdraw ?? 0} />
+        <SummaryCard title="수입" amount={parseInt(data?.income ?? "")} />
+        <SummaryCard title="지출" amount={parseInt(data?.expense ?? "")} />
       </Stack>
 
       <Box
@@ -101,9 +101,11 @@ function ScheduleListPage() {
         const todaySchedules =
           selectedOption === "과거순" ? schedules.reverse() : schedules;
         return (
-          <div ref={moment().isSame(date, "date") ? todayRef : undefined}>
+          <div
+            key={date}
+            ref={moment().isSame(date, "date") ? todayRef : undefined}
+          >
             <ScheduleList
-              key={date}
               showHeader
               date={date}
               todaySchedules={todaySchedules}
