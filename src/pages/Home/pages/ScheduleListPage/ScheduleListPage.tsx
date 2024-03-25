@@ -101,9 +101,11 @@ function ScheduleListPage() {
         const todaySchedules =
           selectedOption === "과거순" ? schedules.reverse() : schedules;
         return (
-          <div ref={moment().isSame(date, "date") ? todayRef : undefined}>
+          <div
+            key={date}
+            ref={moment().isSame(date, "date") ? todayRef : undefined}
+          >
             <ScheduleList
-              key={date}
               showHeader
               date={date}
               todaySchedules={todaySchedules}
