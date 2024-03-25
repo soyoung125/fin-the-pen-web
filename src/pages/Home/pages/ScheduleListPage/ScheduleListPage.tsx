@@ -10,6 +10,7 @@ import useSchedule from "@hooks/useSchedule.ts";
 import ScheduleList from "@components/ScheduleList";
 import TodayButton from "@components/common/TodayButton/TodayButton.tsx";
 import FilterDrawer from "@components/layouts/common/TopBar/buttons/FilterButton/FilterDrawer.tsx";
+import useMonthSchedule from "@hooks/home/useMonthSchedule.ts";
 
 function ScheduleListPage() {
   useHeader(false);
@@ -17,7 +18,12 @@ function ScheduleListPage() {
   const todayRef = useRef<HTMLDivElement>(null);
 
   const { date, subtractMonth, addMonth, pickMonth } = useHome();
-  const { data, monthSchedules, isError, isPending } = useSchedule();
+  const {
+    monthData: data,
+    monthSchedules,
+    isError,
+    isPending,
+  } = useMonthSchedule();
 
   const [selectedOption, setSelectedOption] = useState(options[0]);
   const [scheduleDates, setScheduleDates] = useState<string[]>([]);

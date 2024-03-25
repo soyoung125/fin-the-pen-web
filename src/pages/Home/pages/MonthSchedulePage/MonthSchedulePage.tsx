@@ -12,13 +12,10 @@ import { Box, Stack, Typography } from "@mui/material";
 import KeyboardArrowRightIcon from "@mui/icons-material/KeyboardArrowRight";
 import { HomePageProps } from "@pages/Home/Home.tsx";
 import { useEffect } from "react";
-import useSchedule from "@hooks/useSchedule.ts";
 
 function MonthSchedulePage({ updateHeight, navigateTo }: HomePageProps) {
-  const { date, monthData, isError, isPending, changeDate } =
+  const { date, todaySchedules, monthData, isError, isPending, changeDate } =
     useMonthSchedule();
-  const { todaySchedules } = useSchedule();
-  // const TodaySchedules = monthData?.today_schedule ?? [];
   const showPredict = moment().isSameOrBefore(date, "month");
   const isThisMonth = moment().isSame(date, "month");
 
