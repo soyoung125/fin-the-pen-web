@@ -1,5 +1,5 @@
 import { Box, Stack, Typography } from "@mui/material";
-import { Schedule, TodaySchedule } from "@app/types/schedule.ts";
+import { Schedule } from "@app/types/schedule.ts";
 import ScheduleCard from "components/ScheduleList/ScheduleCard";
 import { useAppSelector } from "@redux/hooks.ts";
 import { selectIsBudgetHidden } from "@redux/slices/settingSlice.ts";
@@ -12,7 +12,7 @@ import ScheduleDateBoxSkeleton from "@components/ScheduleList/ScheduleDateBox/Sc
 interface ScheduleListProps {
   showHeader?: boolean;
   date: string;
-  todaySchedules: TodaySchedule[] | Schedule[];
+  todaySchedules: Schedule[];
   isPending: boolean;
   isError: boolean;
   count?: number;
@@ -61,18 +61,9 @@ function ScheduleList({
     );
   }
 
-  const handleModal = (schedule: TodaySchedule | Schedule) => {
+  const handleModal = (schedule: Schedule) => {
     if (schedule && !isHideBudgetMode) {
-      if ("id" in schedule) {
-        openScheduleDrawer(
-          SCHEDULE_REQUEST({
-            ...schedule,
-            schedule_id: schedule.id,
-          } as Schedule)
-        );
-      } else {
-        openScheduleDrawer(SCHEDULE_REQUEST(schedule));
-      }
+      openScheduleDrawer(SCHEDULE_REQUEST(schedule));
     }
   };
 
