@@ -10,10 +10,10 @@ import moment from "moment/moment";
 import { v4 as uuidv4 } from "uuid";
 import { useCreateSchedule } from "@app/tanstack-query/schedules/useCreateSchedule.ts";
 import { useUser } from "@app/tanstack-query/useUser.ts";
-import { useSchedules } from "@app/tanstack-query/schedules/useSchedules.ts";
 import { INIT_SCHEDULE } from "@constants/schedule.ts";
 import { useModifySchedule } from "@app/tanstack-query/schedules/useModifySchedule.ts";
 import { useDeleteSchedule } from "@app/tanstack-query/schedules/useDeleteSchedule.ts";
+import { useMonthSchedules } from "@app/tanstack-query/home/useMonthSchedules.ts";
 
 const useSchedule = () => {
   const dispatch = useAppDispatch();
@@ -25,9 +25,10 @@ const useSchedule = () => {
   const { createSchedule } = useCreateSchedule();
   const { modifySchedule } = useModifySchedule();
   const { deleteSchedule } = useDeleteSchedule();
-  const { data, isPending, isError } = useSchedules({
+  const { data, isPending, isError } = useMonthSchedules({
     user_id: user?.user_id ?? "",
-    date: month,
+    main_month: month,
+    calendar_date: date,
   });
 
   const schedules = data?.data;

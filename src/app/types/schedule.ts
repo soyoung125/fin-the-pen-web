@@ -95,10 +95,6 @@ export interface RepeatOptionProps {
 
 export interface RepeatProps extends RepeatTypeProps, RepeatOptionProps {}
 
-export interface TodaySchedule extends Omit<Schedule, "schedule_id"> {
-  id: string;
-}
-
 export interface ScheduleResponse {
   count: number;
   data: Schedule[];
@@ -107,10 +103,11 @@ export interface ScheduleResponse {
 }
 
 export interface MonthSchedule {
-  income: string;
   available: string;
-  today_schedule: TodaySchedule[];
+  count: number;
+  data: Schedule[];
   expense: string;
+  income: string;
 }
 
 export interface WeekSchedule {

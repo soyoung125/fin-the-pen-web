@@ -76,8 +76,8 @@ function ScheduleListPage() {
         bgcolor="primary.main"
         sx={{ color: "#FFF" }}
       >
-        <SummaryCard title="수입" amount={data?.deposit ?? 0} />
-        <SummaryCard title="지출" amount={data?.withdraw ?? 0} />
+        <SummaryCard title="수입" amount={parseInt(data?.income ?? "")} />
+        <SummaryCard title="지출" amount={parseInt(data?.expense ?? "")} />
       </Stack>
 
       <Box
