@@ -6,7 +6,6 @@ import SummaryCard from "@pages/Home/next-components/HomeHeader/MonthlyBudgetSum
 import useHeader from "@hooks/useHeader.ts";
 import ScheduleListHeader from "components/ScheduleList/ScheduleListHeader";
 import React, { useEffect, useRef, useState } from "react";
-import useSchedule from "@hooks/useSchedule.ts";
 import ScheduleList from "@components/ScheduleList";
 import TodayButton from "@components/common/TodayButton/TodayButton.tsx";
 import FilterDrawer from "@components/layouts/common/TopBar/buttons/FilterButton/FilterDrawer.tsx";
@@ -18,12 +17,7 @@ function ScheduleListPage() {
   const todayRef = useRef<HTMLDivElement>(null);
 
   const { date, subtractMonth, addMonth, pickMonth } = useHome();
-  const {
-    monthData: data,
-    monthSchedules,
-    isError,
-    isPending,
-  } = useMonthSchedule();
+  const { monthData: data, monthSchedules, isPending } = useMonthSchedule();
 
   const [selectedOption, setSelectedOption] = useState(options[0]);
   const [scheduleDates, setScheduleDates] = useState<string[]>([]);

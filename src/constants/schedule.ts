@@ -34,7 +34,6 @@ export const SCHEDULE_REQUEST = (schedule: Schedule) => {
   const { term, options } = schedule.repeat_options;
   const start = moment(schedule.start_date);
   let repeat = INIT_REPEAT(start);
-  console.log(schedule);
 
   switch (schedule.repeat_kind) {
     case "DAY":

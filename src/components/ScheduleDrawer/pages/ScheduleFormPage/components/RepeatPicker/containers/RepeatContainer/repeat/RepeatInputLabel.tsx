@@ -19,7 +19,6 @@ function RepeatInputLabel({
   const { scheduleForm, updateRepeat } = useScheduleForm();
   const type = `${option}_type` as const;
   const repeatValue = scheduleForm?.repeat[type].repeat_term;
-  console.log(scheduleForm);
 
   const handleUpdate = (value: string) =>
     updateRepeat({ target: { id: "repeat_term", value: value } });
