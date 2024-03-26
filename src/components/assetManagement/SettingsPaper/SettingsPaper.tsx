@@ -7,8 +7,8 @@ import SettingCard from "./SettingCard";
 function SettingsPaper() {
   return (
     <Stack>
-      {assetManagements.map((s: AssetManagement) => (
-        <SettingCard setting={s} key={s.path} />
+      {assetManagements.map((s: AssetManagement, index) => (
+        <SettingCard setting={s} index={index} key={s.path} />
       ))}
     </Stack>
   );

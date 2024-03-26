@@ -10,7 +10,7 @@ function SavingsGoal() {
   const { goal, handleSetSavingGoal, handleSetPersonalGoal } = useSavingGoal();
 
   return (
-    <Box mx={3.5} pt={3}>
+    <Box>
       <Stack justifyContent="space-between" spacing="7px">
         <Typography variant="h2">
           <span style={{ fontSize: "20px", color: "#735BF2", fontWeight: 500 }}>
