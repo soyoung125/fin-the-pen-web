@@ -3,16 +3,13 @@ import {
   Divider,
   FormControl,
   IconButton,
-  InputAdornment,
-  OutlinedInput,
   Stack,
   TextField,
   Typography,
 } from "@mui/material";
 import ClearIcon from "@mui/icons-material/Clear";
-import { useSelector } from "react-redux";
-import { useEffect, useState } from "react";
-import { selectSavingGoal, setSavingGoal } from "@redux/slices/assetSlice.tsx";
+import { useState } from "react";
+import { setSavingGoal } from "@redux/slices/assetSlice.tsx";
 import { useAppDispatch } from "@redux/hooks.ts";
 import ResetButton from "@components/common/ResetButton";
 import { useDialog } from "@hooks/dialog/useDialog.tsx";

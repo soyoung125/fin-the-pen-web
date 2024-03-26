@@ -11,7 +11,6 @@ import {
 } from "@mui/material";
 import ClearIcon from "@mui/icons-material/Clear";
 import { useState } from "react";
-import { SOMETHING_IS_WRONG } from "@constants/messages.tsx";
 import ResetButton from "@components/common/ResetButton";
 import {
   PersonalGoal,
