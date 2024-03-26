@@ -47,7 +47,9 @@ function Saving({ saving, handleSetSavingGoal }: SavingProps) {
           alignItems="center"
           pb={1}
         >
-          <Box sx={{ fontSize: "18px", fontWeight: "700" }}>1 Year Goal</Box>
+          <Box sx={{ fontSize: "18px", fontWeight: "700" }}>
+            한 해 저축 목표
+          </Box>
           <IconButton color="primary" onClick={handleModify} sx={{ p: 0 }}>
             <img src={filter_main} alt="filter" />
           </IconButton>
@@ -67,7 +69,7 @@ function Saving({ saving, handleSetSavingGoal }: SavingProps) {
         </RoundedBorderBox>
 
         <Box sx={{ fontSize: "18px", fontWeight: "700" }} pb={1} pt={2}>
-          1 Month Goal
+          월 저축 목표
         </Box>
         <RoundedBorderBox>
           <Box
