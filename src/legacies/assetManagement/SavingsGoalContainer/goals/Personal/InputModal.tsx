@@ -12,7 +12,6 @@ import {
 import ClearIcon from "@mui/icons-material/Clear";
 import { useState } from "react";
 import { SOMETHING_IS_WRONG } from "@constants/messages.tsx";
-import SwitchButton from "../../../../../components/common/SwitchButton";
 import ResetButton from "@components/common/ResetButton";
 import {
   PersonalGoal,
@@ -44,18 +43,8 @@ function InputModal({
     setForm({ ...form, [state.target.id]: state.target.value });
   };
 
-  const divisionByType = (
-    type: "day" | "month",
-    money: number
-  ): number | string => {
-    switch (type) {
-      case "day":
-        return Math.round(money / 365);
-      case "month":
-        return Math.round(money / 12);
-      default:
-        return SOMETHING_IS_WRONG;
-    }
+  const divisionByType = (money: number): number | string => {
+    return Math.round(money / 12);
   };
 
   const handleReset = async () => {
@@ -74,7 +63,9 @@ function InputModal({
     <Stack p={2} spacing={1}>
       <Stack direction="row" alignItems="center" justifyContent="space-between">
         <ResetButton handleClick={handleReset} />
-        <Typography variant="h6">Personal Goal</Typography>
+        <Typography sx={{ fontWeight: 500, fontSize: "17px" }}>
+          나만의 저축 목표
+        </Typography>
         <IconButton onClick={closeModal}>
           <ClearIcon />
         </IconButton>
@@ -87,7 +78,7 @@ function InputModal({
           <OutlinedInput
             id="personal_goal"
             startAdornment={
-              <InputAdornment position="start">목표</InputAdornment>
+              <InputAdornment position="start">목표명</InputAdornment>
             }
             value={form.personal_goal}
             onChange={changePersonalGoal}
@@ -131,7 +122,7 @@ function InputModal({
           fullWidth
           InputProps={{
             startAdornment: (
-              <InputAdornment position="start">기한</InputAdornment>
+              <InputAdornment position="start">기간</InputAdornment>
             ),
           }}
           inputProps={{
@@ -142,100 +133,17 @@ function InputModal({
           size="small"
         />
 
-        {/* 적금 단위 */}
-        <Stack direction="row" spacing={1}>
-          <Button
-            fullWidth
-            variant={form.criteria === "day" ? "contained" : "outlined"}
-            onClick={() =>
-              changePersonalGoal({
-                target: {
-                  id: "criteria",
-                  value: "day",
-                },
-              })
-            }
-          >
-            하루 기준
-          </Button>
-          <Button
-            fullWidth
-            variant={form.criteria === "month" ? "contained" : "outlined"}
-            onClick={() =>
-              changePersonalGoal({
-                target: {
-                  id: "criteria",
-                  value: "month",
-                },
-              })
-            }
-          >
-            한달 기준
-          </Button>
-        </Stack>
-
         {/* 필요 적금 액 */}
         <FormControl fullWidth>
           <OutlinedInput
             startAdornment={
-              <InputAdornment position="start">필요 적금액</InputAdornment>
+              <InputAdornment position="start">한 달 저축액</InputAdornment>
             }
-            value={divisionByType(
-              form.criteria,
-              form.goal_amount
-            ).toLocaleString("ko-KR")}
+            value={divisionByType(form.goal_amount).toLocaleString("ko-KR")}
             size="small"
             inputProps={{
               style: { textAlign: "right" },
             }}
-          />
-        </FormControl>
-
-        {/* 자동 적금 */}
-        <FormControl fullWidth>
-          <OutlinedInput
-            startAdornment={
-              <InputAdornment position="start">적금액 송금 설정</InputAdornment>
-            }
-            endAdornment={
-              <SwitchButton
-                checked={form.is_remittance}
-                handleChange={() =>
-                  changePersonalGoal({
-                    target: {
-                      id: "is_remittance",
-                      value: !form.is_remittance,
-                    },
-                  })
-                }
-              />
-            }
-            size="small"
-            readOnly
-          />
-        </FormControl>
-
-        {/* 팝업 */}
-        <FormControl fullWidth>
-          <OutlinedInput
-            startAdornment={
-              <InputAdornment position="start">팝업창</InputAdornment>
-            }
-            endAdornment={
-              <SwitchButton
-                checked={form.pop_on}
-                handleChange={() =>
-                  changePersonalGoal({
-                    target: {
-                      id: "pop_on",
-                      value: !form.pop_on,
-                    },
-                  })
-                }
-              />
-            }
-            size="small"
-            readOnly
           />
         </FormControl>
       </Stack>
@@ -243,13 +151,9 @@ function InputModal({
         fullWidth
         variant="contained"
         onClick={() => {
-          // dispatch(setPersonalGoal(form));
           handleSetPersonalGoal({
             ...form,
-            required_amount: divisionByType(
-              form.criteria,
-              form.goal_amount
-            ).toString(),
+            required_amount: divisionByType(form.goal_amount).toString(),
             goal_amount: form.goal_amount.toString(),
           });
           closeModal();
