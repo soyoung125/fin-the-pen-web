@@ -51,6 +51,7 @@ interface InitialState {
     assets: AssetsByCategoryInterface[];
     updateDate: string;
   };
+  assetMenu: number;
 }
 
 const initialState: InitialState = {
@@ -99,6 +100,7 @@ const initialState: InitialState = {
     assets: initAssetsByCategory(),
     updateDate: moment().format("YYYY-MM-DD"),
   },
+  assetMenu: 0,
 };
 
 export const assetSlice = createSlice({
@@ -125,6 +127,9 @@ export const assetSlice = createSlice({
     setSavingDetailSetting: (state, action) => {
       state.savingDetailSetting = action.payload;
     },
+    setAssetMenu: (state, action) => {
+      state.assetMenu = action.payload;
+    },
   },
 });
 export const {
@@ -134,6 +139,7 @@ export const {
   setInitAssetsByCategory,
   setMonthlyConsumptionGoal,
   setSavingDetailSetting,
+  setAssetMenu,
 } = assetSlice.actions;
 
 export const selectSavingGoal = (state: RootState) => state.asset.goal.saving;
@@ -149,5 +155,6 @@ export const selectSavingDetailSetting = (state: RootState) =>
   state.asset.savingDetailSetting;
 export const selectSavingPopUpSetting = (state: RootState) =>
   state.asset.savingDetailSetting.popup;
+export const selectAssetMenu = (state: RootState) => state.asset.assetMenu;
 
 export default assetSlice.reducer;

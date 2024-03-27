@@ -1,15 +1,12 @@
-import { Box, IconButton, Stack, Typography } from "@mui/material";
-import BorderColorIcon from "@mui/icons-material/BorderColor";
+import { Box, IconButton, Stack } from "@mui/material";
 import RoundedPaper from "../../../../../components/common/RoundedPaper";
-import ModalStaticBackdrop from "../../../../../components/layouts/ModalStaticBackdrop";
 import RoundedBorderBox from "../../../../../components/common/RoundedBorderBox";
 import InputModal from "./InputModal";
-import useModal_deprecated from "@hooks/useModal_deprecated.ts";
 import { SavingGoal } from "@app/types/asset.ts";
 import { getAmount } from "@legacies/assetManagement/SavingsGoalContainer/utils.ts";
 import { useDialog } from "@hooks/dialog/useDialog.tsx";
 import { useModal } from "@hooks/modal/useModal.tsx";
-import UseableInfoModal from "@pages/reports/Report/components/modals/UseableInfoModal";
+import filter_main from "@assets/icons/header/filter_main.svg";
 
 interface SavingProps {
   saving?: SavingGoal;
@@ -42,7 +39,7 @@ function Saving({ saving, handleSetSavingGoal }: SavingProps) {
   };
 
   return (
-    <>
+    <Box mt="30px">
       <RoundedPaper my={2}>
         <Stack
           direction="row"
@@ -50,9 +47,11 @@ function Saving({ saving, handleSetSavingGoal }: SavingProps) {
           alignItems="center"
           pb={1}
         >
-          <Typography variant="h1">1 Year Goal</Typography>
+          <Box sx={{ fontSize: "18px", fontWeight: "700" }}>
+            한 해 저축 목표
+          </Box>
           <IconButton color="primary" onClick={handleModify} sx={{ p: 0 }}>
-            <BorderColorIcon fontSize="small" />
+            <img src={filter_main} alt="filter" />
           </IconButton>
         </Stack>
         <RoundedBorderBox>
@@ -69,9 +68,9 @@ function Saving({ saving, handleSetSavingGoal }: SavingProps) {
           </Box>
         </RoundedBorderBox>
 
-        <Typography variant="h1" pb={1} pt={2}>
-          1 Month Goal
-        </Typography>
+        <Box sx={{ fontSize: "18px", fontWeight: "700" }} pb={1} pt={2}>
+          월 저축 목표
+        </Box>
         <RoundedBorderBox>
           <Box
             sx={{
@@ -86,7 +85,7 @@ function Saving({ saving, handleSetSavingGoal }: SavingProps) {
           </Box>
         </RoundedBorderBox>
       </RoundedPaper>
-    </>
+    </Box>
   );
 }
 

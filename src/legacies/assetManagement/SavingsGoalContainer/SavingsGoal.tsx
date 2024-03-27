@@ -1,30 +1,31 @@
-import { Box, IconButton, Stack } from "@mui/material";
-import SettingsIcon from "@mui/icons-material/Settings";
-import { useNavigate } from "react-router-dom";
+import { Box, Stack, Typography } from "@mui/material";
 import Saving from "./goals/Saving/Saving.tsx";
 import Personal from "./goals/Personal/Personal.tsx";
-import { PATH } from "@constants/path.ts";
 import { useUser } from "@app/tanstack-query/useUser.ts";
 import useSavingGoal from "@hooks/assetManagement/useSavingGoal.ts";
+import React from "react";
 
 function SavingsGoal() {
   const { data: user } = useUser();
-  const navigate = useNavigate();
   const { goal, handleSetSavingGoal, handleSetPersonalGoal } = useSavingGoal();
 
   return (
-    <>
-      <Stack direction="row" justifyContent="space-between">
-        <Box sx={{ fontWeight: "bold" }}>
-          {`"${user?.name}"님의 한해 저축 목표입니다.`}
-        </Box>
-        <IconButton
-          color="primary"
-          sx={{ p: 0 }}
-          onClick={() => navigate(PATH.savingDetailSetting)}
-        >
-          <SettingsIcon />
-        </IconButton>
+    <Box>
+      <Stack justifyContent="space-between" spacing="7px">
+        <Typography variant="h2">
+          <span style={{ fontSize: "20px", color: "#735BF2", fontWeight: 500 }}>
+            {user?.name}
+          </span>
+          님의 저축 목표 입니다.
+        </Typography>
+
+        <Typography variant="h2">
+          {"오늘까지 총 "}
+          <span style={{ fontSize: "20px", color: "#735BF2", fontWeight: 500 }}>
+            900,000
+          </span>
+          {"원을 저축했어요."}
+        </Typography>
       </Stack>
 
       <Saving
@@ -36,7 +37,7 @@ function SavingsGoal() {
         personal={goal?.personal_goal}
         handleSetPersonalGoal={handleSetPersonalGoal}
       />
-    </>
+    </Box>
   );
 }
 

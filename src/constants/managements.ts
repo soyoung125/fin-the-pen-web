@@ -14,19 +14,19 @@ const assetManagements: ReadonlyArray<AssetManagement> = [
     path: PATH.savingsGoal,
   },
   {
-    title: "정기 입출금액 설정",
-    color: yellow[200],
-    path: PATH.regularDepositWithdrawal,
+    title: "지출 목표 금액 설정 ",
+    color: teal[200],
+    path: PATH.scheduleManagement,
   },
   {
-    title: "카테고리별 자산 설정",
+    title: "카테고리별 지출액 설정",
     color: lightBlue[200],
     path: PATH.assetsByCategory,
   },
   {
-    title: "일정 관리",
-    color: teal[200],
-    path: PATH.scheduleManagement,
+    title: "정기 입출금액 설정",
+    color: yellow[200],
+    path: PATH.regularDepositWithdrawal,
   },
 ];
 
