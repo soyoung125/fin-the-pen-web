@@ -27,7 +27,7 @@ interface InputModalProps {
 }
 
 interface ChangePersonalGoal {
-  (state: { target: { id: string; value: string | number | boolean } }): void;
+  (state: { target: { id: string; value: string } }): void;
 }
 
 function InputModal({
@@ -39,6 +39,10 @@ function InputModal({
   const [form, setForm] = useState<PersonalGoalForm>(getPersonalForm(personal));
 
   const changePersonalGoal: ChangePersonalGoal = (state) => {
+    const { id, value } = state.target;
+    if (id === "personal_goal" && value.length > 16) return;
+    if (id === "goal_amount" && Number(value) > 10000000) return;
+
     setForm({ ...form, [state.target.id]: state.target.value });
   };
 
@@ -100,7 +104,7 @@ function InputModal({
               changePersonalGoal({
                 target: {
                   id: e.target.id,
-                  value: +e.target.value.replaceAll(",", ""),
+                  value: e.target.value.replaceAll(",", ""),
                 },
               })
             }
