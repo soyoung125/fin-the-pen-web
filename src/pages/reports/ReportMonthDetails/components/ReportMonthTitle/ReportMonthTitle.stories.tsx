@@ -13,6 +13,8 @@ const meta = {
     year: 2023,
     month: 5,
     onClickMonth: () => alert("하단의 State 예제를 사용해주세요."),
+    goal: 1000,
+    spent: 1000,
   },
   argTypes: {},
 } satisfies Meta<typeof ReportMonthTitle>;
